@@ -1,0 +1,38 @@
+{
+  "edition": "2026-10-10",
+  "mode": "preview",
+  "title": "Phillip Galinsky for America 2028",
+  "slogan": "Justice for All",
+  "canonicalOrigin": null,
+  "portalOrigin": null,
+  "donations": {
+    "enabled": false,
+    "reason": "Online contributions are not open yet. No payment or donor details are collected on this page."
+  },
+  "issues": {
+    "kirk-evers": {
+      "title": "Kirk\u2013Evers",
+      "youtubeId": null,
+      "poster": "/assets/kirk-evers.svg",
+      "transcript": null,
+      "websiteUrl": null,
+      "documents": []
+    },
+    "garden": {
+      "title": "The Garden",
+      "youtubeId": null,
+      "poster": "/assets/garden.svg",
+      "transcript": null,
+      "websiteUrl": null,
+      "documents": []
+    },
+    "cornerstone": {
+      "title": "The Cornerstone",
+      "youtubeId": null,
+      "poster": "/assets/cornerstone.svg",
+      "transcript": null,
+      "websiteUrl": null,
+      "documents": []
+    }
+  }
+}

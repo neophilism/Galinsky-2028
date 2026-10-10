@@ -1,0 +1,7 @@
+{
+  "sourceRepository": "neophilism/Galinsky-2028",
+  "roadmapVersion": 1,
+  "mappingRevision": 1,
+  "note": "Sixty approved work packages. No full package is mapped to an accepted PR merely because foundation code touches it. Populate only with evidence-backed accepted package mappings.",
+  "pullRequestNumbers": []
+}

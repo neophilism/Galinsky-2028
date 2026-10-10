@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+source-inputs/
+.private/
+coverage/
+test-results/
+playwright-report/
+*.log
+*.tgz
+*.zip
+.DS_Store

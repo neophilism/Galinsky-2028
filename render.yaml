@@ -1,0 +1,49 @@
+# Import ONLY into the explicitly assigned Galinsky 2028 project:
+# prj-db57fnm7bikc739783q0. Do not substitute the excluded workspace.
+# This default blueprint provisions only a public static preview, not a paid worker.
+services:
+  - type: web
+    runtime: static
+    name: galinsky-2028-public
+    repo: https://github.com/neophilism/Galinsky-2028
+    branch: main
+    buildCommand: npm ci && npm run build:web
+    staticPublishPath: dist/web
+    envVars:
+      - key: NODE_VERSION
+        value: 22.23.3
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Robots-Tag
+        value: noindex, nofollow
+    routes:
+      - type: redirect
+        source: /index.html
+        destination: /
+      - type: redirect
+        source: /issues.html
+        destination: /issues/
+      - type: redirect
+        source: /kirk-evers.html
+        destination: /issues/kirk-evers/
+      - type: redirect
+        source: /garden.html
+        destination: /issues/garden/
+      - type: redirect
+        source: /cornerstone.html
+        destination: /issues/cornerstone/
+      - type: redirect
+        source: /volunteer.html
+        destination: /volunteer/
+      - type: redirect
+        source: /donate.html
+        destination: /donate/

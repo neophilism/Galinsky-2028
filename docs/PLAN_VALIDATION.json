@@ -1,0 +1,12 @@
+{
+  "plan_packages": 60,
+  "requirements": 27,
+  "source_asset_checksums": 7,
+  "dependencies_acyclic": true,
+  "all_packages_have_acceptance_and_evidence": true,
+  "all_packages_not_started": true,
+  "planning_artifact_validation_only": true,
+  "word_count": 13430,
+  "github_writes_performed": false,
+  "deployment_performed": false
+}

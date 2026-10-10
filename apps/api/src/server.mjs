@@ -1,0 +1,11 @@
+import {loadConfig} from './config.mjs';
+import {createApp} from './app.mjs';
+import {PostgresStore,databasePool} from './postgres-store.mjs';
+import {MemoryStore} from './memory-store.mjs';
+import {registerPortal} from './static.mjs';
+const config=loadConfig();
+const store=config.databaseUrl?new PostgresStore(databasePool(config.databaseUrl)):new MemoryStore();
+const app=createApp({store,config});
+registerPortal(app,config.portalOrigin);
+for(const signal of ['SIGTERM','SIGINT'])process.on(signal,async()=>{await app.close();await store.close();process.exit(0);});
+await app.listen({host:config.host,port:config.port});console.log(JSON.stringify({event:'api_started',port:config.port,signupEnabled:config.signup}));

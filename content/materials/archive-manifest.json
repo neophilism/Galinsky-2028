@@ -1,0 +1,542 @@
+[
+  {
+    "id": "00",
+    "title": "Master Reference & Website Organization",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "start",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "00_Master_Reference_and_Website_Organization.md",
+      "sha256": "aaad154c7192ff7c4f970ddc0c3d82cea942ba33bd5ae6e35f35435fef107cba"
+    }
+  },
+  {
+    "id": "01",
+    "title": "Universal Volunteer Core",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "start",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "01_Universal_Volunteer_Core.md",
+      "sha256": "5b0eee9f1eb2be2a80446ab2d008d972105b3a747da30353ab8e93a39fac0163"
+    }
+  },
+  {
+    "id": "02",
+    "title": "Personal Network Organizer Playbook",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "role",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "02_Role_Personal_Network_Organizer.md",
+      "sha256": "be9f702a71c61ebc290873ed1db9c1d434d46ca18c47c8ad381e501fe37174a6"
+    }
+  },
+  {
+    "id": "03",
+    "title": "Digital Ambassador Playbook",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "role",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "03_Role_Digital_Ambassador.md",
+      "sha256": "32d886d35b03caec386ff4f6b02d438e88ca1dba2e861e65abc68f6c2e106e1d"
+    }
+  },
+  {
+    "id": "04",
+    "title": "Issue Ambassador Playbook",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "role",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "04_Role_Issue_Ambassador.md",
+      "sha256": "76e1d5f20b7dc8367a976bca1c75b01003a9d50e2c26032a0da6b295fb4194cc"
+    }
+  },
+  {
+    "id": "05",
+    "title": "Canvassing & Tabling Playbook",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "role",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "05_Role_Canvasser_and_Tabling.md",
+      "sha256": "81c82466838c252cd9f66e43283b043b25d9c71402a4813f162c131e4e223255"
+    }
+  },
+  {
+    "id": "06",
+    "title": "Phone & Text Volunteer Playbook",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "role",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "06_Role_Phone_and_Text.md",
+      "sha256": "a5c5e216b4c19681eddd87d94a23abb3c43db2db479106f6516cfbc6a97ed3d2"
+    }
+  },
+  {
+    "id": "07",
+    "title": "Event Host Playbook",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "role",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "07_Role_Event_Host.md",
+      "sha256": "9a3bdb5179c8d662e6f1579dd0bf170e857bf171fd116a4408860b71d9aed388"
+    }
+  },
+  {
+    "id": "08",
+    "title": "Volunteer Recruiter & Onboarder Playbook",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "role",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "08_Role_Recruiter_and_Onboarder.md",
+      "sha256": "6147ba4ae9ee2d48e79c495d50e7227dfe87c8ad06ac4dd53c7069e4cd0115e9"
+    }
+  },
+  {
+    "id": "09",
+    "title": "Local Team Captain Playbook",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "role",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "09_Role_Local_Team_Captain.md",
+      "sha256": "d557633b639f355f08f1887fbb6cdb8e2c760ff4e3554d09949045280c54a4d7"
+    }
+  },
+  {
+    "id": "10",
+    "title": "Ballot-Access Petition Playbook",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "role",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "10_Role_Ballot_Access_Petition.md",
+      "sha256": "bb67429e99ac9085657dccec3e7ebc44d53c67fa40ba0a82add542b1b0bd1cd7"
+    }
+  },
+  {
+    "id": "11",
+    "title": "Voter Registration, GOTV & Election-Day Playbook",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "role",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "11_Role_Voter_Registration_GOTV_Election_Day.md",
+      "sha256": "ef1e6d3fe11e6c576ea520baa12a72f662a0b45fd505b69a13f5bad5c4a95201"
+    }
+  },
+  {
+    "id": "12",
+    "title": "Small-Dollar Fundraising Playbook",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "role",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "12_Role_Small_Dollar_Fundraising.md",
+      "sha256": "4990483d1f23df9a36d99ee5f76a47b8648aac49cc3840b0e0b2fa7615ae5e49"
+    }
+  },
+  {
+    "id": "13",
+    "title": "Skills & Operations Volunteer Playbook",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "role",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "13_Role_Skills_and_Operations.md",
+      "sha256": "74c61badbb84c69134963988f05585d84d74834ba3bbde638cfbb3384286137c"
+    }
+  },
+  {
+    "id": "14",
+    "title": "The Garden Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "14_Policy_The_Garden.md",
+      "sha256": "ac989c8063a936934fbb346decdf02d590209e773515bbedacf813496c4303c6"
+    }
+  },
+  {
+    "id": "15",
+    "title": "The Cornerstone Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "15_Policy_The_Cornerstone.md",
+      "sha256": "808623a39cc29517b5d8b01cef7b3a15afcabf3313fec3d30245ab9c8875e189"
+    }
+  },
+  {
+    "id": "16",
+    "title": "Deterrence by Denial Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "16_Policy_Deterrence_by_Denial.md",
+      "sha256": "339a84cb1e8fcc97e6f7724ae293899bf5b3d9fa08a7744d68f7c545fccb16a7"
+    }
+  },
+  {
+    "id": "17",
+    "title": "Great Undertakings Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "17_Policy_Great_Undertakings.md",
+      "sha256": "da88a11ed68c1dc19822ac109b6d1db88d27b696ac7e54b964a8001d5bcb30f1"
+    }
+  },
+  {
+    "id": "18",
+    "title": "Strategic Aid Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "18_Policy_Strategic_Aid.md",
+      "sha256": "8a2467b15aa222acc32cbda9d84a5b4ac237e13988ce7c6f90dde2fc16c7ef38"
+    }
+  },
+  {
+    "id": "19",
+    "title": "American Independence Act Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "19_Policy_American_Independence_Act.md",
+      "sha256": "0c0782b302ce9f88ba8b4d99db1ccb7c96383583f62f3bcf5ea355f03fc8c918"
+    }
+  },
+  {
+    "id": "20",
+    "title": "Citizens Share Money Creation Program Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "20_Policy_Citizens_Share.md",
+      "sha256": "024acd15aeb56b41340b1da0fb05ab6b198da4380902270e6967efb2c5057d32"
+    }
+  },
+  {
+    "id": "21",
+    "title": "HISA & Healthright Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "21_Policy_HISA_and_Healthright.md",
+      "sha256": "968e0a9e28ec3e2585d4272ee3e4abe2ed6ccc9e73a71e79af6141a7140c441b"
+    }
+  },
+  {
+    "id": "22",
+    "title": "Choice & Life Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "22_Policy_Choice_and_Life.md",
+      "sha256": "3e7dc42c5c0974f7e13dea5023c6fc95b994f72161e4a09119055dd1453c4573"
+    }
+  },
+  {
+    "id": "23",
+    "title": "RISA Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "23_Policy_RISA.md",
+      "sha256": "d05af274e999dd675c80f54dec85eb53df96c403588ca1293d478e0c1e9f7ca8"
+    }
+  },
+  {
+    "id": "24",
+    "title": "Regulation EC Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "24_Policy_Regulation_EC.md",
+      "sha256": "d7db167afce4cbfdd8a37d9a23eb9b64b6f015a1260923e371db8a99e062ab86"
+    }
+  },
+  {
+    "id": "25",
+    "title": "National CO₂ Pipeline Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "25_Policy_National_CO2_Pipeline.md",
+      "sha256": "baa9d6cd01a105cd73af77b4c0d4e9deb9fbbb7c9d685a806096603ec7039cd6"
+    }
+  },
+  {
+    "id": "26",
+    "title": "Three Sisters Rewilding & Indigenous Empowerment Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "26_Policy_Three_Sisters_Rewilding.md",
+      "sha256": "cc3f25f69d10621b2154765271c5c39486a13be5e6e17bd73cfbcef09f7bdb34"
+    }
+  },
+  {
+    "id": "27",
+    "title": "Restoration Homestead Act Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "27_Policy_Restoration_Homestead_Act.md",
+      "sha256": "26f2d0b60186548ad0627aca40bd3d0bfad1fa776b5dbf6b65dfbea304880e6a"
+    }
+  },
+  {
+    "id": "28",
+    "title": "Emergency Food Reserve Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "28_Policy_Emergency_Food_Reserve.md",
+      "sha256": "30784b8e6a78789c61cee2cbc125a11d541732c8750d3d372812aec2ff61809c"
+    }
+  },
+  {
+    "id": "29",
+    "title": "Lunar Far Side Reserve Policy Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "29_Policy_Lunar_Far_Side_Reserve.md",
+      "sha256": "fcb780a099fabca5e806cf9e6cb34edb0ef31bbc8ccb97181531d1b389177704"
+    }
+  },
+  {
+    "id": "30",
+    "title": "SPISA & Eternal Liberty Space Program Action Kit",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "policy",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "30_Policy_SPISA_Eternal_Liberty.md",
+      "sha256": "b3e068f127e16c99a670b5b7248c1e36b3e5e4e9a0de5d5af1ca0ce5bcf838e4"
+    }
+  },
+  {
+    "id": "31",
+    "title": "Campaign & Pillar Messaging Guide",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "tools",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "31_Campaign_and_Pillar_Messaging_Guide.md",
+      "sha256": "ec684f2f2299599e48177d9c37bd48a85c5a9eac14f72a1e23770c4180629c3d"
+    }
+  },
+  {
+    "id": "32",
+    "title": "Volunteer Orientation Facilitator Guide",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "tools",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "32_Orientation_Facilitator_Guide.md",
+      "sha256": "b06cbdeb126dc71c35f68ebf534820976cedc7bf45785b861237d72d479b3178"
+    }
+  },
+  {
+    "id": "33",
+    "title": "Volunteer Forms & Templates Pack",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "tools",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "33_Forms_and_Templates_Pack.md",
+      "sha256": "ed0fae926bc21e771ba497e27fba54f12af7ee3b1187268a2f6d68fbc1bc003b"
+    }
+  },
+  {
+    "id": "34",
+    "title": "Website Copy & Onboarding Messages",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "tools",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": false,
+    "source": {
+      "filename": "34_Website_Copy_and_Onboarding_Messages.md",
+      "sha256": "1d576d6c41ca599104e0039a6ba9c458ab5b0a5be19632c23ad24b96938f672c"
+    }
+  },
+  {
+    "id": "35",
+    "title": "Complete Volunteer Manual",
+    "description": "September 2026 reference edition; review required before current publication.",
+    "category": "tools",
+    "status": "unreviewed",
+    "audience": "reviewer",
+    "revision": 1,
+    "review": null,
+    "compiled": true,
+    "source": {
+      "filename": "35_Complete_Volunteer_Manual.md",
+      "sha256": "5920b4145d58197340363df0cf6c927c11dfb537dce6f8e36de9483be6b95d2e"
+    }
+  }
+]

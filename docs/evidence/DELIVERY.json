@@ -1,0 +1,14 @@
+{
+  "status": "local_implementation_pending_repository_CI",
+  "full_work_packages_accepted": 0,
+  "deployment_verified": false,
+  "core_public_tests": 92,
+  "api_route_tests_before_dependency_patch": 10,
+  "public_layouts_checked_offline": 32,
+  "public_framework_build": "passed_locally",
+  "portal_build": "passed_locally",
+  "typescript": "passed_locally",
+  "final_dependency_audit": "pending_patched_install",
+  "postgres_tests": "pending_isolated_CI",
+  "browser_HTTP_journeys": "pending_CI"
+}

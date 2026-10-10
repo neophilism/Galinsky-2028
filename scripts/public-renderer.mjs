@@ -1,0 +1,35 @@
+import {readFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {join} from 'node:path';
+import {escapeHtml,origin} from '../packages/core/validation.mjs';
+import {videoPanel} from '../packages/core/video.mjs';
+export const root=process.env.G28_SOURCE_ROOT||fileURLToPath(new URL('../',import.meta.url));
+export const pages=JSON.parse(readFileSync(join(root,'content/public/pages.json'),'utf8'));
+export const site=JSON.parse(readFileSync(join(root,'content/public/site.json'),'utf8'));
+export function renderPage(key, options={}) {
+ const page=pages.find(p=>p.key===key);if(!page)throw new Error('Unknown page');
+ const cfg=options.site||site;
+ const canonical=process.env.CANONICAL_ORIGIN||cfg.canonicalOrigin;
+ if(canonical)origin(canonical);
+ const portal=process.env.PORTAL_ORIGIN||cfg.portalOrigin;
+ if(portal)origin(portal,process.env.NODE_ENV!=='production');
+ const portalPath=portal||'/volunteer/#join';
+ let body=readFileSync(join(root,`content/public/pages/${page.key}.html`),'utf8');
+ body=body.replace(/\{\{VIDEO:([a-z-]+)\}\}/g,(_,slug)=>videoPanel(slug,cfg.issues[slug]));
+ body=body.replace(/\{\{DESTINATION:([a-z-]+)\}\}/g,(_,slug)=>{
+   const url=cfg.issues[slug]?.websiteUrl;
+   if(!url)return '/notices/#resources';
+   const u=new URL(url);if(u.protocol!=='https:'||u.username||u.password)throw new Error('Invalid policy destination');
+   return escapeHtml(url);
+ });
+ const replacePortal=text=>text.replace(/\{\{PORTAL\}\}[^"\s<]*/g,match=>portal?match.replace('{{PORTAL}}',portal):portalPath);
+ body=replacePortal(body);
+ let header=replacePortal(readFileSync(join(root,'content/public/header.html'),'utf8'));
+ header=header.replace(/<a class="(?:current)?" href="([^"]+)">/g,(_,url)=>`<a class="${url===page.path||(url==='/issues/'&&page.path.startsWith('/issues/'))?'current':''}" href="${url}"${url===page.path||(url==='/issues/'&&page.path.startsWith('/issues/'))?' aria-current="page"':''}>`);
+ const footer=readFileSync(join(root,'content/public/footer.html'),'utf8');
+ const status=cfg.mode==='production'?'':`<div class="build-status" role="note">Campaign website preview &bull; Accounts and payments are not open.</div>`;
+ const description=escapeHtml(page.description);
+ const robots=cfg.mode==='production'?'index,follow':'noindex,nofollow';
+ const csp="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'none'; form-action 'none'";
+ return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="${csp}"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="robots" content="${robots}"><title>${escapeHtml(page.title)}</title><meta name="description" content="${description}">${canonical?`<link rel="canonical" href="${canonical}${page.path}">`:''}<meta property="og:title" content="${escapeHtml(page.title)}"><meta property="og:description" content="${description}"><meta property="og:type" content="website">${canonical?`<meta property="og:image" content="${canonical}/assets/candidate.webp">`:''}<meta name="theme-color" content="#0a3161"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/design.css"><link rel="stylesheet" href="/assets/site.css"></head><body data-page="${key}">${header}${body}${footer}${status}<script src="/assets/public.js" defer></script>${key==='index'?'<script src="/assets/motion.js" defer></script>':''}</body></html>`;
+}

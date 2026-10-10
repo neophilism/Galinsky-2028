@@ -1,0 +1,9 @@
+---
+import { pages, renderPage } from '../../../../scripts/public-renderer.mjs';
+export function getStaticPaths() {
+  return pages.map(page=>({params:{route:page.path==='/'?undefined:page.path.replace(/^\/+|\/+$/g,'')},props:{key:page.key}}));
+}
+const { key } = Astro.props;
+const html = renderPage(key);
+---
+<Fragment set:html={html} />
