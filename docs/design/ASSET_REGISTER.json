@@ -1,0 +1,54 @@
+{
+  "observed_date": "2026-10-10",
+  "assets": [
+    {
+      "file": "Galinsky_2028_Interactive_Mockups.zip",
+      "bytes": 14139175,
+      "sha256": "2a87c55f4531f0da52369efc214307f0d5c0346ffdb65ae5dad1d354bfbb13c9",
+      "status": "supplied_baseline",
+      "publication_note": "Review before public-repository import; archives may contain gated volunteer sources."
+    },
+    {
+      "file": "Galinsky_2028_Design_Review.pdf",
+      "bytes": 6253134,
+      "sha256": "542914122a759255f2bb035dba2d64be7f52cc00dd6a00ed0c6a820edc36c85f",
+      "status": "supplied_baseline",
+      "publication_note": "Review before public-repository import; archives may contain gated volunteer sources."
+    },
+    {
+      "file": "Galinsky_2028_Home_Preview.png",
+      "bytes": 566317,
+      "sha256": "e31741a38bf77709da13be9993dc77ae6f10aefccec4592db2a9368bc54174bb",
+      "status": "supplied_baseline",
+      "publication_note": "Review before public-repository import; archives may contain gated volunteer sources."
+    },
+    {
+      "file": "Galinsky_2028_Mockup_Board.jpg",
+      "bytes": 709544,
+      "sha256": "6e1f3a1bb8fc8ff73fe9c170f060e6befd7c33593dae3e0b8b0427ec9c990c29",
+      "status": "supplied_baseline",
+      "publication_note": "Review before public-repository import; archives may contain gated volunteer sources."
+    },
+    {
+      "file": "Galinsky_2028_Mobile_Preview.jpg",
+      "bytes": 508294,
+      "sha256": "4c6f9597e37aef922c7d42fb2891cde4a765804257cf01385d19629a342b67ce",
+      "status": "supplied_baseline",
+      "publication_note": "Review before public-repository import; archives may contain gated volunteer sources."
+    },
+    {
+      "file": "Galinsky-2028-Front-Page(1).png",
+      "bytes": 623459,
+      "sha256": "2a4a268c0ed38d755169fffd6a95eca7937557803867beb6399a243ff26b1177",
+      "status": "supplied_baseline",
+      "publication_note": "Review before public-repository import; archives may contain gated volunteer sources."
+    },
+    {
+      "file": "Phillip_Galinsky_2028_Volunteer_Action_System.zip",
+      "bytes": 4642334,
+      "sha256": "097c8bf49e57776bc7aec4a4af671fc5ab7a1e8125cf30a552fe0684ed1df7f0",
+      "status": "supplied_baseline",
+      "publication_note": "Review before public-repository import; archives may contain gated volunteer sources."
+    }
+  ]
+}

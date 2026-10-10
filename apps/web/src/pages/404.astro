@@ -1,0 +1,5 @@
+---
+import {renderPage} from '../../../../scripts/public-renderer.mjs';
+const html=renderPage('notices').replace('Campaign notices.','Page not found.');
+---
+<Fragment set:html={html}/>

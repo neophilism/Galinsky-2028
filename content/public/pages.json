@@ -1,0 +1,50 @@
+[
+  {
+    "key": "index",
+    "path": "/",
+    "title": "Home | Galinsky 2028 Design Preview",
+    "description": "Justice for All. Phillip Galinsky for America 2028."
+  },
+  {
+    "key": "issues",
+    "path": "/issues/",
+    "title": "The issues | Galinsky 2028 Design Preview",
+    "description": "Justice for All. Phillip Galinsky for America 2028."
+  },
+  {
+    "key": "kirk-evers",
+    "path": "/issues/kirk-evers/",
+    "title": "Kirk\u2013Evers | Galinsky 2028 Design Preview",
+    "description": "Justice for All. Phillip Galinsky for America 2028."
+  },
+  {
+    "key": "garden",
+    "path": "/issues/garden/",
+    "title": "The Garden | Galinsky 2028 Design Preview",
+    "description": "Justice for All. Phillip Galinsky for America 2028."
+  },
+  {
+    "key": "cornerstone",
+    "path": "/issues/cornerstone/",
+    "title": "The Cornerstone | Galinsky 2028 Design Preview",
+    "description": "Justice for All. Phillip Galinsky for America 2028."
+  },
+  {
+    "key": "volunteer",
+    "path": "/volunteer/",
+    "title": "Volunteer | Galinsky 2028 Design Preview",
+    "description": "Justice for All. Phillip Galinsky for America 2028."
+  },
+  {
+    "key": "donate",
+    "path": "/donate/",
+    "title": "Donate | Galinsky 2028 Design Preview",
+    "description": "Justice for All. Phillip Galinsky for America 2028."
+  },
+  {
+    "key": "notices",
+    "path": "/notices/",
+    "title": "Campaign notices | Galinsky 2028",
+    "description": "Privacy, accessibility, participation and publication information."
+  }
+]

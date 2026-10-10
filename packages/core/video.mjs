@@ -1,0 +1,20 @@
+import {assert,DomainError,escapeHtml} from './validation.mjs';
+export function parseYouTubeId(value) {
+ if(value===null||value==='')return null;
+ assert(typeof value==='string'&&value.length<2048,'invalid_video','Enter a YouTube URL or video ID.');
+ if(/^[A-Za-z0-9_-]{11}$/.test(value))return value;
+ let u;try{u=new URL(value);}catch{throw new DomainError('invalid_video','Enter a YouTube URL or video ID.');}
+ assert(u.protocol==='https:'&&!u.username&&!u.password&&!u.port,'invalid_video','Only secure YouTube URLs are accepted.');
+ let video;
+ if(u.hostname==='youtu.be')video=u.pathname.slice(1);
+ else if(['youtube.com','www.youtube.com','m.youtube.com','www.youtube-nocookie.com'].includes(u.hostname)){
+  if(u.pathname==='/watch')video=u.searchParams.get('v');
+  else video=u.pathname.match(/^\/(?:embed|shorts|live)\/([A-Za-z0-9_-]{11})\/?$/)?.[1];
+ }
+ assert(typeof video==='string'&&/^[A-Za-z0-9_-]{11}$/.test(video),'invalid_video','Only a single valid YouTube video is accepted.');return video;
+}
+export function videoPanel(slug, config) {
+ const video=parseYouTubeId(config.youtubeId);const title=escapeHtml(config.title);
+ assert(/^\/assets\/[a-z0-9-]+\.(svg|webp|png|jpg)$/.test(config.poster),'invalid_poster','Use a campaign-hosted poster.');
+ return `<section class="issue-video-section" aria-labelledby="video-${slug}"><div class="wrap"><span class="eyebrow">THE IDEA, IN PHILLIP'S WORDS</span><h1 id="video-${slug}" class="video-title">${title}</h1><div class="issue-video${video?'':' video-pending'}" data-video="${video||''}" data-title="${title}"><img src="${config.poster}" alt="" width="1600" height="900"><div class="video-shade"></div>${video?`<button class="video-play" type="button" aria-label="Play ${title} on YouTube"><span aria-hidden="true">&#9654;</span> Play video</button>`:`<div class="video-message"><span class="play-outline" aria-hidden="true">&#9654;</span><strong>${title}</strong><span>Phillip's video introduction is coming soon.</span><a href="#why">Read the proposal below &darr;</a></div>`}</div><p class="video-privacy">${video?'Choosing Play connects to YouTube. Nothing is loaded from YouTube before you choose to watch.':'The complete summary is available below. No video provider is contacted.'}</p>${config.transcript?`<details class="video-transcript"><summary>Read the transcript</summary><div>${escapeHtml(config.transcript).replace(/\n/g,'<br>')}</div></details>`:''}</div></section>`;
+}

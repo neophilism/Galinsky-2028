@@ -1,0 +1,24 @@
+project:
+  name: Galinsky-2028
+  display_name: Galinsky 2028
+  repository: neophilism/Galinsky-2028
+  status: active-development
+
+roadmap:
+  version: 1
+  planned_prs: 60
+  approved: true
+
+milestones:
+  - name: Foundation and durable handoff
+    prs: 8
+  - name: Public campaign website
+    prs: 10
+  - name: Accounts protection and current materials
+    prs: 8
+  - name: Volunteer operations and administration
+    prs: 12
+  - name: Production fundraising
+    prs: 10
+  - name: Verification deployment and handoff
+    prs: 12

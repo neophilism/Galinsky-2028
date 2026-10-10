@@ -1,7 +1,44 @@
 # Galinsky 2028
 
-Website implementation for Phillip Galinsky for America, following the approved design and 60-work-package development plan.
+Implementation of the approved Phillip Galinsky for America campaign website and volunteer application. The public design preserves the approved portrait, colors, composition and illustrations. Each launch issue has its large top-of-page video component.
 
-Implementation status and release dependencies will be recorded in `docs/IMPLEMENTATION_STATUS.md`. Passing code checks, verified deployments, and production authorization are separate states.
+**Start here:** [implementation status](docs/IMPLEMENTATION_STATUS.md), [complete development plan](docs/DEVELOPMENT_PLAN.md), [60-package register](docs/PR_REGISTER.json), [agent rules](AGENTS.md), [deployment runbook](docs/operations/DEPLOYMENT.md).
 
-Public campaign content must match the approved mockups. Each issue page includes a large video at the top; real YouTube IDs will be supplied later. Payments and sensitive volunteer data collection remain disabled until their separate release requirements are met.
+## Run and verify
+
+Use the Node version in `.nvmrc` and the committed lockfile.
+
+```sh
+npm ci
+npm run check
+npm run typecheck
+npm test
+npm run test:api
+npm run build
+npm run dev
+```
+
+`npm run dev` serves the built public website on port 4321. `npm start` serves the built volunteer application and API on port 4322. Without a database it uses an explicit development-only in-memory store. Production refuses that fallback. Copy `.env.example` into your local environment; Node does not silently load an arbitrary environment file. For local development use `node --env-file=.env apps/api/src/server.mjs` after setting the required values.
+
+Database tests need an isolated loopback Postgres instance and `TEST_DATABASE_URL`; they must never target the assigned Neon production project. CI supplies that isolated database. `npm run test:browser` requires installed Playwright Chromium, Firefox and WebKit and exercises real local HTTP sign-in, cookie, library and logout flows using synthetic mail and material fixtures.
+
+`npm run build:offline` is a dependency-free public-page rendering fallback for inspection. It is not a replacement for the Astro/Vite production build or application testing.
+
+## Layout
+
+- `apps/web`: Astro public marketing site, original design assets and small interactive scripts.
+- `apps/portal`: React/TypeScript volunteer workspace, account UI, role guide, library and local worksheets.
+- `apps/api`: Fastify application, explicit runtime configuration, Postgres storage and durable account-email worker.
+- `packages/core`: tested validation, consent, publication, activity authorization and finance boundary rules.
+- `content/public`: approved public templates and issue/video configuration.
+- `content/materials`: source manifest and current approved publication input; no full historical archive in the public build.
+- `db/migrations`: versioned transactional database schema.
+- `docs`: full plan, decisions, security boundaries, evidence and handoff.
+
+## Important current boundaries
+
+The preview does not accept payments or collect sensitive volunteer reports. Signup requires verified email delivery configuration. The current materials list is intentionally empty until the historical package is reconciled and actually reviewed. Staff identity, sensitive-content E2EE, fundraising integration and several planned operations workflows still require implementation and review; setting a boolean cannot enable them.
+
+The original 36-document source package remains an authorized source input, not a browser download. Its manifest is tracked, not its full bodies. This project does not claim E2EESA certification. Public material, account-delivery metadata, sensitive content and financial disclosure have separate boundaries.
+
+The Render blueprint is a public preview configuration, not evidence of a deployment. Use the user-designated Render project; do not silently use an excluded default workspace.
