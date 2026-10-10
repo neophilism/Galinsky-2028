@@ -11,29 +11,30 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24'
       - run: npm install --global pnpm@12.11.2
       - name: Resolve exact published versions once
         run: |
-          pnpm add --workspace-root --save-exact astro react react-dom fastify @fastify/cookie @fastify/helmet @fastify/rate-limit @fastify/static pg zod @electric-sql/pglite markdown-it sanitize-html
-          pnpm add --workspace-root --save-dev --save-exact typescript @types/node @types/react @types/react-dom @types/pg @types/markdown-it @types/sanitize-html tsx vite @vitejs/plugin-react @astrojs/check @playwright/test @axe-core/playwright prettier
+          pnpm add --workspace-root --save-exact astro react react-dom fastify @fastify/cookie @fastify/helmet @fastify/rate-limit @fastify/static pg zod @electric-sql/pglite markdown-it sanitize-html @fontsource-variable/inter nodemailer @simplewebauthn/server @simplewebauthn/browser
+          pnpm add --workspace-root --save-dev --save-exact typescript@6.0.3 @types/node@24 @types/react @types/react-dom @types/pg @types/markdown-it @types/sanitize-html @types/nodemailer tsx vite @vitejs/plugin-react @astrojs/check @playwright/test @axe-core/playwright prettier
           pnpm list --depth 0 --json > resolved-toolchain.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: resolution-files
           path: |
             package.json
             pnpm-lock.yaml
+            pnpm-workspace.yaml
             resolved-toolchain.json
           retention-days: 7
       - name: Package dependencies for offline implementation verification
         run: tar -czf offline-toolchain.tar.gz node_modules
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: offline-toolchain
           path: offline-toolchain.tar.gz
@@ -44,7 +45,7 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           ref: build/g28-foundation
       - uses: actions/download-artifact@v4
@@ -54,6 +55,6 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add package.json pnpm-lock.yaml resolved-toolchain.json
+          git add package.json pnpm-lock.yaml pnpm-workspace.yaml resolved-toolchain.json
           git diff --cached --quiet || git commit -m 'build: pin initial resolved dependency graph'
           git push origin HEAD:build/g28-foundation
