@@ -10,7 +10,7 @@
     "dev": "node scripts/preview.mjs",
     "dev:api": "node apps/api/src/server.mjs",
     "build": "npm run build:web && npm run build:portal",
-    "build:web": "astro build --root apps/web",
+    "build:web": "astro build --root apps/web && node scripts/build-indexing.mjs",
     "build:portal": "vite build --config apps/portal/vite.config.ts",
     "build:offline": "node scripts/build-public.mjs",
     "test": "node --test tests/*.test.mjs",

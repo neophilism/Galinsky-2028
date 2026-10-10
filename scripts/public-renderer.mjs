@@ -3,14 +3,14 @@ import {fileURLToPath} from 'node:url';
 import {join} from 'node:path';
 import {escapeHtml,origin} from '../packages/core/validation.mjs';
 import {videoPanel} from '../packages/core/video.mjs';
+import {publicRelease} from '../packages/core/indexing.mjs';
 export const root=process.env.G28_SOURCE_ROOT||fileURLToPath(new URL('../',import.meta.url));
 export const pages=JSON.parse(readFileSync(join(root,'content/public/pages.json'),'utf8'));
 export const site=JSON.parse(readFileSync(join(root,'content/public/site.json'),'utf8'));
 export function renderPage(key, options={}) {
  const page=pages.find(p=>p.key===key);if(!page)throw new Error('Unknown page');
  const cfg=options.site||site;
- const canonical=process.env.CANONICAL_ORIGIN||cfg.canonicalOrigin;
- if(canonical)origin(canonical);
+ const {mode,canonical}=publicRelease(cfg);
  const portal=process.env.PORTAL_ORIGIN||cfg.portalOrigin;
  if(portal)origin(portal,process.env.NODE_ENV!=='production');
  const portalPath=portal||'/volunteer/#join';
@@ -27,9 +27,9 @@ export function renderPage(key, options={}) {
  let header=replacePortal(readFileSync(join(root,'content/public/header.html'),'utf8'));
  header=header.replace(/<a class="(?:current)?" href="([^"]+)">/g,(_,url)=>`<a class="${url===page.path||(url==='/issues/'&&page.path.startsWith('/issues/'))?'current':''}" href="${url}"${url===page.path||(url==='/issues/'&&page.path.startsWith('/issues/'))?' aria-current="page"':''}>`);
  const footer=readFileSync(join(root,'content/public/footer.html'),'utf8');
- const status=cfg.mode==='production'?'':`<div class="build-status" role="note">Campaign website preview &bull; Accounts and payments are not open.</div>`;
+ const status=mode==='production'?'':`<div class="build-status" role="note">Campaign website preview &bull; Accounts and payments are not open.</div>`;
  const description=escapeHtml(page.description);
- const robots=cfg.mode==='production'?'index,follow':'noindex,nofollow';
+ const robots=mode==='production'?'index,follow':'noindex,nofollow';
  const csp="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'none'; form-action 'none'";
- return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="${csp}"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="robots" content="${robots}"><title>${escapeHtml(page.title)}</title><meta name="description" content="${description}">${canonical?`<link rel="canonical" href="${canonical}${page.path}">`:''}<meta property="og:title" content="${escapeHtml(page.title)}"><meta property="og:description" content="${description}"><meta property="og:type" content="website">${canonical?`<meta property="og:image" content="${canonical}/assets/candidate.webp">`:''}<meta name="theme-color" content="#0a3161"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/design.css"><link rel="stylesheet" href="/assets/site.css"></head><body data-page="${key}">${header}${body}${footer}${status}<script src="/assets/public.js" defer></script>${key==='index'?'<script src="/assets/motion.js" defer></script>':''}</body></html>`;
+ return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="${csp}"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="robots" content="${robots}"><title>${escapeHtml(page.title)}</title><meta name="description" content="${description}">${canonical?`<link rel="canonical" href="${canonical}${page.path}">`:''}<meta property="og:title" content="${escapeHtml(page.title)}"><meta property="og:description" content="${description}"><meta property="og:type" content="website"><meta property="og:site_name" content="Galinsky 2028"><meta name="twitter:card" content="summary_large_image">${canonical?`<meta property="og:url" content="${canonical}${page.path}">`:''}${canonical?`<meta property="og:image" content="${canonical}/assets/candidate.webp">`:''}${canonical?`<meta property="og:image" content="${canonical}/assets/candidate.webp">`:''}<meta name="theme-color" content="#0a3161"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/design.css"><link rel="stylesheet" href="/assets/site.css"></head><body data-page="${key}">${header}${body}${footer}${status}<script src="/assets/public.js" defer></script>${key==='index'?'<script src="/assets/motion.js" defer></script>':''}</body></html>`;
 }
