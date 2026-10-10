@@ -1,0 +1,59 @@
+name: Resolve initial toolchain
+on:
+  push:
+    branches: [build/g28-foundation]
+    paths: [.github/workflows/bootstrap.yml]
+permissions:
+  contents: read
+jobs:
+  resolve:
+    if: contains(github.event.head_commit.message, 'bootstrap dependency resolution')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install --global pnpm@12.11.2
+      - name: Resolve exact published versions once
+        run: |
+          pnpm add --workspace-root --save-exact astro react react-dom fastify @fastify/cookie @fastify/helmet @fastify/rate-limit @fastify/static pg zod @electric-sql/pglite markdown-it sanitize-html
+          pnpm add --workspace-root --save-dev --save-exact typescript @types/node @types/react @types/react-dom @types/pg @types/markdown-it @types/sanitize-html tsx vite @vitejs/plugin-react @astrojs/check @playwright/test @axe-core/playwright prettier
+          pnpm list --depth 0 --json > resolved-toolchain.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resolution-files
+          path: |
+            package.json
+            pnpm-lock.yaml
+            resolved-toolchain.json
+          retention-days: 7
+      - name: Package dependencies for offline implementation verification
+        run: tar -czf offline-toolchain.tar.gz node_modules
+      - uses: actions/upload-artifact@v4
+        with:
+          name: offline-toolchain
+          path: offline-toolchain.tar.gz
+          retention-days: 3
+  record:
+    needs: resolve
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: build/g28-foundation
+      - uses: actions/download-artifact@v4
+        with:
+          name: resolution-files
+      - name: Record reproducible dependency lock on the implementation branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add package.json pnpm-lock.yaml resolved-toolchain.json
+          git diff --cached --quiet || git commit -m 'build: pin initial resolved dependency graph'
+          git push origin HEAD:build/g28-foundation

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+.local/
+source-inputs/
+original-volunteer-archive/
+playwright-report/
+test-results/
+*.log
