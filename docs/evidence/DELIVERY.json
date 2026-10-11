@@ -1,7 +1,7 @@
 {
-  "status": "foundation_merged_main_and_release_blocked",
+  "status": "private_preview_live_production_release_blocked",
   "full_work_packages_accepted": 0,
-  "deployment_verified": false,
+  "deployment_verified": true,
   "repository": "neophilism/Galinsky-2028",
   "verified_merges": [
     {
@@ -61,11 +61,34 @@
         "production_dependency_audit"
       ],
       "scope": "truthful_production_copy_and_inactive_signup_donation_disclosures"
+    },
+    {
+      "pr": 30,
+      "merge_commit": "58a55afd3928750e53547c979afd4215f954d8d1",
+      "ci_run_id": 38153243508,
+      "scope": "guarded_Render_cleanup_audit_workflow"
+    },
+    {
+      "pr": 31,
+      "merge_commit": "6ab69f51f7f32674cb1b610c182974463f5d2f96",
+      "ci_run_id": 38164345156,
+      "scope": "five_exact_Render_service_deletions"
+    },
+    {
+      "pr": 32,
+      "merge_commit": "46d4b836cebe6a9915f37c983e22b69dfd0e3d2f",
+      "ci_run_id": 38164396844,
+      "scope": "create_password_protected_preview_in_exact_project"
+    },
+    {
+      "pr": 33,
+      "merge_commit": "a31f659e94082b0390fd5aecc02d0069d47a4aa2",
+      "ci_run_id": 38164768225,
+      "scope": "live_HTTP_preview_access_verification"
     }
   ],
   "release_gates_pending": [
-    "confirmed usable Render workspace and project destination",
-    "verified canonical public and volunteer origins",
+    "verified public-production canonical and volunteer portal origins",
     "live email sender and operational approval",
     "three actual issue video URLs",
     "approved policy source documents and outgoing website links",
@@ -80,5 +103,38 @@
     "Staff/admin features not complete",
     "Unreviewed source archive not publicly bundled"
   ],
-  "notes": "A passing PR or an imported source archive is not a production deployment, formal package acceptance, or evidence of a functioning live campaign."
+  "notes": "The protected public-site preview has been deployed and live HTTP-tested. This does not activate signup, payments, a separate volunteer portal, staff administration, E2EE reporting, or a public production release; no formal acceptance of all 60 packages is implied.",
+  "production_release_verified": false,
+  "private_preview": {
+    "url": "https://galinsky-2028-private-preview.onrender.com",
+    "dashboard_url": "https://dashboard.render.com/web/srv-db5teuajnfac73bm8pug",
+    "service_id": "srv-db5teuajnfac73bm8pug",
+    "project_id": "prj-db57fnm7bikc739783q0",
+    "environment_id": "evm-db57fnm7bikc739783qg",
+    "deploy_id": "dep-db5tev2jnfac73bm8sn0",
+    "deployed_commit": "46d4b836cebe6a9915f37c983e22b69dfd0e3d2f",
+    "deploy_status": "live",
+    "authentication": "HTTP Basic; username preview; secret never stored in Git",
+    "rejected_access_test_paths": 9,
+    "authorized_public_page_checks": 9,
+    "accepted_http_run_id": 38164974556,
+    "auto_deploy": false,
+    "public_launch": false,
+    "portal_deployed": false
+  },
+  "render_cleanup": {
+    "audit_run_id": 38164309166,
+    "delete_run_id": 38164565395,
+    "deleted_service_ids": [
+      "srv-db53cknavr4c73faj5fg",
+      "srv-db53ag8473hc739nkl8g",
+      "srv-db39haid0e5s73fik1kg",
+      "srv-db39gtid0e5s73fiirjg",
+      "srv-db3ptde0tbcc738giui0"
+    ],
+    "service_count_after_new_preview": 20,
+    "preserved_ram_database": "dpg-db39gm1srm7s73b62mv0-a",
+    "ram_database_content_inspected": false,
+    "workspace_root_services_not_relocated": true
+  }
 }
