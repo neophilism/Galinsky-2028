@@ -1,6 +1,6 @@
 {
   "workspaceId": "tea-db23jkks728c73av263g",
-  "action": "audit",
+  "action": "delete",
   "serviceIds": [
     "srv-db53cknavr4c73faj5fg",
     "srv-db53ag8473hc739nkl8g",
