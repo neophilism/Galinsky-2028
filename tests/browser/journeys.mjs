@@ -64,6 +64,16 @@ try{
   await page.screenshot({path:`test-results/browser/${name}-home-mobile.png`,fullPage:true});
   await page.goto(portalOrigin+'/join');await page.getByLabel('Email address').fill(name+'@example.test');await page.getByRole('checkbox').first().check();await page.getByRole('button',{name:/Email my sign-in link/}).click();await page.getByText(/When delivery is available/).waitFor();
   const queued=store.outbox.at(-1);const mail=openDelivery(queued.envelope,cfg.deliveryKey);assert.equal(mail.email,name+'@example.test');await page.goto(mail.url);await page.getByRole('button',{name:'Continue to my workspace'}).click();await page.getByRole('button',{name:'Sign out'}).waitFor();
+  // Real role preferences are saved behind the volunteer session and persist.
+  await page.goto(portalOrigin+'/roles');
+  await page.getByLabel('What would you enjoy?').selectOption('skills');
+  await page.getByRole('button',{name:'Save role preference'}).click();
+  await page.getByText(/were saved to your account/).waitFor();
+  await page.reload();
+  assert.equal(await page.getByLabel('What would you enjoy?').inputValue(),'skills');
+  const prefs=await context.request.get(portalOrigin+'/api/account/role-preferences');
+  assert.equal(prefs.status(),200);
+  assert.equal((await prefs.json()).preferences.roleId,'skills');
   // Account-only checklist persists across reloads without certifying fieldwork.
   // SPA route changes must announce a new page and move keyboard/screen-reader focus.
   await page.getByRole('link',{name:'Available actions'}).click();
