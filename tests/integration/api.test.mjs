@@ -15,3 +15,38 @@ test('rate limiting retains generic response and does not enqueue unlimited emai
 test('no volunteer session can access staff, payments or plaintext sensitive submissions',async()=>{const{app,store}=await setup();const{cookie,csrf}=await login(app,store);for(const path of ['/api/admin/publish','/api/protected/report','/api/payments/checkout']){const r=await app.inject({method:'POST',url:path,headers:{...headers,cookie,'x-csrf-token':csrf},payload:{body:'Must never be stored'}});assert.equal(r.statusCode,503);}assert(!JSON.stringify(store).includes('Must never be stored'));await app.close();});
 test('unconfigured registration is a clear failure, not a fake success',async()=>{const store=new MemoryStore();const app=createApp({store,config:{...config,signup:false}});const r=await app.inject({method:'POST',url:'/api/auth/request',headers,payload:{email:'volunteer@example.test',termsAccepted:true}});assert.equal(r.statusCode,503);assert.equal(store.outbox.length,0);assert.equal(store.accounts.size,0);await app.close();});
 test('security headers and body limits apply to API responses',async()=>{const{app}=await setup();const r=await app.inject({url:'/api/config'});assert.equal(r.headers['cache-control'],'no-store');assert.equal(r.headers['x-frame-options'],'DENY');assert(r.headers['content-security-policy'].includes("frame-ancestors 'none'"));const huge=await app.inject({method:'POST',url:'/api/auth/request',headers,payload:{email:'x'.repeat(40000)}});assert.equal(huge.statusCode,413);await app.close();});
+
+// Progress is account-scoped and cannot certify regulated election activity.
+test('personal task progress persists, toggles and requires CSRF',async()=>{
+ const{app,store}=await setup();const{cookie,csrf}=await login(app,store);
+ const auth={...headers,cookie,'x-csrf-token':csrf};
+ let r=await app.inject({url:'/api/tasks',headers:{cookie}});
+ assert.equal(r.json().completed,0);assert.equal(r.json().total,3);
+ r=await app.inject({method:'POST',url:'/api/tasks/choose-role/completion',headers:{...headers,cookie},payload:{completed:true}});
+ assert.equal(r.statusCode,403,'Missing CSRF must fail');
+ r=await app.inject({method:'POST',url:'/api/tasks/choose-role/completion',headers:auth,payload:{completed:true}});
+ assert.equal(r.statusCode,200);assert.deepEqual(r.json(),{id:'choose-role',completed:true,verified:false});
+ r=await app.inject({url:'/api/tasks',headers:{cookie}});assert.equal(r.json().completed,1);
+ assert.equal(r.json().tasks.find(t=>t.id==='choose-role').completed,true);
+ r=await app.inject({method:'POST',url:'/api/tasks/choose-role/completion',headers:auth,payload:{completed:false}});
+ assert.equal(r.statusCode,200);
+ r=await app.inject({url:'/api/tasks',headers:{cookie}});assert.equal(r.json().completed,0);
+ await app.close();
+});
+test('restricted tasks, arbitrary IDs and forged completion payloads are rejected',async()=>{
+ const{app,store}=await setup();const{cookie,csrf}=await login(app,store);const auth={...headers,cookie,'x-csrf-token':csrf};
+ for(const [task,payload,status] of [['petition-training',{completed:true},403],['arbitrary',{completed:true},404],['read-principle',{completed:'true'},400],['read-principle',{completed:true,notes:'leak'},400]]){
+  const r=await app.inject({method:'POST',url:'/api/tasks/'+task+'/completion',headers:auth,payload});assert.equal(r.statusCode,status,task);
+ }
+ assert.equal(store.taskProgress.size,0);
+ await app.close();
+});
+test('task progress is account-isolated and erased when the account closes',async()=>{
+ const{app,store}=await setup();const{cookie,csrf}=await login(app,store);const auth={...headers,cookie,'x-csrf-token':csrf};
+ let r=await app.inject({method:'POST',url:'/api/tasks/read-principle/completion',headers:auth,payload:{completed:true}});assert.equal(r.statusCode,200);
+ assert.equal(store.taskProgress.size,1);
+ r=await app.inject({method:'POST',url:'/api/account/close',headers:auth,payload:{confirm:'close my account'}});assert.equal(r.statusCode,200);
+ assert.equal(store.taskProgress.size,0);
+ assert.equal((await app.inject({url:'/api/tasks',headers:{cookie}})).statusCode,401);
+ await app.close();
+});
