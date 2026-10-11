@@ -5,6 +5,7 @@ import {randomToken,tokenHash,emailKey,validToken,sealDelivery,sessionCookie,rea
 import {roles,recommendRole} from '../../../packages/core/roles.mjs';
 import {forms} from '../../../packages/core/forms.mjs';
 import {materialSearch,canReadMaterial,publicMaterial} from '../../../packages/core/content.mjs';
+import {readableVersion,matchesReading} from '../../../packages/core/material-reading.mjs';
 import {starterTasks,taskDecision} from '../../../packages/core/tasks.mjs';
 export function createApp({store,config,clock=()=>Date.now()}){
  const app=Fastify({logger:false,bodyLimit:32768,trustProxy:false,requestTimeout:15000});
@@ -53,7 +54,26 @@ export function createApp({store,config,clock=()=>Date.now()}){
  app.post('/api/account/consent',async req=>{const s=await writeSession(req);const b=exactKeys(req.body,['marketing']);assert(typeof b.marketing==='boolean','invalid_consent','Select a valid preference.');await store.consent(s.account.id,b.marketing);return {saved:true};});
  app.post('/api/account/close',async(req,reply)=>{const s=await writeSession(req);const b=exactKeys(req.body,['confirm']);assert(b.confirm==='close my account','confirmation','Confirm account closure.');await store.closeAccount(s.account.id);reply.header('Set-Cookie',sessionCookie('',{secure:config.production,maxAge:0}));return {closed:true};});
  app.get('/api/materials',async req=>{const s=await account(req);const list=materialSearch(await store.listMaterials(),String(req.query.q||''),String(req.query.category||'all'),s.account);return {materials:list.map(m=>{const x=publicMaterial(m);delete x.body;return x;}),notice:list.length?null:'Current materials are being prepared and reviewed. Unreviewed historical files are not published as current guidance.'};});
- app.get('/api/materials/:id',async req=>{const s=await account(req);const m=(await store.listMaterials()).find(m=>m.id===id(req.params.id));assert(m&&canReadMaterial(m,s.account),'not_found','This material is not available.',404);return publicMaterial(m);});
+ app.get('/api/materials/:id',async req=>{
+  const session=await account(req);
+  const key=id(req.params.id);
+  const m=(await store.listMaterials()).find(m=>m.id===key);
+  assert(m&&canReadMaterial(m,session.account),'not_found','This material is not available.',404);
+  const ack=await store.readMaterialAck(session.account.id,m.id);
+  return {...publicMaterial(m),acknowledged:matchesReading(m,session.account,ack),readingNotice:'Reading this guide is not training certification or authorization for regulated activity.'};
+ });
+ app.post('/api/materials/:id/reading',async req=>{
+  const session=await writeSession(req);
+  const body=exactKeys(req.body,['revision','acknowledged']);
+  assert(Number.isSafeInteger(body.revision)&&body.revision>0&&typeof body.acknowledged==='boolean','invalid_reading','Choose the current revision and reading acknowledgment.');
+  const key=id(req.params.id);
+  const m=(await store.listMaterials()).find(m=>m.id===key);
+  assert(m&&canReadMaterial(m,session.account),'not_found','This material is not available.',404);
+  assert(body.revision===m.revision,'stale_material','The guide changed. Read the current version before acknowledging.',409);
+  const record=body.acknowledged?readableVersion(m,session.account):null;
+  await store.setMaterialAck(session.account.id,m.id,record);
+  return {materialId:key,revision:m.revision,acknowledged:body.acknowledged,trainingCertified:false,activityAuthorized:false};
+ });
  app.get('/api/materials/:id/download',async(req,reply)=>{const s=await account(req);const key=id(req.params.id);const m=(await store.listMaterials()).find(m=>m.id===key);assert(m&&canReadMaterial(m,s.account),'not_found','This material is not available.',404);return reply.header('Content-Disposition',`attachment; filename="${key}-v${m.revision}.md"`).type('text/plain; charset=utf-8').send(m.body);});
  app.get('/api/roles',async()=>({roles}));
  app.get('/api/role-recommendation',async req=>recommendRole({interest:String(req.query.interest||'network'),minutes:Number(req.query.minutes)||30,willingToTrain:req.query.training!=='no'}));
