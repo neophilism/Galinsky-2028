@@ -28,29 +28,37 @@ try{
     const response=await page.goto(publicOrigin+path);assert.equal(response.status(),200);await page.locator('h1').waitFor();assert.equal(await page.locator('h1').count(),1);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,path+' at '+width);
    }
   }
-  // Role recommendation and playbook must change together. The preview may
-  // have no provisioned portal, so first verify the safe signup-only fallback.
+  // The private volunteer preview must work without a separate deployed
+  // portal, user credentials, or any external API call.
   await page.goto(publicOrigin+'/volunteer/');
-  assert.equal(await page.locator('#role-open').getAttribute('href'),'/volunteer/#join');
+  assert.equal(await page.locator('#role-open').getAttribute('href'),'#preview-workspace');
+  assert.equal(await page.locator('#preview-role-select option').count(),12);
+  assert.equal(await page.getByRole('button',{name:/Download my volunteer plan/}).count(),1);
   await page.locator('#role-pref').selectOption('skills');
   assert.equal(await page.locator('#role-result').innerText(),'Skills & Operations Volunteer');
-  assert.equal(await page.locator('#role-open').getAttribute('href'),'/volunteer/#join');
-  // Simulate the separately configured protected portal destination without
-  // navigating to it or making an external request.
-  await page.locator('#role-open').evaluate(a=>a.setAttribute('href','https://portal.example.test/materials/02'));
-  await page.locator('#role-pref').selectOption('network');
-  await page.locator('#role-pref').selectOption('skills');
-  assert.equal(await page.locator('#role-open').getAttribute('href'),'https://portal.example.test/materials/13');
-  await page.locator('#role-pref').selectOption('host');
-  assert.equal(await page.locator('#role-open').getAttribute('href'),'https://portal.example.test/materials/07');
+  await page.locator('#role-open').click();
+  assert.equal(await page.locator('#preview-role-select').inputValue(),'13');
+  assert.equal(await page.locator('#preview-role-name').innerText(),'Skills & Operations');
+  await page.locator('.role-grid [data-role-id="10"]').click();
+  assert.equal(await page.locator('#preview-role-select').inputValue(),'10');
+  assert.match(await page.locator('#preview-role-state').innerText(),/PREPARATION ONLY/);
   await page.locator('#role-training').selectOption('no');
   await page.locator('#role-pref').selectOption('ballot');
   assert.equal(await page.locator('#role-result').innerText(),'Personal Network Organizer');
-  assert.equal(await page.locator('#role-open').getAttribute('href'),'https://portal.example.test/materials/02');
-  await page.locator('#role-training').selectOption('yes');
-  assert.equal(await page.locator('#role-result').innerText(),'Ballot-Access Petition Volunteer');
-  assert.equal(await page.locator('#role-open').getAttribute('href'),'https://portal.example.test/materials/10');
-  assert.equal(outside.length,0,'Role finder must not contact external portals');
+  await page.locator('#role-open').click();
+  assert.equal(await page.locator('#preview-role-select').inputValue(),'02');
+  await page.locator('[data-preview-task="issues"]').check();
+  assert.match(await page.locator('#preview-progress').innerText(),/1 of 4/);
+  await page.reload();
+  assert.equal(await page.locator('[data-preview-task="issues"]').isChecked(),true);
+  await page.locator('#preview-plan-text').fill('Practice discussing one published campaign issue.');
+  const volunteerDownload=page.waitForEvent('download');
+  await page.getByRole('button',{name:/Download my volunteer plan/}).click();
+  assert.equal((await volunteerDownload).suggestedFilename(),'galinsky-volunteer-practice-plan.md');
+  assert.match(await page.locator('#preview-download-status').innerText(),/not submitted/i);
+  await page.locator('#preview-reset').click();
+  assert.match(await page.locator('#preview-progress').innerText(),/0 of 4/);
+  assert.equal(outside.length,0,'Volunteering tools must not contact outside services');
   assert.equal(outside.length,0,'No third-party request before activation');
   await page.goto(publicOrigin+'/');await page.setViewportSize({width:390,height:844});await page.locator('#menu-toggle').click();assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'true');
   await page.screenshot({path:`test-results/browser/${name}-home-mobile.png`,fullPage:true});
