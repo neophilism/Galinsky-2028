@@ -1,0 +1,314 @@
+{
+  "repository": "neophilism/Galinsky-2028",
+  "title": "Galinsky-2028",
+  "version": 1,
+  "planVerified": true,
+  "plannedPrCount": 60,
+  "sourceFiles": [
+    ".exechub/project.yml",
+    "docs/DEVELOPMENT_PLAN.md",
+    ".exechub/approved-pr-mapping.json"
+  ],
+  "milestones": [
+    {
+      "id": "G28-001",
+      "title": "Foundation and durable handoff — approved work package 1 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-002",
+      "title": "Foundation and durable handoff — approved work package 2 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-003",
+      "title": "Foundation and durable handoff — approved work package 3 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-004",
+      "title": "Foundation and durable handoff — approved work package 4 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-005",
+      "title": "Foundation and durable handoff — approved work package 5 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-006",
+      "title": "Foundation and durable handoff — approved work package 6 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-007",
+      "title": "Foundation and durable handoff — approved work package 7 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-008",
+      "title": "Foundation and durable handoff — approved work package 8 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-009",
+      "title": "Public campaign website — approved work package 1 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-010",
+      "title": "Public campaign website — approved work package 2 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-011",
+      "title": "Public campaign website — approved work package 3 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-012",
+      "title": "Public campaign website — approved work package 4 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-013",
+      "title": "Public campaign website — approved work package 5 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-014",
+      "title": "Public campaign website — approved work package 6 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-015",
+      "title": "Public campaign website — approved work package 7 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-016",
+      "title": "Public campaign website — approved work package 8 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-017",
+      "title": "Public campaign website — approved work package 9 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-018",
+      "title": "Public campaign website — approved work package 10 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-019",
+      "title": "Accounts protection and current materials — approved work package 1 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-020",
+      "title": "Accounts protection and current materials — approved work package 2 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-021",
+      "title": "Accounts protection and current materials — approved work package 3 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-022",
+      "title": "Accounts protection and current materials — approved work package 4 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-023",
+      "title": "Accounts protection and current materials — approved work package 5 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-024",
+      "title": "Accounts protection and current materials — approved work package 6 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-025",
+      "title": "Accounts protection and current materials — approved work package 7 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-026",
+      "title": "Accounts protection and current materials — approved work package 8 of 8",
+      "origin": "original"
+    },
+    {
+      "id": "G28-027",
+      "title": "Volunteer operations and administration — approved work package 1 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-028",
+      "title": "Volunteer operations and administration — approved work package 2 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-029",
+      "title": "Volunteer operations and administration — approved work package 3 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-030",
+      "title": "Volunteer operations and administration — approved work package 4 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-031",
+      "title": "Volunteer operations and administration — approved work package 5 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-032",
+      "title": "Volunteer operations and administration — approved work package 6 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-033",
+      "title": "Volunteer operations and administration — approved work package 7 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-034",
+      "title": "Volunteer operations and administration — approved work package 8 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-035",
+      "title": "Volunteer operations and administration — approved work package 9 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-036",
+      "title": "Volunteer operations and administration — approved work package 10 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-037",
+      "title": "Volunteer operations and administration — approved work package 11 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-038",
+      "title": "Volunteer operations and administration — approved work package 12 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-039",
+      "title": "Production fundraising — approved work package 1 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-040",
+      "title": "Production fundraising — approved work package 2 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-041",
+      "title": "Production fundraising — approved work package 3 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-042",
+      "title": "Production fundraising — approved work package 4 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-043",
+      "title": "Production fundraising — approved work package 5 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-044",
+      "title": "Production fundraising — approved work package 6 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-045",
+      "title": "Production fundraising — approved work package 7 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-046",
+      "title": "Production fundraising — approved work package 8 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-047",
+      "title": "Production fundraising — approved work package 9 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-048",
+      "title": "Production fundraising — approved work package 10 of 10",
+      "origin": "original"
+    },
+    {
+      "id": "G28-049",
+      "title": "Verification deployment and handoff — approved work package 1 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-050",
+      "title": "Verification deployment and handoff — approved work package 2 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-051",
+      "title": "Verification deployment and handoff — approved work package 3 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-052",
+      "title": "Verification deployment and handoff — approved work package 4 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-053",
+      "title": "Verification deployment and handoff — approved work package 5 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-054",
+      "title": "Verification deployment and handoff — approved work package 6 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-055",
+      "title": "Verification deployment and handoff — approved work package 7 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-056",
+      "title": "Verification deployment and handoff — approved work package 8 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-057",
+      "title": "Verification deployment and handoff — approved work package 9 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-058",
+      "title": "Verification deployment and handoff — approved work package 10 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-059",
+      "title": "Verification deployment and handoff — approved work package 11 of 12",
+      "origin": "original"
+    },
+    {
+      "id": "G28-060",
+      "title": "Verification deployment and handoff — approved work package 12 of 12",
+      "origin": "original"
+    }
+  ]
+}
