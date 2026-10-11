@@ -1,0 +1,822 @@
+{
+  "schemaVersion": 1,
+  "repository": "neophilism/Galinsky-2028",
+  "roadmapVersion": 1,
+  "planVerified": true,
+  "plannedPrCount": 60,
+  "observedAt": "2026-10-11T17:41:34.878Z",
+  "units": [
+    {
+      "id": "G28-001",
+      "title": "Foundation and durable handoff — approved work package 1 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-002",
+      "title": "Foundation and durable handoff — approved work package 2 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-003",
+      "title": "Foundation and durable handoff — approved work package 3 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-004",
+      "title": "Foundation and durable handoff — approved work package 4 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-005",
+      "title": "Foundation and durable handoff — approved work package 5 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-006",
+      "title": "Foundation and durable handoff — approved work package 6 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-007",
+      "title": "Foundation and durable handoff — approved work package 7 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-008",
+      "title": "Foundation and durable handoff — approved work package 8 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-009",
+      "title": "Public campaign website — approved work package 1 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-010",
+      "title": "Public campaign website — approved work package 2 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-011",
+      "title": "Public campaign website — approved work package 3 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-012",
+      "title": "Public campaign website — approved work package 4 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-013",
+      "title": "Public campaign website — approved work package 5 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-014",
+      "title": "Public campaign website — approved work package 6 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-015",
+      "title": "Public campaign website — approved work package 7 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-016",
+      "title": "Public campaign website — approved work package 8 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-017",
+      "title": "Public campaign website — approved work package 9 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-018",
+      "title": "Public campaign website — approved work package 10 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-019",
+      "title": "Accounts protection and current materials — approved work package 1 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-020",
+      "title": "Accounts protection and current materials — approved work package 2 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-021",
+      "title": "Accounts protection and current materials — approved work package 3 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-022",
+      "title": "Accounts protection and current materials — approved work package 4 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-023",
+      "title": "Accounts protection and current materials — approved work package 5 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-024",
+      "title": "Accounts protection and current materials — approved work package 6 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-025",
+      "title": "Accounts protection and current materials — approved work package 7 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-026",
+      "title": "Accounts protection and current materials — approved work package 8 of 8",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-027",
+      "title": "Volunteer operations and administration — approved work package 1 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-028",
+      "title": "Volunteer operations and administration — approved work package 2 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-029",
+      "title": "Volunteer operations and administration — approved work package 3 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-030",
+      "title": "Volunteer operations and administration — approved work package 4 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-031",
+      "title": "Volunteer operations and administration — approved work package 5 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-032",
+      "title": "Volunteer operations and administration — approved work package 6 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-033",
+      "title": "Volunteer operations and administration — approved work package 7 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-034",
+      "title": "Volunteer operations and administration — approved work package 8 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-035",
+      "title": "Volunteer operations and administration — approved work package 9 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-036",
+      "title": "Volunteer operations and administration — approved work package 10 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-037",
+      "title": "Volunteer operations and administration — approved work package 11 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-038",
+      "title": "Volunteer operations and administration — approved work package 12 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-039",
+      "title": "Production fundraising — approved work package 1 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-040",
+      "title": "Production fundraising — approved work package 2 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-041",
+      "title": "Production fundraising — approved work package 3 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-042",
+      "title": "Production fundraising — approved work package 4 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-043",
+      "title": "Production fundraising — approved work package 5 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-044",
+      "title": "Production fundraising — approved work package 6 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-045",
+      "title": "Production fundraising — approved work package 7 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-046",
+      "title": "Production fundraising — approved work package 8 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-047",
+      "title": "Production fundraising — approved work package 9 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-048",
+      "title": "Production fundraising — approved work package 10 of 10",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-049",
+      "title": "Verification deployment and handoff — approved work package 1 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-050",
+      "title": "Verification deployment and handoff — approved work package 2 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-051",
+      "title": "Verification deployment and handoff — approved work package 3 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-052",
+      "title": "Verification deployment and handoff — approved work package 4 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-053",
+      "title": "Verification deployment and handoff — approved work package 5 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-054",
+      "title": "Verification deployment and handoff — approved work package 6 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-055",
+      "title": "Verification deployment and handoff — approved work package 7 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-056",
+      "title": "Verification deployment and handoff — approved work package 8 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-057",
+      "title": "Verification deployment and handoff — approved work package 9 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-058",
+      "title": "Verification deployment and handoff — approved work package 10 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-059",
+      "title": "Verification deployment and handoff — approved work package 11 of 12",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "G28-060",
+      "title": "Verification deployment and handoff — approved work package 12 of 12",
+      "origin": "original",
+      "prs": []
+    }
+  ],
+  "pullRequests": [
+    {
+      "id": 4820328952,
+      "number": 30,
+      "title": "Prepare guarded deletion of the five approved Render duplicates",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/30",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-10-11T15:54:30.000Z",
+      "updatedAt": "2026-10-11T15:54:30.000Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "1bd9fdca9f6ce42e2f395749c2999d7b6f0dda82",
+      "baseRef": "main",
+      "mergeCommitSha": "1bf546db91c56b2b7f802bdfd4f051c8056aa41f"
+    },
+    {
+      "id": 4819921268,
+      "number": 29,
+      "title": "Audit all Render workspace projects and services without changes",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/29",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T14:51:34.000Z",
+      "updatedAt": "2026-10-11T14:53:39.000Z",
+      "closedAt": "2026-10-11T14:53:39.000Z",
+      "mergedAt": "2026-10-11T14:53:39.000Z",
+      "headSha": "12db6096974ef82bb6665d15784b606480662da1",
+      "baseRef": "main",
+      "mergeCommitSha": "898cc1b210d961a2e98ee899a97a128a8bf7ee58"
+    },
+    {
+      "id": 4818081947,
+      "number": 28,
+      "title": "Diagnose Render API validation errors safely and retry private preview creation",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/28",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T09:33:22.000Z",
+      "updatedAt": "2026-10-11T09:35:20.000Z",
+      "closedAt": "2026-10-11T09:35:20.000Z",
+      "mergedAt": "2026-10-11T09:35:20.000Z",
+      "headSha": "bd818daa78442fb1630f267521b8fca0c8a46fce",
+      "baseRef": "main",
+      "mergeCommitSha": "1c78c5acd62cba059ee926edaacbb8b2ea262335"
+    },
+    {
+      "id": 4818061384,
+      "number": 27,
+      "title": "Retry creation of password-protected Galinsky preview in verified Render environment",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/27",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T09:29:15.000Z",
+      "updatedAt": "2026-10-11T09:31:31.000Z",
+      "closedAt": "2026-10-11T09:31:31.000Z",
+      "mergedAt": "2026-10-11T09:31:31.000Z",
+      "headSha": "2f46cd89deadfbc40b01bd73ff2980b2ac7e5def",
+      "baseRef": "main",
+      "mergeCommitSha": "e0f8376e9ed1e93de5294484761856fb52d2698a"
+    },
+    {
+      "id": 4818047985,
+      "number": 26,
+      "title": "Align Render creation secret check with 24-character server requirement",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/26",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T09:26:35.000Z",
+      "updatedAt": "2026-10-11T09:28:38.000Z",
+      "closedAt": "2026-10-11T09:28:38.000Z",
+      "mergedAt": "2026-10-11T09:28:38.000Z",
+      "headSha": "cfebdf48963c36e77bd4616858ee401dc7715617",
+      "baseRef": "main",
+      "mergeCommitSha": "881a55120f47c65b928dcb69f717614e8ce5a411"
+    },
+    {
+      "id": 4818027104,
+      "number": 25,
+      "title": "READY / awaiting owner: create private preview in verified Galinsky project",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/25",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T09:22:33.000Z",
+      "updatedAt": "2026-10-11T09:25:11.000Z",
+      "closedAt": "2026-10-11T09:25:11.000Z",
+      "mergedAt": "2026-10-11T09:25:11.000Z",
+      "headSha": "afa05e475ac43690de44214b251a9122eeb1fb14",
+      "baseRef": "main",
+      "mergeCommitSha": "11a6458c33bf47b94902c74cf85052b580de56fd"
+    },
+    {
+      "id": 4818006813,
+      "number": 24,
+      "title": "Fix Render evm- environment ID validation; retry exact-project inspection",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/24",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T09:18:35.000Z",
+      "updatedAt": "2026-10-11T09:21:10.000Z",
+      "closedAt": "2026-10-11T09:21:10.000Z",
+      "mergedAt": "2026-10-11T09:21:10.000Z",
+      "headSha": "b045e09726ceed0e7a82cd7f261e445953229c56",
+      "baseRef": "main",
+      "mergeCommitSha": "b12e25127e51f9da36b0da98f6d355c492a0c34f"
+    },
+    {
+      "id": 4817984001,
+      "number": 23,
+      "title": "Queue exact-project Render inspection without exposing credentials",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/23",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T09:14:59.000Z",
+      "updatedAt": "2026-10-11T09:17:12.000Z",
+      "closedAt": "2026-10-11T09:17:11.000Z",
+      "mergedAt": "2026-10-11T09:17:11.000Z",
+      "headSha": "555c3abd640bd147bde0b8d69f92742d355e1cfd",
+      "baseRef": "main",
+      "mergeCommitSha": "0339924ae46b0543bc15cfa581d1d7e6ab45a957"
+    },
+    {
+      "id": 4817935747,
+      "number": 22,
+      "title": "Provision private preview directly into verified Galinsky Render project environment",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/22",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T09:06:08.000Z",
+      "updatedAt": "2026-10-11T09:08:13.000Z",
+      "closedAt": "2026-10-11T09:08:13.000Z",
+      "mergedAt": "2026-10-11T09:08:13.000Z",
+      "headSha": "771e83a00a20a1363f55d8ca9a2191c0c962ab54",
+      "baseRef": "main",
+      "mergeCommitSha": "a65c3461bb0993123375126cfb8e29f5d8c9ef4f"
+    },
+    {
+      "id": 4817871837,
+      "number": 21,
+      "title": "Password-lock every private preview surface before Render deployment",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/21",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T08:54:18.000Z",
+      "updatedAt": "2026-10-11T08:57:03.000Z",
+      "closedAt": "2026-10-11T08:57:03.000Z",
+      "mergedAt": "2026-10-11T08:57:03.000Z",
+      "headSha": "d56cf0a7e7e474766a6256308ffdeffe75356bb0",
+      "baseRef": "main",
+      "mergeCommitSha": "a8fc86fee1bc580050e4f9fc370409634a16e6e2"
+    },
+    {
+      "id": 4817769202,
+      "number": 20,
+      "title": "Add read-only, privacy-minimal operations health diagnostics",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/20",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T08:36:09.000Z",
+      "updatedAt": "2026-10-11T08:50:46.000Z",
+      "closedAt": "2026-10-11T08:50:46.000Z",
+      "mergedAt": "2026-10-11T08:50:46.000Z",
+      "headSha": "2945f39807886f4316dfade95cd96d93c7b43225",
+      "baseRef": "main",
+      "mergeCommitSha": "e8852710c10e0aaad006c126744802ab955e9e9b"
+    },
+    {
+      "id": 4817756488,
+      "number": 19,
+      "title": "Run deployed site and portal read-only HTTP acceptance from GitHub Actions",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/19",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T08:34:06.000Z",
+      "updatedAt": "2026-10-11T08:36:33.000Z",
+      "closedAt": "2026-10-11T08:36:33.000Z",
+      "mergedAt": "2026-10-11T08:36:33.000Z",
+      "headSha": "759b33f8052e95073c6b267a5cc2b0e3aa701638",
+      "baseRef": "main",
+      "mergeCommitSha": "c2cfbd0dd8e799bd60437545384781cb4e817c27"
+    },
+    {
+      "id": 4817749565,
+      "number": 18,
+      "title": "Add strict provider-neutral fundraising reconciliation foundation",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/18",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T08:32:52.000Z",
+      "updatedAt": "2026-10-11T08:37:33.000Z",
+      "closedAt": "2026-10-11T08:37:33.000Z",
+      "mergedAt": "2026-10-11T08:37:33.000Z",
+      "headSha": "e412c931eb910a019746e538e4f27cffec957d69",
+      "baseRef": "main",
+      "mergeCommitSha": "96cfe406f59e3ac44e37669e0b721dabb5b514fb"
+    },
+    {
+      "id": 4817745000,
+      "number": 17,
+      "title": "Record migration 002 in the schema ledger",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/17",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T08:31:56.000Z",
+      "updatedAt": "2026-10-11T08:34:15.000Z",
+      "closedAt": "2026-10-11T08:34:15.000Z",
+      "mergedAt": "2026-10-11T08:34:15.000Z",
+      "headSha": "ccacfb421f9a89005efe837fea6cebfbac407506",
+      "baseRef": "main",
+      "mergeCommitSha": "912d4e1fc91261b44a9ee4aef8584226c1585766"
+    },
+    {
+      "id": 4817568704,
+      "number": 16,
+      "title": "Require independent cryptographic staff approval for volunteer materials",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/16",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T07:58:29.000Z",
+      "updatedAt": "2026-10-11T08:30:58.000Z",
+      "closedAt": "2026-10-11T08:30:58.000Z",
+      "mergedAt": "2026-10-11T08:30:58.000Z",
+      "headSha": "ce72428f3525fbe65903cc36c433292b6d870294",
+      "baseRef": "main",
+      "mergeCommitSha": "79aed0e6a880b24d41367606dc1c59dfcab6a580"
+    },
+    {
+      "id": 4817494675,
+      "number": 15,
+      "title": "Make pending Garden and Cornerstone websites honest, then link when verified",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/15",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T07:44:55.000Z",
+      "updatedAt": "2026-10-11T07:48:07.000Z",
+      "closedAt": "2026-10-11T07:48:07.000Z",
+      "mergedAt": "2026-10-11T07:48:07.000Z",
+      "headSha": "64765e703dd4e3078313b2a5d40a423b45dba13d",
+      "baseRef": "main",
+      "mergeCommitSha": "129e13224da1c5605fedac786d4e9526dc474c23"
+    },
+    {
+      "id": 4817478909,
+      "number": 14,
+      "title": "Add private exact-revision reading acknowledgments for approved volunteer guides",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/14",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T07:42:15.000Z",
+      "updatedAt": "2026-10-11T07:52:31.000Z",
+      "closedAt": "2026-10-11T07:52:31.000Z",
+      "mergedAt": "2026-10-11T07:52:31.000Z",
+      "headSha": "12f2c5ed2993f4fb3df00e4f6fe1d5c6edf92650",
+      "baseRef": "main",
+      "mergeCommitSha": "bf6743fa4bde113f9f7f390002eab51b39fcd56d"
+    },
+    {
+      "id": 4817461967,
+      "number": 13,
+      "title": "Generate accessible standalone policy HTML from publication drafts",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/13",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T07:39:31.000Z",
+      "updatedAt": "2026-10-11T07:42:34.000Z",
+      "closedAt": "2026-10-11T07:42:34.000Z",
+      "mergedAt": "2026-10-11T07:42:34.000Z",
+      "headSha": "c53ac440ef2f090804416a70de4b84035baf41e3",
+      "baseRef": "main",
+      "mergeCommitSha": "2516a1d7c11dbb01da9cc94f82eaf11853aae578"
+    },
+    {
+      "id": 4817446915,
+      "number": 12,
+      "title": "Publish Kirk–Evers documents only with independent review and verified asset hashes",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/12",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T07:37:08.000Z",
+      "updatedAt": "2026-10-11T07:42:29.000Z",
+      "closedAt": "2026-10-11T07:42:29.000Z",
+      "mergedAt": "2026-10-11T07:42:29.000Z",
+      "headSha": "096701b5a525b0d0940da9f8dd86c2a7f7ff037d",
+      "baseRef": "main",
+      "mergeCommitSha": "a0ba12d444bf5a0daa61814aec1237b701415cfa"
+    },
+    {
+      "id": 4817425725,
+      "number": 11,
+      "title": "Make approved volunteer guides navigable, readable, and safe",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/11",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T07:33:29.000Z",
+      "updatedAt": "2026-10-11T07:36:43.000Z",
+      "closedAt": "2026-10-11T07:36:43.000Z",
+      "mergedAt": "2026-10-11T07:36:42.000Z",
+      "headSha": "8f791c9055860fbe9ceb5d65e284821df74e0065",
+      "baseRef": "main",
+      "mergeCommitSha": "9e6ceec224dacd7cb4035e74c36730bc948cc57b"
+    },
+    {
+      "id": 4817399963,
+      "number": 10,
+      "title": "Restore keyboard focus and accessible navigation in volunteer SPA",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/10",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T07:28:55.000Z",
+      "updatedAt": "2026-10-11T07:31:32.000Z",
+      "closedAt": "2026-10-11T07:31:32.000Z",
+      "mergedAt": "2026-10-11T07:31:32.000Z",
+      "headSha": "11867d784101c282d631246877dd0676bbc342b4",
+      "baseRef": "main",
+      "mergeCommitSha": "9103f37f4529a3fb30a2365df49fc89b516b4dcb"
+    },
+    {
+      "id": 4817392765,
+      "number": 9,
+      "title": "Preserve downloadable public previews and add read-only deployment smoke tests",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/9",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T07:27:37.000Z",
+      "updatedAt": "2026-10-11T07:30:08.000Z",
+      "closedAt": "2026-10-11T07:30:08.000Z",
+      "mergedAt": "2026-10-11T07:30:08.000Z",
+      "headSha": "d946517f2b5d6fc73c220871fea176ada6f2e1e6",
+      "baseRef": "main",
+      "mergeCommitSha": "081d95e2970e7995a613e7ea882b91411b24bed0"
+    },
+    {
+      "id": 4817378329,
+      "number": 8,
+      "title": "Prepare reviewed YouTube videos and issue-site links without editing application code",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/8",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T07:25:04.000Z",
+      "updatedAt": "2026-10-11T07:27:56.000Z",
+      "closedAt": "2026-10-11T07:27:56.000Z",
+      "mergedAt": "2026-10-11T07:27:56.000Z",
+      "headSha": "4c83ee4048ea549ecfb3f10b661353a7bd3fc42e",
+      "baseRef": "main",
+      "mergeCommitSha": "d941aa89206d8d7eb4583dee230f357aa109fa04"
+    },
+    {
+      "id": 4817362666,
+      "number": 7,
+      "title": "Add private, persistent volunteer first-action checklist",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/7",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T07:21:50.000Z",
+      "updatedAt": "2026-10-11T07:27:03.000Z",
+      "closedAt": "2026-10-11T07:27:03.000Z",
+      "mergedAt": "2026-10-11T07:27:03.000Z",
+      "headSha": "08bb1c9c6eb69c85a3699a89d9251d6a5f503256",
+      "baseRef": "main",
+      "mergeCommitSha": "152af7ccc6e444df582d6786c51de064e742ef09"
+    },
+    {
+      "id": 4817343651,
+      "number": 6,
+      "title": "Fix volunteer role-finder playbook links and speed up browser CI",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/6",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T07:18:07.000Z",
+      "updatedAt": "2026-10-11T07:20:52.000Z",
+      "closedAt": "2026-10-11T07:20:52.000Z",
+      "mergedAt": "2026-10-11T07:20:52.000Z",
+      "headSha": "33ed1f09560fb33535f28034d78eb71b2ae48364",
+      "baseRef": "main",
+      "mergeCommitSha": "a463ddad6e3d6a5292b21b2f23a14edd9be6accc"
+    },
+    {
+      "id": 4816751710,
+      "number": 5,
+      "title": "Reconcile delivery evidence for merged PRs 3 and 4",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/5",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T05:11:28.000Z",
+      "updatedAt": "2026-10-11T05:14:15.000Z",
+      "closedAt": "2026-10-11T05:14:15.000Z",
+      "mergedAt": "2026-10-11T05:14:15.000Z",
+      "headSha": "36e31b285731f0dabd830c55d2b94fda7ec00a1d",
+      "baseRef": "main",
+      "mergeCommitSha": "b92e15b35acd208bcbd7cad3ad0305d270fad796"
+    },
+    {
+      "id": 4815350794,
+      "number": 4,
+      "title": "Remove prototype wording and clarify inactive signup/donations",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/4",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T00:04:05.000Z",
+      "updatedAt": "2026-10-11T00:07:00.000Z",
+      "closedAt": "2026-10-11T00:07:00.000Z",
+      "mergedAt": "2026-10-11T00:07:00.000Z",
+      "headSha": "0bc98ee310978c0d90fcd2170e6cd44abd43c728",
+      "baseRef": "main",
+      "mergeCommitSha": "efe07090d18233d6bb1f240cc6810d320f559de5"
+    },
+    {
+      "id": 4815340141,
+      "number": 3,
+      "title": "Fix standalone 404 route and record verified launch readiness evidence",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/3",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-11T00:02:10.000Z",
+      "updatedAt": "2026-10-11T00:04:35.000Z",
+      "closedAt": "2026-10-11T00:04:35.000Z",
+      "mergedAt": "2026-10-11T00:04:35.000Z",
+      "headSha": "2cdd0e7caf4d902be2b22b0c4b0636f7fc0cdc3f",
+      "baseRef": "main",
+      "mergeCommitSha": "e048a3c2ce892fba4f54156ac5c508d8150c8fe7"
+    },
+    {
+      "id": 4815326246,
+      "number": 2,
+      "title": "Add production-safe campaign indexing and page metadata",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/2",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-10T23:59:12.000Z",
+      "updatedAt": "2026-10-11T00:01:09.000Z",
+      "closedAt": "2026-10-11T00:01:09.000Z",
+      "mergedAt": "2026-10-11T00:01:09.000Z",
+      "headSha": "3c09368cd1eaa9240d194cd01ce5cfbe868a4977",
+      "baseRef": "main",
+      "mergeCommitSha": "06ad5793f2543321b82e36070e9c28a6420277e6"
+    },
+    {
+      "id": 4815309503,
+      "number": 1,
+      "title": "Build campaign marketing site and secure volunteer foundation",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/1",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-10T23:55:31.000Z",
+      "updatedAt": "2026-10-10T23:58:04.000Z",
+      "closedAt": "2026-10-10T23:58:04.000Z",
+      "mergedAt": "2026-10-10T23:58:04.000Z",
+      "headSha": "cd235c21f6372937d74123b23164ace912e39d59",
+      "baseRef": "main",
+      "mergeCommitSha": "0e576ee14ec63717ed6598bc3157da0ba3b03395"
+    }
+  ]
+}
