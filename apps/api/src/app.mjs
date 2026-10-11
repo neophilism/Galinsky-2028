@@ -57,6 +57,20 @@ export function createApp({store,config,clock=()=>Date.now()}){
  });
  app.get('/api/session',async req=>{const s=await account(req);return {account:{id:s.account.id,verified:true,marketing:s.account.marketing,role:'volunteer'},csrf:s.csrf,expires:s.expires};});
  app.post('/api/auth/logout',async(req,reply)=>{const s=await writeSession(req);await store.logout(s.hash);reply.header('Set-Cookie',sessionCookie('',{secure:config.production,maxAge:0}));return {signedOut:true};});
+ app.get('/api/account/role-preferences',async req=>{
+  const s=await account(req);
+  return {preferences:await store.getRolePreferences(s.account.id)};
+ });
+ app.post('/api/account/role-preferences',async req=>{
+  const s=await writeSession(req);
+  const b=exactKeys(req.body,['roleId','minutes','willingToTrain']);
+  assert(typeof b.roleId==='string'&&roles.some(r=>r.id===b.roleId),'invalid_role','Choose one of the twelve available volunteer roles.');
+  assert(Number.isSafeInteger(b.minutes)&&[15,30,120,240].includes(b.minutes),'invalid_time','Select one of the provided time options.');
+  assert(typeof b.willingToTrain==='boolean','invalid_training','Choose whether you are willing to train.');
+  const preferences={roleId:b.roleId,minutes:b.minutes,willingToTrain:b.willingToTrain};
+  await store.setRolePreferences(s.account.id,preferences);
+  return {saved:true,preferences,activityAuthorized:false};
+ });
  app.post('/api/account/consent',async req=>{const s=await writeSession(req);const b=exactKeys(req.body,['marketing']);assert(typeof b.marketing==='boolean','invalid_consent','Select a valid preference.');await store.consent(s.account.id,b.marketing);return {saved:true};});
  app.post('/api/account/close',async(req,reply)=>{const s=await writeSession(req);const b=exactKeys(req.body,['confirm']);assert(b.confirm==='close my account','confirmation','Confirm account closure.');await store.closeAccount(s.account.id);reply.header('Set-Cookie',sessionCookie('',{secure:config.production,maxAge:0}));return {closed:true};});
  app.get('/api/materials',async req=>{const s=await account(req);const list=materialSearch(await store.listMaterials(),String(req.query.q||''),String(req.query.category||'all'),s.account);return {materials:list.map(m=>{const x=publicMaterial(m);delete x.body;return x;}),notice:list.length?null:'Current materials are being prepared and reviewed. Unreviewed historical files are not published as current guidance.'};});
