@@ -3,7 +3,7 @@ import {createApp} from '../../apps/api/src/app.mjs';import {MemoryStore} from '
 const config=loadConfig({MAIL_PROVIDER:'resend',RESEND_API_KEY:'ci-fixture-not-a-key',MAIL_FROM:'campaign@example.test',SIGNUP_ENABLED:'true',DELIVERY_KEY:randomBytes(32).toString('base64'),LOGIN_PEPPER:'ci-fixture-pepper-with-more-than-thirty-two-characters'});
 const headers={origin:config.portalOrigin,'content-type':'application/json','sec-fetch-site':'same-origin'};
 const material={id:'test-guide',title:'Synthetic test guide',description:'Fixture',body:'This is a synthetic guide.',category:'start',status:'published',audience:'volunteer',revision:1,review:{approvedBy:'fixture-reviewer',revision:1}};
-async function setup(){const store=new MemoryStore({materials:[material,{...material,id:'archive',status:'unreviewed'}]});const app=createApp({store,config});return{app,store};}
+async function setup(){const store=new MemoryStore({materials:[structuredClone(material),{...structuredClone(material),id:'archive',status:'unreviewed'}]});const app=createApp({store,config});return{app,store};}
 async function login(app,store){const r=await app.inject({method:'POST',url:'/api/auth/request',headers,payload:{email:'volunteer@example.test',termsAccepted:true,marketing:false}});assert.equal(r.statusCode,202);const binding=r.headers['set-cookie'].split(';')[0];const job=store.outbox.at(-1);const token=new URL(openDelivery(job.envelope,config.deliveryKey).url).hash.slice(7);const v=await app.inject({method:'POST',url:'/api/auth/verify',headers:{...headers,cookie:binding},payload:{token}});assert.equal(v.statusCode,200);const cookie=v.headers['set-cookie'][0].split(';')[0];const s=await app.inject({url:'/api/session',headers:{cookie}});assert.equal(s.statusCode,200);return{cookie,csrf:s.json().csrf,binding,token};}
 test('signup waits for verification and only encrypted delivery metadata is queued',async()=>{const{app,store}=await setup();const r=await app.inject({method:'POST',url:'/api/auth/request',headers,payload:{email:'volunteer@example.test',termsAccepted:true}});assert.equal(r.statusCode,202);assert.equal(store.accounts.size,0);assert.equal(store.outbox.length,1);assert(!JSON.stringify(store.outbox).includes('volunteer@example.test'));assert(!r.body.includes('token='));await app.close();});
 test('email verification creates a real session and immediately unlocks reviewed materials',async()=>{const{app,store}=await setup();const{cookie}=await login(app,store);const r=await app.inject({url:'/api/materials',headers:{cookie}});assert.deepEqual(r.json().materials.map(m=>m.id),['test-guide']);const doc=await app.inject({url:'/api/materials/test-guide',headers:{cookie}});assert(doc.json().body.includes('synthetic'));const hidden=await app.inject({url:'/api/materials/archive',headers:{cookie}});assert.equal(hidden.statusCode,404);await app.close();});
@@ -48,5 +48,51 @@ test('task progress is account-isolated and erased when the account closes',asyn
  r=await app.inject({method:'POST',url:'/api/account/close',headers:auth,payload:{confirm:'close my account'}});assert.equal(r.statusCode,200);
  assert.equal(store.taskProgress.size,0);
  assert.equal((await app.inject({url:'/api/tasks',headers:{cookie}})).statusCode,401);
+ await app.close();
+});
+
+test('material reading acknowledgments track exact approved edition, undo and CSRF',async()=>{
+ const{app,store}=await setup();const{cookie,csrf}=await login(app,store);
+ const auth={...headers,cookie,'x-csrf-token':csrf};
+ let r=await app.inject({url:'/api/materials/test-guide',headers:{cookie}});
+ assert.equal(r.statusCode,200);assert.equal(r.json().acknowledged,false);
+ r=await app.inject({method:'POST',url:'/api/materials/test-guide/reading',headers:auth,payload:{revision:1,acknowledged:true}});
+ assert.equal(r.statusCode,200);assert.deepEqual(r.json(),{materialId:'test-guide',revision:1,acknowledged:true,trainingCertified:false,activityAuthorized:false});
+ r=await app.inject({url:'/api/materials/test-guide',headers:{cookie}});assert.equal(r.json().acknowledged,true);
+ r=await app.inject({method:'POST',url:'/api/materials/test-guide/reading',headers:auth,payload:{revision:1,acknowledged:false}});
+ assert.equal(r.statusCode,200);
+ r=await app.inject({url:'/api/materials/test-guide',headers:{cookie}});assert.equal(r.json().acknowledged,false);
+ assert.equal(store.materialReading.size,0);await app.close();
+});
+test('stale, unreviewed and forged material acknowledgments fail closed',async()=>{
+ const{app,store}=await setup();const{cookie,csrf}=await login(app,store);
+ const auth={...headers,cookie,'x-csrf-token':csrf};
+ const cases=[
+ ['test-guide',{revision:2,acknowledged:true},409,auth],
+ ['archive',{revision:1,acknowledged:true},404,auth],
+ ['missing',{revision:1,acknowledged:true},404,auth],
+ ['test-guide',{revision:1,acknowledged:'yes'},400,auth],
+ ['test-guide',{revision:1,acknowledged:true,certified:true},400,auth],
+ ['test-guide',{revision:1,acknowledged:true},403,{...headers,cookie}]
+ ];
+ for(const [id,body,status,h]of cases){
+  const r=await app.inject({method:'POST',url:'/api/materials/'+id+'/reading',headers:h,payload:body});
+  assert.equal(r.statusCode,status,id+' '+JSON.stringify(body));
+ }
+ assert.equal(store.materialReading.size,0);
+ const r=await app.inject({method:'POST',url:'/api/materials/test-guide/reading',headers:auth,payload:{revision:1,acknowledged:true}});
+ assert.equal(r.statusCode,200);
+ store.materials[0].body='A newly reviewed edition';store.materials[0].revision=2;store.materials[0].review={approvedBy:'different-reviewer',revision:2};
+ const changed=await app.inject({url:'/api/materials/test-guide',headers:{cookie}});
+ assert.equal(changed.json().acknowledged,false,'Previous revision acknowledgment must never silently carry over');
+ await app.close();
+});
+test('closing an account erases its private material reading records',async()=>{
+ const{app,store}=await setup();const{cookie,csrf}=await login(app,store);
+ const auth={...headers,cookie,'x-csrf-token':csrf};
+ let r=await app.inject({method:'POST',url:'/api/materials/test-guide/reading',headers:auth,payload:{revision:1,acknowledged:true}});assert.equal(r.statusCode,200);
+ assert.equal(store.materialReading.size,1);
+ r=await app.inject({method:'POST',url:'/api/account/close',headers:auth,payload:{confirm:'close my account'}});assert.equal(r.statusCode,200);
+ assert.equal(store.materialReading.size,0);
  await app.close();
 });
