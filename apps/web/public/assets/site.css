@@ -10,3 +10,7 @@ a.resource-link:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 .resource-link .resource-format{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:.06em;white-space:nowrap}
 .policy-document-status{margin-top:14px}
 @media(prefers-reduced-motion:reduce){a.resource-link{transition:none}}
+
+/* A missing verified project site is a non-clickable publication status, not a fake external CTA. */
+.pending-destination{display:inline-flex;align-items:center;max-width:100%;padding:12px 16px;background:#f0f3f7;color:#273a52;border:1px solid #cbd5e0;border-radius:2px;font-size:12px;font-weight:700;letter-spacing:.02em;line-height:1.45}
+.policy-bottom .pending-destination{background:#fff;color:#0a3161}
