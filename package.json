@@ -21,6 +21,7 @@
     "worker": "node apps/api/src/worker.mjs",
     "start": "node apps/api/src/server.mjs",
     "materials:publish": "node scripts/publish-materials.mjs",
+    "issue:prepare": "node scripts/prepare-issue-video.mjs",
     "test:browser": "node tests/browser/journeys.mjs"
   },
   "dependencies": {
