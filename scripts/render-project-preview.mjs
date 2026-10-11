@@ -35,8 +35,8 @@ export function createPreviewSpec(ownerId,environmentId,password){
   throw new Error('Missing or invalid Render project owner ID.');
  if(typeof environmentId!=='string'||!/^evm-[a-z0-9-]+$/.test(environmentId))
   throw new Error('A verified Render environment ID is required.');
- if(typeof password!=='string'||password.length<32)
-  throw new Error('Set a private 32+ character G28_PREVIEW_ACCESS_PASSWORD GitHub Actions secret before creating the service.');
+ if(typeof password!=='string'||password.length<24)
+  throw new Error('Set a private 24+ character G28_PREVIEW_ACCESS_PASSWORD GitHub Actions secret before creating the service.');
  loadPreviewGate({PREVIEW_ACCESS_USER:'preview',PREVIEW_ACCESS_PASSWORD:password});
  return {
   type:'web_service',

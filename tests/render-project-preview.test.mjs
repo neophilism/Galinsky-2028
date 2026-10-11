@@ -25,6 +25,8 @@ test('service creation is non-static, private and atomically password-protected'
  assert.equal(spec.envVars.find(x=>x.key==='PREVIEW_ACCESS_PASSWORD')?.value,pass);
  assert.equal(spec.name,TARGET_SERVICE);
  assert.throws(()=>createPreviewSpec(project.owner.id,e1.id,''));
+ assert.throws(()=>createPreviewSpec(project.owner.id,e1.id,'x'.repeat(23)));
+ assert.equal(createPreviewSpec(project.owner.id,e1.id,'x'.repeat(24)).envVars.find(x=>x.key==='PREVIEW_ACCESS_PASSWORD').value.length,24);
  assert.throws(()=>createPreviewSpec(project.owner.id,'evm-invalid! ',pass));
 });
 test('inspect mode queries exact project and environments but makes no writes',async()=>{
