@@ -1,5 +1,5 @@
 {
-  "status": "private_preview_live_production_release_blocked",
+  "status": "two_private_services_live_production_release_blocked",
   "full_work_packages_accepted": 0,
   "deployment_verified": true,
   "repository": "neophilism/Galinsky-2028",
@@ -85,10 +85,22 @@
       "merge_commit": "a31f659e94082b0390fd5aecc02d0069d47a4aa2",
       "ci_run_id": 38164768225,
       "scope": "live_HTTP_preview_access_verification"
+    },
+    {
+      "pr": 41,
+      "merge_commit": "31bad741e2db6f398ff9b3ee8a68c7b029f265ad",
+      "ci_run_id": 38181416466,
+      "scope": "account_data_export_and_global_session_revocation"
+    },
+    {
+      "pr": 42,
+      "merge_commit": "5aef1f8d2bcabee093960f552ce482f9adfd9f4b",
+      "ci_run_id": 38181706838,
+      "scope": "remove_fake_volunteer_preview_and_route_twelve_roles_to_real_portal"
     }
   ],
   "release_gates_pending": [
-    "verified public-production canonical and volunteer portal origins",
+    "verified public-production canonical domain and public DNS (private portal preview origin is verified)",
     "live email sender and operational approval",
     "three actual issue video URLs",
     "approved policy source documents and outgoing website links",
@@ -103,7 +115,7 @@
     "Staff/admin features not complete",
     "Unreviewed source archive not publicly bundled"
   ],
-  "notes": "The protected public-site preview has been deployed and live HTTP-tested. This does not activate signup, payments, a separate volunteer portal, staff administration, E2EE reporting, or a public production release; no formal acceptance of all 60 packages is implied.",
+  "notes": "Both password-protected public-site and real volunteer portal/API are deployed and role links point to the actual application. The staging database stores account preferences/checklists and supports self-service exports and session revocation. Registration remains disabled without verified email; staff identity, sensitive submissions, donations, policy publication and full public production release remain blocked on independent engineering/owner acceptance. Zero of the 60 complete work packages is certified.",
   "production_release_verified": false,
   "private_preview": {
     "url": "https://galinsky-2028-private-preview.onrender.com",
@@ -111,8 +123,8 @@
     "service_id": "srv-db5teuajnfac73bm8pug",
     "project_id": "prj-db57fnm7bikc739783q0",
     "environment_id": "evm-db57fnm7bikc739783qg",
-    "deploy_id": "dep-db5tev2jnfac73bm8sn0",
-    "deployed_commit": "46d4b836cebe6a9915f37c983e22b69dfd0e3d2f",
+    "deploy_id": "dep-db614dnlk1mc73bhs8ig",
+    "deployed_commit": "5aef1f8d2bcabee093960f552ce482f9adfd9f4b",
     "deploy_status": "live",
     "authentication": "HTTP Basic; username preview; secret never stored in Git",
     "rejected_access_test_paths": 9,
@@ -120,7 +132,7 @@
     "accepted_http_run_id": 38164974556,
     "auto_deploy": false,
     "public_launch": false,
-    "portal_deployed": false
+    "portal_deployed": true
   },
   "render_cleanup": {
     "audit_run_id": 38164309166,
@@ -136,5 +148,25 @@
     "preserved_ram_database": "dpg-db39gm1srm7s73b62mv0-a",
     "ram_database_content_inspected": false,
     "workspace_root_services_not_relocated": true
+  },
+  "volunteer_portal": {
+    "url": "https://galinsky-2028-volunteer-portal.onrender.com",
+    "dashboard_url": "https://dashboard.render.com/web/srv-db5v0lfavr4c73a62870",
+    "service_id": "srv-db5v0lfavr4c73a62870",
+    "project_id": "prj-db57fnm7bikc739783q0",
+    "environment_id": "evm-db57fnm7bikc739783qg",
+    "deploy_id": "dep-db614gqd0e5s7390qjb0",
+    "deployed_commit": "5aef1f8d2bcabee093960f552ce482f9adfd9f4b",
+    "deploy_status": "live",
+    "auto_deploy": false,
+    "password_gate": true,
+    "neon_project_id": "soft-bread-25523698",
+    "neon_staging_branch_id": "br-purple-tooth-b4ra2kbm",
+    "verified_neon_readiness_run_id": 38181063632,
+    "signup_enabled": false,
+    "staff_enabled": false,
+    "payments_enabled": false,
+    "account_export_and_revoke_sessions_implemented": true,
+    "public_role_links_to_actual_portal": true
   }
 }
