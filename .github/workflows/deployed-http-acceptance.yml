@@ -1,0 +1,58 @@
+name: Galinsky 2028 deployed HTTP acceptance
+on:
+  workflow_dispatch:
+    inputs:
+      public_url:
+        description: Exact HTTPS public site origin (no path)
+        required: true
+        type: string
+      portal_url:
+        description: Separate HTTPS volunteer portal origin (optional in preview)
+        required: false
+        type: string
+      release_mode:
+        description: Choose preview or production; production requires portal URL
+        required: true
+        type: choice
+        options:
+          - preview
+          - production
+permissions:
+  contents: read
+concurrency:
+  group: g28-http-acceptance
+  cancel-in-progress: false
+jobs:
+  deployed-http-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PUBLIC_TARGET: ${{ inputs.public_url }}
+      PORTAL_TARGET: ${{ inputs.portal_url }}
+      RELEASE_MODE: ${{ inputs.release_mode }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.3
+      - name: Validate and probe deployed HTTP surfaces without writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(--public "$PUBLIC_TARGET" --mode "$RELEASE_MODE")
+          if [[ -n "$PORTAL_TARGET" ]]; then args+=(--portal "$PORTAL_TARGET"); fi
+          node scripts/smoke-release.mjs "${args[@]}" | tee deployment-smoke-output.txt
+      - name: Capture exact commit and operator instructions
+        if: always()
+        shell: bash
+        run: |
+          printf 'Commit: %s\nWorkflow: %s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" > deployed-http-evidence.txt
+          printf 'Scope: Read-only HTTP checks; not a proof of verified fundraising, live signup, E2EE, legal review, or database backup.\n' >> deployed-http-evidence.txt
+          cat deployment-smoke-output.txt >> deployed-http-evidence.txt 2>/dev/null || true
+      - name: Keep acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: galinsky-deployed-http-evidence
+          path: deployed-http-evidence.txt
+          retention-days: 30
