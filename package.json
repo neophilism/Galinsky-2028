@@ -21,6 +21,8 @@
     "worker": "node apps/api/src/worker.mjs",
     "start": "node apps/api/src/server.mjs",
     "materials:publish": "node scripts/publish-materials.mjs",
+    "materials:verify": "node scripts/verify-material-release.mjs",
+    "materials:sign": "node scripts/sign-material-review.mjs",
     "issue:prepare": "node scripts/prepare-issue-video.mjs",
     "policy:html": "node scripts/prepare-public-document.mjs",
     "test:browser": "node tests/browser/journeys.mjs"
