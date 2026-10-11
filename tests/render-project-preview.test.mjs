@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {chooseEnvironment,createPreviewSpec,run,TARGET_PROJECT_ID,TARGET_SERVICE} from '../scripts/render-project-preview.mjs';
+import {chooseEnvironment,createPreviewSpec,run,classifyRenderRejection,TARGET_PROJECT_ID,TARGET_SERVICE} from '../scripts/render-project-preview.mjs';
 const project={id:TARGET_PROJECT_ID,name:'Galinsky 2028',owner:{id:'tea-test-workspace',name:'Example workspace'},environmentIds:['evm-a123456789']};
 const e1={id:'evm-a123456789',name:'Preview',projectId:TARGET_PROJECT_ID};
 const pass='synthetic-long-preview-password-with-32-plus-characters';
@@ -88,4 +88,20 @@ test('a chosen environment from another project refuses to create',async()=>{
  };
  await assert.rejects(()=>run({env:{G28_RENDER_API_KEY:'fixture-render-api-token',G28_RENDER_ACTION:'create',G28_RENDER_ENVIRONMENT_ID:'evm-other123456',G28_PREVIEW_ACCESS_PASSWORD:pass},client}),/does not belong/);
  assert.equal(posted,false);
+});
+
+test('Render error diagnostics classify known fields but never echo arbitrary message content',()=>{
+ const secret='THIS-SUPER-SECRET-RENDER-PASSWORD-LEAK-CANARY';
+ const examples=[
+  '{"message":"invalid serviceDetails plan for free tier; secret '+secret+'"}',
+  '{"error":"GitHub repository unavailable at '+secret+'"}',
+  secret
+ ];
+ for(const example of examples){
+  const diagnostic=classifyRenderRejection(example);
+  assert(!diagnostic.includes(secret));
+ }
+ assert.match(classifyRenderRejection(examples[0]),/service_details/);
+ assert.match(classifyRenderRejection(examples[0]),/plan/);
+ assert.match(classifyRenderRejection(examples[1]),/git_provider/);
 });
