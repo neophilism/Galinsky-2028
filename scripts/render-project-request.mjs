@@ -14,7 +14,7 @@ export function resolveRequest(raw){
  if(request.schemaVersion!==1||request.projectId!==TARGET_PROJECT_ID)throw Error('Render request does not name the authorized project.');
  if(!['inspect','create'].includes(request.action))throw Error('Unsupported Render project request.');
  if(request.environmentId!==null&&
-   (typeof request.environmentId!=='string'||!/^env-[a-z0-9-]+$/.test(request.environmentId)))
+   (typeof request.environmentId!=='string'||!/^evm-[a-z0-9-]+$/.test(request.environmentId)))
    throw Error('Invalid Render environment ID.');
  return request;
 }

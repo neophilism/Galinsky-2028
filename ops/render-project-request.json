@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
   "projectId": "prj-db57fnm7bikc739783q0",
-  "action": "inspect",
-  "environmentId": null
+  "environmentId": null,
+  "action": "inspect"
 }
