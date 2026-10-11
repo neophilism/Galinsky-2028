@@ -7,7 +7,7 @@
 The user explicitly excluded "Phillip's workspace". The designated Render project link is:
 https://dashboard.render.com/project/prj-db57fnm7bikc739783q0
 
-The current Render integration cannot assign a newly created service to that project and shows only the excluded workspace. Do not create a service in the excluded workspace. Either connect the actual intended Render workspace/project to the tool or create the services manually using the dashboard *inside the target project's chosen environment*, then provide non-secret service IDs and URLs.
+The current Render integration cannot assign a newly created service to that project. **Preferred:** use the automated GitHub Actions workflow described in `docs/operations/RENDER_EXACT_PROJECT.md`; it calls Render's official REST API with an explicit environmentId verified to belong to this exact project, with the password secret supplied at create time. Creating services at unassigned workspace root through the connector remains prohibited. The original manual-dashboard steps below are an optional fallback only.
 
 Do not rely on a Blueprint import selecting the correct destination automatically. The new `render.yaml` defines a **Node web service** with auto-deploy disabled, not a static site. Create the first service inside the intended project with:
 
