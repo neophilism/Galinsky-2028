@@ -3,7 +3,7 @@ import {databasePool,PostgresStore} from '../../apps/api/src/postgres-store.mjs'
 const url=process.env.TEST_DATABASE_URL;
 test('Postgres persistence, atomic verification, leasing and deletion',{skip:!url},async t=>{
  assert(['127.0.0.1','localhost'].includes(new URL(url).hostname),'Tests must use an isolated local database, never the assigned Neon production database.');
- const pool=databasePool(url),store=new PostgresStore(pool);await pool.query(await readFile('db/migrations/001_foundation.sql','utf8'));await pool.query(await readFile('db/migrations/002_self_reported_task_progress.sql','utf8'));await pool.query(await readFile('db/migrations/003_material_reading.sql','utf8'));await pool.query('TRUNCATE g28.accounts,g28.login_requests,g28.outbox,g28.rate_buckets,g28.materials CASCADE');
+ const pool=databasePool(url),store=new PostgresStore(pool);await pool.query(await readFile('db/migrations/001_foundation.sql','utf8'));await pool.query(await readFile('db/migrations/002_self_reported_task_progress.sql','utf8'));await pool.query(await readFile('db/migrations/003_material_reading.sql','utf8'));await pool.query(await readFile('db/migrations/004_fundraising_reconciliation.sql','utf8'));await pool.query('TRUNCATE g28.accounts,g28.login_requests,g28.outbox,g28.rate_buckets,g28.materials CASCADE');
  try{
   await t.test('database readiness',async()=>assert(await store.healthy()));
   await t.test('durable login request and encrypted outbox',async()=>{await store.requestLogin({hash:'test-token',binding:'binding',emailKey:'fixture-email-key',deliveryEnvelope:'fixture-encrypted-envelope',marketing:false,termsVersion:'test',expires:Date.now()+100000},{id:randomUUID(),kind:'account_login',envelope:'fixture-outbox-envelope'});const row=await pool.query('SELECT count(*) FROM g28.outbox');assert.equal(Number(row.rows[0].count),1);});
@@ -30,6 +30,15 @@ test('Postgres persistence, atomic verification, leasing and deletion',{skip:!ur
    await store.setMaterialAck(account.id,'test-guide',null);
    assert.equal(await store.readMaterialAck(account.id,'test-guide'),null);
    await store.setMaterialAck(account.id,'test-guide',ack);
+  });
+  await t.test('financial provider events have safe fixed-key uniqueness and no donor card fields',async()=>{
+   await pool.query("INSERT INTO g28.financial_provider_events(provider,event_id,payment_id,event_digest,event_kind,amount_cents,occurred_at) VALUES($1,$2,$3,$4,$5,$6,now())",['synthetic','evt-a','pay-a','a'.repeat(64),'captured',2500]);
+   await assert.rejects(()=>pool.query("INSERT INTO g28.financial_provider_events(provider,event_id,payment_id,event_digest,event_kind,amount_cents,occurred_at) VALUES($1,$2,$3,$4,$5,$6,now())",['synthetic','evt-a','pay-a','a'.repeat(64),'captured',2500]));
+   const cols=await pool.query("SELECT column_name FROM information_schema.columns WHERE table_schema='g28' AND table_name='financial_provider_events'");
+   const names=cols.rows.map(r=>r.column_name);
+   for(const prohibited of ['card_number','email','donor_name','billing_address','cvv'])assert(!names.includes(prohibited));
+   const result=await pool.query("SELECT amount_cents FROM g28.financial_provider_events WHERE provider='synthetic' AND event_id='evt-a'");
+   assert.equal(Number(result.rows[0].amount_cents),2500);
   });
   await t.test('account closure cascades to all sessions, checklist and reading history',async()=>{await store.closeAccount(account.id);assert.equal(await store.session('session-1'),null);assert.equal(await store.session('session-2'),null);assert.deepEqual(await store.listTaskCompletion(account.id),[]);assert.equal(await store.readMaterialAck(account.id,'test-guide'),null);});
  }finally{await store.close();}
