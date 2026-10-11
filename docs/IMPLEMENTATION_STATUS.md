@@ -1,6 +1,6 @@
 # Implementation status - foundation delivery
 
-Status updated 11 October 2026. This is implemented code for the public site and an initial volunteer application, not completion of all 60 work packages or a claim that the campaign is live. A mandatory server-side private-preview password gate has been added to the Render Web Service plan; services are not deployed or configured yet.
+Status updated 11 October 2026. The private *public-site preview* is deployed and independently HTTP-verified behind a required password. This is not a public production campaign launch, not deployment of the volunteer portal/API, and not completion of all 60 work packages. Signup, payments, staff administration and protected reports remain disabled or incomplete.
 
 ## Implemented in this foundation
 
@@ -14,26 +14,29 @@ The original 36 source documents have a tracked manifest with hashes. They are n
 
 ## Verification states
 
-The production source is on the repository's main branch, but there has been **no production deployment** and no formal acceptance of all 60 work packages.
+The website source is on main and its password-protected **private preview is live**. No publicly launched production website or portal/API has been accepted, and there has been no formal acceptance of all 60 work packages.
 
 - Foundation PR #1 (https://github.com/neophilism/Galinsky-2028/pull/1) merged to main at `0e576ee14ec63717ed6598bc3157da0ba3b03395`. Final pull-request CI run `38096683496` passed: 92 unit tests, 20 HTTP/worker/PostgreSQL integration tests, complete Astro and React builds, Chromium/Firefox/WebKit browser journeys with 32 layout checks per engine, and production dependency audit with zero reported vulnerabilities.
 - Indexing and metadata PR #2 (https://github.com/neophilism/Galinsky-2028/pull/2) merged to main at `06ad5793f2543321b82e36070e9c28a6420277e6`. CI run `38096874116` passed: 97 unit tests, 20 integration tests, three-browser journeys and zero reported production dependency vulnerabilities.
 - Missing-page and verified-delivery evidence PR #3 (https://github.com/neophilism/Galinsky-2028/pull/3) merged to main at `e048a3c2ce892fba4f54156ac5c508d8150c8fe7`. CI run `38097052494` passed syntax and publishing-boundary checks, TypeScript, unit and PostgreSQL integration tests, Astro/React builds, three-browser HTTP journeys and the production dependency audit.
 - Production-copy clarity PR #4 (https://github.com/neophilism/Galinsky-2028/pull/4) merged to main at `efe07090d18233d6bb1f240cc6810d320f559de5`. CI run `38097158009` passed the same full application pipeline. This evidence does not claim deployment, activated signup, payments or acceptance of any complete work package.
-- Actual protected-content review, donor processing integration, production email authorization, live domain/DNS, deployed smoke checks, independent accessibility review and durable operations remain separate, incomplete release gates.
+- Render cleanup: approved duplicate-service deletion [run 38164565395](https://github.com/neophilism/Galinsky-2028/actions/runs/38164565395) removed exactly five services after passing audit [run 38164309166](https://github.com/neophilism/Galinsky-2028/actions/runs/38164309166). The RAM Marketplace PostgreSQL database `dpg-db39gm1srm7s73b62mv0-a` remains intact and available; row-level contents were not inspected.
+- Render private-preview creation [run 38164605594](https://github.com/neophilism/Galinsky-2028/actions/runs/38164605594): service `srv-db5teuajnfac73bm8pug` in project `prj-db57fnm7bikc739783q0`, environment `evm-db57fnm7bikc739783qg`; deployment `dep-db5tev2jnfac73bm8sn0` reached `live` from commit `46d4b836cebe6a9915f37c983e22b69dfd0e3d2f`.
+- Deployed HTTP acceptance [run 38164974556](https://github.com/neophilism/Galinsky-2028/actions/runs/38164974556): anonymous and invalid-password requests returned 401 on all nine tested paths; authenticated page and robots.txt checks passed. The password itself was not logged.
+- Actual protected-content review, donor processing integration, production email authorization, public-domain/DNS activation, **production** deployment acceptance, independent accessibility review, and durable operations remain separate, incomplete release gates.
 
 The indexed public release requires a real `CANONICAL_ORIGIN` and explicitly set `G28_PUBLIC_MODE=production`. Preview builds remain noindex and serve a disallowing robots.txt. The missing-page route is a distinct, nonindexed 404 and is not part of the sitemap.
 
 ## External inputs and deployment
 
-- Assigned Render project: `prj-db57fnm7bikc739783q0`. No service was created in the excluded default workspace. The available connector cannot directly set a project/environment on create; deployment placement remains unresolved.
+- Assigned Render project: `prj-db57fnm7bikc739783q0` in Phillip's workspace, explicitly approved by the user. The exact-project GitHub Actions provisioner created the private-preview service in environment `evm-db57fnm7bikc739783qg`; automatic deploys are disabled. The 19 other workspace services were intentionally left in the workspace root without relocation.
 - Assigned Neon project: `soft-bread-25523698`, Galinsky 2028. No production schema or credentials have been changed.
-- Needed: verified campaign/public and portal origins, authorized Render placement, sender domain/account credentials, three actual YouTube links, actual Kirk-Evers publication files and verified Garden/Cornerstone URLs.
+- Needed for production: verified canonical campaign and portal origins, sender domain/account credentials, three actual YouTube links, actual Kirk-Evers publication files and verified Garden/Cornerstone URLs.
 - Needed for production fundraising: provider/account selection, credentials and treasurer/legal acceptance. No charges are enabled.
 - Needed for sensitive production content: exact reviewed E2EESA implementation/profile and key/recovery review. No insecure substitute is offered.
 
 ## Remaining engineering (not mislabeled as credentials)
 
-Staff authentication and editorial/operations administration, authenticated recipient/device key management, protected reports, persistent task/team/training/event workflows, full policy reconciliation and publishing UI, fundraising checkout/webhook/ledger/treasury implementation, retention beyond the initial account lifecycle, independent accessibility/security review, production monitoring, restore rehearsal and live deployment acceptance remain open. The original register retains all 60 work packages. Foundation code and partial package progress do not count as all packages accepted.
+Staff authentication and editorial/operations administration, authenticated recipient/device key management, protected reports, persistent task/team/training/event workflows, full policy reconciliation and publishing UI, fundraising checkout/webhook/ledger/treasury implementation, retention beyond the initial account lifecycle, independent accessibility/security review, production monitoring, restore rehearsal and **public production** deployment acceptance remain open. The original register retains all 60 work packages. Foundation code and partial package progress do not count as all packages accepted.
 
 The latest PR/commit/CI evidence and exact next step are recorded in `docs/evidence/DELIVERY.json` as they become available. This status must be updated after those results, not used to imply they already passed.
