@@ -58,6 +58,7 @@ try{
   const queued=store.outbox.at(-1);const mail=openDelivery(queued.envelope,cfg.deliveryKey);assert.equal(mail.email,name+'@example.test');await page.goto(mail.url);await page.getByRole('button',{name:'Continue to my workspace'}).click();await page.getByRole('button',{name:'Sign out'}).waitFor();
   // Account-only checklist persists across reloads without certifying fieldwork.
   await page.goto(portalOrigin+'/tasks');
+  await page.getByRole('button',{name:'Mark complete'}).first().waitFor();
   assert.equal(await page.getByRole('button',{name:'Mark complete'}).count(),3,'No restricted actions may be self-certified');
   await page.getByRole('button',{name:'Mark complete'}).first().click();
   await page.getByText('Your first steps: 1 of 3 marked complete. You can change these at any time.').waitFor();
