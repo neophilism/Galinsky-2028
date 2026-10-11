@@ -96,3 +96,29 @@ test('closing an account erases its private material reading records',async()=>{
  assert.equal(store.materialReading.size,0);
  await app.close();
 });
+
+test('volunteer role preferences are durable, account-scoped and never authorize activity',async()=>{
+ const {app,store}=await setup();const {cookie,csrf}=await login(app,store);
+ const auth={...headers,cookie,'x-csrf-token':csrf};
+ let r=await app.inject({url:'/api/account/role-preferences',headers:{cookie}});
+ assert.deepEqual(r.json(),{preferences:null});
+ for(const [payload,status]of [
+  [{roleId:'ballot',minutes:30,willingToTrain:true},403],
+  [{roleId:'staff',minutes:30,willingToTrain:true},400],
+  [{roleId:'ballot',minutes:42,willingToTrain:true},400],
+  [{roleId:'ballot',minutes:30,willingToTrain:'yes'},400],
+  [{roleId:'ballot',minutes:30,willingToTrain:true,permission:'approved'},400]
+ ]){
+  const result=await app.inject({method:'POST',url:'/api/account/role-preferences',headers:status===403?{...headers,cookie}:auth,payload});
+  assert.equal(result.statusCode,status);
+ }
+ const chosen={roleId:'ballot',minutes:120,willingToTrain:true};
+ r=await app.inject({method:'POST',url:'/api/account/role-preferences',headers:auth,payload:chosen});
+ assert.equal(r.statusCode,200);assert.deepEqual(r.json(),{saved:true,preferences:chosen,activityAuthorized:false});
+ r=await app.inject({url:'/api/account/role-preferences',headers:{cookie}});
+ assert.deepEqual(r.json(),{preferences:chosen});
+ const another=await app.inject({url:'/api/account/role-preferences'});assert.equal(another.statusCode,401);
+ r=await app.inject({method:'POST',url:'/api/account/close',headers:auth,payload:{confirm:'close my account'}});
+ assert.equal(r.statusCode,200);assert.equal(store.rolePreferences.size,0);
+ await app.close();
+});

@@ -28,6 +28,18 @@ export class PostgresStore{
   if(completed)await this.pool.query(`INSERT INTO g28.task_progress(account_id,task_id) VALUES($1,$2) ON CONFLICT(account_id,task_id) DO UPDATE SET completed_at=now()`,[accountId,taskId]);
   else await this.pool.query('DELETE FROM g28.task_progress WHERE account_id=$1 AND task_id=$2',[accountId,taskId]);
  }
+ async getRolePreferences(accountId){
+  const q=await this.pool.query('SELECT role_id,available_minutes,willing_to_train FROM g28.volunteer_role_preferences WHERE account_id=$1',[accountId]);
+  const r=q.rows[0];
+  return r?{roleId:r.role_id,minutes:r.available_minutes,willingToTrain:r.willing_to_train}:null;
+ }
+ async setRolePreferences(accountId,preferences){
+  await this.pool.query(`INSERT INTO g28.volunteer_role_preferences(account_id,role_id,available_minutes,willing_to_train)
+   VALUES($1,$2,$3,$4)
+   ON CONFLICT(account_id) DO UPDATE SET role_id=EXCLUDED.role_id,available_minutes=EXCLUDED.available_minutes,
+   willing_to_train=EXCLUDED.willing_to_train,updated_at=now()`,
+   [accountId,preferences.roleId,preferences.minutes,preferences.willingToTrain]);
+ }
  async readMaterialAck(accountId,materialId){
   const q=await this.pool.query('SELECT material_id,revision,content_sha256 FROM g28.material_reading WHERE account_id=$1 AND material_id=$2',[accountId,materialId]);
   return q.rows[0]?{materialId:q.rows[0].material_id,revision:q.rows[0].revision,contentSha256:q.rows[0].content_sha256}:null;
