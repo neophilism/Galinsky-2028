@@ -1,4 +1,5 @@
 import {readFileSync} from 'node:fs';
+import {isIP} from 'node:net';
 import {fileURLToPath} from 'node:url';
 import {join} from 'node:path';
 import {escapeHtml,origin} from '../packages/core/validation.mjs';
@@ -20,12 +21,17 @@ export function renderPage(key, options={}) {
  body=body.replace('<main id="main"','<main id="main" tabindex="-1"');
  body=body.replace(/\{\{VIDEO:([a-z-]+)\}\}/g,(_,slug)=>videoPanel(slug,cfg.issues[slug]));
  body=body.replace(/\{\{DOCUMENTS:([a-z-]+)\}\}/g,(_,slug)=>policyDocumentSection(slug,cfg.issues[slug]?.documents||[],join(root,'apps/web/public')));
- body=body.replace(/\{\{DESTINATION:([a-z-]+)\}\}/g,(_,slug)=>{
+ body=body.replace(/<a\b([^>]*\bdata-destination="([a-z-]+)"[^>]*)>([\s\S]*?)<\/a>/g,(whole,attrs,slug,inside)=>{
+   const marker='href="{{DESTINATION:'+slug+'}}"';
+   if(!attrs.includes(marker))return whole;
    const url=cfg.issues[slug]?.websiteUrl;
-   if(!url)return '/notices/#resources';
-   const u=new URL(url);if(u.protocol!=='https:'||u.username||u.password)throw new Error('Invalid policy destination');
-   return escapeHtml(url);
+   if(!url)return '<span class="pending-destination" role="note" data-pending-issue="'+slug+'">Full issue site link pending verification</span>';
+   if(typeof url!=='string'||url.length>2048)throw new Error('Invalid policy destination');
+   const u=new URL(url);
+   if(u.protocol!=='https:'||u.username||u.password||u.port||!u.hostname.includes('.')||u.hostname==='localhost'||u.hostname.endsWith('.local')||isIP(u.hostname))throw new Error('Invalid policy destination');
+   return '<a'+attrs.replace(marker,'href="'+escapeHtml(u.toString())+'" rel="noopener noreferrer"')+'>'+inside+'</a>';
  });
+ if(body.includes('{{DESTINATION:'))throw new Error('Unresolved policy destination token');
  const replacePortal=text=>text.replace(/\{\{PORTAL\}\}[^"\s<]*/g,match=>portal?match.replace('{{PORTAL}}',portal):portalPath);
  body=replacePortal(body);
  let header=replacePortal(readFileSync(join(root,'content/public/header.html'),'utf8'));
