@@ -2,6 +2,8 @@
 
 **Target project:** https://dashboard.render.com/project/prj-db57fnm7bikc739783q0
 
+**Already provisioned on 11 October 2026:** [galinsky-2028-private-preview](https://dashboard.render.com/web/srv-db5teuajnfac73bm8pug), service ID `srv-db5teuajnfac73bm8pug`, environment `evm-db57fnm7bikc739783qg`. Build and deploy `dep-db5tev2jnfac73bm8sn0` succeeded and the site is live at https://galinsky-2028-private-preview.onrender.com. Exact-project creation: [run 38164605594](https://github.com/neophilism/Galinsky-2028/actions/runs/38164605594); anonymous/wrong-password 401 plus authorized HTTP test: [run 38164974556](https://github.com/neophilism/Galinsky-2028/actions/runs/38164974556). Do not recreate this service or deploy unprotected copies. The user elected not to move other services into projects.
+
 The connected Render integration can create services only at workspace scope. Its create method has no `environmentId` option, which would leave service placement ambiguous. Render's **official REST API** supports both `GET /v1/projects/{projectId}`, `GET /v1/environments/{environmentId}` and an `environmentId` field on `POST /v1/services`, so the verified route is the project-specific manual GitHub Actions workflow.
 
 ## Operator setup — secrets never supplied in chat
@@ -45,4 +47,4 @@ Check the new service's Render page (the workflow prints the nonsecret service I
 - **GitHub repository inaccessible to Render**: Configure GitHub repo access in the correct Render project/workspace.
 - **Unexpected API shape**: The script refuses service creation rather than defaulting to workspace-root placement.
 
-No Render or Neon deployment is performed by merely committing this workflow. Creating the password-protected service requires a deliberate GitHub Actions `create` run.
+The private-preview service above was created by an explicitly authorized, guarded GitHub Actions `create` request. Merely committing the underlying workflow code never creates a Render or Neon service; do not run `create` again while this service exists.
