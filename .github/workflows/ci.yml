@@ -43,6 +43,13 @@ jobs:
         run: npm run test:api
       - name: Build Astro and React applications
         run: npm run build
+      - name: Preserve public static preview for visual review
+        uses: actions/upload-artifact@v4
+        with:
+          name: galinsky-2028-public-preview
+          path: dist/web/
+          if-no-files-found: error
+          retention-days: 7
       - name: Cache Playwright browser downloads
         uses: actions/cache@v4
         with:
