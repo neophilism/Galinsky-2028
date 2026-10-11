@@ -43,6 +43,11 @@ jobs:
         run: npm run test:api
       - name: Build Astro and React applications
         run: npm run build
+      - name: Cache Playwright browser downloads
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
       - name: Browser engines and dependencies
         run: npx playwright install --with-deps chromium firefox webkit
       - name: Real HTTP browser journeys
