@@ -28,6 +28,29 @@ try{
     const response=await page.goto(publicOrigin+path);assert.equal(response.status(),200);await page.locator('h1').waitFor();assert.equal(await page.locator('h1').count(),1);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,path+' at '+width);
    }
   }
+  // Role recommendation and playbook must change together. The preview may
+  // have no provisioned portal, so first verify the safe signup-only fallback.
+  await page.goto(publicOrigin+'/volunteer/');
+  assert.equal(await page.locator('#role-open').getAttribute('href'),'/volunteer/#join');
+  await page.locator('#role-pref').selectOption('skills');
+  assert.equal(await page.locator('#role-result').innerText(),'Skills & Operations Volunteer');
+  assert.equal(await page.locator('#role-open').getAttribute('href'),'/volunteer/#join');
+  // Simulate the separately configured protected portal destination without
+  // navigating to it or making an external request.
+  await page.locator('#role-open').evaluate(a=>a.setAttribute('href','https://portal.example.test/materials/02'));
+  await page.locator('#role-pref').selectOption('network');
+  await page.locator('#role-pref').selectOption('skills');
+  assert.equal(await page.locator('#role-open').getAttribute('href'),'https://portal.example.test/materials/13');
+  await page.locator('#role-pref').selectOption('host');
+  assert.equal(await page.locator('#role-open').getAttribute('href'),'https://portal.example.test/materials/07');
+  await page.locator('#role-training').selectOption('no');
+  await page.locator('#role-pref').selectOption('ballot');
+  assert.equal(await page.locator('#role-result').innerText(),'Personal Network Organizer');
+  assert.equal(await page.locator('#role-open').getAttribute('href'),'https://portal.example.test/materials/02');
+  await page.locator('#role-training').selectOption('yes');
+  assert.equal(await page.locator('#role-result').innerText(),'Ballot-Access Petition Volunteer');
+  assert.equal(await page.locator('#role-open').getAttribute('href'),'https://portal.example.test/materials/10');
+  assert.equal(outside.length,0,'Role finder must not contact external portals');
   assert.equal(outside.length,0,'No third-party request before activation');
   await page.goto(publicOrigin+'/');await page.setViewportSize({width:390,height:844});await page.locator('#menu-toggle').click();assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'true');
   await page.screenshot({path:`test-results/browser/${name}-home-mobile.png`,fullPage:true});
