@@ -1,0 +1,29 @@
+/* Secure, self-contained volunteer preparation UI. Never exposed as signup. */
+.volunteer-preview{background:#f3f6fa;scroll-margin-top:30px}
+.volunteer-preview .section-head{align-items:center}
+.volunteer-preview .section-head p{margin-top:14px;max-width:610px}
+.volunteer-preview .section-head .pill{white-space:nowrap;color:#0a3161}
+.preview-explanation{max-width:860px;margin:0 0 30px;line-height:1.75;font-size:14px;color:#465c76}
+.preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.preview-panel{background:#fff;border:1px solid #dce3ed;padding:32px;min-width:0}
+.preview-panel h3{color:#0a3161;font-size:28px;margin:5px 0 16px}
+.preview-panel>p{font-size:14px;line-height:1.75}
+.preview-panel select{max-width:100%;background:#fff}
+.preview-role-state{border-left:3px solid #b31942;padding:12px 15px;background:#f6f8fb;margin:20px 0;font-size:13px}
+.preview-role-steps{margin:14px 0 22px;padding-left:23px}
+.preview-role-steps li{margin:10px 0;color:#465c76;font-size:14px;line-height:1.6}
+.preview-progress{font-weight:800;color:#0a3161;margin:16px 0!important}
+.preview-checklist{display:grid;gap:14px;margin:22px 0}
+.preview-checklist label{display:flex;gap:11px;align-items:flex-start;font-size:14px;font-weight:550;line-height:1.5;cursor:pointer}
+.preview-checklist input{accent-color:#0a3161;width:19px;height:19px;flex:0 0 auto;margin-top:2px}
+.preview-reset{background:transparent;border:1px solid #b9c7db;color:#0a3161;padding:11px 17px;font-weight:750;font-size:12px;margin-bottom:10px;min-height:44px}
+.preview-reset:hover{background:#edf3f9}
+.preview-plan{display:grid;grid-template-columns:.95fr 1.05fr;gap:40px;margin-top:24px}
+.preview-plan p{margin-top:12px;max-width:390px}
+.preview-plan .field{font-size:13px}
+.preview-plan textarea{display:block;width:100%;min-height:132px;margin-top:10px;padding:13px;border:1px solid #b9c7db;color:#0a3161;background:white;resize:vertical;line-height:1.6;font:inherit}
+.preview-plan .btn{margin-bottom:4px}
+.preview-release-note{margin-top:25px;padding:17px 20px;border-left:3px solid #b31942;background:#fff;font-size:13px;line-height:1.7;color:#42536b}
+#preview-role-name:focus-visible{outline:3px solid #b31942;outline-offset:5px}
+@media(max-width:850px){.volunteer-preview .section-head{display:block}.volunteer-preview .section-head .pill{margin-top:18px;white-space:normal}.preview-grid,.preview-plan{grid-template-columns:1fr;gap:18px}.preview-panel{padding:24px}.preview-panel h3{font-size:24px}}
+@media(max-width:420px){.preview-panel{padding:19px}.preview-plan .btn{width:100%;font-size:12px}.preview-checklist label{font-size:13px}}

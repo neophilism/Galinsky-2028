@@ -1,88 +1,219 @@
 (() => {
-const $=(s)=>document.querySelector(s);
-  // Lightweight canvas network flag. No external scripts, trackers, or WebGL.
-  const canvas = $('.flag-canvas');
-  if (canvas) {
-    const context=canvas.getContext('2d');
-    const media=matchMedia('(prefers-reduced-motion: reduce)');
-    let paused=media.matches, visible=true, frame=0, last=0, elapsed=0, width=1,height=1;
-    const toggle=$('#motion-toggle');
-    const cols=66, rows=39, points=[];
-    const random=n=>{const x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x);};
-    for (let row=0;row<rows;row++) for (let col=0;col<cols;col++) {
-      // Keep every other point outside the canton to create a fine open weave.
-      if ((row+col)%2 && !(col<26 && row<21)) continue;
-      const canton=col<26 && row<21;
-      const red=Math.floor(row/3)%2===0;
-      points.push({u:col/(cols-1),v:row/(rows-1),color:canton?'#0a3161':red?'#b31942':'#99aec7',seed:row*cols+col,canton,red});
-    }
-    function size() {
-      const r=canvas.getBoundingClientRect();width=r.width;height=r.height;
-      const dpr=Math.min(devicePixelRatio||1,2);
-      canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
-      context.setTransform(dpr,0,0,dpr,0,0); draw();
-    }
-    function draw() {
-      context.clearRect(0,0,width,height);
-      const time=paused?12:elapsed/1000;
-      const form=Math.min(1,time/4.2);
-      const eased=1-Math.pow(1-form,3);
-      const fw=width*.94,fh=Math.min(height*.68,fw*.526),x0=width*.02,y0=height*.13;
-      const positions=[];
-      for(const p of points) {
-        const wave=Math.sin(p.u*7+time*.32)*height*.021*Math.sin(p.u*Math.PI*.75);
-        const x=x0+p.u*fw+(1-eased)*(random(p.seed+1)-.5)*width*.62;
-        const y=y0+p.v*fh+wave+(1-eased)*(random(p.seed+6)-.5)*height*.72;
-        positions.push([x,y]);
-      }
-      // Quiet diagonal links echo a civic network, without obscuring the person.
-      context.lineWidth=.5;
-      points.forEach((p,i)=>{
-        const a=positions[i],b=positions[i+1];
-        if (b && Math.abs(b[0]-a[0])<fw*.038 && Math.abs(b[1]-a[1])<fh*.09) {
-          context.strokeStyle=p.color;context.globalAlpha=p.canton?.26:p.red?.21:.09;
-          context.beginPath();context.moveTo(a[0],a[1]);context.lineTo(b[0],b[1]);context.stroke();
-        }
-      });
-      points.forEach((p,i)=>{
-        context.fillStyle=p.color;context.globalAlpha=p.canton?.88:p.red?.8:.16;
-        context.beginPath();context.arc(positions[i][0],positions[i][1],p.canton?2.1:p.red?2.0:1.05,0,Math.PI*2);context.fill();
-      });
-      context.globalAlpha=eased*.95;
-      for(let r=0;r<9;r++) {
-        const count=r%2===0?6:5;
-        for(let c=0;c<count;c++) {
-          const u=(c+(r%2===0?.5:1))/6*.378;
-          const v=(r+.65)/9*.51;
-          const x=x0+u*fw;
-          const y=y0+v*fh+Math.sin(u*7+time*.32)*height*.021*Math.sin(u*Math.PI*.75);
-          context.fillStyle='#ffffff';context.beginPath();
-          for(let k=0;k<10;k++) {
-            const angle=-Math.PI/2+k*Math.PI/5, radius=k%2===0?4.2:1.8;
-            const px=x+Math.cos(angle)*radius,py=y+Math.sin(angle)*radius;
-            if(k===0)context.moveTo(px,py);else context.lineTo(px,py);
-          }
-          context.closePath();context.fill();
-        }
-      }
-      context.globalAlpha=1;
-    }
-    function tick(t) {
-      frame=0;
-      if(paused||!visible||document.hidden){last=0;return;}
-      if(last)elapsed+=Math.min(40,t-last);last=t;draw();frame=requestAnimationFrame(tick);
-    }
-    function sync() {
-      document.body.classList.toggle('motion-paused',paused);
-      toggle.textContent=paused?'Play animation \u25b6':'Pause animation \u275a\u275a';
-      toggle.setAttribute('aria-pressed',String(paused));
-      if(paused){if(frame)cancelAnimationFrame(frame);frame=0;draw();}
-      else if(!frame && visible && !document.hidden)frame=requestAnimationFrame(tick);
-    }
-    toggle.addEventListener('click',()=>{paused=!paused;sync();});
-    media.addEventListener('change',e=>{paused=e.matches;sync();});
-    document.addEventListener('visibilitychange',sync);
-    new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();}).observe(canvas);
-    new ResizeObserver(size).observe(canvas);size();sync();
+  // All flag elements, including the fifty stars, are particles. No external
+  // scripts, WebGL, personal data, motion controls, or continuous work offscreen.
+  const canvas = document.querySelector('.flag-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const WANDER_SECONDS = 2.7;
+  const FORM_SECONDS = 4.1;
+  const ROWS = 39;
+  const COLS = 66;
+  const particles = [];
+  const noise = seed => {
+    const value = Math.sin(seed * 127.1 + 311.7) * 43758.5453123;
+    return value - Math.floor(value);
+  };
+
+  function addParticle(u, v, color, seed, kind = 'fabric') {
+    particles.push({
+      u, v, color, seed, kind,
+      x: noise(seed + 11) * 0.96 + 0.02,
+      y: noise(seed + 31) * 0.84 + 0.08,
+      vx: (noise(seed + 53) - .5) * .28,
+      vy: (noise(seed + 79) - .5) * .24
+    });
   }
+
+  // Deliberately open dot-weave so the portrait remains prominent in front.
+  for (let row = 0; row < ROWS; row++) {
+    for (let col = 0; col < COLS; col++) {
+      const canton = col < 26 && row < 21;
+      if ((row + col) % 2 && !canton) continue;
+      const red = Math.floor(row / 3) % 2 === 0;
+      addParticle(col / (COLS - 1), row / (ROWS - 1),
+        canton ? '#0a3161' : red ? '#b31942' : '#a4b7ce', row * COLS + col);
+    }
+  }
+
+  // Exactly 50 stars: alternating rows of six and five. Each star is drawn
+  // by fifteen small WHITE DOTS, not by a solid polygon painted over the flag.
+  for (let row = 0; row < 9; row++) {
+    const count = row % 2 === 0 ? 6 : 5;
+    for (let col = 0; col < count; col++) {
+      const u = (col + (row % 2 === 0 ? .5 : 1)) / 6 * .378;
+      const v = (row + .65) / 9 * .51;
+      for (let k = 0; k < 10; k++) {
+        const angle = -Math.PI / 2 + k * Math.PI / 5;
+        const radius = k % 2 === 0 ? 1 : .44;
+        addParticle(u + Math.cos(angle) * .0063 * radius,
+          v + Math.sin(angle) * .0108 * radius,
+          '#ffffff', 4000 + row * 400 + col * 25 + k, 'star');
+      }
+      for (let k = 0; k < 5; k++) {
+        const angle = -Math.PI / 2 + k * Math.PI * 2 / 5;
+        addParticle(u + Math.cos(angle) * .0063 * .58,
+          v + Math.sin(angle) * .0108 * .58,
+          '#ffffff', 5000 + row * 400 + col * 25 + k, 'star');
+      }
+    }
+  }
+
+  let width = 1, height = 1, elapsed = 0, lastFrame = 0, handle = 0;
+  let visible = true;
+
+  function resize() {
+    const bounds = canvas.getBoundingClientRect();
+    width = Math.max(1, bounds.width);
+    height = Math.max(1, bounds.height);
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(width * pixelRatio);
+    canvas.height = Math.round(height * pixelRatio);
+    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    draw();
+  }
+
+  // Spatial buckets make dot collisions linear in normal conditions, rather
+  // than comparing every particle with every other particle each frame.
+  function wander(dt, time) {
+    const diameter = 5;
+    const buckets = new Map();
+    const cell = 8;
+    for (const particle of particles) {
+      particle.vx += Math.sin(time * 1.7 + particle.seed * .93) * dt * .025;
+      particle.vy += Math.cos(time * 1.4 + particle.seed * .71) * dt * .025;
+      particle.vx *= 1 - dt * .07;
+      particle.vy *= 1 - dt * .07;
+      particle.x += particle.vx * dt;
+      particle.y += particle.vy * dt;
+      if (particle.x < .015 || particle.x > .985) {
+        particle.x = Math.max(.015, Math.min(.985, particle.x));
+        particle.vx *= -.9;
+      }
+      if (particle.y < .04 || particle.y > .94) {
+        particle.y = Math.max(.04, Math.min(.94, particle.y));
+        particle.vy *= -.9;
+      }
+      const bx = Math.floor(particle.x * width / cell);
+      const by = Math.floor(particle.y * height / cell);
+      for (let ox = -1; ox <= 1; ox++) {
+        for (let oy = -1; oy <= 1; oy++) {
+          const others = buckets.get((bx + ox) + ',' + (by + oy));
+          if (!others) continue;
+          for (const other of others) {
+            const dx = (particle.x - other.x) * width;
+            const dy = (particle.y - other.y) * height;
+            const d2 = dx * dx + dy * dy;
+            if (d2 >= diameter * diameter) continue;
+            const distance = Math.sqrt(d2) || .001;
+            const push = (diameter - distance) * .32;
+            const px = dx / distance * push / width;
+            const py = dy / distance * push / height;
+            particle.x += px;
+            particle.y += py;
+            other.x -= px;
+            other.y -= py;
+            const vx = particle.vx;
+            particle.vx = other.vx * .84;
+            other.vx = vx * .84;
+          }
+        }
+      }
+      const key = bx + ',' + by;
+      if (!buckets.has(key)) buckets.set(key, []);
+      buckets.get(key).push(particle);
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    const seconds = reducedMotion.matches ? WANDER_SECONDS + FORM_SECONDS : elapsed;
+    const t = Math.min(1, Math.max(0, (seconds - WANDER_SECONDS) / FORM_SECONDS));
+    const order = 1 - (1 - t) ** 3;
+    const flagWidth = width * .94;
+    const flagHeight = Math.min(height * .68, flagWidth * .526);
+    const x0 = width * .02;
+    const y0 = height * .13;
+    const positions = new Array(particles.length);
+    const phase = Math.max(0, seconds - WANDER_SECONDS);
+
+    particles.forEach((p, i) => {
+      const wave = Math.sin(p.u * 7 + phase * .58) *
+        height * .021 * Math.sin(p.u * Math.PI * .75);
+      const tx = x0 + p.u * flagWidth;
+      const ty = y0 + p.v * flagHeight + wave;
+      positions[i] = [
+        p.x * width * (1 - order) + tx * order,
+        p.y * height * (1 - order) + ty * order
+      ];
+    });
+
+    // The fabric's quiet connections form only after the collision phase.
+    if (order > .48) {
+      ctx.lineWidth = .45;
+      for (let i = 0; i < ROWS * COLS; i++) {
+        // The sparse checkerboard makes index adjacency unreliable; instead
+        // connect only naturally adjacent fabric particles.
+        if (i >= particles.length - 1) break;
+        const p = particles[i], q = particles[i + 1];
+        if (!q || p.kind !== 'fabric' || q.kind !== 'fabric') break;
+        if (Math.abs(p.u - q.u) > .027 || Math.abs(p.v - q.v) > .04) continue;
+        ctx.strokeStyle = p.color;
+        ctx.globalAlpha = .12 * order;
+        ctx.beginPath();
+        ctx.moveTo(...positions[i]);
+        ctx.lineTo(...positions[i + 1]);
+        ctx.stroke();
+      }
+    }
+    particles.forEach((p, i) => {
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.kind === 'star' ? .99 : p.color === '#0a3161' ? .85 :
+        p.color === '#b31942' ? .82 : .31;
+      ctx.beginPath();
+      ctx.arc(positions[i][0], positions[i][1],
+        p.kind === 'star' ? Math.max(.66, Math.min(1.28, width * .0015)) :
+        p.color === '#a4b7ce' ? 1.15 : 1.9, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  function tick(now) {
+    handle = 0;
+    if (reducedMotion.matches || !visible || document.hidden) {
+      lastFrame = 0;
+      draw();
+      return;
+    }
+    const dt = lastFrame ? Math.min(.04, (now - lastFrame) / 1000) : 0;
+    lastFrame = now;
+    elapsed += dt;
+    if (elapsed < WANDER_SECONDS) wander(dt, elapsed);
+    draw();
+    handle = requestAnimationFrame(tick);
+  }
+
+  function synchronize() {
+    if (handle) cancelAnimationFrame(handle);
+    handle = 0;
+    lastFrame = 0;
+    draw();
+    if (!reducedMotion.matches && visible && !document.hidden)
+      handle = requestAnimationFrame(tick);
+  }
+
+  reducedMotion.addEventListener('change', synchronize);
+  document.addEventListener('visibilitychange', synchronize);
+  if ('IntersectionObserver' in window)
+    new IntersectionObserver(entries => {
+      visible = entries[0].isIntersecting;
+      synchronize();
+    }).observe(canvas);
+  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(canvas);
+  else window.addEventListener('resize', resize);
+  resize();
+  synchronize();
 })();
