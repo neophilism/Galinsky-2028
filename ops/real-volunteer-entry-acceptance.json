@@ -1,0 +1,6 @@
+{
+  "action": "verify",
+  "publicServiceId": "srv-db5teuajnfac73bm8pug",
+  "portalServiceId": "srv-db5v0lfavr4c73a62870",
+  "expectedCanonicalRoleCount": 12
+}
