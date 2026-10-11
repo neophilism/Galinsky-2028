@@ -1,14 +1,54 @@
 {
-  "status": "local_implementation_pending_repository_CI",
+  "status": "foundation_merged_main_and_release_blocked",
   "full_work_packages_accepted": 0,
   "deployment_verified": false,
-  "core_public_tests": 92,
-  "api_route_tests_before_dependency_patch": 10,
-  "public_layouts_checked_offline": 32,
-  "public_framework_build": "passed_locally",
-  "portal_build": "passed_locally",
-  "typescript": "passed_locally",
-  "final_dependency_audit": "pending_patched_install",
-  "postgres_tests": "pending_isolated_CI",
-  "browser_HTTP_journeys": "pending_CI"
+  "repository": "neophilism/Galinsky-2028",
+  "verified_merges": [
+    {
+      "pr": 1,
+      "merge_commit": "0e576ee14ec63717ed6598bc3157da0ba3b03395",
+      "ci_run_id": 38096683496,
+      "unit_tests_passed": 92,
+      "integration_tests_passed": 20,
+      "browser_engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "layout_checks_per_browser": 32,
+      "production_dependency_audit": "zero_reported_vulnerabilities"
+    },
+    {
+      "pr": 2,
+      "merge_commit": "06ad5793f2543321b82e36070e9c28a6420277e6",
+      "ci_run_id": 38096874116,
+      "unit_tests_passed": 97,
+      "integration_tests_passed": 20,
+      "browser_engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "layout_checks_per_browser": 32,
+      "production_dependency_audit": "zero_reported_vulnerabilities"
+    }
+  ],
+  "release_gates_pending": [
+    "confirmed usable Render workspace and project destination",
+    "verified canonical public and volunteer origins",
+    "live email sender and operational approval",
+    "three actual issue video URLs",
+    "approved policy source documents and outgoing website links",
+    "fundraising processor and treasurer acceptance",
+    "reviewed protected-content E2EE and security signoff",
+    "independent accessibility review",
+    "production database migration and deploy/restore smoke tests"
+  ],
+  "known_exclusions": [
+    "Payments disabled",
+    "Sensitive volunteer report submissions disabled",
+    "Staff/admin features not complete",
+    "Unreviewed source archive not publicly bundled"
+  ],
+  "notes": "A passing PR or an imported source archive is not a production deployment, formal package acceptance, or evidence of a functioning live campaign."
 }

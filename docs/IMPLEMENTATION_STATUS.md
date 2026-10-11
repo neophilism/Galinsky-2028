@@ -14,9 +14,13 @@ The original 36 source documents have a tracked manifest with hashes. They are n
 
 ## Verification states
 
-Local core/public/publication tests: 92 passing. Fastify API tests: 10 passing before the patched dependency refresh. Worker transport tests, full PostgreSQL integration and cross-browser HTTP journeys are included and must be checked in the final CI record. Local TypeScript check and Astro/Vite builds passed after fixing JSX, CSS module typing and Astro source-root resolution. The initial dependency audit found vulnerable Fastify 5.12.0; source is pinned to the patched 5.12.5 and the lockfile/audit must be regenerated and rechecked before merge.
+The production source is on the repository's main branch, but there has been **no production deployment** and no formal acceptance of all 60 work packages.
 
-Offline Chromium visual inspection covered eight public pages at 320, 390, 768 and 1440 pixels with no horizontal overflow and exactly one primary heading. This is layout evidence, not an HTTP/CSP, WCAG audit or deployed test. GitHub runner output is the authoritative final clean-install/build/route/browser test evidence.
+- Foundation PR #1 (https://github.com/neophilism/Galinsky-2028/pull/1) merged to main at `0e576ee14ec63717ed6598bc3157da0ba3b03395`. Final pull-request CI run `38096683496` passed: 92 unit tests, 20 HTTP/worker/PostgreSQL integration tests, complete Astro and React builds, Chromium/Firefox/WebKit browser journeys with 32 layout checks per engine, and production dependency audit with zero reported vulnerabilities.
+- Indexing and metadata PR #2 (https://github.com/neophilism/Galinsky-2028/pull/2) merged to main at `06ad5793f2543321b82e36070e9c28a6420277e6`. CI run `38096874116` passed: 97 unit tests, 20 integration tests, three-browser journeys and zero reported production dependency vulnerabilities.
+- Actual protected-content review, donor processing integration, production email authorization, live domain/DNS, deployed smoke checks, independent accessibility review and durable operations remain separate, incomplete release gates.
+
+The indexed public release requires a real `CANONICAL_ORIGIN` and explicitly set `G28_PUBLIC_MODE=production`. Preview builds remain noindex and serve a disallowing robots.txt. The missing-page route is a distinct, nonindexed 404 and is not part of the sitemap.
 
 ## External inputs and deployment
 
