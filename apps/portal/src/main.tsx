@@ -22,7 +22,73 @@ function Verify(){const{refresh}=useContext(Context);const[,navigate]=usePath();
 const nav=[['/','Your first action'],['/materials','Materials library'],['/roles','Find your role'],['/tasks','Available actions'],['/forms','Forms & practice'],['/activity','Activity status'],['/settings','Account settings']];
 function Shell({children,path}:{children:React.ReactNode;path:string}){const{session,refresh}=useContext(Context);const[,navigate]=usePath();const[error,setError]=useState('');async function out(){try{await request('/api/auth/logout',{},session?.csrf);sessionStorage.removeItem('g28-bookmarks');await refresh();navigate('/join');}catch(e){setError((e as Error).message);}}return <div className="workspace"><aside><span className="eyebrow">VOLUNTEER WORKSPACE</span><nav aria-label="Volunteer navigation">{nav.map(([p,t])=><Link key={p} to={p} className={path===p?'active':''} aria-current={path===p?'page':undefined}>{t}</Link>)}</nav><div className="sidebar-note"><strong>Read. Learn. Act responsibly.</strong><p>Materials access is not authorization for restricted activities.</p></div><button className="text-button" onClick={out}>Sign out</button>{error&&<p role="alert">{error}</p>}</aside><div className="work-main">{children}</div></div>;}
 function Home(){return <><span className="eyebrow">WELCOME TO THE TEAM</span><h1>Make your first<br/><em>move count.</em></h1><p className="lead">You do not need to do everything. Start with one action you can do well.</p><div className="first-action"><div><span className="eyebrow">YOUR FIRST HOUR</span><h2>A strong start,<br/>at your pace.</h2><p>Understand the principle. Choose a role. Practice one conversation.</p><Link className="btn" to="/roles">Find my role &rarr;</Link></div><ol><li><strong>Learn the principle</strong><p>Justice for All: protect rights, identify actual harm and repair it without creating another injustice.</p></li><li><strong>Choose a manageable role</strong><p>Match your time and interests to a useful first step.</p></li><li><strong>Use current materials</strong><p>Check the source, version and activity status before taking action.</p></li></ol></div><div className="cards two"><article className="panel"><h2>Your materials.</h2><p>Find approved guides in readable, searchable form.</p><Link to="/materials" className="textlink">Open the library &rarr;</Link></article><article className="panel"><h2>Practice first.</h2><p>Turn a good intention into a clear plan, without collecting anyone else's information.</p><Link to="/forms/action-card" className="textlink">Make an action card &rarr;</Link></article></div><Notice>No petitioning or other regulated activity is active without its exact current approval. Training does not substitute for authorization.</Notice></>;}
-function Roles(){const[interest,setInterest]=useState('network'),[minutes,setMinutes]=useState(30),[training,setTraining]=useState(true);const recommendation=recommendRole({interest,minutes,willingToTrain:training});return <><span className="eyebrow">TWELVE WAYS TO HELP</span><h1>Find your place.</h1><p className="lead">Use your interests and available time, not a political profile, to choose your first step.</p><section className="chooser"><div><label>What would you enjoy?<select value={interest} onChange={e=>setInterest(e.target.value)}>{roleDefinitions.map(r=><option value={r.id} key={r.id}>{r.title}</option>)}</select></label><label>Time for a first action<select value={minutes} onChange={e=>setMinutes(Number(e.target.value))}><option value={15}>15 minutes</option><option value={30}>30 minutes</option><option value={120}>1-2 hours</option><option value={240}>Half a day</option></select></label><label className="check"><input type="checkbox" checked={training} onChange={e=>setTraining(e.target.checked)}/><span>I am willing to complete training.</span></label></div><div className="recommendation" aria-live="polite"><span className="eyebrow">A POSSIBLE FIRST ROLE</span><h2>{recommendation.role.title}</h2><p>{recommendation.reason}</p><p>{recommendation.firstStep}</p>{recommendation.role.restricted&&<strong>Authorization required before the activity.</strong>}</div></section><div className="cards two">{roleDefinitions.map(r=><article key={r.id} className="panel"><span className="eyebrow">{r.time}</span><h2>{r.title}</h2><p>{r.description}</p>{r.restricted?<span className="status-tag">Current approval required</span>:<span className="status-tag">Self-directed first steps</span>}</article>)}</div></>;}
+function Roles(){
+ const {session}=useContext(Context);
+ const[interest,setInterest]=useState('network');
+ const[minutes,setMinutes]=useState(30);
+ const[training,setTraining]=useState(true);
+ const[saveMessage,setSaveMessage]=useState('');
+ const[error,setError]=useState('');
+ const[saving,setSaving]=useState(false);
+ useEffect(()=>{
+  if(!session)return;
+  let cancelled=false;
+  request<{preferences:{roleId:string;minutes:number;willingToTrain:boolean}|null}>('/api/account/role-preferences')
+   .then(result=>{
+    if(cancelled||!result.preferences)return;
+    const p=result.preferences;
+    if(roleDefinitions.some(r=>r.id===p.roleId))setInterest(p.roleId);
+    if([15,30,120,240].includes(p.minutes))setMinutes(p.minutes);
+    setTraining(p.willingToTrain);
+   })
+   .catch(err=>{if(!cancelled)setError((err as Error).message);});
+  return()=>{cancelled=true;};
+ },[session?.account.id]);
+ const recommendation=recommendRole({interest,minutes,willingToTrain:training});
+ async function save(){
+  if(!session)return;
+  setSaving(true);setError('');setSaveMessage('');
+  try{
+   await request('/api/account/role-preferences',{roleId:interest,minutes,willingToTrain:training},session.csrf);
+   setSaveMessage('Your volunteer role preferences were saved to your account. This does not authorize restricted activities.');
+  }catch(e){setError((e as Error).message);}
+  finally{setSaving(false);}
+ }
+ return <>
+  <span className="eyebrow">TWELVE WAYS TO HELP</span>
+  <h1>Find your place.</h1>
+  <p className="lead">Use your interests and available time, not a political profile, to choose your first step.</p>
+  <section className="chooser">
+   <div>
+    <label>What would you enjoy?
+     <select value={interest} onChange={e=>{setInterest(e.target.value);setSaveMessage('');}}>
+      {roleDefinitions.map(r=><option value={r.id} key={r.id}>{r.title}</option>)}
+     </select>
+    </label>
+    <label>Time for a first action
+     <select value={minutes} onChange={e=>{setMinutes(Number(e.target.value));setSaveMessage('');}}>
+      <option value={15}>15 minutes</option><option value={30}>30 minutes</option>
+      <option value={120}>1-2 hours</option><option value={240}>Half a day</option>
+     </select>
+    </label>
+    <label className="check"><input type="checkbox" checked={training} onChange={e=>{setTraining(e.target.checked);setSaveMessage('');}}/><span>I am willing to complete training.</span></label>
+    {session&&<button className="btn blue" type="button" disabled={saving} onClick={save}>{saving?'Saving...':'Save role preference'}</button>}
+    {saveMessage&&<Notice>{saveMessage}</Notice>}
+    {error&&<Notice error>{error}</Notice>}
+   </div>
+   <div className="recommendation" aria-live="polite">
+    <span className="eyebrow">A POSSIBLE FIRST ROLE</span>
+    <h2>{recommendation.role.title}</h2><p>{recommendation.reason}</p>
+    <p>{recommendation.firstStep}</p>
+    {recommendation.role.restricted&&<strong>Authorization required before the activity.</strong>}
+   </div>
+  </section>
+  <div className="cards two">{roleDefinitions.map(r=><article key={r.id} className="panel">
+   <span className="eyebrow">{r.time}</span><h2>{r.title}</h2><p>{r.description}</p>
+   {r.restricted?<span className="status-tag">Current approval required</span>:<span className="status-tag">Self-directed first steps</span>}
+  </article>)}</div>
+ </>;
+}
 function Materials(){const[q,setQ]=useState(''),[category,setCategory]=useState('all'),[query,setQuery]=useState('');useEffect(()=>{const t=setTimeout(()=>setQuery(q),200);return()=>clearTimeout(t);},[q]);const{data,error,loading}=useLoad<{materials:Material[];notice:string|null}>(`/api/materials?q=${encodeURIComponent(query)}&category=${encodeURIComponent(category)}`);return <><span className="eyebrow">CURRENT GUIDANCE, IN ONE PLACE</span><h1>Your materials.</h1><p className="lead">Search approved guides. Read online or download a copy with its version information.</p><div className="search-controls"><label>Search the library<input type="search" value={q} onChange={e=>setQ(e.target.value)} placeholder="Search by topic, role or phrase"/></label><label>Category<select value={category} onChange={e=>setCategory(e.target.value)}>{[['all','All materials'],['start','Start here'],['role','Role playbooks'],['policy','Policy kits'],['tools','Forms & training']].map(([v,t])=><option key={v} value={v}>{t}</option>)}</select></label></div>{loading&&<Notice>Searching current materials...</Notice>}{error&&<Notice error>{error}</Notice>}{data?.notice&&<Notice>{data.notice}</Notice>}<div className="cards two">{data?.materials.map(m=><article className="panel" key={m.id}><span className="eyebrow">{m.category} / VERSION {m.revision}</span><h2>{m.title}</h2><p>{m.description}</p><Link to={'/materials/'+m.id} className="textlink">Read the guide &rarr;</Link></article>)}</div></>;}
 type DocBlock={type:string;level?:number;id?:string;text?:string;items?:string[];headers?:string[];rows?:string[][]};
 type DocHeading={id:string;level:number;text:string};
