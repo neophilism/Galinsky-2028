@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "action": "inspect",
+  "action": "create",
   "projectId": "prj-db57fnm7bikc739783q0",
   "environmentId": "evm-db57fnm7bikc739783qg",
   "ownerId": "tea-db23jkks728c73av263g",
