@@ -122,3 +122,56 @@ test('volunteer role preferences are durable, account-scoped and never authorize
  assert.equal(r.statusCode,200);assert.equal(store.rolePreferences.size,0);
  await app.close();
 });
+
+
+test('account data export returns only the authenticated volunteer own durable records',async()=>{
+ const{app,store}=await setup();
+ const{cookie}=await login(app,store);
+ const s=(await app.inject({url:'/api/session',headers:{cookie}})).json();
+ const id=s.account.id;
+ await store.setRolePreferences(id,{roleId:'skills',minutes:120,willingToTrain:true});
+ await store.setTaskCompletion(id,'choose-role',true);
+ await store.setMaterialAck(id,'test-guide',{revision:1,contentSha256:'a'.repeat(64)});
+ store.accounts.set(randomBytes(16).toString('hex'),{id:'unrelated',emailKey:'private-other-email',marketing:true});
+ const r=await app.inject({url:'/api/account/export',headers:{cookie}});
+ assert.equal(r.statusCode,200);
+ assert.match(r.headers['content-disposition'],/attachment; filename="galinsky-volunteer-account.json"/);
+ assert.match(r.headers['cache-control'],/no-store/);
+ const data=r.json();
+ assert.equal(data.schemaVersion,1);
+ assert.equal(data.account.id,id);
+ assert.equal(data.account.marketingConsent,false);
+ assert.equal(data.account.termsVersion,config.termsVersion);
+ assert.deepEqual(data.rolePreferences,{roleId:'skills',minutes:120,willingToTrain:true});
+ assert.deepEqual(data.completedTasks,['choose-role']);
+ assert.deepEqual(data.materialAcknowledgments,[{materialId:'test-guide',revision:1,contentSha256:'a'.repeat(64)}]);
+ for(const forbidden of ['emailKey','deliveryEnvelope','private-other-email','token_hash','csrf','lease_token','unrelated']){
+  assert(!r.body.includes(forbidden),'Account export must not contain '+forbidden);
+ }
+ assert.equal((await app.inject({url:'/api/account/export'})).statusCode,401);
+ await app.close();
+});
+
+test('sign out everywhere uses CSRF and invalidates all of this account sessions',async()=>{
+ const{app,store}=await setup();
+ const a=await login(app,store);
+ const b=await login(app,store);
+ assert.equal((await app.inject({url:'/api/session',headers:{cookie:a.cookie}})).statusCode,200);
+ assert.equal((await app.inject({url:'/api/session',headers:{cookie:b.cookie}})).statusCode,200);
+ const hdr={...headers,cookie:a.cookie,'x-csrf-token':a.csrf};
+ for(const [h,payload,status]of [
+  [{...headers,cookie:a.cookie},{confirm:'sign out everywhere'},403],
+  [hdr,{confirm:'yes'},400],
+  [hdr,{confirm:'sign out everywhere',accountId:'someone-else'},400]
+ ]){
+  const r=await app.inject({method:'POST',url:'/api/account/revoke-sessions',headers:h,payload});
+  assert.equal(r.statusCode,status);
+ }
+ const r=await app.inject({method:'POST',url:'/api/account/revoke-sessions',headers:hdr,payload:{confirm:'sign out everywhere'}});
+ assert.equal(r.statusCode,200);
+ assert.deepEqual(r.json(),{signedOutAll:true});
+ assert.equal((await app.inject({url:'/api/session',headers:{cookie:a.cookie}})).statusCode,401);
+ assert.equal((await app.inject({url:'/api/session',headers:{cookie:b.cookie}})).statusCode,401);
+ assert.equal(store.accounts.size,1,'Revocation does not delete the user account');
+ await app.close();
+});
