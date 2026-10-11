@@ -57,6 +57,10 @@ try{
   await page.goto(portalOrigin+'/join');await page.getByLabel('Email address').fill(name+'@example.test');await page.getByRole('checkbox').first().check();await page.getByRole('button',{name:/Email my sign-in link/}).click();await page.getByText(/When delivery is available/).waitFor();
   const queued=store.outbox.at(-1);const mail=openDelivery(queued.envelope,cfg.deliveryKey);assert.equal(mail.email,name+'@example.test');await page.goto(mail.url);await page.getByRole('button',{name:'Continue to my workspace'}).click();await page.getByRole('button',{name:'Sign out'}).waitFor();
   // Account-only checklist persists across reloads without certifying fieldwork.
+  // SPA route changes must announce a new page and move keyboard/screen-reader focus.
+  await page.getByRole('link',{name:'Available actions'}).click();
+  await page.waitForFunction(()=>document.activeElement?.id==='main');
+  assert.equal(await page.title(),'Available actions | Galinsky 2028');
   await page.goto(portalOrigin+'/tasks');
   await page.getByRole('button',{name:'Mark complete'}).first().waitFor();
   assert.equal(await page.getByRole('button',{name:'Mark complete'}).count(),3,'No restricted actions may be self-certified');
