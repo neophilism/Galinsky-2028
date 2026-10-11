@@ -8,7 +8,7 @@ Updated after verified source merge. This is an inventory and review tracker, no
 | Large issue-video amendment | Implemented and tested on all three individual issue pages | Connect the actual YouTube IDs when supplied. |
 | Actual three YouTube links | Not supplied in this session | Keep IDs null; connect and review later through admin. |
 | Volunteer Action System | Edition 1.0 September 2026; 36 Markdown/36 Word, 2 PDFs, orientation deck | Preserve provenance; reconcile before current publication. |
-| Twelve volunteer roles | All roles implemented in the volunteer portal; current historical playbooks remain unreviewed | Review and publish versioned current playbooks. |
+| Twelve volunteer roles | Real React/Fastify portal deployed in Render, accessible behind private password; canonical role links now active on public website. Historical playbooks still unreviewed. | Review and publish versioned current playbooks; activate real accounts only after verified email delivery. |
 | Kirk-Evers volunteer kit | Absent from supplied edition | Create from approved current policy source and review. |
 | Garden/Cornerstone kits | Historical versions | Reconcile with later approved policy changes. |
 | Fifteen other policy kits | Source reference, not the three-issue launch | Keep out of current public platform unless expressly published later. |
