@@ -19,7 +19,7 @@ test('no local reviewed bill published at launch; placeholders are clearly not d
 });
 test('reviewed, integrity-matching PDF link replaces only its own placeholder slot',()=>fixture(({dir,record})=>{
  const html=policyDocumentSection('kirk-evers',[record],dir);
- assert.match(html,/href="\\/documents\\/kirk-evers-bill-v1\\.pdf"/);
+ assert(html.includes('href="/documents/kirk-evers-bill-v1.pdf"'));
  assert.match(html,/The reviewed Kirk–Evers bill/);
  assert.equal((html.match(/class="resource resource-link"/g)||[]).length,1);
  assert.equal((html.match(/AWAITING<br>APPROVED FILE/g)||[]).length,2);
