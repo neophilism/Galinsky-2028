@@ -6,3 +6,5 @@ CREATE TABLE IF NOT EXISTS g28.task_progress(
  completed_at timestamptz NOT NULL DEFAULT now(),
  PRIMARY KEY(account_id,task_id)
 );
+
+INSERT INTO g28.schema_migrations(version) VALUES('002_self_reported_task_progress') ON CONFLICT DO NOTHING;
