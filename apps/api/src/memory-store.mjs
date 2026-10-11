@@ -15,6 +15,24 @@ export class MemoryStore{
  async logout(hash){this.sessions.delete(hash);}
  async consent(accountId,value){const a=this.accounts.get(accountId);if(a)a.marketing=value;}
  async closeAccount(id){const a=this.accounts.get(id);if(!a)return;this.accounts.delete(id);this.taskProgress.delete(id);this.materialReading.delete(id);this.rolePreferences.delete(id);for(const [k,s]of this.sessions)if(s.accountId===id)this.sessions.delete(k);for(const[k,l]of this.logins)if(l.emailKey===a.emailKey)this.logins.delete(k);this.outbox=this.outbox.filter(j=>j.subjectKey!==a.emailKey);}
+ async accountActivityExport(id){
+  const a=this.accounts.get(id);
+  if(!a)return null;
+  const p=this.rolePreferences.get(id);
+  const reads=this.materialReading.get(id)||new Map();
+  return {
+   account:{id,verifiedAt:a.verifiedAt||null,createdAt:a.createdAt||null,
+    marketingConsent:Boolean(a.marketing),termsVersion:a.termsVersion||null},
+   rolePreferences:p?{...p}:null,
+   completedTasks:[...(this.taskProgress.get(id)||new Set())].sort(),
+   materialAcknowledgments:[...reads.values()].map(x=>({
+    materialId:x.materialId,revision:x.revision,contentSha256:x.contentSha256
+   })).sort((a,b)=>a.materialId.localeCompare(b.materialId))
+  };
+ }
+ async revokeAllSessions(id){
+  for(const [hash,s] of this.sessions)if(s.accountId===id)this.sessions.delete(hash);
+ }
  async listTaskCompletion(accountId){return [...(this.taskProgress.get(accountId)||new Set())];}
  async setTaskCompletion(accountId,taskId,completed){
   if(!this.accounts.has(accountId))throw new Error('Account no longer exists');

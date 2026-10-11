@@ -97,6 +97,22 @@ try{
   await page.getByRole('button',{name:'I have read this version'}).waitFor();
   
   await page.goto(portalOrigin+'/forms/action-card');await page.getByLabel('One action I can complete').fill('Read the approved policy summary');const downloadPromise=page.waitForEvent('download');await page.getByRole('button',{name:'Download my worksheet'}).click();const download=await downloadPromise;assert.equal(download.suggestedFilename(),'action-card-planning.md');
+  await page.goto(portalOrigin+'/settings');
+  const accountExportDownload=page.waitForEvent('download');
+  await page.getByRole('button',{name:'Download my account data'}).click();
+  assert.equal((await accountExportDownload).suggestedFilename(),'galinsky-volunteer-account.json');
+  await page.getByText('Your account activity export was downloaded directly to your device.').waitFor();
+  await page.getByRole('button',{name:'Sign out everywhere'}).click();
+  await page.getByRole('button',{name:/Email my sign-in link/}).waitFor();
+  assert.equal((await context.request.get(portalOrigin+'/api/session')).status(),401);
+  // Restore a verified session to exercise the ordinary sign-out button too.
+  await page.getByLabel('Email address').fill(name+'-again@example.test');
+  await page.getByRole('checkbox').first().check();
+  await page.getByRole('button',{name:/Email my sign-in link/}).click();
+  const job2=store.outbox.at(-1);
+  await page.goto(openDelivery(job2.envelope,cfg.deliveryKey).url);
+  await page.getByRole('button',{name:'Continue to my workspace'}).click();
+  await page.getByRole('button',{name:'Sign out'}).waitFor();
   await page.goto(portalOrigin+'/');await page.screenshot({path:`test-results/browser/${name}-workspace-mobile.png`,fullPage:true});await page.getByRole('button',{name:'Sign out'}).click();await page.getByRole('button',{name:/Email my sign-in link/}).waitFor();
   const unauthorized=await context.request.get(portalOrigin+'/api/materials');assert.equal(unauthorized.status(),401);assert.equal(errors.length,0,errors.join('\n'));
   evidence.push({browser:name,publicLayouts:32,emailVerification:true,authenticatedLibrary:true,worksheetDownload:true,logoutRevocation:true,thirdPartyRequestsBeforeActivation:outside.length});await browser.close();

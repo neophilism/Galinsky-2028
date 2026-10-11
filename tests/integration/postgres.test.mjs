@@ -48,6 +48,23 @@ test('Postgres persistence, atomic verification, leasing and deletion',{skip:!ur
    const result=await pool.query("SELECT amount_cents FROM g28.financial_provider_events WHERE provider='synthetic' AND event_id='evt-a'");
    assert.equal(Number(result.rows[0].amount_cents),2500);
   });
+  await t.test('account activity snapshot excludes identity secrets and role preferences persist',async()=>{
+    const data=await store.accountActivityExport(account.id);
+    assert.equal(data.account.id,account.id);
+    assert.deepEqual(data.rolePreferences,{roleId:'skills',minutes:30,willingToTrain:false});
+    assert.deepEqual(data.completedTasks,['choose-role']);
+    assert.equal(data.materialAcknowledgments.length,1);
+    assert.equal(data.materialAcknowledgments[0].materialId,'test-guide');
+    assert(!JSON.stringify(data).includes('fixture-encrypted-envelope'));
+    assert(!JSON.stringify(data).includes('fixture-email-key'));
+    assert.equal(await store.accountActivityExport(randomUUID()),null);
+  });
+  await t.test('revoke all sessions does not close the account',async()=>{
+    await store.revokeAllSessions(account.id);
+    assert.equal(await store.session('session-1'),null);
+    assert.equal(await store.session('session-2'),null);
+    assert(await store.accountActivityExport(account.id));
+  });
   await t.test('account closure cascades to all sessions, checklist and reading history',async()=>{await store.closeAccount(account.id);assert.equal(await store.session('session-1'),null);assert.equal(await store.session('session-2'),null);assert.deepEqual(await store.listTaskCompletion(account.id),[]);assert.equal(await store.readMaterialAck(account.id,'test-guide'),null);assert.equal(await store.getRolePreferences(account.id),null);});
  }finally{await store.close();}
 });

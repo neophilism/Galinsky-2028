@@ -188,7 +188,75 @@ function Tasks(){
  </article>;})}</div></>;
 }
 function Activity(){const{data,error}=useLoad<{notice:string}>('/api/activity-status');return <><span className="eyebrow">KNOW WHAT IS AUTHORIZED</span><h1>Readiness matters.</h1>{error&&<Notice error>{error}</Notice>}<Notice>{data?.notice||'Checking current activity status...'}</Notice><div className="panel"><h2>Before a restricted activity</h2><p>Check the exact jurisdiction, election, activity, approved tool, required training, review dates and authorization. An old guide or a completed lesson is not sufficient.</p><p>The system requires two distinct verifier records and campaign publication approval for the exact module revision.</p><Link to="/roles" className="textlink">Review the roles &rarr;</Link></div></>;}
-function Settings(){const{session,refresh}=useContext(Context);const[marketing,setMarketing]=useState(Boolean(session?.account.marketing)),[message,setMessage]=useState(''),[error,setError]=useState(''),[confirm,setConfirm]=useState('');const[,navigate]=usePath();async function save(){try{await request('/api/account/consent',{marketing},session?.csrf);await refresh();setMessage('Your preference has been saved.');}catch(e){setError((e as Error).message);}}async function close(){try{await request('/api/account/close',{confirm},session?.csrf);sessionStorage.removeItem('g28-bookmarks');await refresh();navigate('/join');}catch(e){setError((e as Error).message);}}return <><span className="eyebrow">YOUR ACCOUNT, YOUR CHOICES</span><h1>Account settings.</h1>{message&&<Notice>{message}</Notice>}{error&&<Notice error>{error}</Notice>}<div className="panel"><h2>Email preferences</h2><label className="check"><input type="checkbox" checked={marketing} onChange={e=>setMarketing(e.target.checked)}/><span>Receive optional campaign updates. Account and security messages remain separate.</span></label><button className="btn" onClick={save}>Save preference</button></div><div className="panel spaced"><h2>Close this volunteer account</h2><p>Closing the account revokes its sessions and deletes its account access records. This does not erase any separately required campaign finance records.</p><label>Type “close my account” to confirm<input value={confirm} onChange={e=>setConfirm(e.target.value)}/></label><button className="btn outline" onClick={close} disabled={confirm!=='close my account'}>Close my account</button></div></>;}
+function Settings(){
+ const{session,refresh}=useContext(Context);
+ const[marketing,setMarketing]=useState(Boolean(session?.account.marketing));
+ const[message,setMessage]=useState('');
+ const[error,setError]=useState('');
+ const[confirm,setConfirm]=useState('');
+ const[exportBusy,setExportBusy]=useState(false);
+ const[signoutBusy,setSignoutBusy]=useState(false);
+ const[,navigate]=usePath();
+ async function save(){
+  setError('');setMessage('');
+  try{await request('/api/account/consent',{marketing},session?.csrf);await refresh();setMessage('Your preference has been saved.');}
+  catch(e){setError((e as Error).message);}
+ }
+ async function downloadExport(){
+  setError('');setMessage('');setExportBusy(true);
+  try{
+   const data=await request<Record<string,unknown>>('/api/account/export');
+   const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json;charset=utf-8'});
+   const uri=URL.createObjectURL(blob);
+   const anchor=document.createElement('a');
+   anchor.href=uri;anchor.download='galinsky-volunteer-account.json';
+   document.body.appendChild(anchor);anchor.click();anchor.remove();
+   setTimeout(()=>URL.revokeObjectURL(uri),1000);
+   setMessage('Your account activity export was downloaded directly to your device.');
+  }catch(e){setError((e as Error).message);}
+  finally{setExportBusy(false);}
+ }
+ async function signOutEverywhere(){
+  setError('');setMessage('');setSignoutBusy(true);
+  try{
+   await request('/api/account/revoke-sessions',{confirm:'sign out everywhere'},session?.csrf);
+   sessionStorage.removeItem('g28-bookmarks');await refresh();navigate('/join');
+  }catch(e){setError((e as Error).message);}
+  finally{setSignoutBusy(false);}
+ }
+ async function close(){
+  setError('');setMessage('');
+  try{
+   await request('/api/account/close',{confirm},session?.csrf);
+   sessionStorage.removeItem('g28-bookmarks');await refresh();navigate('/join');
+  }catch(e){setError((e as Error).message);}
+ }
+ return <>
+  <span className="eyebrow">YOUR ACCOUNT, YOUR CHOICES</span><h1>Account settings.</h1>
+  {message&&<Notice>{message}</Notice>}{error&&<Notice error>{error}</Notice>}
+  <div className="panel">
+   <h2>Email preferences</h2>
+   <label className="check"><input type="checkbox" checked={marketing} onChange={e=>setMarketing(e.target.checked)}/><span>Receive optional campaign updates. Account and security messages remain separate.</span></label>
+   <button className="btn" onClick={save}>Save preference</button>
+  </div>
+  <div className="panel spaced">
+   <h2>Download my account activity</h2>
+   <p>Export your volunteer role choices, checklist progress, reviewed-material acknowledgments and account consent as a JSON file. Your download stays on your device. No private tokens or other volunteers' information is included.</p>
+   <button className="btn outline" disabled={exportBusy} onClick={downloadExport}>{exportBusy?'Preparing export...':'Download my account data'}</button>
+  </div>
+  <div className="panel spaced">
+   <h2>Sign out of all devices</h2>
+   <p>Immediately revoke every active volunteer session, including this one. Signing in again will require a new verified email link.</p>
+   <button className="btn outline" disabled={signoutBusy} onClick={signOutEverywhere}>{signoutBusy?'Signing out...':'Sign out everywhere'}</button>
+  </div>
+  <div className="panel spaced">
+   <h2>Close this volunteer account</h2>
+   <p>Closing the account revokes its sessions and deletes its account access records. This does not erase any separately required campaign finance records.</p>
+   <label>Type “close my account” to confirm<input value={confirm} onChange={e=>setConfirm(e.target.value)}/></label>
+   <button className="btn outline" onClick={close} disabled={confirm!=='close my account'}>Close my account</button>
+  </div>
+ </>;
+}
 function App(){const[path]=usePath();const[config,setConfig]=useState<Config|null>(null),[session,setSession]=useState<Session|null>(null),[ready,setReady]=useState(false),[error,setError]=useState('');async function refresh(){try{setSession(await request<Session>('/api/session'));}catch(e){if(e instanceof ApiError&&e.status===401)setSession(null);else throw e;}}useEffect(()=>{Promise.all([request<Config>('/api/config').then(setConfig),refresh()]).catch(e=>setError(e.message)).finally(()=>setReady(true));},[]);useEffect(()=>{
   const label=path==='/join'?'Join the team':path==='/verify'?'Verify sign-in':path.startsWith('/materials/')?'Read a volunteer guide':nav.find(([route])=>route===path)?.[1]||'Volunteer workspace';
   document.title=label+' | Galinsky 2028';

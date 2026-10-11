@@ -20,6 +20,30 @@ export class PostgresStore{
  async logout(hash){await this.pool.query('DELETE FROM g28.sessions WHERE token_hash=$1',[hash]);}
  async consent(id,marketing){await this.pool.query('UPDATE g28.accounts SET marketing_consent=$1 WHERE id=$2',[marketing,id]);}
  async closeAccount(id){const c=await this.pool.connect();try{await c.query('BEGIN');await c.query('DELETE FROM g28.login_requests WHERE email_key=(SELECT email_key FROM g28.accounts WHERE id=$1)',[id]);await c.query('DELETE FROM g28.outbox WHERE subject_key=(SELECT email_key FROM g28.accounts WHERE id=$1)',[id]);await c.query('DELETE FROM g28.accounts WHERE id=$1',[id]);await c.query('COMMIT');}catch(e){await c.query('ROLLBACK');throw e;}finally{c.release();}}
+ async accountActivityExport(id){
+  const c=await this.pool.connect();
+  try{
+   await c.query('BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY');
+   const account=await c.query(
+    'SELECT id,verified_at,created_at,marketing_consent,terms_version FROM g28.accounts WHERE id=$1',[id]);
+   if(account.rowCount===0){await c.query('COMMIT');return null;}
+   const prefs=await c.query('SELECT role_id,available_minutes,willing_to_train FROM g28.volunteer_role_preferences WHERE account_id=$1',[id]);
+   const tasks=await c.query('SELECT task_id FROM g28.task_progress WHERE account_id=$1 ORDER BY task_id',[id]);
+   const reads=await c.query('SELECT material_id,revision,content_sha256 FROM g28.material_reading WHERE account_id=$1 ORDER BY material_id',[id]);
+   await c.query('COMMIT');
+   const a=account.rows[0],p=prefs.rows[0];
+   return {
+    account:{id:a.id,verifiedAt:a.verified_at.toISOString(),createdAt:a.created_at.toISOString(),
+     marketingConsent:a.marketing_consent,termsVersion:a.terms_version},
+    rolePreferences:p?{roleId:p.role_id,minutes:p.available_minutes,willingToTrain:p.willing_to_train}:null,
+    completedTasks:tasks.rows.map(x=>x.task_id),
+    materialAcknowledgments:reads.rows.map(x=>({materialId:x.material_id,revision:x.revision,contentSha256:x.content_sha256}))
+   };
+  }catch(e){await c.query('ROLLBACK');throw e;}finally{c.release();}
+ }
+ async revokeAllSessions(id){
+  await this.pool.query('DELETE FROM g28.sessions WHERE account_id=$1',[id]);
+ }
  async listTaskCompletion(accountId){
   const q=await this.pool.query('SELECT task_id FROM g28.task_progress WHERE account_id=$1 ORDER BY task_id',[accountId]);
   return q.rows.map(r=>r.task_id);

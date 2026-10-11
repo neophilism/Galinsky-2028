@@ -71,6 +71,26 @@ export function createApp({store,config,clock=()=>Date.now()}){
   await store.setRolePreferences(s.account.id,preferences);
   return {saved:true,preferences,activityAuthorized:false};
  });
+ app.get('/api/account/export',async(req,reply)=>{
+  const s=await account(req);
+  const data=await store.accountActivityExport(s.account.id);
+  assert(data,'authentication_required','Your account is no longer available.',401);
+  // No email ciphertext, login tokens, rate-limit identifiers, or third-party
+  // records may be included. Finance/legal retention is a separate process.
+  return reply.header('Cache-Control','private, no-store')
+   .header('Content-Disposition','attachment; filename="galinsky-volunteer-account.json"')
+   .type('application/json; charset=utf-8')
+   .send({schemaVersion:1,exportedAt:new Date(clock()).toISOString(),...data,
+    limitations:'This export includes volunteer account activity stored in this application. Required finance and legally retained records, if any, are handled separately.'});
+ });
+ app.post('/api/account/revoke-sessions',async(req,reply)=>{
+  const s=await writeSession(req);
+  const b=exactKeys(req.body,['confirm']);
+  assert(b.confirm==='sign out everywhere','confirmation','Confirm signing out all devices.');
+  await store.revokeAllSessions(s.account.id);
+  reply.header('Set-Cookie',sessionCookie('',{secure:config.production,maxAge:0}));
+  return {signedOutAll:true};
+ });
  app.post('/api/account/consent',async req=>{const s=await writeSession(req);const b=exactKeys(req.body,['marketing']);assert(typeof b.marketing==='boolean','invalid_consent','Select a valid preference.');await store.consent(s.account.id,b.marketing);return {saved:true};});
  app.post('/api/account/close',async(req,reply)=>{const s=await writeSession(req);const b=exactKeys(req.body,['confirm']);assert(b.confirm==='close my account','confirmation','Confirm account closure.');await store.closeAccount(s.account.id);reply.header('Set-Cookie',sessionCookie('',{secure:config.production,maxAge:0}));return {closed:true};});
  app.get('/api/materials',async req=>{const s=await account(req);const list=materialSearch(await store.listMaterials(),String(req.query.q||''),String(req.query.category||'all'),s.account);return {materials:list.map(m=>{const x=publicMaterial(m);delete x.body;return x;}),notice:list.length?null:'Current materials are being prepared and reviewed. Unreviewed historical files are not published as current guidance.'};});
