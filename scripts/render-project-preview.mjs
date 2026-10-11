@@ -62,14 +62,36 @@ export function createPreviewSpec(ownerId,environmentId,password){
 }
 
 function unwrap(resource,field){return resource?.[field]||resource;}
+// Only fixed, safe classifications may appear in public CI logs. Render may
+// echo the repository's confidential password or request body in error text.
+export function classifyRenderRejection(raw){
+ const source=typeof raw==='string'?raw.slice(0,16384).toLowerCase():'';
+ const probes=[
+  ['plan','plan'],['free','free_tier'],['billing','billing'],['payment','billing'],
+  ['limit','quota_limit'],['quota','quota_limit'],
+  ['service details','service_details'],['servicedetails','service_details'],
+  ['envspecificdetails','build_start_configuration'],['buildcommand','build_start_configuration'],['startcommand','build_start_configuration'],
+  ['runtime','runtime'],['region','region'],['repository','git_repository'],['repo','git_repository'],['github','git_provider'],
+  ['environment','environment'],['owner','ownership'],['workspace','workspace'],
+  ['envvars','environment_variables'],['secret','environment_variables'],
+  ['previews','preview_configuration'],['autodeploy','automatic_deployment'],
+  ['unauthorized','authorization'],['permission','authorization'],['access','authorization'],
+  ['already exists','duplicate_name'],['name','service_name'],['invalid','invalid_request'],
+  ['not found','not_found'],['not supported','unsupported'],['unsupported','unsupported']
+ ];
+ const tags=[...new Set(probes.filter(([needle])=>source.includes(needle)).map(([,tag])=>tag))].slice(0,10);
+ return tags.length?tags.join(','):'unclassified';
+}
 async function api(method,path,{token,body}={}){
  const response=await fetch('https://api.render.com/v1'+path,{
   method,
   headers:{Accept:'application/json',Authorization:'Bearer '+token,...(body?{'Content-Type':'application/json'}:{})},
   ...(body?{body:JSON.stringify(body)}:{})
  });
- if(!response.ok)
-  throw new Error('Render API '+method+' failed (HTTP '+response.status+'). Credentials and response details are withheld; inspect the project before retrying.');
+ if(!response.ok){
+  const raw=await response.text().catch(()=>'');
+  throw new Error('Render API '+method+' failed (HTTP '+response.status+'; safe categories: '+classifyRenderRejection(raw)+'). Request and response values withheld.');
+ }
  return response.json();
 }
 async function findExisting(token,client=api){

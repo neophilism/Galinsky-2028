@@ -1,6 +1,6 @@
 {
-  "action": "create",
-  "schemaVersion": 1,
   "projectId": "prj-db57fnm7bikc739783q0",
-  "environmentId": "evm-db57fnm7bikc739783qg"
+  "action": "create",
+  "environmentId": "evm-db57fnm7bikc739783qg",
+  "schemaVersion": 1
 }
