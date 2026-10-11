@@ -1,3 +1,5 @@
+> **Canonical PR roadmap:** [registry/roadmap.json](../registry/roadmap.json). This detailed development plan is preserved as original source; agents must update canonical PR tracking file.
+
 # Galinsky 2028: Comprehensive Development Plan
 
 **Repository:** `neophilism/Galinsky-2028`  
