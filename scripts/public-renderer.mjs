@@ -16,6 +16,7 @@ export function renderPage(key, options={}) {
  if(portal)origin(portal,process.env.NODE_ENV!=='production');
  const portalPath=portal||'/volunteer/#join';
  let body=readFileSync(join(root,`content/public/pages/${page.key}.html`),'utf8');
+ body=body.replace('<main id="main"','<main id="main" tabindex="-1"');
  body=body.replace(/\{\{VIDEO:([a-z-]+)\}\}/g,(_,slug)=>videoPanel(slug,cfg.issues[slug]));
  body=body.replace(/\{\{DESTINATION:([a-z-]+)\}\}/g,(_,slug)=>{
    const url=cfg.issues[slug]?.websiteUrl;
