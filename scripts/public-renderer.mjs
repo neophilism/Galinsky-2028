@@ -3,6 +3,7 @@ import {fileURLToPath} from 'node:url';
 import {join} from 'node:path';
 import {escapeHtml,origin} from '../packages/core/validation.mjs';
 import {videoPanel} from '../packages/core/video.mjs';
+import {policyDocumentSection} from '../packages/core/policy-documents.mjs';
 import {publicRelease} from '../packages/core/indexing.mjs';
 export const root=process.env.G28_SOURCE_ROOT||fileURLToPath(new URL('../',import.meta.url));
 export const pages=JSON.parse(readFileSync(join(root,'content/public/pages.json'),'utf8'));
@@ -18,6 +19,7 @@ export function renderPage(key, options={}) {
  let body=readFileSync(join(root,`content/public/pages/${page.key}.html`),'utf8');
  body=body.replace('<main id="main"','<main id="main" tabindex="-1"');
  body=body.replace(/\{\{VIDEO:([a-z-]+)\}\}/g,(_,slug)=>videoPanel(slug,cfg.issues[slug]));
+ body=body.replace(/\{\{DOCUMENTS:([a-z-]+)\}\}/g,(_,slug)=>policyDocumentSection(slug,cfg.issues[slug]?.documents||[],join(root,'apps/web/public')));
  body=body.replace(/\{\{DESTINATION:([a-z-]+)\}\}/g,(_,slug)=>{
    const url=cfg.issues[slug]?.websiteUrl;
    if(!url)return '/notices/#resources';
@@ -34,5 +36,5 @@ export function renderPage(key, options={}) {
  const robots=key==='404'||mode!=='production'?'noindex,nofollow':'index,follow';
  const pageCanonical=key==='404'?null:canonical&&canonical+page.path;
  const csp="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'none'; form-action 'none'";
- return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="${csp}"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="robots" content="${robots}"><title>${escapeHtml(page.title)}</title><meta name="description" content="${description}">${pageCanonical?`<link rel="canonical" href="${pageCanonical}">`:''}<meta property="og:title" content="${escapeHtml(page.title)}"><meta property="og:description" content="${description}"><meta property="og:type" content="website"><meta property="og:site_name" content="Galinsky 2028"><meta name="twitter:card" content="summary_large_image">${pageCanonical?`<meta property="og:url" content="${pageCanonical}">`:''}${canonical?`<meta property="og:image" content="${canonical}/assets/candidate.webp">`:''}${canonical?`<meta property="og:image" content="${canonical}/assets/candidate.webp">`:''}<meta name="theme-color" content="#0a3161"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/design.css"><link rel="stylesheet" href="/assets/site.css"></head><body data-page="${key}">${header}${body}${footer}${status}<script src="/assets/public.js" defer></script>${key==='index'?'<script src="/assets/motion.js" defer></script>':''}</body></html>`;
+ return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="${csp}"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="robots" content="${robots}"><title>${escapeHtml(page.title)}</title><meta name="description" content="${description}">${pageCanonical?`<link rel="canonical" href="${pageCanonical}">`:''}<meta property="og:title" content="${escapeHtml(page.title)}"><meta property="og:description" content="${description}"><meta property="og:type" content="website"><meta property="og:site_name" content="Galinsky 2028"><meta name="twitter:card" content="summary_large_image">${pageCanonical?`<meta property="og:url" content="${pageCanonical}">`:''}${canonical?`<meta property="og:image" content="${canonical}/assets/candidate.webp">`:''}<meta name="theme-color" content="#0a3161"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/design.css"><link rel="stylesheet" href="/assets/site.css"></head><body data-page="${key}">${header}${body}${footer}${status}<script src="/assets/public.js" defer></script>${key==='index'?'<script src="/assets/motion.js" defer></script>':''}</body></html>`;
 }
