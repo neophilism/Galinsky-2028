@@ -31,6 +31,36 @@
       ],
       "layout_checks_per_browser": 32,
       "production_dependency_audit": "zero_reported_vulnerabilities"
+    },
+    {
+      "pr": 3,
+      "merge_commit": "e048a3c2ce892fba4f54156ac5c508d8150c8fe7",
+      "ci_run_id": 38097052494,
+      "validation": [
+        "syntax_and_publishing_boundary",
+        "typescript",
+        "unit_tests",
+        "http_worker_postgresql_integration",
+        "astro_and_react_builds",
+        "chromium_firefox_webkit_http_journeys",
+        "production_dependency_audit"
+      ],
+      "scope": "standalone_nonindexed_404_and_delivery_evidence"
+    },
+    {
+      "pr": 4,
+      "merge_commit": "efe07090d18233d6bb1f240cc6810d320f559de5",
+      "ci_run_id": 38097158009,
+      "validation": [
+        "syntax_and_publishing_boundary",
+        "typescript",
+        "unit_tests",
+        "http_worker_postgresql_integration",
+        "astro_and_react_builds",
+        "chromium_firefox_webkit_http_journeys",
+        "production_dependency_audit"
+      ],
+      "scope": "truthful_production_copy_and_inactive_signup_donation_disclosures"
     }
   ],
   "release_gates_pending": [
