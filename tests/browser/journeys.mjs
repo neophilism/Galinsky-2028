@@ -70,6 +70,7 @@ try{
   await page.getByRole('button',{name:'Save role preference'}).click();
   await page.getByText(/were saved to your account/).waitFor();
   await page.reload();
+  await page.waitForFunction(()=>document.querySelector('.chooser select')?.value==='skills',undefined,{timeout:10000});
   assert.equal(await page.getByLabel('What would you enjoy?').inputValue(),'skills');
   const prefs=await context.request.get(portalOrigin+'/api/account/role-preferences');
   assert.equal(prefs.status(),200);
