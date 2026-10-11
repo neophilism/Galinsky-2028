@@ -7,7 +7,7 @@ import {parseMaterialMarkdown,materialLinks} from '../../../packages/core/materi
 import './portal.css';
 type Config={publicOrigin:string;signupEnabled:boolean;notice:string|null;features:Record<string,boolean>};
 type Session={account:{id:string;verified:boolean;marketing:boolean;role:string};csrf:string;expires:number};
-type Material={id:string;title:string;description:string;category:string;revision:number;body?:string;reviewedAt?:string};
+type Material={id:string;title:string;description:string;category:string;revision:number;body?:string;reviewedAt?:string;acknowledged?:boolean;readingNotice?:string};
 type FormSpec={id:string;title:string;notice:string;restricted:boolean;fields:{name:string;label:string;type:string}[]};
 const Context=createContext<{config:Config|null;session:Session|null;refresh:()=>Promise<void>}>({config:null,session:null,refresh:async()=>{}});
 function usePath(){const[path,set]=useState(location.pathname);useEffect(()=>{const pop=()=>set(location.pathname);window.addEventListener('popstate',pop);return()=>window.removeEventListener('popstate',pop);},[]);return[path,(p:string)=>{history.pushState({},'',p);set(p);window.dispatchEvent(new PopStateEvent('popstate'));window.scrollTo(0,0);} ]as const;}
@@ -60,7 +60,45 @@ function PlainDocument({text}:{text:string}){
  })}
  </div></div>;
 }
-function Document({id}:{id:string}){const{data,error,loading}=useLoad<Material>('/api/materials/'+encodeURIComponent(id));const[saved,setSaved]=useState(()=>{try{return JSON.parse(sessionStorage.getItem('g28-bookmarks')||'[]').includes(id);}catch{return false;}});function bookmark(){let previous:string[]=[];try{previous=JSON.parse(sessionStorage.getItem('g28-bookmarks')||'[]');}catch{}const next=saved?previous.filter(v=>v!==id):[...previous,id];sessionStorage.setItem('g28-bookmarks',JSON.stringify(next));setSaved(!saved);}return <><Link to="/materials" className="textlink">&larr; Materials library</Link>{loading&&<Notice>Loading guide...</Notice>}{error&&<Notice error>{error}</Notice>}{data&&<><span className="eyebrow spaced">CURRENT GUIDE / VERSION {data.revision}</span><h1>{data.title}</h1><div className="actions"><a className="btn" href={'/api/materials/'+encodeURIComponent(id)+'/download'}>Download Markdown</a><button className="btn outline" aria-pressed={saved} onClick={bookmark}>{saved?'Saved in this session':'Bookmark for this session'}</button></div><p className="fine">Bookmarks stay in this browser session and are cleared on sign-out.</p><PlainDocument text={data.body||''}/></>}</>;}
+function Document({id}:{id:string}){
+ const{session}=useContext(Context);
+ const{data,error,loading}=useLoad<Material>('/api/materials/'+encodeURIComponent(id));
+ const[saved,setSaved]=useState(false);
+ const[reading,setReading]=useState<boolean|null>(null);
+ const[saving,setSaving]=useState(false);
+ const[saveError,setSaveError]=useState('');
+ useEffect(()=>{
+  let value=false;
+  try{value=JSON.parse(sessionStorage.getItem('g28-bookmarks')||'[]').includes(id);}catch{}
+  setSaved(value);setReading(null);setSaveError('');
+ },[id]);
+ function bookmark(){
+  let previous:string[]=[];
+  try{previous=JSON.parse(sessionStorage.getItem('g28-bookmarks')||'[]');}catch{}
+  const next=saved?previous.filter(v=>v!==id):[...previous,id];
+  sessionStorage.setItem('g28-bookmarks',JSON.stringify(next));setSaved(!saved);
+ }
+ const isRead=reading??Boolean(data?.acknowledged);
+ async function toggleReading(){
+  if(!data||saving)return;
+  setSaveError('');setSaving(true);
+  try{
+   const result=await request<{acknowledged:boolean}>('/api/materials/'+encodeURIComponent(id)+'/reading',{revision:data.revision,acknowledged:!isRead},session?.csrf);
+   setReading(result.acknowledged);
+  }catch(e){setSaveError((e as Error).message);}finally{setSaving(false);}
+ }
+ return <><Link to="/materials" className="textlink">&larr; Materials library</Link>
+  {loading&&<Notice>Loading guide...</Notice>}{error&&<Notice error>{error}</Notice>}
+  {data&&<><span className="eyebrow spaced">CURRENT GUIDE / VERSION {data.revision}</span><h1>{data.title}</h1>
+   <div className="actions"><a className="btn" href={'/api/materials/'+encodeURIComponent(id)+'/download'}>Download Markdown</a>
+   <button className="btn outline" aria-pressed={saved} onClick={bookmark}>{saved?'Saved in this session':'Bookmark for this session'}</button>
+   <button className="btn outline" type="button" aria-pressed={isRead} disabled={saving} onClick={toggleReading}>{saving?'Saving...':isRead?'Read this version - undo':'I have read this version'}</button></div>
+   {saveError&&<Notice error>{saveError}</Notice>}
+   <p className="fine" aria-live="polite">{isRead?'Reading acknowledgment saved to your private account. You can undo it.':'You have not yet acknowledged reading this exact approved version.'}</p>
+   <p className="fine">Bookmarks stay in this browser session and are cleared on sign-out. {data.readingNotice||'Reading a guide is not training certification or authorization for regulated campaign activity.'}</p>
+   <PlainDocument text={data.body||''}/>
+  </>}</>;
+}
 function Forms({id}:{id?:string}){const form=(worksheetTemplates as FormSpec[]).find(f=>f.id===id);const[values,setValues]=useState<Record<string,string>>({});useEffect(()=>setValues({}),[id]);if(!id)return <><span className="eyebrow">PLAN. PRACTICE. PREPARE.</span><h1>Put it into words.</h1><p className="lead">Twelve practical worksheets, readable and usable without a giant PDF.</p><Notice>Drafts stay in this tab. Nothing you type in a worksheet is submitted to the campaign.</Notice><div className="cards two">{(worksheetTemplates as FormSpec[]).map(f=><article className="panel" key={f.id}><h2>{f.title}</h2><p>{f.restricted?'Planning and training only. Does not authorize an activity.':'A practical tool for a self-directed first step.'}</p><Link to={'/forms/'+f.id} className="textlink">Open worksheet &rarr;</Link></article>)}</div></>;if(!form)return <Notice error>This worksheet was not found.</Notice>;function download(){const blob=new Blob([worksheet(form!.id,values)],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=form!.id+'-planning.md';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}return <><Link to="/forms" className="textlink">&larr; All worksheets</Link><span className="eyebrow spaced">PLANNING / PRACTICE ONLY</span><h1>{form.title}</h1><Notice>{form.notice}</Notice><div className="panel worksheet">{form.fields.map(f=><label key={f.name}>{f.label}{f.type==='textarea'?<textarea rows={4} maxLength={10000} value={values[f.name]||''} onChange={e=>setValues({...values,[f.name]:e.target.value})}/>:<input type={f.type} maxLength={1000} value={values[f.name]||''} onChange={e=>setValues({...values,[f.name]:e.target.value})}/>}</label>)}<div className="actions"><button className="btn" onClick={download}>Download my worksheet</button><button className="btn outline" onClick={()=>window.print()}>Print</button><button className="text-button" onClick={()=>setValues({})}>Clear this draft</button></div></div></>;}
 function Tasks(){
  const{config,session}=useContext(Context);

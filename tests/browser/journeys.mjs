@@ -70,7 +70,13 @@ try{
   await page.getByRole('button',{name:'Completed - undo'}).first().waitFor();
   await page.getByRole('button',{name:'Completed - undo'}).first().click();
   await page.getByText('Your first steps: 0 of 3 marked complete. You can change these at any time.').waitFor();
-  await page.goto(portalOrigin+'/materials');await page.getByLabel('Search the library').fill('Synthetic');await page.getByRole('heading',{name:'Synthetic test guide'}).waitFor();await page.getByRole('link',{name:/Read the guide/}).click();await page.getByRole('heading',{name:'Synthetic test guide'}).first().waitFor();const contents=page.getByRole('navigation',{name:'On this page'});await contents.getByRole('link',{name:'Getting started'}).click();assert.equal(await page.locator('#getting-started').count(),1);assert.equal(await page.getByRole('table').count(),1);
+  await page.goto(portalOrigin+'/materials');await page.getByLabel('Search the library').fill('Synthetic');await page.getByRole('heading',{name:'Synthetic test guide'}).waitFor();await page.getByRole('link',{name:/Read the guide/}).click();await page.getByRole('heading',{name:'Synthetic test guide'}).first().waitFor();const contents=page.getByRole('navigation',{name:'On this page'});await contents.getByRole('link',{name:'Getting started'}).click();assert.equal(await page.locator('#getting-started').count(),1);assert.equal(await page.getByRole('table').count(),1);await page.getByRole('button',{name:'I have read this version'}).click();
+  await page.getByText('Reading acknowledgment saved to your private account. You can undo it.').waitFor();
+  await page.reload();
+  await page.getByRole('button',{name:'Read this version - undo'}).waitFor();
+  await page.getByRole('button',{name:'Read this version - undo'}).click();
+  await page.getByRole('button',{name:'I have read this version'}).waitFor();
+  
   await page.goto(portalOrigin+'/forms/action-card');await page.getByLabel('One action I can complete').fill('Read the approved policy summary');const downloadPromise=page.waitForEvent('download');await page.getByRole('button',{name:'Download my worksheet'}).click();const download=await downloadPromise;assert.equal(download.suggestedFilename(),'action-card-planning.md');
   await page.goto(portalOrigin+'/');await page.screenshot({path:`test-results/browser/${name}-workspace-mobile.png`,fullPage:true});await page.getByRole('button',{name:'Sign out'}).click();await page.getByRole('button',{name:/Email my sign-in link/}).waitFor();
   const unauthorized=await context.request.get(portalOrigin+'/api/materials');assert.equal(unauthorized.status(),401);assert.equal(errors.length,0,errors.join('\n'));

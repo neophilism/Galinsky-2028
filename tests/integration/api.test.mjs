@@ -50,3 +50,49 @@ test('task progress is account-isolated and erased when the account closes',asyn
  assert.equal((await app.inject({url:'/api/tasks',headers:{cookie}})).statusCode,401);
  await app.close();
 });
+
+test('material reading acknowledgments track exact approved edition, undo and CSRF',async()=>{
+ const{app,store}=await setup();const{cookie,csrf}=await login(app,store);
+ const auth={...headers,cookie,'x-csrf-token':csrf};
+ let r=await app.inject({url:'/api/materials/test-guide',headers:{cookie}});
+ assert.equal(r.statusCode,200);assert.equal(r.json().acknowledged,false);
+ r=await app.inject({method:'POST',url:'/api/materials/test-guide/reading',headers:auth,payload:{revision:1,acknowledged:true}});
+ assert.equal(r.statusCode,200);assert.deepEqual(r.json(),{materialId:'test-guide',revision:1,acknowledged:true,trainingCertified:false,activityAuthorized:false});
+ r=await app.inject({url:'/api/materials/test-guide',headers:{cookie}});assert.equal(r.json().acknowledged,true);
+ r=await app.inject({method:'POST',url:'/api/materials/test-guide/reading',headers:auth,payload:{revision:1,acknowledged:false}});
+ assert.equal(r.statusCode,200);
+ r=await app.inject({url:'/api/materials/test-guide',headers:{cookie}});assert.equal(r.json().acknowledged,false);
+ assert.equal(store.materialReading.size,0);await app.close();
+});
+test('stale, unreviewed and forged material acknowledgments fail closed',async()=>{
+ const{app,store}=await setup();const{cookie,csrf}=await login(app,store);
+ const auth={...headers,cookie,'x-csrf-token':csrf};
+ const cases=[
+ ['test-guide',{revision:2,acknowledged:true},409,auth],
+ ['archive',{revision:1,acknowledged:true},404,auth],
+ ['missing',{revision:1,acknowledged:true},404,auth],
+ ['test-guide',{revision:1,acknowledged:'yes'},400,auth],
+ ['test-guide',{revision:1,acknowledged:true,certified:true},400,auth],
+ ['test-guide',{revision:1,acknowledged:true},403,{...headers,cookie}]
+ ];
+ for(const [id,body,status,h]of cases){
+  const r=await app.inject({method:'POST',url:'/api/materials/'+id+'/reading',headers:h,payload:body});
+  assert.equal(r.statusCode,status,id+' '+JSON.stringify(body));
+ }
+ assert.equal(store.materialReading.size,0);
+ const r=await app.inject({method:'POST',url:'/api/materials/test-guide/reading',headers:auth,payload:{revision:1,acknowledged:true}});
+ assert.equal(r.statusCode,200);
+ store.materials[0].body='A newly reviewed edition';store.materials[0].revision=2;store.materials[0].review={approvedBy:'different-reviewer',revision:2};
+ const changed=await app.inject({url:'/api/materials/test-guide',headers:{cookie}});
+ assert.equal(changed.json().acknowledged,false,'Previous revision acknowledgment must never silently carry over');
+ await app.close();
+});
+test('closing an account erases its private material reading records',async()=>{
+ const{app,store}=await setup();const{cookie,csrf}=await login(app,store);
+ const auth={...headers,cookie,'x-csrf-token':csrf};
+ let r=await app.inject({method:'POST',url:'/api/materials/test-guide/reading',headers:auth,payload:{revision:1,acknowledged:true}});assert.equal(r.statusCode,200);
+ assert.equal(store.materialReading.size,1);
+ r=await app.inject({method:'POST',url:'/api/account/close',headers:auth,payload:{confirm:'close my account'}});assert.equal(r.statusCode,200);
+ assert.equal(store.materialReading.size,0);
+ await app.close();
+});
