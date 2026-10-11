@@ -55,7 +55,7 @@ try{
   const volunteerDownload=page.waitForEvent('download');
   await page.getByRole('button',{name:/Download my volunteer plan/}).click();
   assert.equal((await volunteerDownload).suggestedFilename(),'galinsky-volunteer-practice-plan.md');
-  assert.match(await page.locator('#preview-download-status').innerText(),/not submitted/i);
+  assert.match(await page.locator('#preview-download-status').innerText(),/No information was submitted/i);
   await page.locator('#preview-reset').click();
   assert.match(await page.locator('#preview-progress').innerText(),/0 of 4/);
   assert.equal(outside.length,0,'Volunteering tools must not contact outside services');
