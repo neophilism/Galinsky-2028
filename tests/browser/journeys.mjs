@@ -56,6 +56,15 @@ try{
   await page.screenshot({path:`test-results/browser/${name}-home-mobile.png`,fullPage:true});
   await page.goto(portalOrigin+'/join');await page.getByLabel('Email address').fill(name+'@example.test');await page.getByRole('checkbox').first().check();await page.getByRole('button',{name:/Email my sign-in link/}).click();await page.getByText(/When delivery is available/).waitFor();
   const queued=store.outbox.at(-1);const mail=openDelivery(queued.envelope,cfg.deliveryKey);assert.equal(mail.email,name+'@example.test');await page.goto(mail.url);await page.getByRole('button',{name:'Continue to my workspace'}).click();await page.getByRole('button',{name:'Sign out'}).waitFor();
+  // Account-only checklist persists across reloads without certifying fieldwork.
+  await page.goto(portalOrigin+'/tasks');
+  assert.equal(await page.getByRole('button',{name:'Mark complete'}).count(),3,'No restricted actions may be self-certified');
+  await page.getByRole('button',{name:'Mark complete'}).first().click();
+  await page.getByText('Your first steps: 1 of 3 marked complete. You can change these at any time.').waitFor();
+  await page.reload();
+  await page.getByRole('button',{name:'Completed - undo'}).first().waitFor();
+  await page.getByRole('button',{name:'Completed - undo'}).first().click();
+  await page.getByText('Your first steps: 0 of 3 marked complete. You can change these at any time.').waitFor();
   await page.goto(portalOrigin+'/materials');await page.getByLabel('Search the library').fill('Synthetic');await page.getByRole('heading',{name:'Synthetic test guide'}).waitFor();await page.getByRole('link',{name:/Read the guide/}).click();await page.getByRole('heading',{name:'Synthetic test guide'}).first().waitFor();
   await page.goto(portalOrigin+'/forms/action-card');await page.getByLabel('One action I can complete').fill('Read the approved policy summary');const downloadPromise=page.waitForEvent('download');await page.getByRole('button',{name:'Download my worksheet'}).click();const download=await downloadPromise;assert.equal(download.suggestedFilename(),'action-card-planning.md');
   await page.goto(portalOrigin+'/');await page.screenshot({path:`test-results/browser/${name}-workspace-mobile.png`,fullPage:true});await page.getByRole('button',{name:'Sign out'}).click();await page.getByRole('button',{name:/Email my sign-in link/}).waitFor();

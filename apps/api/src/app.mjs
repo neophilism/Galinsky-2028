@@ -58,7 +58,23 @@ export function createApp({store,config,clock=()=>Date.now()}){
  app.get('/api/roles',async()=>({roles}));
  app.get('/api/role-recommendation',async req=>recommendRole({interest:String(req.query.interest||'network'),minutes:Number(req.query.minutes)||30,willingToTrain:req.query.training!=='no'}));
  app.get('/api/forms',async req=>{await account(req);return {forms};});
- app.get('/api/tasks',async req=>{const s=await account(req);return {tasks:starterTasks.map(t=>({...t,decision:taskDecision(t,s.account,null,{},new Date(clock()))})),tracking:'self-directed; completion is not submitted to the campaign'};});
+ app.get('/api/tasks',async req=>{
+  const s=await account(req);
+  const done=new Set(await store.listTaskCompletion(s.account.id));
+  const tasks=starterTasks.map(t=>({...t,completed:!t.restricted&&done.has(t.id),decision:taskDecision(t,s.account,null,{},new Date(clock()))}));
+  return {tasks,completed:tasks.filter(t=>t.completed).length,total:tasks.filter(t=>!t.restricted).length,tracking:'Account-only checklist. Completion is self-reported, not verified campaign work.'};
+ });
+ app.post('/api/tasks/:id/completion',async req=>{
+  const s=await writeSession(req);
+  const b=exactKeys(req.body,['completed']);assert(typeof b.completed==='boolean','invalid_status','Choose complete or not complete.');
+  const task=starterTasks.find(t=>t.id===id(req.params.id));
+  assert(task,'not_found','This checklist action does not exist.',404);
+  assert(!task.restricted,'restricted_action','Restricted campaign activity cannot be self-certified as completed.',403);
+  const decision=taskDecision(task,s.account,null,{},new Date(clock()));
+  assert(decision.allowed,'inactive_task',decision.reason,403);
+  await store.setTaskCompletion(s.account.id,task.id,b.completed);
+  return {id:task.id,completed:b.completed,verified:false};
+ });
  app.get('/api/activity-status',async req=>{await account(req);return {modules:[],notice:'No regulated activity module is currently active. Reading a playbook does not authorize the activity.'};});
  return app;
 }
