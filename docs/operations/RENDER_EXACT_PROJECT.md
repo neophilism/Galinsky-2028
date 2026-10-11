@@ -15,7 +15,7 @@ Never paste either secret into chat, pull requests or the tracked repo.
 
 ## One-time project verification and creation
 
-Open **Actions → Create private preview in exact Galinsky Render project → Run workflow** and choose **inspect**. The output reports the actual project, its owner workspace, and its validated environment IDs. It makes no changes. If the project has multiple environments, select the desired `env-...` ID explicitly when running **create**; the script refuses to infer an environment.
+Open **Actions → Create private preview in exact Galinsky Render project → Run workflow** and choose **inspect**. The output reports the actual project, its owner workspace, and its validated environment IDs. It makes no changes. If the project has multiple environments, select the desired `evm-...` ID explicitly when running **create**; the script refuses to infer an environment.
 
 When the location is correct and both secrets are present, run that workflow again with **create**. It refuses to create a service outside project `prj-db57fnm7bikc739783q0`, refuses to overwrite existing services, and atomically supplies the password at creation time. The resulting configuration:
 

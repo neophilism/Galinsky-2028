@@ -31,9 +31,9 @@ export function chooseEnvironment(project,environments,requestedId=''){
 }
 
 export function createPreviewSpec(ownerId,environmentId,password){
- if(typeof ownerId!=='string'||!/^(tea|own)-[a-z0-9-]+$/.test(ownerId))
+ if(typeof ownerId!=='string'||!/^(tea|usr|own)-[a-z0-9-]+$/.test(ownerId))
   throw new Error('Missing or invalid Render project owner ID.');
- if(typeof environmentId!=='string'||!/^env-[a-z0-9-]+$/.test(environmentId))
+ if(typeof environmentId!=='string'||!/^evm-[a-z0-9-]+$/.test(environmentId))
   throw new Error('A verified Render environment ID is required.');
  if(typeof password!=='string'||password.length<32)
   throw new Error('Set a private 32+ character G28_PREVIEW_ACCESS_PASSWORD GitHub Actions secret before creating the service.');
@@ -103,7 +103,7 @@ export async function run({env=process.env,client=api}={}){
   throw new Error('The exact Render project has no discoverable environments. Check its settings.');
  const environments=[];
  for(const environmentId of environmentIds){
-  if(typeof environmentId!=='string'||!/^env-[a-z0-9-]+$/.test(environmentId))
+  if(typeof environmentId!=='string'||!/^evm-[a-z0-9-]+$/.test(environmentId))
    throw new Error('Unrecognized Render environment identifier.');
   const entry=unwrap(await client('GET','/environments/'+environmentId,{token}),'environment');
   environments.push(entry);

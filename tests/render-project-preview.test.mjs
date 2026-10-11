@@ -1,18 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {chooseEnvironment,createPreviewSpec,run,TARGET_PROJECT_ID,TARGET_SERVICE} from '../scripts/render-project-preview.mjs';
-const project={id:TARGET_PROJECT_ID,name:'Galinsky 2028',owner:{id:'tea-test-workspace',name:'Example workspace'},environmentIds:['env-a123456789']};
-const e1={id:'env-a123456789',name:'Preview',projectId:TARGET_PROJECT_ID};
+const project={id:TARGET_PROJECT_ID,name:'Galinsky 2028',owner:{id:'tea-test-workspace',name:'Example workspace'},environmentIds:['evm-a123456789']};
+const e1={id:'evm-a123456789',name:'Preview',projectId:TARGET_PROJECT_ID};
 const pass='synthetic-long-preview-password-with-32-plus-characters';
 test('chooses ONLY an environment belonging to the requested Render project',()=>{
  assert.equal(chooseEnvironment(project,[e1]).id,e1.id);
  assert.throws(()=>chooseEnvironment({...project,id:'prj-other'},[e1]));
  assert.throws(()=>chooseEnvironment(project,[{...e1,projectId:'prj-other'}]));
- assert.throws(()=>chooseEnvironment(project,[e1,{...e1,id:'env-other12345'}]));
- assert.throws(()=>chooseEnvironment(project,[e1], 'env-different1234'));
+ assert.throws(()=>chooseEnvironment(project,[e1,{...e1,id:'evm-other12345'}]));
+ assert.throws(()=>chooseEnvironment(project,[e1], 'evm-different1234'));
 });
 test('multiple environments require explicit verified selection',()=>{
- const second={...e1,id:'env-another123456',name:'Production'};
+ const second={...e1,id:'evm-another123456',name:'Production'};
  assert.throws(()=>chooseEnvironment(project,[e1,second]));
  assert.equal(chooseEnvironment(project,[e1,second],second.id).id,second.id);
 });
@@ -25,7 +25,7 @@ test('service creation is non-static, private and atomically password-protected'
  assert.equal(spec.envVars.find(x=>x.key==='PREVIEW_ACCESS_PASSWORD')?.value,pass);
  assert.equal(spec.name,TARGET_SERVICE);
  assert.throws(()=>createPreviewSpec(project.owner.id,e1.id,''));
- assert.throws(()=>createPreviewSpec(project.owner.id,'env-invalid! ',pass));
+ assert.throws(()=>createPreviewSpec(project.owner.id,'evm-invalid! ',pass));
 });
 test('inspect mode queries exact project and environments but makes no writes',async()=>{
  const calls=[];
@@ -45,7 +45,7 @@ test('create mode requires password before any POST and preserves environment id
  assert(calls.every(x=>x.startsWith('GET ')));
 });
 test('existing service cannot be replaced or created in another project',async()=>{
- const calls=[];const client=async(method,path)=>{calls.push(method+' '+path);if(path.startsWith('/projects/'))return project;if(path.startsWith('/environments/'))return e1;if(path.startsWith('/services?'))return [{service:{id:'srv-old',name:TARGET_SERVICE,environmentId:'env-other'}}];throw Error('Unexpected POST');};
+ const calls=[];const client=async(method,path)=>{calls.push(method+' '+path);if(path.startsWith('/projects/'))return project;if(path.startsWith('/environments/'))return e1;if(path.startsWith('/services?'))return [{service:{id:'srv-old',name:TARGET_SERVICE,environmentId:'evm-other'}}];throw Error('Unexpected POST');};
  await assert.rejects(()=>run({env:{G28_RENDER_API_KEY:'fixture-render-api-token',G28_RENDER_ACTION:'create',G28_PREVIEW_ACCESS_PASSWORD:pass},client}),/already exists/);
  assert(calls.every(x=>x.startsWith('GET ')));
 });
@@ -84,6 +84,6 @@ test('a chosen environment from another project refuses to create',async()=>{
   if(path.startsWith('/environments/'))return e1;
   throw Error('Unexpected request');
  };
- await assert.rejects(()=>run({env:{G28_RENDER_API_KEY:'fixture-render-api-token',G28_RENDER_ACTION:'create',G28_RENDER_ENVIRONMENT_ID:'env-other123456',G28_PREVIEW_ACCESS_PASSWORD:pass},client}),/does not belong/);
+ await assert.rejects(()=>run({env:{G28_RENDER_API_KEY:'fixture-render-api-token',G28_RENDER_ACTION:'create',G28_RENDER_ENVIRONMENT_ID:'evm-other123456',G28_PREVIEW_ACCESS_PASSWORD:pass},client}),/does not belong/);
  assert.equal(posted,false);
 });

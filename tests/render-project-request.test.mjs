@@ -20,12 +20,12 @@ test('inspection uses only GET for verified project and its environment',async()
  const operations=[],log=console.log;console.log=()=>{};
  const fake=async(method,path)=>{
   operations.push(method+' '+path);
-  if(path==='/projects/prj-db57fnm7bikc739783q0')return {id:req.projectId,owner:{id:'tea-a123456789'},environmentIds:['env-a123456789'],name:'Campaign'};
-  if(path==='/environments/env-a123456789')return {id:'env-a123456789',projectId:req.projectId,name:'Preview'};
+  if(path==='/projects/prj-db57fnm7bikc739783q0')return {id:req.projectId,owner:{id:'tea-a123456789'},environmentIds:['evm-a123456789'],name:'Campaign'};
+  if(path==='/environments/evm-a123456789')return {id:'evm-a123456789',projectId:req.projectId,name:'Preview'};
   throw Error('Unexpected Render request');
  };
  try{
   await executeRequest(req,{env:{G28_RENDER_API_KEY:'synthetic-api-key-long-enough'},client:fake});
-  assert.deepEqual(operations,['GET /projects/'+req.projectId,'GET /environments/env-a123456789']);
+  assert.deepEqual(operations,['GET /projects/'+req.projectId,'GET /environments/evm-a123456789']);
  }finally{console.log=log;}
 });
