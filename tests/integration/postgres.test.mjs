@@ -36,7 +36,7 @@ test('Postgres persistence, atomic verification, leasing and deletion',{skip:!ur
    await store.setMaterialAck(account.id,'test-guide',revised);
    assert.deepEqual(await store.readMaterialAck(account.id,'test-guide'),{materialId:'test-guide',...revised});
    await store.setMaterialAck(account.id,'test-guide',null);
-   assert.equal(await store.readMaterialAck(account.id,'test-guide'),null);assert.equal(await store.getRolePreferences(account.id),null);
+   assert.equal(await store.readMaterialAck(account.id,'test-guide'),null);
    await store.setMaterialAck(account.id,'test-guide',ack);
   });
   await t.test('financial provider events have safe fixed-key uniqueness and no donor card fields',async()=>{
@@ -48,6 +48,6 @@ test('Postgres persistence, atomic verification, leasing and deletion',{skip:!ur
    const result=await pool.query("SELECT amount_cents FROM g28.financial_provider_events WHERE provider='synthetic' AND event_id='evt-a'");
    assert.equal(Number(result.rows[0].amount_cents),2500);
   });
-  await t.test('account closure cascades to all sessions, checklist and reading history',async()=>{await store.closeAccount(account.id);assert.equal(await store.session('session-1'),null);assert.equal(await store.session('session-2'),null);assert.deepEqual(await store.listTaskCompletion(account.id),[]);assert.equal(await store.readMaterialAck(account.id,'test-guide'),null);});
+  await t.test('account closure cascades to all sessions, checklist and reading history',async()=>{await store.closeAccount(account.id);assert.equal(await store.session('session-1'),null);assert.equal(await store.session('session-2'),null);assert.deepEqual(await store.listTaskCompletion(account.id),[]);assert.equal(await store.readMaterialAck(account.id,'test-guide'),null);assert.equal(await store.getRolePreferences(account.id),null);});
  }finally{await store.close();}
 });
