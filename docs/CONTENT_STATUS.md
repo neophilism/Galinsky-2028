@@ -1,14 +1,14 @@
 # Content and input status
 
-Observed 10 October 2026. Status is evidence of availability/review, not a promise of publication.
+Updated after verified source merge. This is an inventory and review tracker, not a promise that the campaign is deployed.
 
 | Item | Current status | Required action |
 |---|---|---|
 | Approved visual prototype, screenshots, portrait and concept art | Supplied and inspected | Preserve public-safe baseline; verify rights/publication handling. |
-| Large issue-video amendment | Explicit owner requirement | Implement top video on each issue page regardless of old screenshot. |
+| Large issue-video amendment | Implemented and tested on all three individual issue pages | Connect the actual YouTube IDs when supplied. |
 | Actual three YouTube links | Not supplied in this session | Keep IDs null; connect and review later through admin. |
 | Volunteer Action System | Edition 1.0 September 2026; 36 Markdown/36 Word, 2 PDFs, orientation deck | Preserve provenance; reconcile before current publication. |
-| Twelve volunteer roles | Present in source | Implement all roles and current playbooks. |
+| Twelve volunteer roles | All roles implemented in the volunteer portal; current historical playbooks remain unreviewed | Review and publish versioned current playbooks. |
 | Kirk-Evers volunteer kit | Absent from supplied edition | Create from approved current policy source and review. |
 | Garden/Cornerstone kits | Historical versions | Reconcile with later approved policy changes. |
 | Fifteen other policy kits | Source reference, not the three-issue launch | Keep out of current public platform unless expressly published later. |
@@ -19,6 +19,6 @@ Observed 10 October 2026. Status is evidence of availability/review, not a promi
 | Domain galinsky2028.us | Referenced by volunteer archive | Verify actual ownership/DNS/canonical decision before deploy. |
 | E2EESA production basis | README reports remediation toward 0.9.0-rc.2 | Select reviewed applicable basis; preserve independent review gate. |
 | Activated state/election/tool modules | No active module established here | Keep affected activities inactive until valid publication/approval. |
-| Target GitHub repository | Read reports empty | Import plan in implementation kickoff; do not assume code exists. |
+| Target GitHub repository | Application source, plan and GitHub Actions CI merged into `main` in PR #1; release-gated indexing merged in PR #2 | Continue per the 60-package plan; do not equate merged source with deployed or production-authorized features. |
 
 Use durable repository/source-storage references in the implementation. Temporary sandbox links and a prior conversation are not sufficient handoff storage. Do not publish the entire mockup ZIP: it embeds the volunteer archive and material content in source/JS.
