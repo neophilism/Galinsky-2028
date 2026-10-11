@@ -1,0 +1,42 @@
+name: Verify live private Galinsky preview
+on:
+  push:
+    branches: [main]
+    paths:
+      - ops/private-preview-acceptance-request.json
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.repository == 'neophilism/Galinsky-2028' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.3'
+      - name: Verify exact reviewed service and unauthorized HTTP requests
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFile} from 'node:fs/promises';
+          const req=JSON.parse(await readFile('ops/private-preview-acceptance-request.json','utf8'));
+          const origin='https://galinsky-2028-private-preview.onrender.com';
+          assert.deepEqual(req,{action:'verify',serviceId:'srv-db5teuajnfac73bm8pug',publicUrl:origin});
+          for(const path of ['/','/issues/','/issues/garden/','/issues/cornerstone/','/donate/','/assets/candidate.webp','/robots.txt','/api/config','/healthz']){
+            for(const authorization of [null,'Basic '+Buffer.from('preview:incorrect-password').toString('base64')]){
+              const response=await fetch(origin+path,{redirect:'manual',signal:AbortSignal.timeout(20000),headers:authorization?{Authorization:authorization}:{}});
+              const body=await response.text();
+              if(response.status!==401)throw Error('Private access failure on '+path+' (HTTP '+response.status+')');
+              if(!/^Basic\b/i.test(response.headers.get('www-authenticate')||''))throw Error('Missing Basic challenge on '+path);
+              if(/<!doctype html>|<title[^>]*>.*Galinsky/i.test(body))throw Error('Protected content leaked on '+path);
+            }
+            console.log('Protected route: '+path+' (anonymous and wrong password -> 401)');
+          }
+          NODE
+      - name: Test authorized private-page loading without printing credentials
+        env:
+          PREVIEW_ACCESS_USER: preview
+          PREVIEW_ACCESS_PASSWORD: ${{ secrets.G28_PREVIEW_ACCESS_PASSWORD }}
+        run: node scripts/smoke-release.mjs --public https://galinsky-2028-private-preview.onrender.com --mode preview
