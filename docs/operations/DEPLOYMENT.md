@@ -20,7 +20,7 @@ Review terms/privacy/consent and sender setup. Configure `MAIL_PROVIDER=resend`,
 
 ## Materials
 
-Reconcile source texts from the original user-supplied volunteer archive. Record actual author/reviewer identities and revision-specific approval. Add approved volunteer-facing records to `content/materials/current.json`; run `npm run materials:publish`. Search, read and download them with a newly verified volunteer account. The CLI deliberately cannot approve historical documents itself. Staff administration is a separate future integration.
+Reconcile source texts from the original user-supplied volunteer archive. Record actual author/reviewer identities and revision-specific approval. Add approved volunteer-facing records to `content/materials/current.json`; run `npm run materials:publish`. Search, read and download them with a newly verified volunteer account. Two authorized humans must sign each exact published revision with independently held Ed25519 private keys. Add their public verification keys through reviewed source changes. Verify via `npm run materials:verify` before `npm run materials:publish`. Unreviewed or unsigned historical files remain blocked. See `docs/operations/STAFF_PUBLICATION.md`. Full online multi-factor staff administration remains a separate release gate.
 
 ## Videos and issue links
 
