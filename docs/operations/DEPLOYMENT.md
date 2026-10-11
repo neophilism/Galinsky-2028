@@ -6,11 +6,11 @@ The user's designated Render project is `prj-db57fnm7bikc739783q0`; the assigned
 
 ## Public preview
 
-After a green merge, use `render.yaml` in the intended project. It builds with the exact Node/lockfile and publishes only `dist/web`. Preview remains noindex and explicitly announces that accounts and payments are closed. Confirm all eight routes, 404, assets, the three large video placeholders, mobile navigation, reduced motion and donation disclosures on the real URL. A successful build is not a successful HTTP smoke check.
+**Private password is mandatory before deployment.** Deploy the public preview only as a Node Web Service using `render.yaml`, never as a static site/CDN: build `npm ci && npm run build:web`, start `npm run preview:serve`, and set a 24+ character `PREVIEW_ACCESS_PASSWORD` Render secret (32+ random characters recommended). Without the secret the server refuses to start. Keep auto-deploy off and preview noindex. Render must be configured inside the owner-designated project, not Phillip's workspace. See `docs/operations/PRIVATE_PASSWORD_PREVIEW.md` for exact steps and HTTP tests. Confirm all eight routes, 404, assets, three issue video panels, mobile navigation, reduced motion and donation disclosures only AFTER entering the password. A successful build is not a successful deployed HTTP check.
 
 ## Portal/API
 
-Create a separately authorized Node service with build `npm ci && npm run build:portal`, start `npm start`, health `/healthz` and readiness `/readyz`. Set `NODE_ENV=production`, assigned `DATABASE_URL`, exact HTTPS `PUBLIC_ORIGIN` and `PORTAL_ORIGIN`. Keep all release flags false initially. Use separate staging and production secrets; never paste them into GitHub source or a public issue.
+Create a separately authorized Node service with build `npm ci && npm run build:portal`, start `npm start`. Set `NODE_ENV=production`, assigned staging-branch `DATABASE_URL`, exact HTTPS `PUBLIC_ORIGIN` and `PORTAL_ORIGIN`, and the mandatory `PREVIEW_ACCESS_PASSWORD` on this service too. The password protects all portal/API endpoints including `/healthz` and `/readyz`; do not configure an unauthenticated HTTP health probe expecting 200. Keep all release flags false initially. Use separate staging and production secrets; never paste them into GitHub source or a public issue.
 
 Run `npm run db:migrate` as an explicit deployment step using the assigned database. Migrations acquire a lock and use transactions. Preview/test databases must be separate branches or local instances. Restore an actual backup before claiming recoverability.
 
