@@ -1,0 +1,10 @@
+import {writeFile,rm} from 'node:fs/promises';
+import {join} from 'node:path';
+import {pages,site,root} from './public-renderer.mjs';
+import {indexingDocuments} from '../packages/core/indexing.mjs';
+const output=process.env.G28_PUBLIC_DIST || join(root,'dist/web');
+const {robots,sitemap}=indexingDocuments(site,pages,process.env);
+await writeFile(join(output,'robots.txt'),robots,'utf8');
+if(sitemap)await writeFile(join(output,'sitemap.xml'),sitemap,'utf8');
+else await rm(join(output,'sitemap.xml'),{force:true});
+console.log('Public indexing:',sitemap?'production sitemap published':'preview blocked');
