@@ -9,7 +9,7 @@ The connected Render integration can create services only at workspace scope. It
 In the private GitHub repository `neophilism/Galinsky-2028`, open **Settings → Secrets and variables → Actions → New repository secret** and configure:
 
 - `G28_RENDER_API_KEY`: an authorized Render API key with service-creation access to the **exact Galinsky 2028 project** (Render Account Settings → API Keys). The key is required by Render's REST API and is not available to the connected Render plugin.
-- `G28_PREVIEW_ACCESS_PASSWORD`: a new random 32+ character secret to use for the private HTTP Basic authentication barrier. Save it privately so you can enter it in your browser. The username is `preview`.
+- `G28_PREVIEW_ACCESS_PASSWORD`: a new high-entropy secret of at least 24 characters (32+ random characters recommended) to use for the private HTTP Basic authentication barrier. Save it privately so you can enter it in your browser. The username is `preview`.
 
 Never paste either secret into chat, pull requests or the tracked repo.
 

@@ -14,3 +14,5 @@ Read-only API inspection on 2026-10-11 (GitHub Actions run 38128065299) returned
 Once permission is obtained, review the draft PR `ops/ready-password-preview-in-exact-render-project` and confirm `ops/render-project-request.json` names the exact IDs above. Merging that PR triggers the repo's authorized single-purpose Render creation workflow. No paid plan, domain, signup, billing, Neon production, or email worker should be enabled by that action. The `PREVIEW_ACCESS_PASSWORD` GitHub Actions secret is passed into Render at service creation, not printed.
 
 After service creation, verify HTTPS and the server-side Basic-auth barrier for the homepage, issue routes, assets, and direct paths **before** sharing any preview URL. Record service ID, status, and acceptance results.
+
+The HTTP server itself enforces a 24-character minimum for the private preview password, and the provisioning script now enforces the same minimum. 32+ random characters remain recommended; neither tool prints the secret.
