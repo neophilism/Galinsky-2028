@@ -1,6 +1,6 @@
 # Implementation status - foundation delivery
 
-Status recorded 10 October 2026. This is implemented code for the public site and an initial volunteer application, not completion of all 60 work packages or a claim that the campaign is live.
+Status updated 11 October 2026. This is implemented code for the public site and an initial volunteer application, not completion of all 60 work packages or a claim that the campaign is live. A mandatory server-side private-preview password gate has been added to the Render Web Service plan; services are not deployed or configured yet.
 
 ## Implemented in this foundation
 

@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {loadPreviewGate} from '../packages/core/preview-gate.mjs';
 // Read-only deployed HTTP acceptance probe. Never submits accounts or payments.
+// Private previews receive credentials only from process environment, never CLI arguments or output.
+function accessHeader(env=process.env){
+ if(!env.PREVIEW_ACCESS_PASSWORD)return null;
+ loadPreviewGate(env);
+ return 'Basic '+Buffer.from((env.PREVIEW_ACCESS_USER||'preview')+':'+env.PREVIEW_ACCESS_PASSWORD,'utf8').toString('base64');
+}
 const publicPaths=['/','/issues/','/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/','/volunteer/','/donate/','/notices/'];
 const issues=['/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/'];
 
@@ -30,10 +37,10 @@ export function validateHtml(path,html,mode,headers={}){
  return problems;
 }
 
-export async function smokePublic(url,{mode='preview',fetcher=fetch}={}){
+export async function smokePublic(url,{mode='preview',fetcher=fetch,authorization=accessHeader()}={}){
  const origin=base(url),out=[];if(!['preview','production'].includes(mode))throw Error('Invalid smoke mode');
  async function get(path){
-  const response=await fetcher(origin+path,{redirect:'manual',signal:AbortSignal.timeout(12000),headers:{Accept:'text/html, text/plain'}});
+  const response=await fetcher(origin+path,{redirect:'manual',signal:AbortSignal.timeout(12000),headers:{Accept:'text/html, text/plain',...(authorization?{Authorization:authorization}:{})}});
   return {response,body:await response.text()};
  }
  for(const path of publicPaths){
@@ -58,10 +65,10 @@ export async function smokePublic(url,{mode='preview',fetcher=fetch}={}){
  return {scope:'public',origin,mode,passed:out.every(r=>r.pass),checks:out};
 }
 
-export async function smokePortal(url,{fetcher=fetch}={}){
+export async function smokePortal(url,{fetcher=fetch,authorization=accessHeader()}={}){
  const origin=base(url),checks=[];
  for(const [path,want]of [['/healthz',200],['/readyz',200],['/api/materials',401]]){
-  try{const r=await fetcher(origin+path,{redirect:'manual',signal:AbortSignal.timeout(12000)});checks.push({path,pass:r.status===want,status:r.status,want});}
+  try{const r=await fetcher(origin+path,{redirect:'manual',signal:AbortSignal.timeout(12000),headers:authorization?{Authorization:authorization}:{}});checks.push({path,pass:r.status===want,status:r.status,want});}
   catch{checks.push({path,pass:false,status:'request_failed_or_timeout',want});}
  }
  return {scope:'portal',origin,passed:checks.every(x=>x.pass),checks};

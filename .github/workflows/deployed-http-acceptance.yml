@@ -30,6 +30,8 @@ jobs:
       PUBLIC_TARGET: ${{ inputs.public_url }}
       PORTAL_TARGET: ${{ inputs.portal_url }}
       RELEASE_MODE: ${{ inputs.release_mode }}
+      PREVIEW_ACCESS_USER: ${{ vars.G28_PREVIEW_ACCESS_USER || 'preview' }}
+      PREVIEW_ACCESS_PASSWORD: ${{ secrets.G28_PREVIEW_ACCESS_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

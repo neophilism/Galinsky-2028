@@ -2,6 +2,8 @@
 
 Implementation of the approved Phillip Galinsky for America campaign website and volunteer application. The public design preserves the approved portrait, colors, composition and illustrations. Each launch issue has its large top-of-page video component.
 
+**PRIVATE PREVIEW ONLY:** All Render-hosted public and portal content must be served behind the server-side password gate in `docs/operations/PRIVATE_PASSWORD_PREVIEW.md`. `render.yaml` now defines a Node Web Service, not a static site, and auto-deployment is disabled. Configure a long random Render secret named `PREVIEW_ACCESS_PASSWORD` before any deployment; no secret means refusal to start. Do not use the excluded workspace, deploy `dist/web` as a public static site, or enable payments/signups by default.
+
 **Start here:** [implementation status](docs/IMPLEMENTATION_STATUS.md), [complete development plan](docs/DEVELOPMENT_PLAN.md), [60-package register](docs/PR_REGISTER.json), [agent rules](AGENTS.md), [deployment runbook](docs/operations/DEPLOYMENT.md).
 
 ## Run and verify

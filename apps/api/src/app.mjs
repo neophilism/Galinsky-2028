@@ -7,8 +7,14 @@ import {forms} from '../../../packages/core/forms.mjs';
 import {materialSearch,canReadMaterial,publicMaterial} from '../../../packages/core/content.mjs';
 import {readableVersion,matchesReading} from '../../../packages/core/material-reading.mjs';
 import {starterTasks,taskDecision} from '../../../packages/core/tasks.mjs';
+import {previewAuthorized,PREVIEW_REALM,PREVIEW_ROBOTS} from '../../../packages/core/preview-gate.mjs';
 export function createApp({store,config,clock=()=>Date.now()}){
  const app=Fastify({logger:false,bodyLimit:32768,trustProxy:false,requestTimeout:15000});
+ if(config.production&&!config.previewGate)throw Error('Production portal must be behind the private preview password gate.');
+ if(config.previewGate)app.addHook('onRequest',async(req,reply)=>{
+  reply.header('Cache-Control','private, no-store').header('Vary','Authorization').header('X-Robots-Tag',PREVIEW_ROBOTS);
+  if(!previewAuthorized(req.headers.authorization,config.previewGate))return reply.code(401).header('WWW-Authenticate',PREVIEW_REALM).type('text/plain').send('Private preview. Enter your access credentials.');
+ });
  const cookieName=config.production?'__Host-g28':'g28-local';const bindingCookie=config.production?'__Host-g28-login':'g28-local-login';
  app.addHook('onRequest',async(req,reply)=>{
   reply.header('Cache-Control','no-store').header('X-Content-Type-Options','nosniff').header('Referrer-Policy','no-referrer').header('X-Frame-Options','DENY');
