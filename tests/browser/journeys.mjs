@@ -28,37 +28,31 @@ try{
     const response=await page.goto(publicOrigin+path);assert.equal(response.status(),200);await page.locator('h1').waitFor();assert.equal(await page.locator('h1').count(),1);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,path+' at '+width);
    }
   }
-  // The private volunteer preview must work without a separate deployed
-  // portal, user credentials, or any external API call.
+  // The public landing page must NOT impersonate a live volunteer account.
+  // Its twelve role paths must point to the actual React/API portal.
   await page.goto(publicOrigin+'/volunteer/');
-  assert.equal(await page.locator('#role-open').getAttribute('href'),'#preview-workspace');
-  assert.equal(await page.locator('#preview-role-select option').count(),12);
-  assert.equal(await page.getByRole('button',{name:/Download my volunteer plan/}).count(),1);
+  assert.equal(await page.locator('#preview-workspace').count(),0);
+  assert.equal(await page.locator('#preview-download').count(),0);
+  assert.equal(await page.locator('.role-grid a[data-role-id]').count(),12);
+  assert.equal(await page.locator('.role-grid a[data-role-id="13"]').getAttribute('href'),
+    'https://galinsky-2028-volunteer-portal.onrender.com/roles?role=skills');
   await page.locator('#role-pref').selectOption('skills');
   assert.equal(await page.locator('#role-result').innerText(),'Skills & Operations Volunteer');
-  await page.locator('#role-open').click();
-  assert.equal(await page.locator('#preview-role-select').inputValue(),'13');
-  assert.equal(await page.locator('#preview-role-name').innerText(),'Skills & Operations');
-  await page.locator('.role-grid [data-role-id="10"]').click();
-  assert.equal(await page.locator('#preview-role-select').inputValue(),'10');
-  assert.match(await page.locator('#preview-role-state').innerText(),/PREPARATION ONLY/);
+  assert.match(await page.locator('#role-open').getAttribute('href'),/\/roles\?role=skills$/);
   await page.locator('#role-training').selectOption('no');
   await page.locator('#role-pref').selectOption('ballot');
   assert.equal(await page.locator('#role-result').innerText(),'Personal Network Organizer');
-  await page.locator('#role-open').click();
-  assert.equal(await page.locator('#preview-role-select').inputValue(),'02');
-  await page.locator('[data-preview-task="issues"]').check();
-  assert.match(await page.locator('#preview-progress').innerText(),/1 of 4/);
-  await page.reload();
-  assert.equal(await page.locator('[data-preview-task="issues"]').isChecked(),true);
-  await page.locator('#preview-plan-text').fill('Practice discussing one published campaign issue.');
-  const volunteerDownload=page.waitForEvent('download');
-  await page.getByRole('button',{name:/Download my volunteer plan/}).click();
-  assert.equal((await volunteerDownload).suggestedFilename(),'galinsky-volunteer-practice-plan.md');
-  assert.match(await page.locator('#preview-download-status').innerText(),/No information was submitted/i);
-  await page.locator('#preview-reset').click();
-  assert.match(await page.locator('#preview-progress').innerText(),/0 of 4/);
-  assert.equal(outside.length,0,'Volunteering tools must not contact outside services');
+  assert.match(await page.locator('#role-open').getAttribute('href'),/\/roles\?role=network$/);
+  // Verify the SAME role link reaches the canonical live-application component
+  // in the isolated test server; no call to the live Render host is required.
+  await page.goto(portalOrigin+'/roles?role=skills');
+  assert.equal(await page.getByLabel('What would you enjoy?').inputValue(),'skills');
+  await page.goto(portalOrigin+'/roles?role=ballot');
+  assert.equal(await page.getByLabel('What would you enjoy?').inputValue(),'ballot');
+  await page.getByText('Authorization required before the activity.').waitFor();
+  const roleResponse=await context.request.get(portalOrigin+'/api/roles');
+  assert.equal(roleResponse.status(),200);
+  assert.equal((await roleResponse.json()).roles.length,12);
   assert.equal(outside.length,0,'No third-party request before activation');
   await page.goto(publicOrigin+'/');await page.setViewportSize({width:390,height:844});await page.locator('#menu-toggle').click();assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'true');
   await page.screenshot({path:`test-results/browser/${name}-home-mobile.png`,fullPage:true});

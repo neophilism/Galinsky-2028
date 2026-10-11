@@ -4,14 +4,14 @@
   "title": "Phillip Galinsky for America 2028",
   "slogan": "Justice for All",
   "canonicalOrigin": null,
-  "portalOrigin": null,
+  "portalOrigin": "https://galinsky-2028-volunteer-portal.onrender.com",
   "donations": {
     "enabled": false,
     "reason": "Online contributions are not open yet. No payment or donor details are collected on this page."
   },
   "issues": {
     "kirk-evers": {
-      "title": "Kirk\u2013Evers",
+      "title": "Kirk–Evers",
       "youtubeId": null,
       "poster": "/assets/kirk-evers.svg",
       "transcript": null,
