@@ -33,7 +33,7 @@ export function createApp({store,config,clock=()=>Date.now()}){
  async function writeSession(req){const s=await account(req);const supplied=req.headers['x-csrf-token'];assert(typeof supplied==='string'&&supplied.length===s.csrf.length&&timingSafeEqual(Buffer.from(supplied),Buffer.from(s.csrf)),'csrf','Reload the workspace and try again.',403);return s;}
  app.get('/healthz',async()=>({ok:true,service:'galinsky-2028-api',version:'0.1.0',commit:config.commit??null}));
  app.get('/readyz',async(req,reply)=>{try{await store.healthy();return {ready:true};}catch{return reply.code(503).send({ready:false});}});
- app.get('/api/config',async()=>({publicOrigin:config.publicOrigin,signupEnabled:config.signup,features:{materials:true,worksheets:true,protectedSubmissions:false,staff:false,payments:false,treasurySetup:config.adminLoginReady===true},adminLoginEnabled:config.adminLoginReady===true,notice:config.signup?null:'Account registration opens when verified email delivery is connected.'}));
+ app.get('/api/config',async()=>({publicOrigin:config.publicOrigin,signupEnabled:config.signup,features:{materials:true,worksheets:true,protectedSubmissions:false,staff:false,payments:false,treasurySetup:config.adminLoginReady===true},adminLoginEnabled:config.adminLoginReady===true,notice:config.signup?null:config.adminLoginReady?'Private staff sign-in is available by verified email invitation. Public volunteer registration remains closed.':'Account registration opens when verified email delivery is connected.'}));
  app.post('/api/auth/request',async(req,reply)=>{
   assert(config.signup||config.adminLoginReady,'signup_unavailable','Account registration is not open yet. No account has been created.',503);
   const b=exactKeys(req.body,['email','marketing','termsAccepted']);const address=email(b.email);assert(b.termsAccepted===true,'terms_required','Review the participation and privacy notices before continuing.');assert(b.marketing===undefined||typeof b.marketing==='boolean','invalid_consent','Choose whether to receive optional campaign updates.');
@@ -59,6 +59,10 @@ export function createApp({store,config,clock=()=>Date.now()}){
   assert(validToken(b.token)&&validToken(binding),'invalid_link','This link is invalid or belongs to another browser. Request a new link in this browser.');
   const token=randomToken();const s={hash:tokenHash(token),csrf:randomToken(),expires:clock()+86400000};
   const a=await store.consumeLogin(tokenHash(b.token),tokenHash(binding),s,clock());assert(a,'invalid_link','This link has expired or has already been used. Request a new link.');
+  if(!config.signup&&config.adminLoginReady){
+   const currentRole=await store.adminRole(a,config.adminOwnerEmailKey);
+   if(!currentRole){await store.revokeAllSessions(a.id);return reply.code(403).send({error:'admin_grant_revoked',message:'This staff invitation is no longer active.'});}
+  }
   reply.header('Set-Cookie',[sessionCookie(token,{secure:config.production}),`${bindingCookie}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${config.production?'; Secure':''}`]);return {verified:true};
  });
  app.get('/api/session',async req=>{const s=await account(req);return {account:{id:s.account.id,verified:true,marketing:s.account.marketing,role:(config.adminLoginReady?await store.adminRole(s.account,config.adminOwnerEmailKey):null)||'volunteer'},csrf:s.csrf,expires:s.expires};});
