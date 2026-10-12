@@ -10,7 +10,7 @@
     "dev": "node scripts/preview.mjs",
     "dev:api": "node apps/api/src/server.mjs",
     "build": "npm run build:web && npm run build:portal",
-    "build:web": "node --test tests/release-health.test.mjs && astro build --root apps/web && node scripts/build-indexing.mjs",
+    "build:web": "node --test tests/release-health.test.mjs tests/live-policy-library.test.mjs && astro build --root apps/web && node scripts/build-indexing.mjs",
     "preview:serve": "node apps/web/private-preview.mjs",
     "build:portal": "node --test tests/release-health.test.mjs && vite build --config apps/portal/vite.config.ts",
     "build:offline": "node scripts/build-public.mjs",
