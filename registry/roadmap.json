@@ -534,8 +534,15 @@
       "id": "G28-061",
       "title": "Individual, revocable private policy-review accounts",
       "origin": "added",
-      "prs": [],
-      "contributingPrs": []
+      "prs": [
+        79
+      ],
+      "contributingPrs": [
+        79
+      ],
+      "evidence": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md",
+      "status": "completed",
+      "liveVerifiedAt": "2026-10-12T22:11:42.212794293Z"
     }
   ],
   "progressEvidenceNote": "Original sixty baseline packages plus the owner-authorized G28-061 private-review addition. contributingPrs indicate partial work; prs require whole-package scoped acceptance and real evidence."

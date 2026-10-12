@@ -32,9 +32,54 @@ the runtime performs the same permission check before listening.
 
 ## Deployment/live acceptance
 
-Pending verified deployment. Do not mark this section passed based on source
-merge. Record exact commit, service/environment IDs, both Render deployments
-and the redacted actual-HTTPS live acceptance event after deployment.
+**Passed on the actual HTTPS preview.** Implementation PR #79:
+https://github.com/neophilism/Galinsky-2028/pull/79
+
+Exact deployed source: `c263d8fd8a331b238ddc884b052c672558cee96e`.
+Both existing services remain in project `prj-db57fnm7bikc739783q0`,
+environment `evm-db57fnm7bikc739783qg`, free plan, auto-deploy off.
+
+| Service | Successful deployment | Live timestamp (UTC) |
+|---|---|---|
+| Private website `srv-db5teuajnfac73bm8pug` | `dep-db6lloaj9qps73cu802g` | 2026-10-12T22:11:36Z |
+| Volunteer portal `srv-db5v0lfavr4c73a62870` | `dep-db6llps9v7es7380kk7g` | 2026-10-12T22:11:32Z |
+
+The actual restricted Neon/Postgres runtime verified password login, session
+persistence across independent authentication instances, immediate revocation
+and no volunteer/treasury table access at 2026-10-12T22:11:30.615890164Z.
+Redacted event: `private_review_runtime_verified`.
+
+At **2026-10-12T22:11:42.212794293Z**, HTTPS requests from the deployed service
+to `https://galinsky-2028-private-preview.onrender.com` verified the exact
+serving commit and recorded `private_review_live_verified` with:
+
+- Anonymous and wrong-credential campaign-page/asset requests denied.
+- Real independent reviewer username/password sign-in and mandatory initial
+  password replacement before opening pages.
+- HTTP 200 for home, issue index, Kirk-Evers, Garden, Cornerstone and portrait.
+- Host-only Secure, HttpOnly, SameSite=Lax session cookie.
+- HTTP 403 for account management, campaign admin/health diagnostics, checkout
+  and contribution-routing endpoints with the reviewer cookie.
+- HTTP 401 for materials, administration, protected records, financial ledger
+  and config on the existing volunteer portal even with the reviewer cookie.
+- Immediate loss of an existing policy-page session after revocation and
+  blocked subsequent sign-in.
+- Exact disposable reviewer removed; no email or financial operation.
+
+Follow-up database query confirmed owner count 0, reviewer count 0 and owner
+setup `unclaimed`: the owner can privately choose their own final password.
+`G28_REVIEW_LIVE_CHECK` was set false for subsequent deployments after success.
+
+GitHub Actions run 38314937387 failed before runner test steps (job 115029205825
+has no steps/logs). No hosted-CI success is claimed and no paid minutes were
+purchased. The Render website build executed the real password journey plus
+its existing release tests on the supported Node version before going live.
+
+The cloud browser could not open the Render host (`ERR_BLOCKED_BY_CLIENT`).
+The live result above is actual HTTPS request evidence; the interactive UI
+journey was separately verified in local Chromium. Firefox/WebKit and an
+independent production security review remain outside this scoped evidence.
+
 
 No real reviewer or owner password was created in chat or GitHub. Owner setup
 remains unclaimed so the owner chooses their final password privately.

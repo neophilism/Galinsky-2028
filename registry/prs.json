@@ -4,7 +4,7 @@
   "roadmapVersion": 3,
   "planVerified": true,
   "plannedPrCount": 61,
-  "observedAt": "2026-10-12T13:27:53.779Z",
+  "observedAt": "2026-10-12T22:13:00Z",
   "units": [
     {
       "id": "G28-001",
@@ -589,11 +589,32 @@
       "id": "G28-061",
       "title": "Individual, revocable private policy-review accounts",
       "origin": "added",
-      "prs": [],
-      "contributingPrs": []
+      "prs": [
+        79
+      ],
+      "contributingPrs": [
+        79
+      ],
+      "evidence": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md",
+      "status": "completed",
+      "liveVerifiedAt": "2026-10-12T22:11:42.212794293Z"
     }
   ],
   "pullRequests": [
+    {
+      "number": 79,
+      "title": "Add individual, revocable policy-review accounts to the private preview",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/79",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T22:08:44Z",
+      "updatedAt": "2026-10-12T22:10:08Z",
+      "closedAt": "2026-10-12T22:10:07Z",
+      "mergedAt": "2026-10-12T22:10:07Z",
+      "headSha": "18f27f0ebf9265157d0a9f1949779a5b4eb47ed5",
+      "baseRef": "main",
+      "mergeCommitSha": "c263d8fd8a331b238ddc884b052c672558cee96e"
+    },
     {
       "id": 4830057028,
       "number": 62,

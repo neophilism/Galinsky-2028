@@ -6,9 +6,9 @@
   "plan_status": "implementation_started",
   "design_status": "approved_with_issue_video_amendment",
   "planned_work_packages": 61,
-  "implemented_packages": 0,
-  "merged_packages": 0,
-  "deployed_packages": 0,
+  "implemented_packages": 1,
+  "merged_packages": 1,
+  "deployed_packages": 1,
   "note": "Sixty original packages preserved, plus G28-61 owner-requested private reviewer accounts. Whole-package completion requires its scoped acceptance evidence.",
   "packages": [
     {
@@ -1283,13 +1283,21 @@
       "depends_on": [
         "G28-01"
       ],
-      "status": "in_progress",
-      "github_prs": [],
-      "contributing_prs": [],
+      "status": "completed",
+      "github_prs": [
+        79
+      ],
+      "contributing_prs": [
+        79
+      ],
       "scope": "Separate website-only Better Auth realm with owner-managed initial passwords, forced replacement, reset, revocation and expiry. No campaign operational grants.",
       "acceptance": "Persistent real owner/reviewer journeys, denied privilege/CSRF/financial/portal access, immediate revocation and actual HTTPS checks on the existing authorized preview.",
       "evidence": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md; docs/operations/PRIVATE_REVIEW_ACCOUNTS.md",
-      "external_inputs": "Owner claims their own login and supplies reviewer identities privately."
+      "external_inputs": "Owner claims their own login and supplies reviewer identities privately.",
+      "implementation_note": "G28-61 scoped acceptance verified on existing HTTPS preview. Original sixty full-launch packages retain their independent acceptance gates.",
+      "deployed_commit": "c263d8fd8a331b238ddc884b052c672558cee96e",
+      "live_verified_at": "2026-10-12T22:11:42.212794293Z",
+      "owner_setup": "unclaimed; owner chooses private final credential"
     }
   ],
   "progress_evidence_note": "Contributing PR evidence is partial work under these packages, not package acceptance. Do not increment implemented_packages or merged_packages without acceptance verification."
