@@ -13,7 +13,7 @@ export function loadConfig(env=process.env){
  const mailDeliveryMode=env.MAIL_DELIVERY_MODE||'disabled';
  assert(['disabled','inline','external'].includes(mailDeliveryMode),'invalid_mail_delivery','Select disabled, inline or external mail delivery.',503);
  if(production&&signup){
-  assert(mailDeliveryMode==='inline'||(mailDeliveryMode==='external'&&env.MAIL_WORKER_OPERATIONAL_APPROVED==='true'),
+  assert((mailDeliveryMode==='inline'||mailDeliveryMode==='external')&&env.MAIL_WORKER_OPERATIONAL_APPROVED==='true',
    'mail_worker_unavailable','Production sign-in cannot open without a configured, operational mail delivery worker.',503);
  }
  if(signup){assert(deliveryKey&&Buffer.from(deliveryKey,'base64').length===32&&pepper.length>=32&&mailReady,'signup_unready','Account delivery and authentication configuration are incomplete.',503);}
