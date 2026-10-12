@@ -130,19 +130,27 @@ function Document({id}:{id:string}){
  const{session}=useContext(Context);
  const{data,error,loading}=useLoad<Material>('/api/materials/'+encodeURIComponent(id));
  const[saved,setSaved]=useState(false);
+ const[bookmarkSaving,setBookmarkSaving]=useState(false);
  const[reading,setReading]=useState<boolean|null>(null);
  const[saving,setSaving]=useState(false);
  const[saveError,setSaveError]=useState('');
  useEffect(()=>{
-  let value=false;
-  try{value=JSON.parse(sessionStorage.getItem('g28-bookmarks')||'[]').includes(id);}catch{}
-  setSaved(value);setReading(null);setSaveError('');
- },[id]);
- function bookmark(){
-  let previous:string[]=[];
-  try{previous=JSON.parse(sessionStorage.getItem('g28-bookmarks')||'[]');}catch{}
-  const next=saved?previous.filter(v=>v!==id):[...previous,id];
-  sessionStorage.setItem('g28-bookmarks',JSON.stringify(next));setSaved(!saved);
+  let cancelled=false;
+  setSaved(false);setReading(null);setSaveError('');
+  request<{materialIds:string[]}>('/api/account/bookmarks')
+   .then(result=>{if(!cancelled)setSaved(result.materialIds.includes(id));})
+   .catch(e=>{if(!cancelled)setSaveError((e as Error).message);});
+  return()=>{cancelled=true;};
+ },[id,session?.account.id]);
+ async function bookmark(){
+  if(bookmarkSaving||!data)return;
+  setSaveError('');setBookmarkSaving(true);
+  try{
+   const result=await request<{saved:boolean}>('/api/materials/'+encodeURIComponent(id)+'/bookmark',
+    {saved:!saved},session?.csrf);
+   setSaved(result.saved);
+  }catch(e){setSaveError((e as Error).message);}
+  finally{setBookmarkSaving(false);}
  }
  const isRead=reading??Boolean(data?.acknowledged);
  async function toggleReading(){
@@ -157,11 +165,11 @@ function Document({id}:{id:string}){
   {loading&&<Notice>Loading guide...</Notice>}{error&&<Notice error>{error}</Notice>}
   {data&&<><span className="eyebrow spaced">CURRENT GUIDE / VERSION {data.revision}</span><h1>{data.title}</h1>
    <div className="actions"><a className="btn" href={'/api/materials/'+encodeURIComponent(id)+'/download'}>Download Markdown</a>
-   <button className="btn outline" aria-pressed={saved} onClick={bookmark}>{saved?'Saved in this session':'Bookmark for this session'}</button>
+   <button className="btn outline" aria-pressed={saved} disabled={bookmarkSaving} onClick={bookmark}>{bookmarkSaving?'Saving...':saved?'Saved to my account':'Bookmark to my account'}</button>
    <button className="btn outline" type="button" aria-pressed={isRead} disabled={saving} onClick={toggleReading}>{saving?'Saving...':isRead?'Read this version - undo':'I have read this version'}</button></div>
    {saveError&&<Notice error>{saveError}</Notice>}
    <p className="fine" aria-live="polite">{isRead?'Reading acknowledgment saved to your private account. You can undo it.':'You have not yet acknowledged reading this exact approved version.'}</p>
-   <p className="fine">Bookmarks stay in this browser session and are cleared on sign-out. {data.readingNotice||'Reading a guide is not training certification or authorization for regulated campaign activity.'}</p>
+   <p className="fine">Bookmarks are saved to your volunteer account and follow you across signed-in devices. {data.readingNotice||'Reading a guide is not training certification or authorization for regulated campaign activity.'}</p>
    <PlainDocument text={data.body||''}/>
   </>}</>;
 }
