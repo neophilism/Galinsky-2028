@@ -16,12 +16,19 @@ export async function probeHostedCheckout(url,{fetchImpl=fetch,timeoutMs=8000}={
  const status=response.status;
  if(status>=300&&status<400){
   const target=response.headers?.get?.('location');
-  if(target){
-   try{if(stripeHost(new URL(target,parsed).hostname))return {signal:null,code:'prohibited_upstream'};}
-   catch{return {signal:null,code:'invalid_redirect'};}
-  }
+  // A redirect alone cannot establish that a payment checkout works.
+  // Otherwise a merchant could redirect to an unrelated page, a captive
+  // portal or a blocked platform and still count as "healthy".
+  if(!target)return {signal:null,code:'redirect_without_destination'};
+  try {
+   const destination=new URL(target,parsed);
+   if(destination.protocol!=='https:'||destination.username||destination.password||
+      destination.port||destination.hostname!==parsed.hostname)
+    return {signal:null,code:stripeHost(destination.hostname)?'prohibited_upstream':'external_redirect_unverified'};
+  }catch{return {signal:null,code:'invalid_redirect'};}
+  return {signal:null,code:'same_origin_redirect_unverified'};
  }
- if(status>=200&&status<400)return {signal:'checkout_reachable',code:'http_ok'};
+ if(status>=200&&status<300)return {signal:'checkout_reachable',code:'http_ok'};
  if(status>=500||status===404||status===410)return {signal:'checkout_unreachable',code:'http_unavailable'};
  return {signal:null,code:'http_inconclusive'};
 }
