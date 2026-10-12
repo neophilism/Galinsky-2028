@@ -1,7 +1,7 @@
 {
   "repository": "neophilism/Galinsky-2028",
   "title": "Galinsky-2028",
-  "version": 1,
+  "version": 2,
   "planVerified": true,
   "plannedPrCount": 60,
   "sourceFiles": [
@@ -13,17 +13,26 @@
     {
       "id": "G28-001",
       "title": "Foundation and durable handoff — approved work package 1 of 8",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        1
+      ]
     },
     {
       "id": "G28-002",
       "title": "Foundation and durable handoff — approved work package 2 of 8",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        5
+      ]
     },
     {
       "id": "G28-003",
       "title": "Foundation and durable handoff — approved work package 3 of 8",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        17
+      ]
     },
     {
       "id": "G28-004",
@@ -53,22 +62,34 @@
     {
       "id": "G28-009",
       "title": "Public campaign website — approved work package 1 of 10",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        2
+      ]
     },
     {
       "id": "G28-010",
       "title": "Public campaign website — approved work package 2 of 10",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        3
+      ]
     },
     {
       "id": "G28-011",
       "title": "Public campaign website — approved work package 3 of 10",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        10
+      ]
     },
     {
       "id": "G28-012",
       "title": "Public campaign website — approved work package 4 of 10",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        35
+      ]
     },
     {
       "id": "G28-013",
@@ -103,22 +124,34 @@
     {
       "id": "G28-019",
       "title": "Accounts protection and current materials — approved work package 1 of 8",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        16
+      ]
     },
     {
       "id": "G28-020",
       "title": "Accounts protection and current materials — approved work package 2 of 8",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        41
+      ]
     },
     {
       "id": "G28-021",
       "title": "Accounts protection and current materials — approved work package 3 of 8",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        46
+      ]
     },
     {
       "id": "G28-022",
       "title": "Accounts protection and current materials — approved work package 4 of 8",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        49
+      ]
     },
     {
       "id": "G28-023",
@@ -143,32 +176,50 @@
     {
       "id": "G28-027",
       "title": "Volunteer operations and administration — approved work package 1 of 12",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        36
+      ]
     },
     {
       "id": "G28-028",
       "title": "Volunteer operations and administration — approved work package 2 of 12",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        37
+      ]
     },
     {
       "id": "G28-029",
       "title": "Volunteer operations and administration — approved work package 3 of 12",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        38
+      ]
     },
     {
       "id": "G28-030",
       "title": "Volunteer operations and administration — approved work package 4 of 12",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        40
+      ]
     },
     {
       "id": "G28-031",
       "title": "Volunteer operations and administration — approved work package 5 of 12",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        61
+      ]
     },
     {
       "id": "G28-032",
       "title": "Volunteer operations and administration — approved work package 6 of 12",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        62
+      ]
     },
     {
       "id": "G28-033",
@@ -203,27 +254,42 @@
     {
       "id": "G28-039",
       "title": "Production fundraising — approved work package 1 of 10",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        18
+      ]
     },
     {
       "id": "G28-040",
       "title": "Production fundraising — approved work package 2 of 10",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        47
+      ]
     },
     {
       "id": "G28-041",
       "title": "Production fundraising — approved work package 3 of 10",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        55
+      ]
     },
     {
       "id": "G28-042",
       "title": "Production fundraising — approved work package 4 of 10",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        56
+      ]
     },
     {
       "id": "G28-043",
       "title": "Production fundraising — approved work package 5 of 10",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        57
+      ]
     },
     {
       "id": "G28-044",
@@ -253,32 +319,50 @@
     {
       "id": "G28-049",
       "title": "Verification deployment and handoff — approved work package 1 of 12",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        19
+      ]
     },
     {
       "id": "G28-050",
       "title": "Verification deployment and handoff — approved work package 2 of 12",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        32
+      ]
     },
     {
       "id": "G28-051",
       "title": "Verification deployment and handoff — approved work package 3 of 12",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        33
+      ]
     },
     {
       "id": "G28-052",
       "title": "Verification deployment and handoff — approved work package 4 of 12",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        43
+      ]
     },
     {
       "id": "G28-053",
       "title": "Verification deployment and handoff — approved work package 5 of 12",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        44
+      ]
     },
     {
       "id": "G28-054",
       "title": "Verification deployment and handoff — approved work package 6 of 12",
-      "origin": "original"
+      "origin": "original",
+      "pullRequests": [
+        67
+      ]
     },
     {
       "id": "G28-055",
