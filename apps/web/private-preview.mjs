@@ -9,7 +9,8 @@ import {livePolicyIndex,livePolicyBytes,policyIndexHtml} from '../../packages/co
 import {approvedDonationRoutes} from '../../packages/core/donation-provider.mjs';
 import {DonationRotationStore} from './donation-rotation-store.mjs';
 import {databasePool} from '../api/src/postgres-store.mjs';
-import {stripeSettings,checkoutNonceKey,openStripeSession,stripeDonationHtml} from '../../packages/core/stripe-web-checkout.mjs';
+import {randomUUID} from 'node:crypto';
+import {stripeSettings,checkoutNonceKey,openStripeSession,stripeDonationHtml,parseCheckoutForm,checkCheckoutToken} from '../../packages/core/stripe-web-checkout.mjs';
 import {StripeCampaignStore} from './stripe-campaign-store.mjs';
 
 const mime={
@@ -135,6 +136,18 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
     res.statusCode=303;res.setHeader('Location',created.hostedCheckoutUrl);
     res.setHeader('Content-Length','0');res.end();return;
    }catch(e){
+    // Record only proven gateway/API failure after form validation, never
+    // donor eligibility mistakes, card declines, or ambiguous authorizations.
+    if(stripeConfig.live && e?.code==='checkout_unavailable' && liveRotationStore){
+     try{
+      const parsed=parseCheckoutForm(body);
+      const attempt=checkCheckoutToken(stripeNonce,parsed.formToken);
+      if(attempt)await liveRotationStore.observe('stripe',{
+       eventId:'stripe-fail-'+randomUUID(),attemptRef:attempt,signal:'gateway_error'});
+     }catch{
+      console.error(JSON.stringify({event:'stripe_outage_observation_failed'}));
+     }
+    }
     console.error(JSON.stringify({event:'stripe_checkout_refused',code:e?.code||'input_or_provider_failure'}));
     return send(res,e?.code==='checkout_unavailable'||e?.status===503||e?.statusCode===503?503:400,
       'Could not open secure card checkout. No payment has been confirmed. Check your details, or try later.');

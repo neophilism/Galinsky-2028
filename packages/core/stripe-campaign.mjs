@@ -89,14 +89,15 @@ export async function createStripeCheckout({plan,secretKey,transport=fetch,signa
   'stripe_credentials','Valid server-side Stripe credentials are required.',503);
  assert(plan?.endpoint===CHECKOUT_ENDPOINT&&plan.method==='POST'&&plan.body instanceof URLSearchParams,
   'invalid_plan','Checkout plan must be constructed by the approved adapter.');
- const response=await transport(CHECKOUT_ENDPOINT,{
+ let response;
+ try{response=await transport(CHECKOUT_ENDPOINT,{
   method:'POST',headers:{
    'Authorization':'Bearer '+secretKey,
    'Content-Type':'application/x-www-form-urlencoded',
    'Idempotency-Key':plan.idempotencyKey
   },
   body:plan.body.toString(),signal
- });
+ });}catch{throw new DomainError('checkout_unavailable','Stripe Checkout is temporarily unavailable. No payment has been confirmed.',503);}
  if(!response.ok)throw new DomainError('checkout_unavailable',
   'Stripe Checkout could not be started. Please try later; no donation has been confirmed.',503);
  const data=await response.json();
