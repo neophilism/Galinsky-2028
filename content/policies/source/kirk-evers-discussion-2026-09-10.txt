@@ -1,0 +1,2279 @@
+# Kirk-Evers unapproved source staging
+
+Normalized page text from the owner's 58-page September 10, 2026 v1.0 Kirk-Evers Free Speech & Democracy Protection Act PDF. Cover expressly states DISCUSSION DRAFT for committee/staff review and that it is NOT an introduced bill. Source is preserved in the owner's private ChatGPT Library. This copy is editorial-only, not byte-identical to the original PDF, and has not been legally reviewed or approved for public publication. Do not bundle, index, or expose in the public site or volunteer material API. Verify original document pagination/footnotes prior to authorized publication.
+
+---
+
+<PARSED TEXT FOR PAGE: 1 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+DISCUSSION DRAFT
+Kirk–Evers Free Speech & Democracy
+Protection Act
+Version: v1.0 — 2026-09-10
+Prepared by: Phillip Galinsky
+Contact: phillip.galinsky@gmail.com
+This draft is for committee and staff review only. It is not an introduced bill.
+Page 1 of 58
+<PARSED TEXT FOR PAGE: 2 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+SECTION 1. SHORT TITLE.
+This Act may be cited as the “Kirk–Evers Free Speech & Democracy Protection Act.”
+SECTION 2. TABLE OF CONTENTS.
+SECTION 1. SHORT TITLE.................................................................................................... 2
+SECTION 2. TABLE OF CONTENTS.................................................................................... 2
+SECTION 3. FINDINGS........................................................................................................... 3
+SECTION 4. DEFINITIONS.................................................................................................... 5
+Title I — Protecting Elections and Political Speech........................................................8
+SEC. 101. Prohibited acts of election interference and political intimidation....................8
+SEC. 102. Protection of ballot access for qualified federal candidates..............................15
+SEC. 103. Prohibition on private funding of federal election administration.................. 17
+Title II — Enforcement and Remedies.............................................................................. 18
+SEC. 201. Federal civil action for injunctive relief and damages......................................18
+SEC. 202. Remedies, damages, and allocation of awards.................................................. 39
+SEC. 203. Representative actions by harmed organizations.............................................43
+SEC. 204. Trial Period..........................................................................................................44
+Title III — Democracy Defense and Remediation Trust Fund.................................... 46
+SEC. 301. Establishment of Trust Fund............................................................................. 46
+SEC. 302. Use of Fund; grants and oversight.....................................................................46
+Title IV — Criminal Offenses and Penalties.....................................................................49
+SEC. 401. Offense of election subversion............................................................................49
+SEC. 402. Penalties for officials abusing authority............................................................51
+SEC. 403. Penalties for ballot fraud and tampering.......................................................... 53
+Title V — General Provisions...............................................................................................54
+SEC. 501. Implementation assistance................................................................................ 54
+SEC. 502. Rulemaking authority; interagency coordination; congressional oversight.... 55
+SEC. 503. Effective date...................................................................................................... 56
+SEC. 504. Severability..........................................................................................................57
+SEC. 505. Rules of Construction......................................................................................... 57
+Page 2 of 58
+<PARSED TEXT FOR PAGE: 3 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+SECTION 3. FINDINGS.
+The Congress finds the following:
+(1) Free Speech and Fair Elections are Fundamental.
+Free and fair elections are the foundation of the United States’ constitutional republic.
+Robust political debate and honest elections are indispensable to self-government.
+Protecting political expression, voter confidence, and electoral integrity is a paramount
+federal interest.
+(2) Surveillance Abuses Threaten Political Participation.
+Surveillance powers designed for foreign intelligence have been misused in ways that could
+chill Americans’ political activities. A declassified Foreign Intelligence Surveillance Court
+opinion in April 2022 detailed a “persistent and widespread” pattern of FBI agents
+conducting improper queries on data collected under Section 702 of the Foreign Intelligence
+Surveillance Act, including searches related to protestors, activists, and political donors.
+While subsequent reforms have improved compliance (with a court finding over 98% query
+compliance after new safeguards), Congress finds that no government agency should spy on
+Americans’ politics without a strict legal basis, and that individuals whose political
+campaigns or activities were unlawfully surveilled have too few remedies under current
+law.
+(3) Outside Funding of Election Places Undermines Trust.
+After the 2020 election, it was revealed that private funds from non-governmental entities
+were used to support certain local election offices, raising concerns about real or perceived
+influence. Since then, at least 29 states — including Wisconsin (by constitutional
+amendment in 2024) and Wyoming (by statute in 2025) — have prohibited or strictly
+limited private funding for election administration. It is the sense of Congress that federal
+law should establish uniform guardrails on the acceptance of private money by local
+election officials or offices in connection with administration of federal elections, to prevent
+distortive effects and ensure all jurisdictions have equal access to resources.
+(4) Ballot Fraud Incidents Highlight Need for Deterrence.
+Documented abuses in absentee ballot handling have undermined public trust in elections.
+In Bridgeport, Connecticut’s 2023 mayoral primary, surveillance videos surfaced showing
+individuals illicitly depositing multiple absentee ballots into drop boxes. A state court found
+the evidence credible and took the extraordinary step of overturning the primary results
+and ordering a new election. Subsequent investigation led to multiple arrests of political
+operatives on charges of ballot fraud. Such misconduct, while not representative of the
+broader election system, demonstrates a clear need for stronger federal deterrents and
+remedies to protect “ballot-handling integrity” and ensure every legitimate vote is counted
+as cast.
+Page 3 of 58
+<PARSED TEXT FOR PAGE: 4 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(5) Voting System Breaches Demand Federal Response.
+The security of election infrastructure remains a critical concern. In Coffee County, Georgia,
+following the 2020 election, unauthorized persons gained covert access to voting machines
+and election servers, copying sensitive software and data in what has been described as
+possibly the “biggest election breach” in U.S. history. Several individuals involved were
+indicted at the state level, yet significant gaps in investigation and accountability remain.
+Congress finds that additional federal tools are needed to address and prevent insider
+threats or breaches of voting systems, without relitigating past outcomes.
+(6) Government-Induced Censorship is a Serious Threat.
+Government-induced censorship of lawful speech has emerged as a serious threat to First
+Amendment freedoms. In Missouri v. Biden (2023), the U.S. Court of Appeals for the Fifth
+Circuit found that federal officials — including White House and FBI personnel — “likely…
+coerced” social media platforms into suppressing certain posts and viewpoints, and that
+such pressure campaigns violated the First Amendment. Although the Supreme Court
+ultimately vacated the district court’s injunction on procedural grounds, the factual record
+and parallel congressional investigations have revealed a “censorship-by-proxy” problem.
+(7) Only Congress Can Set Federal Candidate Qualifications.
+The Constitution assigns Congress the responsibility to safeguard federal elections and the
+political process. In Trump v. Anderson (2024), the Supreme Court unanimously held that
+only Congress — and not the states — can enforce Section 3 of the Fourteenth Amendment
+with respect to disqualifying individuals from federal office. That decision confirms that
+attempts by State officials to unilaterally bar otherwise qualified candidates from the ballot
+for federal office infringe upon a uniquely federal prerogative. Congress therefore finds that
+federal law may establish uniform protections governing ballot access in federal elections,
+consistent with constitutional and statutory processes.
+(8) Protecting Democracy Requires Vigilance and Enforcement.
+It is imperative that all branches and levels of government, as well as private actors,
+uphold the integrity of the democratic process. Acts of intimidation, retaliation, fraud,
+tampering, censorship, or sabotage that meaningfully burden a federal election corrode
+public trust and suppress citizen participation.
+(9) A Bipartisan Tradition of Protecting Free Expression and the Franchise.
+Congress honors the legacies of Medgar Evers and Charlie Kirk, after whom this Act is
+named, as individuals who, in different eras and from different political traditions, were
+united by a shared commitment to free expression, democratic participation, and the right
+of Americans to engage in the political process without fear or intimidation. Both were
+victims of political violence aimed at silencing lawful political advocacy. Their names
+symbolize this Act’s dedication to protecting the First Amendment, safeguarding the
+integrity of elections, and rejecting the use of coercion or violence as a tool of political power.
+Page 4 of 58
+<PARSED TEXT FOR PAGE: 5 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+SECTION 4. DEFINITIONS.
+For purposes of this Act:
+(1) Federal election.
+“Federal election” means any election (general, special, primary, or runoff) held in whole or
+in part to select or nominate an individual to serve as President or Vice President of the
+United States, as a Presidential elector, or as a Member of the United States Senate or
+House of Representatives. This includes elections for Delegate or Resident Commissioner to
+Congress, and any caucus or convention with authority to nominate or select a candidate for
+the foregoing offices. It does not include elections purely for state or local office, except
+when such election is held concurrently with and on the same ballot as a federal election (in
+which case this Act’s provisions apply to conduct impacting the federal portion of the
+election).
+(2) Candidate.
+“Candidate” means, with respect to a federal election, an individual who has qualified
+under state or federal law to be on the ballot (or to have write-in votes counted) for
+nomination or election to federal office, or who has publicly declared their intent to seek
+such office and has taken substantial steps toward campaign organization (such as filing
+the required candidacy statement with the Federal Election Commission). “Political
+committee” and “campaign” refer to any committee, party organization, fund, or entity
+(whether incorporated or not) that is legally authorized under federal or state law to
+support or oppose the election of one or more candidates for federal office, including
+authorized candidate committees, political party committees, and independent expenditure
+committees, as those terms are defined in the Federal Election Campaign Act.
+(3) Political expression.
+“Political expression” means speech, press, or expressive conduct by any person relating to a
+political campaign, public issue, or matter of public policy or governance, which is protected
+from government abridgment by the First Amendment to the U.S. Constitution. This
+includes advocacy on election-related issues; commentary on officials, candidates, or
+legislation; writing legislation; writing books with political content or underlying political
+messages; creating protest music; creating other content related to politics or ideas affecting
+the polity including creating images or works in any other expressive medium;
+encouragement to vote or to refrain from voting; display of political signs or symbols;
+peaceful rallies, protests, or other political association; the publication or online sharing of
+writings and images about public affairs; and communications on social media concerning
+public issues. Political expression is not limited to accurate or popular speech — even false,
+unorthodox, or controversial statements about public issues are covered, so long as they do
+not fall into a traditionally unprotected category (such as true threats, incitement of
+imminent lawless action, criminal solicitation, or defamation of a private figure). For
+avoidance of doubt, speech does not lose protection because it is anonymous, politically
+Page 5 of 58
+<PARSED TEXT FOR PAGE: 6 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+extreme, or factually disputed. Nothing in this Act should be construed to protect speech
+that is independently illegal, such as bribery or explicit electioneering coordination that
+violates campaign finance laws; it simply guards against government coercion of private
+censorship of lawful speech.
+(4) Prohibited Act.
+“Prohibited Act” means any act or omission described as unlawful in Sections 101(a)(1)
+through 101(a)(8) of this Act.
+(5) Materially burden.
+“Materially burden” means to impose a significant, non-trivial impediment, distortion, or
+adverse impact on the conduct, transparency, or outcome of a federal election, or on any
+person’s ability to participate in or speak about the election.
+(6) Under color of law.
+“Under color of law” means under the authority of any statute, ordinance, regulation, policy,
+or custom of a state or of the United States, or under the pretense of such authority. Acts by
+an official in their official capacity (or under the guise of official right) are acts under color
+of law even if they exceed the official’s lawful authority.
+(7) Knowingly or willfully.
+“Knowingly” or “willfully” means that an action was undertaken with actual knowledge of
+the facts giving rise to the violation and with intent to commit the act that constitutes the
+violation.
+(8) Election system.
+“Election system” means any mechanical or electronic infrastructure used in the
+administration of a federal election, including voting machines and tabulators, vote tally
+software, election management systems, voter registration databases, electronic pollbooks,
+ballot drop-boxes, or other related equipment and technology.
+(9) Foreign national.
+“Foreign national” has the meaning given in 52 U.S.C. § 30121(b).
+(10) Democracy Defense and Remediation Trust Fund.
+“Democracy Defense and Remediation Trust Fund” means the Treasury trust fund
+established by Section 301 of this Act.
+(11) Qualified public-interest plaintiff.
+“Qualified public-interest plaintiff” means an organization that A) has been continuously
+active for at least three years prior to filing suit and B) demonstrates organizational injury
+or representational standing as described in Section 201(b)(2). An individual U.S. citizen
+may not bring a public-interest action on behalf of the public or any definable group unless
+acting as a duly authorized representative of a qualified public-interest plaintiff.
+Page 6 of 58
+<PARSED TEXT FOR PAGE: 7 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(12) Contractor.
+“Contractor” means any person or private entity (including any subcontractor, vendor,
+consultant, or agent) that provides services, goods, or other support to the United States or
+any department, agency, or instrumentality thereof, whether pursuant to a contract, task
+order, grant, memorandum of understanding, informal arrangement, or other form of
+authorization.
+(13) Acting under the direction, control, or authority of the United States.
+“Acting under the direction, control, or authority of the United States” means performing
+activities, functions, or tasks that were assigned, directed, supervised, authorized, financed,
+or otherwise controlled by the United States (including by contract, tasking order,
+memorandum, oral instruction, operational tasking, or other mode of direction), or where
+the United States otherwise exercised de facto control over the person’s conduct. This term
+includes, without limitation, circumstances in which the United States:
+(A) provided or arranged payment, equipment, training, weapons, communications, or
+other material support for the person’s activities;
+(B) issued operational orders, tasking instructions, or supervision;
+(C) integrated the person into a chain of command or otherwise exercised day-to-day
+operational control;
+(D) expressly or tacitly authorized, ratified, or acquiesced in the conduct; or
+(E) recruited or otherwise caused a person to act on the United States’ behalf.
+The presence of one or more of these indicia is sufficient but not necessary to establish that
+a person acted under the direction, control, or authority of the United States.
+(14) Coerce.
+“Coerce” means an explicit or implicit communication by an official that a private entity
+will suffer adverse governmental action (such as regulatory enforcement, loss of contracts,
+or initiation of prosecution) unless the entity removes, labels, or restricts specified lawful
+content, and where the official making the communication had actual knowledge that the
+threatened action would likely be effectuated.
+(15) Significant encouragement.
+“Significant encouragement” means repeated, targeted, and unilateral communications by
+an official that, in the totality of the circumstances, are reasonably likely to overbear the
+independent judgment of a private entity. Isolated advisory, informational, or
+non-threatening communications are not “significant encouragement.”
+Page 7 of 58
+<PARSED TEXT FOR PAGE: 8 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+Title I — Protecting Elections and Political Speech
+SEC. 101. Prohibited acts of election interference and political
+intimidation.
+(a) Prohibitions. —
+It is unlawful for any person, whether acting under color of law or as a private individual,
+to engage in any of the following Prohibited Acts, if committed with respect to a federal
+election or in connection with political expression about a federal election, and done for the
+purpose of interfering with, undermining, or retaliating against any person’s lawful
+participation in a federal election or campaign, or for the purpose of influencing a federal
+election outcome by wrongful means:
+(1) Intimidation or retaliation against candidates, campaigns, or supporters. —
+No person shall intimidate, threaten, coerce, harass, or punish any other person because of
+their involvement in a federal election campaign. This includes intimidation or retaliation
+against anyone for:
+(A) being a candidate for federal office (or exploring or intending to become one);
+(B) working for or donating to a candidate, political party, or political committee in
+connection with a federal election; or
+(C) engaging in lawful political expression in support of or opposition to any federal
+candidate.
+Prohibited conduct under this paragraph includes, but is not limited to:
+(i) threats of physical harm, stalking, or property destruction directed at a candidate or
+campaign staffer or volunteer;
+(ii) threats of financial, legal, or regulatory harm (such as launching baseless
+investigations, audits, or lawsuits; terminating someone’s employment; or canceling
+business dealings) directly because of that person’s candidacy, campaign support, or
+political donations;
+(iii) “doxing” (publicizing personal information) or spreading malicious falsehoods about
+an individual with the intent and reasonably foreseeable effect of provoking third-party
+harassment or violence against them due to their political activities; or
+(iv) any other action—whether under color of official authority or otherwise—that is
+intended to deter a reasonable person from running for office, to cause them to withdraw
+from an election, or to chill their freedom to speak, associate, or donate in the political
+process, or to retaliate against them for having done so.
+(Nothing in this paragraph shall be construed to criminalize constitutionally protected
+political advocacy or criticism. This provision targets true threats, extortionate or coercive
+behavior, and misuse of official power to target political opponents. It does not encompass
+Page 8 of 58
+<PARSED TEXT FOR PAGE: 9 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+lawful and peaceful persuasion, negative campaigning, robust public criticism, boycotts, or
+other routine forms of political opposition that do not involve unlawful threats or abuse of
+power.)
+(2) Ballot-handling fraud and corruption. —
+No person shall engage in fraud or corruption in the casting, collection, counting, or
+certification of ballots in a federal election. Prohibited acts include:
+(A) casting or attempting to cast ballots on behalf of others without authorization (for
+example, voting in the name of another person, or one person casting multiple ballots,
+except where expressly permitted by law such as an authorized proxy for a disabled voter);
+(B) counting, recording, or certifying votes that one knows are fictitious, invalid, or
+unauthorized (e.g., knowingly tallying fraudulent ballots, or reporting more votes than
+actual voters);
+(C) intentionally failing to count or report lawful votes (e.g., discarding valid ballots, or
+certifying an incomplete or false vote tally);
+(D) altering, suppressing, or falsifying any election return, tally sheet, certificate of
+election, or other official document to reflect anything other than the true votes cast;
+(E) destroying, defacing, hiding, or spoiling any cast ballot or significant election record,
+except as permitted by law (such as routine destruction of ballots after the legally required
+retention period);
+(F) knowingly accepting or counting ballots or votes that are materially fraudulent or not
+legally eligible (for instance, counting the vote of a deceased or non-eligible person, unless
+pursuant to a court order); or
+(G) organizing or participating in an illegitimate ballot harvesting scheme that violates
+applicable law (for example, collecting absentee ballots from voters and failing to deliver
+them, or deceiving voters into handing over ballots which are then altered or not
+submitted).
+(This paragraph is intended to supplement, not supplant, existing federal and state
+prohibitions on election fraud. It shall be enforced consistently with those laws. It does not
+reach unintentional errors or minor procedural irregularities that do not amount to knowing
+fraud or alteration of true vote counts. Lawful assistance to voters where permitted by
+statute, and good-faith judgments by election officials interpreting ambiguous voter
+markings, are not prohibited. Only deliberate acts to inject false votes, eliminate true votes,
+or corrupt the counting process fall within this ban.)
+(3) Unauthorized tampering with election systems or equipment. —
+No person shall, without lawful authorization, access or tamper with election systems or
+equipment used in a federal election, or the data they contain. This includes both physical
+and electronic tampering. Prohibited acts include:
+Page 9 of 58
+<PARSED TEXT FOR PAGE: 10 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(A) gaining unauthorized entry into a secured area housing ballots or voting machines;
+(B) breaking seals, altering settings, or interfering with the calibration or configuration
+of voting machines, tabulators, or other election devices contrary to law or without
+permission;
+(C) hacking into, introducing malware to, or exploiting vulnerabilities in any
+election-related software, firmware, or communication network;
+(D) initiating any unauthorized intrusion into an election management network or
+database (such as a voter registration database), or exceeding one’s authorized access by
+using valid credentials for improper purposes;
+(E) altering or deleting electronic election data (including vote totals, ballot images, audit
+logs, or voter records) without legal approval; or
+(F) willfully failing to perform a duty of cybersecurity or physical security required by
+federal or state law (or by one’s official position), if such failure enables another person to
+gain unauthorized access to, or to undetectably alter, any part of an election system.
+(For purposes of this paragraph, “without authorization” includes acts by an election official
+or contractor that are materially outside the scope of their lawful duties—e.g., an IT
+administrator using their credentials to make unsanctioned software changes for improper
+purposes. This paragraph shall not be construed to penalize legitimate, non-deceptive
+security research or testing of election systems that is conducted with the knowledge and
+permission of the relevant election authority. Conversely, an individual who abuses otherwise
+authorized access with wrongful intent is covered just as an external hacker would be. As an
+affirmative defense, a defendant may show that they accessed an election system solely to
+expose vulnerabilities to the responsible officials, and not to alter results or data, and that
+they acted without malice, promptly reported the issue, and did not unreasonably risk the
+integrity of any election. If proven, the court may deem such conduct outside the scope of this
+prohibition. This safe harbor is intended to avoid chilling good-faith cybersecurity
+improvements while still forbidding rogue or malicious intrusions.)
+(4) Government-induced viewpoint-based censorship of political speech. —
+No officer, employee, or person acting under the direction, control, or authority of the
+United States (including any department, agency, instrumentality, or agent thereof), and no
+person acting under color of federal law, shall knowingly and intentionally use their official
+position or influence to coerce or significantly encourage any private entity (such as a social
+media platform, internet search engine, news outlet, or other publisher) to suppress,
+remove, label, restrict, or reduce the visibility of lawfully expressed content because of the
+viewpoint expressed in that content. Prohibited forms of coercion or inducement include,
+but are not limited to:
+(A) threatening (or implying) that a private entity will face adverse government
+action—such as regulatory scrutiny, enforcement, prosecution, or loss of government
+benefits or contracts—if it does not moderate content in a particular way;
+(B) exerting persistent official pressure or making repeated directives to a private
+Page 10 of 58
+<PARSED TEXT FOR PAGE: 11 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+platform regarding content moderation (even without an explicit threat), such that the
+platform’s independent judgment is overborne and it removes or suppresses content due to
+the government’s influence;
+(C) deputizing or colluding with a private platform’s employees to achieve censorship
+that the government itself could not directly mandate (for example, embedding government
+staff within a company’s content moderation team, or otherwise commandeering the
+platform’s decision-making processes); or
+(D) using any other form of intimidation, control, or undue influence to cause a private
+platform or publisher to censor content that it would not have censored but for the
+government’s pressure—when the censorship is based on the ideas, opinions, or political
+viewpoint expressed.
+Nothing in Sec.101(a)(4) prohibits bona fide, factual, lawful notifications by government
+actors about content that is not protected by the First Amendment (e.g., true threats,
+incitement, or foreign agent activity), provided such communications are informational and
+non-coercive.
+(Nothing in this paragraph prohibits government officials from engaging in their own
+counterspeech—i.e., speaking out to correct misinformation or express disagreement with
+content—so long as they do not threaten or coerce others to take down content. Nor does it
+prevent officials from notifying platforms about content not protected by the First
+Amendment (such as true threats, incitement, or foreign disinformation by covert agents)
+provided such notifications are purely informational and carry no element of coercion.
+General exhortations to the public or to platforms to be vigilant against misinformation are
+not prohibited, so long as they do not cross into targeted pressure to remove specific
+viewpoints. This paragraph also does not confer any right on a private platform to disregard
+lawful court orders or statutory obligations to remove content (e.g., compliance with valid
+copyright takedown orders or foreign agent registration requirements is unaffected). In short,
+this provision forbids government officials from achieving indirectly, through unofficial
+pressure, what the Constitution forbids them from doing directly. It targets “jawboning” and
+de facto commandeering of private moderation decisions, and shall be construed in harmony
+with First Amendment principles. )
+(5) Discriminatory abuse of governmental processes (“political lawfare”). —
+No person acting under color of federal, state, or local law shall initiate or use any official
+legal process with the primary purpose of impeding, obstructing, or retaliating against any
+person’s campaign for federal office (or their supporters) without a good-faith basis in law
+and fact. In other words, it is unlawful to misuse criminal investigations, civil lawsuits,
+administrative proceedings, legislative inquiries, or other official processes as a weapon to
+burden or undermine a political opponent’s candidacy, absent a legitimate, substantiated
+legal justification. Prohibited acts include:
+Page 11 of 58
+<PARSED TEXT FOR PAGE: 12 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(A) knowingly initiating or pursuing charges, indictments, or investigations against a
+candidate mainly to generate negative publicity or tie up the candidate’s time during an
+election, where the accusations lack serious evidence of wrongdoing or rely on a pretextual
+legal theory;
+(B) filing (or causing to be filed) civil suits or administrative complaints—such as
+frivolous challenges to ballot access, baseless ethics complaints, or unwarranted campaign
+finance investigations—with the intent to harass a candidate or their campaign, rather
+than to resolve a genuine dispute, and without any reasonable expectation of success on the
+merits;
+(C) selectively enforcing laws or regulations (tax laws, permitting rules, professional
+licensing, etc.) against a candidate, campaign staffer, donor, or politically active individual
+primarily because of their political affiliation or activity, rather than due to a neutral
+enforcement trigger; or
+(D) using the powers of one’s public office (e.g., subpoena power, audit authority,
+legislative investigative powers) in a manner designed to harass or embarrass a political
+opponent or their campaign during an election, as opposed to pursuing a legitimate
+government purpose.
+(This paragraph is not intended to inhibit legitimate law enforcement or regulatory actions
+during election seasons. An official proceeding that is supported by probable cause or a
+strong factual basis, and that would have been undertaken in the normal course regardless
+of the target’s candidacy or politics, is not an unlawful “political” use of process. The burden
+is on any plaintiff alleging a violation of this provision to prove by clear and convincing
+evidence that the proceeding was initiated without substantial legal or factual foundation
+and primarily for a partisan or retaliatory purpose. Courts hearing such claims shall
+exercise caution and, where appropriate, defer any ruling until the underlying proceeding (if
+still ongoing) has been resolved—so as to avoid undue interference with that
+proceeding—unless the plaintiff shows that irreparable harm is imminent and that the lack
+of merit is manifest. Nothing in this Act authorizes lawsuits against judges or other neutral
+adjudicators for their official rulings (judicial immunity for decision-makers remains
+intact); rather, this targets those who instigate sham proceedings or investigations. Likewise,
+good-faith enforcement of generally applicable laws (e.g., prosecuting actual corruption or
+crime by a candidate) is not prohibited, even if it occurs in an election year, so long as it’s
+based on genuine evidence and consistent standards.)
+(6) Covert interference with political campaigns and advocacy. —
+No officer, employee, or person acting under the direction, control, or authority of the
+United States (including any member of the intelligence community, law enforcement, or
+the armed forces), and no person acting under color of federal, state, or local law, shall
+engage in any undercover, deceptive, or covert operation intended to surveil, infiltrate,
+disrupt, or sow discord within:
+Page 12 of 58
+<PARSED TEXT FOR PAGE: 13 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(A) any campaign for federal office; or
+(B) any organization or group of U.S. persons engaged in political expression related to a
+federal election—
+unless such operation is part of a bona fide law enforcement or intelligence investigation
+that meets strict criteria. Specifically, a covert operation is permitted only if:
+(i) it is predicated on reasonable suspicion of a specific criminal violation (for law
+enforcement) or on a specific foreign threat (for intelligence); and
+(ii) it has been authorized and is overseen through established procedures that ensure
+compliance with all applicable laws and protect constitutional rights (including obtaining
+any required court orders or warrants, and securing high-level approval for sensitive
+investigative matters).
+Prohibited acts under this paragraph include:
+(i) any government agent or informant assuming a false identity or concealing their
+affiliation to infiltrate the meetings, communications, or activities of a campaign or political
+group, without satisfying the above criteria;
+(ii) any government officer or agent collecting or maintaining information about the
+membership, meetings, or plans of a domestic political organization without a properly
+authorized investigative predicate (for example, querying a government database for
+information on donors to a political cause absent a relevant criminal or national security
+justification is prohibited); and
+(iii) any covert technique or technology used by a government official designed to disrupt
+or undermine the internal operations or reputation of a political campaign or group (such as
+planting false rumors, instigating factional infighting, deploying obstructive technologies
+such as those that jam communications systems, changing or inserting threats onto
+candidate websites or encouraging illegal actions by volunteers or staff in order to discredit
+the organization).
+(This provision bolsters existing First and Fourth Amendment protections. It does not
+restrict legitimate investigations of crimes or foreign espionage or influence that incidentally
+involve political actors, so long as those investigations strictly adhere to constitutional and
+statutory requirements (e.g., obtaining warrants under FISA where required, following DOJ
+guidelines for sensitive investigative matters). However, it firmly establishes that agencies
+shall not investigate or monitor Americans just because of their political activities absent a
+specific indication of unlawful activity or foreign sponsorship. If a federal employee or agent
+violates this paragraph, affected parties may seek relief under this Act. Nothing in this
+paragraph diminishes the government’s ability to protect candidates and officials through
+legitimate security measures (like defensive briefings or monitoring known foreign agents); it
+is aimed at preventing recurrences of historical abuses where agencies surveilled or
+subverted lawful domestic dissent (e.g., COINTELPRO-type programs).)
+Page 13 of 58
+<PARSED TEXT FOR PAGE: 14 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(7) Deceptive practices and synthetic media intended to suppress voting. —
+No person shall, in connection with a federal election and with intent to impede or
+discourage eligible voters from exercising their right to vote, disseminate or cause to be
+disseminated materially false information regarding the time, place, manner, or eligibility
+conditions for voting in that election. This includes but is not limited to falsely stating that
+an election has been postponed, canceled, or rescheduled; falsely claiming that certain
+voters (e.g., of a particular party, demographic, or area) are disqualified from voting or must
+meet additional requirements to vote when they do not; falsely asserting that polling places
+have closed or changed location; or any similar knowing deception that could reasonably be
+expected to deter one or more targeted individuals from voting.
+It is unlawful for any person, in connection with a federal election, to knowingly and
+intentionally create or distribute synthetic audio or video that:
+(A) portrays a real candidate or election official saying or doing something the person did
+not in fact say or do;
+(B) is not conspicuously and continuously labeled as simulated or fictional; and
+(C) the person knows or reasonably should know is materially likely to deceive a
+reasonable recipient about a material fact relevant to electoral choice.
+This section shall not apply to satire or parody reasonably apparent as such, or to media
+that is conspicuously labeled as altered or simulated.
+(For purposes of this paragraph, a “deepfake” means any video, audio, or similar media that
+has been created or altered using artificial intelligence or other sophisticated techniques to
+realistically portray a person saying or doing something they did not actually say or do. This
+prohibition does not apply to satire or parody that a reasonable observer would not mistake
+for authentic content (for example, a clearly comedic depiction on a late-night show). As an
+affirmative defense, a person is not liable under this paragraph for distributing synthetic
+media if the media contained a clear, written or spoken disclosure at the beginning and
+throughout (in the case of video or audio) stating that it is altered or simulated (e.g., a
+watermark or obvious disclaimer such as “simulated audio” or “fictional reenactment”). The
+burden is on the accused to show by a preponderance of evidence that such a disclosure was
+present and was sufficient to alert an average viewer or listener to the media’s false nature.
+Likewise, sharing content that is clearly labeled as fake or parody, or content so outlandish
+that no reasonable voter would believe it real, is not covered. This provision targets
+fraudulent media deliberately masquerading as real in order to confuse or mislead voters.)
+(8) Catch-all: Other acts materially burdening a federal election or political
+participation. —
+Any other deliberate act or scheme not specifically enumerated in paragraphs (1) through
+(7) that is undertaken with the intent to cause, and that in fact causes or is reasonably
+likely to cause, a material burden (as defined in Section 4(5)) on the conduct of a federal
+Page 14 of 58
+<PARSED TEXT FOR PAGE: 15 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+election or on the ability of citizens to engage in political expression or association related to
+a federal election, is likewise prohibited.
+(This catch-all provision covers functionally similar tactics of election subversion or voter
+suppression that Congress may not have expressly anticipated, but which clearly fall within
+the same category of serious anti-democratic wrongdoing. It shall be applied judiciously and
+only to conduct of a gravity and character akin to the other prohibited acts in this section. It
+is not intended to federalize or punish minor irregularities, routine negative campaigning, or
+state election policy disputes that are better addressed through ordinary political processes.
+Rather, it ensures that novel forms of significant election interference—for example, a new
+type of cyberattack on election infrastructure not explicitly listed above, or an orchestrated
+scheme of ballot destruction using an unconventional method—can still be reached under
+this Act. In applying this paragraph, courts shall require a clear showing that the conduct in
+question had a meaningful potential to distort the election outcome or broadly chill political
+participation, thus meeting the “material burden” standard. If an alleged act only affects a
+state or local election and not any federal election, it is outside the scope of this Act. Likewise,
+nothing in this paragraph (or elsewhere in this Act) shall be construed to authorize the DOJ
+or private plaintiffs to challenge or override state laws of general applicability governing
+elections (such as voter identification requirements, ballot collection rules, or registration
+deadlines) on the theory that they “burden” elections—those kinds of policy questions are to
+be addressed, if at all, under other laws (e.g., the Voting Rights Act or constitutional review).
+The focus here is on malicious, unlawful acts of election interference, not on good-faith policy
+choices by legislatures.)
+SEC. 102. Protection of ballot access for qualified federal candidates.
+(a) Exclusive federal determination of qualifications. —
+No State (including any State officer or any executive, judicial, or legislative body of a
+State) shall adjudicate, impose, or enforce any rule of law that has the effect of excluding,
+removing, or disqualifying a candidate from the ballot for President, Vice President,
+Senator, or Representative in Congress on grounds of alleged “insurrection,” “rebellion,” or
+other disqualifying misconduct under Section 3 of the Fourteenth Amendment, except as
+expressly authorized by Act of Congress. In plain terms, the determination of whether a
+candidate is disqualified from federal office under Section 3 of the 14th Amendment (or any
+similar constitutional provision) is reserved to federal authority; states may not unilaterally
+bar an otherwise qualified candidate from the ballot for federal office by invoking such
+provisions.
+(b) Right of action and removal. —
+If any state or local official or body seeks to deny ballot access to, or to remove from the
+ballot, a candidate for federal office on the grounds of insurrection, rebellion, or similar
+political offense (or if any private person initiates a proceeding to do so under state law), the
+affected candidate may immediately remove the matter to the appropriate U.S. district
+Page 15 of 58
+<PARSED TEXT FOR PAGE: 16 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+court. Upon such removal, the federal court shall have exclusive jurisdiction to decide the
+candidate’s eligibility, applying federal law. The Act hereby confers a federal cause of action
+for injunctive and declaratory relief to any candidate whose eligibility for federal office is
+challenged or denied on such grounds, allowing them to obtain an expedited ruling on the
+merits in federal court. The removing candidate shall file a notice of removal in the state
+proceeding and a copy in federal court; the state proceeding shall be stayed and no state
+judgment issued pending the federal court’s decision. The federal court (a single judge,
+unless a three-judge court is required by other law) shall hear the case on an expedited
+basis and shall grant relief ordering the candidate to be placed or retained on the ballot
+unless it finds, based on a federal legal standard, that the candidate is clearly disqualified
+under Section 3 of the 14th Amendment or other applicable federal law. Any appeal from
+the federal court’s decision shall lie directly to the U.S. Supreme Court, which is
+respectfully urged to expedite such appeal given the time-sensitive nature of ballot access
+disputes.
+(c) No inference from non-enforcement. —
+This section neither mandates nor forbids Congress itself from enforcing Section 3 of the
+Fourteenth Amendment via appropriate legislation or proceedings. It simply preempts
+unilateral state action in this area. The absence of a current congressional determination of
+ineligibility for any given individual shall not be construed by any state as license to decide
+the matter on its own. Conversely, if Congress (or a federal court applying federal law) in
+the future formally adjudicates that a person is disqualified under Section 3, states shall
+give full effect to that determination in their ballot access decisions.
+(d) Other candidate qualifications. —
+Nothing in this section affects the ability of states to enforce generally applicable ballot
+access requirements permissible under federal law (such as age, residency, signature
+requirements, filing deadlines, etc., as provided by Article I, §4 and Article II, §1, or related
+federal statutes). It is aimed specifically at preventing ad hoc state-level decisions about
+disqualifying candidates for federal office based on accusations of insurrection, rebellion, or
+similar “unfitness” grounds that lie beyond the state’s purview.
+(e) Enforcement. —
+A violation of this section by a state official (intentionally keeping a qualified candidate off
+the federal ballot in contravention of this section) shall be deemed a violation of Section
+101(a)(5) (abuse of official process) and Section 101(a)(8) (material burden on the election)
+of this Act, and the affected candidate or any voter may seek relief under Title II. In any
+such suit, the court may issue an injunction placing the candidate on the ballot and may
+award damages or other relief as appropriate. Additionally, the Attorney General is
+authorized to bring a civil action to enforce this section against any state or local official or
+entity.
+Page 16 of 58
+<PARSED TEXT FOR PAGE: 17 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+SEC. 103. Prohibition on private funding of federal election
+administration.
+(a) Ban on soliciting or using private funds. —
+No State or local government (or any subdivision or official thereof) that administers a
+federal election may solicit, accept, or use any funds, grants, goods, or in-kind services from
+a private entity for the purpose of conducting, supporting, or administering the election
+(including voter registration, voting operations, vote counting, or voter education related to
+election procedures), except as provided in subsection (b). In essence, all funding for the
+administration of federal elections must come from public sources (government
+appropriations or the Trust Fund established by this Act), not from private donations, to
+avoid real or perceived partisan influence.
+(b) Limited exceptions. —
+The only exceptions to subsection (a)’s ban are:
+(1) the routine use of publicly available facilities or resources that happen to be donated
+or rented at low cost, such as a church allowing its hall to be used as a polling place without
+charge, or civic volunteers serving as poll workers without pay—provided such customary
+contributions are offered broadly and not targeted to influence specific jurisdictions;
+(2) any private funds expressly provided by Act of Congress (such as a
+congressionally-authorized foundation grant program) and accepted through official
+channels; and
+(3) goods of de minimis value (under $500 aggregate per election) given as gestures of
+community support (for example, a local business sending pizza to poll workers)—such
+token contributions must be disclosed and made available equally regardless of jurisdiction.
+The Election Assistance Commission (EAC) may by regulation clarify additional minimal
+exceptions that do not pose a risk of skewing resources or voter turnout.
+(c) Enforcement through civil action. —
+If a jurisdiction or official violates subsection (a) by accepting prohibited private funding,
+the Department of Justice, any affected candidate, or any political committee or voter in
+that jurisdiction may bring a civil action under Title II of this Act to enjoin the practice and
+require that any funds received be disgorged to the U.S. Treasury or to an appropriate
+public fund. The court shall order prompt cessation of the private-funded activity and
+repayment of the funds (or equivalent value) to ensure no net benefit is retained from the
+unlawful contribution.
+(d) Criminal penalty for willful violation. —
+Any election official who knowingly and willfully solicits or accepts private funding in
+violation of subsection (a), where the total value is $500 or more, shall be fined not more
+than $10,000 or imprisoned not more than 2 years, or both. Likewise, any person (including
+a nonprofit or donor) who knowingly offers or provides such funding in order to affect the
+administration of a federal election shall be subject to the same penalties. These criminal
+Page 17 of 58
+<PARSED TEXT FOR PAGE: 18 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+penalties are intended for egregious or knowing violations; inadvertent acceptance of small
+private donations that is promptly returned upon discovery may be addressed via civil
+enforcement.
+(e) Relationship to state laws. —
+This section sets a federal floor of protection. State laws that are more stringent in
+prohibiting private funding of elections (for example, a state ban on any in-kind donations
+or a lower monetary threshold for penalties) are not preempted; states remain free to
+impose stricter prohibitions so long as they do not permit what this federal law forbids.
+Conversely, if a state law is more permissive than this section (allowing private funding
+that this Act would ban), then for any election in which federal offices are on the ballot, this
+section’s prohibition controls. In mixed federal-state elections, states may still allow private
+funding for the purely state or local portions of the election if clearly segregated, but any
+resource that also touches federal contest administration must comply with this section.
+(f) Transition and grace period. —
+To avoid disrupting ongoing election preparations, any jurisdiction that, on the date of
+enactment, is a party to an existing agreement accepting private election administration
+funds shall notify the funding provider that such funds will no longer be accepted or used
+for federal election purposes. The jurisdiction shall make good-faith efforts to return or
+refuse funds not yet expended, or to segregate and not use them for the federal portion of
+election costs. The Election Assistance Commission may allow a brief grace period (not to
+exceed one election cycle) for jurisdictions to wind down and replace private grants with
+public funds, provided that any private funds used during the transition are publicly
+disclosed and reported to Congress. By the next federal election after enactment, full
+compliance with this section is required in all jurisdictions.
+Title II — Enforcement and Remedies
+SEC. 201. Federal civil action for injunctive relief and damages.
+(a) Violations by federal actors and government-directed persons. —
+In the case of an alleged violation committed by an officer, employee, or person acting under
+the direction, control, or authority of the United States (or any federal agency), or by any
+person (including any contractor, subcontractor, vendor, consultant, agent, volunteer, or
+other individual) who at the time of the challenged conduct was acting under the direction,
+control, or authority of the United States (as defined in Section 4), the action may be
+brought against the United States itself and/or against the officer, employee, or person in
+their official or individual capacity only if the action is (i) filed as a representative action
+properly certified in accordance with Section 203, or (ii) is an individual action in which the
+plaintiff demonstrates an individualized Article III injury cognizable under subsection
+(b)(1). Monetary awards against the United States in such certified representative actions
+or in certified individual actions shall be payable only from the Judgment Fund (31 U.S.C.
+Page 18 of 58
+<PARSED TEXT FOR PAGE: 19 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+§1304) or other specifically appropriated funds and are subject to the availability of
+appropriations. The court shall not award monetary relief against the United States unless
+plaintiffs prove at trial by clear and convincing evidence that the United States (through
+officers, employees, or agents) is legally responsible for the harms for which damages are
+awarded. The Attorney General shall report final monetary payments to the appropriate
+congressional committees within 60 days. Nothing in this Act abrogates procedural or
+substantive defenses available in individual actions, and defendants sued in their
+individual capacity may assert defenses (including qualified immunity) to the extent
+authorized by governing constitutional and statutory law.
+(1) Violations by federal actors. —
+In the case of an alleged violation committed by an officer, employee, or person acting
+under the direction, control, or authority of the United States (or any federal agency), the
+action may be brought against the United States itself and/or against the officer or
+employee in their official or individual capacity. The United States hereby waives sovereign
+immunity and consents to be sued for any violation of this Act committed by an officer,
+employee, or person acting under the direction, control, or authority of the United States,
+and to the award of money damages and other relief as specified herein, provided that
+monetary relief against the United States is available only where the claim seeks monetary
+relief in (i) a representative action certified under Section 203 or (ii) an individual action
+that establishes an Article III injury; any monetary award against the United States shall
+be payable only from the Judgment Fund (31 U.S.C. §1304) or other specifically
+appropriated funds and is subject to the availability of appropriations.. This waiver of
+sovereign immunity shall be consistent with the limitations on monetary relief and Article
+III requirements set forth in this subsection; no assertion of immunity by the United States
+shall bar a claim under this Act in any court of otherwise competent jurisdiction. (If a
+federal official is sued in their individual capacity, defenses such as qualified immunity
+shall be available to the extent otherwise permitted by law, but the Act’s standards and
+clearly established rights will inform the analysis of any such defense.) This waiver of
+sovereign immunity shall apply whether or not the officer, employee, or person was acting
+within the scope of that officer’s or employee’s employment or within the authority
+conferred on them, and includes acts undertaken without lawful authorization or that are
+materially outside the scope of a person’s lawful duties.
+(2) Violations by state or local actors. —
+In the case of an alleged violation committed by an officer or employee of a State or local
+government, or by a State or local governmental entity, the action may be brought against
+such officer, employee, or entity. Consistent with Section 5 of the Fourteenth Amendment,
+Congress hereby abrogates State sovereign immunity for claims seeking monetary relief
+under this Act, but only to the extent and subject to the limitations set forth in this
+paragraph. Courts shall construe and apply these limitations informed by the findings and
+Page 19 of 58
+<PARSED TEXT FOR PAGE: 20 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+factual record set forth in Section 3, while retaining responsibility to make independent
+findings based on the evidence presented in each case.
+Monetary relief against a State (including monetary relief payable from State funds) shall
+be available under this Act only if, after an evidentiary hearing in which the State is
+afforded full opportunity to be heard (which may be bifurcated or held at trial), the court
+finds by a preponderance of the evidence each of the following elements:
+(A) Pattern or practice; extraordinary official acts. —
+(i) Pattern or practice. — The State engaged in a pattern or practice of conduct that
+violated rights enforceable under this Act; or
+(ii) Extraordinary official act. — In an extraordinary case, monetary relief may be
+awarded based on a single act if the court finds, by clear and convincing evidence, that:
+(I) the challenged act was taken (x) by a person or persons who, at the time of the
+act, possessed final policymaking authority for the State with respect to the particular
+subject matter or (y) was thereafter ratified, adopted, or otherwise authorized as State
+policy by persons or bodies with lawful authority to do so; and
+(II) the act was intentional, malicious, or otherwise of such gravity that it caused a
+severe and demonstrable constitutional injury to identifiable persons (for example, an
+intentional act designed to intimidate, silence, or physically harm a candidate or group in
+connection with a covered election); and
+(III) monetary relief is necessary and congruent and proportional to redress the
+extraordinary constitutional injury (as required by clauses (B) and (C) of this subsection).
+Any award predicated on clause (ii) shall be supported by detailed written findings
+explaining why the act qualifies as an extraordinary official act, why the official had final
+policymaking authority or why the act was properly attributable to the State, and why
+monetary relief is congruent and proportional to the injury identified.
+(B) Necessity. — Monetary relief is necessary to remedy the systemic injury caused by
+that pattern or practice (that is, injunctive or declaratory relief alone would not adequately
+redress the constitutional injury identified); and
+(C) Congruence and proportionality. — The monetary relief ordered is congruent and
+proportional to the constitutional injury identified, measured by the scope of the violation,
+the number of persons harmed, and the degree of culpability.
+Where the court awards monetary relief against a State, the court shall set forth in writing
+(which may be filed under seal where necessary) the factual and legal basis for each of the
+findings required by clauses (A)–(C), describe the monetary relief awarded, and explain why
+Page 20 of 58
+<PARSED TEXT FOR PAGE: 21 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+the amount and form of relief are narrowly tailored to remedy the harms shown. Any such
+written findings may be certified for interlocutory appeal by the State pursuant to 28
+U.S.C. §1292(b) or by leave of the court; the court may, in its discretion, stay enforcement of
+any monetary award pending resolution of such an interlocutory appeal.
+In all other cases the court shall limit relief against States to prospective injunctive or
+declaratory relief. Monetary relief may be awarded against political subdivisions,
+municipalities, and individual defendants to the extent otherwise permitted by law. If a
+private plaintiff sues a State in a State court, this Act does not displace any immunities the
+State may have in its own courts unless the defendant removes the case to federal court.
+Any award of monetary relief against a State under this subsection may, where appropriate
+and lawful, be satisfied from State funds to the extent authorized by applicable law.
+(3) Violations by private parties. —
+In the case of an alleged violation committed by any other person (including any
+individual, corporation, organization, or other private entity), the action may be brought
+against that person in their private capacity. No one shall escape liability under this Act by
+virtue of acting as part of a group or conspiracy; each participant in a prohibited act can be
+sued and held liable for the full extent of the harm, jointly and severally with other
+defendants as applicable.
+(4) Qualified immunity; scope of official immunities. —
+For the avoidance of doubt, nothing in this Act shall be construed to abrogate, eliminate,
+or limit the defense of qualified immunity available to individual officers or employees sued
+in their individual capacity for monetary damages; qualified immunity shall remain
+available to the extent permitted under governing constitutional and statutory law.
+Legislative, prosecutorial, or similar official immunities shall not be used to bar injunctive
+or declaratory relief to prevent or remedy violations of this Act.
+(b) Standing. —
+The following persons and entities have standing to bring an action under this section (in
+addition to any standing that exists under general Article III principles):
+(1) Directly aggrieved persons. —
+Any person or entity who is directly and concretely injured by the conduct constituting a
+violation of this Act, or who faces a substantial and imminent risk of such injury, may sue.
+This includes, but is not limited to, candidates whose campaigns are harmed by the
+violation; voters whose rights to vote or to receive information are impaired; organizations
+whose missions are frustrated or resources diverted by the violation; and individuals whose
+constitutional rights (to free expression, association, equal protection, etc.) are infringed by
+the violation.
+(2) Public-interest plaintiffs on behalf of the public. —
+Only a qualified public-interest plaintiff (as defined in Section 4(11A)) may bring an
+Page 21 of 58
+<PARSED TEXT FOR PAGE: 22 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+action on behalf of the public to enforce any provision of Title I. A qualified public-interest
+plaintiff must demonstrate, by admissible evidence, either (A) that the organization itself
+suffered a concrete and particularized injury to its mission or activities attributable to the
+defendant’s conduct (organizational injury), or (B) that the organization represents one or
+more members who have suffered concrete and particularized injuries (representational
+standing). A qualified public-interest plaintiff shall not proceed with generalized or purely
+ideological claims that do not allege a concrete, particularized injury. Before any such action
+may proceed to general discovery, the plaintiff must make a verified preliminary showing to
+the court that it qualifies as a public-interest plaintiff and that the claim involves an
+injury-in-fact sufficient to satisfy Article III. The court shall dismiss any public-interest
+action that fails to meet the Article III injury requirements.
+(c) Available relief. —
+In any civil action under this Act, the court is empowered to grant full relief to remedy the
+violation and prevent similar future violations. The remedies include:
+(1) Injunctive relief. —
+Temporary, preliminary, and/or permanent injunctions to restrain ongoing or imminent
+violations, or to mandate affirmative actions to undo or mitigate past violations. For
+example, a court may enjoin officials from enforcing an unconstitutional gag order, enjoin a
+defendant from disseminating materially false information about time, place, or manner of
+voting; require corrective notices or disclosures; order restoration of wrongfully removed
+content where the defendant itself performed the removal; order record preservation and
+transparency remedies; require that a wrongfully disqualified candidate be placed back on
+the ballot; or even order a re-run of an election or a recount under supervision if severe
+misconduct likely affected the outcome. Given the time-sensitive nature of many election
+disputes, courts are authorized and encouraged to issue emergency relief to preserve the
+status quo ante and protect rights pending final resolution.
+(2) Declaratory relief. —
+A declaratory judgment establishing the rights of the parties and whether the
+defendant’s conduct violated this Act (and/or the Constitution). For instance, a court may
+declare that certain actions—e.g., specific communications between an official and a social
+media company—violated the First Amendment and this Act, or declare that a given
+election result is legally invalid due to proven fraud. Such declarations can guide future
+conduct and also serve as predicates for further remedies by other authorities (e.g.,
+Congress or state officials responding to a declared violation).
+(3) Damages. —
+Monetary relief may be awarded as follows:
+(A) Compensatory damages. —
+In an amount sufficient to fully compensate plaintiffs for any provable losses or harms
+Page 22 of 58
+<PARSED TEXT FOR PAGE: 23 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+caused by the violation. This includes economic losses (such as campaign funds wasted or
+additional expenses incurred to counteract the violation), out-of-pocket costs (security costs
+due to threats, costs of legal action to restore rights, etc.), lost income or profits (if a
+business or individual suffered such loss due to retaliation or censorship), and non-economic
+harm such as emotional distress or damage to reputation. In assessing compensatory
+damages, the trier of fact may consider, among other things, the scope of harm to the
+plaintiff’s political opportunities or expressive activities.
+(B) Statutory damages. —
+In lieu of difficult-to-quantify actual damages, the court may award a statutory damages
+amount for each violation or each affected person, within ranges authorized by Section
+202(b). Congress anticipates guideline amounts such as $25,000 to $75,000 per affected
+individual per day, to ensure meaningful recovery even when actual damages (like a chilling
+effect on voters) are hard to monetize. Statutory damages are especially appropriate in
+cases of intangible injury (e.g. suppression of speech or voting rights) to guarantee that
+violations are not merely nominal costs of doing business. The availability of statutory
+damages under this subsection is subject to the trial period, aggregate limitations,
+reporting requirements, and congressional review set forth in Section 204.
+Any statutory damages awarded under this subsection shall, upon entry of judgment, be
+deposited into the court registry and if Section 202(c) applies, allocated in accordance with
+Section 202(c), otherwise disbursed to the plaintiff subject to the plan requirements herein.
+Any portion of a statutory damages award disbursed to a private plaintiff shall be used only
+for programs, projects, and investments that demonstrably further the purposes of this Act
+by strengthening democratic resilience, protecting political speech, safeguarding free and
+fair elections, and addressing social, economic, institutional, or other determinants of the
+security of our democracy or our democratic institutions. Permissible uses include activities
+reasonably calculated to reinforce civic participation, public confidence, social and political
+stability, electoral legitimacy, and the conditions necessary for the people of the United
+States to govern themselves freely, safely, and without coercion, manipulation, or
+intimidation.
+Before distribution of any such funds to a private plaintiff, the plaintiff shall submit a
+written plan and proposed budget to the court describing the proposed uses, specific
+measurable objectives and performance metrics, a timetable for implementation, and the
+governance and oversight arrangements to be used. The court shall approve the plan only if
+it finds that (A) the proposed uses are consistent with the purposes of this Act; (B) the uses
+are reasonably calculated to achieve the proposed measurable objectives; and (C)
+appropriate safeguards are in place to prevent diversion, partisan use, foreign influence, or
+private enrichment. The court may require independent third-party auditing, bond or
+security, periodic reporting, and other conditions it deems necessary to ensure compliance.
+Page 23 of 58
+<PARSED TEXT FOR PAGE: 24 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+If the court later determines that funds were not used in accordance with an approved
+plan, the court may order disgorgement, repayment with interest, civil penalties, or other
+remedies as appropriate. The court shall report any distributions to the Democracy Defense
+and Remediation Trust Fund and shall require an annual accounting, subject to any
+necessary protective treatment for legitimately classified information. The court shall make
+such reports available to the Trust Fund administrators and, where appropriate, to
+Congress and the Government Accountability Office for audit.
+(C) Punitive (exemplary) damages. —
+If the defendant’s conduct is proven to be willful, malicious, or in reckless disregard of
+plaintiffs’ rights, the court (or jury) may award punitive damages to punish the wrongdoer
+and deter similar conduct. Punitive awards should be commensurate with the degree of
+egregiousness and the defendant’s ability to pay, in accordance with due process.
+(4) Attorneys’ fees and costs. —
+A plaintiff who prevails in an action under this Act (meaning they obtain significant relief
+by judgment or court-approved settlement) shall be entitled to an award of their reasonable
+attorneys’ fees, litigation expenses, and court costs. If a plaintiff prevails on some claims
+but not others, the court may award fees proportional to the success achieved. If multiple
+defendants are sued, fee liability may be apportioned as justice requires. (Defendants shall
+not recover fees from a plaintiff unless the court finds the action was entirely frivolous or in
+bad faith.) The availability of fees is intended to incentivize private enforcement by making
+it feasible for victims and public-interest groups to obtain competent representation even if
+their individual damages might be modest.
+(d) Jurisdiction and venue. —
+The U.S. district courts have original jurisdiction over any action brought under this Act,
+without regard to the amount in controversy or the citizenship of the parties. Venue is
+proper in any judicial district in which any defendant resides, is found, or does business; or
+in which the violation occurred; or, if the action is brought by a plaintiff on behalf of the the
+public or a definable group (under subsection (b)(2)), in the District of Columbia. If an
+action under this Act is initially filed in a state court, any defendant may remove it to the
+appropriate U.S. District Court, and it shall be deemed to arise under federal law for
+purposes of removal. Congress intends that cases under this Act be heard in federal court to
+ensure uniform interpretation, though state courts have concurrent jurisdiction unless and
+until a defendant exercises the right of removal.
+(e) Expedited proceedings and no enforcement of arbitration or confidentiality
+provisions.
+(1) Expedited proceedings. —
+Plaintiffs may designate an action under this Act as an “Election Protection case,” and
+the court shall give such case priority on its docket. If the complaint alleges that the
+Page 24 of 58
+<PARSED TEXT FOR PAGE: 25 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+violation may affect an upcoming election or has ongoing effects that need prompt remedy
+(for example, seeking to halt ongoing censorship or to reinstate a candidate before ballots
+are printed), the court shall schedule any necessary hearings (for preliminary relief or trial
+on the merits) as expeditiously as possible. Courts are encouraged to utilize flexible,
+expedited procedures—such as combining hearings, allowing prompt limited discovery,
+etc.—to resolve these disputes in time to vindicate rights before the electoral harm becomes
+irreversible. Furthermore, in any case where a plaintiff reasonably fears harassment or
+retaliation (e.g., a whistleblower plaintiff), the court may permit them to proceed under
+pseudonym or with protected identifying information, and may issue protective orders to
+prevent unnecessary disclosure of the plaintiff’s identity.
+(2) No enforcement of arbitration or confidentiality provisions. —
+Any predispute arbitration agreement or class-action waiver that would require an
+individual to resolve a claim under this Act by arbitration (or prevent them from bringing a
+case in court) is unenforceable, unless after the dispute arises the individual specifically
+agrees to arbitrate. Similarly, any nondisclosure agreement, confidentiality provision, or
+other contractual term that purports to prohibit a party or witness from reporting or
+testifying about violations of this Act is unenforceable as contrary to public policy.
+Employees or contractors may not be sanctioned for reporting, disclosing, or participating in
+investigations or litigation concerning alleged violations of this Act, except to the extent
+necessary to protect properly classified national-security information and consistent with
+lawful whistleblower channels.
+(f) Special rule regarding judicial immunity. —
+Nothing in this Act authorizes suing a judge for actions taken in the exercise of judicial
+authority (e.g., issuing rulings, injunctions, or sentencing decisions), even if those actions
+are alleged to be erroneous or taken with improper motive. Judges retain absolute
+immunity from damages for judicial acts. If a person believes a judge improperly interfered
+in an election or political process, their remedy lies in appeal, mandamus, or judicial
+conduct proceedings, not an action under this Act. However, non-judicial officials who
+procure or execute a judge’s order in an unlawful manner may be sued (for example, if a
+county official knowingly seeks a court order to remove a candidate from the ballot in
+violation of Section 102, that official can be sued under this Act—though the judge who
+issued the order cannot). Also, a declaratory judgment may be sought to clarify that a prior
+judicial order was unconstitutional or preempted (as occurred when certain state courts
+attempted to remove federal candidates from ballots), but in such a case the action is
+against the officials implementing or threatening to implement the order, not against the
+judge who issued it.
+(g) Vicarious liability for government-directed persons. —
+For the avoidance of doubt, where any person (including any contractor, subcontractor,
+vendor, consultant, agent, volunteer, or other individual) commits an act or omission that
+would constitute a violation of this Act while acting under the direction, control, or
+Page 25 of 58
+<PARSED TEXT FOR PAGE: 26 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+authority of the United States, the United States shall be liable for such act or omission to
+the same extent as if the act or omission had been committed by an officer or employee of
+the United States. Such liability shall apply whether or not the officer, employee, or person
+was acting within the scope of that officer’s or employee’s employment or within the
+authority conferred on them, and includes acts undertaken without lawful authorization or
+that are materially outside the scope of a person’s lawful duties. Liability of the United
+States under this subsection is independent of any determination regarding an individual
+actor’s scope of employment or authority and shall not be construed to limit the availability
+of remedies against the United States or any individual actor.
+The United States shall be subject to the same remedies, damages, and enforcement
+measures as any other defendant under this Act.
+(h) Preservation of records; certification; sanctions.
+(1) Preservation duty. —
+Upon actual notice of a claim under this section, or upon reasonable anticipation of such
+a claim, each department, agency, instrumentality, or component of the United States shall
+preserve all records, files, communications, personnel and contract documentation, payroll
+and timekeeping records, tasking and travel orders, internal memoranda, operational
+directives, security-cleared communications, and other documents or materials that are or
+may be relevant to the subject matter of the claim, in whatever form they exist (including
+metadata and electronic records). This duty extends to records in the possession, custody, or
+control of contractors, subcontractors, or agents acting on the United States’ behalf.
+(2) Certification and privilege log. —
+An agency that is a party to litigation under this section shall, as the court may order,
+provide a sworn certification describing the scope of its search, the custodians searched, the
+time period searched, the methods used, and a privilege log identifying withheld documents
+and the legal basis for nondisclosure.
+(3) Sanctions for destruction or concealment. —
+Any person (including agency officials) who knowingly, recklessly, or intentionally
+destroys, conceals, alters, or fails to preserve relevant records with the intent to impair the
+ability of a person to bring or prosecute a claim under this Act shall be subject to civil
+sanctions, evidentiary presumptions or adverse inferences under subsection (i)(3), and
+referral to the Archivist of the United States, the appropriate Inspector General, and the
+Attorney General for administrative or criminal investigation, as appropriate.
+(i) Expedited discovery; classified material; adverse inference.
+(1) Expedited discovery. —
+If a party alleges that relevant records or facts necessary to determine whether conduct
+was undertaken under the direction, control, or authority of the United States are in the
+Page 26 of 58
+<PARSED TEXT FOR PAGE: 27 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+possession, custody, or control of the United States, the court shall, upon request by the
+plaintiff, order expedited discovery limited to the narrow issues of control, direction, and
+the existence and location of relevant records. The court shall resolve such discovery on an
+expedited timetable and may limit discovery to categories and custodians reasonably
+calculated to produce the required information.
+(2) Classified and sensitive materials. —
+Where production or disclosure would involve classified national-security information or
+other information requiring protection, the court shall employ appropriate protective
+procedures (including in-camera review, sealed filings, appointment of a security-cleared
+special master or counsel, and protective orders) to permit adjudication while safeguarding
+sensitive information. Claims of classification or privilege shall not excuse an agency’s duty
+to preserve relevant materials or its obligation to submit such materials for judicial review
+under appropriate protective mechanisms.
+(3) Failure to preserve or produce records; adverse inferences and sanctions. —
+(A) Scope and general rule. —
+Where a party (including the United States) fails to produce relevant employment,
+payroll, contract, tasking, or other records that are demonstrably within that party’s
+possession, custody, control, or reasonable ability to obtain, the court may, after providing
+opportunity for explanation and after any required in-camera review, draw such adverse
+evidentiary inferences or impose such sanctions as are just and appropriate to remedy
+prejudice to the opposing party and to preserve the integrity of the adjudicative process.
+(B) Required certification and preliminary showing. —
+On motion or on the court’s own initiative, the court may require the nonproducing party
+to provide a sworn certification describing, with particularity, the steps taken to search for
+responsive records, the scope of the search, the identity of custodians searched, any
+searches of electronic systems performed, and the factual basis for any claimed inability to
+produce or for any claimed privilege or other justification. Mere conclusory assertions of
+inability or privilege are insufficient.
+(C) Government assertions of classification or privilege; relationship to
+subsection (l). —
+If the United States invokes classification, state-secrets, or another privilege as a basis
+for nonproduction, the court shall first apply the procedures and protections set forth in
+subsection (l), including ex parte, in-camera review, appointment of cleared counsel or a
+cleared special master, and the opportunity for the Government to propose adequate
+substitutes, summaries, stipulations, or other protective measures. Only after the court has
+applied subsection (l) and the Government either (i) declines to provide a court-approved
+adequate substitute, (ii) submits a substitute the court finds inadequate, or (iii) is found to
+have intentionally destroyed, concealed, or materially misrepresented relevant classified
+Page 27 of 58
+<PARSED TEXT FOR PAGE: 28 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+information, may the court consider drawing an adverse inference or imposing sanctions
+under this paragraph. In no event shall the court order public disclosure of classified
+information as a remedy under this paragraph.
+(D) Standards for inference and findings. —
+(1) Intentional destruction or concealment. — If the court finds by clear and
+convincing evidence that a party intentionally destroyed, altered, or concealed material
+records relevant to a claim or defense, the court shall be authorized to presume that the
+missing materials would have been unfavorable to the party responsible, to preclude
+specified defenses or claims, to treat specified facts as established for purposes of the action,
+or to impose other sanctions (including attorneys’ fees and costs) as appropriate.
+(2) Non-intentional failure to produce. — If the court finds that a party failed to
+produce responsive records despite a diligent search or contrary to a court order but without
+evidence of intentional destruction, the court may, in its discretion, draw appropriate
+adverse inferences, adopt evidentiary limitations, enter default or partial default as to
+affected claims or defenses, or impose other sanctions, taking into account the reason for
+nonproduction, the prejudice to the requesting party, and other relevant circumstances.
+(3) Particularized findings required. — Any adverse inference, preclusion, or
+dispositive sanction shall be supported by a written finding of fact (under seal when
+warranted) describing the nonproduction, the party’s explanation, the court’s evaluation of
+the explanation, and the basis for the particular remedy imposed.
+(E) Proportionality and tailoring. — Remedies under this paragraph shall be tailored
+to cure the prejudice caused by nonproduction and shall not exceed what is necessary to
+restore a fair adjudicatory posture. Where an inference or sanction would impose liability or
+a remedy against the United States, the court shall take particular care to limit the remedy
+to the specific facts or issues affected by the nonproduction and to explain its basis in
+detailed findings.
+(F) Oversight and referral. — If the court finds that the failure to produce or the
+assertion of privilege was in bad faith or part of an intentional scheme to obstruct
+adjudication, the court shall impose appropriate sanctions, which may include fees, costs,
+evidentiary rulings adverse to the nonproducing party, and referral to the appropriate
+Inspector General, the Archivist of the United States, or other oversight authorities as the
+court deems appropriate.
+(j) Protective procedures for witnesses and cleared counsel. —
+The court shall have authority to permit testimony or filings under pseudonym, to seal
+identifying information, to limit compelled disclosure of witness identity, and to take other
+measures necessary to protect the safety of witnesses and the public interest. Where
+necessary to allow meaningful review of classified materials, the court may authorize the
+Page 28 of 58
+<PARSED TEXT FOR PAGE: 29 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+appointment of specially security-cleared counsel, a security-cleared special master, or other
+vetted persons to review materials on a confidential basis and make recommendations to
+the court under appropriate protective terms.
+(k) Whistleblower and anti-retaliation protections. —
+No person who in good faith reports, discloses, or testifies regarding information or records
+relevant to a claim under this Act shall be subject to retaliation. The United States shall
+provide protective procedures, including the availability of pseudonymous filings, protective
+orders, witness safety measures, and confidentiality protections, as the court deems
+necessary to protect safety and the public interest. Any person who knowingly retaliates
+against a witness, whistleblower, or other person for participating in proceedings or
+reporting information under this Act shall be subject to civil penalties and other remedies
+as provided by law.
+(l) Mandatory adjudication of claims implicating national-security information;
+Privilege does not require dismissal or denial of relief in actions under this Act.
+(1) Principle. —
+The state-secrets privilege may be used to bar disclosure of evidence in open court or to
+persons lacking appropriate clearance; the court may review the evidence ex parte and in
+camera to adjudicate the privilege claim and to apply this subsection. The state-secrets
+privilege shall not be used to bar, in whole or in part, the adjudication of a claim or the
+availability of a remedy under this Act. Dismissal of a claim or denial of any remedy on the
+basis of the state-secrets privilege is prohibited. If, after application of paragraphs (2)–(5),
+the Government’s invocation results in the exclusion or withholding of information that the
+court finds material to adjudication (as defined in paragraph (5)(A)), and the Government
+declines to provide an adequate court-approved substitute under paragraph (5)(B), the court
+shall, instead of dismissal, impose the procedural, issue-resolution remedies authorized in
+paragraphs (5) and (6). This subsection supersedes any common-law doctrine requiring
+dismissal or nonjusticiability— including any doctrine predicated on the alleged ‘subject
+matter’ of the action—solely because evidence is excluded under the state-secrets privilege
+in actions brought under this Act.
+(2) Mandatory protective procedures; secured adjudication. —
+Upon invocation of any national-security privilege or classification claim implicating
+adjudicative issues, the court shall order one or more of the following measures (in addition
+to any other measure the court deems necessary or appropriate) to permit adjudication
+while protecting national security, except where the court makes particularized written
+findings under seal that the measure is impracticable in the circumstances:
+(A) in-camera review of the materials by the judge and/or appointment of a
+security-cleared special master or security-cleared counsel to review the materials and
+provide findings and recommendations to the court;
+Page 29 of 58
+<PARSED TEXT FOR PAGE: 30 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(B) appointment of security-cleared counsel to represent the plaintiff’s interests in the
+classified proceedings;
+(C) conduct of hearings and trials in a secure facility or secure environment (including
+SCIFs), under seal;
+(D) use of sealed filings, redactions narrowly tailored to protect sources or methods,
+and court-supervised classified summaries or substitutions that preserve the essential
+factual content;
+(E) empaneling a security-cleared jury or conducting judge-only trials with
+security-cleared counsel and special masters;
+(F) any combination of the measures above sufficient to permit meaningful adversarial
+testing of the Government’s assertions; and
+(G) submission of the referenced materials and any underlying materials that the
+court finds reasonably necessary (and identifies with particularity under seal) to evaluate
+the privilege, materiality, or adequacy of a proposed substitute, to the court for ex parte, in
+camera review upon the court’s order. For purposes of this subparagraph, “underlying
+materials” includes materials that exist and are (i) within the Government’s possession,
+custody, or control; or (ii) reasonably obtainable by the Government through reasonable
+efforts pursuant to a legal entitlement, contractual right, interagency access, or an existing
+written authorization or consent. Refusal to submit such materials shall be treated as an
+election to withhold under paragraph (5)(C).
+(3) Expedited security clearances and logistics. —
+Upon a finding by the court that participation by security-cleared counsel, experts, or a
+special master is necessary to implement paragraph (2) and permit meaningful adversarial
+testing, the court shall order the Government to expeditiously process and decide any
+requests for security clearances or access approvals needed for such participation, and to
+provide to the court, under seal, a written explanation for any denial. Absent a written
+finding of good cause, the Government shall decide such requests within 30 days. For
+avoidance of doubt, a denial constitutes a decision for purposes of this paragraph. Nothing
+in this subsection shall be construed to require the Government to grant a security
+clearance or access authorization. If a requested clearance or access approval is denied or
+not decided within the time set by the court, the court shall, to the maximum extent
+practicable, proceed through appointment of an already security-cleared special master or
+security-cleared counsel, and by use of in camera and ex parte review, substitutions,
+summaries, admissions, and other protective procedures under paragraph (2).
+(4) No compelled disclosure; transition to Government election. —
+The court shall not order public disclosure of classified information. If the Government
+proves, by clear and convincing evidence, that disclosure of specific information would
+create an unavoidable and substantial risk of grave harm to national security, and the court
+determines after applying every reasonable protective procedure under paragraph (2) that
+the information cannot be provided through an adequate substitute under paragraph (5)(B)
+Page 30 of 58
+<PARSED TEXT FOR PAGE: 31 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+or any other protective means sufficient to permit fair adjudication, the court shall not
+dismiss the action on that basis and shall instead proceed under paragraph (5). The court
+shall enter a written decision with detailed findings under seal, and shall transmit the
+decision and invocation materials under seal to the appropriate Inspector General and the
+Judiciary Committees of the Congress.
+(5) Government election; issue-resolution remedies when material evidence is
+withheld. —
+(A) Finding of materiality. —
+If the court determines, after applying the procedures in paragraphs (2) and (3), that
+specific classified information is material to a fair adjudication of a claim or
+defense—meaning there is a substantial likelihood that the information would affect the
+determination of (i) liability, (ii) a material defense, or (iii) the scope or availability of a
+remedy—the court shall identify with particularity the issue(s) to which the information is
+material and shall order the least restrictive protective procedure or combination of
+procedures to permit adjudication consistent with national security. In making this
+determination, the court shall not treat the Government’s election to withhold as neutral.
+Where the Government’s invocation or refusal to provide a substitute prevents the court
+from reliably assessing the information’s effect on the merits, the court shall presume the
+information material and proceed under this paragraph, unless the Government
+demonstrates by clear and convincing evidence (through in camera submission, proffer, or
+other court-approved means) that the information could not reasonably affect the outcome.
+(B) Court-ordered adequate substitutes and admissions; verification. —
+Before any issue-resolution remedy may be imposed under subparagraph (C), the court
+shall order and the Government shall be afforded a reasonable opportunity, not to exceed 30
+days absent a written finding of good cause, to provide one or more adequate substitutes in
+lieu of disclosure, in a manner that preserves meaningful adversarial testing without
+material prejudice. An “adequate substitute” must convey the factual content material to
+adjudicate the element(s), defense(s), or remedial issue(s) identified under subparagraph
+(A), while protecting sources, methods, and other properly classified details. The
+Government bears the burden to demonstrate adequacy by clear and convincing evidence,
+based on materials submitted for ex parte, in camera review. Adequate substitutes may
+include:
+(i) a court-supervised unclassified summary, substitution, or statement of facts that
+sets forth the facts material for adjudication, with deletions only to the extent necessary to
+protect properly classified information;
+(ii) a narrowly tailored redaction of responsive materials accompanied by a
+court-supervised statement of material facts sufficient to permit adjudication;
+(iii) a binding admission of specified facts, as ordered by the court, for purposes of
+this action only, sufficient to cure the prejudice caused by nondisclosure; no assertion
+adverse to the plaintiff shall qualify as an “alternative” under this subparagraph unless
+supported by materials submitted ex parte and in camera sufficient to permit verification,
+Page 31 of 58
+<PARSED TEXT FOR PAGE: 32 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+which admission shall not constitute a waiver of any privilege or an admission outside this
+action; or
+(iv) consent to entry of appropriate relief (including declaratory or injunctive relief
+and/or an agreed monetary remedy) without disclosure of the classified information, which
+consent to relief shall not constitute a waiver of any privilege or an admission outside this
+action.
+Verification and adequacy determination. — The court may appoint an already
+security-cleared special master or security-cleared counsel to review the underlying
+classified materials ex parte and in camera to assess whether a proposed substitute is
+complete and accurate as to the material facts. The court shall determine adequacy only
+after ex parte, in camera review of the underlying materials by the court or by an already
+security-cleared special master or security-cleared counsel. If the court finds that a
+proposed substitute omits, distorts, or fails to provide factual content material to fair
+adjudication, the court shall deem the substitute inadequate and proceed under
+subparagraph (C). Refusal to submit underlying materials for in camera verification upon
+the court’s order shall be treated as an election to withhold under subparagraph (C). Where
+the court cannot reliably assess adequacy because of the Government’s withholding, the
+court shall resolve close questions regarding adequacy in favor of finding the substitute
+inadequate and proceeding under subparagraph (C).
+(C) Election to withhold. If the Government declines or refuses to provide any
+alternative in subparagraph (B) that the court finds would permit fair adjudication without
+material prejudice, the court shall not order disclosure; instead, the court shall impose
+issue-resolution remedies sufficient to prevent unfairness, which shall include one or more
+of the following:
+(i) directing that one or more designated facts shall be taken as established for
+purposes of the action in accordance with the plaintiff’s claim;
+(ii) precluding the Government from contesting specified issues or from asserting
+specified defenses;
+(iii) where the court finds that remedies under clauses (i) and (ii), whether alone or
+in combination, are insufficient or are not reasonably likely to be sufficient to cure the
+prejudice caused by the withholding, notwithstanding Federal Rule of Civil Procedure 55(d)
+or any other rule of civil procedure to the extent inconsistent with this subsection, the court
+shall, as a procedural consequence of the Government’s election to withhold under this
+subsection, deem specified elements, issues, or facts material to adjudication established
+against the Government for purposes of this action, enter judgment on liability as to the
+affected claim(s) to the extent required to cure such prejudice, and thereafter determine and
+award the appropriate remedy consistent with subparagraph (D).
+(D) Tailoring; full relief when necessary. Any issue-resolution remedy or judgment
+under this paragraph shall be tailored to the specific issue(s) identified under subparagraph
+(A) and shall be no broader than necessary to cure the prejudice to adjudication caused by
+Page 32 of 58
+<PARSED TEXT FOR PAGE: 33 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+the Government’s election to withhold. Where the Government’s election to withhold
+prevents fair adjudication of all elements of a claim for relief, the court shall deem those
+elements established and award the full remedy authorized for that claim.
+(E) No required disclosure of classified information as a form of relief.
+Nothing in this subsection shall be construed to require public disclosure of classified
+information as a form of relief; the court shall, to the maximum extent practicable, fashion
+relief and compliance mechanisms that provide an effective remedy while protecting
+national security, including sealed findings, cleared special masters, and in camera
+compliance review.
+(6) Sanctions and oversight. —
+If the court finds that the Government invoked privilege in bad faith or intentionally
+concealed, destroyed, or misrepresented materials to avoid adjudication, the court shall
+impose appropriate sanctions, which may include:
+(A) evidentiary rulings adverse to the Government;
+(B) attorneys’ fees and costs;
+(C) referral to the Archivist of the United States, the appropriate Inspector General,
+and the Attorney General for investigation; and
+(D) any other sanctions justice requires.
+(m) Finality and preclusion following a public-interest recovery; protection of
+individual claims.
+(1) Definitions. — For purposes of this subsection:
+(A) “Public-interest plaintiff” means a plaintiff suing “on behalf of the public or any
+definable group” as authorized by Section 201(b)(2) of this Act.
+(B) “Final judgment” means a judgment or court-approved settlement resolving claims
+on the merits and for which all appeals have been exhausted or the time for appeal has
+expired.
+(C) “Same causes of action and conduct” means claims arising out of the same
+transaction, occurrence, or series of transactions or occurrences and based upon
+substantially the same operative facts and legal theories.
+(2) Notice and opportunity to opt out. —
+If a public-interest plaintiff seeks relief (including statutory damages, equitable relief, or
+other remedies) that, if granted, would bind or otherwise determine the rights of members
+of the general public as to the same causes of action and conduct, the public-interest
+plaintiff shall provide reasonable and practicable notice to the public. Claims from
+individual members of the public must demonstrate individualized injury distinct from the
+generalized public injury addressed by the public-interest action. The court shall adopt
+reasonable procedural rules requiring a claimant to plead and prove, by a preponderance of
+Page 33 of 58
+<PARSED TEXT FOR PAGE: 34 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+the evidence, the claimant’s particularized injury and the causal relationship to the
+defendant’s conduct. The court may summarily deny claims that fail to meet this standard.
+The court shall prescribe the form, content, means, and duration of notice, which shall
+include publication in the Federal Register, prominent posting on the website of the
+public-interest plaintiff and the court, and other reasonable means designed to reach
+affected persons. The court shall provide a minimum 60-day period for members of the
+public to request exclusion (opt out) from the public-interest judgment or settlement.
+(3) Binding effect; preclusion. —
+Upon entry of a Final judgment by a public-interest plaintiff that (A) the court finds was
+litigated or settled in good faith, (B) for which adequate notice and a meaningful
+opportunity to opt out were provided consistent with subsection (2), and (C) that the court
+finds was a fair and reasonable resolution of the public interests at issue, the Final
+judgment shall be binding with respect to the matters adjudicated on behalf of the public or
+any definable group. In such circumstances, no individual plaintiff may recover duplicative
+statutory damages, duplicative equitable relief, or other duplicative remedies for the same
+causes of action and conduct addressed by the Final judgment, except as provided in
+subsection (4).
+(4) Carveouts for individualized harms and opt-outs. —
+The bar in subsection (3) shall not apply to:
+(A) any individual who timely and validly requested exclusion (opted out) pursuant to
+subsection (2); or
+(B) any individual who can demonstrate to the court, by a preponderance of the
+evidence, that the individual’s claim is for a distinct, particularized injury that (i) was not
+addressed by the public-interest judgment or settlement, and (ii) cannot be remedied by the
+public-interest recovery.
+(5) Coordination of pending individual actions. —
+If an individual action asserting the same causes of action and conduct is pending at the
+time a public-interest action is brought, the courts shall, on motion or on the court’s own
+initiative, consolidate or coordinate proceedings, stay individual proceedings while the
+public-interest action proceeds, or otherwise manage the cases to avoid duplicative
+litigation and to protect the rights of opt-outs and persons asserting individualized harms.
+(6) Avoidance of double recovery and offset. —
+If separate monetary recoveries are obtained for substantially the same injury by
+different plaintiffs or in different actions, courts shall reduce, offset, apportion, or otherwise
+fashion equitable relief so that defendants are not required to pay more than once for the
+same compensable injury, and so that the allocations required by Section 202(c) are
+effectuated without duplication. The courts may order consolidated distribution, credit one
+recovery against another, or take other measures to prevent duplicative recovery.
+Page 34 of 58
+<PARSED TEXT FOR PAGE: 35 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(7) Court findings and oversight. —
+Before giving binding effect to a public-interest Final judgment under this subsection, the
+court shall enter written findings that (A) the public-interest plaintiff adequately
+represented the public interests adjudicated; (B) adequate notice and opt-out procedures
+were provided; and (C) the judgment or settlement was fair, reasonable, and in the public
+interest. The court shall retain jurisdiction to enforce distribution plans, require audits, and
+order disgorgement or other remedies where funds were diverted or distributed in violation
+of an approved plan.
+(8) Remedies for failure to provide notice or inadequate representation. —
+If the court finds that notice was inadequate, that the public-interest plaintiff did not
+adequately represent the affected public, or that the settlement or judgment is not fair and
+reasonable, the court may:
+(A) vacate or modify the judgment or settlement to correct the defect;
+(B) reopen the proceedings to provide additional notice or opportunity to opt out; or
+(C) decline to give preclusive effect to the judgment for purposes of subsection (3).
+(7) Government obligation to obtain or generate evidence when necessary and
+feasible. —
+(A) Court authority to require procurement or generation. —
+If the court determines under paragraph (5)(A) that specified information is material
+to adjudication and that no adequate existing materials or substitutes suffice to prevent
+material prejudice, the court may order the Government, within a reasonable time and
+consistent with national security and applicable law, to use its existing legal authorities,
+contractual rights, or agency processes to obtain, procure, or cause creation of the specified
+evidence (including, as appropriate and feasible, forensic testing, site inspection,
+instrumentation, medical or diagnostic imaging, or other expert investigations or
+examinations).
+(B) Scope and limitations. —
+The court shall not order any creation, collection, or examination that would
+(i) contravene applicable criminal law, privacy law, or constitutional protections,
+(ii) require a third party to act when the Government lacks a legal entitlement and
+the third party refuses to cooperate, or
+(iii) compel an individual to submit to and process or procedure that would violate
+the individuals constitutional rights absent that individual’s informed consent or other
+lawful authorization. Where third-party consent or lawful authority is required, the
+Government shall promptly seek the consent or lawful process and shall report to the court
+the steps taken.
+Page 35 of 58
+<PARSED TEXT FOR PAGE: 36 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(C) Protective procedures and confidentiality. —
+Any evidence obtained or generated under this paragraph shall be handled under the
+protective procedures in paragraph (2) (including ex parte, in camera review, sealed filings,
+cleared counsel, or secure facilities) to the maximum extent practicable and shall not be
+publicly disclosed except as required by law and consistent with paragraph (4) and
+subparagraph (5)(E).
+(D) Feasibility; narrow, particularized denial only on a high evidentiary
+showing. —
+The court may decline to order procurement or generation under this paragraph only
+upon particularized written findings under seal that the requested procurement or
+generation is not feasible, would create an unavoidable and substantial risk to national
+security, or is otherwise legally impossible. Any such denial on national-security grounds
+shall be permitted only if the Government demonstrates by clear and convincing evidence,
+in an ex parte, in camera submission to the court, each of the following:
+(i) the specific nature of the national-security harm that would result from
+procurement or generation of the requested evidence;
+(ii) the precise nexus between the requested evidence and that harm (i.e., why the
+evidence, even if handled under protective procedures, would reveal classified sources,
+methods, programs, identities, or other operational details that cannot be protected); and
+(iii) a description of every reasonably feasible protective procedure or mitigation the
+Government considered (including sealed acquisition, conducting procedures in a secure
+facility, redaction, metadata removal, custody by a cleared special master, destruction after
+use, or sealed review), together with an explanation, supported by facts, of why each such
+measure would be insufficient to avoid the asserted harm.
+Before the court may deny procurement or generation on national-security grounds, the
+court shall appoint or consult an already security-cleared special master or security-cleared
+counsel (or, if the court is cleared, the court itself) to conduct ex parte, in camera review of
+the Government’s materials and proposed mitigations and to submit a written
+recommendation, under seal, assessing whether further mitigations could permit
+procurement or generation without creating the alleged harm. The court shall consider the
+special master’s recommendation and shall set forth detailed written findings under seal
+explaining why, if at all, the proposed mitigations would be inadequate.
+“Operationally sensitive information” means classified information that would, if
+disclosed, reasonably be expected to: (A) reveal the identity or location of covert
+agents or operations; (B) disclose intelligence sources or collection methods; (C)
+disclose specific technical parameters, cryptographic keys, program identifiers,
+schematics, or other details of intelligence collection or operational systems; or (D)
+reveal the identity of a critical human source whose exposure would create a
+Page 36 of 58
+<PARSED TEXT FOR PAGE: 37 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+substantial risk of harm. The term does not include routine medical, physical, or
+purely factual evidence that does not on its face reveal any of the foregoing.
+No denial shall be premised solely on generalized assertions of national security, and the
+Government’s affidavit and any supporting materials must identify with particularity the
+facts and operational details supporting the claimed harm. A national-security justification
+shall not be accepted where the requested evidence is purely medical, physical, or factual in
+character and does not, on its face, reveal classified sources, methods, programs, identities
+of covert actors, or other operationally sensitive information. Where the court cannot
+reliably assess the Government’s showing because the Government refuses to provide the
+court or the special master with necessary classified materials, the court shall presume the
+requested evidence material and proceed under paragraph (5), treating the Government’s
+refusal as an election to withhold under paragraph (5)(C).
+If, notwithstanding the Government’s showing, the court declines to order procurement or
+generation, the court’s denial shall be narrowly tailored and supported by detailed findings
+under seal; and the court shall simultaneously identify the issue-resolution remedy it will
+impose under paragraph (5) to cure any prejudice caused by the Government’s election to
+withhold.
+(E) Failure to comply. —
+If the Government fails, without good cause, to take the steps ordered under this
+paragraph, the court shall treat the failure as an election to withhold under paragraph
+(5)(C) and may impose the issue-resolution remedies authorized therein.
+(n) Preliminary judicial review. —
+In any civil action brought by a private plaintiff under this Act, the court may, upon motion,
+require the plaintiff to make a preliminary showing that the complaint plausibly alleges a
+violation of this Act supported by specific factual allegations, before permitting discovery to
+proceed. This subsection is intended to prevent abusive or speculative litigation while
+preserving access to the courts for meritorious claims.
+(o) Optional administrative presentment and Justice Review. —
+(1) Election; effect. —
+A claimant may elect to pursue an administrative Justice Review before filing a civil
+action for monetary relief under this Act. If the claimant so elects, no action for monetary
+relief may be instituted until the claim is finally resolved or deemed denied under
+paragraph (4). This subsection does not restrict actions seeking solely injunctive or
+declaratory relief.
+(2) Justice Claim form; minimum contents. —
+The election under paragraph (1) shall be made by submitting to the Department of
+Page 37 of 58
+<PARSED TEXT FOR PAGE: 38 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+Justice (and to no other agency) a written Justice Claim on a form prescribed by the
+Attorney General, containing, at minimum—
+(A) a short and plain statement of the conduct alleged and the harms claimed that fall
+within the scope of this Act;
+(B) a sum certain demand for monetary relief;
+(C) identification of known defendants and known relevant agencies or contractors, if
+any; and
+(D) optionally, a proposed plan describing how any portion of funds paid to the
+claimant would be used to remedy or rectify the harms alleged or in other ways consistent
+with Section 201(c)(3)(B) and, where applicable, Section 202(c)(3).
+(3) Duty of Justice Review; internal fact-development. —
+Upon receipt of a Justice Claim, the Attorney General shall conduct an internal review
+and fact-development process oriented to reaching a fair and just resolution on the merits,
+and shall not deny a claim for the purpose of preserving litigation advantage. The
+Department shall use reasonable efforts to identify and evaluate information in the
+possession of the United States that materially bears on the claim, including information
+favorable to the claimant.
+(4) Time for decision; deemed denial; tolling. —
+The Department shall allow or deny the claim in writing within 180 days after receipt (or
+such shorter period as the Attorney General may establish for election-related exigency).
+Failure to issue a written disposition within the applicable period shall be deemed a denial.
+Any applicable limitations period shall be tolled during the pendency of a properly filed
+Justice Claim.
+(5) Evidence-generation assistance; recoupment. —
+(A) Authority. —
+The Attorney General may authorize, at government expense, reasonable
+evidence-generation assistance necessary to fairly evaluate a Justice Claim (including
+medical or psychological assessment, forensic analysis, or expert evaluation).
+(B) No-need determination; disclosure; classified-information cases. —
+The Attorney General may deny or limit requested assistance under subparagraph (A)
+if the Department possesses information sufficient to fairly resolve the factual question for
+which assistance is sought. In such case, the Attorney General shall provide the claimant
+the relevant information, or an unclassified/redacted summary, to the maximum extent
+permitted by law. If the Attorney General determines that such disclosure (including
+acknowledgement) cannot be made consistent with law or protection of classified
+Page 38 of 58
+<PARSED TEXT FOR PAGE: 39 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+information, the Department shall proceed under paragraph (6) for purposes of evaluating
+and resolving the claim, and shall not draw any adverse inference against the claimant
+based on the nondisclosure.
+(C) Recoupment; bad faith. —
+The Attorney General shall establish by regulation a recoupment mechanism for costs
+authorized under subparagraph (A) where the claimant, after notice and an opportunity to
+be heard, is found to have acted in bad faith, to have materially misrepresented facts, or to
+have requested or caused assistance that was objectively unreasonable. Any recoupment
+shall be subject to ability-to-pay safeguards and may be collected, if at all, as a limited
+percentage of the claimant’s adjusted gross income; the Attorney General may assess a civil
+penalty for bad-faith waste as provided by regulation.
+(6) Classified or privileged information; justice default. —
+If the Department determines that classified or otherwise protected information
+materially supports a Justice Claim but cannot be disclosed to the claimant, the
+Department shall, to the maximum extent practicable, provide an unclassified substitute,
+summary, or admission sufficient to permit fair evaluation. If even the existence of such
+information cannot be revealed without undue risk, the Department shall nonetheless
+resolve the Justice Claim in a manner that substantially does justice and shall not require
+the claimant to prove facts the United States knows to be true but cannot disclose;
+resolution may include settlement, stipulated facts, or other appropriate disposition.
+(7) Subsequent action. —
+After final denial or deemed denial under paragraph (4), the claimant may file a civil
+action for monetary relief. In any such action, the court may consider the completeness and
+good-faith quality of the claimant’s Justice Claim submission and the Department’s Justice
+Review disposition in managing discovery, protective procedures, and equitable relief.
+SEC. 202. Remedies, damages, and allocation of awards.
+(a) Treble damages for willful violations. —
+If the trier of fact (judge or jury) finds that a defendant’s violation of this Act was willful,
+deliberate, or committed with knowledge of the law and specific intent to flout it, the court
+may, in its discretion, increase the amount of monetary damages (compensatory or
+statutory) up to three times the amount of actual damages incurred (or up to three times
+the statutory damages that would otherwise be awarded). This “treble damages” provision
+is intended to strongly deter especially egregious or flagrant violations by ensuring
+wrongdoers face consequences greater than the harm they inflicted. Treble damages under
+this subsection are considered punitive in nature and shall not be awarded in addition to
+separate punitive damages under Section 201(c)(3)(C); rather, the plaintiff may elect either
+an award of treble damages or a separate award of punitive damages for the same conduct.
+Page 39 of 58
+<PARSED TEXT FOR PAGE: 40 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(In other words, if treble damages are imposed, the court should not stack an additional
+punitive award on top of that for the same violation, and vice versa.)
+(b) Liquidated and statutory damage amounts. —
+Recognizing that certain violations of this Act may cause real harms that are difficult to
+quantify (such as loss of First Amendment freedoms, damage to public confidence, or
+chilling effects on voter participation), Congress establishes the following baseline damage
+amounts as a guide, subject to adjustment by the court in the interest of justice (and subject
+to the cap in subsection (a) if trebling):
+For intangible harms or civil-rights injuries, the court should consider awarding an amount
+not less than $25,000 and not more than $75,000 for each violation, for each affected
+individual, or for each day of an ongoing violation, as the court deems appropriate. In
+determining the measure and amount of statutory damages, the court shall consider, among
+other factors, the plaintiff’s proposed remedial plan for use of funds (if any), the scope and
+duration of the defendant’s wrongful conduct, the number of persons affected, and the need
+for deterrence and proportionality. The court shall approve any award linked to a plaintiff’s
+remedial plan only to the extent the court finds the plan reasonably relates to causes of
+action and remedies authorized under this Act and is not duplicative of other relief; the
+court may require a court-approved accounting or other oversight to ensure the funds are
+used as directed.
+These figures are general guidelines; the court has discretion to choose a fitting per-unit
+amount within the ranges, considering the gravity of the offense and the need for
+deterrence. Statutory damages can be awarded in addition to any proven compensatory
+damages for other distinct harms, but the overall award remains subject to trebling or
+punitive limits as applicable. The damages can be paid on a schedule determined prudent
+by the court.
+(c) Allocation of awards (public-interest bounty). —
+In any civil action under this Act in which monetary relief (damages, civil penalties, or
+settlement amounts) is obtained from a defendant, and one or more plaintiffs in the action
+brought the suit as a public-interest plaintiff on behalf of the public of any qualified group
+(as described in Section 201(b)(2)), the court shall allocate the monetary award between the
+plaintiff and the Democracy Defense and Remediation Trust Fund, as follows,
+notwithstanding any contrary common-law rule about standing or windfalls:
+(1) Default 60/40 split. —
+By default, the prevailing public-interest plaintiff (the organization or citizen who sued
+on behalf of the public) shall be awarded 60% of the net monetary recovery (after any
+court-approved attorneys’ fees and costs), and the remaining 40% shall be deposited into
+the Democracy Defense and Remediation Trust Fund established under Title III. This
+division is intended to reward and sustain civic organizations that take on the costs and
+Page 40 of 58
+<PARSED TEXT FOR PAGE: 41 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+burdens of enforcement (“bounty”), while ensuring a significant portion of funds also go to
+broad democratic improvements via the Trust Fund.
+(2) Court adjustment for cause. —
+The court may adjust the percentage allocation between the plaintiff and the Trust Fund
+if it finds that a different division would better serve the public interest in the specific case.
+For example, if multiple plaintiffs with varying roles are involved, or if the plaintiff
+organization already has ample funds relative to the scope of harm, the court might order a
+50/50 split, or 80/20, etc., as justice requires. The court shall set forth its allocation decision
+and reasons in the final order or judgment. In no event shall the plaintiff’s share exceed
+75% or be less than 25%, except by consent of the plaintiff.
+(3) Use of plaintiff’s share. —
+Any funds allocated to a private plaintiff under this subsection must be used by that
+plaintiff for activities consistent with the purposes of this Act. A nonprofit organization
+receiving such an award shall dedicate the funds to efforts such as voter education, election
+integrity initiatives, protecting free speech, legal reform, or other pro-democracy programs
+that benefit the public (consistent with its tax-exempt purposes, if applicable). An
+individual citizen plaintiff receiving an award shall, as a condition of receipt, either apply
+the funds to a public-interest project of their choosing (related to democracy reform) or
+donate a substantial portion to a recognized nonprofit engaged in such work.
+The court, in its discretion, may require a plan or affidavit from the plaintiff detailing
+how their share will be used in the public interest, and can make the payment to the
+plaintiff conditional on compliance with that plan. (This ensures the “bounty” portion
+directly furthers the Act’s goals and is not misused for purely private benefit – analogous to
+cy pres principles in class actions, but mandated by statute here to maintain alignment
+with the Act’s purpose.) The court may waive this requirement for an individual plaintiff to
+a reasonable extent (or approve an alternative charitable use of the funds) if strict
+compliance would impose undue hardship or if the plaintiff’s proposed use, though not
+strictly within the Act’s scope, has clear public benefit (the court must report any such
+alternative allocation to Congress).
+(4) Settlement considerations. —
+If a case is resolved by settlement, the parties should, wherever feasible, specify the
+agreed allocation between the plaintiff and the Trust Fund in the settlement. The default
+assumption is the 60/40 split applies unless a different allocation is approved by the court.
+Defendants shall not attempt to manipulate the allocation to undermine the plaintiff’s
+incentive (for example, a defendant cannot demand that the entire settlement go to the
+Trust Fund to deprive the plaintiff organization of resources; any such side arrangement
+could be voided by the court as against public policy). The court must review any settlement
+in a public-interest suit to ensure the allocation is fair and in keeping with the Act.
+Page 41 of 58
+<PARSED TEXT FOR PAGE: 42 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(5) Judgment Fund payment (for federal defendants). —
+If a judgment or settlement is entered against the United States under this Act, the
+Judgment Fund (31 U.S.C. § 1304) shall be available to pay the monetary award. The
+Secretary of the Treasury shall satisfy the judgment by paying the respective shares to the
+plaintiff and to the Trust Fund as directed by the court. Payment from the Judgment Fund
+as provided by this Act is deemed a legally authorized payment, satisfying any requirement
+of 31 U.S.C. § 1304(a) for payment of final judgments.
+(6) Joint liability and multiple defendants. —
+If there are multiple defendants held jointly and severally liable, the court may impose
+the Trust Fund allocation proportionately or on the group as a whole. The court may also, in
+its discretion, allocate the Trust Fund portion among multiple defendants in a way that
+reflects their relative culpability (as a quasi-penalty). For example, if one defendant is far
+more culpable, the court could assign a greater portion of the total payout from that
+defendant to go to the Trust Fund, while ensuring the plaintiff still receives roughly their
+entitled share of the total net recovery. The guiding principle is that the plaintiff’s overall
+share of the total recovery versus the Trust Fund’s share should roughly follow the 60/40
+default (unless adjusted for cause), regardless of how payments are distributed among
+defendants.
+(d) Statute of limitations; retroactive lookback. —
+An action under this Act must be commenced within 5 years after the date on which the
+plaintiff discovered or reasonably should have discovered the violation, but in no event later
+than 10 years after the date of the violation. However, for causes of action based on
+violations occurring before the date of enactment of this Act, a special retroactive lookback
+is provided: plaintiffs may bring suits within 2 years of this Act’s enactment for violations
+that occurred in the 10-year period preceding enactment (even if those violations would be
+time-barred under the normal limitations). This one-time lookback aims to address recent
+egregious attacks on election integrity and free speech that were not actionable or not
+discovered until now. After this window, the normal limitations apply.
+(e) Sovereign immunity and preemption clarifications. —
+Any assertion of sovereign immunity by the United States or any other governmental
+defendant in an action under this Act is abrogated as set forth in Section 201(a). Federal
+law enforcement or civil rights statutes that require procedural prerequisites (such as
+exhaustion of state remedies or notices of claim) do not apply to actions under this Act;
+Congress intends this Act to provide immediate, independent federal recourse for the harms
+identified. This Act preempts any state law that purports to authorize or immunize conduct
+prohibited herein (for example, if a state law allowed election officials to accept private
+grants in ways forbidden by Section 103, or if a state law shielded social media companies
+from liability when following government censorship directives, those would be preempted
+with respect to federal elections). Conversely, state laws that provide equal or greater
+protections for free speech and fair elections are not preempted; this Act sets a floor, not a
+Page 42 of 58
+<PARSED TEXT FOR PAGE: 43 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+ceiling. Compliance with both this Act and any stricter state law is possible by adhering to
+the stricter standard. In case of conflict between this Act and any other federal statute, the
+provisions of this Act (being later and more specifically focused on election integrity and
+free expression) shall govern, except where the other statute explicitly supersedes this Act.
+No contractual or private agreement (such as an arbitration clause, nondisclosure
+agreement, or social media terms of service) shall waive or bar the rights conferred by this
+Act; any predispute agreement that would require arbitration of, or restrict access to, the
+remedies under this Act is unenforceable unless the parties knowingly and voluntarily
+agree to arbitration after the dispute arises.
+SEC. 203. Representative actions by harmed organizations.
+(a) Right to bring representative actions. — Except as otherwise limited in this Act, any
+qualified public-interest plaintiff (as defined in Section 4(11A)) that has suffered an injury
+cognizable under this Act may bring a civil action on behalf of itself and on behalf of a
+definable group of persons who suffered harms cognizable under this Act that arose from
+the same course of conduct. The organization must demonstrate organizational injury or
+representational standing as described in Section 201(b)(2).
+(b) Expedited certification. — Before permitting generalized discovery or final relief on
+behalf of a group, the court shall hold a brief expedited hearing and shall determine by a
+preponderance of the evidence that:
+(1) the organization suffered an injury cognizable under this Act;
+(2) the putative group’s harms arise from the same cause and are cognizable under this
+Act; and
+(3) proceeding as a representative action is fair and practicable and will permit the court
+to fashion common relief. If the court so finds the action is certified the court shall issue
+written findings. Certification decisions may be certified for interlocutory appeal.
+(c) Certification and Article III effect for monetary relief. —
+(1) Baseline rule. Certification under this section shall create a rebuttable presumption
+that the representative action satisfies the Article III injury-in-fact requirement for
+purposes of both equitable relief and monetary relief only if the court finds, by
+preponderance of the evidence, each of the following:
+(A) Organizational or member injury: the plaintiff organization has suffered an
+organizational injury cognizable under this Act, or at least one identified or readily
+identifiable member of the putative group has a concrete and particularized injury fairly
+traceable to the defendant’s conduct; and
+Page 43 of 58
+<PARSED TEXT FOR PAGE: 44 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(B) Commonality and predominance: the group’s claims present common issues of
+law or fact and those common issues predominate over individual issues with respect to the
+relief sought; and
+(C) Impracticability of individualized relief or necessity of systemic remedies:
+individualized monetary relief to each injured person is impracticable (because members
+are unidentifiable, harms are highly dispersed, or individual awards would be de minimis
+and administratively infeasible), and the monetary relief sought is primarily intended to
+fund systemic remedial measures (for example, institutional reforms, oversight bodies,
+infrastructure upgrades, or broadly targeted remediation) that will redress the injury to the
+group as a whole.
+(2) Court-approved remedial plan and notice. Before awarding or approving monetary
+relief in a certified representative action, the court shall: (A) require the plaintiff to submit
+a detailed remedial plan describing proposed uses of monetary relief, governance,
+performance metrics, audits, and safeguards against partisan diversion or private
+enrichment; (B) determine that a substantial portion of payments will be used for systemic
+measures rather than redistribution to individuals; (C) order notice reasonably calculated
+to reach group members and provide a meaningful opportunity to opt out or to assert direct
+claims for individualized relief; and (D) appoint a neutral special master or monitor where
+appropriate to oversee implementation and accounting.
+(3) Allocation and distribution. Absent extraordinary circumstances, courts shall prefer
+allocation formulas that direct the bulk of monetary awards in certified representative
+actions to court-approved systemic remedies (including deposits to the Democracy Defense
+and Remediation Trust Fund) when individualized distribution is infeasible; the court may
+authorize limited cy-pres or structured distributions to identifiable victims only to the
+extent feasible and consistent with the remedial plan.
+(4) Safeguards against double recovery. The court shall adopt procedures to avoid
+duplicate recovery by individual claimants and to ensure that any public-interest plaintiff’s
+share is subject to judicial oversight as provided in Section 202.
+(d) Limited discovery. Discovery directed to the putative group shall be stayed pending
+certification except as the court permits for good cause.
+SEC. 204. Trial Period.
+(a) Trial Period. — The remedies in Title II shall take effect on enactment. The monetary
+remedies authorized by Section 202 shall remain in effect without a statutory aggregate cap
+for a trial period of 12 months following the date of enactment (the “Trial Period”). Congress
+may, by statute, terminate the Trial Period or otherwise amend, limit, or suspend the
+operation of any remedy under Title II at any time.
+Page 44 of 58
+<PARSED TEXT FOR PAGE: 45 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(b) Purpose of the Trial Period. — The Trial Period is intended to permit Congress, the
+Judiciary, and relevant oversight bodies to evaluate the real-world operation and
+consequences of the remedies established by Title II before those remedies become
+permanently uncapped. In particular, the Trial Period shall provide a limited, controlled
+interval to:
+(1) collect empirical data and assess the fiscal, insurance-market, litigation, judicial,
+administrative, and broader economic impacts of the remedies authorized by Section 202;
+(2) observe and allow courts, the Democracy Defense and Remediation Trust Fund, and
+other implementing entities to operationalize allocation, monetization, investment, and
+distribution mechanisms, and to develop appropriate procedures for supervision, auditing,
+and enforcement;
+(3) detect and mitigate risks of abusive or speculative litigation, market or fiscal
+disruption, or diversion of funds to private enrichment; and
+(4) enable Congress to consider evidence-based adjustments — including statutory limits,
+phase-ins, procedural reforms, or other refinements — so that the remedies ultimately
+continued beyond the Trial Period are effective, sustainable, and protective of the public
+interest.
+The Trial Period is therefore an intentional, temporary experiment to generate the factual
+record necessary for prudent, permanent policy decisions.
+(c) Early termination by certification or congressional resolution. —
+(1) Termination by executive certification. — The Attorney General may, by written
+certification to the Clerk of the House of Representatives and the Secretary of the Senate,
+terminate the Trial Period prior to its scheduled expiration if they determine, based on a
+factual and analytical record, that continuation of the Trial Period would present an
+extraordinary fiscal, insurance-market, litigation, judicial, or economic risk to the United
+States. Such certification shall state with particularity the factual and analytical basis for
+the determination and shall take effect upon the date of certification. The Attorney General
+shall make the certification publicly available, subject to necessary protective treatment for
+legitimately classified information.
+(2) Congressional termination. — Congress may terminate the Trial Period at any time
+by enactment of a joint resolution bearing the title “Joint Resolution Terminating the Trial
+Period under the Kirk–Evers Free Speech & Democracy Protection Act.” Such a joint
+resolution shall take effect immediately upon enactment. The Attorney General and the
+Comptroller General shall report to the appropriate congressional committees promptly
+upon issuing any certification under paragraph (1).
+Page 45 of 58
+<PARSED TEXT FOR PAGE: 46 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(d) Grandfathering. — Unless a statute enacted after filing expressly provides otherwise,
+a civil action under this Act that is filed in a court of competent jurisdiction during the Trial
+Period shall be governed by the provisions of Title II as in effect at the time the complaint is
+filed, and shall not be subject to any subsequent statute enacted by Congress after the filing
+that would reduce the remedies or relief available in that action. This paragraph does not
+prevent Congress from enacting provisions that apply prospectively to actions filed after the
+effective date of such enactment.
+Title III — Democracy Defense and Remediation
+Trust Fund
+SEC. 301. Establishment of Trust Fund.
+There is established in the Treasury of the United States a trust fund to be known as the
+“Democracy Defense and Remediation Trust Fund” (hereafter the “Trust Fund”). The Trust
+Fund shall consist of:
+(1) Appropriated funds. —
+Such amounts as may be appropriated by Congress to initiate or replenish the fund
+(including an initial appropriation of $30,000,000 authorized upon enactment, to remain
+available until expended).
+(2) Civil recoveries and penalties. —
+All amounts of money payable to the United States as a result of judgments, damages, civil
+penalties, or settlements under this Act that are designated for the Trust Fund pursuant to
+Section 202(c) (typically 35% of awards in public suits, plus any portion allocated by court).
+This includes any amounts forfeited by defendants or disgorged as equitable relief that are
+directed to the United States or the Trust Fund.
+(3) Criminal fines. —
+Any criminal fines imposed for offenses established by this Act (Title IV) shall, after any
+victim restitution, be deposited into the Trust Fund rather than the general fund of the
+Treasury. The same applies to any forfeiture proceeds from criminal cases under this Act
+(e.g., illegal gains or instrumentalities seized)—after satisfying restitution, they go to the
+Trust Fund.
+SEC. 302. Use of Fund; grants and oversight.
+(a) Purpose of the Fund. —
+Amounts in the Democracy Defense and Remediation Trust Fund shall be used only for the
+following purposes, aimed at strengthening democratic processes and remedying past
+harms caused by violations addressed by this Act:
+Page 46 of 58
+<PARSED TEXT FOR PAGE: 47 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+(1) Election infrastructure security and modernization. —
+Making grants to State and local election agencies (through the Election Assistance
+Commission or the Cybersecurity and Infrastructure Security Agency) to enhance the
+security, reliability, and accessibility of federal election infrastructure. This includes
+replacing or upgrading outdated voting machines (especially those with known
+vulnerabilities as documented by DHS or CISA advisories to systems with voter-verified
+paper audit trails), improving cybersecurity of voter registration databases and election
+networks, implementing risk-limiting audits, improving physical security of ballot storage,
+and other measures to harden election systems against hacking, tampering, or failure.
+Priority for such grants shall be given to jurisdictions demonstrating financial need or
+specific security vulnerabilities (for example, those using older voting systems with known
+flaws). The Election Assistance Commission, in consultation with CISA and state election
+directors, shall establish criteria and an application process for these grants, ensuring
+equitable distribution that addresses high-risk areas. Recipients must commit to use funds
+only for the intended security improvements and to report on improvements made.
+(2) Protection of political speech and press freedom. —
+Funding programs to educate government officials at all levels on First Amendment limits
+and the proper role of government regarding social media and the press (to prevent future
+“jawboning” incidents). This may include developing and disseminating training modules or
+guidelines (possibly via the Department of Justice’s Community Relations Service or Office
+of Justice Programs) on how agencies can counter misinformation without infringing on
+speech rights. The Fund can also support civil society “censorship watchdog” initiatives that
+monitor government communications with media or technology companies for potential
+censorship, including creating a public transparency portal where major social media
+platforms can voluntarily report any government content removal requests (thus fostering
+accountability). Additionally, the Fund may be used to assist platforms and news outlets in
+resisting improper government pressure—for example, by subsidizing the legal expenses of
+smaller platforms or publishers that challenge government gag orders or censorship
+directives (with appropriate conflict-of-interest safeguards).
+(3) Remediation of past harms to voters and candidates. —
+Providing resources to assist individuals or communities who were direct victims of proven
+violations of this Act. For example, if in a particular city absentee ballots were unlawfully
+discarded and a court ordered a new election (as occurred in Bridgeport), the Fund could
+help cover the costs of that new election or finance expanded voter outreach to reassure and
+re-engage voters whose trust was shaken. If a demographic group was targeted by a
+deepfake robocall that deterred some from voting, the Fund could support a public
+information campaign in that community to counteract lingering falsehoods and encourage
+future turnout. The Attorney General, with input from the Civil Rights Division and the
+Election Assistance Commission, shall identify opportunities for small grants or projects
+that “heal” communities affected by these anti-democratic incidents—for example, a
+one-time grant to a local nonprofit to hold town halls on election integrity after a scandal, or
+Page 47 of 58
+<PARSED TEXT FOR PAGE: 48 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+funding an academic study and report on the impact of a particular disinformation incident
+on voter behavior, coupled with recommendations. Such uses of the Fund should be targeted
+and not open-ended (no perpetual entitlements).
+(4) Law enforcement and oversight enhancements. —
+Bolstering the capacity of federal, state, and local authorities to detect, investigate, and
+prosecute offenses that threaten election integrity or political rights. This could include
+supporting multi-agency task forces on election threats, funding the hiring or training of
+additional Department of Justice personnel (for example, dedicated election-interference
+prosecutors) or Federal Bureau of Investigation agents focused on election-related
+cybercrime or civil rights violations, and providing technology and tools to analyze deepfake
+content or monitor online threats to election officials. The Fund can also support
+independent oversight—for instance, financing thorough reviews by the Government
+Accountability Office or the Privacy and Civil Liberties Oversight Board of how federal
+agencies are complying with the Act’s anti-censorship protocols (Section 101(a)(4)), and
+funding outside audits of key programs. Up to 5 percent of the Fund’s expenditures in a
+fiscal year may be used to contract with independent auditors or experts to evaluate the
+effectiveness of programs financed by the Fund.
+(5) Public education and resilience. —
+Developing and disseminating public education resources to improve societal resilience
+against election misinformation or intimidation tactics. For example, the Fund might
+support nonpartisan voter information hotlines, public service announcements about voter
+rights (how to report intimidation, how to verify election information), or grants to
+educational institutions to develop curricula on media literacy and democratic
+participation.
+(b) Administration of the Fund. —
+The Trust Fund shall be administered by the Secretary of the Treasury in coordination with
+the Democracy Protection Council established under Title V and the Election Assistance
+Commission. The Secretary of the Treasury shall establish a program office or designate an
+existing office to manage disbursement of funds. This office shall, within 180 days of
+enactment, promulgate guidelines (in consultation with relevant agencies) for the
+application, award, and oversight of grants and projects funded by the Trust Fund. The
+Democracy Protection Council (see Section 502(b)) shall advise on priorities for fund usage
+annually, ensuring that funded projects align with the most pressing needs identified to
+protect elections and speech.
+(c) Grant conditions and accountability. —
+All grants or funds distributed from the Trust Fund shall be subject to conditions to ensure
+proper use:
+Page 48 of 58
+<PARSED TEXT FOR PAGE: 49 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+● Recipients (states, localities, or organizations) must use funds only for the specific
+purposes awarded and maintain detailed records. Misuse of funds or failure to
+comply with grant conditions will require repayment and could result in ineligibility
+for future funds.
+● The Department of Justice or the Election Assistance Commission shall publish an
+annual report detailing all expenditures from the Fund, the recipients, and the
+projects funded.
+● Federal officials making allocation decisions shall do so on a nonpartisan,
+meritocratic basis. Decisions on fund awards are generally not reviewable in court,
+except for claims of unconstitutional discrimination or the like (to prevent litigation
+from disgruntled applicants, consistent with the notion that this funding is a
+discretionary benefit, not an entitlement).
+● Acceptance of any grant from the Fund constitutes agreement by the recipient to
+abide by all applicable federal laws and regulations related to the grant’s purpose. If
+a recipient is found to have violated the terms (for example, using money for
+unauthorized purposes or failing to file required reports), they must repay the
+misspent funds with interest upon demand, and may be barred from further
+assistance until the issue is remedied.
+(d) Congressional oversight and reallocation. —
+The Comptroller General shall conduct an audit and evaluation of the Fund’s activities
+within 3 years of enactment, assessing how funds have been used and their effectiveness in
+improving election integrity, whether any misuse occurred, and recommendations for
+improvement. If Congress finds at any time that Fund monies are not being used effectively
+or as intended, it may enact legislation to amend the purposes or reallocate funds (nothing
+in this Act entitles any entity to continued funding; all grants are discretionary and subject
+to change by Congress).
+Title IV — Criminal Offenses and Penalties
+SEC. 401. Offense of election subversion.
+(a) In general. —
+Whoever knowingly and willfully engages in a scheme or concerted course of conduct
+(including a conspiracy) that involves multiple violations of law or multiple acts of
+interference, with the intent to subvert, nullify, or overturn the free and fair conduct of a
+federal election, or to otherwise undermine the actual or apparent expression of voters’ will
+in a federal election, shall be guilty of the felony offense of “Election Subversion.” Lawful
+political advocacy, protest, assembly, petitioning of government, or contesting of election
+results through lawful processes shall not, by itself, constitute an offense under this section.
+Page 49 of 58
+<PARSED TEXT FOR PAGE: 50 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+To be liable for Election Subversion, an individual (acting alone or with others) must
+commit or attempt at least one overt act that is independently unlawful—e.g., an act that
+constitutes voter intimidation, ballot fraud, unauthorized ballot destruction, computer
+tampering, or another violation of Title I or other federal or state election laws—as part of a
+broader plan or scheme.
+The overt acts must be related and not isolated incidents; they must be part of a pattern or
+coordinated effort to corrupt the election outcome or punish lawful political participation.
+The perpetrator must act with the specific intent to procure an illegitimate advantage or
+outcome in a federal election, or to retaliate against or disenfranchise voters, candidates, or
+others for participating lawfully—in short, intent to subvert democracy in that election.
+(This offense targets orchestrated, multi-faceted schemes to undermine elections—for
+example: a coordinated plot to stuff illegal ballots while discarding real ones and spreading
+disinformation to cover it up; or a conspiracy among officials to falsely certify results and
+intimidate those who object. It is analogous to a “conspiracy against rights” or a RICO
+charge, but focused on electoral integrity rather than requiring, say, a protected class or
+financial enterprise. It ensures that if various illegal acts (threats, fraud, tampering) are
+deployed in combination to overturn an election, they can be charged under one
+comprehensive offense to capture the gravity of the scheme. If all acts were somehow legal
+individually, then no “unlawful overt act” exists and this crime would not apply—i.e.,
+partisan but legal tactics like gerrymandering are not criminalized by this, only schemes
+involving illegal acts.)
+(b) Penalties. —
+A person convicted of Election Subversion shall be subject to the following penalties, in
+addition to any penalties for the underlying acts themselves (which may be charged
+separately):
+(1) Basic penalty. —
+A fine of up to $500,000, and/or imprisonment for up to 15 years.
+(2) Enhanced penalty—outcome change. —
+If the offense actually changed the officially reported outcome of a federal election (for
+example, the scheme succeeded in causing the wrong candidate to be declared winner), or if
+it was so extensive it could have changed the outcome of a reasonably close election (even if
+ultimately caught or reversed), then the maximum imprisonment is increased to 20 years.
+(3) Enhanced penalty—violence. —
+If the offense involved violence or attempted violence—such as kidnapping, attempted
+murder, or inflicting serious bodily injury in the course of the scheme (e.g., an attack on an
+election official or bombing of a ballot storage facility)—then the defendant may be
+imprisoned for up to 25 years. (This is in addition to any punishment for the violent acts
+Page 50 of 58
+<PARSED TEXT FOR PAGE: 51 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+themselves; e.g., attempted murder charges. The 25-year cap is just for the subversion
+charge to reflect its aggravated nature when coupled with violence.)
+(4) Disqualification from office. —
+In addition to imprisonment and fines, the court may order that any defendant who is
+convicted of Election Subversion shall be disqualified from holding any office of honor, trust,
+or profit under the United States. In particularly egregious cases (e.g., where the offender
+was a public official betraying their oath), the court may impose such disqualification for a
+term of years or for life (permanent bar). This implements, in effect, the consequence
+envisioned by Section 3 of the 14th Amendment through the criminal process, allowing a
+judge to bar the worst offenders from future governmental authority.
+(c) Forfeiture. —
+Whoever is convicted of Election Subversion shall forfeit to the United States any
+property which constitutes or is derived from proceeds traceable to the offense, and any
+property used or intended to be used to commit the offense. For example, if conspirators
+raised funds to finance the scheme or received bribes, those funds can be forfeited, and if
+equipment (computers, devices) were used, they can be seized. Proceeds from forfeiture,
+after restitution to identifiable victims, shall be deposited in the Trust Fund. The forfeiture
+process shall follow 18 U.S.C. §§ 981–982, with the court making necessary findings
+post-conviction.
+SEC. 402. Penalties for officials abusing authority.
+This section provides additional penalties and consequences specifically aimed at public
+officials who abuse their authority to interfere in elections or related political rights, beyond
+the general criminal penalties:
+(a) Federal officials—removal and employment bar. —
+Any federal officer or employee who is convicted of any felony under this Act (including the
+Election Subversion offense or other offenses in this Title, or related federal offenses
+committed to carry out a violation of this Act) shall, upon conviction, forfeit their office or
+employment. If they have not already been removed, conviction under this Act shall be
+deemed cause for immediate removal. Furthermore, no person who is convicted of such an
+offense shall be employed by the United States government (in any civilian or military
+capacity) for a minimum of 5 years following the completion of their sentence. The court
+may extend this federal employment bar up to a lifetime ban in extreme cases, by explicit
+provision at sentencing. (This ensures, for instance, that a federal agent or official who
+corrupts an election cannot remain in or return to government service for a substantial
+period, if ever.)
+(b) State and local officials—notification and encouragement of removal. —
+If a state or local official is convicted in federal court of a crime under this Act, the Attorney
+Page 51 of 58
+<PARSED TEXT FOR PAGE: 52 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+General shall transmit a notice of the conviction, along with the pertinent facts and court
+findings, to the Governor and chief elections official (and, if applicable, the state legislative
+leadership or relevant removal authority) of the official’s state. It is the sense of Congress
+that any state or local official convicted of such offenses is unfit to continue holding public
+authority, and states are strongly urged to exercise their powers (such as recall,
+impeachment, or summary removal under existing state laws for felonies) to remove that
+person from any office they hold. (Congress cannot directly remove state officials except via
+constitutional mechanisms, but it expresses a clear stance that states should do so in these
+circumstances, and provides publicity to that effect.) This notification serves to spur state
+action and put moral weight behind removing any officials who betrayed their oath.
+(c) Sentencing enhancement for public trust. —
+In sentencing any defendant under this Act or related laws, if the defendant was a public
+official or person in a position of public trust at the time of the offense, that fact shall be
+treated as an aggravating factor. The United States Sentencing Commission is directed to
+amend the federal sentencing guidelines to reflect that abuse of public trust in committing
+election or speech-related offenses warrants a higher offense level or upward departure.
+(Many guidelines already consider abuse of trust; this makes it explicit for these
+democracy-protection crimes. Essentially, an official betraying democracy is worse than a
+private citizen committing the same act, so should be punished more severely.)
+(d) Disgorgement of ill-gotten benefits. —
+If a person derived any financial benefit or salary from a position that they obtained or
+retained via a violation of this Act (for example, someone who fraudulently won an election
+and thus received a government salary), the court may order that such benefits be
+disgorged and paid into the Trust Fund as a form of restitution to the public. Similarly, if an
+official accepted a bribe or illicit payment as part of subverting an election, that money
+shall be subject to forfeiture or a fine equal to its amount, payable to the Trust Fund. The
+intent is to ensure criminals do not profit from their subversion, even indirectly.
+(e) Federal pension forfeiture.
+(1) Amendment to 5 U.S.C. § 8312. —
+Section 8312(c) of title 5, United States Code, which lists offenses resulting in forfeiture
+of federal retirement annuities, is amended by adding a new paragraph:
+“(5) An offense under the Kirk–Evers Free Speech and Democracy Protection Act of 2025 (or
+any other offense determined by the Attorney General to have been committed in
+furtherance of an offense under that Act).”.
+(2) Effect. —
+As a result of this amendment, any federal employee or Member of Congress who is
+convicted of a felony under this Act (e.g., election subversion or conspiracy to violate rights)
+shall lose any entitlement to a federal pension or retirement annuity, if the offense related
+Page 52 of 58
+<PARSED TEXT FOR PAGE: 53 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+to their public position. The Office of Personnel Management shall implement regulations
+to carry out this pension forfeiture, including notifying the Office of Personnel Management
+of convictions and providing any due process for pensioners as under existing law. Such
+individuals may withdraw their own contributions, but receive no government pension
+benefits (similar to rules for treason, espionage, etc.). Furthermore, any Member of
+Congress convicted under this Act will be treated equivalently to having committed an
+offense listed in 5 U.S.C. § 8332(o), meaning they forfeit the congressional pension.
+(3) Rulemaking. —
+The Office of Personnel Management, in consultation with the Attorney General, shall
+within 180 days of enactment update its rules to include offenses under this Act as cause
+for pension loss, and establish procedures to implement such forfeitures (including
+coordination with the Department of Justice to receive conviction information and to allow
+limited appeal as provided in title 5).
+(4) Notification. —
+Within 30 days of any qualifying conviction of a federal employee or Member of Congress,
+the Attorney General shall notify the Office of Personnel Management and the relevant
+employing agency or congressional office to effectuate the pension suspension promptly.
+These measures collectively reinforce that those who “deliberately try to overthrow our
+democratic process have demonstrated unfitness for public authority” and will face not only
+standard criminal penalties but also the loss of any privileges of public service.
+SEC. 403. Penalties for ballot fraud and tampering.
+While many acts of ballot fraud and tampering are already federal crimes under title 52
+(e.g., 52 U.S.C. § 20511) or title 18 (e.g., 18 U.S.C. §§ 241, 242, etc.), Congress finds it
+necessary to enhance penalties for large-scale or conspiratorial election fraud to
+appropriately punish and deter such conduct:
+(a) Large-scale fraud enhancement. —
+If any person is convicted under any federal law for fraudulently casting ballots, counting
+false votes, bribery in voting, or similar offenses in a federal election, and the offense
+involved 10 or more fraudulent ballots or votes (or if fewer, but the conduct was part of a
+scheme to produce multiple illegal votes), then notwithstanding any lesser penalty in the
+underlying statute, the offender shall be fined and imprisoned for up to 10 years. If the
+offense involved 100 or more fraudulent ballots or votes (or could have altered the outcome
+of a federal contest), the maximum imprisonment shall be 15 years. These enhanced
+maximums apply unless the underlying law already provides equal or higher penalties.
+(b) Tampering with voting machines or tabulation. —
+Any person who, without authorization, tampers with or attempts to manipulate a voting
+Page 53 of 58
+<PARSED TEXT FOR PAGE: 54 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+machine, tabulator, or election results (by electronic means or otherwise) in a federal
+election shall be fined or imprisoned for up to 10 years, or both. If such tampering involves
+multiple machines or is done by an election official abusing their trust, the maximum shall
+be 15 years. (This provision complements Section 101(a)(3) by adding explicit criminal
+penalty; many such acts also violate 18 U.S.C. § 1030 or other statutes, which can be
+charged as well.)
+(c) Voter intimidation. —
+Existing law (18 U.S.C. § 594) punishes voter intimidation with up to 1 year imprisonment.
+To strengthen deterrence, if the intimidation is widespread or involves the threat of
+violence, the penalty shall be up to 5 years imprisonment. The Attorney General shall
+update charging guidelines to seek felony charges (e.g., under civil rights statutes) for
+serious intimidation cases, and not only misdemeanor charges.
+(d) Concurrent charges. —
+A prosecution under Section 401 (Election Subversion) shall not preclude separate charges
+for specific acts of fraud, intimidation, computer crime, or similar offenses. Conversely, a
+person may be charged with stand-alone offenses (ballot fraud, etc.) without the broader
+subversion charge if their conduct, while illegal, did not rise to a concerted scheme at the
+scale of Section 401. The intent is to give prosecutors flexibility to charge according to the
+gravity and coordination of the conduct.
+(e) No double jeopardy issue. —
+If conduct violates both this Act and other federal criminal statutes, prosecution may
+proceed under both so long as each requires proof of a fact the other does not (or they
+address distinct societal harms). However, sentencing courts should avoid “double counting”
+the same harm under multiple enhancements.
+(Congressional finding: These graduated penalties reflect that small-scale ballot fraud is
+serious but a coordinated scheme involving many ballots is vastly more dangerous to
+democracy and thus warrants harsher punishment. The approach parallels some election
+laws that scale penalties by volume of fraud.)
+Title V — General Provisions
+SEC. 501. Implementation assistance.
+The Attorney General, in consultation with the Election Assistance Commission and the
+Cybersecurity and Infrastructure Security Agency, shall provide legal, technical, and
+training assistance to Federal, State, and local election officials, and to qualified
+public-interest plaintiffs and their counsel, to support implementation of this Act. Such
+assistance may include model procedures, training programs, expedited legal review, and
+Page 54 of 58
+<PARSED TEXT FOR PAGE: 55 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+technical guidance to strengthen election administration, cybersecurity, and protective
+procedures required by this Act.
+SEC. 502. Rulemaking authority; interagency coordination;
+congressional oversight.
+(a) Rulemaking. —
+Not later than 180 days after enactment (unless a different timeframe is specified
+elsewhere in this Act), each federal agency or department with responsibilities under this
+Act (including but not limited to DOJ, the Treasury, OGE, EAC, Office of Personnel
+Management for pension rules, etc.) shall promulgate such rules and regulations, or issue
+such guidance, as necessary to implement and administer the provisions of this Act within
+its jurisdiction. The Administrative Procedure Act shall generally apply, except an agency
+may issue interim final rules without prior public comment if it finds good cause that delay
+would be contrary to the public interest, provided that opportunity for post-promulgation
+comment is given. Agencies should prioritize implementing key provisions (like establishing
+the Trust Fund mechanics, creating complaint procedures for the civil action, etc.) quickly
+to have effect by the next federal election.
+(b) Democracy Protection Council. —
+There is established an interagency body known as the “Democracy Protection Council”.
+The Council is chaired by the Attorney General (or their designee) and composed of
+representatives from the Department of Justice, Department of Homeland Security
+(particularly CISA), Office of the Director of National Intelligence (for foreign interference
+insight), Department of the Treasury, Election Assistance Commission, Federal
+Communications Commission, Office of Government Ethics, and any other agency the
+President may designate as relevant. The Council shall meet at least quarterly to
+coordinate the federal government’s efforts under this Act, share information on emerging
+threats to elections and political speech, and ensure efficient use of the Trust Fund
+resources. The Council can form working groups (e.g., on election cybersecurity, on
+combating disinformation, on enforcement of the Act’s provisions) that cut across agencies.
+(c) Congressional oversight. —
+The relevant committees of Congress (including Judiciary, Homeland Security, Intelligence,
+House Administration, Senate Rules, and others with jurisdiction) shall hold periodic
+hearings on the enforcement and implementation of this Act. The Attorney General and the
+Chair of the Democracy Protection Council (if not the Attorney General) shall testify at
+least annually on the status of investigations, civil actions, prosecutions, and programs
+under the Act, while respecting confidentiality of ongoing matters. Not later than one year
+after enactment, the Attorney General shall provide an initial comprehensive report to
+Congress detailing steps taken to implement this Act, including descriptions of any charges
+brought, civil suits filed or intervened in by the Department, settlements reached, the usage
+Page 55 of 58
+<PARSED TEXT FOR PAGE: 56 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+of the Trust Fund monies to date, and any challenges or recommendations. Subsequently,
+annual reports should update on these topics.
+(d) Neutral enforcement. —
+All enforcement actions under this Act shall be undertaken without regard to political
+affiliation, ideology, or viewpoint, and solely on the basis of the conduct alleged and the
+evidence presented.
+(e) Independent effectiveness review. —
+The Comptroller General (GAO) shall commence a review 2 years after enactment to
+evaluate the implementation and effectiveness of this Act. The review shall examine at
+minimum—
+(1) the extent to which the new causes of action and penalties have been utilized and
+whether they have had a measurable deterrent effect;
+(2) any evidence of reduced incidents of the prohibited acts;
+(3) whether the availability of private enforcement and third-party funding has aided
+enforcement or caused any issues; and
+(4) any administrative or legal difficulties encountered (e.g., standing issues, volume of
+suits, etc.).
+GAO shall report its findings, including any recommendations for legislative or
+administrative improvements, to Congress within 3 years of enactment. Congress will use
+this to assess whether further amendments or resources are needed.
+SEC. 503. Effective date.
+Unless otherwise specified—
+(a) In general. —
+This Act takes effect upon enactment. The provisions apply to any conduct that occurs on or
+after the effective date, except as noted for retroactivity below.
+(b) Civil provisions. —
+Civil provisions (Title II) apply immediately and, as noted in Section 202(d), may reach
+conduct from up to 10 years prior to enactment if suit is brought within the special 2-year
+window post-enactment. Any violation that is ongoing or has continuing effects into the
+post-enactment period may be remedied as well.
+(c) Criminal provisions. —
+Criminal provisions (Title IV) shall apply only to acts committed after the date of
+Page 56 of 58
+<PARSED TEXT FOR PAGE: 57 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+enactment. No person may be prosecuted for conduct that was completed before enactment
+(to avoid ex post facto issues). However, if a scheme began before enactment and continued
+after, acts committed after enactment can be charged.
+(d) Administrative obligations. —
+Title I prohibitions inform civil actions immediately (and retroactively via lookback), but
+any new administrative obligations (such as Section 102’s no candidate disqualification rule
+or Section 103’s funding ban) take effect immediately upon enactment. If state actions
+contrary to Section 102 or Section 103 are already in progress at enactment, they must
+cease or conform within 30 days.
+(e) Administrative deadlines. —
+Where the Act imposes deadlines (e.g., rulemakings in 180 days, GAO report in 3 years),
+failure to meet a deadline does not invalidate the Act’s provisions. Agencies delinquent in
+meeting a deadline must notify Congress of the delay and provide a new timetable.
+SEC. 504. Severability.
+If any provision of this Act, or the application of any provision to any person or
+circumstance, is held to be invalid or unconstitutional, the remainder of the Act and the
+application of its provisions to other persons or circumstances shall not be affected. The
+provisions of this Act are severable. Congress declares that it would have enacted this Act
+and each provision, section, sentence, and clause thereof, irrespective of the fact that any
+one or more parts may be declared invalid.
+In particular, if any defendant or class of defendants (for example, state officials) is found
+immune from suit or not subject to a provision, the provisions shall remain enforceable
+against others (e.g., individuals or the federal government). If any remedy or penalty is
+judged excessive in a specific case, the court should enforce it to the maximum allowed
+extent rather than voiding the provision entirely (e.g., if a certain damages cap is required,
+impose the cap but do not nullify the cause of action). Courts are instructed to construe the
+Act to uphold its validity to the fullest possible degree, and to sever only what must be
+severed, preserving the remainder.
+(Congress stresses: even if parts of this Act fall, the resolve to protect free speech and fair
+elections stands—the Act’s provisions should be implemented to the greatest extent
+permissible, to ensure no violation goes unaddressed even if a novel legal theory fails.)
+SEC. 505. Rules of Construction.
+(a) No executive enforcement delegation. —
+Nothing in this Act shall be construed to designate the United States as the real party in
+Page 57 of 58
+<PARSED TEXT FOR PAGE: 58 / 58>
+Kirk–Evers Free Speech & Democracy Protection Act of 2026 Version: v1.0_2026-09-10
+interest, to create an “ex rel.” action, or to assign executive enforcement authority,
+notwithstanding the availability of public-interest civil actions.
+(b) No expansion of governmental power. —
+Nothing in this Act shall be construed to authorize any new category of government
+surveillance, regulation of speech, or control over election administration. This Act is
+intended to restrain and remedy abuses of governmental power, not to expand it.
+(c) Preservation of constitutional allocation of authority. —
+The protections established in this Act regarding ballot access for federal office do not
+expand federal authority, but rather preserve the constitutional allocation of authority
+recognized by the Supreme Court, including Congress’s exclusive role in enforcing
+qualifications for federal office under the Fourteenth Amendment and the Elections Clause.
+Page 58 of 58
