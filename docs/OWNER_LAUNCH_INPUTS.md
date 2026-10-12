@@ -31,8 +31,13 @@ The campaign must authorize its FROM address/domain, provision a verified
 transactional sender (currently code expects Resend), add provider API
 credentials and completed SPF/DKIM DNS to the protected Render service.
 The development agent can create authentication keys and delivery secrets
-without asking the user to paste them into chat. The outbox/worker and
-real end-to-end delivery must pass before SIGNUP_ENABLED is turned on.
+without asking the user to paste them into chat. A same-service inline
+PostgreSQL-leased mail worker is now available (or a separately operated
+worker may be approved). The campaign must still provide/authorize a real
+verified sender and delivery provider account. The operator must test
+real delivery, queue leases and retry behavior, then mark
+MAIL_WORKER_OPERATIONAL_APPROVED=true before enabling SIGNUP_ENABLED=true.
+A free sleeping web process is not evidence of continuous timely delivery.
 A public volunteer can then sign up, verify and return across devices.
 Do not confuse the private-preview HTTP Basic login with a staff/volunteer
 account or passkey/MFA.
