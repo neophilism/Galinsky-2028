@@ -25,8 +25,10 @@ The console is **not activated** merely by deploying its code. Its admin URLs ar
 
 ## External service gates
 
-Payment merchant underwriting, settlement bank ownership, four independent actual acquiring relationships, signed callback adapters, cross-provider donor limits, receipt/refund reconciliation and treasury approval must all be independently verified. An automated availability probe is NOT equivalent to verified card authorization or settled funds. No real payment is possible in this console. Secure storage does NOT represent active integration with Elavon, Chase, Worldpay or Fiserv: each will require a reviewed API adapter after account-specific terms are known.
+Payment merchant underwriting, settlement bank ownership, four independent actual acquiring relationships, signed callback adapters, cross-provider donor limits, receipt/refund reconciliation and treasury approval must all be independently verified. An automated availability probe is NOT equivalent to verified card authorization or settled funds. No real payment is possible in this console. Secure storage does NOT represent active integration with Elavon, Worldpay or Fiserv: each will require a reviewed API adapter after account-specific terms are known.
 
 The code uses real PostgreSQL for production. The in-memory admin store exists for automated tests only, never a real deployment. All sensitive changes create a redacted audit record. A production security review, authenticated browser and email-flow test and backup/restore rehearsal are still outstanding.
 
 If the user cannot activate email sender now due to the zero-dollar budget, keep the vault unconfigured. Public site and policy documents may continue to progress independently; the console is staged for use when verified email is available.
+
+**Processor shortlist correction, 2026-10-12:** Chase/Paymentech/WePay excluded by owner. No final four companies chosen. All options must be self-service, no required call or contact-sales process, no activation/monthly fees, no Stripe/Chase dependencies or political-specific restrictions. Assess independent acquirer groupings and written merchant terms; see `docs/operations/PROCESSOR_SELF_SERVICE_SCREEN_20261012.md`. The vault uses generic `merchant-a` through `merchant-d` slots until each merchant is actually approved.

@@ -54,3 +54,13 @@ test('a missing URL or Stripe-labeled processor fails the configuration',()=>{
  const another=configured();another.DONATIONS_PROCESSOR_1_NAME='Stripe Alternative';
  assert.throws(()=>approvedDonationRoutes(another,'production'),/safe unique/);
 });
+
+test('JPMorgan Chase payment platforms are prohibited directly in every slot',()=>{
+ for(const name of ['Chase Payment Solutions','Chase Paymentech','JPMorgan Payments','WePay']){
+  const env=configured();
+  env.DONATIONS_PROCESSOR_1_NAME=name;
+  assert.throws(()=>approvedDonationRoutes(env,'production'),/safe unique/);
+ }
+ for(const host of ['payments.chase.com','wepay.com','merchant.jpmorgan.com','pay.jpmorganchase.com','api.chasepaymentech.com'])
+  assert.throws(()=>validateHostedDonationUrl('https://'+host+'/pay',host),/prohibited processor hostname/);
+});

@@ -12,7 +12,7 @@ function approvedHost(value) {
   if (host.length > 253 || !host.includes('.') || !/^[a-z0-9.-]+$/.test(host) ||
       host.split('.').some(label => !label || label.length > 63 || !/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(label)) ||
       host === 'localhost' || host.endsWith('.localhost') || host.endsWith('.local') ||
-      isIP(host) || /(^|\.)(stripe\.com|stripe\.network|stripepayments\.com|stripe-cdn\.com)$/.test(host)) {
+      isIP(host) || /(^|\.)((?:stripe\.com|stripe\.network|stripepayments\.com|stripe-cdn\.com|chase\.com|jpmorgan\.com|jpmorganchase\.com|chasepaymentech\.com|wepay\.com))$/.test(host)) {
     throw invalid('invalid, local or prohibited processor hostname');
   }
   return host;
@@ -47,7 +47,7 @@ export function approvedDonationRoutes(env, releaseMode) {
     const name = env[prefix + 'NAME'];
     if (typeof id !== 'string' || !/^[a-z][a-z0-9-]{1,39}$/.test(id) ||
         typeof name !== 'string' || name.trim().length < 2 || name.length > 80 ||
-        /stripe/i.test(id + ' ' + name)) {
+        /stripe/i.test(id + ' ' + name) ||\n        /(^|[-_\\s])(chase|paymentech|wepay|jpmorgan|jp-morgan)($|[-_\\s])/i.test(id + ' ' + name) ||\n        /j\\.?p\\.?\\s?morgan/i.test(name)) {
       throw invalid('an approved processor needs a safe unique ID and display name');
     }
     const host = approvedHost(env[prefix + 'HOST']);
