@@ -45,3 +45,11 @@ a.resource-link:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
   .issue-card,.issue-wide{transition:none}
   .issue-card:hover,.issue-wide:hover{transform:none}
 }
+
+
+/* Promise strip labels are live navigation to three actual proposal pages. */
+.promise-items a{color:inherit;text-decoration:none;border-radius:2px;padding:7px 1px;
+  text-underline-offset:4px;transition:color .15s ease,text-decoration-color .15s ease}
+.promise-items a::before{content:"+";color:#e188a1;margin-right:10px}
+.promise-items a:hover{text-decoration:underline;text-decoration-thickness:2px}
+.promise-items a:focus-visible{outline:3px solid white;outline-offset:4px}
