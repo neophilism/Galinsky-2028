@@ -90,6 +90,17 @@ try{
   const bookmarks=await context.request.get(portalOrigin+'/api/account/bookmarks');
   assert.equal(bookmarks.status(),200);
   assert.deepEqual((await bookmarks.json()).materialIds,['synthetic-guide']);
+  // A saved guide must be discoverable in the actual materials library,
+  // including after a fresh browser navigation and reload.
+  await page.goto(portalOrigin+'/materials');
+  await page.getByRole('checkbox',{name:/Saved guides only/}).check();
+  await page.getByRole('heading',{name:'Synthetic test guide'}).waitFor();
+  assert.equal(await page.getByRole('heading',{name:'Synthetic test guide'}).count(),1);
+  await page.reload();
+  await page.getByRole('checkbox',{name:/Saved guides only/}).check();
+  await page.getByRole('heading',{name:'Synthetic test guide'}).waitFor();
+  await page.goto(portalOrigin+'/materials/synthetic-guide');
+  await page.getByRole('button',{name:'Saved to my account'}).waitFor();
   await page.getByRole('button',{name:'Saved to my account'}).click();
   await page.getByRole('button',{name:'Bookmark to my account'}).waitFor();
   await page.getByRole('button',{name:'I have read this version'}).click();
