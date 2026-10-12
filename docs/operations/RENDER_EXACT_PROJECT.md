@@ -1,5 +1,7 @@
 # Direct deployment to the authorized Render project
 
+> **2026-10-12 CURRENT STATUS:** Both designated project services already exist and the owner has explicitly authorized updates to them despite the parent workspace. This does **not** authorize any new service or workspace-root resources. The instructions below document **historical initial creation**, not steps to repeat. Use `docs/operations/RENDER_VERIFIED_PLACEMENT.md` for current deployment and acceptance. Do not rerun create.
+
 **Target project:** https://dashboard.render.com/project/prj-db57fnm7bikc739783q0
 
 **Already provisioned on 11 October 2026:** [galinsky-2028-private-preview](https://dashboard.render.com/web/srv-db5teuajnfac73bm8pug), service ID `srv-db5teuajnfac73bm8pug`, environment `evm-db57fnm7bikc739783qg`. Build and deploy `dep-db5tev2jnfac73bm8sn0` succeeded and the site is live at https://galinsky-2028-private-preview.onrender.com. Exact-project creation: [run 38164605594](https://github.com/neophilism/Galinsky-2028/actions/runs/38164605594); anonymous/wrong-password 401 plus authorized HTTP test: [run 38164974556](https://github.com/neophilism/Galinsky-2028/actions/runs/38164974556). Do not recreate this service or deploy unprotected copies. The user elected not to move other services into projects.
