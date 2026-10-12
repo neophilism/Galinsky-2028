@@ -61,7 +61,7 @@ test('only verified owner or individually invited staff can access encrypted tre
   const deniedCsrf=await app.inject({method:'POST',url:'/api/admin/settings/bank',headers:{...originHeaders,cookie:owner.cookie},payload:bank});
   assert.equal(deniedCsrf.statusCode,403);
   const h={...originHeaders,cookie:owner.cookie,'x-csrf-token':owner.csrf};
-  const invalid=await app.inject({method:'POST',url:'/api/admin/settings/bank',headers:h,payload:{...bank,routingNumber:'000000000'}});
+  const invalid=await app.inject({method:'POST',url:'/api/admin/settings/bank',headers:h,payload:{...bank,routingNumber:'123456789'}});
   assert.equal(invalid.statusCode,400);
   const save=await app.inject({method:'POST',url:'/api/admin/settings/bank',headers:h,payload:bank});
   assert.equal(save.statusCode,200);assert.equal(save.json().financialActivation,false);
