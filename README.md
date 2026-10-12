@@ -48,3 +48,7 @@ The preview does not accept payments or collect sensitive volunteer reports. Sig
 The original 36-document source package remains an authorized source input, not a browser download. Its manifest is tracked, not its full bodies. This project does not claim E2EESA certification. Public material, account-delivery metadata, sensitive content and financial disclosure have separate boundaries.
 
 The Render Blueprint remains a configuration source; actual deployment evidence is linked above. Both the password-protected public preview and real volunteer portal/API are deployed. Email signup, published current volunteer materials, staff administration, donations, sensitive reporting, regulated activity modules, and public production release remain separate implementation/release gates.
+
+## End-to-End Everywhere progress
+
+The canonical [security/e2eesa-status.json](security/e2eesa-status.json) records standard implementation, complete testing and independent expert review separately. Engine Room reads it automatically from GitHub. All initial stages are pending; existing profile locks and approved decisions remain authoritative. Read [adoption and independent-account instructions](docs/E2EESA_ADOPTION.md), and run `python3 scripts/validate_e2eesa_status.py`. Record validation does not establish product security or certification.
