@@ -22,7 +22,11 @@
       "acceptance": "An agent starting with only the repository can locate the governing design, every requirement, the next work package and all outstanding inputs. Public-safe design sources are available in the repo; restricted originals have durable authorized storage references, not temporary ChatGPT links. No volunteer archive, credential or sensitive source is accidentally committed.",
       "evidence": "Inventory report, checksum verification, repository-publication review and a cold-start handoff exercise.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        1,
+        5
+      ]
     },
     {
       "id": "G28-02",
@@ -37,7 +41,12 @@
       "acceptance": "A clean checkout installs reproducibly and passes the documented verification command. CI tests the merge candidate; no production secret is available to untrusted PRs. Empty test suites and skipped security gates cannot be reported as passing implementation evidence.",
       "evidence": "Lockfile, CI configuration, green bootstrap run and documented local setup.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        1,
+        6,
+        19
+      ]
     },
     {
       "id": "G28-03",
@@ -52,7 +61,12 @@
       "acceptance": "Header/footer and representative components match approved desktop/mobile references. Keyboard navigation, skip link, menu state and focus restoration work. Legal text remains readable; an accessibility fix may improve a tiny prototype label without changing the design direction.",
       "evidence": "Component gallery, screenshot baselines and keyboard/accessibility component tests.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        1,
+        10,
+        35
+      ]
     },
     {
       "id": "G28-04",
@@ -67,7 +81,14 @@
       "acceptance": "Migrations work on a fresh database and on an upgrade fixture. Startup rejects missing critical settings. Preview data is synthetic, credentials are isolated and health distinguishes process uptime from dependency readiness. Production resources are not purchased without an approved budget.",
       "evidence": "Migration tests, preview smoke results, environment matrix and service resource inventory.",
       "external_inputs": "Workspace access and any approved paid-resource budget are required to instantiate cloud resources, not to write and test the infrastructure.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        17,
+        20,
+        32,
+        36,
+        38
+      ]
     },
     {
       "id": "G28-05",
@@ -83,7 +104,11 @@
       "acceptance": "No TLS-only or provider-managed encryption is called E2EE. The build can identify every protected flow and its intended recipients. Missing upstream production evidence blocks protected production use but not public UI development. Unknown capabilities fail closed instead of selecting a weaker fallback.",
       "evidence": "Component/data-flow inventory, profile decision record, egress matrix, release-gate specification and reviewer handoff requirements.",
       "external_inputs": "Production profile eligibility and required expert review remain independent gates; they are not presumed satisfied by this plan.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        16,
+        66
+      ]
     },
     {
       "id": "G28-06",
@@ -99,7 +124,12 @@
       "acceptance": "Unapproved documents cannot enter a public release or volunteer current-materials view. Publishing is atomic; stale edits cannot overwrite newer versions. A failed build leaves the previous public release live. No second manual copy of policy definitions is needed for volunteer summaries.",
       "evidence": "Schema tests, publication state-machine tests, rollback fixture and source-to-release traceability.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        12,
+        13,
+        16
+      ]
     },
     {
       "id": "G28-07",
@@ -115,7 +145,12 @@
       "acceptance": "The real candidate likeness and pointing pose are preserved. No public asset or ZIP exposes restricted source materials or metadata. Every displayed/downloadable asset has a rights record, correct content type and accessible alternative. Portrait and illustration loading does not shift layout.",
       "evidence": "Asset register, malicious-upload tests, image comparison and download authorization tests.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        45,
+        46,
+        65
+      ]
     },
     {
       "id": "G28-08",
@@ -131,7 +166,10 @@
       "acceptance": "Engine Room shows planned work before PRs exist. Green means accepted/merged planned work, yellow means implemented but not yet accepted/merged work, and empty means not implemented. New planned work increases the denominator. Deployment and security readiness are separate from merge progress.",
       "evidence": "Manifest validation, ingestion test and an observed Engine Room project entry; screenshots alone are not the data source.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        63
+      ]
     },
     {
       "id": "G28-09",
@@ -148,7 +186,11 @@
       "acceptance": "The full page matches the approved section order, visual balance and mobile stacking. Exactly three launch issues appear. The philosophy is readable without video, animation, third-party requests or JavaScript. No invented achievements, endorsements, crowds or campaign statistics are added.",
       "evidence": "Desktop/mobile screenshots, link checks, semantic heading tests and source-to-copy review.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        1,
+        35
+      ]
     },
     {
       "id": "G28-10",
@@ -163,7 +205,10 @@
       "acceptance": "The headline and buttons never rotate away or move out of reach. Animation is decorative, silent and non-flashing; it stops when requested and remains paused across navigation. Low-power/mobile behavior and disabled-JavaScript still composition remain attractive.",
       "evidence": "Motion-state tests, reduced-motion screenshots, CPU/long-task measurements and mobile visual review.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        35
+      ]
     },
     {
       "id": "G28-11",
@@ -180,7 +225,11 @@
       "acceptance": "Only the three launch records are published. A draft fourth issue never leaks through search, sitemap, navigation or API projections. Each card has one clear destination and accessible illustration treatment.",
       "evidence": "Collection/publication tests, links and desktop/mobile snapshots.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        1,
+        15
+      ]
     },
     {
       "id": "G28-12",
@@ -197,7 +246,11 @@
       "acceptance": "All three issue pages visibly reserve a large video area at the top. There are zero YouTube/Google thumbnail, player, DNS-preconnect or script requests before visitor activation. Activation loads a privacy-enhanced player with controls, fullscreen and suitable referrer configuration. Invalid/unavailable videos, denied embeds and revoked consent have accessible fallbacks. Editing one video does not alter another.",
       "evidence": "Network-interception tests, URL-parser adversarial tests, keyboard/screen-reader checks, no-video screenshots and documented later-link connection instructions.",
       "external_inputs": "The three actual YouTube links, approved posters if different, and reviewed accessibility material are publication inputs. Missing links do not block component implementation.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        45,
+        65
+      ]
     },
     {
       "id": "G28-13",
@@ -214,7 +267,13 @@
       "acceptance": "Approved legislative text is preserved exactly in the source record; summaries do not silently replace it. Download links resolve to the stated version/hash, and older versions are clearly superseded. Missing files are honest preview placeholders, not dead or fabricated downloads.",
       "evidence": "HTML-to-source comparison, bill anchor tests, download/hash checks, visual tests and legal-content review checklist.",
       "external_inputs": "Approved publication bill and supporting documents are needed to publish the actual legislative library.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        12,
+        13,
+        52,
+        68
+      ]
     },
     {
       "id": "G28-14",
@@ -231,7 +290,10 @@
       "acceptance": "Large video is first major content. Links in the introduction, mechanism/source area and closing invitation resolve to the verified destination. The summary preserves voluntary participation, victim-negotiated repair and safeguards; no unapproved land, membership, eligibility or financing promise is introduced.",
       "evidence": "Copy/source review, destination verification, broken-link tests and responsive screenshots.",
       "external_inputs": "Verified Garden public URL and reconciled policy material are publication inputs.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        15
+      ]
     },
     {
       "id": "G28-15",
@@ -248,7 +310,10 @@
       "acceptance": "Large video is first major content. The livelihood/material-effect test and approved scope remain intact; no blanket compensation entitlement is invented. Repeated external links use the verified destination, and missing links remain explicit in preview.",
       "evidence": "Copy/source review, external-link checks and desktop/mobile screenshots.",
       "external_inputs": "Verified Cornerstone public URL and current policy source are publication inputs.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        15
+      ]
     },
     {
       "id": "G28-16",
@@ -265,7 +330,12 @@
       "acceptance": "All chooser combinations produce understandable recommendations with a neutral fallback. No demographics or inferred political traits are requested. Signup fields and privacy/consent copy match the data inventory; the form visibly remains preview-only until the real flow is wired.",
       "evidence": "Chooser tests, all-role coverage, form validation and visual/accessibility snapshots.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        1,
+        6,
+        35
+      ]
     },
     {
       "id": "G28-17",
@@ -282,7 +352,11 @@
       "acceptance": "One-time is the default; no fee coverage, tip or recurring upgrade is preselected. Every supplied sentence is present beside or directly under the donation interface on desktop and mobile, not hidden solely in an accordion or footer. No card data is collected by campaign-owned fields.",
       "evidence": "Exact-copy snapshot test, responsive legibility checks, amount/frequency state tests and inactive-preview boundary tests.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        47,
+        56
+      ]
     },
     {
       "id": "G28-18",
@@ -303,7 +377,13 @@
       "acceptance": "All navigation works with descriptive titles, no orphaned issue pages and no fake contact channel. Staging is access-controlled/noindex; robots is not treated as authorization. Search/social descriptions do not expose draft policies or private material.",
       "evidence": "Crawl report, metadata validation, noindex tests, error-state screenshots and contact-route ownership record.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        2,
+        3,
+        10,
+        15
+      ]
     },
     {
       "id": "G28-19",
@@ -320,7 +400,13 @@
       "acceptance": "A real new account can verify, sign in, sign out and return from another session without a staff approval queue for materials. Expired, replayed, tampered and scanner-opened links are handled safely. Account enumeration, abuse throttling, origin/CSRF checks and accessible recovery paths are tested.",
       "evidence": "Authentication integration tests, mail delivery evidence in staging and full new-volunteer browser journey.",
       "external_inputs": "An authorized sending domain and email provider credentials are needed for deployed mail delivery.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        36,
+        38,
+        40,
+        61
+      ]
     },
     {
       "id": "G28-20",
@@ -335,7 +421,11 @@
       "scope": "Add server-enforced permissions for volunteer, captain, coordinator, editor, publisher, module verifier/approver, safety reviewer, treasurer and security administrator. Require strong staff authentication and step-up for sensitive changes. Keep technical administration separate from decryption/financial authority. Use least-privilege database and service identities.",
       "acceptance": "Changing client flags, route URLs, object IDs or API payloads never increases access. A captain cannot access another team, a publisher cannot read donor data and a technical admin cannot automatically decrypt volunteer records. Privilege changes and session revocation are auditable.",
       "evidence": "Role-resource-action authorization matrix, negative IDOR/BOLA tests, staff enrollment and revocation tests.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": [
+        16,
+        69
+      ]
     },
     {
       "id": "G28-21",
@@ -351,7 +441,8 @@
       "scope": "Integrate the selected reviewed E2EESA implementation for recipient/device identity, authenticated key directory, key-change notices and enrollment. Pin the exact protocol/library versions and evidence. Separate authentication identity from cryptographic authority. Define authorized campaign recipient groups without silent future-member access.",
       "acceptance": "Tampered or substituted recipient keys are detected according to the selected profile. A new/reset account does not inherit old verified keys. Private recipient keys are not stored in server environment variables. Unavailable or unsupported protection blocks protected submissions, not a silent plaintext fallback.",
       "evidence": "Interoperability/test vectors, key-substitution tests, enrollment evidence and profile-conformance mapping.",
-      "external_inputs": "A suitable reviewed implementation/profile is a dependency; writing a novel cryptographic scheme is not an acceptable shortcut."
+      "external_inputs": "A suitable reviewed implementation/profile is a dependency; writing a novel cryptographic scheme is not an acceptable shortcut.",
+      "contributing_prs": []
     },
     {
       "id": "G28-22",
@@ -367,7 +458,8 @@
       "scope": "Add client-to-authorized-recipient encryption for sensitive volunteer profile fields, private reports, operational notes and protected attachments. Bind envelopes to record/type/version/recipient context using the reviewed implementation. Store only ciphertext plus declared minimal metadata on general hosting. Use restricted origins, restrictive CSP and no third-party scripts in protected views.",
       "acceptance": "Database, logs, job payloads, support tools and object storage inspections show no protected plaintext. Unauthorized recipients cannot decrypt. Updates cannot swap envelopes between records, replay stale versions or expand recipients without authorization. Loss of network/key access gives an explicit recoverable error.",
       "evidence": "Plaintext-canary tests, recipient/record-binding tests, egress traces and storage/log inspection evidence.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": []
     },
     {
       "id": "G28-23",
@@ -382,7 +474,10 @@
       "scope": "Implement the selected key recovery/no-recovery policy, trusted-device changes, emergency revocation, backup-generation handling and explicit item/recipient export authorization. Expose understandable warnings for irreversible key loss and previously downloaded copies. Require step-up and audit for authorized bulk exports.",
       "acceptance": "Email reset, support override or role reassignment cannot silently restore old cryptographic trust. Revoked users receive no new protected content; the UI does not promise to erase retained old copies. Exports are scoped, authorized and absent from ordinary analytics/email paths.",
       "evidence": "Lost-device and account-takeover simulations, export negative tests, backup/restore key tests and readable user guidance.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": [
+        41
+      ]
     },
     {
       "id": "G28-24",
@@ -399,7 +494,10 @@
       "acceptance": "An outbox retry never creates duplicate account messages or resurrects an unsubscribe. Optional campaigning stops after opt-out without disabling essential account access. Bounces/complaints suppress correctly; recipient addresses and tokens are redacted in logs. Jobs survive process restarts.",
       "evidence": "Retry/crash tests, suppression tests, delivery callback verification and evidence from staging email accounts.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        61
+      ]
     },
     {
       "id": "G28-25",
@@ -416,7 +514,10 @@
       "acceptance": "Every source item has a stable ID, version, intended audience, owner, review status and source hash. No historic packet becomes current legal guidance by import alone. All twelve roles remain represented. The compiled manual is not duplicated into normal search results.",
       "evidence": "Import reconciliation report, document inventory, changed-policy crosswalk and content approval queue.",
       "external_inputs": "Current policy sources/reviewer approval are needed for publication; ingesting an archive is not that approval.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        46
+      ]
     },
     {
       "id": "G28-26",
@@ -433,7 +534,13 @@
       "acceptance": "Every verified volunteer can immediately access all current volunteer-facing materials without staff approval. Direct URLs, object keys, search APIs and static bundles do not bypass authorization. Superseded/withdrawn items are absent from default search. Sensitive records are not placed in a server plaintext search index.",
       "evidence": "Full-library access and leakage tests, search relevance fixtures, accessibility checks and download/source version parity.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        11,
+        49,
+        62,
+        68
+      ]
     },
     {
       "id": "G28-27",
@@ -450,7 +557,13 @@
       "acceptance": "Progress persists across legitimate sessions and devices at the declared privacy level. A new volunteer sees a useful low-risk action, not an empty dashboard. No fabricated completion, attendance or activity counts are displayed; completion is identified as self-reported or verified.",
       "evidence": "New/returning volunteer journeys, progress synchronization tests and desktop/mobile visual snapshots.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        7,
+        35,
+        49,
+        62
+      ]
     },
     {
       "id": "G28-28",
@@ -465,7 +578,10 @@
       "scope": "Convert the orientation guide/deck into accessible navigable training, with transcript/slide-text equivalents, short knowledge checks and acknowledgments of the current universal core. Track training version, completion evidence and expiry only where relevant. Material changes prompt targeted re-acknowledgment.",
       "acceptance": "All training remains readable immediately after signup. Completing a lesson is not represented as legal authority, certification or automatic activation of regulated activity. Training prerequisites gate task execution rather than hiding the entire library.",
       "evidence": "Training state-machine tests, old-version acknowledgment tests and assistive-technology walkthrough.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": [
+        14
+      ]
     },
     {
       "id": "G28-29",
@@ -483,7 +599,8 @@
       "acceptance": "A worksheet, downloaded packet, expired module or one verifier cannot activate regulated work. Mismatched jurisdiction/election/activity, missing training, withdrawn approval or tool outage blocks the action with a clear reason. Every sensitive operation rechecks authorization; a stale open tab is not sufficient.",
       "evidence": "Authorization decision-table tests, clock-boundary/revocation tests, two-verifier separation tests and admin audit evidence.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": []
     },
     {
       "id": "G28-30",
@@ -501,7 +618,8 @@
       "acceptance": "Tasks cannot be claimed or completed outside current authorization. Race conditions cannot overbook exclusive assignments. Reporting excludes supporter identities and sensitive personal attributes; counts have validation and clear self-reported/verified provenance.",
       "evidence": "Task concurrency tests, activity privacy fixtures, task lifecycle tests and volunteer-to-coordinator journeys.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": []
     },
     {
       "id": "G28-31",
@@ -518,7 +636,8 @@
       "acceptance": "Each original form maps to a working typed form or intentionally local worksheet; none is merely a PDF embedded in an iframe. Required warnings and no-supporter-data rules remain. Custody logs use sheet identifiers rather than copying signatures or voter identities. Admin-only activation fields cannot be submitted by ordinary volunteers.",
       "evidence": "Form-to-source coverage matrix, field/privacy validation, authorization tests and print layout checks.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": []
     },
     {
       "id": "G28-32",
@@ -535,7 +654,8 @@
       "scope": "Add opt-in team membership, invitation/acceptance, scoped captain assignments, weekly plans, anonymous result summaries and authorized member contact handling. Do not publish a volunteer directory or precise private locations. Make leaving a team immediate and remove future access on role change.",
       "acceptance": "Captains see only the minimum data and tasks of authorized members. Joining a team does not grant access to historic private records. Invite forwarding, revoked invites, self-promotion and cross-team enumeration fail safely.",
       "evidence": "Team lifecycle tests, privacy/access matrix and revoked-captain browser journey.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": []
     },
     {
       "id": "G28-33",
@@ -552,7 +672,8 @@
       "scope": "Provide approved orientation/event listings, accessible details, time zones, RSVP/capacity/waitlist/cancellation, attendee-only private details when appropriate and reminders. Support event-plan submission/review with venue, accessibility, safety and required authorization fields. Link to approved external meeting providers without exposing protected records.",
       "acceptance": "Double booking/capacity races, cancellation and time-zone boundaries are handled. Public calendars never reveal private addresses or attendee identities. An RSVP does not authorize spending, contracts, permits, field operations or recording participants.",
       "evidence": "Capacity/time-zone tests, privacy projections, cancellation notifications and event-host walkthrough.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": []
     },
     {
       "id": "G28-34",
@@ -570,7 +691,8 @@
       "scope": "Route private incidents to named authorized safety recipients, content corrections to editors and ordinary help to the appropriate support role. Provide receipt/status, controlled replies and escalation without making emergency-response promises. Use a separate protected attachment quarantine/recipient-side review path; public document scanners must not decrypt private submissions.",
       "acceptance": "Immediate-danger guidance is visible; the form is not described as emergency services. Reports do not appear in public logs, dashboards or email. Unauthorized staff cannot read a report. Corrections can supersede affected published material with traceable approval.",
       "evidence": "End-to-end encrypted report/reply tests, attachment-handling threat tests and correction-to-publication audit trail.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": []
     },
     {
       "id": "G28-35",
@@ -586,7 +708,8 @@
       "scope": "Provide current share links, printable issue cards, campaign-supplied images, QR generation for approved public destinations, social-preview previews and simple copy-link functions. Preserve required disclaimers and asset usage terms. Personal sharing remains separate from official-account publishing.",
       "acceptance": "QR codes resolve to approved stable public URLs, not private portal objects, expiring tokens or PII-bearing tracking links. Withdrawn assets are marked and removed from current collections. No automatic posting, supporter tracking or fabricated endorsement is introduced.",
       "evidence": "QR decode/link tests, current-asset/version checks, image rights review and mobile share behavior tests.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": []
     },
     {
       "id": "G28-36",
@@ -603,7 +726,8 @@
       "scope": "Add an administrator-managed registry of approved tools for manual calling/texting, canvassing and other activated work. Support scoped assignments, current scripts, launch/deep links, tool health/status and opt-out reconciliation where an actual provider supports it. Require an integration capability review before enabling a connector; no fictitious API or native bulk-messaging engine.",
       "acceptance": "All twelve roles have a usable instruction/task path. Roles requiring an unavailable tool are honestly unavailable, not mislabeled ready. No autodialer, artificial voice, ringless voicemail, bulk text, scraped list or personal export is enabled. Failed suppression sync pauses affected outreach.",
       "evidence": "Connector contract tests, inactive-tool tests, opt-out failure scenario and role-to-tool readiness matrix.",
-      "external_inputs": "An actual approved outreach provider/module is required only to activate those activities. The platform must work normally for other volunteer roles."
+      "external_inputs": "An actual approved outreach provider/module is required only to activate those activities. The platform must work normally for other volunteer roles.",
+      "contributing_prs": []
     },
     {
       "id": "G28-37",
@@ -621,7 +745,11 @@
       "scope": "Provide friendly editing, preview, review, publication and rollback for homepage copy, issues, each YouTube URL/poster/transcript, canonical links, documents, legal text and media. Add change comparison, concurrent-edit protection and a publication readiness checklist. No GitHub knowledge is required for ordinary content changes.",
       "acceptance": "A publisher can replace one issue video, fix a link or publish a reviewed document without a code change. The static public release updates atomically after a successful build; failed publication leaves the previous version intact. Legal/security-controlled fields retain their special approvals.",
       "evidence": "Editor-to-publisher acceptance journeys, simultaneous-edit tests, build-failure rollback and content-version reconciliation.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": [
+        8,
+        45
+      ]
     },
     {
       "id": "G28-38",
@@ -643,7 +771,10 @@
       "scope": "Create role-scoped management of volunteers, teams, tasks, training, events, modules, approval queues, support cases and operational notices. Include emergency activity pause, membership revocation, training/module expiry and evidence links. Keep finance and safety content out of general dashboards.",
       "acceptance": "Every administrative write is validated server-side and auditable; dangerous actions require step-up and explicit confirmation. Staff can operate all supported workflows through the UI without database edits. Counts reflect real records and never conceal blocked integrations.",
       "evidence": "Full admin action matrix, abuse tests, coordinator/captain/safety role walkthroughs and scoped audit review.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": [
+        69
+      ]
     },
     {
       "id": "G28-39",
@@ -658,7 +789,12 @@
       "scope": "Evaluate Anedot first against the required hosted fields, personal-credit-card policy, recurring management, custom donor attestations, designation/limits, receipts, signed webhooks, exports, accessibility, branding, test environment, fees and committee onboarding. Record verified capabilities and gaps. Implement a narrow provider adapter contract and a fake provider for CI only.",
       "acceptance": "Processor selection is evidence-backed, not an assumption. Direct hosted-page donations, recurring charges and offline contributions are included in the compliance feasibility review. No undocumented endpoint or CSS access to a cross-origin frame is assumed. A material capability gap is resolved before enabling affected features.",
       "evidence": "Provider capability matrix, documented test/sandbox path, cost/onboarding record and treasurer selection decision.",
-      "external_inputs": "Committee-authorized processor account/KYC, treasurer identity, current service terms and approved costs are external inputs. Start this package early in parallel after its dependencies."
+      "external_inputs": "Committee-authorized processor account/KYC, treasurer identity, current service terms and approved costs are external inputs. Start this package early in parallel after its dependencies.",
+      "contributing_prs": [
+        47,
+        53,
+        55
+      ]
     },
     {
       "id": "G28-40",
@@ -674,7 +810,11 @@
       "scope": "Create versioned treasurer-approved configurations for committee identity, election designations/dates, effective limits, campaign-specific exclusions, donor attestations, record fields, recurring caps and remedy workflows. Define authoritative aggregation across processor and offline records with concurrency handling and conservative reconciliation of uncertain identities.",
       "acceptance": "No 2025-2026 number is hard-coded as a 2028 rule. Campaign choices such as age 18 and no PAC money are preserved without being mislabeled universal law. Stale/missing approval disables fundraising. Frontend checks are not the enforcement boundary; provider-direct and recurring paths are covered or explicitly blocked.",
       "evidence": "Configuration approval tests, concurrency/cycle boundary fixtures, donor-identity ambiguity tests and treasurer-reviewed policy matrix.",
-      "external_inputs": "Treasurer/election-counsel approval of applicable rules is required before live fundraising."
+      "external_inputs": "Treasurer/election-counsel approval of applicable rules is required before live fundraising.",
+      "contributing_prs": [
+        18,
+        47
+      ]
     },
     {
       "id": "G28-41",
@@ -691,7 +831,13 @@
       "scope": "Wire homepage amount/frequency selection and the dedicated donation page to processor-hosted fields or a reviewed embedded checkout. Keep the campaign-owned shell visually faithful; use supported theming for the secure form. Preserve amount, frequency, election designation and consent when entering checkout without leaking donor PII in URLs. Provide a trusted hosted fallback when embedding is blocked.",
       "acceptance": "Card numbers/CVV never reach campaign servers, logs or analytics. Unchecked eligibility, invalid amounts or unapproved election configuration stop the flow. Closing/retrying/back navigation cannot silently duplicate a gift or switch its frequency. External handoff is clear and does not introduce a second unapproved recipient.",
       "evidence": "Sandbox checkout journeys, iframe/hosted fallback accessibility, network inspection and amount/designation tampering tests.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": [
+        47,
+        55,
+        56,
+        57
+      ]
     },
     {
       "id": "G28-42",
@@ -707,7 +853,8 @@
       "scope": "Validate the provider signature over exact raw request bytes before JSON processing; enforce account/page allowlists, size bounds and supported event types. Durably accept events, deduplicate, redact/drop unnecessary donor fields and route financial changes into the outbox/ledger. Apply replay/state-order protections without assuming the provider supplies a signed timestamp.",
       "acceptance": "Invalid signatures and wrong-account events never alter records. Duplicate, delayed, reordered and replayed valid events cannot double count or roll state backward. Server crash after receipt causes safe replay; success is never inferred from a browser return URL.",
       "evidence": "Provider signature vectors, raw-body corruption tests, event-order/replay suite and webhook crash/retry evidence.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": []
     },
     {
       "id": "G28-43",
@@ -722,7 +869,10 @@
       "scope": "Add append-only financial events and audited projections for gifts, fees, payouts, election allocations, refunds, disputes and recurring installments. Use integer minor units, unique provider identifiers and explicit made/received/settled dates. Reconcile with provider reports and the treasurer-authorized accounting source, including other contribution channels.",
       "acceptance": "Ledger totals reconcile to source reports; missing/disputed events are flagged rather than concealed. Gross/net/fee totals are distinct. Name/email alone never establishes that two donors are the same. Correcting a record adds an audit event instead of overwriting financial history.",
       "evidence": "Reconciliation fixtures, duplicate/partial refund cases, currency precision tests and treasurer comparison report.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": [
+        18
+      ]
     },
     {
       "id": "G28-44",
@@ -739,7 +889,8 @@
       "scope": "Connect the processor donor portal or supported API for receipts, recurring schedule visibility, cancellation and supported payment-method updates. Keep donor and volunteer accounts independent; an optional explicit link must be verified. Disclose frequency, next charge and cancellation effect and respect provider authority for final state.",
       "acceptance": "A donor can cancel through the documented working path without joining the volunteer system. Replayed clicks do not create new commitments. Recurring limits/expiry rules apply before future charges through a proven provider mechanism; unavailable enforcement is a launch gap, not hidden behavior.",
       "evidence": "Create/renew/cancel/retry sandbox scenarios, receipt accuracy and unauthorized donor-portal access tests.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": []
     },
     {
       "id": "G28-45",
@@ -755,7 +906,11 @@
       "scope": "Provide treasurer-only review of suspect/prohibited/excessive gifts, missing contributor information, refunds, disputes, chargebacks, cancellations and authorized redesignation/reattribution records. Model deadlines from the approved ruleset and store documentary evidence. Use generic donor notifications and approved provider actions, not direct card handling.",
       "acceptance": "An ordinary admin cannot refund, reallocate or access donor identity. Partial refunds and disputes reconcile correctly. Best-efforts follow-up is bounded and recorded; the software does not falsely certify legal sufficiency. Donor intent/election records are preserved.",
       "evidence": "Exception lifecycle tests, deadline fixtures, role enforcement and treasurer-reviewed remedy scenarios.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": [
+        55,
+        57
+      ]
     },
     {
       "id": "G28-46",
@@ -771,7 +926,8 @@
       "scope": "Generate treasurer-approved exports for the chosen accounting/FEC filing workflow, with review, reconciliation totals, schema validation and evidence references. Limit PII to authorized recipients, log exports and apply approved retention. Keep public campaign analytics aggregate only; do not create a public donor directory.",
       "acceptance": "Exports reconcile to ledger/source reports and preserve required designation/receipt information. CSV formula injection and unauthorized/bulk extraction are blocked. No filing is submitted automatically and no export is labeled an accepted FEC filing.",
       "evidence": "Export golden files, schema/total validation, injection tests and a treasurer import dry run.",
-      "external_inputs": "The treasurer must identify the actual accounting/filing system and approve its mapping."
+      "external_inputs": "The treasurer must identify the actual accounting/filing system and approve its mapping.",
+      "contributing_prs": []
     },
     {
       "id": "G28-47",
@@ -790,7 +946,13 @@
       "scope": "Exercise card-testing/abuse controls using provider-supported protections, rate limits and no sensitive fingerprinting. Test unavailable provider, stale rules, parallel donations, excessive recurring schedules, conflicting identities, cancellations, refunds, chargebacks, webhook exhaustion, reconciliation outage and accessible fallback.",
       "acceptance": "The site never shows payment success before authenticated confirmation. Failure states preserve clear donor choices and never silently retry a charge. Direct hosted links obey campaign restrictions. All requested exclusions are accounted for through configuration, attestation and treasurer review without claiming perfect automatic detection.",
       "evidence": "Donation threat-model review, adversarial/sandbox suite, error-state screenshots and data-leak inspection.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": [
+        55,
+        56,
+        57,
+        64
+      ]
     },
     {
       "id": "G28-48",
@@ -807,7 +969,11 @@
       "scope": "Have the authorized treasurer verify committee identity, processor onboarding, bank/payout setup, disclosures, effective election configuration, donor-field collection, receipts, cancellation, remedies, exports, retention and reconciliation ownership. Record approval against the exact build/configuration and expiry/review triggers.",
       "acceptance": "Fundraising cannot enable unless evidence and responsible contacts exist. A code/config change affecting compliance invalidates the relevant approval. Sandbox tests are distinct from any later expressly authorized small live transaction; developers do not charge a card merely to claim completion.",
       "evidence": "Signed/attributed treasury checklist, configuration digest, processor acceptance evidence and documented live-test authorization process.",
-      "external_inputs": "Actual committee/treasurer decisions and credentials are required; developers cannot manufacture this approval."
+      "external_inputs": "Actual committee/treasurer decisions and credentials are required; developers cannot manufacture this approval.",
+      "contributing_prs": [
+        53,
+        64
+      ]
     },
     {
       "id": "G28-49",
@@ -827,7 +993,10 @@
       "acceptance": "Account deletion never promises to erase legally retained finance records or downloaded copies. No one can request another persons data by changing an ID. Cleanup is restart-safe, logged minimally and tested against protected-object/key references and active legal holds.",
       "evidence": "Retention/deletion fixtures, legal-hold tests, privacy-request identity checks and backup-expiry runbook.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        41
+      ]
     },
     {
       "id": "G28-50",
@@ -844,7 +1013,10 @@
       "scope": "Add aggregate public page/action counts and operational conversion measurements with documented definitions. Exclude session replay, ad pixels, cross-site tracking, hidden fingerprints and political profiling. Do not instrument protected form fields, reports, donor identity or individualized issue histories. Separate security logs from campaign measurement.",
       "acceptance": "Staff can see that signup/checkout delivery is functioning without inspecting peoples private interests or messages. Opt-out/consent settings are respected. Dashboards display real data with sampling/latency caveats, not mock numbers.",
       "evidence": "Event allowlist tests, network/PII canaries, log-retention checks and dashboard metric definitions.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": [
+        20
+      ]
     },
     {
       "id": "G28-51",
@@ -866,7 +1038,12 @@
       "acceptance": "No unresolved blocker prevents a user from reading issues, joining, using materials, completing forms or donating. Accessibility fixes preserve the design. Any third-party limitation has a genuinely accessible working alternative and an owner, not only a disclaimer.",
       "evidence": "Manual audit report, automated results, assistive-technology journey recordings and issue closure evidence.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        10,
+        11,
+        13
+      ]
     },
     {
       "id": "G28-52",
@@ -893,7 +1070,10 @@
       "acceptance": "No accidental redesign, cropped portrait/hand, overflow, broken navigation, unreadable disclosures or dashboard-like public homepage remains. Snapshot updates require an explanation; a failing comparison cannot be fixed solely by approving the new image.",
       "evidence": "Before/after visual report, cross-browser runs, approved amendment baseline and documented design exceptions.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        35
+      ]
     },
     {
       "id": "G28-53",
@@ -913,7 +1093,8 @@
       "acceptance": "Target public-page p75 LCP <=2.5s, INP <=200ms and CLS <=0.1 when sufficient field samples exist; use documented lab conditions before launch. Keep public initial compressed JS approximately <=100KB, excluding user-activated providers, unless a reviewed budget exception is justified. Slow services fail visibly without corrupting data.",
       "evidence": "Lab measurements, load/recovery tests, bundle budget report and later field-measurement plan; targets are not preclaimed results.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": []
     },
     {
       "id": "G28-54",
@@ -935,7 +1116,11 @@
       "acceptance": "No open release-blocking finding or missing required cryptographic production evidence is waived by a green unit test. Independent review is attributed to its actual reviewer, not self-certified. Public-only deployment and protected-production approval remain distinct scopes.",
       "evidence": "Security test artifacts, threat-model closure, independent review evidence where required and exact scoped security status.",
       "external_inputs": "External expert review is a genuine independent dependency. Continue unrelated work; do not mark the gate complete without its evidence.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        16,
+        66
+      ]
     },
     {
       "id": "G28-55",
@@ -954,7 +1139,11 @@
       "acceptance": "Process restarts do not lose accepted tasks or double-send effects. A complete restore succeeds with documented key custody and without production PII in CI. Proposed starting objectives are RPO <=24h and RTO <=4h for ordinary operational content; unreconciled accepted financial events must be recoverable from durable/provider records. Objectives require measured proof and budget approval.",
       "evidence": "Restore/drill report, outbox/crash tests, backup inventory and documented recovery owners.",
       "external_inputs": "Production uptime, backup retention and worker capacity may require a paid plan; no free-tier assumption substitutes for the drill.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md."
+      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "contributing_prs": [
+        17,
+        61
+      ]
     },
     {
       "id": "G28-56",
@@ -972,7 +1161,15 @@
       "scope": "Publish authenticated/internal health summaries for service readiness, deployed SHA, approved content version, queue lag, last successful email/webhook/reconciliation/backup, configured videos, blocked modules and release gates. Connect GitHub events/reconciliation and Render deployment state to Engine Room without sending personal data.",
       "acceptance": "Clicking Engine Room refresh retrieves actual available GitHub/deployment state, timestamps success, and retains honest partial-failure/stale indicators. Merged, deployed and live-verified are separate. No private volunteer/donor/report contents appear in status data.",
       "evidence": "Observed Engine Room update, refresh/failure tests, deployed-SHA check and data-minimization audit.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": [
+        19,
+        20,
+        33,
+        43,
+        63,
+        67
+      ]
     },
     {
       "id": "G28-57",
@@ -1007,7 +1204,12 @@
       "scope": "Deploy an isolated production-like staging release and run end-to-end public, volunteer, staff and treasury journeys using synthetic users and processor-approved test mechanisms. Include a new-device recovery exercise, expired activity module, withdrawn document, disabled integration, failed publishing build, provider outage and restored backup.",
       "acceptance": "Every launch requirement has demonstrable pass/fail evidence, owner and exact build reference. Test communications cannot reach real supporters. Missing provider credentials or external reviews are visible blockers, not bypassed by a demo flag.",
       "evidence": "Acceptance matrix, browser results, content/finance/security signoffs and staging release manifest.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": [
+        19,
+        40,
+        43
+      ]
     },
     {
       "id": "G28-58",
@@ -1025,7 +1227,13 @@
       "scope": "Connect and verify the three supplied issue videos, approved bill/downloads and canonical Garden/Cornerstone sites. Confirm current volunteer kits, real contact/privacy channels, media rights, committee/legal wording, current activity modules where activation is intended and all responsible staff. Record any explicitly approved public-preview omissions separately from a full launch.",
       "acceptance": "No prototype banner, invented link, missing required media, historic policy mislabeling or fake success remains in the full release. Publication readiness, security readiness and fundraising readiness all have evidence; an inactive optional field program is shown accurately rather than implied active.",
       "evidence": "Final content/link/media crawl, launch-gate register and owner/treasurer/security approvals.",
-      "external_inputs": "Actual policy files, three YouTube links, dedicated-site URLs, sender/domain access, committee setup and required review evidence are unavoidable inputs."
+      "external_inputs": "Actual policy files, three YouTube links, dedicated-site URLs, sender/domain access, committee setup and required review evidence are unavoidable inputs.",
+      "contributing_prs": [
+        8,
+        12,
+        15,
+        45
+      ]
     },
     {
       "id": "G28-59",
@@ -1041,7 +1249,13 @@
       "scope": "Configure verified production domains/TLS, isolated secrets, database/object permissions, sender authentication, backups and monitoring. Apply reversible migrations, publish the immutable content release, deploy portal/API, verify health and enable volunteer/payment/module flags only after their gates pass. Use a rollback checklist and make external provider configuration part of the release.",
       "acceptance": "Public pages, real verification mail, authorized materials, protected submissions and permitted donation flow work on the actual production origins. Preview data is absent. Any real-money test is separately authorized and reconciled by the treasurer; no unauthorized card charge is made.",
       "evidence": "Production deployment records, domain/TLS checks, smoke results, feature-gate evidence and rollback-ready release record.",
-      "external_inputs": "DNS/domain control, production credentials and approved recurring operating costs are required before execution."
+      "external_inputs": "DNS/domain control, production credentials and approved recurring operating costs are required before execution.",
+      "contributing_prs": [
+        32,
+        36,
+        38,
+        42
+      ]
     },
     {
       "id": "G28-60",
@@ -1055,7 +1269,13 @@
       "scope": "Rerun critical journeys after production deployment and provider callbacks, verify Engine Room state, inspect errors/deliverability and document observed performance. Deliver operator guides for publishing an issue/video, adding volunteers/staff, activating modules, handling incidents, fundraising reconciliation and restoring service. Update README, AGENTS, changelog, input register and next-maintenance responsibilities.",
       "acceptance": "Completion is supported by live evidence, not merely merged PRs. All remaining exceptions are explicit and any additional work is in the denominator. A new agent and a nontechnical campaign operator can continue without this conversation. No unattended ChatGPT scheduler is silently restarted.",
       "evidence": "Live acceptance report, final status manifest, operator walkthrough, repository cold-start check and recorded maintenance owners.",
-      "external_inputs": "None beyond the listed dependencies."
+      "external_inputs": "None beyond the listed dependencies.",
+      "contributing_prs": [
+        34,
+        44,
+        63
+      ]
     }
-  ]
+  ],
+  "progress_evidence_note": "Contributing PR evidence is partial work under these packages, not package acceptance. Do not increment implemented_packages or merged_packages without acceptance verification."
 }
