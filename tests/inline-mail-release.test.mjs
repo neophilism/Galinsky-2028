@@ -20,11 +20,12 @@ test('production account signup refuses to open without operational mail worker 
  assert.throws(()=>loadConfig({...cfg,MAIL_DELIVERY_MODE:'unspecified'}),/Select disabled, inline or external/);
 });
 test('inline mode uses the same service and requires actual configured sender secrets',()=>{
- const cfg=ready();cfg.MAIL_DELIVERY_MODE='inline';
+ const cfg=ready();cfg.MAIL_DELIVERY_MODE='inline';cfg.MAIL_WORKER_OPERATIONAL_APPROVED='true';
  const c=loadConfig(cfg);
  assert.equal(c.signup,true);
  assert.equal(c.mailReady,true);
  assert.equal(c.mailDeliveryMode,'inline');
+ assert.throws(()=>loadConfig({...cfg,MAIL_WORKER_OPERATIONAL_APPROVED:'false'}),/operational mail delivery worker/);
  assert.throws(()=>loadConfig({...cfg,MAIL_FROM:undefined}),/configuration are incomplete/);
  assert.throws(()=>loadConfig({...cfg,RESEND_API_KEY:undefined}),/configuration are incomplete/);
 });
