@@ -8,7 +8,8 @@ test('a donor has one route, uniformly addressable among all four active provide
  const all=states(...routes.map(x=>x.id));
  for(let i=0;i<4;i++)assert.equal(selectRotatingProvider(routes,all,()=>i).id,routes[i].id);
  assert.equal(selectRotatingProvider(routes,[],()=>0),null);
- assert.throws(()=>selectRotatingProvider(routes.slice(0,3),all),/Exactly four/);
+ assert.equal(selectRotatingProvider(routes.slice(0,1),all,()=>0).id,'merchant-1');
+ assert.throws(()=>selectRotatingProvider([],all),/Between one and sixteen/);
 });
 test('quarantined or excluded processors cannot be chosen even by injected index',()=>{
  const s=[{provider_id:'merchant-1',status:'quarantined'},{provider_id:'merchant-2',status:'active'},
