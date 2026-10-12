@@ -41,13 +41,13 @@ test('download verifies exact git blob digest and refuses other content, includi
  assert.deepEqual(result.bytes,txt);
  assert.match(result.mime,/markdown/);
  await assert.rejects(()=>livePolicyBytes('garden','f'.repeat(40),{token:'read-token-not-logged-abcdefghijkl',index}),/no longer/);
- await assert.rejects(()=>livePolicyBytes('garden',good.sha,{token:'read-token-not-logged-abcdefghijkl',index,fetchImpl:async()=>asResponse({encoding:'base64',size:txt.length,content:Buffer.from('x'.repeat(txt.length)).toString('base64')})}),/temporarily unavailable/i);
+ await assert.rejects(()=>livePolicyBytes('garden',good.sha,{token:'read-token-not-logged-abcdefghijkl',index,fetchImpl:async()=>asResponse({encoding:'base64',size:txt.length,content:Buffer.from('x'.repeat(txt.length)).toString('base64')})}),/unavailable/i);
 });
 test('fail closed on missing token, refused APIs, malicious tree and unknown issue',async()=>{
- await assert.rejects(()=>livePolicyIndex('garden',{}),/temporarily unavailable/i);
+ await assert.rejects(()=>livePolicyIndex('garden',{}),/unavailable/i);
  await assert.rejects(()=>livePolicyIndex('other',{token:'safe-token-abcdefghijklmnopqrstuv'}),/Unknown policy issue/);
- await assert.rejects(()=>livePolicyIndex('cornerstone',{token:'safe-token-abcdefghijklmnopqrstuv',now:333333333,fetchImpl:async()=>new Response('unauthorized',{status:401})}),/temporarily unavailable/i);
- assert.throws(()=>policyFilesFromTree('garden','wrong'),/temporarily unavailable/i);
+ await assert.rejects(()=>livePolicyIndex('cornerstone',{token:'safe-token-abcdefghijklmnopqrstuv',now:333333333,fetchImpl:async()=>new Response('unauthorized',{status:401})}),/unavailable/i);
+ assert.throws(()=>policyFilesFromTree('garden','wrong'),/unavailable/i);
  const html=policyIndexHtml('garden',{repo:'The-Garden',ref:'main',treeSha:first.sha,files:[{...good,name:'<evil>.md'}]});
  assert(!html.includes('<evil>'));assert(html.includes('&lt;evil&gt;'));
 });
