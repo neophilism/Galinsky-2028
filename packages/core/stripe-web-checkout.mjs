@@ -96,8 +96,9 @@ export async function openStripeSession({raw,settings,nonceKey,request,transport
  const plan=stripeCheckoutPlan({contribution:{amountCents:input.amountCents,frequency:input.frequency,
   election:input.election,clientRef,attestations:input.attestations},
   policy:settings.policy,release:settings.release});
- return createStripeCheckout({plan,secretKey:settings.secretKey,transport,
+ const created=await createStripeCheckout({plan,secretKey:settings.secretKey,transport,
   signal:AbortSignal.timeout(10000)});
+ return {...created,clientRef,amountCents:input.amountCents,election:input.election};
 }
 export function stripeDonationHtml(settings,nonceKey,amount='25'){
  if(!settings)throw routeBlocked();
