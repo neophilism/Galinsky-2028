@@ -135,5 +135,8 @@ export function verifyStripeWebhook(raw,signature,secret,{now=Math.floor(Date.no
  // emails, card details and full raw payloads must not reach ordinary logs.
  return {valid:true,event:{id:event.id,type:event.type,livemode:event.livemode,
   objectId:data.id,created:event.created,amountTotal:Number.isSafeInteger(data.amount_total)?data.amount_total:null,
-  currency:typeof data.currency==='string'?data.currency:null}};
+  currency:typeof data.currency==='string'?data.currency:null,
+  paymentStatus:data.payment_status==='paid'?'paid':data.payment_status==='unpaid'?'unpaid':null,
+  clientReferenceId:typeof data.client_reference_id==='string'&&/^attempt_[a-f0-9]{32}$/.test(data.client_reference_id)?data.client_reference_id:null,
+  election:data.metadata?.election==='primary'||data.metadata?.election==='general'?data.metadata.election:null}};
 }
