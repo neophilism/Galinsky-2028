@@ -1172,3 +1172,18 @@ Observed basis on 2026-10-10; development toward 0.9.0-rc.2, not production cert
 **[R12] E2EESA Audit Remediation Plan.** https://github.com/neophilism/End-To-End-Everywhere-Security-Architecture-Standard/blob/6ec85d51f9207da31f0e90fd8a7c82ffff8448f6/docs/AUDIT_REMEDIATION_PLAN.md  
 Corrected component/data-flow inventories, scoped claims, release and independent review gates.
 
+
+
+## 18. Owner-approved added scope — 12 October 2026
+
+### G28-61 - Individual, revocable private policy-review accounts
+
+**Dependencies:** G28-01 (existing handoff), staging identity/schema and existing protected web hosting.
+**Scope.** Separate Better Auth username/password realm for the already authorized private website. Owner-only single-use setup, reviewer creation with initial credentials, mandatory password replacement, resets, revocation and expiration. Reviewers receive GET/HEAD policy-site access only; no campaign administrative, editorial, financial, volunteer or protected-data grants.
+**Acceptance.** Real persistent accounts, owner-only controls, safe credential handoff, anonymous/role/CSRF denial, immediate existing-session revocation, real owner/reviewer browser journeys and HTTPS verification on the exact existing Render services. Public signup and launch features remain disabled. Owner claims their own final credential privately through Render setup.
+**Evidence.** `docs/operations/PRIVATE_REVIEW_ACCOUNTS.md`, `docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md`, linked reviewer PR, deployed exact commit and redacted runtime/live HTTPS acceptance.
+**External input.** Owner chooses their own owner password and actual selected reviewers, then shares each initial password privately. No verified email provider is required for this isolated private-review realm.
+
+This adds one owner-authorized work package to the sixty original packages;
+canonical planned work is now 61. It does not complete the original public
+launch, volunteer-email, staff-MFA, treasury or protected-content packages.

@@ -2,6 +2,17 @@
 
 **Release rule:** The campaign is not publicly launched. Do not deploy a Render static site or publish `dist/web` through a CDN, GitHub Pages, or another direct URL. A static site cannot run this server-side gate; `robots.txt` and a JavaScript password prompt are NOT access control.
 
+## Individual policy reviewers (12 October 2026 addition)
+
+Selected reviewers now use the separate owner-managed account realm documented
+in [PRIVATE_REVIEW_ACCOUNTS.md](PRIVATE_REVIEW_ACCOUNTS.md). A valid reviewer
+session authenticates the private policy website and public-safe assets before
+reading files. Reviewers never receive the shared Basic credential. That
+credential remains an operator fallback; it does not manage review accounts.
+The portal still requires its separate preview gate and volunteer/staff login.
+Reviewer sessions do not enable signup, editorial work, payments or protected
+campaign operations. The login/setup shells expose no private campaign content.
+
 ## Required Render placement (no deployment by this change)
 
 The user explicitly excluded "Phillip's workspace". The designated Render project link is:
@@ -24,7 +35,7 @@ Do not rely on a Blueprint import selecting the correct destination automaticall
 | `PREVIEW_ACCESS_USER` | `preview` (or another simple private username) |
 | `PREVIEW_ACCESS_PASSWORD` | A freshly generated, strong random 32+ character **Render secret**; never put in a repository, URL, screenshot or chat |
 
-The server refuses to start without a valid `PREVIEW_ACCESS_PASSWORD` (minimum 24 characters). A browser entering the preview URL will see an HTTP Basic authentication dialog; supply the configured username and password. All HTML, image, CSS, JS, and direct deep links are authenticated BEFORE the file is read. Failed authentication returns 401 with no page contents. Preview responses also carry no-store/noindex headers; those headers are secondary, not a substitute for authentication. HTTPS from Render is mandatory before entering the password.
+The server refuses to start without a valid `PREVIEW_ACCESS_PASSWORD` (minimum 24 characters). A browser entering the preview URL will see an HTTP Basic authentication dialog; supply the configured username and password. All campaign HTML, images, CSS, JS and direct deep links are authenticated BEFORE the file is read, either by the operator Basic credential or a valid individually issued reviewer session. Failed authentication returns 401 with no page contents. Preview responses also carry no-store/noindex headers; those headers are secondary, not a substitute for authentication. HTTPS from Render is mandatory before entering the password.
 
 ## Separate volunteer portal/API, only if needed for preview testing
 
