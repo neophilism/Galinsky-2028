@@ -10,7 +10,7 @@ const app=createApp({store,config});
 registerPortal(app,config.portalOrigin);
 const mailController=new AbortController();
 let mailLoop=null;
-if(config.production&&config.signup&&config.mailDeliveryMode==='inline'){
+if(config.production&&(config.signup||config.adminLoginReady)&&config.mailDeliveryMode==='inline'){
  // Never accept signups until the existing service can actually reach its
  // durable queue and a valid mail transport configuration is present.
  if(!config.databaseUrl)throw new Error('Inline mail worker requires a real database.');
