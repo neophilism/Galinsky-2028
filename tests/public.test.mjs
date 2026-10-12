@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,readdirSync,statSync} from 'node:fs';
+import {readFileSync,readdirSync,statSync,existsSync} from 'node:fs';
 import {join} from 'node:path';
 import {pages,site,root,renderPage} from '../scripts/public-renderer.mjs';
 const rendered=new Map(pages.map(p=>[p.path,renderPage(p.key)]));
@@ -12,7 +12,7 @@ for(const p of pages)test('public contract: '+p.key,()=>{
   if(u.hash){const target=rendered.get(u.pathname);const anchor=u.hash.slice(1);assert(target.includes(`id="${anchor}"`),`${p.key}: missing anchor ${match[1]}`);}
  }
 });
-test('issue video is above original policy hero on all three pages',()=>{for(const slug of Object.keys(site.issues)){const html=renderPage(slug);assert(html.indexOf('issue-video-section')<html.indexOf('policy-hero'));assert(html.includes('aspect-ratio')===false);assert(html.includes('data-video=""'));assert(!html.includes('<iframe'));assert(!html.includes('<video'), 'Without an uploaded binary, never render a broken video.');}});
+test('issue video is above original policy hero on all three pages',()=>{for(const slug of Object.keys(site.issues)){const html=renderPage(slug);assert(html.indexOf('issue-video-section')<html.indexOf('policy-hero'));assert(html.includes('aspect-ratio')===false);assert(html.includes('data-video=""'));assert(!html.includes('<iframe'));const uploaded=existsSync(join(root,'apps/web/public/assets/issue-video-placeholder.mp4'));if(uploaded)assert(html.includes('<video controls playsinline'), 'The verified local source must render its actual video player.');else assert(!html.includes('<video'), 'Without the uploaded binary, never render a broken player.');}});
 test('homepage preserves actual portrait and approved design',()=>{const html=renderPage('index');assert(html.includes('/assets/candidate.webp'));assert(html.includes('JUSTICE'));assert(html.includes('debt of injustice'));assert(html.includes('class="brand"'));assert(html.includes('id="menu-toggle"'));});
 test('donor eligibility wording is present in both views',()=>{for(const p of ['index','donate']){const h=renderPage(p);for(const fragment of ['Are a U.S. citizen or lawfully admitted permanent resident','Contribute from your own funds.','Are at least 18 years old.','Are not a federal contractor.','personal credit card','national banks, FARA registrants, or foreign nationals.','not deductible as charitable contributions for federal income tax purposes.'])assert(h.includes(fragment),`${p}: missing ${fragment}`);}});
 test('all donor input fields are disabled before release',()=>{const h=renderPage('donate');for(const tag of h.match(/<(?:input|select)\b[^>]*>/g)||[])assert(tag.includes('disabled'),tag);assert(h.includes('Online contributions are not open yet'));});
