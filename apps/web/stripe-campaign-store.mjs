@@ -30,7 +30,8 @@ export class StripeCampaignStore {
   if(e.paymentStatus!=='paid')return {status:200,outcome:'no_capture_confirmed'};
   if(!SESSION.test(e.objectId)||!e.clientReferenceId||
      !['primary','general'].includes(e.election)||e.currency!=='usd'||
-     !Number.isSafeInteger(e.amountTotal)||e.amountTotal<=0)return {status:422,outcome:'unmatched_payment'};
+     !Number.isSafeInteger(e.amountTotal)||e.amountTotal<=0||
+     !Number.isSafeInteger(e.created)||e.created<=0)return {status:422,outcome:'unmatched_payment'};
   const digest=createHash('sha256').update(raw).digest('hex');
   const c=await this.pool.connect();
   try{
