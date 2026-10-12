@@ -13,12 +13,12 @@ function configured(count=4){
  }
  return env;
 }
-test('four separately configured processors are mandatory before fundraising',()=>{
- assert.equal(MIN_DONATION_PROCESSORS,4);assert.equal(MAX_DONATION_PROCESSORS,4);
+test('one approved processor can launch; rotation scales to sixteen as more join',()=>{
+ assert.equal(MIN_DONATION_PROCESSORS,1);assert.equal(MAX_DONATION_PROCESSORS,16);
+ assert.equal(approvedDonationRoutes(configured(1),'production').length,1);
  assert.equal(approvedDonationRoutes(configured(4),'production').length,4);
- for(let n=0;n<4;n++)assert.throws(()=>approvedDonationRoutes(configured(n),'production'),/all four/);
- const env=configured();env.DONATIONS_PROCESSOR_4_APPROVED='false';
- assert.throws(()=>approvedDonationRoutes(env,'production'),/all four/);
+ assert.equal(approvedDonationRoutes(configured(16),'production').length,16);
+ assert.throws(()=>approvedDonationRoutes(configured(0),'production'),/at least one/);
 });
 test('preview or incomplete release may not reveal donation routes',()=>{
  assert.deepEqual(approvedDonationRoutes(configured(),'preview'),[]);
@@ -37,8 +37,8 @@ test('secure checkout URL must match the exact configured HTTPS host',()=>{
   assert.throws(()=>validateHostedDonationUrl(bad,'checkout.processor-1.com'),/Donation provider configuration/);
  }
 });
-test('Stripe, local hosts and addresses are rejected',()=>{
- for(const host of ['checkout.stripe.com','stripepayments.com','localhost','pay.local','127.0.0.1','[::1]'])
+test('Local and IP hosts remain rejected',()=>{
+ for(const host of ['localhost','pay.local','127.0.0.1','[::1]'])
   assert.throws(()=>validateHostedDonationUrl('https://'+host+'/donate',host),/Donation provider configuration/);
 });
 test('duplicate IDs and hosts cannot masquerade as independent providers',()=>{
@@ -48,11 +48,11 @@ test('duplicate IDs and hosts cannot masquerade as independent providers',()=>{
  another.DONATIONS_PROCESSOR_4_URL=another.DONATIONS_PROCESSOR_1_URL;
  assert.throws(()=>approvedDonationRoutes(another,'production'),/distinct/);
 });
-test('a missing URL or Stripe-labeled processor fails the configuration',()=>{
+test('a missing URL or a fake native Stripe ID fails the configuration',()=>{
  const env=configured();delete env.DONATIONS_PROCESSOR_1_URL;
  assert.throws(()=>approvedDonationRoutes(env,'production'),/required/);
- const another=configured();another.DONATIONS_PROCESSOR_1_NAME='Stripe Alternative';
- assert.throws(()=>approvedDonationRoutes(another,'production'),/safe unique/);
+ const another=configured();another.DONATIONS_PROCESSOR_1_ID='stripe';
+ assert.throws(()=>approvedDonationRoutes(another,'production'),/native signed/);
 });
 
 test('JPMorgan Chase payment platforms are prohibited directly in every slot',()=>{
@@ -63,4 +63,15 @@ test('JPMorgan Chase payment platforms are prohibited directly in every slot',()
  }
  for(const host of ['payments.chase.com','wepay.com','merchant.jpmorgan.com','pay.jpmorganchase.com','api.chasepaymentech.com'])
   assert.throws(()=>validateHostedDonationUrl('https://'+host+'/pay',host),/prohibited processor hostname/);
+});
+
+test('Stripe uses native hosted Checkout creation, never a fake fixed URL',()=>{
+ const env=configured(0);env.G28_STRIPE_LIVE_APPROVED='true';
+ env.STRIPE_SECRET_KEY='sk_live_12345678901234567890';
+ const routes=approvedDonationRoutes(env,'production');
+ assert.deepEqual(routes.map(r=>r.id),['stripe']);
+ assert.equal(routes[0].url,'/donate/stripe');
+ assert.equal(routes[0].kind,'stripe');
+ env.STRIPE_SECRET_KEY='sk_test_12345678901234567890';
+ assert.throws(()=>approvedDonationRoutes(env,'production'),/approved live Stripe account/);
 });
