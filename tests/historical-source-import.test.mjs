@@ -13,5 +13,5 @@ test('source archive is preserved privately and is not published as current',()=
   assert.equal(x.review,null);
   if(!x.compiled)assert(copies.includes(x.source.filename));
  }
- assert.equal(current.materials.length,0,'Import must not publish historical content');
+ assert.deepEqual(current,[],'Import must not publish historical content');
 });
