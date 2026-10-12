@@ -89,7 +89,48 @@ function Roles(){
   </article>)}</div>
  </>;
 }
-function Materials(){const[q,setQ]=useState(''),[category,setCategory]=useState('all'),[query,setQuery]=useState('');useEffect(()=>{const t=setTimeout(()=>setQuery(q),200);return()=>clearTimeout(t);},[q]);const{data,error,loading}=useLoad<{materials:Material[];notice:string|null}>(`/api/materials?q=${encodeURIComponent(query)}&category=${encodeURIComponent(category)}`);return <><span className="eyebrow">CURRENT GUIDANCE, IN ONE PLACE</span><h1>Your materials.</h1><p className="lead">Search approved guides. Read online or download a copy with its version information.</p><div className="search-controls"><label>Search the library<input type="search" value={q} onChange={e=>setQ(e.target.value)} placeholder="Search by topic, role or phrase"/></label><label>Category<select value={category} onChange={e=>setCategory(e.target.value)}>{[['all','All materials'],['start','Start here'],['role','Role playbooks'],['policy','Policy kits'],['tools','Forms & training']].map(([v,t])=><option key={v} value={v}>{t}</option>)}</select></label></div>{loading&&<Notice>Searching current materials...</Notice>}{error&&<Notice error>{error}</Notice>}{data?.notice&&<Notice>{data.notice}</Notice>}<div className="cards two">{data?.materials.map(m=><article className="panel" key={m.id}><span className="eyebrow">{m.category} / VERSION {m.revision}</span><h2>{m.title}</h2><p>{m.description}</p><Link to={'/materials/'+m.id} className="textlink">Read the guide &rarr;</Link></article>)}</div></>;}
+function Materials(){
+ const [q,setQ]=useState(''),[category,setCategory]=useState('all'),[query,setQuery]=useState('');
+ const [savedOnly,setSavedOnly]=useState(false);
+ useEffect(()=>{const t=setTimeout(()=>setQuery(q),200);return()=>clearTimeout(t);},[q]);
+ const {data,error,loading}=useLoad<{materials:Material[];notice:string|null}>(`/api/materials?q=${encodeURIComponent(query)}&category=${encodeURIComponent(category)}`);
+ const {data:bookmarks,error:bookmarkError,loading:bookmarkLoading}=useLoad<{materialIds:string[]}>('/api/account/bookmarks');
+ const savedIds=new Set(bookmarks?.materialIds||[]);
+ const visible=(data?.materials||[]).filter(material=>!savedOnly||savedIds.has(material.id));
+ return <>
+  <span className="eyebrow">CURRENT GUIDANCE, IN ONE PLACE</span>
+  <h1>Your materials.</h1>
+  <p className="lead">Search approved guides. Read online, download or return to guides saved to your volunteer account.</p>
+  <div className="search-controls">
+   <label>Search the library
+    <input type="search" value={q} onChange={e=>setQ(e.target.value)} placeholder="Search by topic, role or phrase"/>
+   </label>
+   <label>Category
+    <select value={category} onChange={e=>setCategory(e.target.value)}>
+     {[['all','All materials'],['start','Start here'],['role','Role playbooks'],['policy','Policy kits'],['tools','Forms & training']].map(([v,t])=><option key={v} value={v}>{t}</option>)}
+    </select>
+   </label>
+  </div>
+  <label className="check">
+   <input type="checkbox" checked={savedOnly} onChange={e=>setSavedOnly(e.target.checked)} disabled={bookmarkLoading}/>
+   <span>Saved guides only{!bookmarkLoading&&!bookmarkError&&` (${savedIds.size})`}</span>
+  </label>
+  {loading&&<Notice>Searching current materials...</Notice>}
+  {bookmarkLoading&&savedOnly&&<Notice>Loading your saved guides...</Notice>}
+  {error&&<Notice error>{error}</Notice>}
+  {bookmarkError&&<Notice error>Your saved guides could not be loaded. Try refreshing the page.</Notice>}
+  {data?.notice&&<Notice>{data.notice}</Notice>}
+  {savedOnly&&!bookmarkLoading&&!bookmarkError&&!loading&&!error&&!data?.notice&&visible.length===0&&
+   <Notice>No saved current guides match these filters. Open a guide and select "Bookmark to my account" to add it here.</Notice>}
+  <div className="cards two">
+   {visible.map(m=><article className="panel" key={m.id}>
+    <span className="eyebrow">{m.category} / VERSION {m.revision}{savedIds.has(m.id)?' / SAVED':''}</span>
+    <h2>{m.title}</h2><p>{m.description}</p>
+    <Link to={'/materials/'+m.id} className="textlink">Read the guide &rarr;</Link>
+   </article>)}
+  </div>
+ </>;
+}
 type DocBlock={type:string;level?:number;id?:string;text?:string;items?:string[];headers?:string[];rows?:string[][]};
 type DocHeading={id:string;level:number;text:string};
 type InlinePart={type:'text'|'link';text:string;url?:string;external?:boolean};
