@@ -14,6 +14,7 @@ test('config preparation writes only selected issue fields',()=>{
  const {config,changed}=prepare(original,{issue:'garden',youtube:video,website:'https://example.org/garden'});
  assert.equal(changed,2);
  assert.equal(config.issues.garden.youtubeId,'AbcdefG123_');
+ assert.equal(config.issues.garden.temporaryLocalVideo,null,'Published issue-specific video replaces shared temporary media.');
  assert.equal(config.issues.garden.websiteUrl,'https://example.org/garden');
  assert.deepEqual(config.issues.cornerstone,original.issues.cornerstone);
  assert.deepEqual(config.issues['kirk-evers'],original.issues['kirk-evers']);
