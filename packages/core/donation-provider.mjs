@@ -47,7 +47,8 @@ export function approvedDonationRoutes(env, releaseMode) {
     const name = env[prefix + 'NAME'];
     if (typeof id !== 'string' || !/^[a-z][a-z0-9-]{1,39}$/.test(id) ||
         typeof name !== 'string' || name.trim().length < 2 || name.length > 80 ||
-        /stripe/i.test(id + ' ' + name) ||\n        /(^|[-_\\s])(chase|paymentech|wepay|jpmorgan|jp-morgan)($|[-_\\s])/i.test(id + ' ' + name) ||\n        /j\\.?p\\.?\\s?morgan/i.test(name)) {
+        /stripe/i.test(id + ' ' + name) ||
+        /(?:^|[^a-z0-9])(?:chase|wepay|paymentech|jpmorgan|j[ .-]*p[ .-]*morgan)(?:$|[^a-z0-9])/i.test(id + ' ' + name)) {
       throw invalid('an approved processor needs a safe unique ID and display name');
     }
     const host = approvedHost(env[prefix + 'HOST']);
