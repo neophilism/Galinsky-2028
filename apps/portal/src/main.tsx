@@ -93,7 +93,7 @@ function Materials(){
  const [q,setQ]=useState(''),[category,setCategory]=useState('all'),[query,setQuery]=useState('');
  const [savedOnly,setSavedOnly]=useState(false);
  useEffect(()=>{const t=setTimeout(()=>setQuery(q),200);return()=>clearTimeout(t);},[q]);
- const {data,error,loading}=useLoad<{materials:Material[];notice:string|null}>(/`/api/materials?q=${encodeURIComponent(query)}&category=${encodeURIComponent(category)}`);
+ const {data,error,loading}=useLoad<{materials:Material[];notice:string|null}>(`/api/materials?q=${encodeURIComponent(query)}&category=${encodeURIComponent(category)}`);
  const {data:bookmarks,error:bookmarkError,loading:bookmarkLoading}=useLoad<{materialIds:string[]}>('/api/account/bookmarks');
  const savedIds=new Set(bookmarks?.materialIds||[]);
  const visible=(data?.materials||[]).filter(material=>!savedOnly||savedIds.has(material.id));
