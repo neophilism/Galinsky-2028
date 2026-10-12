@@ -40,7 +40,7 @@ export class DonationRotationStore {
   const c=await this.pool.connect();
   try {
    await c.query('BEGIN');
-   const current=await c.query('SELECT status FROM g28.donation_provider_state WHERE provider_id=$1 FOR UPDATE',[providerId]);
+   const current=await c.query('SELECT status,updated_at FROM g28.donation_provider_state WHERE provider_id=$1 FOR UPDATE',[providerId]);
    if(!current.rowCount)throw new Error('Provider must be registered before recording health evidence');
    const inserted=await c.query(
     'INSERT INTO g28.donation_provider_observations(provider_id,event_id,attempt_ref,signal) VALUES($1,$2,$3,$4) ON CONFLICT(provider_id,event_id) DO NOTHING RETURNING observation_seq',
@@ -48,8 +48,8 @@ export class DonationRotationStore {
    let status=current.rows[0].status,reason=null;
    if(inserted.rowCount && status==='active'){
     const recent=await c.query(
-     'SELECT signal,attempt_ref,observed_at FROM g28.donation_provider_observations WHERE provider_id=$1 ORDER BY observation_seq DESC LIMIT 20',
-     [providerId]);
+     'SELECT signal,attempt_ref,observed_at FROM g28.donation_provider_observations WHERE provider_id=$1 AND observed_at > $2 ORDER BY observation_seq DESC LIMIT 20',
+     [providerId,current.rows[0].updated_at]);
     const verdict=evaluateIncident(recent.rows);
     if(verdict.quarantine){
      status='quarantined';reason=verdict.reason;
