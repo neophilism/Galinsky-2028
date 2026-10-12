@@ -24,6 +24,8 @@ test('the private preview server protects all pages, images, styles and direct l
  await mkdir(join(directory,'assets'));await mkdir(join(directory,'issues'));await mkdir(join(directory,'issues','garden'));
  await writeFile(join(directory,'index.html'),'<html>Campaign private home</html>');
  await writeFile(join(directory,'assets','secret.css'),'.secret{display:block}');
+ const videoBytes=Buffer.from(Array.from({length:256},(_,i)=>i));
+ await writeFile(join(directory,'assets','issue-video-placeholder.mp4'),videoBytes);
  await writeFile(join(directory,'issues','garden','index.html'),'<html>Garden private policy</html>');
  await writeFile(join(directory,'.env'),'SHOULD_NEVER_BE_SERVED');
  const server=createPrivatePreviewServer({directory,env:{PREVIEW_ACCESS_PASSWORD:password}});
@@ -45,6 +47,25 @@ test('the private preview server protects all pages, images, styles and direct l
   assert.equal(ok.status,200,path);
   assert.ok((await ok.text()).includes(text),path);
   assert.match(ok.headers.get('x-robots-tag'),/noindex/);
+ }
+ // MP4 playback is private too; byte-range requests work for video seeking.
+ const unauthorizedRange=await fetch(base+'/assets/issue-video-placeholder.mp4',{headers:{Range:'bytes=0-10'}});
+ assert.equal(unauthorizedRange.status,401,'Byte ranges must not bypass authentication');
+ const full=await fetch(base+'/assets/issue-video-placeholder.mp4',{headers:{Authorization:header()}});
+ assert.equal(full.status,200);
+ assert.equal(full.headers.get('content-type'),'video/mp4');
+ assert.equal(full.headers.get('accept-ranges'),'bytes');
+ assert.equal((await full.arrayBuffer()).byteLength,256);
+ const range=await fetch(base+'/assets/issue-video-placeholder.mp4',{headers:{Authorization:header(),Range:'bytes=25-44'}});
+ assert.equal(range.status,206);
+ assert.equal(range.headers.get('content-range'),'bytes 25-44/256');
+ assert.equal((await range.arrayBuffer()).byteLength,20);
+ const suffix=await fetch(base+'/assets/issue-video-placeholder.mp4',{headers:{Authorization:header(),Range:'bytes=-5'}});
+ assert.equal(suffix.status,206);
+ assert.equal(suffix.headers.get('content-range'),'bytes 251-255/256');
+ for(const badRange of ['bytes=1000-','bytes=1-0','bytes=0-1,3-4','bytes=-0']){
+  const bad=await fetch(base+'/assets/issue-video-placeholder.mp4',{headers:{Authorization:header(),Range:badRange}});
+  assert.equal(bad.status,416,'Malformed and unsatisfiable ranges must fail closed: '+badRange);
  }
  const denied=await fetch(base+'/.env',{headers:{Authorization:header()}});
  assert.equal(denied.status,404);
