@@ -13,8 +13,9 @@ temporary placeholder on Kirk–Evers, The Garden and The Cornerstone. The
 private-preview website has code to serve ONE verified local file at
 apps/web/public/assets/issue-video-placeholder.mp4, with accessible HTML5
 controls, a prominent disclaimer that it does NOT explain those issues,
-and authenticated byte-range seeking. The 2.8MB optimized H.264/AAC copy
-is available as a generated download in the original ChatGPT session.
+and authenticated byte-range seeking. The 2,165,255-byte optimized H.264/AAC copy
+(SHA-256 bab062faf1ed9b647daf73a40dbbeebf63ae04d8dfe669c43605697e56a20f5f)
+has been prepared as a downloadable user artifact in ChatGPT.
 It has not reached GitHub/Render because the ChatGPT execution container
 cannot reach either external host for binary uploads. An authorized operator
 must upload the prepared file at that EXACT private-repo location, verify
