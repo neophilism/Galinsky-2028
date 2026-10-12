@@ -9,3 +9,5 @@ Synthetic tests cover one capture, partial refunds, final refund, replay idempot
 ## Runtime donation routing vs. actual financial events
 
 Migration 007 and the four-way routing engine track which hosted processor the donor was directed to and health observations **without donor PII or card data**. A redirect selection is not a financial contribution and does NOT update this ledger. Until four real processor-specific verified webhook/export implementations are accepted and reconciled, finance reporting and automated charged-payment outage detection remain UNIMPLEMENTED. Do not infer donations from redirects or payment success from a reachable checkout page.
+
+Read-only checkout availability observations from migration 008 are not financial events; they cannot establish whether an account is actually authorized to accept or settle a contribution.

@@ -11,6 +11,7 @@ test('real PostgreSQL rotation is durable, idempotent and quarantines only prove
  try{
   await pool.query(await readFile('db/migrations/001_foundation.sql','utf8'));
   await pool.query(await readFile('db/migrations/007_donation_rotation.sql','utf8'));
+  await pool.query(await readFile('db/migrations/008_donation_checkout_monitoring.sql','utf8'));
   await pool.query("DELETE FROM g28.donation_route_selections WHERE provider_id LIKE 'itest-rot-%'");
   await pool.query("DELETE FROM g28.donation_provider_observations WHERE provider_id LIKE 'itest-rot-%'");
   await pool.query("DELETE FROM g28.donation_provider_state WHERE provider_id LIKE 'itest-rot-%'");
@@ -45,6 +46,12 @@ test('real PostgreSQL rotation is durable, idempotent and quarantines only prove
   await store.setStatus(id,'active','verified gateway repair test 20261012');
   const clear=await store.observe(id,{eventId:'benign-000002',attemptRef:'attempt-b-000002',signal:'donor_decline'});
   assert.equal(clear.status,'active','old quarantined epoch errors may not re-quarantine after verified repair');
+  const checkoutId=routes[1].id;
+  for(let i=1;i<=3;i++){
+   const report=await store.observe(checkoutId,{eventId:'probe-event-0000'+i,attemptRef:'probe-attempt-0000'+i,signal:'checkout_unreachable'});
+   assert.equal(report.status,i===3?'quarantined':'active');
+  }
+  assert((await Promise.all(Array.from({length:6},()=>store.selectRoute(routes)))).every(x=>x.providerId!==checkoutId));
   const fatal=await store.observe(id,{eventId:'fatal-000001',attemptRef:'attempt-f-000001',signal:'access_terminated'});
   assert.equal(fatal.status,'quarantined','account termination must quarantine immediately');
   await store.setStatus(id,'excluded','documented owner reviewed provider denial');

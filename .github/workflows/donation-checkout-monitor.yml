@@ -1,0 +1,27 @@
+name: Campaign checkout reachability monitor
+on:
+  schedule:
+    - cron: '*/3 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    # Owner/treasurer release gate: until enabled, no provider is contacted.
+    if: vars.G28_DONATIONS_MONITOR_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    env:
+      G28_DONATIONS_MONITOR_ENABLED: ${{ vars.G28_DONATIONS_MONITOR_ENABLED }}
+      G28_DONATIONS_MONITOR_ROUTES_JSON: ${{ secrets.G28_DONATIONS_MONITOR_ROUTES_JSON }}
+      DATABASE_URL: ${{ secrets.G28_DONATIONS_MONITOR_DATABASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.3
+          cache: npm
+      - name: Install locked production packages
+        run: npm ci --omit=dev --no-fund
+      - name: Evaluate approved hosted checkout reachability
+        run: node scripts/donation-probe-once.mjs
