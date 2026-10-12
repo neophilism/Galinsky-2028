@@ -30,6 +30,7 @@ export class PostgresStore{
    const prefs=await c.query('SELECT role_id,available_minutes,willing_to_train FROM g28.volunteer_role_preferences WHERE account_id=$1',[id]);
    const tasks=await c.query('SELECT task_id FROM g28.task_progress WHERE account_id=$1 ORDER BY task_id',[id]);
    const reads=await c.query('SELECT material_id,revision,content_sha256 FROM g28.material_reading WHERE account_id=$1 ORDER BY material_id',[id]);
+   const bookmarked=await c.query('SELECT material_id FROM g28.account_bookmarks WHERE account_id=$1 ORDER BY material_id',[id]);
    await c.query('COMMIT');
    const a=account.rows[0],p=prefs.rows[0];
    return {
@@ -37,6 +38,7 @@ export class PostgresStore{
      marketingConsent:a.marketing_consent,termsVersion:a.terms_version},
     rolePreferences:p?{roleId:p.role_id,minutes:p.available_minutes,willingToTrain:p.willing_to_train}:null,
     completedTasks:tasks.rows.map(x=>x.task_id),
+    bookmarkedMaterials:bookmarked.rows.map(x=>x.material_id),
     materialAcknowledgments:reads.rows.map(x=>({materialId:x.material_id,revision:x.revision,contentSha256:x.content_sha256}))
    };
   }catch(e){await c.query('ROLLBACK');throw e;}finally{c.release();}
@@ -51,6 +53,17 @@ export class PostgresStore{
  async setTaskCompletion(accountId,taskId,completed){
   if(completed)await this.pool.query(`INSERT INTO g28.task_progress(account_id,task_id) VALUES($1,$2) ON CONFLICT(account_id,task_id) DO UPDATE SET completed_at=now()`,[accountId,taskId]);
   else await this.pool.query('DELETE FROM g28.task_progress WHERE account_id=$1 AND task_id=$2',[accountId,taskId]);
+ }
+ async listBookmarks(accountId){
+  const r=await this.pool.query('SELECT material_id FROM g28.account_bookmarks WHERE account_id=$1 ORDER BY material_id',[accountId]);
+  return r.rows.map(x=>x.material_id);
+ }
+ async setBookmark(accountId,materialId,saved){
+  if(saved)await this.pool.query(
+   'INSERT INTO g28.account_bookmarks(account_id,material_id) VALUES($1,$2) ON CONFLICT(account_id,material_id) DO NOTHING',
+   [accountId,materialId]);
+  else await this.pool.query(
+   'DELETE FROM g28.account_bookmarks WHERE account_id=$1 AND material_id=$2',[accountId,materialId]);
  }
  async getRolePreferences(accountId){
   const q=await this.pool.query('SELECT role_id,available_minutes,willing_to_train FROM g28.volunteer_role_preferences WHERE account_id=$1',[accountId]);

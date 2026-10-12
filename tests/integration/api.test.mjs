@@ -175,3 +175,29 @@ test('sign out everywhere uses CSRF and invalidates all of this account sessions
  assert.equal(store.accounts.size,1,'Revocation does not delete the user account');
  await app.close();
 });
+
+test('bookmarks are account-scoped, authorized, persistent and not accessible anonymously',async()=>{
+ const {app,store}=await setup();const {cookie,csrf}=await login(app,store);
+ const auth={...headers,cookie,'x-csrf-token':csrf};
+ assert.deepEqual((await app.inject({url:'/api/account/bookmarks',headers:{cookie}})).json(),{materialIds:[]});
+ for(const [path,head,payload,status] of [
+  ['/api/materials/test-guide/bookmark',{...headers,cookie},{saved:true},403],
+  ['/api/materials/archive/bookmark',auth,{saved:true},404],
+  ['/api/materials/not-current/bookmark',auth,{saved:true},404],
+  ['/api/materials/test-guide/bookmark',auth,{saved:'yes'},400],
+  ['/api/materials/test-guide/bookmark',auth,{saved:true,accountId:'other'},400]
+ ]){
+  const r=await app.inject({method:'POST',url:path,headers:head,payload});
+  assert.equal(r.statusCode,status);
+ }
+ let r=await app.inject({method:'POST',url:'/api/materials/test-guide/bookmark',headers:auth,payload:{saved:true}});
+ assert.equal(r.statusCode,200);assert.deepEqual(r.json(),{materialId:'test-guide',saved:true,storedInAccount:true});
+ assert.deepEqual((await app.inject({url:'/api/account/bookmarks',headers:{cookie}})).json(),{materialIds:['test-guide']});
+ assert.deepEqual((await app.inject({url:'/api/account/export',headers:{cookie}})).json().bookmarkedMaterials,['test-guide']);
+ assert.deepEqual(await store.listBookmarks('unrelated'),[]);
+ assert.equal((await app.inject({url:'/api/account/bookmarks'})).statusCode,401);
+ r=await app.inject({method:'POST',url:'/api/materials/test-guide/bookmark',headers:auth,payload:{saved:false}});
+ assert.equal(r.statusCode,200);
+ assert.deepEqual((await app.inject({url:'/api/account/bookmarks',headers:{cookie}})).json(),{materialIds:[]});
+ await app.close();
+});
