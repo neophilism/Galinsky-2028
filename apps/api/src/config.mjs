@@ -1,6 +1,9 @@
 import {origin,assert} from '../../../packages/core/validation.mjs';
 import {loadPreviewGate} from '../../../packages/core/preview-gate.mjs';
 import {safeReleaseCommit} from '../../../packages/core/release-id.mjs';
+import {emailKey} from '../../../packages/core/auth.mjs';
+import {email} from '../../../packages/core/validation.mjs';
+import {treasuryVaultKey} from '../../../packages/core/treasury-vault.mjs';
 export function loadConfig(env=process.env){
  const production=env.NODE_ENV==='production';
  assert(env.RENDER!=='true'||production,'production_runtime','Render API deployments require NODE_ENV=production.',503);
@@ -12,7 +15,22 @@ export function loadConfig(env=process.env){
  const mailReady=env.MAIL_PROVIDER==='resend'&&Boolean(env.RESEND_API_KEY&&env.MAIL_FROM&&/^[^\r\n]+@[^\r\n]+$/.test(env.MAIL_FROM));
  const signup=env.SIGNUP_ENABLED==='true';
  const mailDeliveryMode=env.MAIL_DELIVERY_MODE||'disabled';
+ const adminLoginReady=env.G28_ADMIN_LOGIN_ENABLED==='true';
+ // Never bootstrap by password knowledge alone: actual mailbox ownership and
+ // dedicated email one-time link must be proven before any admin role is issued.
+ const adminOwnerEmailKey=adminLoginReady?emailKey(email(env.G28_OWNER_ADMIN_EMAIL),pepper):null;
+ const treasuryKey=env.G28_TREASURY_VAULT_KEY||'';
+
  assert(['disabled','inline','external'].includes(mailDeliveryMode),'invalid_mail_delivery','Select disabled, inline or external mail delivery.',503);
+ if(adminLoginReady){
+  assert(pepper.length>=32&&deliveryKey&&Buffer.from(deliveryKey,'base64').length===32&&mailReady,
+   'admin_signin_unready','Verified email delivery and secure login keys are required for administrator sign-in.',503);
+  treasuryVaultKey(treasuryKey);
+ }
+ if(production&&adminLoginReady){
+  assert((mailDeliveryMode==='inline'||mailDeliveryMode==='external')&&env.MAIL_WORKER_OPERATIONAL_APPROVED==='true',
+   'admin_mail_unavailable','Administrator login cannot open without an operational verified mail worker.',503);
+ }
  if(production&&signup){
   assert((mailDeliveryMode==='inline'||mailDeliveryMode==='external')&&env.MAIL_WORKER_OPERATIONAL_APPROVED==='true',
    'mail_worker_unavailable','Production sign-in cannot open without a configured, operational mail delivery worker.',503);
@@ -23,5 +41,5 @@ export function loadConfig(env=process.env){
  assert(env.STAFF_IDENTITY_ENABLED!=='true','staff_unavailable','A reviewed staff identity integration is not installed.',503);
  assert(env.DONATIONS_ENABLED!=='true','fundraising_unavailable','A production fundraising adapter and release evidence are not installed.',503);
  if(production)assert(env.DATABASE_URL,'database_required','Production requires the assigned database.',503);
- return {production,previewGate,publicOrigin,portalOrigin,deliveryKey,pepper,signup,mailReady,mailDeliveryMode,mailKey:env.RESEND_API_KEY,mailFrom:env.MAIL_FROM,databaseUrl:env.DATABASE_URL,port:Number(env.PORT||4322),host:env.HOST||(production?'0.0.0.0':'127.0.0.1'),commit:safeReleaseCommit(env.RENDER_GIT_COMMIT),termsVersion:'2026-10-10'};
+ return {production,previewGate,publicOrigin,portalOrigin,deliveryKey,pepper,signup,adminLoginReady,adminOwnerEmailKey,treasuryKey,mailReady,mailDeliveryMode,mailKey:env.RESEND_API_KEY,mailFrom:env.MAIL_FROM,databaseUrl:env.DATABASE_URL,port:Number(env.PORT||4322),host:env.HOST||(production?'0.0.0.0':'127.0.0.1'),commit:safeReleaseCommit(env.RENDER_GIT_COMMIT),termsVersion:'2026-10-10'};
 }
