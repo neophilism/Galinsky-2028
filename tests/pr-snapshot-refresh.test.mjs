@@ -26,7 +26,7 @@ test('GitHub snapshot refresh preserves exact work-unit mappings without fabrica
  assert.notEqual(out.observedAt,input.observedAt);
 });
 test('invalid/missing source PR, wrong repo, or impossible merge date cannot be published',()=>{
- assert.throws(()=>withObservedPullRequests(previous(),[pr(3)],observed),/mapping/);
+ assert.throws(()=>withObservedPullRequests(previous(),[pr(3)],observed),/work-unit reference/);
  assert.throws(()=>withObservedPullRequests(previous(),[pr(5),pr(5)],observed),/duplicate/);
  assert.throws(()=>withObservedPullRequests(previous(),[pr(5,{state:'open'})],observed),/inconsistent open/);
  assert.throws(()=>withObservedPullRequests(previous(),[pr(5,{merged_at:'2028-01-01T00:00:00Z'})],observed),/future timestamp/);
