@@ -45,7 +45,7 @@ function requestedPath(raw){
 
 // Unlike a static CDN, this Node service authenticates BEFORE reading any file.
 // Use only this web-service entry point for preview hosting.
-export function createPrivatePreviewServer({directory=resolve('dist/web'),env=process.env,rotationStore=null}={}){
+export function createPrivatePreviewServer({directory=resolve('dist/web'),env=process.env,rotationStore=null,stripeTransport=fetch}={}){
  const credentials=loadPreviewGate(env);
  const root=realpathSync(directory);
  if(!statSync(root).isDirectory())throw Error('The public preview build directory does not exist.');
@@ -100,7 +100,7 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
      body+=chunk.toString('utf8');
      if(body.length>4096)return send(res,413,'Contribution form exceeds the allowed size.');
     }
-    const created=await openStripeSession({raw:body,settings:stripeConfig,nonceKey:stripeNonce,request:req});
+    const created=await openStripeSession({raw:body,settings:stripeConfig,nonceKey:stripeNonce,request:req,transport:stripeTransport});
     res.statusCode=303;res.setHeader('Location',created.hostedCheckoutUrl);
     res.setHeader('Content-Length','0');res.end();return;
    }catch(e){
