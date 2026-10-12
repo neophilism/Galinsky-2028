@@ -83,7 +83,16 @@ try{
   await page.getByRole('button',{name:'Completed - undo'}).first().waitFor();
   await page.getByRole('button',{name:'Completed - undo'}).first().click();
   await page.getByText('Your first steps: 0 of 3 marked complete. You can change these at any time.').waitFor();
-  await page.goto(portalOrigin+'/materials');await page.getByLabel('Search the library').fill('Synthetic');await page.getByRole('heading',{name:'Synthetic test guide'}).waitFor();await page.getByRole('link',{name:/Read the guide/}).click();await page.getByRole('heading',{name:'Synthetic test guide'}).first().waitFor();const contents=page.getByRole('navigation',{name:'On this page'});await contents.getByRole('link',{name:'Getting started'}).click();assert.equal(await page.locator('#getting-started').count(),1);assert.equal(await page.getByRole('table').count(),1);await page.getByRole('button',{name:'I have read this version'}).click();
+  await page.goto(portalOrigin+'/materials');await page.getByLabel('Search the library').fill('Synthetic');await page.getByRole('heading',{name:'Synthetic test guide'}).waitFor();await page.getByRole('link',{name:/Read the guide/}).click();await page.getByRole('heading',{name:'Synthetic test guide'}).first().waitFor();const contents=page.getByRole('navigation',{name:'On this page'});await contents.getByRole('link',{name:'Getting started'}).click();assert.equal(await page.locator('#getting-started').count(),1);assert.equal(await page.getByRole('table').count(),1);await page.getByRole('button',{name:'Bookmark to my account'}).click();
+  await page.getByRole('button',{name:'Saved to my account'}).waitFor();
+  await page.reload();
+  await page.getByRole('button',{name:'Saved to my account'}).waitFor();
+  const bookmarks=await context.request.get(portalOrigin+'/api/account/bookmarks');
+  assert.equal(bookmarks.status(),200);
+  assert.deepEqual((await bookmarks.json()).materialIds,['test-guide']);
+  await page.getByRole('button',{name:'Saved to my account'}).click();
+  await page.getByRole('button',{name:'Bookmark to my account'}).waitFor();
+  await page.getByRole('button',{name:'I have read this version'}).click();
   await page.getByText('Reading acknowledgment saved to your private account. You can undo it.').waitFor();
   await page.reload();
   await page.getByRole('button',{name:'Read this version - undo'}).waitFor();
