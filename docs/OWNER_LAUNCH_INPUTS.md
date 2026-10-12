@@ -37,28 +37,19 @@ A public volunteer can then sign up, verify and return across devices.
 Do not confuse the private-preview HTTP Basic login with a staff/volunteer
 account or passkey/MFA.
 
-## 3. Stripe political fundraising: more than a secret key
+## 3. FOUR non-Stripe, independently underwritten payment providers
 
-The owner or treasurer must confirm:
-- registered federal campaign committee's exact legal name, ID and
-  treasurer/authorized representatives; correct public disclaimer;
-- Stripe's documented approval of political fundraising as a restricted
-  business, not merely the availability of an API key;
-- approved bank/payout recipient and processor-account capabilities;
-- a current authorized per-election 2027–28 limit and designation,
-  direct checkout/offline aggregation, donor-source exclusions,
-  legal attestations and legally required reporting/receipts;
-- the site's strict own PERSONAL CREDIT CARD ONLY rule: Stripe's generic
-  "card" method also accepts debit/business funding types unless a
-  verified provider/process control blocks or remedies them;
-- approved recurring cancellation and ongoing cap/scheduling policies;
-- webhook SIGNING SECRET and sandbox/live API secrets entered ONLY as
-  encrypted environment variables on Render; never in chat/GitHub issues;
-- independent financial reconciliation, refund/dispute and treasurer
-  acceptance against the exact release before donations go live;
-- explicit permission for any real card charge/refund, even a test.
+The owner has prohibited Stripe completely, including indirect integrations. The campaign will present ONE checkout button and select randomly among four genuinely independently approved payment relationships, with runtime incident quarantine. See docs/DONATION_PROCESSOR.md and issue #51. Four hosted checkout slots and PostgreSQL routing logic are NOT evidence of four merchant accounts or functional payment/settlement integrations.
 
-See docs/operations/STRIPE_POLITICAL_CAMPAIGN_ACCEPTANCE.md (when merged).
+Owner/treasurer must supply or authorize, separately for each provider:
+- complete merchant agreements and underlying acquirer/subprocessor identities, with documented ordinary nondiscriminatory treatment of campaign activity;
+- legally accurate campaign committee and treasurer information, settlement bank account, contribution source eligibility, limits and election designation;
+- one VERIFIED approved hosted checkout URL plus account credentials/keys or signed webhook API setup in the Render secrets, never in chat or GitHub;
+- approved donor identification and occupation/employer collection, disclosure, receipt and refund rules, and the campaign's separate personal-credit-card-only policy;
+- accepted sandbox and then permitted live financial test/settlement reconciliation results, no duplicate charges, and evidence that actual provider error status can be authenticated for automatic incident detection;
+- a contact and written escalation procedure for account freezes, disputes, risk reviews and termination.
+
+Do NOT enable DONATIONS_ENABLED, DONATIONS_TREASURER_APPROVED or any provider APPROVED variable until the evidence exists. Keep system fail-closed; no provider, merchant or bank is implicitly approved by a code change.
 
 ## 4. Public identity, links and legislative content
 
@@ -118,7 +109,7 @@ Two Render services are deployed and password protected; neither being live
 nor the repository having merged PRs constitutes completion of the full
 60-package plan. Persistent accounts are real but signup delivery is gated.
 Staff UI/MFA, current materials publishing, verified field workflows,
-protected-content E2EE, treasurer-led real Stripe flow, end-to-end release
+protected-content E2EE, treasurer-approved four-provider non-Stripe payment flow, end-to-end release
 rehearsal, backups and independent reviews remain substantial ENGINEERING
 work beyond these owner-provided inputs. The authoritative register retains
 the status of every package, and every actual release must have exact SHA,

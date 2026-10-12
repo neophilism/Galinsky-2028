@@ -4,6 +4,9 @@ import {realpathSync,statSync} from 'node:fs';
 import {extname,resolve,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {loadPreviewGate,previewAuthorized,PREVIEW_REALM,PREVIEW_ROBOTS} from '../../packages/core/preview-gate.mjs';
+import {approvedDonationRoutes} from '../../packages/core/donation-provider.mjs';
+import {DonationRotationStore} from './donation-rotation-store.mjs';
+import {databasePool} from '../api/src/postgres-store.mjs';
 
 const mime={
  '.html':'text/html; charset=utf-8',
@@ -39,11 +42,18 @@ function requestedPath(raw){
 
 // Unlike a static CDN, this Node service authenticates BEFORE reading any file.
 // Use only this web-service entry point for preview hosting.
-export function createPrivatePreviewServer({directory=resolve('dist/web'),env=process.env}={}){
+export function createPrivatePreviewServer({directory=resolve('dist/web'),env=process.env,rotationStore=null}={}){
  const credentials=loadPreviewGate(env);
  const root=realpathSync(directory);
  if(!statSync(root).isDirectory())throw Error('The public preview build directory does not exist.');
- return createServer(async(req,res)=>{
+ // Release flags and provider approvals are checked independently of the database.
+ // Preview mode always fails closed; tests may inject an in-memory routing store.
+ const donationRoutes=env.G28_PUBLIC_MODE==='production'?approvedDonationRoutes(env,'production'):[];
+ if(donationRoutes.length && !rotationStore && !env.DATABASE_URL)
+  throw Error('Activated donation routing requires a verified persistent DATABASE_URL');
+ const rotationPool=donationRoutes.length && !rotationStore?databasePool(env.DATABASE_URL):null;
+ const liveRotationStore=rotationStore||(rotationPool?new DonationRotationStore(rotationPool):null);
+ const server=createServer(async(req,res)=>{
   res.setHeader('Cache-Control','private, no-store, max-age=0');
   res.setHeader('X-Robots-Tag',PREVIEW_ROBOTS);
   res.setHeader('Vary','Authorization');
@@ -60,6 +70,25 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
   }
   const pathname=requestedPath(req.url);
   if(pathname===null)return send(res,404,'Not found.');
+  if(pathname==='/donate/continue'){
+   if(req.method!=='GET'){res.setHeader('Allow','GET');return send(res,405,'Method not allowed.');}
+   if(!donationRoutes.length || !liveRotationStore)
+    return send(res,503,'Online contributions are not available. No payment was attempted.');
+   try{
+    const selection=await liveRotationStore.selectRoute(donationRoutes);
+    if(!selection)return send(res,503,'Online contributions are temporarily unavailable. No payment was attempted.');
+    const configured=donationRoutes.find(route=>route.id===selection.providerId);
+    if(!configured||configured.url!==selection.url)throw Error('Invalid rotation selection');
+    res.statusCode=303;
+    res.setHeader('Location',configured.url);
+    res.setHeader('Referrer-Policy','no-referrer');
+    res.setHeader('Content-Length','0');
+    res.end();return;
+   }catch{
+    console.error(JSON.stringify({event:'donation_route_unavailable'}));
+    return send(res,503,'Online contributions are temporarily unavailable. No payment was attempted.');
+   }
+  }
   try{
    let candidate=resolve(root,'.'+pathname);
    if(candidate!==root&&!candidate.startsWith(root+sep))return send(res,404,'Not found.');
@@ -113,6 +142,8 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
    send(res,404,'Not found.');
   }
  });
+ if(rotationPool)server.on('close',()=>{void rotationPool.end().catch(()=>{});});
+ return server;
 }
 const entry=process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url);
 if(entry){
