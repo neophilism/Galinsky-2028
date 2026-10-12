@@ -29,7 +29,7 @@ export function stripeCheckoutPlan({contribution,policy,release}){
  for(const key of ['stripeRestrictedBusinessApproval','federalCommitteeIdentity',
    'cardSourcePolicy','donorAttestations','directCheckoutRules','recurringControls']){
   assert(e?.[key]?.accepted===true&&typeof e[key].reference==='string'&&e[key].reference.trim(),
-   'donations_unapproved','Stripe's restricted-business and contribution compliance approvals are incomplete.',503);
+   'donations_unapproved',"Stripe's restricted-business and contribution compliance approvals are incomplete.",503);
  }
  assert(contribution&&typeof contribution==='object'&&!Array.isArray(contribution),
   'invalid_contribution','Invalid contribution request.');
