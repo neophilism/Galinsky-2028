@@ -1,6 +1,6 @@
 # Campaign donation checkout: four-way randomized continuity
 
-**Policy, 2026-10-12:** Stripe is prohibited. The campaign requires FOUR actual independently underwritten providers/acquirers, assessed for ordinary equal-treatment merchant terms. An approved general-purpose gateway alone is not evidence of an independent acquiring relationship. No provider is approved as of this document; no live donations are enabled.
+**Policy, 2026-10-12:** Stripe is prohibited. The campaign requires FOUR actual independently underwritten providers/acquirers, assessed for ordinary equal-treatment merchant terms. An approved general-purpose gateway alone is not evidence of an independent acquiring relationship. No provider is approved as of this document; no live donations are enabled. JPMorgan Chase merchant services, Chase Paymentech and WePay are excluded by the owner's 2026-10-12 directive. The earlier four named candidates have been withdrawn pending a genuine self-service, no-fee eligibility screen. See `docs/operations/PROCESSOR_SELF_SERVICE_SCREEN_20261012.md`.
 
 ## Exactly one donor button
 - In production mode, and ONLY with four treasurer-approved hosted checkout configurations, the public page displays **one** link labeled "Continue to secure contribution" pointing to same-origin /donate/continue.
