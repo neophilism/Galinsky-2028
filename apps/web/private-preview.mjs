@@ -4,6 +4,7 @@ import {realpathSync,statSync} from 'node:fs';
 import {extname,resolve,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {loadPreviewGate,previewAuthorized,PREVIEW_REALM,PREVIEW_ROBOTS} from '../../packages/core/preview-gate.mjs';
+import {safeReleaseCommit} from '../../packages/core/release-id.mjs';
 import {approvedDonationRoutes} from '../../packages/core/donation-provider.mjs';
 import {DonationRotationStore} from './donation-rotation-store.mjs';
 import {databasePool} from '../api/src/postgres-store.mjs';
@@ -70,6 +71,16 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
   }
   const pathname=requestedPath(req.url);
   if(pathname===null)return send(res,404,'Not found.');
+  if(pathname==='/healthz'){
+   const result=JSON.stringify({ok:true,service:'galinsky-2028-web',
+    mode:env.G28_PUBLIC_MODE==='production'?'production':'preview',
+    commit:safeReleaseCommit(env.RENDER_GIT_COMMIT)});
+   res.statusCode=200;
+   res.setHeader('Content-Type','application/json; charset=utf-8');
+   res.setHeader('Content-Length',Buffer.byteLength(result));
+   res.end(req.method==='HEAD'?undefined:result);
+   return;
+  }
   if(pathname==='/donate/continue'){
    if(req.method!=='GET'){res.setHeader('Allow','GET');return send(res,405,'Method not allowed.');}
    if(!donationRoutes.length || !liveRotationStore)
