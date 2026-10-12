@@ -26,6 +26,15 @@ export function renderPage(key, options={}) {
   return videoPanel(slug,video,{localAssetExists:Boolean(mode==='preview'&&path&&existsSync(join(root,'apps/web/public',path.slice(1))))});
  });
  body=body.replace(/\{\{DOCUMENTS:([a-z-]+)\}\}/g,(_,slug)=>policyDocumentSection(slug,cfg.issues[slug]?.documents||[],join(root,'apps/web/public')));
+ // Source URLs never expose private GitHub tokens. The password-gated Render
+ // server queries the designated repositories' current branch on each visit.
+ if(['kirk-evers','garden','cornerstone'].includes(page.key)){
+  const text='<div class="resource" data-live-policy-source="'+page.key+'">'+
+   '<a class="textlink" href="/policy-library/'+page.key+'/">Download the current source documents &rarr;</a>'+
+   '<small>Updates in the authoritative repository appear automatically. Private source access is required.</small></div>';
+  body=body.replace('<section id="documents">','<section id="documents">'+text);
+ }
+
  body=body.replace(/<a\b([^>]*\bdata-destination="([a-z-]+)"[^>]*)>([\s\S]*?)<\/a>/g,(whole,attrs,slug,inside)=>{
    const marker='href="{{DESTINATION:'+slug+'}}"';
    if(!attrs.includes(marker))return whole;

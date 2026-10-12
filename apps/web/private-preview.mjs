@@ -5,6 +5,7 @@ import {extname,resolve,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {loadPreviewGate,previewAuthorized,PREVIEW_REALM,PREVIEW_ROBOTS} from '../../packages/core/preview-gate.mjs';
 import {safeReleaseCommit} from '../../packages/core/release-id.mjs';
+import {livePolicyIndex,livePolicyBytes,policyIndexHtml} from '../../packages/core/live-policy-library.mjs';
 import {approvedDonationRoutes} from '../../packages/core/donation-provider.mjs';
 import {DonationRotationStore} from './donation-rotation-store.mjs';
 import {databasePool} from '../api/src/postgres-store.mjs';
@@ -80,6 +81,40 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
    res.setHeader('Content-Length',Buffer.byteLength(result));
    res.end(req.method==='HEAD'?undefined:result);
    return;
+  }
+  // Authorized source files are served from private repos only AFTER the preview password check.
+  // Never accept a caller-chosen repository, path, GitHub API URL or branch.
+  if(pathname.startsWith('/policy-library/')){
+   const listing=/^\/policy-library\/(kirk-evers|garden|cornerstone)\/?$/.exec(pathname);
+   const download=/^\/policy-library\/(kirk-evers|garden|cornerstone)\/download\/([0-9a-f]{40})$/.exec(pathname);
+   if(!listing&&!download)return send(res,404,'Policy document not found.');
+   const slug=(listing||download)[1];
+   try{
+    const token=env.G28_POLICY_READ_TOKEN||env.GITHUB_READ_TOKEN;
+    const index=await livePolicyIndex(slug,{token});
+    if(listing){
+     const html=policyIndexHtml(slug,index);
+     res.statusCode=200;
+     res.setHeader('Content-Type','text/html; charset=utf-8');
+     res.setHeader('Content-Security-Policy',"default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'");
+     res.setHeader('Content-Length',Buffer.byteLength(html));
+     res.end(req.method==='HEAD'?undefined:html);return;
+    }
+    const selected=index.files.find(f=>f.sha===download[2]);
+    if(!selected)return send(res,404,'Document not found in current branch.');
+    let responseBytes;
+    if(req.method==='GET')responseBytes=await livePolicyBytes(slug,download[2],{token,index});
+    const filename=selected.name.replace(/[^A-Za-z0-9_.-]/g,'_');
+    res.statusCode=200;
+    res.setHeader('Content-Type',responseBytes?.mime||'application/octet-stream');
+    res.setHeader('Content-Disposition','attachment; filename="'+filename+'"');
+    res.setHeader('Content-Security-Policy',"default-src 'none'; sandbox");
+    res.setHeader('Content-Length',selected.size);
+    res.end(req.method==='HEAD'?undefined:responseBytes.bytes);return;
+   }catch{
+    console.error(JSON.stringify({event:'policy_library_unavailable',slug}));
+    return send(res,503,'Policy documents are temporarily unavailable. No private repository details were disclosed.');
+   }
   }
   if(pathname==='/donate/continue'){
    if(req.method!=='GET'){res.setHeader('Allow','GET');return send(res,405,'Method not allowed.');}
