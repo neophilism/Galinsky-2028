@@ -1,3 +1,5 @@
+> **2026-10-12 owner update:** Stripe is permitted as the first provider. This file records the historical screening before that reversal; do not interpret its Stripe prohibition or four-provider requirement as current. Chase remains excluded.
+
 # Payment provider self-service screening — 2026-10-12
 
 **Status: NO FINAL FOUR. No production merchant has been approved. No account applications, paid services, live payments or refunds authorized.**
