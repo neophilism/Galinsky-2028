@@ -46,7 +46,7 @@ Owner/treasurer must supply or authorize, separately for each provider:
 - legally accurate campaign committee and treasurer information, settlement bank account, contribution source eligibility, limits and election designation;
 - one VERIFIED approved hosted checkout URL plus account credentials/keys or signed webhook API setup in the Render secrets, never in chat or GitHub;
 - approved donor identification and occupation/employer collection, disclosure, receipt and refund rules, and the campaign's separate personal-credit-card-only policy;
-- accepted sandbox and then permitted live financial test/settlement reconciliation results, no duplicate charges, and evidence that actual provider error status can be authenticated for automatic incident detection;
+- accepted sandbox and then permitted live financial test/settlement reconciliation results, no duplicate charges, and evidence that actual provider error status can be authenticated for automatic incident detection; hosted-page reachability monitoring is a separate optional gate, see docs/operations/DONATION_HEALTH_MONITOR.md;
 - a contact and written escalation procedure for account freezes, disputes, risk reviews and termination.
 
 Do NOT enable DONATIONS_ENABLED, DONATIONS_TREASURER_APPROVED or any provider APPROVED variable until the evidence exists. Keep system fail-closed; no provider, merchant or bank is implicitly approved by a code change.
