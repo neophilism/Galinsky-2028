@@ -1,0 +1,22 @@
+
+.admin-treasury{max-width:990px}
+.admin-treasury .lead{max-width:730px}
+.admin-status{border-left:4px solid var(--blue)}
+.admin-status h2{font-size:23px;margin-bottom:12px}
+.admin-status p{max-width:820px}
+.admin-treasury .spaced{margin-top:28px}
+.admin-treasury .spaced h2{font-size:26px}
+.admin-treasury h3{font-size:19px}
+.admin-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 18px;max-width:850px;margin-top:20px}
+.admin-fields>label{display:flex;flex-direction:column;gap:8px;font-size:13px;font-weight:650}
+.admin-fields>label>input,.admin-fields>label>select{width:100%;box-sizing:border-box;min-width:0;padding:13px 14px;border:1px solid var(--line);border-radius:2px;font:inherit;font-weight:400;background:#fff;color:var(--text)}
+.admin-fields>button{grid-column:1/-1;justify-self:start}
+.admin-state{padding:12px 14px;background:#f0f4f9;border:1px solid var(--line);margin-bottom:16px;font-size:13px}
+.admin-feedback{padding:12px 15px;border:1px solid var(--line);background:#f4f7fc;margin:10px 0 16px}
+.admin-feedback.error{border-color:#b03b3b;color:#962525;background:#fff5f5}
+.admin-section-heading{font-family:inherit;font-size:24px;margin:35px 0 12px}
+.admin-grants{list-style:none;padding:0;margin:15px 0}
+.admin-grants li{border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:18px;padding:18px 0}
+.admin-grants span small{display:block;font-size:12px;margin-top:4px;color:#54677c}
+.admin-treasury .fine{font-size:12px;color:#566e87;margin-top:18px}
+@media(max-width:780px){.admin-fields{grid-template-columns:1fr}.admin-grants li{align-items:flex-start;flex-direction:column}}
