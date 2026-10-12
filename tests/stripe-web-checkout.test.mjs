@@ -51,7 +51,9 @@ test('password-protected sandbox returns form and 303 to verified Stripe checkou
   assert.equal(req.get('line_items[0][price_data][unit_amount]'),'2500');
   return {ok:true,json:async()=>({id:'cs_test_ABCDEFGHIJKLM',url:'https://checkout.stripe.com/c/pay/session'})};
  };
- const server=createPrivatePreviewServer({directory:dir,env:sandbox(),stripeTransport:transport});
+ const stored=[];
+ const stripeStore={async recordSession(data){stored.push(data);},async receiveSignedWebhook(){return {status:200,outcome:'verified_captured_not_settled'};}};
+ const server=createPrivatePreviewServer({directory:dir,env:sandbox(),stripeTransport:transport,stripeStore});
  await new Promise(ok=>server.listen(0,'127.0.0.1',ok));
  t.after(async()=>{await new Promise(ok=>server.close(ok));await rm(dir,{recursive:true,force:true});});
  const root='http://127.0.0.1:'+server.address().port;
@@ -76,6 +78,9 @@ test('password-protected sandbox returns form and 303 to verified Stripe checkou
   body:body(token)});
  assert.equal(ok.status,303);assert.equal(ok.headers.get('location'),'https://checkout.stripe.com/c/pay/session');
  assert.equal(called,1);
+ assert.equal(stored.length,1);
+ assert.equal(stored[0].amountCents,2500);
+ assert.equal(stored[0].livemode,false);
  assert.equal((await ok.text()),'');
 });
 test('Stripe test mode is unconfigured by default and cannot leak live donation routes',async t=>{
