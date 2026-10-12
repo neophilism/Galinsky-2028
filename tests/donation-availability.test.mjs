@@ -21,5 +21,12 @@ test('WAF denials, rate-limits and prohibited upstream redirects need human inve
  assert.deepEqual(await probeHostedCheckout(url,{fetchImpl:fake(403)}),{signal:null,code:'http_inconclusive'});
  assert.deepEqual(await probeHostedCheckout(url,{fetchImpl:fake(429)}),{signal:null,code:'http_inconclusive'});
  assert.deepEqual(await probeHostedCheckout(url,{fetchImpl:fake(302,'https://checkout.stripe.com/session')}),{signal:null,code:'prohibited_upstream'});
+ assert.deepEqual(await probeHostedCheckout(url,{fetchImpl:fake(302,'https://other-provider.example/campaign')}),{signal:null,code:'external_redirect_unverified'});
+ assert.deepEqual(await probeHostedCheckout(url,{fetchImpl:fake(302,'http://merchant.example/insecure')}),{signal:null,code:'external_redirect_unverified'});
+ assert.deepEqual(await probeHostedCheckout(url,{fetchImpl:fake(302,'/login')}),{signal:null,code:'same_origin_redirect_unverified'});
+ assert.deepEqual(await probeHostedCheckout(url,{fetchImpl:fake(302)}),{signal:null,code:'redirect_without_destination'});
+ assert.deepEqual(await probeHostedCheckout(url,{fetchImpl:fake(302,'https://bad host') }),{signal:null,code:'invalid_redirect'});
+ assert.deepEqual(await probeHostedCheckout(url,{fetchImpl:fake(204)}),{signal:'checkout_reachable',code:'http_ok'});
+
  await assert.rejects(()=>probeHostedCheckout('https://checkout.stripe.com/pay'),/Invalid approved/);
 });
