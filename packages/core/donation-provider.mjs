@@ -67,6 +67,7 @@ export function approvedDonationRoutes(env, releaseMode) {
       throw invalid('an approved live Stripe account needs its protected live secret');
     routes.push({id:'stripe',name:'Stripe',url:'/donate/stripe',kind:'stripe'});
   }
+  if (routes.length > MAX_DONATION_PROCESSORS) throw invalid('no more than sixteen independent providers are supported');
   if (routes.length < MIN_DONATION_PROCESSORS) {
     throw invalid('at least one approved payment provider is required before opening online donations');
   }
