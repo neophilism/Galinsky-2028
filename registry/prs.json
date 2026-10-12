@@ -1,370 +1,589 @@
 {
   "schemaVersion": 1,
   "repository": "neophilism/Galinsky-2028",
-  "roadmapVersion": 1,
+  "roadmapVersion": 2,
   "planVerified": true,
   "plannedPrCount": 60,
   "observedAt": "2026-10-12T13:27:53.779Z",
   "units": [
     {
       "id": "G28-001",
-      "title": "Foundation and durable handoff — approved work package 1 of 8",
+      "title": "Freeze the approved design and establish the complete handoff",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        1,
+        5
+      ]
     },
     {
       "id": "G28-002",
-      "title": "Foundation and durable handoff — approved work package 2 of 8",
+      "title": "Create the monorepo and mandatory CI",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        1,
+        6,
+        19
+      ]
     },
     {
       "id": "G28-003",
-      "title": "Foundation and durable handoff — approved work package 3 of 8",
+      "title": "Build the exact design system and shared navigation",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        1,
+        10,
+        35
+      ]
     },
     {
       "id": "G28-004",
-      "title": "Foundation and durable handoff — approved work package 4 of 8",
+      "title": "Establish runtime, databases and preview infrastructure",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        17,
+        20,
+        32,
+        36,
+        38
+      ]
     },
     {
       "id": "G28-005",
-      "title": "Foundation and durable handoff — approved work package 5 of 8",
+      "title": "Define the E2EESA security and privacy contract",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        16,
+        66
+      ]
     },
     {
       "id": "G28-006",
-      "title": "Foundation and durable handoff — approved work package 6 of 8",
+      "title": "Implement versioned content and publication contracts",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        12,
+        13,
+        16
+      ]
     },
     {
       "id": "G28-007",
-      "title": "Foundation and durable handoff — approved work package 7 of 8",
+      "title": "Implement media, document and provenance handling",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        45,
+        46,
+        65
+      ]
     },
     {
       "id": "G28-008",
-      "title": "Foundation and durable handoff — approved work package 8 of 8",
+      "title": "Register the project and its full plan in Engine Room",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        63
+      ]
     },
     {
       "id": "G28-009",
-      "title": "Public campaign website — approved work package 1 of 10",
+      "title": "Build the complete candidate-forward homepage",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        1,
+        35
+      ]
     },
     {
       "id": "G28-010",
-      "title": "Public campaign website — approved work package 2 of 10",
+      "title": "Implement the network-flag hero motion",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        35
+      ]
     },
     {
       "id": "G28-011",
-      "title": "Public campaign website — approved work package 3 of 10",
+      "title": "Build the issues overview and extensible issue collection",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        1,
+        15
+      ]
     },
     {
       "id": "G28-012",
-      "title": "Public campaign website — approved work package 4 of 10",
+      "title": "Build the large top-of-page YouTube component",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        45,
+        65
+      ]
     },
     {
       "id": "G28-013",
-      "title": "Public campaign website — approved work package 5 of 10",
+      "title": "Build Kirk-Evers and the legislative document reader",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        12,
+        13,
+        52,
+        68
+      ]
     },
     {
       "id": "G28-014",
-      "title": "Public campaign website — approved work package 6 of 10",
+      "title": "Build The Garden issue page",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        15
+      ]
     },
     {
       "id": "G28-015",
-      "title": "Public campaign website — approved work package 7 of 10",
+      "title": "Build The Cornerstone issue page",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        15
+      ]
     },
     {
       "id": "G28-016",
-      "title": "Public campaign website — approved work package 8 of 10",
+      "title": "Build the public volunteer page and role finder",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        1,
+        6,
+        35
+      ]
     },
     {
       "id": "G28-017",
-      "title": "Public campaign website — approved work package 9 of 10",
+      "title": "Build the donation UI and exact disclosure components",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        47,
+        56
+      ]
     },
     {
       "id": "G28-018",
-      "title": "Public campaign website — approved work package 10 of 10",
+      "title": "Finish public navigation, SEO and essential information pages",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        2,
+        3,
+        10,
+        15
+      ]
     },
     {
       "id": "G28-019",
-      "title": "Accounts protection and current materials — approved work package 1 of 8",
+      "title": "Implement real signup, email verification and authentication",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        36,
+        38,
+        40,
+        61
+      ]
     },
     {
       "id": "G28-020",
-      "title": "Accounts protection and current materials — approved work package 2 of 8",
+      "title": "Implement staff MFA and scoped authorization",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        16,
+        69
+      ]
     },
     {
       "id": "G28-021",
-      "title": "Accounts protection and current materials — approved work package 3 of 8",
+      "title": "Implement approved recipient keys and device enrollment",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-022",
-      "title": "Accounts protection and current materials — approved work package 4 of 8",
+      "title": "Implement protected volunteer records and submissions",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-023",
-      "title": "Accounts protection and current materials — approved work package 5 of 8",
+      "title": "Implement recovery, revocation and controlled export",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        41
+      ]
     },
     {
       "id": "G28-024",
-      "title": "Accounts protection and current materials — approved work package 6 of 8",
+      "title": "Implement consent-aware messaging and reliable jobs",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        61
+      ]
     },
     {
       "id": "G28-025",
-      "title": "Accounts protection and current materials — approved work package 7 of 8",
+      "title": "Import and reconcile the volunteer source edition",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        46
+      ]
     },
     {
       "id": "G28-026",
-      "title": "Accounts protection and current materials — approved work package 8 of 8",
+      "title": "Implement the authorized materials library and reader",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        11,
+        49,
+        62,
+        68
+      ]
     },
     {
       "id": "G28-027",
-      "title": "Volunteer operations and administration — approved work package 1 of 12",
+      "title": "Build the volunteer first-hour workspace",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        7,
+        35,
+        49,
+        62
+      ]
     },
     {
       "id": "G28-028",
-      "title": "Volunteer operations and administration — approved work package 2 of 12",
+      "title": "Implement orientation, training and versioned acknowledgments",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        14
+      ]
     },
     {
       "id": "G28-029",
-      "title": "Volunteer operations and administration — approved work package 3 of 12",
+      "title": "Implement jurisdiction/activity activation gates",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-030",
-      "title": "Volunteer operations and administration — approved work package 4 of 12",
+      "title": "Implement actionable tasks and activity reporting",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-031",
-      "title": "Volunteer operations and administration — approved work package 5 of 12",
+      "title": "Convert every worksheet into an appropriate web tool",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-032",
-      "title": "Volunteer operations and administration — approved work package 6 of 12",
+      "title": "Implement local teams and captain coordination",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-033",
-      "title": "Volunteer operations and administration — approved work package 7 of 12",
+      "title": "Implement events and orientation participation",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-034",
-      "title": "Volunteer operations and administration — approved work package 8 of 12",
+      "title": "Implement secure incident, help and correction workflows",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-035",
-      "title": "Volunteer operations and administration — approved work package 9 of 12",
+      "title": "Implement approved sharing and campaign asset tools",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-036",
-      "title": "Volunteer operations and administration — approved work package 10 of 12",
+      "title": "Implement official-tool handoffs for outreach roles",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-037",
-      "title": "Volunteer operations and administration — approved work package 11 of 12",
+      "title": "Build the nontechnical content/media administration UI",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        8,
+        45
+      ]
     },
     {
       "id": "G28-038",
-      "title": "Volunteer operations and administration — approved work package 12 of 12",
+      "title": "Build volunteer operations and support administration",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        69
+      ]
     },
     {
       "id": "G28-039",
-      "title": "Production fundraising — approved work package 1 of 10",
+      "title": "Validate the fundraising processor and actual account capabilities",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        47,
+        53,
+        55
+      ]
     },
     {
       "id": "G28-040",
-      "title": "Production fundraising — approved work package 2 of 10",
+      "title": "Implement approved donation policy and election configuration",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        18,
+        47
+      ]
     },
     {
       "id": "G28-041",
-      "title": "Production fundraising — approved work package 3 of 10",
+      "title": "Integrate hosted checkout with the approved donation design",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        47,
+        55,
+        56,
+        57
+      ]
     },
     {
       "id": "G28-042",
-      "title": "Production fundraising — approved work package 4 of 10",
+      "title": "Implement authenticated, idempotent payment webhooks",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-043",
-      "title": "Production fundraising — approved work package 5 of 10",
+      "title": "Implement the contribution ledger and reconciliation",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        18
+      ]
     },
     {
       "id": "G28-044",
-      "title": "Production fundraising — approved work package 6 of 10",
+      "title": "Implement receipts and recurring donor self-service",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-045",
-      "title": "Production fundraising — approved work package 7 of 10",
+      "title": "Implement finance exception and remedy workflows",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        55,
+        57
+      ]
     },
     {
       "id": "G28-046",
-      "title": "Production fundraising — approved work package 8 of 10",
+      "title": "Implement controlled treasury reporting and exports",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-047",
-      "title": "Production fundraising — approved work package 9 of 10",
+      "title": "Harden and test the full donation system",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        55,
+        56,
+        57,
+        64
+      ]
     },
     {
       "id": "G28-048",
-      "title": "Production fundraising — approved work package 10 of 10",
+      "title": "Complete treasury and fundraising release acceptance",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        53,
+        64
+      ]
     },
     {
       "id": "G28-049",
-      "title": "Verification deployment and handoff — approved work package 1 of 12",
+      "title": "Implement retention, privacy requests and secure lifecycle cleanup",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        41
+      ]
     },
     {
       "id": "G28-050",
-      "title": "Verification deployment and handoff — approved work package 2 of 12",
+      "title": "Implement privacy-preserving campaign measurement",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        20
+      ]
     },
     {
       "id": "G28-051",
-      "title": "Verification deployment and handoff — approved work package 3 of 12",
+      "title": "Complete accessibility across public and authenticated journeys",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        10,
+        11,
+        13
+      ]
     },
     {
       "id": "G28-052",
-      "title": "Verification deployment and handoff — approved work package 4 of 12",
+      "title": "Complete visual fidelity and cross-browser regression testing",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        35
+      ]
     },
     {
       "id": "G28-053",
-      "title": "Verification deployment and handoff — approved work package 5 of 12",
+      "title": "Meet performance, resilience and load budgets",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": []
     },
     {
       "id": "G28-054",
-      "title": "Verification deployment and handoff — approved work package 6 of 12",
+      "title": "Complete application security review and remediation",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        16,
+        66
+      ]
     },
     {
       "id": "G28-055",
-      "title": "Verification deployment and handoff — approved work package 7 of 12",
+      "title": "Prove durable jobs, backups and disaster recovery",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        17,
+        61
+      ]
     },
     {
       "id": "G28-056",
-      "title": "Verification deployment and handoff — approved work package 8 of 12",
+      "title": "Connect real deployment monitoring and Engine Room freshness",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        19,
+        20,
+        33,
+        43,
+        63,
+        67
+      ]
     },
     {
       "id": "G28-057",
-      "title": "Verification deployment and handoff — approved work package 9 of 12",
+      "title": "Run the complete staging acceptance rehearsal",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        19,
+        40,
+        43
+      ]
     },
     {
       "id": "G28-058",
-      "title": "Verification deployment and handoff — approved work package 10 of 12",
+      "title": "Close publication inputs and operational launch gates",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        8,
+        12,
+        15,
+        45
+      ]
     },
     {
       "id": "G28-059",
-      "title": "Verification deployment and handoff — approved work package 11 of 12",
+      "title": "Deploy the production release and enable approved functions",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        32,
+        36,
+        38,
+        42
+      ]
     },
     {
       "id": "G28-060",
-      "title": "Verification deployment and handoff — approved work package 12 of 12",
+      "title": "Verify the live site and finish the durable handoff",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "contributingPrs": [
+        34,
+        44,
+        63
+      ]
     }
   ],
   "pullRequests": [
@@ -1223,5 +1442,6 @@
       "baseRef": "main",
       "mergeCommitSha": "0e576ee14ec63717ed6598bc3157da0ba3b03395"
     }
-  ]
+  ],
+  "progressEvidenceNote": "contributingPrs are PRs demonstrating partial implementation only; prs remain accepted whole-package completions, never inferred from ordinal or cumulative GitHub merges."
 }
