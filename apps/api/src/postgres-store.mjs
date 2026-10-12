@@ -16,7 +16,52 @@ export class PostgresStore{
   const r=found.rows[0];const accounts=await c.query(`INSERT INTO g28.accounts(id,email_key,delivery_envelope,verified_at,marketing_consent,terms_version) VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT(email_key) DO UPDATE SET verified_at=g28.accounts.verified_at RETURNING *`,[randomUUID(),r.email_key,r.delivery_envelope,new Date(now),r.marketing_consent,r.terms_version]);const a=accounts.rows[0];await c.query('INSERT INTO g28.sessions(token_hash,account_id,csrf_token,expires_at) VALUES($1,$2,$3,$4)',[s.hash,a.id,s.csrf,new Date(s.expires)]);await c.query('COMMIT');return {id:a.id,verified:true,marketing:a.marketing_consent};
   }catch(e){await c.query('ROLLBACK');throw e;}finally{c.release();}
  }
- async session(hash,now=Date.now()){const q=await this.pool.query('SELECT s.token_hash,s.csrf_token,s.expires_at,a.id,a.marketing_consent FROM g28.sessions s JOIN g28.accounts a ON a.id=s.account_id WHERE s.token_hash=$1 AND s.expires_at>$2',[hash,new Date(now)]);const r=q.rows[0];return r?{hash:r.token_hash,csrf:r.csrf_token,expires:+r.expires_at,account:{id:r.id,verified:true,marketing:r.marketing_consent}}:null;}
+ async session(hash,now=Date.now()){const q=await this.pool.query('SELECT s.token_hash,s.csrf_token,s.expires_at,a.id,a.marketing_consent,a.email_key FROM g28.sessions s JOIN g28.accounts a ON a.id=s.account_id WHERE s.token_hash=$1 AND s.expires_at>$2',[hash,new Date(now)]);const r=q.rows[0];return r?{hash:r.token_hash,csrf:r.csrf_token,expires:+r.expires_at,account:{id:r.id,verified:true,marketing:r.marketing_consent,emailKey:r.email_key}}:null;}
+ async invitedAdminRole(key){
+  const q=await this.pool.query('SELECT role FROM g28.admin_grants WHERE email_key=$1 AND revoked_at IS NULL',[key]);
+  return q.rows[0]?.role||null;
+ }
+ async adminRole(account,ownerEmailKey){
+  if(ownerEmailKey&&account.emailKey===ownerEmailKey)return 'owner';
+  return this.invitedAdminRole(account.emailKey);
+ }
+ async adminGrants(){
+  const q=await this.pool.query('SELECT email_key,role,display_label,created_at FROM g28.admin_grants WHERE revoked_at IS NULL ORDER BY created_at');
+  return q.rows.map(r=>({reference:r.email_key.slice(0,12),role:r.role,label:r.display_label,createdAt:r.created_at.toISOString()}));
+ }
+ async setAdminGrant(actorId,key,role,label){
+  const c=await this.pool.connect();
+  try{
+   await c.query('BEGIN');
+   await c.query('INSERT INTO g28.admin_grants(email_key,role,display_label,granted_by,revoked_at) VALUES($1,$2,$3,$4,NULL) ON CONFLICT(email_key) DO UPDATE SET role=EXCLUDED.role,display_label=EXCLUDED.display_label,granted_by=EXCLUDED.granted_by,revoked_at=NULL',[key,role,label,actorId]);
+   await c.query('INSERT INTO g28.treasury_audit(id,actor_id,action,subject) VALUES($1,$2,$3,$4)',[randomUUID(),actorId,'grant_set',key.slice(0,12)]);
+   await c.query('COMMIT');
+  }catch(e){await c.query('ROLLBACK');throw e;}finally{c.release();}
+ }
+ async revokeAdminGrant(actorId,reference){
+  const c=await this.pool.connect();
+  try{
+   await c.query('BEGIN');
+   const r=await c.query('UPDATE g28.admin_grants SET revoked_at=now() WHERE left(email_key,12)=$1 AND revoked_at IS NULL RETURNING email_key',[reference]);
+   if(r.rowCount!==1){await c.query('ROLLBACK');return false;}
+   // Existing sessions are immediately read-only/unauthorized because role is rechecked on each request.
+   await c.query('INSERT INTO g28.treasury_audit(id,actor_id,action,subject) VALUES($1,$2,$3,$4)',[randomUUID(),actorId,'grant_revoke',reference]);
+   await c.query('COMMIT');return true;
+  }catch(e){await c.query('ROLLBACK');throw e;}finally{c.release();}
+ }
+ async treasuryMetadata(){
+  const q=await this.pool.query('SELECT slot,masked_label,updated_at FROM g28.treasury_secrets ORDER BY slot');
+  return q.rows.map(r=>({slot:r.slot,maskedLabel:r.masked_label,updatedAt:r.updated_at.toISOString()}));
+ }
+ async saveTreasurySecret(actorId,slot,envelope,maskedLabel){
+  const c=await this.pool.connect();
+  try{
+   await c.query('BEGIN');
+   await c.query('INSERT INTO g28.treasury_secrets(slot,encrypted_envelope,masked_label,last_updated_by) VALUES($1,$2,$3,$4) ON CONFLICT(slot) DO UPDATE SET encrypted_envelope=EXCLUDED.encrypted_envelope,masked_label=EXCLUDED.masked_label,last_updated_by=EXCLUDED.last_updated_by,updated_at=now()',[slot,envelope,maskedLabel,actorId]);
+   await c.query('INSERT INTO g28.treasury_audit(id,actor_id,action,subject) VALUES($1,$2,$3,$4)',[randomUUID(),actorId,'vault_set',slot]);
+   await c.query('COMMIT');
+  }catch(e){await c.query('ROLLBACK');throw e;}finally{c.release();}
+ }
  async logout(hash){await this.pool.query('DELETE FROM g28.sessions WHERE token_hash=$1',[hash]);}
  async consent(id,marketing){await this.pool.query('UPDATE g28.accounts SET marketing_consent=$1 WHERE id=$2',[marketing,id]);}
  async closeAccount(id){const c=await this.pool.connect();try{await c.query('BEGIN');await c.query('DELETE FROM g28.login_requests WHERE email_key=(SELECT email_key FROM g28.accounts WHERE id=$1)',[id]);await c.query('DELETE FROM g28.outbox WHERE subject_key=(SELECT email_key FROM g28.accounts WHERE id=$1)',[id]);await c.query('DELETE FROM g28.accounts WHERE id=$1',[id]);await c.query('COMMIT');}catch(e){await c.query('ROLLBACK');throw e;}finally{c.release();}}
