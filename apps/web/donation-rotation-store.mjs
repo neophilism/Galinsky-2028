@@ -7,8 +7,8 @@ const validEvidence=x=>typeof x==='string'&&x.length>=8&&x.length<=180&&/^[a-zA-
 export class DonationRotationStore {
  constructor(pool){this.pool=pool;}
  async bootstrap(routes) {
-  if (!Array.isArray(routes)||routes.length!==4||new Set(routes.map(x=>x.id)).size!==4||!routes.every(x=>validId(x.id)))
-   throw new Error('Four approved, distinct processor IDs are required');
+  if (!Array.isArray(routes)||(routes.length<1||routes.length>16)||new Set(routes.map(x=>x.id)).size!==routes.length||!routes.every(x=>validId(x.id)))
+   throw new Error('Between one and sixteen approved, distinct processor IDs are required');
   const c=await this.pool.connect();
   try {
    await c.query('BEGIN');
@@ -19,7 +19,7 @@ export class DonationRotationStore {
   }catch(e){await c.query('ROLLBACK');throw e;}finally{c.release();}
  }
  async selectRoute(routes,draw) {
-  if (!Array.isArray(routes)||routes.length!==4)throw new Error('Exactly four approved providers must be configured');
+  if (!Array.isArray(routes)||(routes.length<1||routes.length>16))throw new Error('Between one and sixteen approved providers must be configured');
   const c=await this.pool.connect();
   try {
    await c.query('BEGIN');

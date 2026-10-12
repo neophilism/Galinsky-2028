@@ -2,8 +2,8 @@
 // Card numbers and donor identity details must never be collected or relayed by this application.
 import {isIP} from 'node:net';
 
-export const MAX_DONATION_PROCESSORS = 4;
-export const MIN_DONATION_PROCESSORS = 4;
+export const MAX_DONATION_PROCESSORS = 16;
+export const MIN_DONATION_PROCESSORS = 1;
 
 function invalid(message) { return new Error('Donation provider configuration: ' + message); }
 function approvedHost(value) {
@@ -12,7 +12,7 @@ function approvedHost(value) {
   if (host.length > 253 || !host.includes('.') || !/^[a-z0-9.-]+$/.test(host) ||
       host.split('.').some(label => !label || label.length > 63 || !/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(label)) ||
       host === 'localhost' || host.endsWith('.localhost') || host.endsWith('.local') ||
-      isIP(host) || /(^|\.)((?:stripe\.com|stripe\.network|stripepayments\.com|stripe-cdn\.com|chase\.com|jpmorgan\.com|jpmorganchase\.com|chasepaymentech\.com|wepay\.com))$/.test(host)) {
+      isIP(host) || /(^|\.)((?:chase\.com|jpmorgan\.com|jpmorganchase\.com|chasepaymentech\.com|wepay\.com))$/.test(host)) {
     throw invalid('invalid, local or prohibited processor hostname');
   }
   return host;
@@ -47,12 +47,12 @@ export function approvedDonationRoutes(env, releaseMode) {
     const name = env[prefix + 'NAME'];
     if (typeof id !== 'string' || !/^[a-z][a-z0-9-]{1,39}$/.test(id) ||
         typeof name !== 'string' || name.trim().length < 2 || name.length > 80 ||
-        /stripe/i.test(id + ' ' + name) ||
         /(?:^|[^a-z0-9])(?:chase|wepay|paymentech|jpmorgan|j[ .-]*p[ .-]*morgan)(?:$|[^a-z0-9])/i.test(id + ' ' + name)) {
       throw invalid('an approved processor needs a safe unique ID and display name');
     }
     const host = approvedHost(env[prefix + 'HOST']);
     const url = validateHostedDonationUrl(env[prefix + 'URL'], host);
+    if (id === 'stripe') throw invalid('Stripe must use the native signed checkout adapter');
     if (ids.has(id) || hosts.has(host)) {
       throw invalid('processor IDs and checkout hostnames must be distinct');
     }
@@ -60,8 +60,16 @@ export function approvedDonationRoutes(env, releaseMode) {
     hosts.add(host);
     routes.push({id, name: name.trim(), url});
   }
+  // Native Stripe sessions are created by the server, never by a fixed payment link.
+  // The actual merchant approval and FEC controls are enforced independently.
+  if (env.G28_STRIPE_LIVE_APPROVED === 'true') {
+    if(typeof env.STRIPE_SECRET_KEY !== 'string'||!/^sk_live_[A-Za-z0-9_]{12,}$/.test(env.STRIPE_SECRET_KEY))
+      throw invalid('an approved live Stripe account needs its protected live secret');
+    routes.push({id:'stripe',name:'Stripe',url:'/donate/stripe',kind:'stripe'});
+  }
+  if (routes.length > MAX_DONATION_PROCESSORS) throw invalid('no more than sixteen independent providers are supported');
   if (routes.length < MIN_DONATION_PROCESSORS) {
-    throw invalid('all four independently approved providers must be configured before opening online donations');
+    throw invalid('at least one approved payment provider is required before opening online donations');
   }
   return routes;
 }

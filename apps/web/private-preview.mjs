@@ -9,6 +9,8 @@ import {livePolicyIndex,livePolicyBytes,policyIndexHtml} from '../../packages/co
 import {approvedDonationRoutes} from '../../packages/core/donation-provider.mjs';
 import {DonationRotationStore} from './donation-rotation-store.mjs';
 import {databasePool} from '../api/src/postgres-store.mjs';
+import {stripeSettings,checkoutNonceKey,openStripeSession,stripeDonationHtml} from '../../packages/core/stripe-web-checkout.mjs';
+import {StripeCampaignStore} from './stripe-campaign-store.mjs';
 
 const mime={
  '.html':'text/html; charset=utf-8',
@@ -44,7 +46,7 @@ function requestedPath(raw){
 
 // Unlike a static CDN, this Node service authenticates BEFORE reading any file.
 // Use only this web-service entry point for preview hosting.
-export function createPrivatePreviewServer({directory=resolve('dist/web'),env=process.env,rotationStore=null}={}){
+export function createPrivatePreviewServer({directory=resolve('dist/web'),env=process.env,rotationStore=null,stripeTransport=fetch,stripeStore=null}={}){
  const credentials=loadPreviewGate(env);
  const root=realpathSync(directory);
  if(!statSync(root).isDirectory())throw Error('The public preview build directory does not exist.');
@@ -55,6 +57,10 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
   throw Error('Activated donation routing requires a verified persistent DATABASE_URL');
  const rotationPool=donationRoutes.length && !rotationStore?databasePool(env.DATABASE_URL):null;
  const liveRotationStore=rotationStore||(rotationPool?new DonationRotationStore(rotationPool):null);
+ const stripeConfig=stripeSettings(env);
+ const stripeNonce=checkoutNonceKey();
+ const stripePool=stripeConfig&&env.DATABASE_URL&&!rotationPool&&!stripeStore?databasePool(env.DATABASE_URL):null;
+ const liveStripeStore=stripeStore||(stripeConfig&&env.DATABASE_URL?new StripeCampaignStore(rotationPool||stripePool):null);
  const server=createServer(async(req,res)=>{
   res.setHeader('Cache-Control','private, no-store, max-age=0');
   res.setHeader('X-Robots-Tag',PREVIEW_ROBOTS);
@@ -62,16 +68,82 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
   res.setHeader('X-Content-Type-Options','nosniff');
   res.setHeader('Referrer-Policy','no-referrer');
   res.setHeader('X-Frame-Options','DENY');
+  // Stripe alone may POST a signed webhook without shared preview credentials.
+  // No unverified event can alter the campaign's financial ledger.
+  if(req.url?.split('?')[0]==='/donate/stripe/webhook'){
+   if(req.method!=='POST'){res.setHeader('Allow','POST');return send(res,405,'Method not allowed.');}
+   if(!stripeConfig||!liveStripeStore||!/^whsec_[A-Za-z0-9_]{10,}$/.test(env.STRIPE_WEBHOOK_SECRET||''))
+    return send(res,503,'Stripe webhooks are not configured.');
+   if(!/^application\/json(?:;|$)/i.test(req.headers['content-type']||''))
+    return send(res,415,'Expected JSON.');
+   let parts=[],size=0;
+   for await(const chunk of req){
+    size+=chunk.length;if(size>1024*1024)return send(res,413,'Request too large.');
+    parts.push(chunk);
+   }
+   try{
+    const outcome=await liveStripeStore.receiveSignedWebhook({
+     raw:Buffer.concat(parts),header:req.headers['stripe-signature'],
+     secret:env.STRIPE_WEBHOOK_SECRET,sandbox:stripeConfig.sandbox
+    });
+    if(outcome.status!==200)console.error(JSON.stringify({event:'stripe_webhook_rejected',reason:outcome.outcome}));
+    return send(res,outcome.status,outcome.status===200?'Acknowledged.':'Webhook was not accepted.');
+   }catch{
+    console.error(JSON.stringify({event:'stripe_webhook_store_error'}));
+    return send(res,503,'Verified event cannot be reconciled right now.');
+   }
+  }
   if(!previewAuthorized(req.headers.authorization,credentials)){
    res.setHeader('WWW-Authenticate',PREVIEW_REALM);
    return send(res,401,'Private preview. Enter your access credentials.');
+  }
+  const pathname=requestedPath(req.url);
+  if(pathname===null)return send(res,404,'Not found.');
+  // Stripe's real Checkout checkout is generated server-side only.
+  // Payment details are always entered on Stripe; POST data here is only
+  // amount, election and eligibility certifications (never card/PII).
+  if(pathname==='/donate/stripe'||pathname==='/donate/stripe/checkout'){
+   if(!stripeConfig)return send(res,503,'Stripe Checkout is not configured. No payment was attempted.');
+   if(!liveStripeStore)return send(res,503,'The Stripe ledger is not configured. No payment was attempted.');
+   if(!stripeConfig.sandbox){
+    if(!liveRotationStore)return send(res,503,'Donation routing is unavailable.');
+    try{
+     const status=await liveRotationStore.statuses();
+     if(!status.some(x=>x.provider_id==='stripe'&&x.status==='active'))
+      return send(res,503,'This processor is temporarily unavailable. No payment was attempted.');
+    }catch{return send(res,503,'Donation routing is unavailable. No payment was attempted.');}
+   }
+   if(pathname==='/donate/stripe'){
+    if(req.method!=='GET'&&req.method!=='HEAD'){res.setHeader('Allow','GET, HEAD');return send(res,405,'Method not allowed.');}
+    const html=stripeDonationHtml(stripeConfig,stripeNonce,new URL(req.url,'https://localhost').searchParams.get('amount')||'25');
+    res.statusCode=200;res.setHeader('Content-Type','text/html; charset=utf-8');
+    res.setHeader('Content-Security-Policy',"default-src 'self'; style-src 'self' 'unsafe-inline'; form-action 'self'; script-src 'none'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'");
+    res.setHeader('Content-Length',Buffer.byteLength(html));res.end(req.method==='HEAD'?undefined:html);return;
+   }
+   if(req.method!=='POST'){res.setHeader('Allow','POST');return send(res,405,'Method not allowed.');}
+   if(!/^application\/x-www-form-urlencoded(?:;|$)/i.test(req.headers['content-type']||'')){
+    return send(res,415,'Expected URL-encoded contribution form.');}
+   let body='';
+   try{
+    for await(const chunk of req){
+     body+=chunk.toString('utf8');
+     if(body.length>4096)return send(res,413,'Contribution form exceeds the allowed size.');
+    }
+    const created=await openStripeSession({raw:body,settings:stripeConfig,nonceKey:stripeNonce,request:req,transport:stripeTransport});
+    await liveStripeStore.recordSession({clientRef:created.clientRef,sessionId:created.sessionId,
+     amountCents:created.amountCents,election:created.election,livemode:stripeConfig.live});
+    res.statusCode=303;res.setHeader('Location',created.hostedCheckoutUrl);
+    res.setHeader('Content-Length','0');res.end();return;
+   }catch(e){
+    console.error(JSON.stringify({event:'stripe_checkout_refused',code:e?.code||'input_or_provider_failure'}));
+    return send(res,e?.code==='checkout_unavailable'||e?.status===503||e?.statusCode===503?503:400,
+      'Could not open secure card checkout. No payment has been confirmed. Check your details, or try later.');
+   }
   }
   if(req.method!=='GET'&&req.method!=='HEAD'){
    res.setHeader('Allow','GET, HEAD');
    return send(res,405,'Method not allowed.');
   }
-  const pathname=requestedPath(req.url);
-  if(pathname===null)return send(res,404,'Not found.');
   if(pathname==='/healthz'){
    const result=JSON.stringify({ok:true,service:'galinsky-2028-web',
     mode:env.G28_PUBLIC_MODE==='production'?'production':'preview',
@@ -126,7 +198,9 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
     const configured=donationRoutes.find(route=>route.id===selection.providerId);
     if(!configured||configured.url!==selection.url)throw Error('Invalid rotation selection');
     res.statusCode=303;
-    res.setHeader('Location',configured.url);
+    const chosenAmount=new URL(req.url,'https://localhost').searchParams.get('amount');
+    const amt=chosenAmount&&/^[1-9]\\d{0,6}(?:\\.\\d{1,2})?$/.test(chosenAmount)?'?amount='+encodeURIComponent(chosenAmount):'';
+    res.setHeader('Location',configured.kind==='stripe'?'/donate/stripe'+amt:configured.url);
     res.setHeader('Referrer-Policy','no-referrer');
     res.setHeader('Content-Length','0');
     res.end();return;
@@ -189,6 +263,7 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
   }
  });
  if(rotationPool)server.on('close',()=>{void rotationPool.end().catch(()=>{});});
+ if(stripePool)server.on('close',()=>{void stripePool.end().catch(()=>{});});
  return server;
 }
 const entry=process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url);

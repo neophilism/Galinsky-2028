@@ -10,7 +10,7 @@ export const INCIDENT_WINDOW_MS = 10 * 60 * 1000;
 export const INCIDENT_THRESHOLD = 3;
 
 export function selectRotatingProvider(routes,states,draw=randomInt) {
- if (!Array.isArray(routes) || routes.length !== 4) throw new Error('Exactly four independently approved processor configurations are required.');
+ if (!Array.isArray(routes) || routes.length < 1 || routes.length > 16 || new Set(routes.map(r=>r.id)).size !== routes.length) throw new Error('Between one and sixteen distinct approved processor configurations are required.');
  if (!Array.isArray(states)) throw new Error('Provider status evidence is unavailable.');
  const byId = new Map(states.map(row=>[row.provider_id,row.status]));
  const available = routes.filter(route=>byId.get(route.id)==='active');
