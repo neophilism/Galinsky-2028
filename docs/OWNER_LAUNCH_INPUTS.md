@@ -37,28 +37,54 @@ A public volunteer can then sign up, verify and return across devices.
 Do not confuse the private-preview HTTP Basic login with a staff/volunteer
 account or passkey/MFA.
 
-## 3. Stripe political fundraising: more than a secret key
+## 3. Donation processing — NEWER OWNER DECISION (12 October 2026)
 
-The owner or treasurer must confirm:
-- registered federal campaign committee's exact legal name, ID and
-  treasurer/authorized representatives; correct public disclaimer;
-- Stripe's documented approval of political fundraising as a restricted
-  business, not merely the availability of an API key;
-- approved bank/payout recipient and processor-account capabilities;
-- a current authorized per-election 2027–28 limit and designation,
-  direct checkout/offline aggregation, donor-source exclusions,
-  legal attestations and legally required reporting/receipts;
-- the site's strict own PERSONAL CREDIT CARD ONLY rule: Stripe's generic
-  "card" method also accepts debit/business funding types unless a
-  verified provider/process control blocks or remedies them;
-- approved recurring cancellation and ongoing cap/scheduling policies;
-- webhook SIGNING SECRET and sandbox/live API secrets entered ONLY as
-  encrypted environment variables on Render; never in chat/GitHub issues;
-- independent financial reconciliation, refund/dispute and treasurer
-  acceptance against the exact release before donations go live;
-- explicit permission for any real card charge/refund, even a test.
+**Stripe is prohibited across all of the user's projects and is NOT an
+acceptable campaign payment option. DO NOT REQUEST A STRIPE API KEY,
+restore a Stripe adapter or add an indirect Stripe dependency.** Earlier
+messages that assumed Stripe was the planned provider are superseded.
 
-See docs/operations/STRIPE_POLITICAL_CAMPAIGN_ACCEPTANCE.md (when merged).
+Owner's latest requirements: a provider-neutral system with FOUR genuinely
+independent merchant/acquiring relationships, all screened for equal
+commercial treatment of lawful political organizations versus comparable
+lawful nonpolitical entities. Discretionary campaign-specific underwriting,
+terms, increased prices or viewpoint-related restrictions disqualify the
+vendor. Normal legally required identity, anti-fraud and merchant-category
+controls still apply; do not mislabel the merchant.
+
+The complete user experience must have ONE donation button. After all four
+are independently approved, selection randomly rotates among the eligible
+four providers. It must detect systematic checkout/settlement failures,
+automatically remove an affected provider from new selections, and restore
+it after a proven ordinary technical fix. If evidence supports deliberate
+financial lawfare, the owner requires permanent provider removal.
+No automatic fallback may replay a payment or charge a donor twice.
+
+The earlier PR #47 implemented only FOUR static hosted-checkout slots and
+direct donor choice, not the later one-button weighted/random selection or
+automatic status evaluation. **Those updated requirements remain actual
+engineering work and must not be marked complete.** A provider's hostname
+does not prove it is independent of another provider's acquirer/network.
+Keep payment collection OFF until the owner/treasurer has verified ALL FOUR
+processors, their agreements, underwriting/acquirer independence, test
+transactions, refund/recurring handling and settlement reconciliation.
+
+What the owner must supply/approve before fundraising goes live:
+- Legal campaign committee identity and registration, treasurer contact,
+  authorized settlement accounts, and an approved donor disclosure;
+- Complete terms and evidence of equal treatment, actual merchant approval,
+  payout/acquirer relationships and hosted checkout URLs for FOUR distinct
+  allowed processors, none directly/indirectly reliant on Stripe;
+- Appropriate credentials and authentication/webhook/reporting channels for
+  each processor (through secure Render configuration, NEVER in chat);
+- Current 2027–2028 election-specific contribution policy, donor eligibility
+  and the campaign's personal-credit-card-only constraint, including real
+  processor enforcement/remediation, recurring handling and refund controls;
+- Explicit approval of costs, final treasurer reconciliation, live test-charge
+  authorization and documented, independently justified processor takedown
+  evidence before permanent removal.
+
+See docs/DONATION_PROCESSOR.md for the underlying non-Stripe policy.
 
 ## 4. Public identity, links and legislative content
 
