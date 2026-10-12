@@ -19,3 +19,5 @@ All 60 initial package IDs are planning IDs, not GitHub PR numbers. Update evide
 The ChatGPT development scheduler is off. Do not restart it or promise overnight work. Actual application workers are separately deployed infrastructure and require logs, ownership and reliable execution.
 
 No keys/passwords in source, logs, screenshots or handoff files. No production PII in previews or tests. Preserve exact recipient authority for protected exports. On stopping, report actual completed work, evidence, exact blocker and smallest needed input. Finish with a durable repo-contained handoff, not a reliance on conversation memory.
+
+Payment processing: Stripe is prohibited in every form (SDK, hosted checkout, billing, Connect, indirect integrations). For campaign contributions use the reviewed, treasury-approved non-Stripe provider, presently Anedot hosted checkout as the first candidate. Do not activate fundraising before compliance approval, verified merchant onboarding and reconciliation requirements. Keep provider choice modular; never substitute an unapproved processor without treasury authorization.
