@@ -22,7 +22,8 @@ const mime={
  '.xml':'application/xml; charset=utf-8',
  '.woff':'font/woff',
  '.woff2':'font/woff2',
- '.pdf':'application/pdf'
+ '.pdf':'application/pdf',
+ '.mp4':'video/mp4'
 };
 function send(res,status,body){
  res.statusCode=status;res.setHeader('Content-Type','text/plain; charset=utf-8');
@@ -74,6 +75,38 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
    const content=await readFile(actual);
    res.statusCode=200;
    res.setHeader('Content-Type',mime[ext]);
+   if(ext==='.mp4'){
+    // HTML5 video players use single byte-range requests. Authenticate first,
+    // reject malformed/multiple ranges, and never serve path traversals.
+    res.setHeader('Accept-Ranges','bytes');
+    const range=req.headers.range;
+    if(range){
+     const match=/^bytes=(\d*)-(\d*)$/.exec(range);
+     let from,to;
+     if(match&&(match[1]!==''||match[2]!=='')){
+      if(match[1]===''){
+       const suffix=Number(match[2]);
+       if(Number.isSafeInteger(suffix)&&suffix>0){from=Math.max(0,content.length-suffix);to=content.length-1;}
+      }else{
+       from=Number(match[1]);
+       to=match[2]===''?content.length-1:Number(match[2]);
+      }
+     }
+     if(from===undefined||to===undefined||!Number.isSafeInteger(from)||!Number.isSafeInteger(to)||from<0||from>=content.length||to<from){
+      res.statusCode=416;
+      res.setHeader('Content-Range','bytes */'+content.length);
+      res.setHeader('Content-Length','0');
+      res.end();return;
+     }
+     to=Math.min(to,content.length-1);
+     const slice=content.subarray(from,to+1);
+     res.statusCode=206;
+     res.setHeader('Content-Range','bytes '+from+'-'+to+'/'+content.length);
+     res.setHeader('Content-Length',slice.length);
+     res.end(req.method==='HEAD'?undefined:slice);
+     return;
+    }
+   }
    res.setHeader('Content-Length',content.length);
    res.end(req.method==='HEAD'?undefined:content);
   }catch{
