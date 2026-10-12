@@ -198,7 +198,9 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
     const configured=donationRoutes.find(route=>route.id===selection.providerId);
     if(!configured||configured.url!==selection.url)throw Error('Invalid rotation selection');
     res.statusCode=303;
-    res.setHeader('Location',configured.kind==='stripe'?'/donate/stripe':configured.url);
+    const chosenAmount=new URL(req.url,'https://localhost').searchParams.get('amount');
+    const amt=chosenAmount&&/^[1-9]\\d{0,6}(?:\\.\\d{1,2})?$/.test(chosenAmount)?'?amount='+encodeURIComponent(chosenAmount):'';
+    res.setHeader('Location',configured.kind==='stripe'?'/donate/stripe'+amt:configured.url);
     res.setHeader('Referrer-Policy','no-referrer');
     res.setHeader('Content-Length','0');
     res.end();return;
