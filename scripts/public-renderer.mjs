@@ -6,6 +6,7 @@ import {escapeHtml,origin} from '../packages/core/validation.mjs';
 import {videoPanel} from '../packages/core/video.mjs';
 import {policyDocumentSection} from '../packages/core/policy-documents.mjs';
 import {publicRelease} from '../packages/core/indexing.mjs';
+import {approvedHostedDonationUrl} from '../packages/core/donation-provider.mjs';
 export const root=process.env.G28_SOURCE_ROOT||fileURLToPath(new URL('../',import.meta.url));
 export const pages=JSON.parse(readFileSync(join(root,'content/public/pages.json'),'utf8'));
 export const site=JSON.parse(readFileSync(join(root,'content/public/site.json'),'utf8'));
@@ -32,6 +33,17 @@ export function renderPage(key, options={}) {
    return '<a'+attrs.replace(marker,'href="'+escapeHtml(u.toString())+'" rel="noopener noreferrer"')+'>'+inside+'</a>';
  });
  if(body.includes('{{DESTINATION:'))throw new Error('Unresolved policy destination token');
+ if(page.key==='donate'){
+  const hostedUrl=approvedHostedDonationUrl(process.env,mode);
+  if(hostedUrl){
+    const notice='<div class="service-notice" role="status">Online contributions are not open yet. No payment or donor details are collected on this page.</div>';
+    const placeholder='<button class="btn blue" disabled="" style="width:100%" type="submit">Contributions opening later</button>';
+    if(!body.includes(notice)||!body.includes(placeholder))throw new Error('Donation template changed: refusing partial activation');
+    body=body.replace(notice,'<div class="service-notice" role="status">Contributions are handled on the secure Anedot payment page. This website does not collect payment or donor details. Review the eligibility rules below before continuing.</div>');
+    body=body.replace('<h2 id="donate-summary">Your $25 contribution</h2>','<h2 id="donate-summary">Secure campaign contribution</h2>');
+    body=body.replace(placeholder,'<a class="btn blue" style="display:block;text-align:center;width:100%" href="'+escapeHtml(hostedUrl)+'" rel="noopener noreferrer">Continue to secure contribution form</a>');
+  }
+ }
  const replacePortal=text=>text.replace(/\{\{PORTAL\}\}[^"\s<]*/g,match=>portal?match.replace('{{PORTAL}}',portal):portalPath);
  body=replacePortal(body);
  let header=replacePortal(readFileSync(join(root,'content/public/header.html'),'utf8'));
