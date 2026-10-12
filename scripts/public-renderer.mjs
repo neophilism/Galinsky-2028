@@ -48,6 +48,14 @@ export function renderPage(key, options={}) {
  if(body.includes('{{DESTINATION:'))throw new Error('Unresolved policy destination token');
  if(page.key==='donate'){
   const routes=approvedDonationRoutes(process.env,mode);
+  // Staging-only test checkout link. Never describes this as a real donation.
+  if(mode==='preview'&&process.env.G28_STRIPE_TEST_ENABLED==='true'&&
+     /^sk_test_[A-Za-z0-9_]{12,}$/.test(process.env.STRIPE_SECRET_KEY||'')){
+   body=body.replace('Online contributions are not open yet. No payment or donor details are collected on this page.',
+    'Online contributions are not open yet. You can try a test checkout with a Stripe test card; it moves no real money.');
+   body=body.replace('<button class="btn blue" disabled="" style="width:100%" type="submit">Contributions opening later</button>',
+    '<a class="btn blue" style="width:100%" href="/donate/stripe">Try Stripe test checkout — no real charges</a>');
+  }
   if(routes.length){
    const original=body.match(/<form class="donate-form" id="donation-details">[\s\S]*?<\/form>/);
    const disclosure=body.match(/<p class="reporting-notice">[\s\S]*?<\/p>/);
