@@ -28,6 +28,7 @@ export async function probeHostedCheckout(url,{fetchImpl=fetch,timeoutMs=8000}={
   }catch{return {signal:null,code:'invalid_redirect'};}
   return {signal:null,code:'same_origin_redirect_unverified'};
  }
+ if(status===204||status===205)return {signal:null,code:'no_checkout_content'};
  if(status>=200&&status<300)return {signal:'checkout_reachable',code:'http_ok'};
  if(status>=500||status===404||status===410)return {signal:'checkout_unreachable',code:'http_unavailable'};
  return {signal:null,code:'http_inconclusive'};
