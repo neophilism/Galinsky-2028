@@ -23,7 +23,7 @@ export function renderPage(key, options={}) {
  body=body.replace(/\{\{VIDEO:([a-z-]+)\}\}/g,(_,slug)=>{
   const video=cfg.issues[slug];
   const path=video?.temporaryLocalVideo;
-  return videoPanel(slug,video,{localAssetExists:Boolean(path&&existsSync(join(root,'apps/web/public',path.slice(1))))});
+  return videoPanel(slug,video,{localAssetExists:Boolean(mode==='preview'&&path&&existsSync(join(root,'apps/web/public',path.slice(1))))});
  });
  body=body.replace(/\{\{DOCUMENTS:([a-z-]+)\}\}/g,(_,slug)=>policyDocumentSection(slug,cfg.issues[slug]?.documents||[],join(root,'apps/web/public')));
  body=body.replace(/<a\b([^>]*\bdata-destination="([a-z-]+)"[^>]*)>([\s\S]*?)<\/a>/g,(whole,attrs,slug,inside)=>{
