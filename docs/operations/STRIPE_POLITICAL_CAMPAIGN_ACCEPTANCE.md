@@ -1,6 +1,8 @@
 # Stripe campaign fundraising: real onboarding, not API-key activation
 
-**2026-10-12 owner reversal:** Stripe is allowed as the first campaign processor, with test-only development until the restricted-business account is approved.\n\n**Release state:** DISABLED. A Stripe API key alone cannot activate this
+**2026-10-12 owner reversal:** Stripe is allowed as the first campaign processor, with test-only development until the restricted-business account is approved.
+
+**Release state:** DISABLED. A Stripe API key alone cannot activate this
 federal campaign's regulated contribution processing. The adapter in
 packages/core/stripe-campaign.mjs is code/test groundwork, not a live
 checkout or an authorized merchant account.
@@ -44,7 +46,7 @@ checkout or an authorized merchant account.
 - verifyStripeWebhook checks HMAC-SHA256 on raw bytes, timestamp tolerances,
   supported event names and minimal event metadata, excluding customer PII
   from ordinary logs.
-- Adapters are NOT exposed as live API routes. Production
+- The Stripe Checkout route and signature-verified webhook listener are now implemented but remain disabled by default. Production
   DONATIONS_ENABLED=true intentionally remains rejected until the server,
   stateful ledger, provider-account verification, finance approval,
   registration and reconciliation requirements are satisfied.
