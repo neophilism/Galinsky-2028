@@ -155,7 +155,7 @@ export function createApp({store,config,clock=()=>Date.now()}){
   return {signedOutAll:true};
  });
  app.post('/api/account/consent',async req=>{const s=await writeSession(req);const b=exactKeys(req.body,['marketing']);assert(typeof b.marketing==='boolean','invalid_consent','Select a valid preference.');await store.consent(s.account.id,b.marketing);return {saved:true};});
- app.post('/api/account/close',async(req,reply)=>{const s=await writeSession(req);const b=exactKeys(req.body,['confirm']);assert(b.confirm==='close my account','confirmation','Confirm account closure.');await store.closeAccount(s.account.id);reply.header('Set-Cookie',sessionCookie('',{secure:config.production,maxAge:0}));return {closed:true};});
+ app.post('/api/account/close',async(req,reply)=>{const s=await writeSession(req);if(config.adminLoginReady){const role=await store.adminRole(s.account,config.adminOwnerEmailKey);assert(!role,'admin_account_retention','Administrator accounts require a reviewed offboarding process.',403);}const b=exactKeys(req.body,['confirm']);assert(b.confirm==='close my account','confirmation','Confirm account closure.');await store.closeAccount(s.account.id);reply.header('Set-Cookie',sessionCookie('',{secure:config.production,maxAge:0}));return {closed:true};});
  app.get('/api/account/bookmarks',async req=>{
   const s=await account(req);
   const ids=await store.listBookmarks(s.account.id);
