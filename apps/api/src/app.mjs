@@ -93,6 +93,23 @@ export function createApp({store,config,clock=()=>Date.now()}){
  });
  app.post('/api/account/consent',async req=>{const s=await writeSession(req);const b=exactKeys(req.body,['marketing']);assert(typeof b.marketing==='boolean','invalid_consent','Select a valid preference.');await store.consent(s.account.id,b.marketing);return {saved:true};});
  app.post('/api/account/close',async(req,reply)=>{const s=await writeSession(req);const b=exactKeys(req.body,['confirm']);assert(b.confirm==='close my account','confirmation','Confirm account closure.');await store.closeAccount(s.account.id);reply.header('Set-Cookie',sessionCookie('',{secure:config.production,maxAge:0}));return {closed:true};});
+ app.get('/api/account/bookmarks',async req=>{
+  const s=await account(req);
+  const ids=await store.listBookmarks(s.account.id);
+  const current=await store.listMaterials();
+  const approved=new Set(current.filter(m=>canReadMaterial(m,s.account)).map(m=>m.id));
+  return {materialIds:ids.filter(x=>approved.has(x))};
+ });
+ app.post('/api/materials/:id/bookmark',async req=>{
+  const s=await writeSession(req);
+  const materialId=id(req.params.id);
+  const b=exactKeys(req.body,['saved']);
+  assert(typeof b.saved==='boolean','invalid_bookmark','Choose whether to save this guide.');
+  const item=(await store.listMaterials()).find(m=>m.id===materialId);
+  assert(item&&canReadMaterial(item,s.account),'not_found','This guide is not available.',404);
+  await store.setBookmark(s.account.id,materialId,b.saved);
+  return {materialId,saved:b.saved,storedInAccount:true};
+ });
  app.get('/api/materials',async req=>{const s=await account(req);const list=materialSearch(await store.listMaterials(),String(req.query.q||''),String(req.query.category||'all'),s.account);return {materials:list.map(m=>{const x=publicMaterial(m);delete x.body;return x;}),notice:list.length?null:'Current materials are being prepared and reviewed. Unreviewed historical files are not published as current guidance.'};});
  app.get('/api/materials/:id',async req=>{
   const session=await account(req);
