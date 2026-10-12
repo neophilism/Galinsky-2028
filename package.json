@@ -21,6 +21,7 @@
     "db:migrate": "node scripts/migrate.mjs",
     "worker": "node apps/api/src/worker.mjs",
     "start": "node apps/api/src/server.mjs",
+    "prs:refresh": "node scripts/refresh-pr-snapshot.mjs",
     "materials:publish": "node scripts/publish-materials.mjs",
     "materials:verify": "node scripts/verify-material-release.mjs",
     "materials:sign": "node scripts/sign-material-review.mjs",
