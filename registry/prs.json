@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "repository": "neophilism/Galinsky-2028",
-  "roadmapVersion": 2,
+  "roadmapVersion": 3,
   "planVerified": true,
-  "plannedPrCount": 60,
+  "plannedPrCount": 61,
   "observedAt": "2026-10-12T13:27:53.779Z",
   "units": [
     {
@@ -584,6 +584,13 @@
         44,
         63
       ]
+    },
+    {
+      "id": "G28-061",
+      "title": "Individual, revocable private policy-review accounts",
+      "origin": "added",
+      "prs": [],
+      "contributingPrs": []
     }
   ],
   "pullRequests": [
@@ -665,7 +672,7 @@
     {
       "id": 4829596446,
       "number": 54,
-      "title": "SUPERSEDED: four-processor handoff already updated in merged PRs #55–57",
+      "title": "SUPERSEDED: four-processor handoff already updated in merged PRs #55\u201357",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/54",
       "state": "closed",
       "draft": false,
@@ -695,7 +702,7 @@
     {
       "id": 4829483935,
       "number": 52,
-      "title": "Recover September 2026 Kirk–Evers legislation source for private editorial review",
+      "title": "Recover September 2026 Kirk\u2013Evers legislation source for private editorial review",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/52",
       "state": "closed",
       "draft": false,
@@ -725,7 +732,7 @@
     {
       "id": 4829439565,
       "number": 48,
-      "title": "SUPERSEDED / PROHIBITED — do not use Stripe for campaign payments",
+      "title": "SUPERSEDED / PROHIBITED \u2014 do not use Stripe for campaign payments",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/48",
       "state": "closed",
       "draft": false,
@@ -1265,7 +1272,7 @@
     {
       "id": 4817446915,
       "number": 12,
-      "title": "Publish Kirk–Evers documents only with independent review and verified asset hashes",
+      "title": "Publish Kirk\u2013Evers documents only with independent review and verified asset hashes",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/12",
       "state": "closed",
       "draft": false,
@@ -1443,5 +1450,5 @@
       "mergeCommitSha": "0e576ee14ec63717ed6598bc3157da0ba3b03395"
     }
   ],
-  "progressEvidenceNote": "contributingPrs are PRs demonstrating partial implementation only; prs remain accepted whole-package completions, never inferred from ordinal or cumulative GitHub merges."
+  "progressEvidenceNote": "Original sixty baseline packages plus the owner-authorized G28-061 private-review addition. contributingPrs indicate partial work; prs require whole-package scoped acceptance and real evidence."
 }

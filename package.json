@@ -10,7 +10,7 @@
     "dev": "node scripts/preview.mjs",
     "dev:api": "node apps/api/src/server.mjs",
     "build": "npm run build:web && npm run build:portal",
-    "build:web": "node --test tests/release-health.test.mjs tests/live-policy-library.test.mjs tests/donation-provider.test.mjs tests/issue-card-navigation.test.mjs tests/stripe-campaign.test.mjs tests/stripe-web-checkout.test.mjs tests/stripe-webhook.test.mjs tests/stripe-outage-routing.test.mjs tests/donation-rotation.test.mjs tests/donation-route-http.test.mjs && astro build --root apps/web && node scripts/build-indexing.mjs",
+    "build:web": "node --test tests/review-accounts.test.mjs tests/release-health.test.mjs tests/live-policy-library.test.mjs tests/donation-provider.test.mjs tests/issue-card-navigation.test.mjs tests/stripe-campaign.test.mjs tests/stripe-web-checkout.test.mjs tests/stripe-webhook.test.mjs tests/stripe-outage-routing.test.mjs tests/donation-rotation.test.mjs tests/donation-route-http.test.mjs && astro build --root apps/web && node scripts/build-indexing.mjs",
     "preview:serve": "node apps/web/private-preview.mjs",
     "build:portal": "node --test tests/release-health.test.mjs tests/treasurer-admin.test.mjs && vite build --config apps/portal/vite.config.ts",
     "build:offline": "node scripts/build-public.mjs",
@@ -27,14 +27,16 @@
     "materials:sign": "node scripts/sign-material-review.mjs",
     "issue:prepare": "node scripts/prepare-issue-video.mjs",
     "policy:html": "node scripts/prepare-public-document.mjs",
-    "test:browser": "node tests/browser/journeys.mjs"
+    "test:browser": "node tests/browser/journeys.mjs",
+    "test:review-browser": "node tests/browser/review-journeys.mjs"
   },
   "dependencies": {
     "astro": "7.3.8",
     "fastify": "5.12.5",
     "pg": "8.16.3",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "better-auth": "1.7.7"
   },
   "devDependencies": {
     "typescript": "6.0.3",

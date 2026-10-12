@@ -27,3 +27,13 @@ Future processor architecture: one simple donor experience; one to sixteen accep
 Render authorization update (2026-10-12): owner explicitly approved deployment updates only to existing Galinsky 2028 Render project `prj-db57fnm7bikc739783q0`, environment `evm-db57fnm7bikc739783qg`, despite its parent workspace `tea-db23jkks728c73av263g`. Only update the existing protected web service `srv-db5teuajnfac73bm8pug` and volunteer portal `srv-db5v0lfavr4c73a62870`; never create services at the workspace root or duplicate services. Never bypass preview passwords, launch publicly, activate paid service plans, enable financial processing or actual charges, or reveal secrets based solely on this placement authorization. Verify exact service project/environment and tested commit before each deploy; automatic deploy is off. Operator log and permissions: `docs/operations/RENDER_VERIFIED_PLACEMENT.md`.
 
 **2026-10-12 owner update: EXCLUDE JPMorgan Chase merchant processing for the campaign**, including Chase Payment Solutions, Paymentech, WePay and affiliated/white-labeled Chase acquiring services. Do not suggest any mandatory contact-sales signup or initial/recurring-fee product while owner has zero funds. Payment providers are NOT approved merely because they offer a free sandbox or online signup; the actual legal committee must be accurately classified, accepted under standard nondiscriminatory contract terms, and supported by independent acquiring relationships. The prior Elavon/Chase/Worldpay/Fiserv list has been withdrawn; see `docs/operations/PROCESSOR_SELF_SERVICE_SCREEN_20261012.md`. Owner's potential future commercial boycott of Chase remains conditional on a separate dispute outcome; do not claim a company-wide blacklist already enacted.
+
+Private-review addition (2026-10-12): owner specifically authorized individual
+revocable website reviewer accounts, owner-managed initial credentials, reset
+and revocation, plus tests/deployment to the existing authorized services.
+G28-61 is added scope; canonical total is 61, preserving the original sixty.
+Use only the isolated review realm and restricted staging database role;
+review sessions never grant staff, editorial, financial, protected or volunteer
+authority. Preserve operator Basic credentials and disabled launch features.
+No reviewer/owner passwords in chat, GitHub, logs or screenshots. Owner chooses
+their own final credential through one-time Render-secret setup.

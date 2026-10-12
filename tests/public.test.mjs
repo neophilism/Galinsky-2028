@@ -8,6 +8,9 @@ for(const p of pages)test('public contract: '+p.key,()=>{
  const html=rendered.get(p.path);assert.equal((html.match(/<h1\b/g)||[]).length,1);assert(html.includes('id="main"'));assert(!html.includes('{{'));assert(!html.includes('data-notice'));assert(!html.includes('materials.js'));assert(!html.includes('signup-preview'));assert(!html.includes('workspace.html'));assert(!html.includes('review.html'));assert(!html.includes('src="https://'));
  for(const match of html.matchAll(/href="(\/[^" ]*)"/g)){
   const u=new URL(match[1],'https://site.test');if(u.pathname.startsWith('/assets/')||u.pathname==='/favicon.svg')continue;
+  // These exact private libraries are server routes, covered by their real
+  // HTTP/authentication tests; they are deliberately absent from static output.
+  if(/^\/policy-library\/(kirk-evers|garden|cornerstone)\/$/.test(u.pathname))continue;
   assert(rendered.has(u.pathname),`${p.key}: broken local link ${match[1]}`);
   if(u.hash){const target=rendered.get(u.pathname);const anchor=u.hash.slice(1);assert(target.includes(`id="${anchor}"`),`${p.key}: missing anchor ${match[1]}`);}
  }

@@ -28,6 +28,13 @@ are **post-placeholder publication inputs**, not a reason to delay other work.
 
 ## 2. Email/verified accounts
 
+Individual private website reviewers use the separate owner-managed realm in
+`docs/operations/PRIVATE_REVIEW_ACCOUNTS.md`. The owner privately claims their
+login using the Render setup key, creates reviewers, and distributes temporary
+passwords through verified private channels. This does not require email
+delivery, confer campaign roles, or release volunteer/staff authentication.
+
+
 The campaign must authorize its FROM address/domain, provision a verified
 transactional sender (currently code expects Resend), add provider API
 credentials and completed SPF/DKIM DNS to the protected Render service.

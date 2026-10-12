@@ -1,9 +1,9 @@
 {
   "repository": "neophilism/Galinsky-2028",
   "title": "Galinsky-2028",
-  "version": 2,
+  "version": 3,
   "planVerified": true,
-  "plannedPrCount": 60,
+  "plannedPrCount": 61,
   "sourceFiles": [
     ".exechub/project.yml",
     "docs/DEVELOPMENT_PLAN.md",
@@ -529,7 +529,14 @@
         44,
         63
       ]
+    },
+    {
+      "id": "G28-061",
+      "title": "Individual, revocable private policy-review accounts",
+      "origin": "added",
+      "prs": [],
+      "contributingPrs": []
     }
   ],
-  "progressEvidenceNote": "Contributing PRs are independently observed implementation evidence; they do not complete a work package. Accepted package PR mappings remain empty until that package's full acceptance criteria are verified. Maintain exactly sixty baseline packages."
+  "progressEvidenceNote": "Original sixty baseline packages plus the owner-authorized G28-061 private-review addition. contributingPrs indicate partial work; prs require whole-package scoped acceptance and real evidence."
 }

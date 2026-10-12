@@ -5,11 +5,11 @@
   "plan_version": "1.0",
   "plan_status": "implementation_started",
   "design_status": "approved_with_issue_video_amendment",
-  "planned_work_packages": 60,
+  "planned_work_packages": 61,
   "implemented_packages": 0,
   "merged_packages": 0,
   "deployed_packages": 0,
-  "note": "Original sixty work packages preserved. Partial foundation code is not full package acceptance. See implementation status and delivery evidence.",
+  "note": "Sixty original packages preserved, plus G28-61 owner-requested private reviewer accounts. Whole-package completion requires its scoped acceptance evidence.",
   "packages": [
     {
       "id": "G28-01",
@@ -1275,6 +1275,21 @@
         44,
         63
       ]
+    },
+    {
+      "id": "G28-61",
+      "title": "Individual, revocable private policy-review accounts",
+      "phase": "Added",
+      "depends_on": [
+        "G28-01"
+      ],
+      "status": "in_progress",
+      "github_prs": [],
+      "contributing_prs": [],
+      "scope": "Separate website-only Better Auth realm with owner-managed initial passwords, forced replacement, reset, revocation and expiry. No campaign operational grants.",
+      "acceptance": "Persistent real owner/reviewer journeys, denied privilege/CSRF/financial/portal access, immediate revocation and actual HTTPS checks on the existing authorized preview.",
+      "evidence": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md; docs/operations/PRIVATE_REVIEW_ACCOUNTS.md",
+      "external_inputs": "Owner claims their own login and supplies reviewer identities privately."
     }
   ],
   "progress_evidence_note": "Contributing PR evidence is partial work under these packages, not package acceptance. Do not increment implemented_packages or merged_packages without acceptance verification."

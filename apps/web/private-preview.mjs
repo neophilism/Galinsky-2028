@@ -47,8 +47,9 @@ function requestedPath(raw){
 
 // Unlike a static CDN, this Node service authenticates BEFORE reading any file.
 // Use only this web-service entry point for preview hosting.
-export function createPrivatePreviewServer({directory=resolve('dist/web'),env=process.env,rotationStore=null,stripeTransport=fetch,stripeStore=null}={}){
+export function createPrivatePreviewServer({directory=resolve('dist/web'),env=process.env,rotationStore=null,stripeTransport=fetch,stripeStore=null,reviewController=null}={}){
  const credentials=loadPreviewGate(env);
+ if(env.G28_REVIEW_ACCOUNTS_ENABLED==='true'&&!reviewController)throw Error('Private review accounts require a persistent authentication controller.');
  const root=realpathSync(directory);
  if(!statSync(root).isDirectory())throw Error('The public preview build directory does not exist.');
  // Release flags and provider approvals are checked independently of the database.
@@ -65,10 +66,24 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
  const server=createServer(async(req,res)=>{
   res.setHeader('Cache-Control','private, no-store, max-age=0');
   res.setHeader('X-Robots-Tag',PREVIEW_ROBOTS);
-  res.setHeader('Vary','Authorization');
+  res.setHeader('Vary',reviewController?'Authorization, Cookie':'Authorization');
   res.setHeader('X-Content-Type-Options','nosniff');
   res.setHeader('Referrer-Policy','no-referrer');
   res.setHeader('X-Frame-Options','DENY');
+  if(env.NODE_ENV==='production')res.setHeader('Strict-Transport-Security','max-age=31536000');
+  const pathname=requestedPath(req.url);
+  if(pathname!==null&&reviewController&&await reviewController.handle(req,res,pathname))return;
+  const legacy=previewAuthorized(req.headers.authorization,credentials);
+  let review=null;
+  if(!legacy&&reviewController){try{review=await reviewController.session(req);}catch{return send(res,503,'Private review access is temporarily unavailable.');}}
+  // Both preview roles have website permissions only. This explicit allowlist
+  // protects future financial/admin routes as well as today's operations.
+  if(review){
+   const pages=new Set(['/','/issues','/issues/','/issues/kirk-evers','/issues/kirk-evers/','/issues/garden','/issues/garden/','/issues/cornerstone','/issues/cornerstone/','/volunteer','/volunteer/','/donate','/donate/','/notices','/notices/']);
+   const allowed=pages.has(pathname)||pathname==='/favicon.svg'||/^\/(?:assets|_astro)\/[A-Za-z0-9_./-]+$/.test(pathname)||/^\/policy-library\/(?:kirk-evers|garden|cornerstone)(?:\/?|\/download\/[0-9a-f]{40})$/.test(pathname);
+   if(!allowed||!['GET','HEAD'].includes(req.method))return send(res,403,'This account has website review access only.');
+   if(review.user.previewPasswordChangeRequired){res.writeHead(303,{Location:'/preview/','Content-Length':'0'});res.end();return;}
+  }
   // Stripe alone may POST a signed webhook without shared preview credentials.
   // No unverified event can alter the campaign's financial ledger.
   if(req.url?.split('?')[0]==='/donate/stripe/webhook'){
@@ -94,11 +109,14 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
     return send(res,503,'Verified event cannot be reconciled right now.');
    }
   }
-  if(!previewAuthorized(req.headers.authorization,credentials)){
+  if(!legacy&&!review){
+   if(reviewController){
+    const html='<!doctype html><html lang="en"><meta charset="utf-8"><title>Private preview sign-in</title><h1>Private preview</h1><p><a href="/preview/">Sign in with your individual reviewer account</a>.</p></html>';
+    res.writeHead(401,{'Content-Type':'text/html; charset=utf-8','Content-Length':Buffer.byteLength(html)});res.end(req.method==='HEAD'?undefined:html);return;
+   }
    res.setHeader('WWW-Authenticate',PREVIEW_REALM);
    return send(res,401,'Private preview. Enter your access credentials.');
   }
-  const pathname=requestedPath(req.url);
   if(pathname===null)return send(res,404,'Not found.');
   // Stripe's real Checkout checkout is generated server-side only.
   // Payment details are always entered on Stripe; POST data here is only
@@ -284,8 +302,30 @@ if(entry){
  try{
   const port=Number(process.env.PORT||10000);
   if(!Number.isSafeInteger(port)||port<1||port>65535)throw Error('Invalid listening port');
-  const server=createPrivatePreviewServer();
-  server.listen(port,process.env.HOST||'0.0.0.0',()=>console.log(JSON.stringify({event:'private_preview_listening',port})));
-  for(const signal of ['SIGINT','SIGTERM'])process.once(signal,()=>server.close(()=>process.exit(0)));
+  let reviewController=null,reviewPool=null,reviewAuth=null;
+  if(process.env.G28_REVIEW_ACCOUNTS_ENABLED==='true'){
+   if(process.env.G28_PUBLIC_MODE==='production')throw Error('Reviewer accounts are limited to the private preview.');
+   if(!process.env.G28_REVIEW_DATABASE_URL)throw Error('Reviewer accounts need their restricted database credential.');
+   const {createReviewAuth,createReviewController}=await import('./review-auth.mjs');
+   reviewPool=databasePool(process.env.G28_REVIEW_DATABASE_URL);
+   await reviewPool.query('SELECT id FROM g28_review_setup WHERE id=1');
+   const origin=process.env.G28_REVIEW_ORIGIN;
+   reviewAuth=createReviewAuth({database:reviewPool,secret:process.env.G28_REVIEW_AUTH_SECRET,origin});
+   const {verifyReviewRuntime}=await import('./review-runtime-check.mjs');
+   console.log(JSON.stringify({event:'private_review_runtime_verified',...await verifyReviewRuntime({auth:reviewAuth,pool:reviewPool,origin,secret:process.env.G28_REVIEW_AUTH_SECRET})}));
+   reviewController=createReviewController({auth:reviewAuth,pool:reviewPool,origin,setupKey:process.env.G28_REVIEW_SETUP_KEY,commit:process.env.RENDER_GIT_COMMIT});
+  }
+  const server=createPrivatePreviewServer({reviewController});
+  server.listen(port,process.env.HOST||'0.0.0.0',async()=>{
+   console.log(JSON.stringify({event:'private_preview_listening',port}));
+   if(reviewController&&process.env.G28_REVIEW_LIVE_CHECK==='true'){
+    try{
+     const {verifyReviewLive}=await import('./review-live-check.mjs');
+     const result=await verifyReviewLive({auth:reviewAuth,pool:reviewPool,origin:process.env.G28_REVIEW_ORIGIN,portalOrigin:process.env.G28_REVIEW_PORTAL_ORIGIN,commit:process.env.RENDER_GIT_COMMIT});
+     console.log(JSON.stringify({event:'private_review_live_verified',...result}));
+    }catch{console.error(JSON.stringify({event:'private_review_live_failed'}));}
+   }
+  });
+  for(const signal of ['SIGINT','SIGTERM'])process.once(signal,()=>server.close(async()=>{if(reviewPool)await reviewPool.end();process.exit(0);}));
  }catch(e){console.error('Private preview refused to start: '+e.message);process.exitCode=1;}
 }
