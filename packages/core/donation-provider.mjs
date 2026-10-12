@@ -3,7 +3,7 @@
 import {isIP} from 'node:net';
 
 export const MAX_DONATION_PROCESSORS = 4;
-export const MIN_DONATION_PROCESSORS = 3;
+export const MIN_DONATION_PROCESSORS = 4;
 
 function invalid(message) { return new Error('Donation provider configuration: ' + message); }
 function approvedHost(value) {
@@ -60,10 +60,7 @@ export function approvedDonationRoutes(env, releaseMode) {
     routes.push({id, name: name.trim(), url});
   }
   if (routes.length < MIN_DONATION_PROCESSORS) {
-    throw invalid('at least three independently approved providers must be configured before opening online donations');
+    throw invalid('all four independently approved providers must be configured before opening online donations');
   }
-  const preferred = env.DONATIONS_PRIMARY_PROCESSOR_ID;
-  if (preferred && !ids.has(preferred)) throw invalid('primary processor is not among approved active routes');
-  if (preferred) routes.sort((a, b) => (a.id === preferred ? -1 : b.id === preferred ? 1 : 0));
   return routes;
 }

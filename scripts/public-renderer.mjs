@@ -40,13 +40,20 @@ export function renderPage(key, options={}) {
  if(page.key==='donate'){
   const routes=approvedDonationRoutes(process.env,mode);
   if(routes.length){
-    const notice='<div class="service-notice" role="status">Online contributions are not open yet. No payment or donor details are collected on this page.</div>';
-    const placeholder='<button class="btn blue" disabled="" style="width:100%" type="submit">Contributions opening later</button>';
-    if(!body.includes(notice)||!body.includes(placeholder))throw new Error('Donation template changed: refusing partial activation');
-    body=body.replace(notice,'<div class="service-notice" role="status">Contributions are processed on the separate secure checkout websites below. Choose any approved payment processor. This website does not collect card or donor details.</div>');
-    body=body.replace('<h2 id="donate-summary">Your $25 contribution</h2>','<h2 id="donate-summary">Secure campaign contribution</h2>');
-    const links=routes.map((route,i)=>'<a class="btn '+(i===0?'blue':'')+'" style="display:block;text-align:center;width:100%;margin-top:10px" href="'+escapeHtml(route.url)+'" rel="noopener noreferrer">Continue via '+escapeHtml(route.name)+'</a>').join('');
-    body=body.replace(placeholder,'<div class="donation-provider-links" role="group" aria-label="Independently approved payment processors">'+links+'<p class="tiny">If one provider is unavailable, you may choose another approved processor above. Complete a donation only once to avoid duplicate contributions.</p></div>');
+   const original=body.match(/<form class="donate-form" id="donation-details">[\s\S]*?<\/form>/);
+   const disclosure=body.match(/<p class="reporting-notice">[\s\S]*?<\/p>/);
+   const eligibility=body.match(/<div class="eligibility">[\s\S]*?<\/div>/);
+   if(!original||!disclosure||!eligibility)throw new Error('Donation template changed: refusing partial activation');
+   const copy='<section class="donate-form" id="donation-details">'+
+     '<div class="formsteps"><span class="active">01 REVIEW</span><span>02 SECURE CHECKOUT</span></div>'+
+     '<h2 id="donate-summary" data-external-checkout="true">Secure campaign contribution</h2>'+
+     '<p class="service-notice">One button takes you to a randomly selected, independently approved secure payment processor. This site never accepts your card number.</p>'+
+     disclosure[0]+eligibility[0]+
+     '<p class="tiny">Choose the final amount and any recurring option on the selected processor checkout. No preselected recurring gift is permitted. The provider page must display the approved committee disclosure and collect required eligibility and reporting information.</p>'+
+     '<a class="btn blue" style="display:block;text-align:center;width:100%;margin-top:16px" href="/donate/continue">Continue to secure contribution</a>'+
+     '<p class="tiny" style="margin-top:14px">If this processor is unavailable, return here to begin a new attempt. Never submit the same gift twice while a prior payment is uncertain.</p>'+
+     '</section>';
+   body=body.replace(original[0],copy);
   }
  }
  const replacePortal=text=>text.replace(/\{\{PORTAL\}\}[^"\s<]*/g,match=>portal?match.replace('{{PORTAL}}',portal):portalPath);
