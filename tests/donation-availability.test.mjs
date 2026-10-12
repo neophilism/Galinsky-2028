@@ -21,5 +21,5 @@ test('WAF denials, rate-limits and prohibited upstream redirects need human inve
  assert.deepEqual(await probeHostedCheckout(url,{fetchImpl:fake(403)}),{signal:null,code:'http_inconclusive'});
  assert.deepEqual(await probeHostedCheckout(url,{fetchImpl:fake(429)}),{signal:null,code:'http_inconclusive'});
  assert.deepEqual(await probeHostedCheckout(url,{fetchImpl:fake(302,'https://checkout.stripe.com/session')}),{signal:null,code:'prohibited_upstream'});
- assert.throws(()=>probeHostedCheckout('https://checkout.stripe.com/pay'),/Invalid approved/);
+ await assert.rejects(()=>probeHostedCheckout('https://checkout.stripe.com/pay'),/Invalid approved/);
 });
