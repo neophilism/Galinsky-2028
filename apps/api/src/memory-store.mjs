@@ -12,7 +12,7 @@ export class MemoryStore{
   this.sessions.set(session.hash,{...session,accountId:a.id});return {...a};
  }
  async session(hash,now=Date.now()){const s=this.sessions.get(hash);const a=s&&this.accounts.get(s.accountId);return s&&s.expires>now&&a?{...s,account:{...a}}:null;}
- async invitedAdminRole(key){return this.adminGrantsStore.get(key)?.role||null;}
+ async invitedAdminRole(key){const grant=this.adminGrantsStore.get(key);return grant?.active?grant.role:null;}
  async adminRole(account,ownerEmailKey){return ownerEmailKey&&account.emailKey===ownerEmailKey?'owner':this.invitedAdminRole(account.emailKey);}
  async adminGrants(){return [...this.adminGrantsStore.entries()].filter(([,v])=>v.active).map(([key,v])=>({reference:key.slice(0,12),role:v.role,label:v.label,createdAt:v.createdAt}));}
  async setAdminGrant(actorId,key,role,label){this.adminGrantsStore.set(key,{role,label,active:true,createdAt:new Date().toISOString()});this.treasuryAudit.push({action:'grant_set',subject:key.slice(0,12),actorId});}
