@@ -1,7 +1,7 @@
 // Explicit development/test store only. server.mjs rejects it in production.
 import {randomUUID} from 'node:crypto';
 export class MemoryStore{
- constructor({materials=[]}={}){this.logins=new Map();this.accounts=new Map();this.sessions=new Map();this.outbox=[];this.buckets=new Map();this.materials=materials;this.taskProgress=new Map();this.materialReading=new Map();this.rolePreferences=new Map();this.bookmarks=new Map();}
+ constructor({materials=[]}={}){this.logins=new Map();this.accounts=new Map();this.sessions=new Map();this.outbox=[];this.buckets=new Map();this.materials=materials;this.taskProgress=new Map();this.materialReading=new Map();this.rolePreferences=new Map();this.bookmarks=new Map();this.adminGrantsStore=new Map();this.treasurySecretsStore=new Map();this.treasuryAudit=[];}
  async healthy(){return true;}
  async rate(key,limit,until){const old=this.buckets.get(key);const item=!old||old.until<Date.now()?{count:0,until}:old;item.count++;this.buckets.set(key,item);return item.count<=limit;}
  async requestLogin(record,job){this.logins.set(record.hash,record);this.outbox.push({...job,subjectKey:record.emailKey,status:'queued',attempts:0,availableAt:Date.now()});}
@@ -12,6 +12,13 @@ export class MemoryStore{
   this.sessions.set(session.hash,{...session,accountId:a.id});return {...a};
  }
  async session(hash,now=Date.now()){const s=this.sessions.get(hash);const a=s&&this.accounts.get(s.accountId);return s&&s.expires>now&&a?{...s,account:{...a}}:null;}
+ async invitedAdminRole(key){const grant=this.adminGrantsStore.get(key);return grant?.active?grant.role:null;}
+ async adminRole(account,ownerEmailKey){return ownerEmailKey&&account.emailKey===ownerEmailKey?'owner':this.invitedAdminRole(account.emailKey);}
+ async adminGrants(){return [...this.adminGrantsStore.entries()].filter(([,v])=>v.active).map(([key,v])=>({reference:key.slice(0,12),role:v.role,label:v.label,createdAt:v.createdAt}));}
+ async setAdminGrant(actorId,key,role,label){this.adminGrantsStore.set(key,{role,label,active:true,createdAt:new Date().toISOString()});this.treasuryAudit.push({action:'grant_set',subject:key.slice(0,12),actorId});}
+ async revokeAdminGrant(actorId,reference){const pair=[...this.adminGrantsStore.entries()].find(([key,v])=>key.slice(0,12)===reference&&v.active);if(!pair)return false;pair[1].active=false;this.treasuryAudit.push({action:'grant_revoke',subject:reference,actorId});return true;}
+ async treasuryMetadata(){return [...this.treasurySecretsStore.entries()].map(([slot,v])=>({slot,maskedLabel:v.maskedLabel,updatedAt:v.updatedAt}));}
+ async saveTreasurySecret(actorId,slot,envelope,maskedLabel){this.treasurySecretsStore.set(slot,{envelope,maskedLabel,updatedAt:new Date().toISOString()});this.treasuryAudit.push({action:'vault_set',subject:slot,actorId});}
  async logout(hash){this.sessions.delete(hash);}
  async consent(accountId,value){const a=this.accounts.get(accountId);if(a)a.marketing=value;}
  async closeAccount(id){const a=this.accounts.get(id);if(!a)return;this.accounts.delete(id);this.taskProgress.delete(id);this.materialReading.delete(id);this.rolePreferences.delete(id);this.bookmarks.delete(id);for(const [k,s]of this.sessions)if(s.accountId===id)this.sessions.delete(k);for(const[k,l]of this.logins)if(l.emailKey===a.emailKey)this.logins.delete(k);this.outbox=this.outbox.filter(j=>j.subjectKey!==a.emailKey);}

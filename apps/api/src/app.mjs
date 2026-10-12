@@ -8,6 +8,7 @@ import {materialSearch,canReadMaterial,publicMaterial} from '../../../packages/c
 import {readableVersion,matchesReading} from '../../../packages/core/material-reading.mjs';
 import {starterTasks,taskDecision} from '../../../packages/core/tasks.mjs';
 import {previewAuthorized,PREVIEW_REALM,PREVIEW_ROBOTS} from '../../../packages/core/preview-gate.mjs';
+import {cleanTreasuryPayload,sealTreasury,MERCHANT_SLOTS} from '../../../packages/core/treasury-vault.mjs';
 export function createApp({store,config,clock=()=>Date.now()}){
  const app=Fastify({logger:false,bodyLimit:32768,trustProxy:false,requestTimeout:15000});
  if(config.production&&!config.previewGate)throw Error('Production portal must be behind the private preview password gate.');
@@ -20,7 +21,7 @@ export function createApp({store,config,clock=()=>Date.now()}){
   reply.header('Cache-Control','no-store').header('X-Content-Type-Options','nosniff').header('Referrer-Policy','no-referrer').header('X-Frame-Options','DENY');
   reply.header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
   if(config.production)reply.header('Strict-Transport-Security','max-age=31536000');
-  if(req.url.startsWith('/api/protected/')||req.url.startsWith('/api/admin/')||req.url.startsWith('/api/payments/'))return reply.code(503).send({error:'release_unavailable',message:'This function is not released. No submission has been stored.'});
+  if(req.url.startsWith('/api/protected/')||req.url.startsWith('/api/payments/')||(req.url.startsWith('/api/admin/')&&!/^\/api\/admin\/(settings(?:\/bank|\/providers\/[a-z-]+)?|grants(?:\/revoke)?)($|\?)/.test(req.url)))return reply.code(503).send({error:'release_unavailable',message:'This function is not released. No submission has been stored.'});
   if(!['GET','HEAD','OPTIONS'].includes(req.method)){
    assert(req.headers.origin===config.portalOrigin,'origin_mismatch','Open this action in the volunteer application.',403);
    assert(!req.headers['sec-fetch-site']||['same-origin','none'].includes(req.headers['sec-fetch-site']),'cross_site','Cross-site actions are not accepted.',403);
@@ -32,14 +33,19 @@ export function createApp({store,config,clock=()=>Date.now()}){
  async function writeSession(req){const s=await account(req);const supplied=req.headers['x-csrf-token'];assert(typeof supplied==='string'&&supplied.length===s.csrf.length&&timingSafeEqual(Buffer.from(supplied),Buffer.from(s.csrf)),'csrf','Reload the workspace and try again.',403);return s;}
  app.get('/healthz',async()=>({ok:true,service:'galinsky-2028-api',version:'0.1.0',commit:config.commit??null}));
  app.get('/readyz',async(req,reply)=>{try{await store.healthy();return {ready:true};}catch{return reply.code(503).send({ready:false});}});
- app.get('/api/config',async()=>({publicOrigin:config.publicOrigin,signupEnabled:config.signup,features:{materials:true,worksheets:true,protectedSubmissions:false,staff:false,payments:false},notice:config.signup?null:'Account registration opens when verified email delivery is connected.'}));
+ app.get('/api/config',async()=>({publicOrigin:config.publicOrigin,signupEnabled:config.signup,features:{materials:true,worksheets:true,protectedSubmissions:false,staff:false,payments:false,treasurySetup:config.adminLoginReady===true},adminLoginEnabled:config.adminLoginReady===true,notice:config.signup?null:config.adminLoginReady?'Private staff sign-in is available by verified email invitation. Public volunteer registration remains closed.':'Account registration opens when verified email delivery is connected.'}));
  app.post('/api/auth/request',async(req,reply)=>{
-  assert(config.signup,'signup_unavailable','Account registration is not open yet. No account has been created.',503);
+  assert(config.signup||config.adminLoginReady,'signup_unavailable','Account registration is not open yet. No account has been created.',503);
   const b=exactKeys(req.body,['email','marketing','termsAccepted']);const address=email(b.email);assert(b.termsAccepted===true,'terms_required','Review the participation and privacy notices before continuing.');assert(b.marketing===undefined||typeof b.marketing==='boolean','invalid_consent','Choose whether to receive optional campaign updates.');
   const key=emailKey(address,config.pepper),now=clock(),until=now+900000;
   const byEmail=await store.rate('email:'+key,4,until);const byIp=await store.rate('ip:'+emailKey(req.ip,config.pepper),20,until);
   const response={message:'When delivery is available, a sign-in link will arrive shortly. Open it in this browser. Check your spam folder before requesting another link.'};
   if(!byEmail||!byIp)return reply.code(202).send(response);
+  // When public signup is disabled, only a preconfigured owner mailbox or an
+  // existing invitation can start a session. Identical generic responses
+  // prevent an attacker from enumerating admin email addresses.
+  if(!config.signup&&key!==config.adminOwnerEmailKey&&!await store.invitedAdminRole(key))
+   return reply.code(202).send(response);
   const token=randomToken(),binding=randomToken();const deliveryEnvelope=sealDelivery({email:address},config.deliveryKey);
   const record={hash:tokenHash(token),binding:tokenHash(binding),emailKey:key,deliveryEnvelope,marketing:b.marketing===true,termsVersion:config.termsVersion,expires:until};
   const job={id:randomUUID(),kind:'account_login',envelope:sealDelivery({email:address,url:`${config.portalOrigin}/verify#token=${token}`,expires:until},config.deliveryKey)};
@@ -48,18 +54,79 @@ export function createApp({store,config,clock=()=>Date.now()}){
   return reply.code(202).send(response);
  });
  app.post('/api/auth/verify',async(req,reply)=>{
-  assert(config.signup,'signup_unavailable','Account registration is not open yet.',503);
+  assert(config.signup||config.adminLoginReady,'signup_unavailable','Account registration is not open yet.',503);
   const b=exactKeys(req.body,['token']);const binding=readCookie(req.headers.cookie,bindingCookie);
   assert(validToken(b.token)&&validToken(binding),'invalid_link','This link is invalid or belongs to another browser. Request a new link in this browser.');
   const token=randomToken();const s={hash:tokenHash(token),csrf:randomToken(),expires:clock()+86400000};
   const a=await store.consumeLogin(tokenHash(b.token),tokenHash(binding),s,clock());assert(a,'invalid_link','This link has expired or has already been used. Request a new link.');
+  if(!config.signup&&config.adminLoginReady){
+   const currentRole=await store.adminRole(a,config.adminOwnerEmailKey);
+   if(!currentRole){await store.revokeAllSessions(a.id);return reply.code(403).send({error:'admin_grant_revoked',message:'This staff invitation is no longer active.'});}
+  }
   reply.header('Set-Cookie',[sessionCookie(token,{secure:config.production}),`${bindingCookie}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${config.production?'; Secure':''}`]);return {verified:true};
  });
- app.get('/api/session',async req=>{const s=await account(req);return {account:{id:s.account.id,verified:true,marketing:s.account.marketing,role:'volunteer'},csrf:s.csrf,expires:s.expires};});
+ app.get('/api/session',async req=>{const s=await account(req);return {account:{id:s.account.id,verified:true,marketing:s.account.marketing,role:(config.adminLoginReady?await store.adminRole(s.account,config.adminOwnerEmailKey):null)||'volunteer'},csrf:s.csrf,expires:s.expires};});
  app.post('/api/auth/logout',async(req,reply)=>{const s=await writeSession(req);await store.logout(s.hash);reply.header('Set-Cookie',sessionCookie('',{secure:config.production,maxAge:0}));return {signedOut:true};});
  app.get('/api/account/role-preferences',async req=>{
   const s=await account(req);
   return {preferences:await store.getRolePreferences(s.account.id)};
+ });
+ // Treasury configuration is always unavailable until invite-only verified
+ // email login and separately provisioned encryption material are ready.
+ async function adminAccount(req,{write=false,roles=['owner','treasurer','auditor']}={}){
+  assert(config.adminLoginReady,'admin_unavailable','Treasury administration is not configured.',503);
+  const s=write?await writeSession(req):await account(req);
+  const role=await store.adminRole(s.account,config.adminOwnerEmailKey);
+  assert(role&&roles.includes(role),'admin_forbidden','This account cannot access treasury administration.',403);
+  return {session:s,role};
+ }
+ app.get('/api/admin/settings',async req=>{
+  const {role}=await adminAccount(req);
+  const configured=await store.treasuryMetadata();
+  return {mode:'sandbox-only',role,credentials:configured,slots:MERCHANT_SLOTS,
+   bankConfigured:configured.some(c=>c.slot==='bank'),vaultConfigured:true,
+   notice:'Bank credentials are encrypted at rest with a server-held key. Payment credentials are sandbox only; no real cards, donations, refunds or transfers can be made.'};
+ });
+ app.post('/api/admin/settings/bank',async req=>{
+  const {session:s}=await adminAccount(req,{write:true,roles:['owner','treasurer']});
+  const prepared=cleanTreasuryPayload('bank',req.body);
+  const sealed=sealTreasury('bank',prepared.value,config.treasuryKey);
+  await store.saveTreasurySecret(s.account.id,'bank',sealed,prepared.maskedLabel);
+  return {saved:true,slot:'bank',maskedLabel:prepared.maskedLabel,financialActivation:false};
+ });
+ app.post('/api/admin/settings/providers/:slot',async req=>{
+  const {session:s}=await adminAccount(req,{write:true,roles:['owner','treasurer']});
+  const slot=req.params.slot;
+  assert(MERCHANT_SLOTS.includes(slot),'invalid_treasury_slot','Choose one of the four payment slots.');
+  const prepared=cleanTreasuryPayload(slot,req.body);
+  const sealed=sealTreasury(slot,prepared.value,config.treasuryKey);
+  await store.saveTreasurySecret(s.account.id,slot,sealed,prepared.maskedLabel);
+  return {saved:true,slot,maskedLabel:prepared.maskedLabel,financialActivation:false};
+ });
+ app.get('/api/admin/grants',async req=>{
+  await adminAccount(req,{roles:['owner']});
+  return {grants:await store.adminGrants(),ownerAdmin:'Configured outside the database',roleOptions:['treasurer','editor','auditor']};
+ });
+ app.post('/api/admin/grants',async req=>{
+  const {session:s}=await adminAccount(req,{write:true,roles:['owner']});
+  const b=exactKeys(req.body,['email','role','label']);
+  const address=email(b.email);
+  assert(['treasurer','editor','auditor'].includes(b.role),'invalid_admin_role','Choose a limited administrator role.');
+  assert(typeof b.label==='string'&&b.label.trim().length>=2&&b.label.trim().length<=90&&!/[\r\n\x00-\x1f]/.test(b.label),
+   'invalid_admin_label','Provide a short staff label.');
+  const key=emailKey(address,config.pepper);
+  assert(key!==config.adminOwnerEmailKey,'immutable_owner','The primary owner cannot be reassigned.',403);
+  await store.setAdminGrant(s.account.id,key,b.role,b.label.trim());
+  return {saved:true,reference:key.slice(0,12),role:b.role,notice:'Staff may use verified email login after receiving the invitation from the owner. Permissions are checked on every request.'};
+ });
+ app.post('/api/admin/grants/revoke',async req=>{
+  const {session:s}=await adminAccount(req,{write:true,roles:['owner']});
+  const b=exactKeys(req.body,['reference']);
+  assert(typeof b.reference==='string'&&/^[a-f0-9]{12}$/.test(b.reference),
+   'invalid_grant_reference','Choose an existing invitation.');
+  const revoked=await store.revokeAdminGrant(s.account.id,b.reference);
+  assert(revoked,'grant_not_found','Active access was not found.',404);
+  return {revoked:true};
  });
  app.post('/api/account/role-preferences',async req=>{
   const s=await writeSession(req);
@@ -92,7 +159,7 @@ export function createApp({store,config,clock=()=>Date.now()}){
   return {signedOutAll:true};
  });
  app.post('/api/account/consent',async req=>{const s=await writeSession(req);const b=exactKeys(req.body,['marketing']);assert(typeof b.marketing==='boolean','invalid_consent','Select a valid preference.');await store.consent(s.account.id,b.marketing);return {saved:true};});
- app.post('/api/account/close',async(req,reply)=>{const s=await writeSession(req);const b=exactKeys(req.body,['confirm']);assert(b.confirm==='close my account','confirmation','Confirm account closure.');await store.closeAccount(s.account.id);reply.header('Set-Cookie',sessionCookie('',{secure:config.production,maxAge:0}));return {closed:true};});
+ app.post('/api/account/close',async(req,reply)=>{const s=await writeSession(req);if(config.adminLoginReady){const role=await store.adminRole(s.account,config.adminOwnerEmailKey);assert(!role,'admin_account_retention','Administrator accounts require a reviewed offboarding process.',403);}const b=exactKeys(req.body,['confirm']);assert(b.confirm==='close my account','confirmation','Confirm account closure.');await store.closeAccount(s.account.id);reply.header('Set-Cookie',sessionCookie('',{secure:config.production,maxAge:0}));return {closed:true};});
  app.get('/api/account/bookmarks',async req=>{
   const s=await account(req);
   const ids=await store.listBookmarks(s.account.id);
