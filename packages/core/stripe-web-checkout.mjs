@@ -141,6 +141,7 @@ export function stripeDonationHtml(settings,nonceKey,amount='25'){
  '<label for="donor-terms-agreement">I agree to the <a href="'+CONTRIBUTION_TERMS_PATH+'" target="_blank" rel="noopener noreferrer">contribution terms</a>.</label>'+ 
  '</div>'+ 
  '<p class="donor-reporting">Federal law requires us to use our best efforts to collect and report the name, mailing address, occupation and employer of individuals whose contributions exceed $200 in an election cycle.</p>'+
- '<button class="btn blue" type="submit">Continue to secure card checkout</button></form>'+
+ '<button class="btn blue" type="submit">Continue to secure card checkout</button>'+ 
+ '<p class="tiny" style="margin:14px 0 0">Next, Stripe will ask for your card details on its own secure checkout page. No card number is entered on this campaign page.</p></form>'+
  '<p class="tiny">Do not submit again if a previous payment is still processing.</p></main></body></html>';
 }
