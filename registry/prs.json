@@ -1,9 +1,17 @@
 {
-  "schemaVersion": 1,
   "repository": "neophilism/Galinsky-2028",
-  "roadmapVersion": 3,
+  "title": "Galinsky-2028",
   "planVerified": true,
   "plannedPrCount": 61,
+  "sourceFiles": [
+    ".exechub/project.yml",
+    "docs/DEVELOPMENT_PLAN.md",
+    ".exechub/approved-pr-mapping.json",
+    "docs/PR_REGISTER.json"
+  ],
+  "progressEvidenceNote": "Original sixty baseline packages plus the owner-authorized G28-061 private-review addition. contributingPrs indicate partial work; prs require whole-package scoped acceptance and real evidence.",
+  "schemaVersion": 1,
+  "roadmapVersion": 3,
   "observedAt": "2026-10-12T22:13:00Z",
   "units": [
     {
@@ -14,7 +22,10 @@
       "contributingPrs": [
         1,
         5
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-002",
@@ -25,7 +36,10 @@
         1,
         6,
         19
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-003",
@@ -36,7 +50,10 @@
         1,
         10,
         35
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-004",
@@ -49,7 +66,10 @@
         32,
         36,
         38
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-005",
@@ -59,7 +79,10 @@
       "contributingPrs": [
         16,
         66
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-006",
@@ -70,7 +93,10 @@
         12,
         13,
         16
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-007",
@@ -81,7 +107,10 @@
         45,
         46,
         65
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-008",
@@ -90,7 +119,10 @@
       "prs": [],
       "contributingPrs": [
         63
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-009",
@@ -100,7 +132,10 @@
       "contributingPrs": [
         1,
         35
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-010",
@@ -109,7 +144,10 @@
       "prs": [],
       "contributingPrs": [
         35
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-011",
@@ -119,7 +157,10 @@
       "contributingPrs": [
         1,
         15
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-012",
@@ -129,7 +170,10 @@
       "contributingPrs": [
         45,
         65
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-013",
@@ -141,7 +185,10 @@
         13,
         52,
         68
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-014",
@@ -150,7 +197,10 @@
       "prs": [],
       "contributingPrs": [
         15
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-015",
@@ -159,7 +209,10 @@
       "prs": [],
       "contributingPrs": [
         15
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-016",
@@ -170,7 +223,10 @@
         1,
         6,
         35
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-017",
@@ -180,7 +236,10 @@
       "contributingPrs": [
         47,
         56
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-018",
@@ -192,7 +251,10 @@
         3,
         10,
         15
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-019",
@@ -204,7 +266,10 @@
         38,
         40,
         61
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-020",
@@ -214,21 +279,30 @@
       "contributingPrs": [
         16,
         69
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-021",
       "title": "Implement approved recipient keys and device enrollment",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-022",
       "title": "Implement protected volunteer records and submissions",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-023",
@@ -237,7 +311,10 @@
       "prs": [],
       "contributingPrs": [
         41
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-024",
@@ -246,7 +323,10 @@
       "prs": [],
       "contributingPrs": [
         61
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-025",
@@ -255,7 +335,10 @@
       "prs": [],
       "contributingPrs": [
         46
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-026",
@@ -267,7 +350,10 @@
         49,
         62,
         68
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-027",
@@ -279,7 +365,10 @@
         35,
         49,
         62
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-028",
@@ -288,63 +377,90 @@
       "prs": [],
       "contributingPrs": [
         14
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-029",
       "title": "Implement jurisdiction/activity activation gates",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-030",
       "title": "Implement actionable tasks and activity reporting",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-031",
       "title": "Convert every worksheet into an appropriate web tool",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-032",
       "title": "Implement local teams and captain coordination",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-033",
       "title": "Implement events and orientation participation",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-034",
       "title": "Implement secure incident, help and correction workflows",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-035",
       "title": "Implement approved sharing and campaign asset tools",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-036",
       "title": "Implement official-tool handoffs for outreach roles",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-037",
@@ -354,7 +470,10 @@
       "contributingPrs": [
         8,
         45
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-038",
@@ -363,7 +482,10 @@
       "prs": [],
       "contributingPrs": [
         69
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-039",
@@ -374,7 +496,10 @@
         47,
         53,
         55
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-040",
@@ -384,7 +509,10 @@
       "contributingPrs": [
         18,
         47
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-041",
@@ -396,14 +524,20 @@
         55,
         56,
         57
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-042",
       "title": "Implement authenticated, idempotent payment webhooks",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-043",
@@ -412,14 +546,20 @@
       "prs": [],
       "contributingPrs": [
         18
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-044",
       "title": "Implement receipts and recurring donor self-service",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-045",
@@ -429,14 +569,20 @@
       "contributingPrs": [
         55,
         57
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-046",
       "title": "Implement controlled treasury reporting and exports",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-047",
@@ -448,7 +594,10 @@
         56,
         57,
         64
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-048",
@@ -458,7 +607,10 @@
       "contributingPrs": [
         53,
         64
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-049",
@@ -467,7 +619,10 @@
       "prs": [],
       "contributingPrs": [
         41
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-050",
@@ -476,7 +631,10 @@
       "prs": [],
       "contributingPrs": [
         20
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-051",
@@ -487,7 +645,10 @@
         10,
         11,
         13
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-052",
@@ -496,14 +657,20 @@
       "prs": [],
       "contributingPrs": [
         35
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-053",
       "title": "Meet performance, resilience and load budgets",
       "origin": "original",
       "prs": [],
-      "contributingPrs": []
+      "contributingPrs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-054",
@@ -513,7 +680,10 @@
       "contributingPrs": [
         16,
         66
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-055",
@@ -523,7 +693,10 @@
       "contributingPrs": [
         17,
         61
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-056",
@@ -537,7 +710,10 @@
         43,
         63,
         67
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-057",
@@ -548,7 +724,10 @@
         19,
         40,
         43
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-058",
@@ -560,7 +739,10 @@
         12,
         15,
         45
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-059",
@@ -572,7 +754,10 @@
         36,
         38,
         42
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-060",
@@ -583,7 +768,10 @@
         34,
         44,
         63
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "G28-061",
@@ -597,7 +785,10 @@
       ],
       "evidence": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md",
       "status": "completed",
-      "liveVerifiedAt": "2026-10-12T22:11:42.212794293Z"
+      "liveVerifiedAt": "2026-10-12T22:11:42.212794293Z",
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     }
   ],
   "pullRequests": [
@@ -693,7 +884,7 @@
     {
       "id": 4829596446,
       "number": 54,
-      "title": "SUPERSEDED: four-processor handoff already updated in merged PRs #55\u201357",
+      "title": "SUPERSEDED: four-processor handoff already updated in merged PRs #55–57",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/54",
       "state": "closed",
       "draft": false,
@@ -723,7 +914,7 @@
     {
       "id": 4829483935,
       "number": 52,
-      "title": "Recover September 2026 Kirk\u2013Evers legislation source for private editorial review",
+      "title": "Recover September 2026 Kirk–Evers legislation source for private editorial review",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/52",
       "state": "closed",
       "draft": false,
@@ -753,7 +944,7 @@
     {
       "id": 4829439565,
       "number": 48,
-      "title": "SUPERSEDED / PROHIBITED \u2014 do not use Stripe for campaign payments",
+      "title": "SUPERSEDED / PROHIBITED — do not use Stripe for campaign payments",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/48",
       "state": "closed",
       "draft": false,
@@ -1293,7 +1484,7 @@
     {
       "id": 4817446915,
       "number": 12,
-      "title": "Publish Kirk\u2013Evers documents only with independent review and verified asset hashes",
+      "title": "Publish Kirk–Evers documents only with independent review and verified asset hashes",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/12",
       "state": "closed",
       "draft": false,
@@ -1470,6 +1661,5 @@
       "baseRef": "main",
       "mergeCommitSha": "0e576ee14ec63717ed6598bc3157da0ba3b03395"
     }
-  ],
-  "progressEvidenceNote": "Original sixty baseline packages plus the owner-authorized G28-061 private-review addition. contributingPrs indicate partial work; prs require whole-package scoped acceptance and real evidence."
+  ]
 }
