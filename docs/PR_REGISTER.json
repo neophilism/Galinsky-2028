@@ -1287,9 +1287,6 @@
       "github_prs": [
         79
       ],
-      "contributing_prs": [
-        79
-      ],
       "scope": "Separate website-only Better Auth realm with owner-managed initial passwords, forced replacement, reset, revocation and expiry. No campaign operational grants.",
       "acceptance": "Persistent real owner/reviewer journeys, denied privilege/CSRF/financial/portal access, immediate revocation and actual HTTPS checks on the existing authorized preview.",
       "evidence": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md; docs/operations/PRIVATE_REVIEW_ACCOUNTS.md",
