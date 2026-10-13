@@ -9,7 +9,7 @@
     ".exechub/approved-pr-mapping.json",
     "docs/PR_REGISTER.json"
   ],
-  "progressEvidenceNote": "2026-10-13 source-bound audit: 10 fully accepted, 44 in progress, 7 not started. 82 merged PRs and 5 superseded/closed. Full acceptance differs from merge count; see docs/evidence/ACCEPTANCE_AUDIT_20261013.md.",
+  "progressEvidenceNote": "Conservative scoped audit: 8 whole packages accepted; 46 partially implemented; 7 unstarted. Snapshot includes 82 merged PRs and 5 closed-unmerged.",
   "schemaVersion": 1,
   "roadmapVersion": 4,
   "observedAt": "2026-10-13T21:14:24.168Z",
@@ -46,28 +46,20 @@
       "id": "G28-002",
       "title": "Create the monorepo and mandatory CI",
       "origin": "original",
-      "prs": [
+      "prs": [],
+      "contributingPrs": [
         1,
         6,
         19,
         90,
         92
       ],
-      "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
-      "status": "completed",
-      "acceptedAt": "2026-10-13T21:14:24.168Z",
-      "reviewedSourceSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-      "evidence": [
-        "package.json",
-        ".github/workflows/ci.yml",
-        ".circleci/config.yml",
-        "tests/browser/journeys.mjs"
-      ],
-      "acceptanceSummary": "Exact-lockfile, TypeScript, unit, PostgreSQL, browser, build and audit CI pipeline passed on reviewed main.",
-      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
+      "status": "in_progress",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+      "acceptanceBlocker": "The complete CI suite passes, but the original G28-02 scope also calls for formatting/lint tooling, dedicated secret scanning, a PR template and branch-rule evidence. Those are absent or unverified; CI success alone is not full package acceptance."
     },
     {
       "id": "G28-003",
@@ -579,25 +571,17 @@
       "id": "G28-031",
       "title": "Convert every worksheet into an appropriate web tool",
       "origin": "original",
-      "prs": [
+      "prs": [],
+      "contributingPrs": [
         1,
         35
       ],
-      "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
-      "status": "completed",
-      "acceptedAt": "2026-10-13T21:14:24.168Z",
-      "reviewedSourceSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-      "evidence": [
-        "packages/core/forms.mjs",
-        "apps/portal/src/main.tsx",
-        "tests/core.test.mjs",
-        "tests/browser/journeys.mjs"
-      ],
-      "acceptanceSummary": "All twelve original worksheet types have editable local web forms, print/download/reset, privacy warnings and no server submission; tests pass.",
-      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
+      "status": "in_progress",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+      "acceptanceBlocker": "All twelve local worksheets render, but the original source templates contain fields not yet mapped to typed controls and the required coverage matrix, print/privacy and role-boundary evidence is incomplete."
     },
     {
       "id": "G28-032",
