@@ -21,10 +21,10 @@ class FakePool{
    return {rowCount:1,rows:[]};
   }
   if(sql.startsWith('SELECT session_id,election,amount_cents,livemode FROM')){
-   return {rowCount:this.intent?1:0,rows:this.intent?[this.intent]:[]};
+   return {rowCount:this.intent?1:0,rows:this.intent?[{...this.intent}]:[]};
   }
   if(sql.startsWith('SELECT client_reference,election,amount_cents,livemode,payment_state FROM')){
-   return {rowCount:this.intent?1:0,rows:this.intent?[this.intent]:[]};
+   return {rowCount:this.intent?1:0,rows:this.intent?[{...this.intent}]:[]};
   }
   if(sql.startsWith('INSERT INTO g28.stripe_webhook_receipts(')){
    if(this.receipts.has(p[0]))return {rowCount:0,rows:[]};
