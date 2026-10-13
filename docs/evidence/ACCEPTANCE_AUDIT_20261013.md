@@ -9,18 +9,18 @@
 
 | Work packages | Number | Meaning |
 |---|---:|---|
-| Accepted | **10** | Package-level scope tested and evidenced |
-| In progress | **44** | Some code exists but at least one criterion remains unfinished |
+| Accepted | **8** | Package-level scope tested and evidenced |
+| In progress | **46** | Some code exists but at least one criterion remains unfinished |
 | Not started | **7** | No usable functional implementation for this scoped feature |
 
-An accepted package does not certify the entire website, and does not turn on campaign donations or protected activities. The two accepted repo-only packages are the project handoff and CI setup; the other eight have deployed implementation components. A paid external expert review is not an engineering blocker under current owner instructions; actual missing code, failed tests and release approvals remain blockers.
+An accepted package does not certify the entire website, and does not turn on campaign donations or protected activities. The one accepted repo-only package is the project handoff; the other seven have deployed implementation components. A paid external expert review is not an engineering blocker under current owner instructions; actual missing code, failed tests and release approvals remain blockers.
 
 ## Every package
 
 | Package | Assessment | Evidence (accepted) or actual missing criterion |
 |---|---|---|
 | G28-01 | **Accepted** | `README.md`, `AGENTS.md`, `docs/DEVELOPMENT_PLAN.md`, `docs/design/ASSET_REGISTER.json`, `tests/public.test.mjs` |
-| G28-02 | **Accepted** | `package.json`, `.github/workflows/ci.yml`, `.circleci/config.yml`, `tests/browser/journeys.mjs` |
+| G28-02 | In progress | The complete CI suite passes, but the original G28-02 scope also calls for formatting/lint tooling, dedicated secret scanning, a PR template and branch-rule evidence. Those are absent or unverified; CI success alone is not full package acceptance. |
 | G28-03 | In progress | Keyboard/mobile components are built, but full baseline side-by-side UI approval and focus/gallery evidence are missing. |
 | G28-04 | **Accepted** | `scripts/migrate.mjs`, `apps/api/src/config.mjs`, `tests/integration/postgres.test.mjs`, `docs/operations/RENDER_VERIFIED_PLACEMENT.md` |
 | G28-05 | In progress | Security boundaries exist; verified complete E2EESA component/flow inventory and profile mapping do not. |
@@ -49,7 +49,7 @@ An accepted package does not certify the entire website, and does not turn on ca
 | G28-28 | In progress | Reading acknowledgments exist; orientation/training lifecycle and activated prerequisites are incomplete. |
 | G28-29 | In progress | Fail-closed activity rules exist; live verified jurisdiction module admin/publish/revoke flow is missing. |
 | G28-30 | In progress | Simple task checklist exists; task assignments, capacity and verified activity reporting are missing. |
-| G28-31 | **Accepted** | `packages/core/forms.mjs`, `apps/portal/src/main.tsx`, `tests/core.test.mjs`, `tests/browser/journeys.mjs` |
+| G28-31 | In progress | All twelve local worksheets render, but the original source templates contain fields not yet mapped to typed controls and the required coverage matrix, print/privacy and role-boundary evidence is incomplete. |
 | G28-32 | Not started | No working team membership or scoped captain-coordination system. |
 | G28-33 | Not started | No event scheduling, capacity/RSVP or cancellation backend. |
 | G28-34 | Not started | No secure protected incident intake, reply or private-attachment workflow. |
