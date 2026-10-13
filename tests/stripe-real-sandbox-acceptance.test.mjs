@@ -19,10 +19,10 @@ class MockDb{
   if(sql==='SELECT 1 FROM g28.stripe_checkout_intents LIMIT 1')return {rows:[]};
   if(sql.startsWith('INSERT INTO g28.stripe_checkout_intents(')){
    if(!this.intent)this.intent={client_reference:values[0],session_id:values[1],
-    election:values[2],amount_cents:values[3],livemode:values[4],payment_state:'pending'};
+    election:values[2],amount_cents:values[3],livemode:values[4],terms_version:values[5]??null,payment_state:'pending'};
    return {rowCount:1,rows:[]};
   }
-  if(sql.startsWith('SELECT session_id,election,amount_cents,livemode FROM g28.stripe_checkout_intents')){
+  if(sql.startsWith('SELECT session_id,election,amount_cents,livemode')){
    return {rowCount:this.intent?1:0,rows:this.intent?[{...this.intent}]:[]};
   }
   if(sql.startsWith('SELECT payment_state FROM g28.stripe_checkout_intents')){
@@ -53,7 +53,7 @@ test('the live sandbox acceptance creates and expires one real-shaped test sessi
    const body=new URLSearchParams(options.body);
    assert.equal(body.get('mode'),'payment');
    assert.equal(body.get('line_items[0][price_data][unit_amount]'),'100');
-   assert.equal(body.get('metadata[election]'),'primary');
+   assert.equal(body.get('metadata[election]'),'general');
    assert.equal(body.get('client_reference_id'),reference);
    return {ok:true,json:async()=>({id:session,url:'https://checkout.stripe.com/c/pay/some-test-token'})};
   }
