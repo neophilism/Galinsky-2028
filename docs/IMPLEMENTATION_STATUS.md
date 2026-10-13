@@ -1,5 +1,7 @@
 # Implementation status - foundation delivery
 
+> **Historical foundation status as of 11 October 2026.** The latest [13 October package audit](evidence/ACCEPTANCE_AUDIT_20261013.md) identifies 10 accepted packages, 44 partially implemented and 7 unstarted. This historical document's older CI/Render SHAs and acceptance counts are not the current registry; public launch remains blocked.
+
 Status updated 11 October 2026. The private *public-site preview* is deployed and independently HTTP-verified behind a required password. This is not a public production campaign launch and not completion of all 60 work packages. Both the public site and the actual React/Fastify volunteer portal/API are now deployed in the designated Render project, connected to Neon staging. Signup, payments, staff administration and protected reports remain disabled or incomplete.
 
 ## Implemented in this foundation
