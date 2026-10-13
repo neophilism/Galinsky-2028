@@ -15,7 +15,7 @@ const controller=createReviewController({auth,database:db,origin,production:fals
 const server=createPrivatePreviewServer({directory:'dist/web',reviewController:controller,env:{PREVIEW_ACCESS_USER:'preview',PREVIEW_ACCESS_PASSWORD:'synthetic-existing-preview-password-32-characters',G28_REVIEW_ACCOUNTS_ENABLED:'true'}});
 await new Promise(r=>server.listen(port,'127.0.0.1',r));await mkdir('test-results/review-browser',{recursive:true});
 const engines={chromium,firefox,webkit},selected=(process.env.G28_BROWSER_ENGINES||'chromium,firefox,webkit').split(',');
-assert(selected.length&&selected.every(n=>Object.hasOwn(engines,n)));const evidence=[];
+assert(selected.length===1&&selected.every(n=>Object.hasOwn(engines,n)),'Use npm run test:review-browser to run every browser in independent test processes.');const evidence=[];
 try{
  for(const name of selected){
   const options={headless:true};if(name==='chromium'&&process.env.G28_CHROMIUM_EXECUTABLE){options.executablePath=process.env.G28_CHROMIUM_EXECUTABLE;options.args=['--no-sandbox','--disable-gpu'];}
