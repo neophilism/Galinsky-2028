@@ -1,5 +1,7 @@
 # Galinsky 2028 — external inputs still required for full acceptance
 
+> **Historical owner-input snapshot (12 October).** Some processor wording below predates the owner's same-day Stripe-first reversal. Follow current `AGENTS.md`, `docs/operations/STRIPE_POLITICAL_CAMPAIGN_ACCEPTANCE.md`, and the [13 October acceptance audit](evidence/ACCEPTANCE_AUDIT_20261013.md) for current decisions and real release gates.
+
 Updated 12 October 2026. This is an owner/treasurer/security handoff, not a
 claim that the complete 60-package system is implemented, deployed, approved,
 or publicly launched. Actual implementation must continue independently of
