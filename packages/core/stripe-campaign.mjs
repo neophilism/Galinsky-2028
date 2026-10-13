@@ -11,7 +11,7 @@ const REF_ID=/^[a-z0-9][a-z0-9_-]{5,63}$/;
 const ELECTION=/^(primary|general)$/;
 const EVENT_TYPES=new Set([
  'checkout.session.completed','checkout.session.async_payment_succeeded',
- 'checkout.session.async_payment_failed','payment_intent.succeeded',
+ 'checkout.session.async_payment_failed','checkout.session.expired','payment_intent.succeeded',
  'payment_intent.payment_failed','charge.refunded','charge.dispute.created',
  'invoice.paid','invoice.payment_failed','customer.subscription.deleted'
 ]);
