@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {runStripeSandboxAcceptance} from '../apps/web/stripe-sandbox-acceptance.mjs';
+import {CONTRIBUTION_TERMS_VERSION} from '../packages/core/contribution-terms.mjs';
 
 const key='sk_test_'+'z'.repeat(25),whsec='whsec_'+'y'.repeat(25);
 const env=()=>({
@@ -54,6 +55,7 @@ test('the live sandbox acceptance creates and expires one real-shaped test sessi
    assert.equal(body.get('mode'),'payment');
    assert.equal(body.get('line_items[0][price_data][unit_amount]'),'100');
    assert.equal(body.get('metadata[election]'),'general');
+   assert.equal(body.get('metadata[terms_version]'),CONTRIBUTION_TERMS_VERSION);
    assert.equal(body.get('client_reference_id'),reference);
    return {ok:true,json:async()=>({id:session,url:'https://checkout.stripe.com/c/pay/some-test-token'})};
   }
@@ -76,6 +78,7 @@ test('the live sandbox acceptance creates and expires one real-shaped test sessi
  assert.equal(pool.intent.client_reference,reference);
  assert.equal(pool.intent.livemode,false);
  assert.equal(pool.intent.amount_cents,100);
+ assert.equal(pool.intent.terms_version,CONTRIBUTION_TERMS_VERSION);
  assert(!JSON.stringify(result).includes('sk_test_'));
  assert(!JSON.stringify(result).includes('whsec_'));
  assert(!JSON.stringify(result).includes('checkout.stripe.com'));

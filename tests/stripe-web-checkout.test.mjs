@@ -24,6 +24,19 @@ test('sandbox is explicit, isolated from real money and legal release keys',()=>
  assert.equal(cfg.sandbox,true);assert.equal(cfg.live,false);
  assert.equal(cfg.policy.recurringEnabled,false);
 });
+test('a signed checkout form remains valid across server restarts but not key rotations',()=>{
+ const keyA=checkoutNonceKey(sandbox().STRIPE_SECRET_KEY);
+ const keyB=checkoutNonceKey(sandbox().STRIPE_SECRET_KEY);
+ const keyOther=checkoutNonceKey('sk_test_'+'Z'.repeat(28));
+ const stamp=1700000000000;
+ const token=createCheckoutToken(keyA,stamp);
+ assert.deepEqual(keyA,keyB);
+ assert.notDeepEqual(keyA,keyOther);
+ assert.match(checkCheckoutToken(keyB,token,stamp),/^attempt_[a-f0-9]{32}$/);
+ assert.equal(checkCheckoutToken(keyOther,token,stamp),null);
+ assert.equal(checkCheckoutToken(keyB,token,stamp+901000),null);
+ assert.throws(()=>createCheckoutToken(keyA,stamp,'forged'),/nonce/);
+});
 test('signed form tokens expire and enforce exact origin, amount and eligibility',async()=>{
  const cfg=stripeSettings(sandbox()),key=checkoutNonceKey();
  const token=createCheckoutToken(key,1700000000000);
@@ -80,6 +93,7 @@ test('password-protected sandbox returns form and 303 to verified Stripe checkou
  assert.equal((page.match(/type="checkbox"/g)||[]).length,1);
  assert.match(page,/name="agree" value="yes" required/);
  assert.match(page,/I agree to the/);
+ assert.match(page,/Stripe will ask for your card details on its own secure checkout page/i);
  assert.match(page,new RegExp('href="'+CONTRIBUTION_TERMS_PATH+'"'));
  assert(!page.includes('name="election"'));
  assert(!page.includes('<fieldset class="eligibility">'));
@@ -110,6 +124,29 @@ test('password-protected sandbox returns form and 303 to verified Stripe checkou
  assert.equal(stored[0].election,'general');
  assert.equal(stored[0].termsVersion,CONTRIBUTION_TERMS_VERSION);
  assert.equal((await ok.text()),'');
+});
+test('a stale checkout token shows a safe recovery page rather than an unhelpful text error',async t=>{
+ const dir=await mkdtemp(join(tmpdir(),'stripe-token-expired-'));
+ await writeFile(join(dir,'index.html'),'private');
+ let requests=0;
+ const server=createPrivatePreviewServer({directory:dir,env:sandbox(),
+  stripeStore:{async recordSession(){throw Error('Checkout may not reach DB');}},
+  stripeTransport:async()=>{requests++;throw Error('Checkout may not reach Stripe');}});
+ await new Promise(ok=>server.listen(0,'127.0.0.1',ok));
+ t.after(async()=>{await new Promise(ok=>server.close(ok));await rm(dir,{recursive:true,force:true});});
+ const origin='http://127.0.0.1:'+server.address().port;
+ const auth={Authorization:'Basic '+Buffer.from('preview:'+password).toString('base64')};
+ const oldKey=checkoutNonceKey('sk_test_'+'Z'.repeat(28));
+ const badToken=createCheckoutToken(oldKey);
+ const response=await fetch(origin+'/donate/stripe/checkout',{method:'POST',redirect:'manual',
+  headers:{...auth,Origin:'https://preview.example.test','Content-Type':'application/x-www-form-urlencoded'},
+  body:body(badToken)});
+ assert.equal(response.status,400);
+ assert.match(response.headers.get('content-type'),/text\/html/);
+ const page=await response.text();
+ assert.match(page,/form was opened before a recent update or has expired/i);
+ assert.match(page,/href="\/donate\/stripe"/);
+ assert.equal(requests,0);
 });
 test('Stripe test mode is unconfigured by default and cannot leak live donation routes',async t=>{
  const dir=await mkdtemp(join(tmpdir(),'stripe-disabled-'));await writeFile(join(dir,'index.html'),'private');
