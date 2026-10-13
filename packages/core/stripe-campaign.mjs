@@ -33,7 +33,7 @@ export function stripeCheckoutPlan({contribution,policy,release}){
  }
  assert(contribution&&typeof contribution==='object'&&!Array.isArray(contribution),
   'invalid_contribution','Invalid contribution request.');
- const {amountCents,frequency,election,clientRef,attestations}=contribution;
+ const {amountCents,frequency,election,clientRef,attestations,termsVersion}=contribution;
  assert(Number.isSafeInteger(amountCents)&&amountCents>0&&amountCents<=100000000,
   'invalid_amount','Enter a permitted positive amount in cents.');
  assert(frequency==='once'||frequency==='monthly','invalid_frequency','Choose one-time or monthly giving.');
@@ -79,6 +79,13 @@ export function stripeCheckoutPlan({contribution,policy,release}){
   'custom_fields[1][optional]':'false'
  };
  if(frequency==='monthly')fields['line_items[0][price_data][recurring][interval]']='month';
+ // The browser cannot select or forge the terms version. Record the server's
+ // version in Stripe metadata so the eventual signed event has audit context.
+ if(termsVersion!==undefined){
+  assert(typeof termsVersion==='string'&&/^[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9-]{4,40}$/.test(termsVersion),
+   'invalid_terms_version','Invalid contribution terms version.');
+  fields['metadata[terms_version]']=termsVersion;
+ }
  for(const [key,value] of Object.entries(fields))params.set(key,value);
  return {endpoint:CHECKOUT_ENDPOINT,method:'POST',body:params,
   idempotencyKey:'g28-'+clientRef,mode:fields.mode,amountCents,
