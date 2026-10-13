@@ -318,6 +318,25 @@ if(entry){
   const server=createPrivatePreviewServer({reviewController});
   server.listen(port,process.env.HOST||'0.0.0.0',async()=>{
    console.log(JSON.stringify({event:'private_preview_listening',port}));
+   // An owner-authorized, explicitly flagged integration acceptance run.
+   // It never accepts live keys, charges a card or logs sensitive account data.
+   if(process.env.G28_STRIPE_SMOKE_ON_BOOT==='true'){
+    void (async()=>{
+     let acceptancePool;
+     try{
+      // Wait until Render can route external Stripe webhooks to this instance.
+      await new Promise(resolve=>setTimeout(resolve,15000));
+      if(process.env.DATABASE_URL)acceptancePool=databasePool(process.env.DATABASE_URL);
+      const {runStripeSandboxAcceptance}=await import('./stripe-sandbox-acceptance.mjs');
+      const result=await runStripeSandboxAcceptance({env:process.env,pool:acceptancePool});
+      console.log(JSON.stringify({event:'stripe_sandbox_acceptance',...result}));
+     }catch{
+      console.error(JSON.stringify({event:'stripe_sandbox_acceptance',stage:'unexpected',status:'failed'}));
+     }finally{
+      if(acceptancePool)await acceptancePool.end().catch(()=>{});
+     }
+    })();
+   }
    if(reviewController&&process.env.G28_REVIEW_LIVE_CHECK==='true'){
     try{
      const {verifyReviewLive}=await import('./review-live-check.mjs');
