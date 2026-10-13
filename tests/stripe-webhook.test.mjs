@@ -17,10 +17,10 @@ class FakePool{
   if(sql==='BEGIN'||sql==='ROLLBACK')return {rowCount:0,rows:[]};
   if(sql==='COMMIT'){this.commits++;return {rowCount:0,rows:[]};}
   if(sql.startsWith('INSERT INTO g28.stripe_checkout_intents(')){
-   if(!this.intent)this.intent={client_reference:p[0],session_id:p[1],election:p[2],amount_cents:p[3],livemode:p[4],payment_state:'pending'};
+   if(!this.intent)this.intent={client_reference:p[0],session_id:p[1],election:p[2],amount_cents:p[3],livemode:p[4],terms_version:p[5]??null,payment_state:'pending'};
    return {rowCount:1,rows:[]};
   }
-  if(sql.startsWith('SELECT session_id,election,amount_cents,livemode FROM')){
+  if(sql.startsWith('SELECT session_id,election,amount_cents,livemode')){
    return {rowCount:this.intent?1:0,rows:this.intent?[{...this.intent}]:[]};
   }
   if(sql.startsWith('SELECT client_reference,election,amount_cents,livemode,payment_state FROM')){
