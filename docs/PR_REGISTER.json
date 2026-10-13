@@ -2,31 +2,49 @@
   "schema_version": 1,
   "project": "Galinsky 2028",
   "repository": "neophilism/Galinsky-2028",
-  "plan_version": "1.0",
+  "plan_version": "1.1",
   "plan_status": "implementation_started",
   "design_status": "approved_with_issue_video_amendment",
   "planned_work_packages": 61,
-  "implemented_packages": 1,
-  "merged_packages": 1,
-  "deployed_packages": 1,
-  "note": "Sixty original packages preserved, plus G28-61 owner-requested private reviewer accounts. Whole-package completion requires its scoped acceptance evidence.",
+  "implemented_packages": 10,
+  "merged_packages": 10,
+  "deployed_packages": 8,
+  "note": "10 source-bound completed work packages; 44 in progress; 7 not started. See docs/evidence/ACCEPTANCE_AUDIT_20261013.md. The 82 merged PRs are distinct from accepted packages.",
   "packages": [
     {
       "id": "G28-01",
       "title": "Freeze the approved design and establish the complete handoff",
       "phase": "A",
       "depends_on": [],
-      "status": "in_progress",
-      "github_prs": [],
+      "status": "completed",
+      "github_prs": [
+        1,
+        5,
+        63,
+        75,
+        90
+      ],
       "scope": "Import this plan, agent instructions, requirements traceability, decision log, content register and machine-readable PR register. Inventory the approved HTML/CSS, screenshots, portrait, illustrations and original volunteer archive with hashes. Preserve the issue-video amendment as a requirement that overrides the earlier screenshots. Inspect archive contents before repository publication; the prototype includes a complete volunteer source archive and materials.js.",
       "acceptance": "An agent starting with only the repository can locate the governing design, every requirement, the next work package and all outstanding inputs. Public-safe design sources are available in the repo; restricted originals have durable authorized storage references, not temporary ChatGPT links. No volunteer archive, credential or sensitive source is accidentally committed.",
       "evidence": "Inventory report, checksum verification, repository-publication review and a cold-start handoff exercise.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
-      "contributing_prs": [
-        1,
-        5
-      ]
+      "implementation_note": "Complete plan/design/source inventory and cold-start documentation verified against the repository; source-leak and roadmap checks pass. Package acceptance is separate from production release.",
+      "contributing_prs": [],
+      "acceptance_review": {
+        "status": "completed",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "completed_at": "2026-10-13T21:14:24.168Z",
+        "ci_run_id": 38462635121,
+        "evidence_paths": [
+          "README.md",
+          "AGENTS.md",
+          "docs/DEVELOPMENT_PLAN.md",
+          "docs/design/ASSET_REGISTER.json",
+          "tests/public.test.mjs"
+        ],
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "scoped_deployed": false
+      }
     },
     {
       "id": "G28-02",
@@ -35,18 +53,34 @@
       "depends_on": [
         "G28-01"
       ],
-      "status": "in_progress",
-      "github_prs": [],
+      "status": "completed",
+      "github_prs": [
+        1,
+        6,
+        19,
+        90,
+        92
+      ],
       "scope": "Set up Astro marketing, React/TypeScript portal, Fastify API/static portal host, shared UI/contracts/content/security packages, pnpm workspace and pinned supported Node/tool versions. Add formatting, lint, type checks, unit/integration/browser test runners, secret scanning, dependency review, branch rules and PR templates. Keep pending features behind server-side flags.",
       "acceptance": "A clean checkout installs reproducibly and passes the documented verification command. CI tests the merge candidate; no production secret is available to untrusted PRs. Empty test suites and skipped security gates cannot be reported as passing implementation evidence.",
       "evidence": "Lockfile, CI configuration, green bootstrap run and documented local setup.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
-      "contributing_prs": [
-        1,
-        6,
-        19
-      ]
+      "implementation_note": "Exact-lockfile, TypeScript, unit, PostgreSQL, browser, build and audit CI pipeline passed on reviewed main. Package acceptance is separate from production release.",
+      "contributing_prs": [],
+      "acceptance_review": {
+        "status": "completed",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "completed_at": "2026-10-13T21:14:24.168Z",
+        "ci_run_id": 38462635121,
+        "evidence_paths": [
+          "package.json",
+          ".github/workflows/ci.yml",
+          ".circleci/config.yml",
+          "tests/browser/journeys.mjs"
+        ],
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "scoped_deployed": false
+      }
     },
     {
       "id": "G28-03",
@@ -61,12 +95,18 @@
       "acceptance": "Header/footer and representative components match approved desktop/mobile references. Keyboard navigation, skip link, menu state and focus restoration work. Legal text remains readable; an accessibility fix may improve a tiny prototype label without changing the design direction.",
       "evidence": "Component gallery, screenshot baselines and keyboard/accessibility component tests.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Keyboard/mobile components are built, but full baseline side-by-side UI approval and focus/gallery evidence are missing.",
       "contributing_prs": [
         1,
         10,
         35
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Keyboard/mobile components are built, but full baseline side-by-side UI approval and focus/gallery evidence are missing."
+      }
     },
     {
       "id": "G28-04",
@@ -75,20 +115,35 @@
       "depends_on": [
         "G28-02"
       ],
-      "status": "in_progress",
-      "github_prs": [],
-      "scope": "Create local Postgres setup, typed migrations, API error contracts, strict configuration validation, health/readiness endpoints and infrastructure-as-code for a Render static site plus portal/API service using Neon. Establish isolated development, staging and production configuration. Add a durable Postgres outbox/job abstraction and a preview deployment path; no real fundraising or volunteer data yet.",
-      "acceptance": "Migrations work on a fresh database and on an upgrade fixture. Startup rejects missing critical settings. Preview data is synthetic, credentials are isolated and health distinguishes process uptime from dependency readiness. Production resources are not purchased without an approved budget.",
-      "evidence": "Migration tests, preview smoke results, environment matrix and service resource inventory.",
-      "external_inputs": "Workspace access and any approved paid-resource budget are required to instantiate cloud resources, not to write and test the infrastructure.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
-      "contributing_prs": [
+      "status": "completed",
+      "github_prs": [
         17,
         20,
         32,
         36,
-        38
-      ]
+        38,
+        40
+      ],
+      "scope": "Create local Postgres setup, typed migrations, API error contracts, strict configuration validation, health/readiness endpoints and infrastructure-as-code for a Render static site plus portal/API service using Neon. Establish isolated development, staging and production configuration. Add a durable Postgres outbox/job abstraction and a preview deployment path; no real fundraising or volunteer data yet.",
+      "acceptance": "Migrations work on a fresh database and on an upgrade fixture. Startup rejects missing critical settings. Preview data is synthetic, credentials are isolated and health distinguishes process uptime from dependency readiness. Production resources are not purchased without an approved budget.",
+      "evidence": "Migration tests, preview smoke results, environment matrix and service resource inventory.",
+      "external_inputs": "Workspace access and any approved paid-resource budget are required to instantiate cloud resources, not to write and test the infrastructure.",
+      "implementation_note": "Versioned migrations, fail-closed config and two approved-project protected Render services with staging DB and readiness evidence verified. Package acceptance is separate from production release.",
+      "contributing_prs": [],
+      "acceptance_review": {
+        "status": "completed",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "completed_at": "2026-10-13T21:14:24.168Z",
+        "ci_run_id": 38462635121,
+        "evidence_paths": [
+          "scripts/migrate.mjs",
+          "apps/api/src/config.mjs",
+          "tests/integration/postgres.test.mjs",
+          "docs/operations/RENDER_VERIFIED_PLACEMENT.md"
+        ],
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "scoped_deployed": true
+      }
     },
     {
       "id": "G28-05",
@@ -104,11 +159,17 @@
       "acceptance": "No TLS-only or provider-managed encryption is called E2EE. The build can identify every protected flow and its intended recipients. Missing upstream production evidence blocks protected production use but not public UI development. Unknown capabilities fail closed instead of selecting a weaker fallback.",
       "evidence": "Component/data-flow inventory, profile decision record, egress matrix, release-gate specification and reviewer handoff requirements.",
       "external_inputs": "Production profile eligibility and required expert review remain independent gates; they are not presumed satisfied by this plan.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Security boundaries exist; verified complete E2EESA component/flow inventory and profile mapping do not.",
       "contributing_prs": [
         16,
         66
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Security boundaries exist; verified complete E2EESA component/flow inventory and profile mapping do not."
+      }
     },
     {
       "id": "G28-06",
@@ -124,12 +185,18 @@
       "acceptance": "Unapproved documents cannot enter a public release or volunteer current-materials view. Publishing is atomic; stale edits cannot overwrite newer versions. A failed build leaves the previous public release live. No second manual copy of policy definitions is needed for volunteer summaries.",
       "evidence": "Schema tests, publication state-machine tests, rollback fixture and source-to-release traceability.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Material publication protections exist; atomic public content release, cross-source versioning and rollback remain incomplete.",
       "contributing_prs": [
         12,
         13,
         16
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Material publication protections exist; atomic public content release, cross-source versioning and rollback remain incomplete."
+      }
     },
     {
       "id": "G28-07",
@@ -145,12 +212,18 @@
       "acceptance": "The real candidate likeness and pointing pose are preserved. No public asset or ZIP exposes restricted source materials or metadata. Every displayed/downloadable asset has a rights record, correct content type and accessible alternative. Portrait and illustration loading does not shift layout.",
       "evidence": "Asset register, malicious-upload tests, image comparison and download authorization tests.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Assets/sanitization exist; comprehensive rights metadata and hostile-editor upload testing are unfinished.",
       "contributing_prs": [
         45,
         46,
         65
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Assets/sanitization exist; comprehensive rights metadata and hostile-editor upload testing are unfinished."
+      }
     },
     {
       "id": "G28-08",
@@ -166,10 +239,16 @@
       "acceptance": "Engine Room shows planned work before PRs exist. Green means accepted/merged planned work, yellow means implemented but not yet accepted/merged work, and empty means not implemented. New planned work increases the denominator. Deployment and security readiness are separate from merge progress.",
       "evidence": "Manifest validation, ingestion test and an observed Engine Room project entry; screenshots alone are not the data source.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Engine Room manifests exist; actual 61-package import, accepted colors and denominator have not been observed.",
       "contributing_prs": [
         63
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Engine Room manifests exist; actual 61-package import, accepted colors and denominator have not been observed."
+      }
     },
     {
       "id": "G28-09",
@@ -180,17 +259,32 @@
         "G28-06",
         "G28-07"
       ],
-      "status": "in_progress",
-      "github_prs": [],
+      "status": "completed",
+      "github_prs": [
+        1,
+        35,
+        76
+      ],
       "scope": "Reproduce the approved hero composition, Justice for All statement, promise strip, debt-of-injustice explanation, three issue cards, candidate introduction, volunteer invitation, donation area and footer. Keep factual biography entries source-backed. Make all calls to action real routes/anchors, even while transactional features remain disabled in preview.",
       "acceptance": "The full page matches the approved section order, visual balance and mobile stacking. Exactly three launch issues appear. The philosophy is readable without video, animation, third-party requests or JavaScript. No invented achievements, endorsements, crowds or campaign statistics are added.",
       "evidence": "Desktop/mobile screenshots, link checks, semantic heading tests and source-to-copy review.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
-      "contributing_prs": [
-        1,
-        35
-      ]
+      "implementation_note": "Candidate homepage matches approved source structure with real portrait, three issue CTAs and philosophy; cross-engine/mobile tests and screenshots pass. Package acceptance is separate from production release.",
+      "contributing_prs": [],
+      "acceptance_review": {
+        "status": "completed",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "completed_at": "2026-10-13T21:14:24.168Z",
+        "ci_run_id": 38462635121,
+        "evidence_paths": [
+          "content/public/pages/index.html",
+          "docs/design/BASELINE_NOTES.md",
+          "tests/public.test.mjs",
+          "tests/browser/journeys.mjs"
+        ],
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "scoped_deployed": true
+      }
     },
     {
       "id": "G28-10",
@@ -205,10 +299,16 @@
       "acceptance": "The headline and buttons never rotate away or move out of reach. Animation is decorative, silent and non-flashing; it stops when requested and remains paused across navigation. Low-power/mobile behavior and disabled-JavaScript still composition remain attractive.",
       "evidence": "Motion-state tests, reduced-motion screenshots, CPU/long-task measurements and mobile visual review.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Dot-star animation exists but user pause/persistent stop and CPU/mobile motion evidence are absent.",
       "contributing_prs": [
         35
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Dot-star animation exists but user pause/persistent stop and CPU/mobile motion evidence are absent."
+      }
     },
     {
       "id": "G28-11",
@@ -219,17 +319,32 @@
         "G28-07",
         "G28-09"
       ],
-      "status": "in_progress",
-      "github_prs": [],
+      "status": "completed",
+      "github_prs": [
+        1,
+        15,
+        76
+      ],
       "scope": "Reproduce the approved illustrated overview of Kirk-Evers, The Garden and The Cornerstone, common principles, short summaries and distinct issue links. Implement an ordered published-issue collection that can add future issues without redesigning navigation or hard-coding the count.",
       "acceptance": "Only the three launch records are published. A draft fourth issue never leaks through search, sitemap, navigation or API projections. Each card has one clear destination and accessible illustration treatment.",
       "evidence": "Collection/publication tests, links and desktop/mobile snapshots.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
-      "contributing_prs": [
-        1,
-        15
-      ]
+      "implementation_note": "Exactly three issue records, full card/promise destinations, accessible headings and absence of unpublished issue routes verified. Package acceptance is separate from production release.",
+      "contributing_prs": [],
+      "acceptance_review": {
+        "status": "completed",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "completed_at": "2026-10-13T21:14:24.168Z",
+        "ci_run_id": 38462635121,
+        "evidence_paths": [
+          "content/public/pages/issues.html",
+          "content/public/site.json",
+          "tests/issue-card-navigation.test.mjs",
+          "tests/indexing.test.mjs"
+        ],
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "scoped_deployed": true
+      }
     },
     {
       "id": "G28-12",
@@ -246,11 +361,17 @@
       "acceptance": "All three issue pages visibly reserve a large video area at the top. There are zero YouTube/Google thumbnail, player, DNS-preconnect or script requests before visitor activation. Activation loads a privacy-enhanced player with controls, fullscreen and suitable referrer configuration. Invalid/unavailable videos, denied embeds and revoked consent have accessible fallbacks. Editing one video does not alter another.",
       "evidence": "Network-interception tests, URL-parser adversarial tests, keyboard/screen-reader checks, no-video screenshots and documented later-link connection instructions.",
       "external_inputs": "The three actual YouTube links, approved posters if different, and reviewed accessibility material are publication inputs. Missing links do not block component implementation.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Lazy YouTube component exists; revoke-consent and full live accessibility activation are not verified.",
       "contributing_prs": [
         45,
         65
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Lazy YouTube component exists; revoke-consent and full live accessibility activation are not verified."
+      }
     },
     {
       "id": "G28-13",
@@ -267,13 +388,19 @@
       "acceptance": "Approved legislative text is preserved exactly in the source record; summaries do not silently replace it. Download links resolve to the stated version/hash, and older versions are clearly superseded. Missing files are honest preview placeholders, not dead or fabricated downloads.",
       "evidence": "HTML-to-source comparison, bill anchor tests, download/hash checks, visual tests and legal-content review checklist.",
       "external_inputs": "Approved publication bill and supporting documents are needed to publish the actual legislative library.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Kirk-Evers draft and source reader exist; final approved legislation/PDF and versioned public downloads are missing.",
       "contributing_prs": [
         12,
         13,
         52,
         68
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Kirk-Evers draft and source reader exist; final approved legislation/PDF and versioned public downloads are missing."
+      }
     },
     {
       "id": "G28-14",
@@ -290,10 +417,16 @@
       "acceptance": "Large video is first major content. Links in the introduction, mechanism/source area and closing invitation resolve to the verified destination. The summary preserves voluntary participation, victim-negotiated repair and safeguards; no unapproved land, membership, eligibility or financing promise is introduced.",
       "evidence": "Copy/source review, destination verification, broken-link tests and responsive screenshots.",
       "external_inputs": "Verified Garden public URL and reconciled policy material are publication inputs.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Garden page exists; verified canonical external URL and final issue video are absent.",
       "contributing_prs": [
         15
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Garden page exists; verified canonical external URL and final issue video are absent."
+      }
     },
     {
       "id": "G28-15",
@@ -310,10 +443,16 @@
       "acceptance": "Large video is first major content. The livelihood/material-effect test and approved scope remain intact; no blanket compensation entitlement is invented. Repeated external links use the verified destination, and missing links remain explicit in preview.",
       "evidence": "Copy/source review, external-link checks and desktop/mobile screenshots.",
       "external_inputs": "Verified Cornerstone public URL and current policy source are publication inputs.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Cornerstone page exists; verified canonical external URL and final issue video are absent.",
       "contributing_prs": [
         15
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Cornerstone page exists; verified canonical external URL and final issue video are absent."
+      }
     },
     {
       "id": "G28-16",
@@ -324,18 +463,34 @@
         "G28-06",
         "G28-11"
       ],
-      "status": "in_progress",
-      "github_prs": [],
+      "status": "completed",
+      "github_prs": [
+        1,
+        6,
+        35,
+        42,
+        43
+      ],
       "scope": "Reproduce the approved welcome, benefits, short onboarding explanation, three-question role finder, all twelve role cards, operating rules and brief signup form. Recommendations use explicit time, preferred activity and training willingness only. Make every role independently browseable and distinguish materials access from activity authorization.",
       "acceptance": "All chooser combinations produce understandable recommendations with a neutral fallback. No demographics or inferred political traits are requested. Signup fields and privacy/consent copy match the data inventory; the form visibly remains preview-only until the real flow is wired.",
       "evidence": "Chooser tests, all-role coverage, form validation and visual/accessibility snapshots.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
-      "contributing_prs": [
-        1,
-        6,
-        35
-      ]
+      "implementation_note": "Twelve canonical role choices and live-portal links, chooser fallbacks and privacy/disclosure boundaries pass browser tests. Package acceptance is separate from production release.",
+      "contributing_prs": [],
+      "acceptance_review": {
+        "status": "completed",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "completed_at": "2026-10-13T21:14:24.168Z",
+        "ci_run_id": 38462635121,
+        "evidence_paths": [
+          "content/public/pages/volunteer.html",
+          "packages/core/roles.mjs",
+          "tests/flag-real-portal.test.mjs",
+          "tests/browser/journeys.mjs"
+        ],
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "scoped_deployed": true
+      }
     },
     {
       "id": "G28-17",
@@ -346,17 +501,37 @@
         "G28-06",
         "G28-09"
       ],
-      "status": "in_progress",
-      "github_prs": [],
+      "status": "completed",
+      "github_prs": [
+        1,
+        77,
+        87,
+        89,
+        91
+      ],
       "scope": "Reproduce homepage amount/frequency selection and the dedicated donation layout, with the complete supplied eligibility rules, restricted-source paragraph, committee explanation and tax statement. Keep disclosure content in one versioned component. Add contributor-information notice and sitewide paid-for disclaimer subject to treasurer review.",
       "acceptance": "One-time is the default; no fee coverage, tip or recurring upgrade is preselected. Every supplied sentence is present beside or directly under the donation interface on desktop and mobile, not hidden solely in an accordion or footer. No card data is collected by campaign-owned fields.",
       "evidence": "Exact-copy snapshot test, responsive legibility checks, amount/frequency state tests and inactive-preview boundary tests.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "One-time default, exact donor disclosures, processor-owned card data and single linked checkbox; real owner test-card checkout reached Stripe. Package acceptance is separate from production release.",
       "contributing_prs": [
         47,
         56
-      ]
+      ],
+      "acceptance_review": {
+        "status": "completed",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "completed_at": "2026-10-13T21:14:24.168Z",
+        "ci_run_id": 38462635121,
+        "evidence_paths": [
+          "content/public/pages/donate.html",
+          "packages/core/stripe-web-checkout.mjs",
+          "tests/public.test.mjs",
+          "tests/stripe-web-checkout.test.mjs"
+        ],
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "scoped_deployed": true
+      }
     },
     {
       "id": "G28-18",
@@ -371,19 +546,35 @@
         "G28-16",
         "G28-17"
       ],
-      "status": "in_progress",
-      "github_prs": [],
+      "status": "completed",
+      "github_prs": [
+        2,
+        3,
+        10,
+        15,
+        76,
+        92
+      ],
       "scope": "Add privacy, accessibility, contact/help, donation-policy and error pages; canonical URLs, per-page metadata, social previews, sitemap and robots rules. Index only published public material; exclude portal/admin/staging and previews. Use valid truthful structured data and permanent public issue URLs. Keep external social widgets out.",
       "acceptance": "All navigation works with descriptive titles, no orphaned issue pages and no fake contact channel. Staging is access-controlled/noindex; robots is not treated as authorization. Search/social descriptions do not expose draft policies or private material.",
       "evidence": "Crawl report, metadata validation, noindex tests, error-state screenshots and contact-route ownership record.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
-      "contributing_prs": [
-        2,
-        3,
-        10,
-        15
-      ]
+      "implementation_note": "Eight public routes, 404, navigation, canonical metadata, preview noindex and fail-closed production indexing pass CI; domain launch belongs to G28-59. Package acceptance is separate from production release.",
+      "contributing_prs": [],
+      "acceptance_review": {
+        "status": "completed",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "completed_at": "2026-10-13T21:14:24.168Z",
+        "ci_run_id": 38462635121,
+        "evidence_paths": [
+          "packages/core/indexing.mjs",
+          "scripts/public-renderer.mjs",
+          "tests/indexing.test.mjs",
+          "tests/accessibility-navigation.test.mjs"
+        ],
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "scoped_deployed": true
+      }
     },
     {
       "id": "G28-19",
@@ -400,13 +591,19 @@
       "acceptance": "A real new account can verify, sign in, sign out and return from another session without a staff approval queue for materials. Expired, replayed, tampered and scanner-opened links are handled safely. Account enumeration, abuse throttling, origin/CSRF checks and accessible recovery paths are tested.",
       "evidence": "Authentication integration tests, mail delivery evidence in staging and full new-volunteer browser journey.",
       "external_inputs": "An authorized sending domain and email provider credentials are needed for deployed mail delivery.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Real signup code exists, but actual portal still has signup=false and mail delivery disabled.",
       "contributing_prs": [
         36,
         38,
         40,
         61
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Real signup code exists, but actual portal still has signup=false and mail delivery disabled."
+      }
     },
     {
       "id": "G28-20",
@@ -416,7 +613,7 @@
         "G28-19",
         "G28-05"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Add server-enforced permissions for volunteer, captain, coordinator, editor, publisher, module verifier/approver, safety reviewer, treasurer and security administrator. Require strong staff authentication and step-up for sensitive changes. Keep technical administration separate from decryption/financial authority. Use least-privilege database and service identities.",
       "acceptance": "Changing client flags, route URLs, object IDs or API payloads never increases access. A captain cannot access another team, a publisher cannot read donor data and a technical admin cannot automatically decrypt volunteer records. Privilege changes and session revocation are auditable.",
@@ -425,7 +622,14 @@
       "contributing_prs": [
         16,
         69
-      ]
+      ],
+      "implementation_note": "Treasury/owner basics exist; staff MFA, scoped roles and negative authorization journeys are missing.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Treasury/owner basics exist; staff MFA, scoped roles and negative authorization journeys are missing."
+      }
     },
     {
       "id": "G28-21",
@@ -442,7 +646,14 @@
       "acceptance": "Tampered or substituted recipient keys are detected according to the selected profile. A new/reset account does not inherit old verified keys. Private recipient keys are not stored in server environment variables. Unavailable or unsupported protection blocks protected submissions, not a silent plaintext fallback.",
       "evidence": "Interoperability/test vectors, key-substitution tests, enrollment evidence and profile-conformance mapping.",
       "external_inputs": "A suitable reviewed implementation/profile is a dependency; writing a novel cryptographic scheme is not an acceptable shortcut.",
-      "contributing_prs": []
+      "contributing_prs": [],
+      "implementation_note": "No recipient-key enrollment, device verification or key-substitution implementation.",
+      "acceptance_review": {
+        "status": "not_started",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "No recipient-key enrollment, device verification or key-substitution implementation."
+      }
     },
     {
       "id": "G28-22",
@@ -459,7 +670,14 @@
       "acceptance": "Database, logs, job payloads, support tools and object storage inspections show no protected plaintext. Unauthorized recipients cannot decrypt. Updates cannot swap envelopes between records, replay stale versions or expand recipients without authorization. Loss of network/key access gives an explicit recoverable error.",
       "evidence": "Plaintext-canary tests, recipient/record-binding tests, egress traces and storage/log inspection evidence.",
       "external_inputs": "None beyond the listed dependencies.",
-      "contributing_prs": []
+      "contributing_prs": [],
+      "implementation_note": "Protected ciphertext submission/recipient system is not implemented or enabled.",
+      "acceptance_review": {
+        "status": "not_started",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Protected ciphertext submission/recipient system is not implemented or enabled."
+      }
     },
     {
       "id": "G28-23",
@@ -469,7 +687,7 @@
         "G28-21",
         "G28-22"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Implement the selected key recovery/no-recovery policy, trusted-device changes, emergency revocation, backup-generation handling and explicit item/recipient export authorization. Expose understandable warnings for irreversible key loss and previously downloaded copies. Require step-up and audit for authorized bulk exports.",
       "acceptance": "Email reset, support override or role reassignment cannot silently restore old cryptographic trust. Revoked users receive no new protected content; the UI does not promise to erase retained old copies. Exports are scoped, authorized and absent from ordinary analytics/email paths.",
@@ -477,7 +695,14 @@
       "external_inputs": "None beyond the listed dependencies.",
       "contributing_prs": [
         41
-      ]
+      ],
+      "implementation_note": "Account export/revocation exists; protected device/key recovery and trust restoration are incomplete.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Account export/revocation exists; protected device/key recovery and trust restoration are incomplete."
+      }
     },
     {
       "id": "G28-24",
@@ -494,10 +719,16 @@
       "acceptance": "An outbox retry never creates duplicate account messages or resurrects an unsubscribe. Optional campaigning stops after opt-out without disabling essential account access. Bounces/complaints suppress correctly; recipient addresses and tokens are redacted in logs. Jobs survive process restarts.",
       "evidence": "Retry/crash tests, suppression tests, delivery callback verification and evidence from staging email accounts.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Durable outbox exists; verified live sender, delivery callbacks, opt-out suppression and retries remain.",
       "contributing_prs": [
         61
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Durable outbox exists; verified live sender, delivery callbacks, opt-out suppression and retries remain."
+      }
     },
     {
       "id": "G28-25",
@@ -514,10 +745,16 @@
       "acceptance": "Every source item has a stable ID, version, intended audience, owner, review status and source hash. No historic packet becomes current legal guidance by import alone. All twelve roles remain represented. The compiled manual is not duplicated into normal search results.",
       "evidence": "Import reconciliation report, document inventory, changed-policy crosswalk and content approval queue.",
       "external_inputs": "Current policy sources/reviewer approval are needed for publication; ingesting an archive is not that approval.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Historical sources inventoried privately; full revised-policy crosswalk and current publication queue are unfinished.",
       "contributing_prs": [
         46
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Historical sources inventoried privately; full revised-policy crosswalk and current publication queue are unfinished."
+      }
     },
     {
       "id": "G28-26",
@@ -534,13 +771,19 @@
       "acceptance": "Every verified volunteer can immediately access all current volunteer-facing materials without staff approval. Direct URLs, object keys, search APIs and static bundles do not bypass authorization. Superseded/withdrawn items are absent from default search. Sensitive records are not placed in a server plaintext search index.",
       "evidence": "Full-library access and leakage tests, search relevance fixtures, accessibility checks and download/source version parity.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Materials reader/bookmarks exist; no approved current materials published and signup disabled.",
       "contributing_prs": [
         11,
         49,
         62,
         68
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Materials reader/bookmarks exist; no approved current materials published and signup disabled."
+      }
     },
     {
       "id": "G28-27",
@@ -557,13 +800,19 @@
       "acceptance": "Progress persists across legitimate sessions and devices at the declared privacy level. A new volunteer sees a useful low-risk action, not an empty dashboard. No fabricated completion, attendance or activity counts are displayed; completion is identified as self-reported or verified.",
       "evidence": "New/returning volunteer journeys, progress synchronization tests and desktop/mobile visual snapshots.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "First-hour checklist exists; real newly registered volunteer/session acceptance is unavailable.",
       "contributing_prs": [
         7,
         35,
         49,
         62
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "First-hour checklist exists; real newly registered volunteer/session acceptance is unavailable."
+      }
     },
     {
       "id": "G28-28",
@@ -573,7 +822,7 @@
         "G28-26",
         "G28-27"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Convert the orientation guide/deck into accessible navigable training, with transcript/slide-text equivalents, short knowledge checks and acknowledgments of the current universal core. Track training version, completion evidence and expiry only where relevant. Material changes prompt targeted re-acknowledgment.",
       "acceptance": "All training remains readable immediately after signup. Completing a lesson is not represented as legal authority, certification or automatic activation of regulated activity. Training prerequisites gate task execution rather than hiding the entire library.",
@@ -581,7 +830,14 @@
       "external_inputs": "None beyond the listed dependencies.",
       "contributing_prs": [
         14
-      ]
+      ],
+      "implementation_note": "Reading acknowledgments exist; orientation/training lifecycle and activated prerequisites are incomplete.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Reading acknowledgments exist; orientation/training lifecycle and activated prerequisites are incomplete."
+      }
     },
     {
       "id": "G28-29",
@@ -599,8 +855,14 @@
       "acceptance": "A worksheet, downloaded packet, expired module or one verifier cannot activate regulated work. Mismatched jurisdiction/election/activity, missing training, withdrawn approval or tool outage blocks the action with a clear reason. Every sensitive operation rechecks authorization; a stale open tab is not sufficient.",
       "evidence": "Authorization decision-table tests, clock-boundary/revocation tests, two-verifier separation tests and admin audit evidence.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
-      "contributing_prs": []
+      "implementation_note": "Fail-closed activity rules exist; live verified jurisdiction module admin/publish/revoke flow is missing.",
+      "contributing_prs": [],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Fail-closed activity rules exist; live verified jurisdiction module admin/publish/revoke flow is missing."
+      }
     },
     {
       "id": "G28-30",
@@ -618,8 +880,14 @@
       "acceptance": "Tasks cannot be claimed or completed outside current authorization. Race conditions cannot overbook exclusive assignments. Reporting excludes supporter identities and sensitive personal attributes; counts have validation and clear self-reported/verified provenance.",
       "evidence": "Task concurrency tests, activity privacy fixtures, task lifecycle tests and volunteer-to-coordinator journeys.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
-      "contributing_prs": []
+      "implementation_note": "Simple task checklist exists; task assignments, capacity and verified activity reporting are missing.",
+      "contributing_prs": [],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Simple task checklist exists; task assignments, capacity and verified activity reporting are missing."
+      }
     },
     {
       "id": "G28-31",
@@ -630,14 +898,31 @@
         "G28-29",
         "G28-30"
       ],
-      "status": "in_progress",
-      "github_prs": [],
+      "status": "completed",
+      "github_prs": [
+        1,
+        35
+      ],
       "scope": "Implement web versions of the action card, three-line debrief, conversation practice, event plan/run of show, call-bank checklist, creative QA, source card, correction record, state activation sheet, petition custody log, incident first-response card and weekly team plan. Use local/no-save mode where submission is unnecessary; protected submission where needed. Offer accessible print/download views.",
       "acceptance": "Each original form maps to a working typed form or intentionally local worksheet; none is merely a PDF embedded in an iframe. Required warnings and no-supporter-data rules remain. Custody logs use sheet identifiers rather than copying signatures or voter identities. Admin-only activation fields cannot be submitted by ordinary volunteers.",
       "evidence": "Form-to-source coverage matrix, field/privacy validation, authorization tests and print layout checks.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
-      "contributing_prs": []
+      "implementation_note": "All twelve original worksheet types have editable local web forms, print/download/reset, privacy warnings and no server submission; tests pass. Package acceptance is separate from production release.",
+      "contributing_prs": [],
+      "acceptance_review": {
+        "status": "completed",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "completed_at": "2026-10-13T21:14:24.168Z",
+        "ci_run_id": 38462635121,
+        "evidence_paths": [
+          "packages/core/forms.mjs",
+          "apps/portal/src/main.tsx",
+          "tests/core.test.mjs",
+          "tests/browser/journeys.mjs"
+        ],
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "scoped_deployed": true
+      }
     },
     {
       "id": "G28-32",
@@ -655,7 +940,14 @@
       "acceptance": "Captains see only the minimum data and tasks of authorized members. Joining a team does not grant access to historic private records. Invite forwarding, revoked invites, self-promotion and cross-team enumeration fail safely.",
       "evidence": "Team lifecycle tests, privacy/access matrix and revoked-captain browser journey.",
       "external_inputs": "None beyond the listed dependencies.",
-      "contributing_prs": []
+      "contributing_prs": [],
+      "implementation_note": "No working team membership or scoped captain-coordination system.",
+      "acceptance_review": {
+        "status": "not_started",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "No working team membership or scoped captain-coordination system."
+      }
     },
     {
       "id": "G28-33",
@@ -673,7 +965,14 @@
       "acceptance": "Double booking/capacity races, cancellation and time-zone boundaries are handled. Public calendars never reveal private addresses or attendee identities. An RSVP does not authorize spending, contracts, permits, field operations or recording participants.",
       "evidence": "Capacity/time-zone tests, privacy projections, cancellation notifications and event-host walkthrough.",
       "external_inputs": "None beyond the listed dependencies.",
-      "contributing_prs": []
+      "contributing_prs": [],
+      "implementation_note": "No event scheduling, capacity/RSVP or cancellation backend.",
+      "acceptance_review": {
+        "status": "not_started",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "No event scheduling, capacity/RSVP or cancellation backend."
+      }
     },
     {
       "id": "G28-34",
@@ -692,7 +991,14 @@
       "acceptance": "Immediate-danger guidance is visible; the form is not described as emergency services. Reports do not appear in public logs, dashboards or email. Unauthorized staff cannot read a report. Corrections can supersede affected published material with traceable approval.",
       "evidence": "End-to-end encrypted report/reply tests, attachment-handling threat tests and correction-to-publication audit trail.",
       "external_inputs": "None beyond the listed dependencies.",
-      "contributing_prs": []
+      "contributing_prs": [],
+      "implementation_note": "No secure protected incident intake, reply or private-attachment workflow.",
+      "acceptance_review": {
+        "status": "not_started",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "No secure protected incident intake, reply or private-attachment workflow."
+      }
     },
     {
       "id": "G28-35",
@@ -709,7 +1015,14 @@
       "acceptance": "QR codes resolve to approved stable public URLs, not private portal objects, expiring tokens or PII-bearing tracking links. Withdrawn assets are marked and removed from current collections. No automatic posting, supporter tracking or fabricated endorsement is introduced.",
       "evidence": "QR decode/link tests, current-asset/version checks, image rights review and mobile share behavior tests.",
       "external_inputs": "None beyond the listed dependencies.",
-      "contributing_prs": []
+      "contributing_prs": [],
+      "implementation_note": "No approved asset-sharing/QR versioning and withdrawal system.",
+      "acceptance_review": {
+        "status": "not_started",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "No approved asset-sharing/QR versioning and withdrawal system."
+      }
     },
     {
       "id": "G28-36",
@@ -721,13 +1034,20 @@
         "G28-24",
         "G28-20"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Add an administrator-managed registry of approved tools for manual calling/texting, canvassing and other activated work. Support scoped assignments, current scripts, launch/deep links, tool health/status and opt-out reconciliation where an actual provider supports it. Require an integration capability review before enabling a connector; no fictitious API or native bulk-messaging engine.",
       "acceptance": "All twelve roles have a usable instruction/task path. Roles requiring an unavailable tool are honestly unavailable, not mislabeled ready. No autodialer, artificial voice, ringless voicemail, bulk text, scraped list or personal export is enabled. Failed suppression sync pauses affected outreach.",
       "evidence": "Connector contract tests, inactive-tool tests, opt-out failure scenario and role-to-tool readiness matrix.",
       "external_inputs": "An actual approved outreach provider/module is required only to activate those activities. The platform must work normally for other volunteer roles.",
-      "contributing_prs": []
+      "contributing_prs": [],
+      "implementation_note": "Role instruction paths exist; provider-approved field-tool handoffs and opt-out tests are missing.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Role instruction paths exist; provider-approved field-tool handoffs and opt-out tests are missing."
+      }
     },
     {
       "id": "G28-37",
@@ -740,7 +1060,7 @@
         "G28-12",
         "G28-25"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Provide friendly editing, preview, review, publication and rollback for homepage copy, issues, each YouTube URL/poster/transcript, canonical links, documents, legal text and media. Add change comparison, concurrent-edit protection and a publication readiness checklist. No GitHub knowledge is required for ordinary content changes.",
       "acceptance": "A publisher can replace one issue video, fix a link or publish a reviewed document without a code change. The static public release updates atomically after a successful build; failed publication leaves the previous version intact. Legal/security-controlled fields retain their special approvals.",
@@ -749,7 +1069,14 @@
       "contributing_prs": [
         8,
         45
-      ]
+      ],
+      "implementation_note": "CLI video/link preparation exists; nontechnical editor, publish and rollback UI is missing.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "CLI video/link preparation exists; nontechnical editor, publish and rollback UI is missing."
+      }
     },
     {
       "id": "G28-38",
@@ -766,7 +1093,7 @@
         "G28-34",
         "G28-36"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Create role-scoped management of volunteers, teams, tasks, training, events, modules, approval queues, support cases and operational notices. Include emergency activity pause, membership revocation, training/module expiry and evidence links. Keep finance and safety content out of general dashboards.",
       "acceptance": "Every administrative write is validated server-side and auditable; dangerous actions require step-up and explicit confirmation. Staff can operate all supported workflows through the UI without database edits. Counts reflect real records and never conceal blocked integrations.",
@@ -774,7 +1101,14 @@
       "external_inputs": "None beyond the listed dependencies.",
       "contributing_prs": [
         69
-      ]
+      ],
+      "implementation_note": "Treasury admin preview exists; operational captain/support admin roles and step-up are incomplete.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Treasury admin preview exists; operational captain/support admin roles and step-up are incomplete."
+      }
     },
     {
       "id": "G28-39",
@@ -784,7 +1118,7 @@
         "G28-05",
         "G28-17"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Evaluate Anedot first against the required hosted fields, personal-credit-card policy, recurring management, custom donor attestations, designation/limits, receipts, signed webhooks, exports, accessibility, branding, test environment, fees and committee onboarding. Record verified capabilities and gaps. Implement a narrow provider adapter contract and a fake provider for CI only.",
       "acceptance": "Processor selection is evidence-backed, not an assumption. Direct hosted-page donations, recurring charges and offline contributions are included in the compliance feasibility review. No undocumented endpoint or CSS access to a cross-origin frame is assumed. A material capability gap is resolved before enabling affected features.",
@@ -794,7 +1128,14 @@
         47,
         53,
         55
-      ]
+      ],
+      "implementation_note": "Stripe test API and Checkout work; political-merchant approval and live account/settlement capability are unverified.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Stripe test API and Checkout work; political-merchant approval and live account/settlement capability are unverified."
+      }
     },
     {
       "id": "G28-40",
@@ -805,7 +1146,7 @@
         "G28-06",
         "G28-20"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Create versioned treasurer-approved configurations for committee identity, election designations/dates, effective limits, campaign-specific exclusions, donor attestations, record fields, recurring caps and remedy workflows. Define authoritative aggregation across processor and offline records with concurrency handling and conservative reconciliation of uncertain identities.",
       "acceptance": "No 2025-2026 number is hard-coded as a 2028 rule. Campaign choices such as age 18 and no PAC money are preserved without being mislabeled universal law. Stale/missing approval disables fundraising. Frontend checks are not the enforcement boundary; provider-direct and recurring paths are covered or explicitly blocked.",
@@ -814,7 +1155,14 @@
       "contributing_prs": [
         18,
         47
-      ]
+      ],
+      "implementation_note": "Linked election terms exist; live donor aggregation, approved limits and personal-card enforcement are incomplete.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Linked election terms exist; live donor aggregation, approved limits and personal-card enforcement are incomplete."
+      }
     },
     {
       "id": "G28-41",
@@ -826,7 +1174,7 @@
         "G28-40",
         "G28-04"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Wire homepage amount/frequency selection and the dedicated donation page to processor-hosted fields or a reviewed embedded checkout. Keep the campaign-owned shell visually faithful; use supported theming for the secure form. Preserve amount, frequency, election designation and consent when entering checkout without leaking donor PII in URLs. Provide a trusted hosted fallback when embedding is blocked.",
       "acceptance": "Card numbers/CVV never reach campaign servers, logs or analytics. Unchecked eligibility, invalid amounts or unapproved election configuration stop the flow. Closing/retrying/back navigation cannot silently duplicate a gift or switch its frequency. External handoff is clear and does not introduce a second unapproved recipient.",
@@ -837,7 +1185,14 @@
         55,
         56,
         57
-      ]
+      ],
+      "implementation_note": "Hosted sandbox checkout works; full retry/back-navigation/duplicate handling and live release remain unverified.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Hosted sandbox checkout works; full retry/back-navigation/duplicate handling and live release remain unverified."
+      }
     },
     {
       "id": "G28-42",
@@ -848,13 +1203,20 @@
         "G28-04",
         "G28-05"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Validate the provider signature over exact raw request bytes before JSON processing; enforce account/page allowlists, size bounds and supported event types. Durably accept events, deduplicate, redact/drop unnecessary donor fields and route financial changes into the outbox/ledger. Apply replay/state-order protections without assuming the provider supplies a signed timestamp.",
       "acceptance": "Invalid signatures and wrong-account events never alter records. Duplicate, delayed, reordered and replayed valid events cannot double count or roll state backward. Server crash after receipt causes safe replay; success is never inferred from a browser return URL.",
       "evidence": "Provider signature vectors, raw-body corruption tests, event-order/replay suite and webhook crash/retry evidence.",
       "external_inputs": "None beyond the listed dependencies.",
-      "contributing_prs": []
+      "contributing_prs": [],
+      "implementation_note": "Signed event validator and synthetic replay tests exist; real signed paid event delivery/reconciliation not verified.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Signed event validator and synthetic replay tests exist; real signed paid event delivery/reconciliation not verified."
+      }
     },
     {
       "id": "G28-43",
@@ -864,7 +1226,7 @@
         "G28-40",
         "G28-42"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Add append-only financial events and audited projections for gifts, fees, payouts, election allocations, refunds, disputes and recurring installments. Use integer minor units, unique provider identifiers and explicit made/received/settled dates. Reconcile with provider reports and the treasurer-authorized accounting source, including other contribution channels.",
       "acceptance": "Ledger totals reconcile to source reports; missing/disputed events are flagged rather than concealed. Gross/net/fee totals are distinct. Name/email alone never establishes that two donors are the same. Correcting a record adds an audit event instead of overwriting financial history.",
@@ -872,7 +1234,14 @@
       "external_inputs": "None beyond the listed dependencies.",
       "contributing_prs": [
         18
-      ]
+      ],
+      "implementation_note": "Staging financial ledger exists; real settlement, deposit reconciliation and all-channel totals are missing.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Staging financial ledger exists; real settlement, deposit reconciliation and all-channel totals are missing."
+      }
     },
     {
       "id": "G28-44",
@@ -890,7 +1259,14 @@
       "acceptance": "A donor can cancel through the documented working path without joining the volunteer system. Replayed clicks do not create new commitments. Recurring limits/expiry rules apply before future charges through a proven provider mechanism; unavailable enforcement is a launch gap, not hidden behavior.",
       "evidence": "Create/renew/cancel/retry sandbox scenarios, receipt accuracy and unauthorized donor-portal access tests.",
       "external_inputs": "None beyond the listed dependencies.",
-      "contributing_prs": []
+      "contributing_prs": [],
+      "implementation_note": "No receipts/recurring donor self-service or cancellation workflow.",
+      "acceptance_review": {
+        "status": "not_started",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "No receipts/recurring donor self-service or cancellation workflow."
+      }
     },
     {
       "id": "G28-45",
@@ -901,7 +1277,7 @@
         "G28-44",
         "G28-20"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Provide treasurer-only review of suspect/prohibited/excessive gifts, missing contributor information, refunds, disputes, chargebacks, cancellations and authorized redesignation/reattribution records. Model deadlines from the approved ruleset and store documentary evidence. Use generic donor notifications and approved provider actions, not direct card handling.",
       "acceptance": "An ordinary admin cannot refund, reallocate or access donor identity. Partial refunds and disputes reconcile correctly. Best-efforts follow-up is bounded and recorded; the software does not falsely certify legal sufficiency. Donor intent/election records are preserved.",
@@ -910,7 +1286,14 @@
       "contributing_prs": [
         55,
         57
-      ]
+      ],
+      "implementation_note": "Outage quarantine and exceptions partly exist; live refunds, disputes and remedy workflow are missing.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Outage quarantine and exceptions partly exist; live refunds, disputes and remedy workflow are missing."
+      }
     },
     {
       "id": "G28-46",
@@ -921,13 +1304,20 @@
         "G28-45",
         "G28-23"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Generate treasurer-approved exports for the chosen accounting/FEC filing workflow, with review, reconciliation totals, schema validation and evidence references. Limit PII to authorized recipients, log exports and apply approved retention. Keep public campaign analytics aggregate only; do not create a public donor directory.",
       "acceptance": "Exports reconcile to ledger/source reports and preserve required designation/receipt information. CSV formula injection and unauthorized/bulk extraction are blocked. No filing is submitted automatically and no export is labeled an accepted FEC filing.",
       "evidence": "Export golden files, schema/total validation, injection tests and a treasurer import dry run.",
       "external_inputs": "The treasurer must identify the actual accounting/filing system and approve its mapping.",
-      "contributing_prs": []
+      "contributing_prs": [],
+      "implementation_note": "Encrypted treasury configuration exists; compliant treasurer exports/import validation are unfinished.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Encrypted treasury configuration exists; compliant treasurer exports/import validation are unfinished."
+      }
     },
     {
       "id": "G28-47",
@@ -941,7 +1331,7 @@
         "G28-45",
         "G28-46"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Exercise card-testing/abuse controls using provider-supported protections, rate limits and no sensitive fingerprinting. Test unavailable provider, stale rules, parallel donations, excessive recurring schedules, conflicting identities, cancellations, refunds, chargebacks, webhook exhaustion, reconciliation outage and accessible fallback.",
       "acceptance": "The site never shows payment success before authenticated confirmation. Failure states preserve clear donor choices and never silently retry a charge. Direct hosted links obey campaign restrictions. All requested exclusions are accounted for through configuration, attestation and treasurer review without claiming perfect automatic detection.",
@@ -952,7 +1342,14 @@
         56,
         57,
         64
-      ]
+      ],
+      "implementation_note": "Adversarial sandbox tests exist; full direct-link, real provider, refund and failure acceptance unverified.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Adversarial sandbox tests exist; full direct-link, real provider, refund and failure acceptance unverified."
+      }
     },
     {
       "id": "G28-48",
@@ -964,7 +1361,7 @@
         "G28-40",
         "G28-46"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Have the authorized treasurer verify committee identity, processor onboarding, bank/payout setup, disclosures, effective election configuration, donor-field collection, receipts, cancellation, remedies, exports, retention and reconciliation ownership. Record approval against the exact build/configuration and expiry/review triggers.",
       "acceptance": "Fundraising cannot enable unless evidence and responsible contacts exist. A code/config change affecting compliance invalidates the relevant approval. Sandbox tests are distinct from any later expressly authorized small live transaction; developers do not charge a card merely to claim completion.",
@@ -973,7 +1370,14 @@
       "contributing_prs": [
         53,
         64
-      ]
+      ],
+      "implementation_note": "Release checks exist; real merchant/treasurer approval and authorized live payment reconciliation are missing.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Release checks exist; real merchant/treasurer approval and authorized live payment reconciliation are missing."
+      }
     },
     {
       "id": "G28-49",
@@ -993,10 +1397,16 @@
       "acceptance": "Account deletion never promises to erase legally retained finance records or downloaded copies. No one can request another persons data by changing an ID. Cleanup is restart-safe, logged minimally and tested against protected-object/key references and active legal holds.",
       "evidence": "Retention/deletion fixtures, legal-hold tests, privacy-request identity checks and backup-expiry runbook.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Account deletion/export exist; legal holds, protected object cleanup and retention/backup tests are incomplete.",
       "contributing_prs": [
         41
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Account deletion/export exist; legal holds, protected object cleanup and retention/backup tests are incomplete."
+      }
     },
     {
       "id": "G28-50",
@@ -1008,7 +1418,7 @@
         "G28-43",
         "G28-05"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Add aggregate public page/action counts and operational conversion measurements with documented definitions. Exclude session replay, ad pixels, cross-site tracking, hidden fingerprints and political profiling. Do not instrument protected form fields, reports, donor identity or individualized issue histories. Separate security logs from campaign measurement.",
       "acceptance": "Staff can see that signup/checkout delivery is functioning without inspecting peoples private interests or messages. Opt-out/consent settings are respected. Dashboards display real data with sampling/latency caveats, not mock numbers.",
@@ -1016,7 +1426,14 @@
       "external_inputs": "None beyond the listed dependencies.",
       "contributing_prs": [
         20
-      ]
+      ],
+      "implementation_note": "Privacy-minimal operations counts exist; consent-based real analytics dashboard and retention tests are missing.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Privacy-minimal operations counts exist; consent-based real analytics dashboard and retention tests are missing."
+      }
     },
     {
       "id": "G28-51",
@@ -1038,12 +1455,18 @@
       "acceptance": "No unresolved blocker prevents a user from reading issues, joining, using materials, completing forms or donating. Accessibility fixes preserve the design. Any third-party limitation has a genuinely accessible working alternative and an owner, not only a disclaimer.",
       "evidence": "Manual audit report, automated results, assistive-technology journey recordings and issue closure evidence.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Automated keyboard/browser tests exist; actual assistive-technology audit across released flows is missing.",
       "contributing_prs": [
         10,
         11,
         13
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Automated keyboard/browser tests exist; actual assistive-technology audit across released flows is missing."
+      }
     },
     {
       "id": "G28-52",
@@ -1070,10 +1493,16 @@
       "acceptance": "No accidental redesign, cropped portrait/hand, overflow, broken navigation, unreadable disclosures or dashboard-like public homepage remains. Snapshot updates require an explanation; a failing comparison cannot be fixed solely by approving the new image.",
       "evidence": "Before/after visual report, cross-browser runs, approved amendment baseline and documented design exceptions.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Cross-browser screenshots exist; approved reference visual comparisons and exceptions are incomplete.",
       "contributing_prs": [
         35
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Cross-browser screenshots exist; approved reference visual comparisons and exceptions are incomplete."
+      }
     },
     {
       "id": "G28-53",
@@ -1093,8 +1522,14 @@
       "acceptance": "Target public-page p75 LCP <=2.5s, INP <=200ms and CLS <=0.1 when sufficient field samples exist; use documented lab conditions before launch. Keep public initial compressed JS approximately <=100KB, excluding user-activated providers, unless a reviewed budget exception is justified. Slow services fail visibly without corrupting data.",
       "evidence": "Lab measurements, load/recovery tests, bundle budget report and later field-measurement plan; targets are not preclaimed results.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
-      "contributing_prs": []
+      "implementation_note": "Images optimized; measured LCP/INP/CLS, load/fault and bundle acceptance not done.",
+      "contributing_prs": [],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Images optimized; measured LCP/INP/CLS, load/fault and bundle acceptance not done."
+      }
     },
     {
       "id": "G28-54",
@@ -1116,11 +1551,17 @@
       "acceptance": "No open release-blocking finding or missing required cryptographic production evidence is waived by a green unit test. Independent review is attributed to its actual reviewer, not self-certified. Public-only deployment and protected-production approval remain distinct scopes.",
       "evidence": "Security test artifacts, threat-model closure, independent review evidence where required and exact scoped security status.",
       "external_inputs": "External expert review is a genuine independent dependency. Continue unrelated work; do not mark the gate complete without its evidence.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Owner deferred paid external review; substantive complete AI source/security assessment and applicable controls still pending.",
       "contributing_prs": [
         16,
         66
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Owner deferred paid external review; substantive complete AI source/security assessment and applicable controls still pending."
+      }
     },
     {
       "id": "G28-55",
@@ -1139,11 +1580,17 @@
       "acceptance": "Process restarts do not lose accepted tasks or double-send effects. A complete restore succeeds with documented key custody and without production PII in CI. Proposed starting objectives are RPO <=24h and RTO <=4h for ordinary operational content; unreconciled accepted financial events must be recoverable from durable/provider records. Objectives require measured proof and budget approval.",
       "evidence": "Restore/drill report, outbox/crash tests, backup inventory and documented recovery owners.",
       "external_inputs": "Production uptime, backup retention and worker capacity may require a paid plan; no free-tier assumption substitutes for the drill.",
-      "implementation_note": "Partial foundation implementation; full acceptance and release evidence remain open. See docs/IMPLEMENTATION_STATUS.md.",
+      "implementation_note": "Outbox retry tests exist; backup restore rehearsal, custody and measured recovery acceptance missing.",
       "contributing_prs": [
         17,
         61
-      ]
+      ],
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Outbox retry tests exist; backup restore rehearsal, custody and measured recovery acceptance missing."
+      }
     },
     {
       "id": "G28-56",
@@ -1156,7 +1603,7 @@
         "G28-43",
         "G28-55"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Publish authenticated/internal health summaries for service readiness, deployed SHA, approved content version, queue lag, last successful email/webhook/reconciliation/backup, configured videos, blocked modules and release gates. Connect GitHub events/reconciliation and Render deployment state to Engine Room without sending personal data.",
       "acceptance": "Clicking Engine Room refresh retrieves actual available GitHub/deployment state, timestamps success, and retains honest partial-failure/stale indicators. Merged, deployed and live-verified are separate. No private volunteer/donor/report contents appear in status data.",
@@ -1169,7 +1616,14 @@
         43,
         63,
         67
-      ]
+      ],
+      "implementation_note": "Registry/deployed SHA hooks exist; live Engine Room refresh/failure/stale behavior unverified.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Registry/deployed SHA hooks exist; live Engine Room refresh/failure/stale behavior unverified."
+      }
     },
     {
       "id": "G28-57",
@@ -1199,7 +1653,7 @@
         "G28-55",
         "G28-56"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Deploy an isolated production-like staging release and run end-to-end public, volunteer, staff and treasury journeys using synthetic users and processor-approved test mechanisms. Include a new-device recovery exercise, expired activity module, withdrawn document, disabled integration, failed publishing build, provider outage and restored backup.",
       "acceptance": "Every launch requirement has demonstrable pass/fail evidence, owner and exact build reference. Test communications cannot reach real supporters. Missing provider credentials or external reviews are visible blockers, not bypassed by a demo flag.",
@@ -1209,7 +1663,14 @@
         19,
         40,
         43
-      ]
+      ],
+      "implementation_note": "Partial staging checks exist; complete release rehearsal across real configured services unverified.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Partial staging checks exist; complete release rehearsal across real configured services unverified."
+      }
     },
     {
       "id": "G28-58",
@@ -1222,7 +1683,7 @@
         "G28-54",
         "G28-57"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Connect and verify the three supplied issue videos, approved bill/downloads and canonical Garden/Cornerstone sites. Confirm current volunteer kits, real contact/privacy channels, media rights, committee/legal wording, current activity modules where activation is intended and all responsible staff. Record any explicitly approved public-preview omissions separately from a full launch.",
       "acceptance": "No prototype banner, invented link, missing required media, historic policy mislabeling or fake success remains in the full release. Publication readiness, security readiness and fundraising readiness all have evidence; an inactive optional field program is shown accurately rather than implied active.",
@@ -1233,7 +1694,14 @@
         12,
         15,
         45
-      ]
+      ],
+      "implementation_note": "Policy source reader exists; final videos, bill/links and publication signoff missing.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Policy source reader exists; final videos, bill/links and publication signoff missing."
+      }
     },
     {
       "id": "G28-59",
@@ -1244,7 +1712,7 @@
         "G28-55",
         "G28-56"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Configure verified production domains/TLS, isolated secrets, database/object permissions, sender authentication, backups and monitoring. Apply reversible migrations, publish the immutable content release, deploy portal/API, verify health and enable volunteer/payment/module flags only after their gates pass. Use a rollback checklist and make external provider configuration part of the release.",
       "acceptance": "Public pages, real verification mail, authorized materials, protected submissions and permitted donation flow work on the actual production origins. Preview data is absent. Any real-money test is separately authorized and reconciled by the treasurer; no unauthorized card charge is made.",
@@ -1255,7 +1723,14 @@
         36,
         38,
         42
-      ]
+      ],
+      "implementation_note": "Private previews live; public origin, signup/mail, current materials and live fundraising unavailable.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Private previews live; public origin, signup/mail, current materials and live fundraising unavailable."
+      }
     },
     {
       "id": "G28-60",
@@ -1264,7 +1739,7 @@
       "depends_on": [
         "G28-59"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Rerun critical journeys after production deployment and provider callbacks, verify Engine Room state, inspect errors/deliverability and document observed performance. Deliver operator guides for publishing an issue/video, adding volunteers/staff, activating modules, handling incidents, fundraising reconciliation and restoring service. Update README, AGENTS, changelog, input register and next-maintenance responsibilities.",
       "acceptance": "Completion is supported by live evidence, not merely merged PRs. All remaining exceptions are explicit and any additional work is in the denominator. A new agent and a nontechnical campaign operator can continue without this conversation. No unattended ChatGPT scheduler is silently restarted.",
@@ -1274,7 +1749,14 @@
         34,
         44,
         63
-      ]
+      ],
+      "implementation_note": "Handoff docs exist; full live release walkthrough, final status and operational owners incomplete.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "blocker": "Handoff docs exist; full live release walkthrough, final status and operational owners incomplete."
+      }
     },
     {
       "id": "G28-61",
@@ -1291,11 +1773,24 @@
       "acceptance": "Persistent real owner/reviewer journeys, denied privilege/CSRF/financial/portal access, immediate revocation and actual HTTPS checks on the existing authorized preview.",
       "evidence": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md; docs/operations/PRIVATE_REVIEW_ACCOUNTS.md",
       "external_inputs": "Owner claims their own login and supplies reviewer identities privately.",
-      "implementation_note": "G28-61 scoped acceptance verified on existing HTTPS preview. Original sixty full-launch packages retain their independent acceptance gates.",
+      "implementation_note": "Individually revocable reviewer accounts passed live HTTPS, privilege-isolation, revocation and cross-browser tests. Package acceptance is separate from production release.",
       "deployed_commit": "c263d8fd8a331b238ddc884b052c672558cee96e",
       "live_verified_at": "2026-10-12T22:11:42.212794293Z",
-      "owner_setup": "unclaimed; owner chooses private final credential"
+      "owner_setup": "unclaimed; owner chooses private final credential",
+      "acceptance_review": {
+        "status": "completed",
+        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+        "completed_at": "2026-10-13T21:14:24.168Z",
+        "ci_run_id": 38462635121,
+        "evidence_paths": [
+          "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md",
+          "tests/review-accounts.test.mjs",
+          "tests/browser/review-journeys.mjs"
+        ],
+        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+        "scoped_deployed": true
+      }
     }
   ],
-  "progress_evidence_note": "Contributing PR evidence is partial work under these packages, not package acceptance. Do not increment implemented_packages or merged_packages without acceptance verification."
+  "progress_evidence_note": "Audited main 0e70c5cee4b34e5de78aea3b304cbe7aa73c3228 and Render private/portal deployments on 2026-10-13. Statuses synced to canonical registry/prs.json."
 }

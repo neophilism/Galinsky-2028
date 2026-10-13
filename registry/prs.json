@@ -9,37 +9,65 @@
     ".exechub/approved-pr-mapping.json",
     "docs/PR_REGISTER.json"
   ],
-  "progressEvidenceNote": "Original sixty baseline packages plus the owner-authorized G28-061 private-review addition. contributingPrs indicate partial work; prs require whole-package scoped acceptance and real evidence.",
+  "progressEvidenceNote": "2026-10-13 source-bound audit: 10 fully accepted, 44 in progress, 7 not started. 82 merged PRs and 5 superseded/closed. Full acceptance differs from merge count; see docs/evidence/ACCEPTANCE_AUDIT_20261013.md.",
   "schemaVersion": 1,
-  "roadmapVersion": 3,
-  "observedAt": "2026-10-12T22:13:00Z",
+  "roadmapVersion": 4,
+  "observedAt": "2026-10-13T21:14:24.168Z",
   "units": [
     {
       "id": "G28-001",
       "title": "Freeze the approved design and establish the complete handoff",
       "origin": "original",
-      "prs": [],
-      "contributingPrs": [
+      "prs": [
         1,
-        5
+        5,
+        63,
+        75,
+        90
       ],
+      "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "completed",
+      "acceptedAt": "2026-10-13T21:14:24.168Z",
+      "reviewedSourceSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+      "evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/DEVELOPMENT_PLAN.md",
+        "docs/design/ASSET_REGISTER.json",
+        "tests/public.test.mjs"
+      ],
+      "acceptanceSummary": "Complete plan/design/source inventory and cold-start documentation verified against the repository; source-leak and roadmap checks pass.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-002",
       "title": "Create the monorepo and mandatory CI",
       "origin": "original",
-      "prs": [],
-      "contributingPrs": [
+      "prs": [
         1,
         6,
-        19
+        19,
+        90,
+        92
       ],
+      "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "completed",
+      "acceptedAt": "2026-10-13T21:14:24.168Z",
+      "reviewedSourceSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+      "evidence": [
+        "package.json",
+        ".github/workflows/ci.yml",
+        ".circleci/config.yml",
+        "tests/browser/journeys.mjs"
+      ],
+      "acceptanceSummary": "Exact-lockfile, TypeScript, unit, PostgreSQL, browser, build and audit CI pipeline passed on reviewed main.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-003",
@@ -53,23 +81,38 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Keyboard/mobile components are built, but full baseline side-by-side UI approval and focus/gallery evidence are missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-004",
       "title": "Establish runtime, databases and preview infrastructure",
       "origin": "original",
-      "prs": [],
-      "contributingPrs": [
+      "prs": [
         17,
         20,
         32,
         36,
-        38
+        38,
+        40
       ],
+      "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "completed",
+      "acceptedAt": "2026-10-13T21:14:24.168Z",
+      "reviewedSourceSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+      "evidence": [
+        "scripts/migrate.mjs",
+        "apps/api/src/config.mjs",
+        "tests/integration/postgres.test.mjs",
+        "docs/operations/RENDER_VERIFIED_PLACEMENT.md"
+      ],
+      "acceptanceSummary": "Versioned migrations, fail-closed config and two approved-project protected Render services with staging DB and readiness evidence verified.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-005",
@@ -82,7 +125,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Security boundaries exist; verified complete E2EESA component/flow inventory and profile mapping do not.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-006",
@@ -96,7 +142,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Material publication protections exist; atomic public content release, cross-source versioning and rollback remain incomplete.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-007",
@@ -110,7 +159,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Assets/sanitization exist; comprehensive rights metadata and hostile-editor upload testing are unfinished.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-008",
@@ -122,20 +174,35 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Engine Room manifests exist; actual 61-package import, accepted colors and denominator have not been observed.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-009",
       "title": "Build the complete candidate-forward homepage",
       "origin": "original",
-      "prs": [],
-      "contributingPrs": [
+      "prs": [
         1,
-        35
+        35,
+        76
       ],
+      "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "completed",
+      "acceptedAt": "2026-10-13T21:14:24.168Z",
+      "reviewedSourceSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+      "evidence": [
+        "content/public/pages/index.html",
+        "docs/design/BASELINE_NOTES.md",
+        "tests/public.test.mjs",
+        "tests/browser/journeys.mjs"
+      ],
+      "acceptanceSummary": "Candidate homepage matches approved source structure with real portrait, three issue CTAs and philosophy; cross-engine/mobile tests and screenshots pass.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-010",
@@ -147,20 +214,35 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Dot-star animation exists but user pause/persistent stop and CPU/mobile motion evidence are absent.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-011",
       "title": "Build the issues overview and extensible issue collection",
       "origin": "original",
-      "prs": [],
-      "contributingPrs": [
+      "prs": [
         1,
-        15
+        15,
+        76
       ],
+      "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "completed",
+      "acceptedAt": "2026-10-13T21:14:24.168Z",
+      "reviewedSourceSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+      "evidence": [
+        "content/public/pages/issues.html",
+        "content/public/site.json",
+        "tests/issue-card-navigation.test.mjs",
+        "tests/indexing.test.mjs"
+      ],
+      "acceptanceSummary": "Exactly three issue records, full card/promise destinations, accessible headings and absence of unpublished issue routes verified.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-012",
@@ -173,7 +255,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Lazy YouTube component exists; revoke-consent and full live accessibility activation are not verified.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-013",
@@ -188,7 +273,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Kirk-Evers draft and source reader exist; final approved legislation/PDF and versioned public downloads are missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-014",
@@ -200,7 +288,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Garden page exists; verified canonical external URL and final issue video are absent.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-015",
@@ -212,49 +303,95 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Cornerstone page exists; verified canonical external URL and final issue video are absent.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-016",
       "title": "Build the public volunteer page and role finder",
       "origin": "original",
-      "prs": [],
-      "contributingPrs": [
+      "prs": [
         1,
         6,
-        35
+        35,
+        42,
+        43
       ],
+      "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "completed",
+      "acceptedAt": "2026-10-13T21:14:24.168Z",
+      "reviewedSourceSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+      "evidence": [
+        "content/public/pages/volunteer.html",
+        "packages/core/roles.mjs",
+        "tests/flag-real-portal.test.mjs",
+        "tests/browser/journeys.mjs"
+      ],
+      "acceptanceSummary": "Twelve canonical role choices and live-portal links, chooser fallbacks and privacy/disclosure boundaries pass browser tests.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-017",
       "title": "Build the donation UI and exact disclosure components",
       "origin": "original",
-      "prs": [],
+      "prs": [
+        1,
+        77,
+        87,
+        89,
+        91
+      ],
       "contributingPrs": [
         47,
         56
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "completed",
+      "acceptedAt": "2026-10-13T21:14:24.168Z",
+      "reviewedSourceSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+      "evidence": [
+        "content/public/pages/donate.html",
+        "packages/core/stripe-web-checkout.mjs",
+        "tests/public.test.mjs",
+        "tests/stripe-web-checkout.test.mjs"
+      ],
+      "acceptanceSummary": "One-time default, exact donor disclosures, processor-owned card data and single linked checkbox; real owner test-card checkout reached Stripe.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-018",
       "title": "Finish public navigation, SEO and essential information pages",
       "origin": "original",
-      "prs": [],
-      "contributingPrs": [
+      "prs": [
         2,
         3,
         10,
-        15
+        15,
+        76,
+        92
       ],
+      "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "completed",
+      "acceptedAt": "2026-10-13T21:14:24.168Z",
+      "reviewedSourceSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+      "evidence": [
+        "packages/core/indexing.mjs",
+        "scripts/public-renderer.mjs",
+        "tests/indexing.test.mjs",
+        "tests/accessibility-navigation.test.mjs"
+      ],
+      "acceptanceSummary": "Eight public routes, 404, navigation, canonical metadata, preview noindex and fail-closed production indexing pass CI; domain launch belongs to G28-59.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-019",
@@ -269,7 +406,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Real signup code exists, but actual portal still has signup=false and mail delivery disabled.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-020",
@@ -282,7 +422,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Treasury/owner basics exist; staff MFA, scoped roles and negative authorization journeys are missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-021",
@@ -292,7 +435,10 @@
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "not_started",
+      "acceptanceBlocker": "No recipient-key enrollment, device verification or key-substitution implementation.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-022",
@@ -302,7 +448,10 @@
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "not_started",
+      "acceptanceBlocker": "Protected ciphertext submission/recipient system is not implemented or enabled.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-023",
@@ -314,7 +463,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Account export/revocation exists; protected device/key recovery and trust restoration are incomplete.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-024",
@@ -326,7 +478,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Durable outbox exists; verified live sender, delivery callbacks, opt-out suppression and retries remain.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-025",
@@ -338,7 +493,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Historical sources inventoried privately; full revised-policy crosswalk and current publication queue are unfinished.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-026",
@@ -353,7 +511,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Materials reader/bookmarks exist; no approved current materials published and signup disabled.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-027",
@@ -368,7 +529,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "First-hour checklist exists; real newly registered volunteer/session acceptance is unavailable.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-028",
@@ -380,7 +544,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Reading acknowledgments exist; orientation/training lifecycle and activated prerequisites are incomplete.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-029",
@@ -390,7 +557,10 @@
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Fail-closed activity rules exist; live verified jurisdiction module admin/publish/revoke flow is missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-030",
@@ -400,17 +570,34 @@
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Simple task checklist exists; task assignments, capacity and verified activity reporting are missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-031",
       "title": "Convert every worksheet into an appropriate web tool",
       "origin": "original",
-      "prs": [],
+      "prs": [
+        1,
+        35
+      ],
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "completed",
+      "acceptedAt": "2026-10-13T21:14:24.168Z",
+      "reviewedSourceSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+      "evidence": [
+        "packages/core/forms.mjs",
+        "apps/portal/src/main.tsx",
+        "tests/core.test.mjs",
+        "tests/browser/journeys.mjs"
+      ],
+      "acceptanceSummary": "All twelve original worksheet types have editable local web forms, print/download/reset, privacy warnings and no server submission; tests pass.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-032",
@@ -420,7 +607,10 @@
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "not_started",
+      "acceptanceBlocker": "No working team membership or scoped captain-coordination system.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-033",
@@ -430,7 +620,10 @@
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "not_started",
+      "acceptanceBlocker": "No event scheduling, capacity/RSVP or cancellation backend.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-034",
@@ -440,7 +633,10 @@
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "not_started",
+      "acceptanceBlocker": "No secure protected incident intake, reply or private-attachment workflow.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-035",
@@ -450,7 +646,10 @@
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "not_started",
+      "acceptanceBlocker": "No approved asset-sharing/QR versioning and withdrawal system.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-036",
@@ -460,7 +659,10 @@
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Role instruction paths exist; provider-approved field-tool handoffs and opt-out tests are missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-037",
@@ -473,7 +675,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "CLI video/link preparation exists; nontechnical editor, publish and rollback UI is missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-038",
@@ -485,7 +690,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Treasury admin preview exists; operational captain/support admin roles and step-up are incomplete.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-039",
@@ -499,7 +707,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Stripe test API and Checkout work; political-merchant approval and live account/settlement capability are unverified.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-040",
@@ -512,7 +723,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Linked election terms exist; live donor aggregation, approved limits and personal-card enforcement are incomplete.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-041",
@@ -527,7 +741,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Hosted sandbox checkout works; full retry/back-navigation/duplicate handling and live release remain unverified.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-042",
@@ -537,7 +754,10 @@
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Signed event validator and synthetic replay tests exist; real signed paid event delivery/reconciliation not verified.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-043",
@@ -549,7 +769,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Staging financial ledger exists; real settlement, deposit reconciliation and all-channel totals are missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-044",
@@ -559,7 +782,10 @@
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "not_started",
+      "acceptanceBlocker": "No receipts/recurring donor self-service or cancellation workflow.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-045",
@@ -572,7 +798,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Outage quarantine and exceptions partly exist; live refunds, disputes and remedy workflow are missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-046",
@@ -582,7 +811,10 @@
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Encrypted treasury configuration exists; compliant treasurer exports/import validation are unfinished.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-047",
@@ -597,7 +829,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Adversarial sandbox tests exist; full direct-link, real provider, refund and failure acceptance unverified.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-048",
@@ -610,7 +845,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Release checks exist; real merchant/treasurer approval and authorized live payment reconciliation are missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-049",
@@ -622,7 +860,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Account deletion/export exist; legal holds, protected object cleanup and retention/backup tests are incomplete.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-050",
@@ -634,7 +875,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Privacy-minimal operations counts exist; consent-based real analytics dashboard and retention tests are missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-051",
@@ -648,7 +892,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Automated keyboard/browser tests exist; actual assistive-technology audit across released flows is missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-052",
@@ -660,7 +907,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Cross-browser screenshots exist; approved reference visual comparisons and exceptions are incomplete.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-053",
@@ -670,7 +920,10 @@
       "contributingPrs": [],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Images optimized; measured LCP/INP/CLS, load/fault and bundle acceptance not done.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-054",
@@ -683,7 +936,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Owner deferred paid external review; substantive complete AI source/security assessment and applicable controls still pending.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-055",
@@ -696,7 +952,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Outbox retry tests exist; backup restore rehearsal, custody and measured recovery acceptance missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-056",
@@ -713,7 +972,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Registry/deployed SHA hooks exist; live Engine Room refresh/failure/stale behavior unverified.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-057",
@@ -727,7 +989,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Partial staging checks exist; complete release rehearsal across real configured services unverified.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-058",
@@ -742,7 +1007,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Policy source reader exists; final videos, bill/links and publication signoff missing.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-059",
@@ -757,7 +1025,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Private previews live; public origin, signup/mail, current materials and live fundraising unavailable.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-060",
@@ -771,7 +1042,10 @@
       ],
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "acceptanceBlocker": "Handoff docs exist; full live release walkthrough, final status and operational owners incomplete.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
       "id": "G28-061",
@@ -780,15 +1054,218 @@
       "prs": [
         79
       ],
-      "evidence": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md",
+      "evidence": [
+        "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md",
+        "tests/review-accounts.test.mjs",
+        "tests/browser/review-journeys.mjs"
+      ],
       "status": "completed",
       "liveVerifiedAt": "2026-10-12T22:11:42.212794293Z",
       "dependsOn": [],
       "externalDependencies": [],
-      "externalPrerequisites": []
+      "externalPrerequisites": [],
+      "acceptedAt": "2026-10-13T21:14:24.168Z",
+      "reviewedSourceSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+      "acceptanceSummary": "Individually revocable reviewer accounts passed live HTTPS, privilege-isolation, revocation and cross-browser tests.",
+      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     }
   ],
   "pullRequests": [
+    {
+      "id": 4848699856,
+      "number": 92,
+      "title": "CI: verify protected policy-library links against real server routes",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/92",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T19:56:41Z",
+      "updatedAt": "2026-10-13T20:20:40Z",
+      "closedAt": "2026-10-13T20:20:40Z",
+      "mergedAt": "2026-10-13T20:20:40Z",
+      "headSha": "36e332022454f4e4f4bb58e799e0d4a2b2219520",
+      "baseRef": "main",
+      "mergeCommitSha": "1c326e9c19380512384be63d64fc03a5dab58a09"
+    },
+    {
+      "id": 4848675351,
+      "number": 91,
+      "title": "Fix browser donation checkout origin rejection in protected preview",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/91",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T19:54:33Z",
+      "updatedAt": "2026-10-13T20:24:46Z",
+      "closedAt": "2026-10-13T20:24:46Z",
+      "mergedAt": "2026-10-13T20:24:46Z",
+      "headSha": "44d8c7857999908aad551a0ecb6180696d0ab028",
+      "baseRef": "main",
+      "mergeCommitSha": "ecc1b9ac1dbb27ce963fb592a4d54513e9596731"
+    },
+    {
+      "id": 4848620650,
+      "number": 90,
+      "title": "Standardize canonical PR registry for Boardroom and Engine Room",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/90",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T19:49:37Z",
+      "updatedAt": "2026-10-13T20:25:00Z",
+      "closedAt": "2026-10-13T20:25:00Z",
+      "mergedAt": "2026-10-13T20:25:00Z",
+      "headSha": "9fe9db9882bc158857ad45cfac1f2a3409822a2c",
+      "baseRef": "main",
+      "mergeCommitSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228"
+    },
+    {
+      "id": 4848394733,
+      "number": 89,
+      "title": "Fix Stripe checkout failures after Render restarts and test the real donor form",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/89",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T19:29:47Z",
+      "updatedAt": "2026-10-13T19:34:00Z",
+      "closedAt": "2026-10-13T19:31:13Z",
+      "mergedAt": "2026-10-13T19:31:13Z",
+      "headSha": "310abb254666d5c91b4508e48632300c371ad40f",
+      "baseRef": "main",
+      "mergeCommitSha": "254fd9109544fcbe23f4e929de28958f4c6fbca5"
+    },
+    {
+      "id": 4848268038,
+      "number": 88,
+      "title": "Fix Stripe signed webhook fake DB query after terms-version upgrade",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/88",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T19:18:22Z",
+      "updatedAt": "2026-10-13T19:18:31Z",
+      "closedAt": "2026-10-13T19:18:30Z",
+      "mergedAt": "2026-10-13T19:18:30Z",
+      "headSha": "1317aaafc9434638fc9b45d36f02308aa483b891",
+      "baseRef": "main",
+      "mergeCommitSha": "55ea4589944b590264e69c9ea32df12356d1da03"
+    },
+    {
+      "id": 4848252808,
+      "number": 87,
+      "title": "Simplify Stripe donations to one aligned terms checkbox; remove election selector",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/87",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T19:17:01Z",
+      "updatedAt": "2026-10-13T19:17:25Z",
+      "closedAt": "2026-10-13T19:17:24Z",
+      "mergedAt": "2026-10-13T19:17:24Z",
+      "headSha": "e92ff07592bf48bd935d6908162f6e2567628763",
+      "baseRef": "main",
+      "mergeCommitSha": "9e4e24e4c6a2d29d68063e51bf203cc01a9eb9a5"
+    },
+    {
+      "id": 4848113429,
+      "number": 86,
+      "title": "Owner policy: proceed with AI security review; defer external audit",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/86",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T19:05:06Z",
+      "updatedAt": "2026-10-13T20:22:23Z",
+      "closedAt": "2026-10-13T20:22:23Z",
+      "mergedAt": "2026-10-13T20:22:23Z",
+      "headSha": "57029af90f629300c4868f4d0515b4cc4da562ac",
+      "baseRef": "main",
+      "mergeCommitSha": "ce54a7c5b3ed0ad014e9d113e07eaa867dd4592c"
+    },
+    {
+      "id": 4847923593,
+      "number": 85,
+      "title": "Inspect Stripe Workbench v2 webhook destinations before diagnosing missing test delivery",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/85",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T18:49:30Z",
+      "updatedAt": "2026-10-13T18:49:42Z",
+      "closedAt": "2026-10-13T18:49:42Z",
+      "mergedAt": "2026-10-13T18:49:42Z",
+      "headSha": "edc69b8ed2826a9ab88ab03bf016baa756270896",
+      "baseRef": "main",
+      "mergeCommitSha": "f0dbb63c6c7bb23f84f363e292b14664f66ab068"
+    },
+    {
+      "id": 4847877276,
+      "number": 84,
+      "title": "Diagnose Stripe test webhook mode, subscriptions and event delivery without secrets",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/84",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T18:45:44Z",
+      "updatedAt": "2026-10-13T18:46:07Z",
+      "closedAt": "2026-10-13T18:46:07Z",
+      "mergedAt": "2026-10-13T18:46:07Z",
+      "headSha": "d0248086b54a50fde7ff8f70300aacd28e7b6217",
+      "baseRef": "main",
+      "mergeCommitSha": "21e492192be5a156baf8418da277d3a9752d02b9"
+    },
+    {
+      "id": 4847808562,
+      "number": 83,
+      "title": "Stripe sandbox live acceptance: test account, $1 session, expiry and signed webhook",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/83",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T18:39:51Z",
+      "updatedAt": "2026-10-13T18:40:17Z",
+      "closedAt": "2026-10-13T18:40:17Z",
+      "mergedAt": "2026-10-13T18:40:17Z",
+      "headSha": "203a596868729bdede8df779f28592b71b342597",
+      "baseRef": "main",
+      "mergeCommitSha": "19a294b18f66f2448f25a39bc58844264f8261a1"
+    },
+    {
+      "id": 4847678368,
+      "number": 82,
+      "title": "Fix fake PostgreSQL result aliasing in Stripe webhook regression tests",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/82",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T18:28:35Z",
+      "updatedAt": "2026-10-13T18:28:43Z",
+      "closedAt": "2026-10-13T18:28:43Z",
+      "mergedAt": "2026-10-13T18:28:43Z",
+      "headSha": "47df14f1474b70df682f90a3bd9989ddeddd322a",
+      "baseRef": "main",
+      "mergeCommitSha": "31b576a94cda8e99eaef4e6c54269ddb106cb8b0"
+    },
+    {
+      "id": 4847658900,
+      "number": 81,
+      "title": "Record signed Stripe checkout expiration and asynchronous payment failures",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/81",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T18:26:52Z",
+      "updatedAt": "2026-10-13T18:27:08Z",
+      "closedAt": "2026-10-13T18:27:08Z",
+      "mergedAt": "2026-10-13T18:27:08Z",
+      "headSha": "5d5a9196341faa25e769bcf01f998f69120f980d",
+      "baseRef": "main",
+      "mergeCommitSha": "2bf8081fda2e79c14efd6f24170cafdabac4ddae"
+    },
+    {
+      "id": 4835614383,
+      "number": 80,
+      "title": "Record verified private-review deployment and scoped account acceptance",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/80",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T22:15:46Z",
+      "updatedAt": "2026-10-12T22:16:41Z",
+      "closedAt": "2026-10-12T22:16:41Z",
+      "mergedAt": "2026-10-12T22:16:41Z",
+      "headSha": "985e4fdb2aae9b86ad957990bd5744dde2280d9b",
+      "baseRef": "main",
+      "mergeCommitSha": "ae6ffbb0f27c77ea43e7f109f1d806f615c03338"
+    },
     {
       "id": 4835555808,
       "number": 79,
@@ -805,19 +1282,259 @@
       "mergeCommitSha": "c263d8fd8a331b238ddc884b052c672558cee96e"
     },
     {
+      "id": 4835336578,
+      "number": 78,
+      "title": "Record actual Stripe API outages in multi-processor circuit breaker",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/78",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T21:43:48Z",
+      "updatedAt": "2026-10-12T21:44:00Z",
+      "closedAt": "2026-10-12T21:43:59Z",
+      "mergedAt": "2026-10-12T21:43:59Z",
+      "headSha": "78dd38ab931ec540f604b7f2a17d47bfa61f63a5",
+      "baseRef": "main",
+      "mergeCommitSha": "4881a68dc7fe73548c0d0839d8979c5e6ced6614"
+    },
+    {
+      "id": 4835309687,
+      "number": 77,
+      "title": "Stripe-first campaign checkout: test-only route, signed webhooks and scalable processor rotation",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/77",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T21:40:48Z",
+      "updatedAt": "2026-10-12T21:41:09Z",
+      "closedAt": "2026-10-12T21:41:09Z",
+      "mergedAt": "2026-10-12T21:41:09Z",
+      "headSha": "22c57f6e5f0af879237622617ced7933691b4086",
+      "baseRef": "main",
+      "mergeCommitSha": "cdf48b81e3cf696fc882bf228edae0e7e1e53cab"
+    },
+    {
+      "id": 4834945461,
+      "number": 76,
+      "title": "Make all launch-priority cards and homepage promise links clickable",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/76",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T21:01:38Z",
+      "updatedAt": "2026-10-12T21:01:50Z",
+      "closedAt": "2026-10-12T21:01:50Z",
+      "mergedAt": "2026-10-12T21:01:50Z",
+      "headSha": "41a610f6ea2e004e0a82c66b6e087af17619c3de",
+      "baseRef": "main",
+      "mergeCommitSha": "1f75a179df6c731c200443f3adfde0421852cbfb"
+    },
+    {
+      "id": 4834515608,
+      "number": 75,
+      "title": "Fix Engine Room tracking: reconcile all 60 campaign packages with verified contribution evidence",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/75",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T20:15:51Z",
+      "updatedAt": "2026-10-12T20:16:23Z",
+      "closedAt": "2026-10-12T20:16:23Z",
+      "mergedAt": "2026-10-12T20:16:23Z",
+      "headSha": "c21f699235cb7df77b8dda1ec1d7758192bf7608",
+      "baseRef": "main",
+      "mergeCommitSha": "6fd9a63a74c54820f22388904a7692fe195ce697"
+    },
+    {
+      "id": 4832265407,
+      "number": 74,
+      "title": "Fix syntax in Chase-exclusion routing guard",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/74",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T16:32:57Z",
+      "updatedAt": "2026-10-12T16:33:05Z",
+      "closedAt": "2026-10-12T16:33:05Z",
+      "mergedAt": "2026-10-12T16:33:05Z",
+      "headSha": "6b445325a8e8457b87305fd1d477c2dba82cc25e",
+      "baseRef": "main",
+      "mergeCommitSha": "365fba62c54191958ed0f78123df7a6ca718fb9e"
+    },
+    {
+      "id": 4832237961,
+      "number": 73,
+      "title": "Exclude Chase merchant processing; retire sales-led and fee-bearing shortlist",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/73",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T16:30:19Z",
+      "updatedAt": "2026-10-12T16:31:30Z",
+      "closedAt": "2026-10-12T16:31:30Z",
+      "mergedAt": "2026-10-12T16:31:29Z",
+      "headSha": "c4d91b0980827319e8bd10d131649aa67f3a1253",
+      "baseRef": "main",
+      "mergeCommitSha": "e114c6f7d4ff020f51b104158679bbd5f0b29333"
+    },
+    {
+      "id": 4832209082,
+      "number": 72,
+      "title": "Restore Galinsky 2028 roadmap progress from 28 verified merged PRs",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/72",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T16:27:31Z",
+      "updatedAt": "2026-10-12T16:28:06Z",
+      "closedAt": "2026-10-12T16:28:06Z",
+      "mergedAt": "2026-10-12T16:28:06Z",
+      "headSha": "b093dce458eb8e3f4369a71b5bd287fad3661dc5",
+      "baseRef": "main",
+      "mergeCommitSha": "2d33a188eff859263fcfccb31af16562212620e5"
+    },
+    {
+      "id": 4832087025,
+      "number": 71,
+      "title": "Show real campaign implementation progress without claiming 60 packages are accepted",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/71",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T16:16:01Z",
+      "updatedAt": "2026-10-13T20:10:17Z",
+      "closedAt": "2026-10-13T20:10:17Z",
+      "mergedAt": null,
+      "headSha": "46bb3b68ed6c8dba9fcebaba2352fbbfb651175e",
+      "baseRef": "main",
+      "mergeCommitSha": null
+    },
+    {
+      "id": 4831949726,
+      "number": 70,
+      "title": "Port full CI verification to CircleCI Free without dropping checks",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/70",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T16:04:10Z",
+      "updatedAt": "2026-10-13T20:10:13Z",
+      "closedAt": "2026-10-13T20:10:13Z",
+      "mergedAt": null,
+      "headSha": "abfcc016d00fe4ddd0ed966da14404fa74e85fef",
+      "baseRef": "main",
+      "mergeCommitSha": "450b1190331641372133add290907336b03927e6"
+    },
+    {
+      "id": 4831111228,
+      "number": 69,
+      "title": "Secure treasury settings and invitation-only administrator accounts",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/69",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T14:52:33Z",
+      "updatedAt": "2026-10-12T14:53:13Z",
+      "closedAt": "2026-10-12T14:53:13Z",
+      "mergedAt": "2026-10-12T14:53:12Z",
+      "headSha": "ca110b67f3c0eaf9011dfe3020c144d439106a35",
+      "baseRef": "main",
+      "mergeCommitSha": "ed07e85a5b273c5b8b4bf3a61e48baba084be69d"
+    },
+    {
+      "id": 4830941432,
+      "number": 68,
+      "title": "Live password-protected policy source library from three private authoritative repos",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/68",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T14:37:58Z",
+      "updatedAt": "2026-10-12T14:39:09Z",
+      "closedAt": "2026-10-12T14:39:08Z",
+      "mergedAt": "2026-10-12T14:39:08Z",
+      "headSha": "c53859b2a3236db26725cbe5e3b5b848dcb2bf7a",
+      "baseRef": "main",
+      "mergeCommitSha": "b52b1efa997a2cd03b0e3f282d933bc76d217db1"
+    },
+    {
+      "id": 4830630858,
+      "number": 67,
+      "title": "Ops: record authorized existing Render services and expose protected deploy revision",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/67",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T14:11:08Z",
+      "updatedAt": "2026-10-12T14:19:27Z",
+      "closedAt": "2026-10-12T14:19:27Z",
+      "mergedAt": "2026-10-12T14:19:27Z",
+      "headSha": "2a43e963c1eda48b6805eb937fe3e8b390538968",
+      "baseRef": "main",
+      "mergeCommitSha": "3d44e39c7cb96a810ad3232aa67dcbfbb0559fe1"
+    },
+    {
+      "id": 4830388342,
+      "number": 66,
+      "title": "Track E2EESA implementation, full testing and independent expert review",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/66",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T13:52:08Z",
+      "updatedAt": "2026-10-12T14:17:09Z",
+      "closedAt": "2026-10-12T14:17:08Z",
+      "mergedAt": "2026-10-12T14:17:08Z",
+      "headSha": "23a9548339ea6919ad72a5732d86aa1f34e1b77f",
+      "baseRef": "main",
+      "mergeCommitSha": "842896c3bb33209ecce283e8512b9ff3f902bfdc"
+    },
+    {
+      "id": 4830178424,
+      "number": 65,
+      "title": "Accept verified owner MP4 upload without breaking CI; preview-only video playback",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/65",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T13:34:25Z",
+      "updatedAt": "2026-10-12T13:37:32Z",
+      "closedAt": "2026-10-12T13:37:32Z",
+      "mergedAt": "2026-10-12T13:37:32Z",
+      "headSha": "35884a5816de582ac522afb86a10c02fe7686754",
+      "baseRef": "main",
+      "mergeCommitSha": "441d08d095b3d5ddec008893ede58841f7dac5ae"
+    },
+    {
+      "id": 4830153048,
+      "number": 64,
+      "title": "Do not treat arbitrary payment-page redirects as checkout availability proof",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/64",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T13:32:19Z",
+      "updatedAt": "2026-10-12T13:36:59Z",
+      "closedAt": "2026-10-12T13:36:58Z",
+      "mergedAt": "2026-10-12T13:36:58Z",
+      "headSha": "31c274dc71a30f1ce341f28b7ecd9b593b43c5cf",
+      "baseRef": "main",
+      "mergeCommitSha": "1723daf4d38ebd4a0f93299418239310acdb7e47"
+    },
+    {
+      "id": 4830129904,
+      "number": 63,
+      "title": "Refresh complete observed PR history for Engine Room without false package completion",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/63",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-12T13:30:30Z",
+      "updatedAt": "2026-10-12T13:35:34Z",
+      "closedAt": "2026-10-12T13:35:33Z",
+      "mergedAt": "2026-10-12T13:35:33Z",
+      "headSha": "f1d475204d0c47f52d5648e35ca17d971a9d1f37",
+      "baseRef": "main",
+      "mergeCommitSha": "3efd3c0b7e6a7dc74c60aa1178e7f7cce5a384f3"
+    },
+    {
       "id": 4830057028,
       "number": 62,
       "title": "Make saved volunteer guides discoverable in the live materials library",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/62",
-      "state": "open",
+      "state": "closed",
       "draft": false,
       "createdAt": "2026-10-12T13:24:20Z",
-      "updatedAt": "2026-10-12T13:24:20Z",
-      "closedAt": null,
-      "mergedAt": null,
+      "updatedAt": "2026-10-12T13:34:56Z",
+      "closedAt": "2026-10-12T13:34:56Z",
+      "mergedAt": "2026-10-12T13:34:56Z",
       "headSha": "0b7fb0103201dae9fce6db30b1b43f66787a7909",
       "baseRef": "main",
-      "mergeCommitSha": "cee62cde75f9fa58f1d3d511664c864504a3e886"
+      "mergeCommitSha": "34285310573522a0e1079c591121e82c85fd824d"
     },
     {
       "id": 4830005228,
