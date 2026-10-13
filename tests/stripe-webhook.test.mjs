@@ -34,7 +34,9 @@ class FakePool{
    return {rowCount:1,rows:[{event_sha256:this.receipts.get(p[0])}]};
   }
   if(sql.startsWith('UPDATE g28.stripe_checkout_intents SET')){
-   this.intent.payment_state='paid';return {rowCount:1,rows:[]};
+   this.intent.payment_state=sql.includes('payment_state=$1')?p[0]:
+    sql.includes("payment_state='requires_review'")?'requires_review':'paid';
+   return {rowCount:1,rows:[]};
   }
   if(sql.startsWith('INSERT INTO g28.financial_provider_events(')){
    this.captured.push({provider:p[0],event:p[1],payment:p[2],amount:p[4]});
@@ -66,5 +68,53 @@ test('only paid, signed, matched test transactions enter ledger; no bank settlem
  assert.deepEqual(accepted,{status:200,outcome:'verified_captured_not_settled'});
  assert.deepEqual(pool.captured,[{provider:'stripe-test',event:'evt_ABCDEFGHIJKL',payment:session,amount:2500}]);
  assert.equal((await s.receiveSignedWebhook({raw:good,header:signature(good),secret,sandbox:true})).outcome,'duplicate');
+ assert.equal(pool.captured.length,1);
+});
+
+test('verified checkout expiration is a nonpayment; signed later paid event requires reconciliation',async()=>{
+ const pool=new FakePool(),store=new StripeCampaignStore(pool);
+ await store.recordSession({clientRef:id,sessionId:session,election:'primary',amountCents:2500,livemode:false});
+ const base=event();
+ const expiration=raw({...base,id:'evt_ExpireSession12',type:'checkout.session.expired',
+  data:{object:{...base.data.object,payment_status:'unpaid'}}});
+ const first=await store.receiveSignedWebhook({raw:expiration,header:signature(expiration),secret,sandbox:true});
+ assert.deepEqual(first,{status:200,outcome:'verified_expired_no_charge'});
+ assert.equal(pool.intent.payment_state,'expired');
+ assert.equal(pool.captured.length,0);
+ assert.equal((await store.receiveSignedWebhook({raw:expiration,header:signature(expiration),secret,sandbox:true})).outcome,'duplicate');
+ const late=raw({...base,id:'evt_LatePayment123'});
+ const outcome=await store.receiveSignedWebhook({raw:late,header:signature(late),secret,sandbox:true});
+ assert.deepEqual(outcome,{status:200,outcome:'verified_capture_requires_reconciliation'});
+ assert.equal(pool.intent.payment_state,'requires_review');
+ assert.equal(pool.captured.length,1);
+});
+test('asynchronous payment failures and late expiration never overwrite a confirmed capture',async()=>{
+ const pool=new FakePool(),store=new StripeCampaignStore(pool);
+ await store.recordSession({clientRef:id,sessionId:session,election:'primary',amountCents:2500,livemode:false});
+ const base=event();
+ const failure=raw({...base,id:'evt_AsyncFailureABC',type:'checkout.session.async_payment_failed',
+  data:{object:{...base.data.object,payment_status:'unpaid'}}});
+ const badSig=await store.receiveSignedWebhook({raw:failure,header:'t='+now+',v1='+'0'.repeat(64),secret,sandbox:true});
+ assert.equal(badSig.status,400);assert.equal(pool.intent.payment_state,'pending');
+ assert.equal((await store.receiveSignedWebhook({raw:failure,header:signature(failure),secret,sandbox:true})).outcome,'verified_failed_no_charge');
+ assert.equal(pool.intent.payment_state,'failed');
+ const later=raw({...base,id:'evt_CapturedAfterFailure'});
+ assert.equal((await store.receiveSignedWebhook({raw:later,header:signature(later),secret,sandbox:true})).outcome,'verified_capture_requires_reconciliation');
+ assert.equal(pool.intent.payment_state,'requires_review');
+ const expiration=raw({...base,id:'evt_ExpiredLateAfter',type:'checkout.session.expired',
+  data:{object:{...base.data.object,payment_status:'unpaid'}}});
+ assert.equal((await store.receiveSignedWebhook({raw:expiration,header:signature(expiration),secret,sandbox:true})).outcome,'already_requires_review');
+ assert.equal(pool.intent.payment_state,'requires_review');
+ assert.equal(pool.captured.length,1);
+});
+test('expired event arriving after a paid checkout never reclassifies the recorded payment',async()=>{
+ const pool=new FakePool(),store=new StripeCampaignStore(pool);
+ await store.recordSession({clientRef:id,sessionId:session,election:'primary',amountCents:2500,livemode:false});
+ const base=event(),paid=raw(base);
+ assert.equal((await store.receiveSignedWebhook({raw:paid,header:signature(paid),secret,sandbox:true})).outcome,'verified_captured_not_settled');
+ const expired=raw({...base,id:'evt_LateExpiryXYZ12',type:'checkout.session.expired',
+  data:{object:{...base.data.object,payment_status:'unpaid'}}});
+ assert.equal((await store.receiveSignedWebhook({raw:expired,header:signature(expired),secret,sandbox:true})).outcome,'already_paid');
+ assert.equal(pool.intent.payment_state,'paid');
  assert.equal(pool.captured.length,1);
 });
