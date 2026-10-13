@@ -12,6 +12,7 @@ import {databasePool} from '../api/src/postgres-store.mjs';
 import {randomUUID} from 'node:crypto';
 import {stripeSettings,checkoutNonceKey,openStripeSession,stripeDonationHtml,parseCheckoutForm,checkCheckoutToken} from '../../packages/core/stripe-web-checkout.mjs';
 import {StripeCampaignStore} from './stripe-campaign-store.mjs';
+import {contributionTermsHtml,CONTRIBUTION_TERMS_PATH} from '../../packages/core/contribution-terms.mjs';
 
 const mime={
  '.html':'text/html; charset=utf-8',
@@ -79,7 +80,7 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
   // Both preview roles have website permissions only. This explicit allowlist
   // protects future financial/admin routes as well as today's operations.
   if(review){
-   const pages=new Set(['/','/issues','/issues/','/issues/kirk-evers','/issues/kirk-evers/','/issues/garden','/issues/garden/','/issues/cornerstone','/issues/cornerstone/','/volunteer','/volunteer/','/donate','/donate/','/notices','/notices/']);
+   const pages=new Set(['/','/issues','/issues/','/issues/kirk-evers','/issues/kirk-evers/','/issues/garden','/issues/garden/','/issues/cornerstone','/issues/cornerstone/','/volunteer','/volunteer/','/donate','/donate/','/donate/terms','/notices','/notices/']);
    const allowed=pages.has(pathname)||pathname==='/favicon.svg'||/^\/(?:assets|_astro)\/[A-Za-z0-9_./-]+$/.test(pathname)||/^\/policy-library\/(?:kirk-evers|garden|cornerstone)(?:\/?|\/download\/[0-9a-f]{40})$/.test(pathname);
    if(!allowed||!['GET','HEAD'].includes(req.method))return send(res,403,'This account has website review access only.');
    if(review.user.previewPasswordChangeRequired){res.writeHead(303,{Location:'/preview/','Content-Length':'0'});res.end();return;}
@@ -118,6 +119,19 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
    return send(res,401,'Private preview. Enter your access credentials.');
   }
   if(pathname===null)return send(res,404,'Not found.');
+  // The same versioned contribution terms linked beside the one consent
+  // checkbox must be accessible before Stripe checkout, even in preview mode.
+  if(pathname===CONTRIBUTION_TERMS_PATH){
+   if(req.method!=='GET'&&req.method!=='HEAD'){
+    res.setHeader('Allow','GET, HEAD');return send(res,405,'Method not allowed.');
+   }
+   const html=contributionTermsHtml();
+   res.statusCode=200;
+   res.setHeader('Content-Type','text/html; charset=utf-8');
+   res.setHeader('Content-Security-Policy',"default-src 'self'; style-src 'self'; script-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'");
+   res.setHeader('Content-Length',Buffer.byteLength(html));
+   res.end(req.method==='HEAD'?undefined:html);return;
+  }
   // Stripe's real Checkout checkout is generated server-side only.
   // Payment details are always entered on Stripe; POST data here is only
   // amount, election and eligibility certifications (never card/PII).
@@ -150,7 +164,8 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
     }
     const created=await openStripeSession({raw:body,settings:stripeConfig,nonceKey:stripeNonce,request:req,transport:stripeTransport});
     await liveStripeStore.recordSession({clientRef:created.clientRef,sessionId:created.sessionId,
-     amountCents:created.amountCents,election:created.election,livemode:stripeConfig.live});
+     amountCents:created.amountCents,election:created.election,livemode:stripeConfig.live,
+     termsVersion:created.termsVersion});
     res.statusCode=303;res.setHeader('Location',created.hostedCheckoutUrl);
     res.setHeader('Content-Length','0');res.end();return;
    }catch(e){
