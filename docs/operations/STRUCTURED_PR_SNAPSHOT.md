@@ -1,10 +1,11 @@
 # GitHub PR snapshot and honest Engine Room progress
 
-Canonical snapshot: registry/prs.json (schema version 1). The full roadmap
-is docs/PR_REGISTER.json and registry/roadmap.json. Historical status text
+Canonical snapshot: registry/prs.json (schema version 1). The acceptance register is docs/PR_REGISTER.json, backed by
+`docs/evidence/ACCEPTANCE_AUDIT_20261013.md`. `registry/roadmap.json`
+is a deprecated redirect, not a second roadmap. Historical status text
 is not evidence that a planned work package has been accepted.
 
-The old snapshot dated 2026-10-11 was missing newer merged PR activity.
+The earlier snapshot omitted newer PR activity. The 13 October 2026 audit refreshed all 87 closed PRs (82 merged, 5 unmerged) and separately reconciled 61 work packages.
 Use the real private GitHub API to refresh **observations**. Never infer
 package completion, author/reviewer acceptance, deployment, live smoke,
 security approval, or partial work from a PR's existence.
@@ -28,7 +29,7 @@ a repository token or requires a payment credential.
 
 ## Mapping is approval, not guesswork
 
-The current sixty work packages are much larger than individual fixes and
+The current sixty-one work packages are much larger than individual fixes and
 many have only partial implementations. Engine Room currently displays
 *fully merged mapped work units* as green, open mapped units as yellow,
 unmapped units as empty. Attaching a merged partial-feature PR to the
@@ -37,7 +38,7 @@ complete. Do not do so.
 
 Before associating a full work-unit ID with a PR, verify that the PR(s)
 actually meet the whole work-unit acceptance standard and link exact CI,
-live-deployed SHA, authorized human review and any external approval in
+live-deployed SHA, documented code/security review and any actually required external operational approval in
 the source plan. Separate raw PR activity from independently accepted
 work-package completion. Never map a PR just because its number is close
 to a roadmap ordinal.
