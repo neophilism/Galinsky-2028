@@ -4,8 +4,7 @@
 // and whether Stripe can deliver an authentic signed expiration webhook.
 // NEVER log Stripe keys, webhook signatures, account profile or Checkout URLs.
 import {randomBytes} from 'node:crypto';
-import {stripeSettings} from '../../packages/core/stripe-web-checkout.mjs';
-import {stripeCheckoutPlan,createStripeCheckout} from '../../packages/core/stripe-campaign.mjs';
+import {stripeSettings,checkoutNonceKey,createCheckoutToken,openStripeSession} from '../../packages/core/stripe-web-checkout.mjs';
 import {StripeCampaignStore} from './stripe-campaign-store.mjs';
 
 const WAIT_COUNT=18;
@@ -13,7 +12,6 @@ const WAIT_INTERVAL_MS=2000;
 const G28_API='https://api.stripe.com';
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const safeStage=(stage,status,more={})=>({stage,status,...more});
-const attestationKeys=['eligibleResidency','ownFunds','age18','notFederalContractor','personalCreditCard'];
 const sandboxRef=()=>('attempt_'+randomBytes(16).toString('hex'));
 
 export async function runStripeSandboxAcceptance({
@@ -52,16 +50,22 @@ export async function runStripeSandboxAcceptance({
   const account=await getOrPost(G28_API+'/v1/account');
   if(typeof account.id!=='string'||!/^acct_[A-Za-z0-9]+$/.test(account.id))
    throw Error('stripe_account_unverified');
-  phase='checkout-session';
-  const plan=stripeCheckoutPlan({contribution:{
-   amountCents:100,frequency:'once',election:'primary',clientRef,
-   attestations:Object.fromEntries(attestationKeys.map(k=>[k,true]))
-  },policy:settings.policy,release:settings.release});
-  checkout=await createStripeCheckout({plan,secretKey:settings.secretKey,transport,
-   signal:AbortSignal.timeout(12000)});
-  if(!checkout.sessionId.startsWith('cs_test_'))throw Error('test_session_expected');
+  phase='checkout-form';
+  // This mirrors the ACTUAL donor form + origin + signed token + terms
+  // version, rather than bypassing validation by creating a Checkout plan
+  // directly. The form never contains card data or real donor information.
+  const csrf=checkoutNonceKey(settings.secretKey);
+  const formToken=createCheckoutToken(csrf,Date.now(),clientRef.slice('attempt_'.length));
+  const form=new URLSearchParams({form_token:formToken,amount:'1.00',frequency:'once',agree:'yes'});
+  checkout=await openStripeSession({raw:form.toString(),settings,nonceKey:csrf,
+   request:{headers:{origin:settings.origin}},transport,
+   onStage:next=>{phase='checkout-'+next;}});
+  if(!checkout.sessionId.startsWith('cs_test_')||checkout.clientRef!==clientRef||
+     checkout.amountCents!==100||checkout.election!=='general'||!checkout.termsVersion)
+   throw Error('test_session_expected');
   phase='database-session';
-  await store.recordSession({clientRef,sessionId:checkout.sessionId,amountCents:100,election:'primary',livemode:false});
+  await store.recordSession({clientRef,sessionId:checkout.sessionId,amountCents:100,
+   election:checkout.election,livemode:false,termsVersion:checkout.termsVersion});
   stored=true;
   phase='expire-test-session';
   const result=await getOrPost(G28_API+'/v1/checkout/sessions/'+checkout.sessionId+'/expire',{

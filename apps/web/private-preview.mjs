@@ -12,6 +12,7 @@ import {databasePool} from '../api/src/postgres-store.mjs';
 import {randomUUID} from 'node:crypto';
 import {stripeSettings,checkoutNonceKey,openStripeSession,stripeDonationHtml,parseCheckoutForm,checkCheckoutToken} from '../../packages/core/stripe-web-checkout.mjs';
 import {StripeCampaignStore} from './stripe-campaign-store.mjs';
+import {contributionTermsHtml,CONTRIBUTION_TERMS_PATH} from '../../packages/core/contribution-terms.mjs';
 
 const mime={
  '.html':'text/html; charset=utf-8',
@@ -37,6 +38,25 @@ function send(res,status,body){
  res.statusCode=status;res.setHeader('Content-Type','text/plain; charset=utf-8');
  res.end(body);
 }
+function checkoutErrorPage(res,status,stage){
+ // Give a useful recovery path; never display Stripe errors, donor details,
+ // card data, session URLs, internal exception strings, or secrets.
+ const message=stage==='token'?'This form was opened before a recent update or has expired. Reload the contribution form and try again.':
+  stage==='origin'?'The checkout security check did not match this website. Reload the contribution form and try again.':
+  stage==='form'?'The contribution form was incomplete or invalid. Return to the form and check the amount and agreement.':
+  'Secure card checkout could not be started. Please return to the form and try again. No payment has been confirmed.';
+ const html='<!doctype html><html lang="en"><head><meta charset="utf-8">'+
+  '<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">'+
+  '<title>Checkout not started | Galinsky 2028</title><link rel="stylesheet" href="/assets/design.css">'+
+  '<link rel="stylesheet" href="/assets/site.css"></head><body><main class="wrap" style="max-width:720px;padding:54px 20px">'+
+  '<h1 style="font-size:clamp(34px,6vw,58px)">Checkout was not started</h1><p style="margin:20px 0">'+message+'</p>'+
+  '<a class="btn blue" href="/donate/stripe">Return to contribution form</a>'+
+  '<p class="tiny" style="margin-top:18px">Card details are entered on the secure Stripe-hosted page, only after this website redirects you there.</p>'+
+  '</main></body></html>';
+ res.statusCode=status;res.setHeader('Content-Type','text/html; charset=utf-8');
+ res.setHeader('Content-Security-Policy',"default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'");
+ res.setHeader('Content-Length',Buffer.byteLength(html));res.end(html);
+}
 function requestedPath(raw){
  if(typeof raw!=='string'||raw.length>4096)return null;
  let pathname;try{pathname=decodeURIComponent(raw.split('?')[0].split('#')[0]);}catch{return null;}
@@ -60,7 +80,7 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
  const rotationPool=donationRoutes.length && !rotationStore?databasePool(env.DATABASE_URL):null;
  const liveRotationStore=rotationStore||(rotationPool?new DonationRotationStore(rotationPool):null);
  const stripeConfig=stripeSettings(env);
- const stripeNonce=checkoutNonceKey();
+ const stripeNonce=checkoutNonceKey(stripeConfig?.secretKey);
  const stripePool=stripeConfig&&env.DATABASE_URL&&!rotationPool&&!stripeStore?databasePool(env.DATABASE_URL):null;
  const liveStripeStore=stripeStore||(stripeConfig&&env.DATABASE_URL?new StripeCampaignStore(rotationPool||stripePool):null);
  const server=createServer(async(req,res)=>{
@@ -79,7 +99,7 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
   // Both preview roles have website permissions only. This explicit allowlist
   // protects future financial/admin routes as well as today's operations.
   if(review){
-   const pages=new Set(['/','/issues','/issues/','/issues/kirk-evers','/issues/kirk-evers/','/issues/garden','/issues/garden/','/issues/cornerstone','/issues/cornerstone/','/volunteer','/volunteer/','/donate','/donate/','/notices','/notices/']);
+   const pages=new Set(['/','/issues','/issues/','/issues/kirk-evers','/issues/kirk-evers/','/issues/garden','/issues/garden/','/issues/cornerstone','/issues/cornerstone/','/volunteer','/volunteer/','/donate','/donate/','/donate/terms','/notices','/notices/']);
    const allowed=pages.has(pathname)||pathname==='/favicon.svg'||/^\/(?:assets|_astro)\/[A-Za-z0-9_./-]+$/.test(pathname)||/^\/policy-library\/(?:kirk-evers|garden|cornerstone)(?:\/?|\/download\/[0-9a-f]{40})$/.test(pathname);
    if(!allowed||!['GET','HEAD'].includes(req.method))return send(res,403,'This account has website review access only.');
    if(review.user.previewPasswordChangeRequired){res.writeHead(303,{Location:'/preview/','Content-Length':'0'});res.end();return;}
@@ -118,6 +138,19 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
    return send(res,401,'Private preview. Enter your access credentials.');
   }
   if(pathname===null)return send(res,404,'Not found.');
+  // The same versioned contribution terms linked beside the one consent
+  // checkbox must be accessible before Stripe checkout, even in preview mode.
+  if(pathname===CONTRIBUTION_TERMS_PATH){
+   if(req.method!=='GET'&&req.method!=='HEAD'){
+    res.setHeader('Allow','GET, HEAD');return send(res,405,'Method not allowed.');
+   }
+   const html=contributionTermsHtml();
+   res.statusCode=200;
+   res.setHeader('Content-Type','text/html; charset=utf-8');
+   res.setHeader('Content-Security-Policy',"default-src 'self'; style-src 'self'; script-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'");
+   res.setHeader('Content-Length',Buffer.byteLength(html));
+   res.end(req.method==='HEAD'?undefined:html);return;
+  }
   // Stripe's real Checkout checkout is generated server-side only.
   // Payment details are always entered on Stripe; POST data here is only
   // amount, election and eligibility certifications (never card/PII).
@@ -142,21 +175,26 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
    if(req.method!=='POST'){res.setHeader('Allow','POST');return send(res,405,'Method not allowed.');}
    if(!/^application\/x-www-form-urlencoded(?:;|$)/i.test(req.headers['content-type']||'')){
     return send(res,415,'Expected URL-encoded contribution form.');}
-   let body='';
+   let body='',stage='body';
    try{
     for await(const chunk of req){
      body+=chunk.toString('utf8');
      if(body.length>4096)return send(res,413,'Contribution form exceeds the allowed size.');
     }
-    const created=await openStripeSession({raw:body,settings:stripeConfig,nonceKey:stripeNonce,request:req,transport:stripeTransport});
+    const created=await openStripeSession({raw:body,settings:stripeConfig,nonceKey:stripeNonce,
+     request:req,transport:stripeTransport,onStage:s=>{stage=s;}});
+    stage='ledger';
     await liveStripeStore.recordSession({clientRef:created.clientRef,sessionId:created.sessionId,
-     amountCents:created.amountCents,election:created.election,livemode:stripeConfig.live});
+     amountCents:created.amountCents,election:created.election,livemode:stripeConfig.live,
+     termsVersion:created.termsVersion});
+    stage='redirect';
     res.statusCode=303;res.setHeader('Location',created.hostedCheckoutUrl);
     res.setHeader('Content-Length','0');res.end();return;
    }catch(e){
-    // Record only proven gateway/API failure after form validation, never
-    // donor eligibility mistakes, card declines, or ambiguous authorizations.
-    if(stripeConfig.live && e?.code==='checkout_unavailable' && liveRotationStore){
+    // Only genuine, validated gateway failures should affect processor health.
+    // Missing/stale form tokens, invalid origins and database errors are not
+    // evidence that the payment processor is unhealthy.
+    if(stripeConfig.live && stage==='stripe_api' && e?.code==='checkout_unavailable' && liveRotationStore){
      try{
       const parsed=parseCheckoutForm(body);
       const attempt=checkCheckoutToken(stripeNonce,parsed.formToken);
@@ -166,9 +204,13 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
       console.error(JSON.stringify({event:'stripe_outage_observation_failed'}));
      }
     }
-    console.error(JSON.stringify({event:'stripe_checkout_refused',code:e?.code||'input_or_provider_failure'}));
-    return send(res,e?.code==='checkout_unavailable'||e?.status===503||e?.statusCode===503?503:400,
-      'Could not open secure card checkout. No payment has been confirmed. Check your details, or try later.');
+    const known=new Set(['body','configuration','origin','form','token','plan','stripe_api','stripe_created','ledger','redirect']);
+    const safeStage=known.has(stage)?stage:'unknown';
+    console.error(JSON.stringify({event:'stripe_checkout_refused',stage:safeStage,
+     code:e?.code==='checkout_unavailable'?'checkout_unavailable':'input_or_provider_failure'}));
+    const unavailable=safeStage==='ledger'||safeStage==='stripe_created'||safeStage==='redirect'||
+     safeStage==='stripe_api'&&e?.code==='checkout_unavailable';
+    return checkoutErrorPage(res,unavailable?503:400,safeStage);
    }
   }
   if(req.method!=='GET'&&req.method!=='HEAD'){

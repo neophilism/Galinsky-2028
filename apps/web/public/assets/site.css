@@ -53,3 +53,22 @@ a.resource-link:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 .promise-items a::before{content:"+";color:#e188a1;margin-right:10px}
 .promise-items a:hover{text-decoration:underline;text-decoration-thickness:2px}
 .promise-items a:focus-visible{outline:3px solid white;outline-offset:4px}
+
+
+/* Stripe donation: a SINGLE required, keyboard-accessible checkbox. */
+.donor-consent{display:flex;align-items:flex-start;gap:12px;margin:20px 0 14px;padding:0;line-height:1.55}
+.donor-consent input[type="checkbox"]{appearance:auto;-webkit-appearance:checkbox;display:block;flex:0 0 19px;width:19px;height:19px;min-width:19px;min-height:19px;margin:3px 0 0;padding:0;accent-color:var(--blue);cursor:pointer}
+.donor-consent label{display:inline;flex:1;min-width:0;font-weight:600;color:var(--ink);cursor:pointer;font-size:16px}
+.donor-consent a,.contribution-terms a.terms-back{color:var(--blue);font-weight:750;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.donor-consent a:hover,.contribution-terms a:hover{color:var(--red)}
+.donor-reporting{font-size:13px;line-height:1.65;margin:12px 0 20px;color:var(--ink)}
+.contribution-terms{max-width:830px!important;padding:50px 0 85px}
+.contribution-terms h1{font-size:clamp(36px,5vw,58px);letter-spacing:-.04em;margin:28px 0}
+.contribution-terms h2{font-size:clamp(22px,3vw,30px);letter-spacing:-.03em;margin:36px 0 15px}
+.contribution-terms p,.contribution-terms li{font-size:16px;line-height:1.8;color:var(--ink)}
+.contribution-terms ul{margin:16px 0 21px;padding-left:25px}
+.contribution-terms li+li{margin-top:10px}
+.contribution-terms .terms-intro{font-size:18px;color:var(--muted)}
+.contribution-terms .terms-revision{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin:28px 0;padding-top:17px}
+.contribution-terms p+p{margin-top:14px}
+@media(max-width:700px){.contribution-terms{width:calc(100% - 40px);padding:30px 0 60px}.donor-consent{gap:11px}.donor-consent label{font-size:15px}}

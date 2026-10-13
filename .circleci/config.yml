@@ -18,6 +18,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Identify tested Git checkout revision
+          command: |
+            printf 'CI_CHECKOUT_SHA='
+            git rev-parse HEAD
+            git status --short
+      - run:
           name: Install exact dependency lock
           command: npm ci --no-fund
       - run:

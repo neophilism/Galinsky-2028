@@ -58,13 +58,16 @@ test('private site never discloses private repo docs or token without password',
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  t.after(async()=>{await new Promise(resolve=>server.close(resolve));await rm(dir,{recursive:true,force:true});});
  const base='http://127.0.0.1:'+server.address().port;
- const denied=await fetch(base+'/policy-library/garden/');
- assert.equal(denied.status,401);
- assert.equal(denied.headers.get('www-authenticate')?.startsWith('Basic realm='),true);
  const auth='Basic '+Buffer.from('preview:fixture-private-authorization-password-123456').toString('base64');
- const missing=await fetch(base+'/policy-library/garden/',{headers:{authorization:auth}});
- assert.equal(missing.status,503);
- assert(!((await missing.text()).includes('github_pat_')));
+ for(const slug of Object.keys(policySources())){
+  const route='/policy-library/'+slug+'/';
+  const denied=await fetch(base+route);
+  assert.equal(denied.status,401,`${route}: must demand preview authentication`);
+  assert.equal(denied.headers.get('www-authenticate')?.startsWith('Basic realm='),true);
+  const missing=await fetch(base+route,{headers:{authorization:auth}});
+  assert.equal(missing.status,503,`${route}: authenticated dynamic route must fail closed without source credentials`);
+  assert(!((await missing.text()).includes('github_pat_')),`${route}: never disclose secrets`);
+ }
  const fakePath=await fetch(base+'/policy-library/garden/download/f'.repeat(40),{headers:{authorization:auth}});
  assert.notEqual(fakePath.status,200);
 });
