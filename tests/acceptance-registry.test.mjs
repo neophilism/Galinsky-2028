@@ -37,7 +37,7 @@ test('all 61 work-package statuses, accepted mappings and counts are synchronize
     }
   }
   const counts = Object.fromEntries(['completed', 'in_progress', 'not_started'].map(status => [status, plan.packages.filter(p => p.status === status).length]));
-  assert.deepEqual(counts, {completed:10, in_progress:44, not_started:7});
+  assert.deepEqual(counts, {completed:8, in_progress:46, not_started:7});
   assert.equal(plan.implemented_packages, counts.completed);
   assert.equal(plan.merged_packages, counts.completed);
   assert.equal(plan.deployed_packages, plan.packages.filter(p => p.status === 'completed' && p.acceptance_review.scoped_deployed).length);
@@ -51,7 +51,7 @@ test('all 61 work-package statuses, accepted mappings and counts are synchronize
 });
 
 test('test-only, gated and missing production workflows are not misclassified as accepted', () => {
-  for (const number of [19,21,22,26,42,43,44,48,54,55,57,58,59,60])
+  for (const number of [2,19,21,22,26,31,42,43,44,48,54,55,57,58,59,60])
     assert.notEqual(registry.units[number - 1].status, 'completed', 'G28-' + number + ' cannot pass yet');
   assert.equal(registry.units[60].status, 'completed');
   assert.deepEqual(registry.units[60].prs, [79]);
