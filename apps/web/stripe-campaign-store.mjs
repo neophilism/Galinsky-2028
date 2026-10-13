@@ -25,9 +25,12 @@ export class StripeCampaignStore {
   if(!result.valid)return {status:400,outcome:'invalid_signature'};
   const e=result.event;
   if(e.livemode===sandbox)return {status:400,outcome:'environment_mismatch'};
-  const recognized=e.type==='checkout.session.completed'||e.type==='checkout.session.async_payment_succeeded';
-  if(!recognized)return {status:200,outcome:'verified_other_event_requires_manual_reconciliation'};
-  if(e.paymentStatus!=='paid')return {status:200,outcome:'no_capture_confirmed'};
+  const confirmed=e.type==='checkout.session.completed'||e.type==='checkout.session.async_payment_succeeded';
+  const nonPaymentState=e.type==='checkout.session.expired'?'expired':
+   e.type==='checkout.session.async_payment_failed'?'failed':null;
+  if(!confirmed&&!nonPaymentState)return {status:200,outcome:'verified_other_event_requires_manual_reconciliation'};
+  if(confirmed&&e.paymentStatus!=='paid')return {status:200,outcome:'no_capture_confirmed'};
+  if(nonPaymentState&&e.paymentStatus==='paid')return {status:422,outcome:'conflicting_payment_status'};
   if(!SESSION.test(e.objectId)||!e.clientReferenceId||
      !['primary','general'].includes(e.election)||e.currency!=='usd'||
      !Number.isSafeInteger(e.amountTotal)||e.amountTotal<=0||
@@ -53,17 +56,37 @@ export class StripeCampaignStore {
     if(old.rows[0]?.event_sha256!==digest)throw Error('Stripe webhook duplicate ID content mismatch');
     await c.query('COMMIT');return {status:200,outcome:'duplicate'};
    }
-   if(record.payment_state!=='pending'){
+   if(nonPaymentState){
+    // A late expiration or failure event must never overwrite a paid status.
+    if(record.payment_state==='pending'){
+     await c.query(
+      'UPDATE g28.stripe_checkout_intents SET payment_state=$1,status_updated_at=now() WHERE client_reference=$2',
+      [nonPaymentState,e.clientReferenceId]);
+    }
+    await c.query('COMMIT');
+    return {status:200,outcome:record.payment_state==='pending'?
+     'verified_'+nonPaymentState+'_no_charge':'already_'+record.payment_state};
+   }
+   if(record.payment_state==='paid'){
     await c.query('COMMIT');return {status:200,outcome:'already_captured'};
    }
-   await c.query(
-    "UPDATE g28.stripe_checkout_intents SET payment_state='paid',confirmed_at=now() WHERE client_reference=$1",
-    [e.clientReferenceId]);
+   if(record.payment_state!=='pending'){
+    // A signed paid event after an expiration/failure is a real discrepancy.
+    // Record the capture for human reconciliation, not as cleared funds.
+    await c.query(
+     "UPDATE g28.stripe_checkout_intents SET payment_state='requires_review',status_updated_at=now() WHERE client_reference=$1",
+     [e.clientReferenceId]);
+   }else{
+    await c.query(
+     "UPDATE g28.stripe_checkout_intents SET payment_state='paid',confirmed_at=now(),status_updated_at=now() WHERE client_reference=$1",
+     [e.clientReferenceId]);
+   }
    await c.query(
     "INSERT INTO g28.financial_provider_events(provider,event_id,payment_id,event_digest,event_kind,amount_cents,occurred_at) VALUES($1,$2,$3,$4,'captured',$5,$6) ON CONFLICT(provider,event_id) DO NOTHING",
     [sandbox?'stripe-test':'stripe',e.id,e.objectId,digest,e.amountTotal,new Date(e.created*1000)]);
    await c.query('COMMIT');
-   return {status:200,outcome:'verified_captured_not_settled'};
+   return {status:200,outcome:record.payment_state==='pending'?
+    'verified_captured_not_settled':'verified_capture_requires_reconciliation'};
   }catch(error){await c.query('ROLLBACK');throw error;}finally{c.release();}
  }
 }
