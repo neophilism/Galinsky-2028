@@ -52,6 +52,24 @@ test('session record is idempotent and rejects changing amount or mode',async()=
  await assert.rejects(()=>s.recordSession({clientRef:id,sessionId:session,election:'general',amountCents:2500,livemode:false}),/Conflicting/);
  await assert.rejects(()=>s.recordSession({clientRef:id,sessionId:session,election:'primary',amountCents:2500,livemode:true}),/mismatch/);
 });
+test('signed Stripe event must match the versioned one-checkbox agreement stored with the contribution',async()=>{
+ const pool=new FakePool(),store=new StripeCampaignStore(pool);
+ const version='2026-10-13-general-v1';
+ await store.recordSession({clientRef:id,sessionId:session,election:'primary',
+  amountCents:2500,livemode:false,termsVersion:version});
+ assert.equal(pool.intent.terms_version,version);
+ const bad=raw(event({data:{object:{...event().data.object,metadata:{
+  election:'primary',terms_version:'2026-01-01-outdated-v1'}}}}));
+ const rejected=await store.receiveSignedWebhook({raw:bad,header:signature(bad),secret,sandbox:true});
+ assert.deepEqual(rejected,{status:422,outcome:'unmatched_payment'});
+ assert.equal(pool.captured.length,0);
+ const valid=raw(event({data:{object:{...event().data.object,metadata:{
+  election:'primary',terms_version:version}}}}));
+ const accepted=await store.receiveSignedWebhook({raw:valid,header:signature(valid),secret,sandbox:true});
+ assert.equal(accepted.outcome,'verified_captured_not_settled');
+ assert.equal(pool.captured.length,1);
+});
+
 test('only paid, signed, matched test transactions enter ledger; no bank settlement assumed',async()=>{
  const pool=new FakePool(),s=new StripeCampaignStore(pool);
  await s.recordSession({clientRef:id,sessionId:session,election:'primary',amountCents:2500,livemode:false});
