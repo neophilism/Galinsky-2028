@@ -146,5 +146,6 @@ export function verifyStripeWebhook(raw,signature,secret,{now=Math.floor(Date.no
   currency:typeof data.currency==='string'?data.currency:null,
   paymentStatus:data.payment_status==='paid'?'paid':data.payment_status==='unpaid'?'unpaid':null,
   clientReferenceId:typeof data.client_reference_id==='string'&&/^attempt_[a-f0-9]{32}$/.test(data.client_reference_id)?data.client_reference_id:null,
-  election:data.metadata?.election==='primary'||data.metadata?.election==='general'?data.metadata.election:null}};
+  election:data.metadata?.election==='primary'||data.metadata?.election==='general'?data.metadata.election:null,
+  termsVersion:typeof data.metadata?.terms_version==='string'&&/^\d{4}-\d{2}-\d{2}-[a-z0-9-]{4,40}$/.test(data.metadata.terms_version)?data.metadata.terms_version:null}};
 }
