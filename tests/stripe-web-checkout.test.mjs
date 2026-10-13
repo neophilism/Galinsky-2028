@@ -3,8 +3,9 @@ import assert from 'node:assert/strict';
 import {mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
+import {request as httpRequest} from 'node:http';
 import {createPrivatePreviewServer} from '../apps/web/private-preview.mjs';
-import {stripeSettings,checkoutNonceKey,createCheckoutToken,checkCheckoutToken,parseCheckoutForm,openStripeSession} from '../packages/core/stripe-web-checkout.mjs';
+import {stripeSettings,checkoutNonceKey,createCheckoutToken,checkCheckoutToken,parseCheckoutForm,openStripeSession,validDonationOrigin} from '../packages/core/stripe-web-checkout.mjs';
 import {CONTRIBUTION_TERMS_VERSION,CONTRIBUTION_TERMS_PATH} from '../packages/core/contribution-terms.mjs';
 
 const password='test-preview-password-long-2026';
@@ -62,6 +63,29 @@ test('signed form tokens expire and enforce exact origin, amount and eligibility
  await assert.rejects(()=>openStripeSession({raw:body(token),settings:cfg,nonceKey:key,
   request:{headers:{origin:'https://evil.example.test'}}}),/Cross-origin/);
 });
+test('real-browser origin fallback accepts privacy-suppressed Origin only on the correct host',()=>{
+ const cfg=stripeSettings(sandbox());
+ const req=headers=>({headers});
+ const host='preview.example.test';
+ assert.equal(validDonationOrigin(req({host,'sec-fetch-site':'same-origin'}),cfg),true);
+ assert.equal(validDonationOrigin(req({host,origin:'null','sec-fetch-site':'same-origin'}),cfg),true);
+ assert.equal(validDonationOrigin(req({host}),cfg),true); // authenticated sandbox plus signed token
+ assert.equal(validDonationOrigin(req({host,referer:'https://preview.example.test/donate/stripe'}),cfg),true);
+ for(const headers of [
+  {host:'evil.example.test'},
+  {host,origin:'https://evil.example.test'},
+  {host,origin:'null','sec-fetch-site':'cross-site'},
+  {host,'sec-fetch-site':'same-site'},
+  {host,referer:'https://evil.example.test/donate/stripe'}
+ ])assert.equal(validDonationOrigin(req(headers),cfg),false);
+ assert.equal(validDonationOrigin(req({host}),{...cfg,sandbox:false}),false);
+ assert.equal(validDonationOrigin(req({host,'sec-fetch-site':'same-origin'}),{...cfg,sandbox:false}),true);
+});
+test('sandbox return origin follows deployed Render preview host, not a future domain',()=>{
+ const settings=stripeSettings({...sandbox(),G28_STRIPE_RETURN_ORIGIN:'https://galinsky2028.us',
+  RENDER_EXTERNAL_URL:'https://galinsky-2028-private-preview.onrender.com'});
+ assert.equal(settings.origin,'https://galinsky-2028-private-preview.onrender.com');
+});
 test('password-protected sandbox returns form and 303 to verified Stripe checkout, no charges',async t=>{
  const dir=await mkdtemp(join(tmpdir(),'stripe-checkout-'));await writeFile(join(dir,'index.html'),'private');
  let called=0;
@@ -113,12 +137,26 @@ test('password-protected sandbox returns form and 303 to verified Stripe checkou
   body:body(token)});
  assert.equal(bad.status,400);assert.equal(called,0);
  // A URL-encoded test form never contains real card numbers.
+ // Use Node's low-level HTTP client rather than fetch: fetch may inject its
+ // own Origin/Fetch Metadata, so it cannot model a privacy-suppressed browser.
+ const privacy=await new Promise((resolve,reject)=>{
+  const u=new URL(root+'/donate/stripe/checkout');
+  const payload=body(token);
+  const req=httpRequest({hostname:u.hostname,port:u.port,path:u.pathname,method:'POST',headers:{
+   ...auth,Host:'preview.example.test','Sec-Fetch-Site':'same-origin',
+   'Content-Type':'application/x-www-form-urlencoded','Content-Length':Buffer.byteLength(payload)
+  }},res=>{
+   res.resume();res.on('end',()=>resolve({status:res.statusCode,location:res.headers.location}));
+  });
+  req.on('error',reject);req.end(payload);
+ });
+ assert.equal(privacy.status,303);assert.equal(privacy.location,'https://checkout.stripe.com/c/pay/session');
  const ok=await fetch(root+'/donate/stripe/checkout',{method:'POST',redirect:'manual',
   headers:{...auth,origin:'https://preview.example.test','content-type':'application/x-www-form-urlencoded'},
   body:body(token)});
  assert.equal(ok.status,303);assert.equal(ok.headers.get('location'),'https://checkout.stripe.com/c/pay/session');
- assert.equal(called,1);
- assert.equal(stored.length,1);
+ assert.equal(called,2);
+ assert.equal(stored.length,2);
  assert.equal(stored[0].amountCents,2500);
  assert.equal(stored[0].livemode,false);
  assert.equal(stored[0].election,'general');
