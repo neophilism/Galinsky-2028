@@ -6,10 +6,10 @@
   "plan_status": "implementation_started",
   "design_status": "approved_with_issue_video_amendment",
   "planned_work_packages": 61,
-  "implemented_packages": 10,
-  "merged_packages": 10,
-  "deployed_packages": 8,
-  "note": "10 source-bound completed work packages; 44 in progress; 7 not started. See docs/evidence/ACCEPTANCE_AUDIT_20261013.md. The 82 merged PRs are distinct from accepted packages.",
+  "implemented_packages": 8,
+  "merged_packages": 8,
+  "deployed_packages": 7,
+  "note": "Conservative source-bound audit: 8 completed, 46 in progress, 7 not started. All 82 previously merged PRs are represented as either complete or partial evidence, not as work-unit numbers.",
   "packages": [
     {
       "id": "G28-01",
@@ -53,33 +53,25 @@
       "depends_on": [
         "G28-01"
       ],
-      "status": "completed",
-      "github_prs": [
+      "status": "in_progress",
+      "github_prs": [],
+      "scope": "Set up Astro marketing, React/TypeScript portal, Fastify API/static portal host, shared UI/contracts/content/security packages, pnpm workspace and pinned supported Node/tool versions. Add formatting, lint, type checks, unit/integration/browser test runners, secret scanning, dependency review, branch rules and PR templates. Keep pending features behind server-side flags.",
+      "acceptance": "A clean checkout installs reproducibly and passes the documented verification command. CI tests the merge candidate; no production secret is available to untrusted PRs. Empty test suites and skipped security gates cannot be reported as passing implementation evidence.",
+      "evidence": "Lockfile, CI configuration, green bootstrap run and documented local setup.",
+      "external_inputs": "None beyond the listed dependencies.",
+      "implementation_note": "The complete CI suite passes, but the original G28-02 scope also calls for formatting/lint tooling, dedicated secret scanning, a PR template and branch-rule evidence. Those are absent or unverified; CI success alone is not full package acceptance.",
+      "contributing_prs": [
         1,
         6,
         19,
         90,
         92
       ],
-      "scope": "Set up Astro marketing, React/TypeScript portal, Fastify API/static portal host, shared UI/contracts/content/security packages, pnpm workspace and pinned supported Node/tool versions. Add formatting, lint, type checks, unit/integration/browser test runners, secret scanning, dependency review, branch rules and PR templates. Keep pending features behind server-side flags.",
-      "acceptance": "A clean checkout installs reproducibly and passes the documented verification command. CI tests the merge candidate; no production secret is available to untrusted PRs. Empty test suites and skipped security gates cannot be reported as passing implementation evidence.",
-      "evidence": "Lockfile, CI configuration, green bootstrap run and documented local setup.",
-      "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Exact-lockfile, TypeScript, unit, PostgreSQL, browser, build and audit CI pipeline passed on reviewed main. Package acceptance is separate from production release.",
-      "contributing_prs": [],
       "acceptance_review": {
-        "status": "completed",
+        "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "completed_at": "2026-10-13T21:14:24.168Z",
-        "ci_run_id": 38462635121,
-        "evidence_paths": [
-          "package.json",
-          ".github/workflows/ci.yml",
-          ".circleci/config.yml",
-          "tests/browser/journeys.mjs"
-        ],
         "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "scoped_deployed": false
+        "blocker": "The complete CI suite passes, but the original G28-02 scope also calls for formatting/lint tooling, dedicated secret scanning, a PR template and branch-rule evidence. Those are absent or unverified; CI success alone is not full package acceptance."
       }
     },
     {
@@ -898,30 +890,22 @@
         "G28-29",
         "G28-30"
       ],
-      "status": "completed",
-      "github_prs": [
-        1,
-        35
-      ],
+      "status": "in_progress",
+      "github_prs": [],
       "scope": "Implement web versions of the action card, three-line debrief, conversation practice, event plan/run of show, call-bank checklist, creative QA, source card, correction record, state activation sheet, petition custody log, incident first-response card and weekly team plan. Use local/no-save mode where submission is unnecessary; protected submission where needed. Offer accessible print/download views.",
       "acceptance": "Each original form maps to a working typed form or intentionally local worksheet; none is merely a PDF embedded in an iframe. Required warnings and no-supporter-data rules remain. Custody logs use sheet identifiers rather than copying signatures or voter identities. Admin-only activation fields cannot be submitted by ordinary volunteers.",
       "evidence": "Form-to-source coverage matrix, field/privacy validation, authorization tests and print layout checks.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "All twelve original worksheet types have editable local web forms, print/download/reset, privacy warnings and no server submission; tests pass. Package acceptance is separate from production release.",
-      "contributing_prs": [],
+      "implementation_note": "All twelve local worksheets render, but the original source templates contain fields not yet mapped to typed controls and the required coverage matrix, print/privacy and role-boundary evidence is incomplete.",
+      "contributing_prs": [
+        1,
+        35
+      ],
       "acceptance_review": {
-        "status": "completed",
+        "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "completed_at": "2026-10-13T21:14:24.168Z",
-        "ci_run_id": 38462635121,
-        "evidence_paths": [
-          "packages/core/forms.mjs",
-          "apps/portal/src/main.tsx",
-          "tests/core.test.mjs",
-          "tests/browser/journeys.mjs"
-        ],
         "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "scoped_deployed": true
+        "blocker": "All twelve local worksheets render, but the original source templates contain fields not yet mapped to typed controls and the required coverage matrix, print/privacy and role-boundary evidence is incomplete."
       }
     },
     {
@@ -1792,5 +1776,5 @@
       }
     }
   ],
-  "progress_evidence_note": "Audited main 0e70c5cee4b34e5de78aea3b304cbe7aa73c3228 and Render private/portal deployments on 2026-10-13. Statuses synced to canonical registry/prs.json."
+  "progress_evidence_note": "13 October 2026 acceptance audit: eight demonstrated whole-package completions, 46 partial implementations and 7 unstarted; a merged PR does not imply full acceptance."
 }
