@@ -1,6 +1,6 @@
 {
-  "status": "two_private_services_live_ten_scoped_packages_accepted_production_release_blocked",
-  "full_work_packages_accepted": 10,
+  "status": "two_private_services_live_eight_scoped_packages_accepted_production_release_blocked",
+  "full_work_packages_accepted": 8,
   "deployment_verified": true,
   "repository": "neophilism/Galinsky-2028",
   "verified_merges": [
@@ -115,7 +115,7 @@
     "Staff/admin features not complete",
     "Unreviewed source archive not publicly bundled"
   ],
-  "notes": "Ten accepted scoped packages; 44 partly implemented; 7 unstarted based on 82 merged GitHub PRs, current source/CI and actual protected Render preview. Production fundraising, live email, current materials, final issue links/media and public site launch still blocked.",
+  "notes": "Eight verified package acceptances, 46 incomplete scoped implementations and 7 without functional implementation. CI and worksheets exist but their full original package requirements are not yet satisfied. Public release and live donations remain gated.",
   "production_release_verified": false,
   "private_preview": {
     "url": "https://galinsky-2028-private-preview.onrender.com",
@@ -173,8 +173,8 @@
     "reviewed_at": "2026-10-13T21:14:24.168Z",
     "source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
     "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-    "completed": 10,
-    "in_progress": 44,
+    "completed": 8,
+    "in_progress": 46,
     "not_started": 7,
     "observed_merged_prs": 82,
     "observed_closed_unmerged_prs": 5,
