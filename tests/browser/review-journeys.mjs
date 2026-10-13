@@ -40,10 +40,12 @@ try{
    assert.equal((await view.request.get(origin+'/preview/api/users')).status(),403);
    assert.equal((await view.request.get(origin+'/donate/stripe')).status(),403);
    await reader.goto(origin+'/preview/');assert.equal(await reader.getByRole('link',{name:'Manage reviewer accounts'}).count(),0);
-   await page.getByRole('button',{name:'Reset password'}).click();await page.getByLabel('New reviewer password').fill('synthetic-reset-password-12345');await page.getByRole('button',{name:'Save new password'}).click();await page.getByText('Password reset. The reviewer’s existing sessions have been revoked.').waitFor();
+   const reviewerCard=page.locator('article.account').filter({hasText:'Username: reviewer'+name});
+    assert.equal(await reviewerCard.count(),1,'Exactly one row matches the active synthetic reviewer');
+    await reviewerCard.getByRole('button',{name:'Reset password'}).click();await reviewerCard.getByLabel('New reviewer password').fill('synthetic-reset-password-12345');await reviewerCard.getByRole('button',{name:'Save new password'}).click();await page.getByText('Password reset. The reviewer’s existing sessions have been revoked.').waitFor();
    assert.equal((await view.request.get(origin+'/issues/garden/')).status(),401);
    await reader.reload();await reader.getByLabel('Username',{exact:true}).fill('reviewer'+name);await reader.getByLabel('Password',{exact:true}).fill('synthetic-reset-password-12345');await reader.getByRole('button',{name:'Sign in',exact:true}).click();await reader.getByLabel('Current password').fill('synthetic-reset-password-12345');await reader.getByLabel('New password').fill('synthetic-final-password-12345');await reader.getByRole('button',{name:'Update password'}).click();await reader.getByText('Password updated. Your other sessions have been signed out.').waitFor();
-   await page.getByRole('button',{name:'Disable access'}).click();await page.getByText('Reviewer access disabled and sessions revoked.').waitFor();assert.equal((await view.request.get(origin+'/issues/garden/')).status(),401);
+   await reviewerCard.getByRole('button',{name:'Disable access'}).click();await page.getByText('Reviewer access disabled and sessions revoked.').waitFor();assert.equal((await view.request.get(origin+'/issues/garden/')).status(),401);
    await reader.reload();await reader.getByRole('button',{name:'Sign in',exact:true}).waitFor();
    assert.deepEqual(errors,[]);evidence.push({browser:name,policyViews:views,ownerCreation:true,requiredPasswordChange:true,resetRevokesSessions:true,revocation:true,reviewerCannotManage:true});
    // Capture only the empty login screen; no credentials or account roster.
