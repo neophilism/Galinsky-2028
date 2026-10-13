@@ -9,6 +9,10 @@ The owner explicitly directs all projects to continue implementation, testing, m
 - If code, workflow or a status interpreter blocks solely on external-review absence, replace that prerequisite with the owner-authorized AI review/testing process. Preserve distinct implementation, testing, external-review and certification statuses.
 - Continue dependency-ready work and chain PRs. Do not ask the owner again to waive the human-review prerequisite.
 
+## Package acceptance — 13 October 2026
+
+`registry/prs.json` is the sole canonical PR-to-work-unit mapping. Read `docs/evidence/ACCEPTANCE_AUDIT_20261013.md` and `docs/PR_REGISTER.json` before changing acceptance. There are 61 total work units, not 61 remaining PRs. Update both registries together, associate only actually merged full-scope PRs with accepted packages, keep partial source marked in progress, and run `npm test` and `npm run check` before merging. The old `registry/roadmap.json` is a redirect; `.exechub` summaries are not parallel status truth. Full package acceptance requires its scoped source, CI and runtime evidence, but a paid external human security auditor is not a prerequisite to normal AI-reviewed development.
+
 # Agent instructions: Galinsky 2028
 
 Read `docs/DEVELOPMENT_PLAN.md`, `docs/PR_REGISTER.json`, the approved design baseline, content/input register and current GitHub/CI/deployment state before making changes.

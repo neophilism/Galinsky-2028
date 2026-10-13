@@ -1,4 +1,4 @@
-# CANONICAL PR ROADMAP: registry/roadmap.json. Historical manifest retained; change PR plan and total in canonical roadmap.
+# Canonical PR and acceptance registry: registry/prs.json. This manifest is a historical compatibility projection.
 project:
   name: Galinsky-2028
   display_name: Galinsky 2028
@@ -7,7 +7,7 @@ project:
 
 roadmap:
   version: 1
-  planned_prs: 60
+  planned_prs: 61
   approved: true
 
 milestones:
@@ -23,3 +23,5 @@ milestones:
     prs: 10
   - name: Verification deployment and handoff
     prs: 12
+  - name: Owner-requested private reviewer accounts
+    prs: 1

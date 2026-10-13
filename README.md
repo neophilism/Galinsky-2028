@@ -8,7 +8,9 @@ Implementation of the approved Phillip Galinsky for America campaign website and
 
 **Real volunteer portal/API:** https://galinsky-2028-volunteer-portal.onrender.com ([Render service](https://dashboard.render.com/web/srv-db5v0lfavr4c73a62870)), in the same designated project/environment and protected by the same private-preview password. Its Neon staging database is connected and `/readyz` passed live verification ([run 38181063632](https://github.com/neophilism/Galinsky-2028/actions/runs/38181063632)). Public volunteer role links now open the actual portal, not a browser-only simulation. It provides account-backed role preferences, tasks and reading acknowledgments, plus real account-data export and global logout (PR #41). Accounts cannot be created until verified mail infrastructure is enabled. Current approved volunteer-materials publication is still pending.
 
-**Start here:** [implementation status](docs/IMPLEMENTATION_STATUS.md), [complete development plan](docs/DEVELOPMENT_PLAN.md), [60-package register](docs/PR_REGISTER.json), [agent rules](AGENTS.md), [deployment runbook](docs/operations/DEPLOYMENT.md).
+**Current package acceptance (13 October 2026):** **8 accepted, 46 in progress, 7 not started**, from 61 planned work packages. Separately, 82 GitHub PRs were merged. See the [package-by-package acceptance audit](docs/evidence/ACCEPTANCE_AUDIT_20261013.md). This is not a live public campaign or payment release.
+
+**Start here:** [implementation status](docs/IMPLEMENTATION_STATUS.md), [complete development plan](docs/DEVELOPMENT_PLAN.md), [61-package register](docs/PR_REGISTER.json), [agent rules](AGENTS.md), [deployment runbook](docs/operations/DEPLOYMENT.md).
 
 ## Run and verify
 
