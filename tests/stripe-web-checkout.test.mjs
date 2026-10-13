@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
+import {request as httpRequest} from 'node:http';
 import {createPrivatePreviewServer} from '../apps/web/private-preview.mjs';
 import {stripeSettings,checkoutNonceKey,createCheckoutToken,checkCheckoutToken,parseCheckoutForm,openStripeSession,validDonationOrigin} from '../packages/core/stripe-web-checkout.mjs';
 import {CONTRIBUTION_TERMS_VERSION,CONTRIBUTION_TERMS_PATH} from '../packages/core/contribution-terms.mjs';
@@ -136,10 +137,20 @@ test('password-protected sandbox returns form and 303 to verified Stripe checkou
   body:body(token)});
  assert.equal(bad.status,400);assert.equal(called,0);
  // A URL-encoded test form never contains real card numbers.
- const privacy=await fetch(root+'/donate/stripe/checkout',{method:'POST',redirect:'manual',
-  headers:{...auth,host:'preview.example.test','sec-fetch-site':'same-origin','content-type':'application/x-www-form-urlencoded'},
-  body:body(token)});
- assert.equal(privacy.status,303);assert.equal(privacy.headers.get('location'),'https://checkout.stripe.com/c/pay/session');
+ // Use Node's low-level HTTP client rather than fetch: fetch may inject its
+ // own Origin/Fetch Metadata, so it cannot model a privacy-suppressed browser.
+ const privacy=await new Promise((resolve,reject)=>{
+  const u=new URL(root+'/donate/stripe/checkout');
+  const payload=body(token);
+  const req=httpRequest({hostname:u.hostname,port:u.port,path:u.pathname,method:'POST',headers:{
+   ...auth,Host:'preview.example.test','Sec-Fetch-Site':'same-origin',
+   'Content-Type':'application/x-www-form-urlencoded','Content-Length':Buffer.byteLength(payload)
+  }},res=>{
+   res.resume();res.on('end',()=>resolve({status:res.statusCode,location:res.headers.location}));
+  });
+  req.on('error',reject);req.end(payload);
+ });
+ assert.equal(privacy.status,303);assert.equal(privacy.location,'https://checkout.stripe.com/c/pay/session');
  const ok=await fetch(root+'/donate/stripe/checkout',{method:'POST',redirect:'manual',
   headers:{...auth,origin:'https://preview.example.test','content-type':'application/x-www-form-urlencoded'},
   body:body(token)});
