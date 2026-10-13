@@ -3,14 +3,21 @@ import assert from 'node:assert/strict';
 import {readFileSync,readdirSync,statSync,existsSync} from 'node:fs';
 import {join} from 'node:path';
 import {pages,site,root,renderPage} from '../scripts/public-renderer.mjs';
+import {policySources} from '../packages/core/live-policy-library.mjs';
 const rendered=new Map(pages.map(p=>[p.path,renderPage(p.key)]));
+const protectedPolicyRoutes=new Set(Object.keys(policySources()).map(slug=>`/policy-library/${slug}/`));
+test('all live policy links resolve to explicitly registered protected server routes',()=>{
+ assert.deepEqual([...protectedPolicyRoutes].sort(),['/policy-library/cornerstone/','/policy-library/garden/','/policy-library/kirk-evers/']);
+ for(const slug of Object.keys(policySources()))assert(renderPage(slug).includes(`href="/policy-library/${slug}/"`),`Missing registered source link: ${slug}`);
+});
 for(const p of pages)test('public contract: '+p.key,()=>{
  const html=rendered.get(p.path);assert.equal((html.match(/<h1\b/g)||[]).length,1);assert(html.includes('id="main"'));assert(!html.includes('{{'));assert(!html.includes('data-notice'));assert(!html.includes('materials.js'));assert(!html.includes('signup-preview'));assert(!html.includes('workspace.html'));assert(!html.includes('review.html'));assert(!html.includes('src="https://'));
  for(const match of html.matchAll(/href="(\/[^" ]*)"/g)){
   const u=new URL(match[1],'https://site.test');if(u.pathname.startsWith('/assets/')||u.pathname==='/favicon.svg')continue;
-  // These exact private libraries are server routes, covered by their real
-  // HTTP/authentication tests; they are deliberately absent from static output.
-  if(/^\/policy-library\/(kirk-evers|garden|cornerstone)\/$/.test(u.pathname))continue;
+  // A policy-library URL is a dynamic, authenticated server route, NOT a
+  // static page. Only explicitly registered URLs can bypass static lookup;
+  // the server's 401/503 behavior is exercised in live-policy-library.test.mjs.
+  if(protectedPolicyRoutes.has(u.pathname))continue;
   assert(rendered.has(u.pathname),`${p.key}: broken local link ${match[1]}`);
   if(u.hash){const target=rendered.get(u.pathname);const anchor=u.hash.slice(1);assert(target.includes(`id="${anchor}"`),`${p.key}: missing anchor ${match[1]}`);}
  }
