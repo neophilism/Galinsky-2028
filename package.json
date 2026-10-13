@@ -28,7 +28,7 @@
     "issue:prepare": "node scripts/prepare-issue-video.mjs",
     "policy:html": "node scripts/prepare-public-document.mjs",
     "test:browser": "node tests/browser/journeys.mjs",
-    "test:review-browser": "node tests/browser/review-journeys.mjs"
+    "test:review-browser": "node scripts/run-review-browser-suite.mjs"
   },
   "dependencies": {
     "astro": "7.3.8",
