@@ -1,6 +1,6 @@
 {
-  "status": "two_private_services_live_production_release_blocked",
-  "full_work_packages_accepted": 0,
+  "status": "two_private_services_live_ten_scoped_packages_accepted_production_release_blocked",
+  "full_work_packages_accepted": 10,
   "deployment_verified": true,
   "repository": "neophilism/Galinsky-2028",
   "verified_merges": [
@@ -115,7 +115,7 @@
     "Staff/admin features not complete",
     "Unreviewed source archive not publicly bundled"
   ],
-  "notes": "Both password-protected public-site and real volunteer portal/API are deployed and role links point to the actual application. The staging database stores account preferences/checklists and supports self-service exports and session revocation. Registration remains disabled without verified email; staff identity, sensitive submissions, donations, policy publication and full public production release remain blocked on independent engineering/owner acceptance. Zero of the 60 complete work packages is certified.",
+  "notes": "Ten accepted scoped packages; 44 partly implemented; 7 unstarted based on 82 merged GitHub PRs, current source/CI and actual protected Render preview. Production fundraising, live email, current materials, final issue links/media and public site launch still blocked.",
   "production_release_verified": false,
   "private_preview": {
     "url": "https://galinsky-2028-private-preview.onrender.com",
@@ -123,8 +123,8 @@
     "service_id": "srv-db5teuajnfac73bm8pug",
     "project_id": "prj-db57fnm7bikc739783q0",
     "environment_id": "evm-db57fnm7bikc739783qg",
-    "deploy_id": "dep-db614dnlk1mc73bhs8ig",
-    "deployed_commit": "5aef1f8d2bcabee093960f552ce482f9adfd9f4b",
+    "deploy_id": "dep-db79b2d9fdbs73dblj80",
+    "deployed_commit": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
     "deploy_status": "live",
     "authentication": "HTTP Basic; username preview; secret never stored in Git",
     "rejected_access_test_paths": 9,
@@ -168,5 +168,21 @@
     "payments_enabled": false,
     "account_export_and_revoke_sessions_implemented": true,
     "public_role_links_to_actual_portal": true
+  },
+  "last_acceptance_audit": {
+    "reviewed_at": "2026-10-13T21:14:24.168Z",
+    "source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+    "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+    "completed": 10,
+    "in_progress": 44,
+    "not_started": 7,
+    "observed_merged_prs": 82,
+    "observed_closed_unmerged_prs": 5,
+    "ci_run_id": 38462635121,
+    "ci_conclusion": "success",
+    "private_preview_deploy": "dep-db79b2d9fdbs73dblj80",
+    "private_preview_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
+    "portal_preview_sha": "c263d8fd8a331b238ddc884b052c672558cee96e",
+    "warning": "Whole-package acceptance is separate from full public campaign release, real-money contributions, verified production signup and public media publication."
   }
 }
