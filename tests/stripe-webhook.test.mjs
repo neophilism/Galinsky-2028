@@ -23,7 +23,7 @@ class FakePool{
   if(sql.startsWith('SELECT session_id,election,amount_cents,livemode')){
    return {rowCount:this.intent?1:0,rows:this.intent?[{...this.intent}]:[]};
   }
-  if(sql.startsWith('SELECT client_reference,election,amount_cents,livemode,payment_state FROM')){
+  if(sql.startsWith('SELECT client_reference,election,amount_cents,livemode,payment_state')){
    return {rowCount:this.intent?1:0,rows:this.intent?[{...this.intent}]:[]};
   }
   if(sql.startsWith('INSERT INTO g28.stripe_webhook_receipts(')){
