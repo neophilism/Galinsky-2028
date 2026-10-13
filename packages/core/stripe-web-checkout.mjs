@@ -52,10 +52,18 @@ export function stripeSettings(env){
     limits,recurringEnabled:false,evidence:policyEvidence},release};
 }
 
-export function checkoutNonceKey(){return randomBytes(32);}
-export function createCheckoutToken(secret,now=Date.now()){
+export function checkoutNonceKey(stripeSecretKey=null){
+ // A random per-process signing key invalidates a form whenever Render deploys
+ // or scales, leaving users stuck before reaching Stripe. Derive a separate
+ // domain-separated CSRF key from the private, stable server-only Stripe key.
+ // It never leaves the backend and is not sent to Stripe or the browser.
+ if(typeof stripeSecretKey==='string'&&/^(sk_test|sk_live)_[A-Za-z0-9_]{12,}$/.test(stripeSecretKey))
+  return createHmac('sha256',stripeSecretKey).update('galinsky-2028:stripe-csrf-form:v1').digest();
+ return randomBytes(32);
+}
+export function createCheckoutToken(secret,now=Date.now(),nonce=randomBytes(16).toString('hex')){
+ if(typeof nonce!=='string'||!/^[a-f0-9]{32}$/.test(nonce))throw Error('Invalid checkout token nonce.');
  const issued=Math.floor(now/1000);
- const nonce=randomBytes(16).toString('hex');
  const payload=issued+'.'+nonce;
  const sig=createHmac('sha256',secret).update(payload).digest('hex');
  return payload+'.'+sig;
@@ -89,17 +97,24 @@ export function parseCheckoutForm(raw){
  return {amountCents,frequency:'once',election:ONLINE_DONATION_ELECTION,attestations,
   termsVersion:CONTRIBUTION_TERMS_VERSION,formToken:p.get('form_token')};
 }
-export async function openStripeSession({raw,settings,nonceKey,request,transport=fetch}){
+export async function openStripeSession({raw,settings,nonceKey,request,transport=fetch,onStage=()=>{}}){
+ onStage('configuration');
  if(!settings)throw routeBlocked();
+ onStage('origin');
  if(!validDonationOrigin(request,settings))throw Error('Cross-origin payment request refused.');
+ onStage('form');
  const input=parseCheckoutForm(raw);
+ onStage('token');
  const clientRef=checkCheckoutToken(nonceKey,input.formToken);
  if(!clientRef)throw Error('Expired or invalid checkout form. Reload before submitting.');
+ onStage('plan');
  const plan=stripeCheckoutPlan({contribution:{amountCents:input.amountCents,frequency:input.frequency,
   election:input.election,clientRef,attestations:input.attestations,termsVersion:input.termsVersion},
   policy:settings.policy,release:settings.release});
+ onStage('stripe_api');
  const created=await createStripeCheckout({plan,secretKey:settings.secretKey,transport,
   signal:AbortSignal.timeout(10000)});
+ onStage('stripe_created');
  return {...created,clientRef,amountCents:input.amountCents,election:input.election,
   termsVersion:input.termsVersion};
 }
