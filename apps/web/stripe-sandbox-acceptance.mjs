@@ -54,14 +54,14 @@ export async function runStripeSandboxAcceptance({
    throw Error('stripe_account_unverified');
   phase='checkout-session';
   const plan=stripeCheckoutPlan({contribution:{
-   amountCents:100,frequency:'once',election:'primary',clientRef,
+   amountCents:100,frequency:'once',election:'general',clientRef,
    attestations:Object.fromEntries(attestationKeys.map(k=>[k,true]))
   },policy:settings.policy,release:settings.release});
   checkout=await createStripeCheckout({plan,secretKey:settings.secretKey,transport,
    signal:AbortSignal.timeout(12000)});
   if(!checkout.sessionId.startsWith('cs_test_'))throw Error('test_session_expected');
   phase='database-session';
-  await store.recordSession({clientRef,sessionId:checkout.sessionId,amountCents:100,election:'primary',livemode:false});
+  await store.recordSession({clientRef,sessionId:checkout.sessionId,amountCents:100,election:'general',livemode:false});
   stored=true;
   phase='expire-test-session';
   const result=await getOrPost(G28_API+'/v1/checkout/sessions/'+checkout.sessionId+'/expire',{

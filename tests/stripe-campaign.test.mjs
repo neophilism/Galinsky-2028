@@ -55,6 +55,8 @@ test('Checkout is processor-hosted, carries no donor PII, and does not mark paym
  assert.equal(p.body.get('success_url'),'https://campaign.example/donate/?checkout=processing');
  assert(!p.body.toString().includes('@'));
  assert(!p.body.toString().includes('card_number'));
+ const withTerms=stripeCheckoutPlan({contribution:contribution({termsVersion:'2026-10-13-general-v1'}),policy:policy(),release:release()});
+ assert.equal(withTerms.body.get('metadata[terms_version]'),'2026-10-13-general-v1');
 });
 test('invalid election/amount/attestations/recurrence fail before contacting Stripe',()=>{
  for(const c of [

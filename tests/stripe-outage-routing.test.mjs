@@ -36,8 +36,7 @@ test('three independent gateway failures become trusted circuit-breaker observat
   assert.equal(get.status,200);
   const token=(await get.text()).match(/name="form_token" value="([^"]+)"/)?.[1];
   assert(token);
-  const body=new URLSearchParams({form_token:token,amount:'25',frequency:'once',election:'primary',
-   eligibleResidency:'yes',ownFunds:'yes',age18:'yes',notFederalContractor:'yes',personalCreditCard:'yes'});
+  const body=new URLSearchParams({form_token:token,amount:'25',frequency:'once',agree:'yes'});
   const post=await fetch(origin+'/donate/stripe/checkout',{
    method:'POST',redirect:'manual',
    headers:{...auth,origin:'https://preview.example.test','content-type':'application/x-www-form-urlencoded'},body:body.toString()
