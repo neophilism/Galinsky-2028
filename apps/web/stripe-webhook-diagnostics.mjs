@@ -5,11 +5,12 @@ import {stripeSettings} from '../../packages/core/stripe-web-checkout.mjs';
 const API='https://api.stripe.com';
 const targetPath='/donate/stripe/webhook';
 
-async function stripeList(url,key,transport){
+async function stripeList(url,key,transport,{v2=false}={}){
  try{
-  const r=await transport(url,{method:'GET',redirect:'error',headers:{
-   Authorization:'Bearer '+key,'User-Agent':'Galinsky-2028-test-webhook-diagnostics'
-  },signal:AbortSignal.timeout(12000)});
+  const headers={Authorization:'Bearer '+key,'User-Agent':'Galinsky-2028-test-webhook-diagnostics'};
+  if(v2)headers['Stripe-Version']='2026-09-30.endive';
+  const r=await transport(url,{method:'GET',redirect:'error',headers,
+   signal:AbortSignal.timeout(12000)});
   if(!r?.ok)return null;
   const json=await r.json();
   return json&&Array.isArray(json.data)?json:null;
@@ -33,6 +34,17 @@ export async function diagnoseStripeTestWebhooks({env=process.env,pool,transport
  }catch{dbState='unavailable';}
  const expected=setting.origin+targetPath;
  const endpoints=await stripeList(API+'/v1/webhook_endpoints?limit=100',setting.secretKey,transport);
+ // Workbench may use the newer v2 Event Destination API, not the classic
+ // v1 webhook_endpoints API. Include otherwise redacted URLs for local-only
+ // comparison, but NEVER log URL strings or endpoint objects.
+ const workbenchDestinations=await stripeList(
+  API+'/v2/core/event_destinations?limit=100&include%5B0%5D=webhook_endpoint.url',
+  setting.secretKey,transport,{v2:true});
+ const workbenchMatch=workbenchDestinations?.data.find(item=>
+  item&&item.type==='webhook_endpoint'&&item.livemode===false&&item.status==='enabled'&&
+  item.webhook_endpoint?.url===expected)||null;
+ const workbenchEvents=workbenchMatch?.enabled_events||[];
+ const hasEvent=(types,type)=>types.includes('*')||types.includes(type)||types.includes('v1.'+type);
  let matched=null;
  if(endpoints){
   matched=endpoints.data.find(x=>x&&x.url===expected&&x.livemode===false&&x.status==='enabled')||null;
@@ -54,6 +66,11 @@ export async function diagnoseStripeTestWebhooks({env=process.env,pool,transport
   status:'inspected',
   webhookEndpointApiReadable:Boolean(endpoints),
   matchingEnabledTestDestination:Boolean(matched),
+  workbenchV2ApiReadable:Boolean(workbenchDestinations),
+  workbenchV2MatchingEnabledTestDestination:Boolean(workbenchMatch),
+  workbenchV2PayloadIsSnapshot:workbenchMatch?.event_payload==='snapshot',
+  workbenchV2ExpiredSubscribed:Boolean(workbenchMatch&&hasEvent(workbenchEvents,'checkout.session.expired')),
+  workbenchV2CompletedSubscribed:Boolean(workbenchMatch&&hasEvent(workbenchEvents,'checkout.session.completed')),
   expiredEventSubscribed:Boolean(matched&&(types.includes('*')||types.includes('checkout.session.expired'))),
   completedEventSubscribed:Boolean(matched&&(types.includes('*')||types.includes('checkout.session.completed'))),
   testExpiryEventPresent:latestEventGenerated,
