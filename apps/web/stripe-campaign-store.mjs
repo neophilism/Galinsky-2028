@@ -4,20 +4,21 @@ import {verifyStripeWebhook} from '../../packages/core/stripe-campaign.mjs';
 const SESSION=/^cs_(test|live)_[A-Za-z0-9]{10,}$/;
 export class StripeCampaignStore {
  constructor(pool){this.pool=pool;}
- async recordSession({clientRef,sessionId,amountCents,election,livemode}){
+ async recordSession({clientRef,sessionId,amountCents,election,livemode,termsVersion=null}){
   if(!/^attempt_[a-f0-9]{32}$/.test(clientRef)||!SESSION.test(sessionId)||
    !Number.isSafeInteger(amountCents)||amountCents<=0||amountCents>100000000||
-   !['primary','general'].includes(election)||typeof livemode!=='boolean')
+   !['primary','general'].includes(election)||typeof livemode!=='boolean'||
+   termsVersion!==null&&(typeof termsVersion!=='string'||!/^\d{4}-\d{2}-\d{2}-[a-z0-9-]{4,40}$/.test(termsVersion)))
    throw new Error('Invalid Stripe checkout session record.');
   if(livemode !== sessionId.startsWith('cs_live_'))throw Error('Live and test Stripe session identity mismatch');
   await this.pool.query(
-   "INSERT INTO g28.stripe_checkout_intents(client_reference,session_id,election,amount_cents,livemode) VALUES($1,$2,$3,$4,$5) ON CONFLICT(client_reference) DO NOTHING",
-   [clientRef,sessionId,election,amountCents,livemode]);
+   "INSERT INTO g28.stripe_checkout_intents(client_reference,session_id,election,amount_cents,livemode,terms_version,agreed_at) VALUES($1,$2,$3,$4,$5,$6,CASE WHEN $6::text IS NULL THEN NULL ELSE now() END) ON CONFLICT(client_reference) DO NOTHING",
+   [clientRef,sessionId,election,amountCents,livemode,termsVersion]);
   const found=await this.pool.query(
-   'SELECT session_id,election,amount_cents,livemode FROM g28.stripe_checkout_intents WHERE client_reference=$1',[clientRef]);
+   'SELECT session_id,election,amount_cents,livemode,terms_version FROM g28.stripe_checkout_intents WHERE client_reference=$1',[clientRef]);
   if(found.rowCount!==1||found.rows[0].session_id!==sessionId||
      found.rows[0].election!==election||Number(found.rows[0].amount_cents)!==amountCents||
-     found.rows[0].livemode!==livemode)
+     found.rows[0].livemode!==livemode||found.rows[0].terms_version!==termsVersion)
    throw Error('Conflicting Stripe checkout idempotency reference');
  }
  async receiveSignedWebhook({raw,header,secret,sandbox}){
@@ -40,12 +41,12 @@ export class StripeCampaignStore {
   try{
    await c.query('BEGIN');
    const attempts=await c.query(
-    'SELECT client_reference,election,amount_cents,livemode,payment_state FROM g28.stripe_checkout_intents WHERE session_id=$1 FOR UPDATE',
+    'SELECT client_reference,election,amount_cents,livemode,payment_state,terms_version FROM g28.stripe_checkout_intents WHERE session_id=$1 FOR UPDATE',
     [e.objectId]);
    const record=attempts.rows[0];
    if(!record||record.client_reference!==e.clientReferenceId||
        record.election!==e.election||Number(record.amount_cents)!==e.amountTotal||
-       record.livemode!==e.livemode){
+       record.livemode!==e.livemode||record.terms_version!==e.termsVersion){
     await c.query('ROLLBACK');return {status:422,outcome:'unmatched_payment'};
    }
    const receipt=await c.query(
