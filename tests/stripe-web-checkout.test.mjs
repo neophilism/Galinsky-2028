@@ -5,14 +5,14 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {createPrivatePreviewServer} from '../apps/web/private-preview.mjs';
 import {stripeSettings,checkoutNonceKey,createCheckoutToken,checkCheckoutToken,parseCheckoutForm,openStripeSession} from '../packages/core/stripe-web-checkout.mjs';
+import {CONTRIBUTION_TERMS_VERSION,CONTRIBUTION_TERMS_PATH} from '../packages/core/contribution-terms.mjs';
 
 const password='test-preview-password-long-2026';
 const sandbox=()=>({PREVIEW_ACCESS_PASSWORD:password,G28_PUBLIC_MODE:'preview',
  G28_STRIPE_TEST_ENABLED:'true',STRIPE_SECRET_KEY:'sk_test_12345678901234567890',
  G28_STRIPE_RETURN_ORIGIN:'https://preview.example.test',DONATIONS_ENABLED:'false'});
 const body=(nonce)=>new URLSearchParams({form_token:nonce,amount:'25.00',
- election:'primary',frequency:'once',eligibleResidency:'yes',ownFunds:'yes',age18:'yes',
- notFederalContractor:'yes',personalCreditCard:'yes'}).toString();
+ frequency:'once',agree:'yes'}).toString();
 test('sandbox is explicit, isolated from real money and legal release keys',()=>{
  assert.equal(stripeSettings({}),null);
  assert.equal(stripeSettings({...sandbox(),STRIPE_SECRET_KEY:'sk_live_12345678901234567890'}),null);
@@ -30,10 +30,21 @@ test('signed form tokens expire and enforce exact origin, amount and eligibility
  assert.match(checkCheckoutToken(key,token,1700000000000),/^attempt_[0-9a-f]{32}$/);
  assert.equal(checkCheckoutToken(key,token,1700001000000),null);
  assert.equal(checkCheckoutToken(checkoutNonceKey(),token,1700000000000),null);
- assert.equal(parseCheckoutForm(body(token)).amountCents,2500);
- for(const bad of [body(token).replace('ownFunds=yes','ownFunds=no'),body(token).replace('25.00','0'),
+ const parsed=parseCheckoutForm(body(token));
+ assert.equal(parsed.amountCents,2500);
+ assert.equal(parsed.election,'general');
+ assert.equal(parsed.termsVersion,CONTRIBUTION_TERMS_VERSION);
+ assert(Object.values(parsed.attestations).every(Boolean));
+ for(const bad of [
+   body(token).replace('agree=yes','agree=no'),
+   body(token).replace('&agree=yes',''),
+   body(token).replace('25.00','0'),
    body(token).replace('frequency=once','frequency=monthly'),
-   body(token)+'&amount=25',body(token)+'&card_number=4111111111111111'])
+   body(token)+'&amount=25',
+   body(token)+'&election=primary',
+   body(token)+'&terms_version=forged',
+   body(token)+'&ownFunds=yes',
+   body(token)+'&card_number=4111111111111111'])
   assert.throws(()=>parseCheckoutForm(bad));
  await assert.rejects(()=>openStripeSession({raw:body(token),settings:cfg,nonceKey:key,
   request:{headers:{origin:'https://evil.example.test'}}}),/Cross-origin/);
@@ -49,6 +60,8 @@ test('password-protected sandbox returns form and 303 to verified Stripe checkou
   assert.equal(req.get('custom_fields[0][key]'),'occupation');
   assert.equal(req.get('custom_fields[1][key]'),'employer');
   assert.equal(req.get('line_items[0][price_data][unit_amount]'),'2500');
+  assert.equal(req.get('metadata[election]'),'general');
+  assert.equal(req.get('metadata[terms_version]'),CONTRIBUTION_TERMS_VERSION);
   return {ok:true,json:async()=>({id:'cs_test_ABCDEFGHIJKLM',url:'https://checkout.stripe.com/c/pay/session'})};
  };
  const stored=[];
@@ -64,7 +77,20 @@ test('password-protected sandbox returns form and 303 to verified Stripe checkou
  assert.equal(get.status,200);
  const page=await get.text();
  assert.match(page,/Stripe TEST MODE/);
- assert.match(page,/not a business or third-party card/i);
+ assert.equal((page.match(/type="checkbox"/g)||[]).length,1);
+ assert.match(page,/name="agree" value="yes" required/);
+ assert.match(page,/I agree to the/);
+ assert.match(page,new RegExp('href="'+CONTRIBUTION_TERMS_PATH+'"'));
+ assert(!page.includes('name="election"'));
+ assert(!page.includes('<fieldset class="eligibility">'));
+ assert.match(page,/Federal law requires us to use our best efforts/i);
+ const terms=await fetch(root+CONTRIBUTION_TERMS_PATH,{headers:auth});
+ assert.equal(terms.status,200);
+ const policy=await terms.text();
+ assert.match(policy,/I am a U\.S\. citizen or lawfully admitted permanent resident/);
+ assert.match(policy,/2028 general election/);
+ assert.match(policy,/not a corporate or business credit card/);
+ assert.match(policy,new RegExp(CONTRIBUTION_TERMS_VERSION));
  assert.match(get.headers.get('content-security-policy'),/form-action 'self'/);
  const token=page.match(/name="form_token" value="([^"]+)"/)?.[1];
  assert(token);
@@ -81,6 +107,8 @@ test('password-protected sandbox returns form and 303 to verified Stripe checkou
  assert.equal(stored.length,1);
  assert.equal(stored[0].amountCents,2500);
  assert.equal(stored[0].livemode,false);
+ assert.equal(stored[0].election,'general');
+ assert.equal(stored[0].termsVersion,CONTRIBUTION_TERMS_VERSION);
  assert.equal((await ok.text()),'');
 });
 test('Stripe test mode is unconfigured by default and cannot leak live donation routes',async t=>{
