@@ -320,6 +320,23 @@ if(entry){
    console.log(JSON.stringify({event:'private_preview_listening',port}));
    // An owner-authorized, explicitly flagged integration acceptance run.
    // It never accepts live keys, charges a card or logs sensitive account data.
+   // Independent, READ-ONLY inventory of the owner-configured TEST webhook
+   // destination. Checks mode, event subscriptions and emitted test events;
+   // never logs a URL, account name, session ID, secret or donor record.
+   if(process.env.G28_STRIPE_DIAGNOSE_WEBHOOKS_ON_BOOT==='true'){
+    void (async()=>{
+     let diagnosticsPool;
+     try{
+      await new Promise(resolve=>setTimeout(resolve,8000));
+      if(process.env.DATABASE_URL)diagnosticsPool=databasePool(process.env.DATABASE_URL);
+      const {diagnoseStripeTestWebhooks}=await import('./stripe-webhook-diagnostics.mjs');
+      const result=await diagnoseStripeTestWebhooks({env:process.env,pool:diagnosticsPool});
+      console.log(JSON.stringify({event:'stripe_test_webhook_diagnostics',...result}));
+     }catch{
+      console.error(JSON.stringify({event:'stripe_test_webhook_diagnostics',status:'failed',stage:'unexpected'}));
+     }finally{if(diagnosticsPool)await diagnosticsPool.end().catch(()=>{});}
+    })();
+   }
    if(process.env.G28_STRIPE_SMOKE_ON_BOOT==='true'){
     void (async()=>{
      let acceptancePool;
