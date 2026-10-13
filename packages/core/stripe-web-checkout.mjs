@@ -21,7 +21,10 @@ export function stripeSettings(env){
  const key=env.STRIPE_SECRET_KEY;
  if(typeof key!=='string'||!(sandbox?/^sk_test_[A-Za-z0-9_]{12,}$/:/^sk_live_[A-Za-z0-9_]{12,}$/).test(key))
   return null;
- const supplied=env.G28_STRIPE_RETURN_ORIGIN||env.RENDER_EXTERNAL_URL;
+ // In protected sandbox previews, use the actual Render hostname being viewed,
+ // not an optional future public-domain return URL. A mismatched configured
+ // origin rejects every real browser POST even though synthetic API tests pass.
+ const supplied=(sandbox&&env.RENDER_EXTERNAL_URL)||env.G28_STRIPE_RETURN_ORIGIN||env.RENDER_EXTERNAL_URL;
  let origin;
  try{origin=new URL(supplied);}catch{return null;}
  if(origin.protocol!=='https:'||origin.username||origin.password||origin.port||
@@ -77,9 +80,31 @@ export function checkCheckoutToken(secret,token,now=Date.now()){
  return actual.length===expected.length&&timingSafeEqual(actual,expected)?'attempt_'+nonce:null;
 }
 export function validDonationOrigin(req,settings){
- const reported=req.headers.origin;
- // Browser form POST supplies an Origin header. Require exact scheme and host.
- return reported===settings.origin;
+ const headers=req?.headers||{};
+ const reported=headers.origin;
+ const site=headers['sec-fetch-site'];
+ // Browser Fetch Metadata never identifies an ordinary same-origin form POST
+ // as cross-site or same-site. Reject cross-site submissions even if a proxy
+ // or extension has removed the Origin header.
+ if(site && site!=='same-origin' && site!=='none')return false;
+ // An explicit non-opaque Origin must always be the configured campaign origin.
+ if(reported && reported!=='null')return reported===settings.origin;
+ // Firefox privacy modes and browser extensions can suppress/opaque Origin.
+ // Only recover on the verified public host; a valid HMAC-signed, expiring
+ // form token is separately mandatory before any Stripe call.
+ let expectedHost;
+ try{expectedHost=new URL(settings.origin).host;}catch{return false;}
+ if(typeof headers.host!=='string'||headers.host.toLowerCase()!==expectedHost.toLowerCase())return false;
+ let sameOriginReferrer=false;
+ if(headers.referer){
+  if(typeof headers.referer!=='string')return false;
+  try{sameOriginReferrer=new URL(headers.referer).origin===settings.origin;}catch{return false;}
+  if(!sameOriginReferrer)return false;
+ }
+ // In production, a stripped Origin still needs positive same-origin browser
+ // evidence. The password-protected TEST preview may instead rely on the
+ // expected host plus its existing signed form token and preview authorization.
+ return site==='same-origin'||sameOriginReferrer||settings.sandbox===true;
 }
 export function parseCheckoutForm(raw){
  if(typeof raw!=='string'||raw.length>4096)throw Error('Invalid contribution form.');
