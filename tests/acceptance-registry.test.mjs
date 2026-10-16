@@ -56,7 +56,8 @@ test('status totals, PR observations and deployment counters are derived instead
  assert.equal(delivery.last_acceptance_audit.in_progress,counts.in_progress);
  assert.equal(delivery.last_acceptance_audit.not_started,counts.not_started);
  assert.equal(registry.pullRequests.filter(pr=>pr.mergedAt).length,delivery.last_acceptance_audit.observed_merged_prs);
- assert.equal(registry.pullRequests.filter(pr=>!pr.mergedAt).length,delivery.last_acceptance_audit.observed_closed_unmerged_prs);
+ assert.equal(registry.pullRequests.filter(pr=>pr.state==='closed'&&!pr.mergedAt).length,delivery.last_acceptance_audit.observed_closed_unmerged_prs);
+ assert.equal(registry.pullRequests.filter(pr=>pr.state==='open').length,delivery.last_acceptance_audit.observed_open_prs||0);
  assert.equal(prs.size,registry.pullRequests.length);
  assert.equal(typeof delivery.production_release_verified,'boolean');
  // Accepting the public-launch package is necessary before claiming a verified production release.

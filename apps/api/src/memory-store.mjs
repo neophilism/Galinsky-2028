@@ -1,3 +1,4 @@
+import {memoryCoordination,removeAccountCoordination,ownCoordination} from './coordination-store.mjs';
 // Explicit development/test store only. server.mjs rejects it in production.
 import {randomUUID} from 'node:crypto';
 export class MemoryStore{
@@ -21,13 +22,14 @@ export class MemoryStore{
  async saveTreasurySecret(actorId,slot,envelope,maskedLabel){this.treasurySecretsStore.set(slot,{envelope,maskedLabel,updatedAt:new Date().toISOString()});this.treasuryAudit.push({action:'vault_set',subject:slot,actorId});}
  async logout(hash){this.sessions.delete(hash);}
  async consent(accountId,value){const a=this.accounts.get(accountId);if(a)a.marketing=value;}
- async closeAccount(id){const a=this.accounts.get(id);if(!a)return;this.accounts.delete(id);this.taskProgress.delete(id);this.materialReading.delete(id);this.rolePreferences.delete(id);this.bookmarks.delete(id);for(const [k,s]of this.sessions)if(s.accountId===id)this.sessions.delete(k);for(const[k,l]of this.logins)if(l.emailKey===a.emailKey)this.logins.delete(k);this.outbox=this.outbox.filter(j=>j.subjectKey!==a.emailKey);}
+ async closeAccount(id){const a=this.accounts.get(id);if(!a)return;for(const team of this.coordinationTeams?.values()||[])removeAccountCoordination(team,id,a.emailKey);this.accounts.delete(id);this.taskProgress.delete(id);this.materialReading.delete(id);this.rolePreferences.delete(id);this.bookmarks.delete(id);for(const [k,s]of this.sessions)if(s.accountId===id)this.sessions.delete(k);for(const[k,l]of this.logins)if(l.emailKey===a.emailKey)this.logins.delete(k);this.outbox=this.outbox.filter(j=>j.subjectKey!==a.emailKey);}
  async accountActivityExport(id){
   const a=this.accounts.get(id);
   if(!a)return null;
   const p=this.rolePreferences.get(id);
   const reads=this.materialReading.get(id)||new Map();
   return {
+   coordination:ownCoordination([...(this.coordinationTeams?.values()||[])],id),
    account:{id,verifiedAt:a.verifiedAt||null,createdAt:a.createdAt||null,
     marketingConsent:Boolean(a.marketing),termsVersion:a.termsVersion||null},
    rolePreferences:p?{...p}:null,
@@ -71,3 +73,5 @@ export class MemoryStore{
  async cleanup(){const now=Date.now();for(const [k,l]of this.logins)if(l.expires<=now)this.logins.delete(k);for(const [k,s]of this.sessions)if(s.expires<=now)this.sessions.delete(k);for(const [k,b]of this.buckets)if(b.until<=now)this.buckets.delete(k);}
  async close(){}
 }
+
+Object.assign(MemoryStore.prototype, memoryCoordination);

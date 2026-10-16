@@ -58,7 +58,7 @@ jobs:
       - name: Browser engines and dependencies
         run: npx playwright install --with-deps chromium firefox webkit
       - name: Real HTTP browser journeys
-        run: npm run test:browser && npm run test:public-browser
+        run: npm run test:browser && npm run test:public-browser && npm run test:coordination-browser
       - name: Individual reviewer browser accounts
         run: npm run test:review-browser
       - name: Audit production dependencies
@@ -71,6 +71,7 @@ jobs:
           path: |
             test-results/browser/
             test-results/public-interactions/
+            test-results/coordination-browser/
             test-results/review-browser/
           if-no-files-found: ignore
           retention-days: 7

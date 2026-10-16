@@ -9,10 +9,10 @@
     ".exechub/approved-pr-mapping.json",
     "docs/PR_REGISTER.json"
   ],
-  "progressEvidenceNote": "Conservative scoped audit: 8 whole packages accepted; 46 partially implemented; 7 unstarted. Snapshot includes 82 merged PRs and 5 closed-unmerged.",
+  "progressEvidenceNote": "16 October combined candidate: 8 accepted, 48 in progress, 5 not started. 84 previously merged PRs; PRs 95 and 96 remain open pending merge authorization. No production release is claimed.",
   "schemaVersion": 1,
   "roadmapVersion": 4,
-  "observedAt": "2026-10-13T21:14:24.168Z",
+  "observedAt": "2026-10-16T17:43:08Z",
   "units": [
     {
       "id": "G28-001",
@@ -52,7 +52,8 @@
         6,
         19,
         90,
-        92
+        92,
+        96
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -147,7 +148,8 @@
       "contributingPrs": [
         45,
         46,
-        65
+        65,
+        96
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -202,7 +204,8 @@
       "origin": "original",
       "prs": [],
       "contributingPrs": [
-        35
+        35,
+        96
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -243,7 +246,8 @@
       "prs": [],
       "contributingPrs": [
         45,
-        65
+        65,
+        96
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -588,26 +592,30 @@
       "title": "Implement local teams and captain coordination",
       "origin": "original",
       "prs": [],
-      "contributingPrs": [],
+      "contributingPrs": [
+        95
+      ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
-      "status": "not_started",
-      "acceptanceBlocker": "No working team membership or scoped captain-coordination system.",
-      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
+      "status": "in_progress",
+      "acceptanceBlocker": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md.",
+      "acceptanceReport": "docs/evidence/COORDINATION_20261016.md"
     },
     {
       "id": "G28-033",
       "title": "Implement events and orientation participation",
       "origin": "original",
       "prs": [],
-      "contributingPrs": [],
+      "contributingPrs": [
+        95
+      ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
-      "status": "not_started",
-      "acceptanceBlocker": "No event scheduling, capacity/RSVP or cancellation backend.",
-      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
+      "status": "in_progress",
+      "acceptanceBlocker": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md.",
+      "acceptanceReport": "docs/evidence/COORDINATION_20261016.md"
     },
     {
       "id": "G28-034",
@@ -670,7 +678,8 @@
       "origin": "original",
       "prs": [],
       "contributingPrs": [
-        69
+        69,
+        95
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -721,7 +730,8 @@
         47,
         55,
         56,
-        57
+        57,
+        96
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -840,7 +850,8 @@
       "origin": "original",
       "prs": [],
       "contributingPrs": [
-        41
+        41,
+        95
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -1055,6 +1066,66 @@
     }
   ],
   "pullRequests": [
+    {
+      "id": 4892104907,
+      "number": 96,
+      "title": "Repair public donation/video interactions and add reproducible quality checks",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/96",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-10-16T17:43:08Z",
+      "updatedAt": "2026-10-16T17:43:08Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "3310df69eba606d3d68fd9ac0a64cd71e1fbe1bf",
+      "baseRef": "main",
+      "mergeCommitSha": "07bf83a55294dd07d3592d0ae3d8683f6a58a679"
+    },
+    {
+      "id": 4890577626,
+      "number": 95,
+      "title": "Add persistent volunteer teams and reviewed event coordination",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/95",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-10-16T15:29:21Z",
+      "updatedAt": "2026-10-16T15:33:21Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "6d5f80e267eef2fe3559ea4bbc59831cd295e527",
+      "baseRef": "main",
+      "mergeCommitSha": "7005d59c4e3329acb3fdd05a25624e312b86eb16"
+    },
+    {
+      "id": 4849713830,
+      "number": 94,
+      "title": "Keep acceptance registry CI flexible for future verified package completions",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/94",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T21:28:27Z",
+      "updatedAt": "2026-10-13T21:31:13Z",
+      "closedAt": "2026-10-13T21:31:12Z",
+      "mergedAt": "2026-10-13T21:31:12Z",
+      "headSha": "6ebc2ddf4add8288ed3a592d281b8110e5b0b18c",
+      "baseRef": "main",
+      "mergeCommitSha": "f5a924d83cf8d9f94ed857b6df5da5dd041f56cb"
+    },
+    {
+      "id": 4849603222,
+      "number": 93,
+      "title": "Audit actual acceptance of all 61 packages and repair stale progress registry",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/93",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-13T21:18:20Z",
+      "updatedAt": "2026-10-13T21:26:24Z",
+      "closedAt": "2026-10-13T21:26:23Z",
+      "mergedAt": "2026-10-13T21:26:23Z",
+      "headSha": "ea8adde3fe27db1566736d13bc1b60c78d229cd7",
+      "baseRef": "main",
+      "mergeCommitSha": "2b3e4b3eeb3b85b1d80e4563b8bbfaaa850fd285"
+    },
     {
       "id": 4848699856,
       "number": 92,

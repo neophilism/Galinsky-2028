@@ -32,3 +32,10 @@ PR #95 separately contains the team/event implementation and passed CI run
 engines, reviewer journeys and zero reported production dependency vulnerabilities).
 Automatic approval review rejected its merge into main as requiring explicit
 approval for that exact merge. It remains unmerged; no deployment is claimed.
+
+PR #96 standalone head `3310df69eba606d3d68fd9ac0a64cd71e1fbe1bf` passed
+hosted CI run 38941833517, including PostgreSQL and all three browser engines.
+The subsequent integrated candidate incorporates #95, preserves both browser
+suites, and passes 282 local unit tests, lint, formatting, credential scan,
+validation, type checks and both builds. Hosted combined checks are required
+before merging; standalone runs are not a substitute for combined verification.

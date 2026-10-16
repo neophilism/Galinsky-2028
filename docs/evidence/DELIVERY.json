@@ -174,15 +174,16 @@
     "source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
     "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
     "completed": 8,
-    "in_progress": 46,
-    "not_started": 7,
-    "observed_merged_prs": 82,
+    "in_progress": 48,
+    "not_started": 5,
+    "observed_merged_prs": 84,
     "observed_closed_unmerged_prs": 5,
     "ci_run_id": 38462635121,
     "ci_conclusion": "success",
     "private_preview_deploy": "dep-db79b2d9fdbs73dblj80",
     "private_preview_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
     "portal_preview_sha": "c263d8fd8a331b238ddc884b052c672558cee96e",
-    "warning": "Whole-package acceptance is separate from full public campaign release, real-money contributions, verified production signup and public media publication."
+    "warning": "Whole-package acceptance is separate from full public campaign release, real-money contributions, verified production signup and public media publication.",
+    "observed_open_prs": 2
   }
 }

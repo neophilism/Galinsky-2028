@@ -32,3 +32,5 @@
 .document-content th{background:#f2f5fa}
 @media(max-width:900px){.document-layout{grid-template-columns:1fr}.document-outline{position:static;max-height:none}.document-content{padding:24px}}
 @media print{.document-layout{display:block}.document-outline{display:none}.document-content pre{color:#000;background:#fff;border:1px solid #bbb}}
+
+.coordination-controls{border:0;padding:0;margin:0;min-width:0}.coordination-controls article{overflow-wrap:anywhere}.coordination-controls textarea{width:100%;min-height:5rem}

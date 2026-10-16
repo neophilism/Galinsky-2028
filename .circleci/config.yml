@@ -46,7 +46,7 @@ jobs:
           command: npx playwright install --with-deps chromium firefox webkit
       - run:
           name: Cross-browser end-to-end journeys
-          command: npm run test:browser && npm run test:public-browser
+          command: npm run test:browser && npm run test:public-browser && npm run test:coordination-browser
       - run:
           name: Audit production dependencies (high or critical)
           command: npm audit --omit=dev --audit-level=high
@@ -56,6 +56,9 @@ jobs:
       - store_artifacts:
           path: test-results/public-interactions
           destination: public-interaction-evidence
+      - store_artifacts:
+          path: test-results/coordination-browser
+          destination: coordination-browser-evidence
       - store_artifacts:
           path: dist/web
           destination: public-preview

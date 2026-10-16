@@ -39,6 +39,7 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     'test:browser',
     'test:review-browser',
     'test:public-browser',
+    'test:coordination-browser',
   ]) {
     const result = spawnSync(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['run', script], {
       stdio: 'inherit',
