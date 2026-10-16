@@ -86,7 +86,24 @@ function panel(id,index){
  const history=element('details');history.append(element('summary','Revision history'));const revisions=element('select');const restoreButton=button('Restore as a new draft',async()=>{cleanRequired(id);if(!revisions.value)return;if(!confirm('Restore this revision into a new draft? The published website will not change.'))return;await operation(id,async()=>{await request('/campaigns/'+id+'/restore',{method:'POST',data:{expectedRevision:d.record.revision,sourceRevision:Number(revisions.value)}});await load(id,{force:true});message('Historical revision restored as a new draft.');});});history.append(button('Load history',async()=>{const result=await request('/campaigns/'+id+'/history'+(revisions.dataset.next?'?before='+revisions.dataset.next:''));if(!revisions.dataset.next)revisions.replaceChildren();for(const item of result.items)revisions.add(new Option('Revision '+item.revision,item.revision));revisions.dataset.next=result.next||'';}),label('Saved revision',revisions),restoreButton);fs.append(history);return box;
 }
 function sections(preferred=''){const values=[...new Set(state.contract.fields.filter(x=>x.page===$('page').value).map(x=>x.section))];optionsList($('section'),[['','All sections'],...values.map(value=>[value,human(value)])],values.includes(preferred)?preferred:'');}
+function renderDraftPreview(){
+ const target=$('fields');target.replaceChildren();
+ const d=current(state.left);if(!d){target.append(element('p','Choose a campaign to preview.',{class:'empty'}));return;}
+ const box=element('section',null,{class:'card'}),controls=element('div',null,{class:'preview-controls'}),frame=element('iframe',null,{title:'Unpublished campaign page preview',sandbox:'allow-same-origin',referrerpolicy:'no-referrer',class:'draft-page-frame'});
+ const labelText=element('p','Draft preview: unsaved text, colors, and portrait. This does not publish changes.',{class:'muted'});
+ const status=element('p','',{'role':'status'});
+ let sequence=0;
+ const refresh=async()=>{const requested=++sequence;status.textContent='Rendering private draft...';try{
+   const result=await request('/preview',{method:'POST',data:{page:$('page').value,document:structuredClone(current(state.left).document)}});
+   if(sequence!==requested)return;frame.srcdoc=result.html;status.textContent='This page reflects your current draft. The published website is unchanged.';
+  }catch(error){if(sequence===requested){status.textContent='Complete every required field and resolve contrast warnings before previewing.';message(error.message,true);}}
+ };
+ const size=(mobile)=>{frame.classList.toggle('mobile',mobile);status.textContent=mobile?'Mobile-width preview.':'Desktop-width preview.';};
+ controls.append(button('Refresh current draft',refresh,'primary'),button('Desktop width',()=>size(false)),button('Mobile width',()=>size(true)));
+ box.append(element('h2','Unpublished page preview'),labelText,controls,status,frame);target.append(box);void refresh();
+}
 function renderFields(){
+ if($('view').value==='preview'){renderDraftPreview();return;}
  const ids=selectedIds(),page=$('page').value,compare=ids.length===2;const target=$('fields');target.replaceChildren();
  const drafts=ids.map(current);if(drafts.some(x=>!x)){target.append(element('p','Choose the campaign'+(compare?'s':'')+' above.',{class:'empty'}));return;}
  for(const field of state.contract.fields.filter(x=>x.page===page&&(!$('section').value||x.section===$('section').value))){
