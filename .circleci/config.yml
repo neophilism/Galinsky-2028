@@ -28,7 +28,7 @@ jobs:
           command: npm ci --no-fund
       - run:
           name: Validate syntax and publishing boundary
-          command: npm run check
+          command: npm run check && npm run lint && npm run format:check && npm run secrets:check
       - run:
           name: TypeScript validation
           command: npm run typecheck
@@ -46,13 +46,16 @@ jobs:
           command: npx playwright install --with-deps chromium firefox webkit
       - run:
           name: Cross-browser end-to-end journeys
-          command: npm run test:browser
+          command: npm run test:browser && npm run test:public-browser
       - run:
           name: Audit production dependencies (high or critical)
           command: npm audit --omit=dev --audit-level=high
       - store_artifacts:
           path: test-results/browser
           destination: cross-browser-evidence
+      - store_artifacts:
+          path: test-results/public-interactions
+          destination: public-interaction-evidence
       - store_artifacts:
           path: dist/web
           destination: public-preview

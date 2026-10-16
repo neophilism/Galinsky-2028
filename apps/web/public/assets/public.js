@@ -16,7 +16,7 @@
  if(checkoutButton){
   const query=new URLSearchParams(location.search);
   const value=query.get('amount');
-  if(value&&/^[1-9]\\d{0,6}(?:\\.\\d{1,2})?$/.test(value)){
+  if(value&&/^[1-9]\d{0,6}(?:\.\d{1,2})?$/.test(value)){
    checkoutButton.setAttribute('href','/donate/continue?amount='+encodeURIComponent(value));
   }
  }
@@ -31,5 +31,25 @@
  const roles={network:['Personal Network Organizer','Start with one respectful conversation with someone you know.','02'],digital:['Digital Ambassador','Share an approved campaign idea accurately, in your own voice.','03'],issue:['Issue Ambassador','Learn one issue deeply and use approved sources to answer questions.','04'],host:['Event Host','Plan a small gathering using the current host checklist.','07'],skills:['Skills & Operations Volunteer','Connect a practical skill with a campaign task.','13'],ballot:['Ballot-Access Petition Volunteer','Read the training first. Petition work needs current jurisdiction approval.','10']};
  function role(){const pref=$('#role-pref');if(!pref)return;let key=pref.value;if(key==='ballot'&&$('#role-training')?.value==='no')key='network';const r=roles[key]||roles.network;$('#role-result').textContent=r[0];const p=$('.chooser-result p');if(p)p.textContent=r[1]+' '+($('#role-time')?.value==='15-30 minutes'?'Start with a manageable first action.':'Use the playbook to plan your next step.');const link=$('#role-open');if(link){const href=link.getAttribute('href')||'';link.dataset.roleId=r[2];const canonical={'02':'network','03':'digital','04':'issue','05':'canvass','06':'phone','07':'host','08':'recruit','09':'captain','10':'ballot','11':'voter','12':'fundraising','13':'skills'};const dest=new URL(href,location.href);if(dest.pathname==='/roles'&&canonical[r[2]]){dest.searchParams.set('role',canonical[r[2]]);link.setAttribute('href',dest.toString());}}}
  ['role-pref','role-time','role-training'].forEach(id=>$('#'+id)?.addEventListener('change',role));role();
- $$('.video-play').forEach(b=>b.addEventListener('click',()=>{const panel=b.closest('[data-video]');const id=panel?.dataset.video;if(!/^[a-zA-Z0-9_-]{11}$/.test(id||''))return;const iframe=document.createElement('iframe');iframe.title=panel.dataset.title+' video';iframe.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;iframe.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';iframe.allowFullscreen=true;iframe.referrerPolicy='strict-origin-when-cross-origin';iframe.setAttribute('sandbox','allow-scripts allow-same-origin allow-presentation');panel.replaceChildren(iframe);iframe.focus();}));
+ $$('.video-play').forEach(b=>b.addEventListener('click',()=>{
+  const panel=b.closest('[data-video]');const id=panel?.dataset.video;
+  if(!/^[a-zA-Z0-9_-]{11}$/.test(id||''))return;
+  const original=Array.from(panel.childNodes);
+  const iframe=document.createElement('iframe');
+  iframe.title=panel.dataset.title+' video';
+  iframe.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+  iframe.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
+  iframe.allowFullscreen=true;iframe.tabIndex=0;
+  iframe.referrerPolicy='strict-origin-when-cross-origin';
+  iframe.setAttribute('sandbox','allow-scripts allow-same-origin allow-presentation');
+  const controls=document.createElement('div');controls.className='video-session-controls';
+  const stop=document.createElement('button');stop.type='button';stop.className='btn outline';
+  stop.textContent='Stop video and disconnect YouTube';
+  const fallback=document.createElement('a');fallback.href=`https://www.youtube.com/watch?v=${id}`;
+  fallback.textContent='Open this video on YouTube';fallback.target='_blank';fallback.rel='noopener noreferrer';
+  const note=document.createElement('p');note.textContent='If playback is unavailable here, you can open the video on YouTube. Disconnecting stops this player; it cannot undo information already sent.';
+  controls.append(stop,fallback,note);panel.replaceChildren(iframe);panel.after(controls);
+  stop.addEventListener('click',()=>{iframe.remove();panel.replaceChildren(...original);controls.remove();b.focus();},{once:true});
+  stop.focus();
+ }));
 })();

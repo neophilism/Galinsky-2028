@@ -58,8 +58,8 @@
       "externalDependencies": [],
       "externalPrerequisites": [],
       "status": "in_progress",
-      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-      "acceptanceBlocker": "The complete CI suite passes, but the original G28-02 scope also calls for formatting/lint tooling, dedicated secret scanning, a PR template and branch-rule evidence. Those are absent or unverified; CI success alone is not full package acceptance."
+      "acceptanceReport": "docs/evidence/PUBLIC_QUALITY_20261016.md",
+      "acceptanceBlocker": "Added repository-wide JavaScript lint, formatting tooling/configuration, known-pattern secret scanning, a PR template and a verification command that requires the isolated test database. Classic branch-protection evidence remains unavailable to the connected app (403); hosted CI must verify this revision."
     },
     {
       "id": "G28-003",
@@ -208,8 +208,8 @@
       "externalDependencies": [],
       "externalPrerequisites": [],
       "status": "in_progress",
-      "acceptanceBlocker": "Dot-star animation exists but user pause/persistent stop and CPU/mobile motion evidence are absent.",
-      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
+      "acceptanceBlocker": "Original static dot-flag fallback and its CSS URL repaired. Preserve the owner-requested absence of pause controls from PR #35. Measured CPU/mobile motion and remaining visual evidence are still outstanding.",
+      "acceptanceReport": "docs/evidence/PUBLIC_QUALITY_20261016.md"
     },
     {
       "id": "G28-011",
@@ -249,8 +249,8 @@
       "externalDependencies": [],
       "externalPrerequisites": [],
       "status": "in_progress",
-      "acceptanceBlocker": "Lazy YouTube component exists; revoke-consent and full live accessibility activation are not verified.",
-      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
+      "acceptanceBlocker": "Added explicit YouTube disconnection, restoration of the original play control and keyboard focus, replay protection and three-engine browser tests. Actual approved videos/captions and live media acceptance remain outstanding.",
+      "acceptanceReport": "docs/evidence/PUBLIC_QUALITY_20261016.md"
     },
     {
       "id": "G28-013",
@@ -1583,7 +1583,7 @@
     {
       "id": 4829596446,
       "number": 54,
-      "title": "SUPERSEDED: four-processor handoff already updated in merged PRs #55–57",
+      "title": "SUPERSEDED: four-processor handoff already updated in merged PRs #55\u201357",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/54",
       "state": "closed",
       "draft": false,
@@ -1613,7 +1613,7 @@
     {
       "id": 4829483935,
       "number": 52,
-      "title": "Recover September 2026 Kirk–Evers legislation source for private editorial review",
+      "title": "Recover September 2026 Kirk\u2013Evers legislation source for private editorial review",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/52",
       "state": "closed",
       "draft": false,
@@ -1643,7 +1643,7 @@
     {
       "id": 4829439565,
       "number": 48,
-      "title": "SUPERSEDED / PROHIBITED — do not use Stripe for campaign payments",
+      "title": "SUPERSEDED / PROHIBITED \u2014 do not use Stripe for campaign payments",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/48",
       "state": "closed",
       "draft": false,
@@ -2183,7 +2183,7 @@
     {
       "id": 4817446915,
       "number": 12,
-      "title": "Publish Kirk–Evers documents only with independent review and verified asset hashes",
+      "title": "Publish Kirk\u2013Evers documents only with independent review and verified asset hashes",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/12",
       "state": "closed",
       "draft": false,

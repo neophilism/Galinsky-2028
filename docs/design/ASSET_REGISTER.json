@@ -49,6 +49,13 @@
       "sha256": "097c8bf49e57776bc7aec4a4af671fc5ab7a1e8125cf30a552fe0684ed1df7f0",
       "status": "supplied_baseline",
       "publication_note": "Review before public-repository import; archives may contain gated volunteer sources."
+    },
+    {
+      "file": "apps/web/public/assets/network-flag.svg",
+      "bytes": 102363,
+      "sha256": "45fe7e91b6f5fd0b42ab2448e10adcbc975fc00b0a90381f173090cabdb83c39",
+      "status": "original_code_asset",
+      "publication_note": "Original geometric dot-flag fallback generated for the existing approved design. No external images, personal data, scripts or embedded resources."
     }
   ]
 }
