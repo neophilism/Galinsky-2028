@@ -11,13 +11,14 @@ test('private draft preview renders every shared page without database publicati
   assert.ok(html.includes('data-campaign="true"'),page);
   assert.ok(!html.includes(doc.internalName),page);
   assert.ok(html.includes('data-campaign-theme'),page);
-  assert.ok(!html.includes('data-campaign-mode-enabled="true"'),page);
+  assert.match(html,/<html\b[^>]*data-campaign-mode-enabled="false"/,page);
  }
 });
 test('draft changes immediately affect preview without saving or editing immutable releases',()=>{
  const doc=original();doc.fields['home.hero.headline']='Unsaved synthetic change & <script>alert("x")</script>';
  const html=renderCampaignDraftPage(doc,'home');
- assert.ok(html.includes('Unsaved synthetic change &amp; &lt;script&gt;'),html.slice(0,200));
+ assert.ok(html.includes('Unsaved synthetic change &amp;'), 'draft copy must be escaped');
+ assert.ok(html.includes('&lt;script&gt;alert'), 'script-looking text must remain inert even within highlighted headline');
  assert.ok(!html.includes('Unsaved synthetic change & <script>'));
  assert.ok(!html.includes('class="campaign-appearance"'));
 });
