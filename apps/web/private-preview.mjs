@@ -133,7 +133,13 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
   }
   if(!legacy&&!review){
    if(reviewController){
-    const html='<!doctype html><html lang="en"><meta charset="utf-8"><title>Private preview sign-in</title><h1>Private preview</h1><p><a href="/preview/">Sign in with your individual reviewer account</a>.</p></html>';
+    // Keep the pre-existing shared Basic preview credential usable even when
+    // optional individual reviewer accounts are enabled. Without the challenge
+    // browsers never open their native username/password dialog, stranding
+    // operators whose working credentials were issued before reviewer accounts.
+    // This does not grant an individual reviewer or campaign administration role.
+    res.setHeader('WWW-Authenticate',PREVIEW_REALM);
+    const html='<!doctype html><html lang="en"><meta charset="utf-8"><title>Private preview sign-in</title><h1>Private preview</h1><p><a href="/preview/">Sign in with your individual reviewer account</a>, or use your existing shared preview username and password in the browser sign-in dialog.</p></html>';
     res.writeHead(401,{'Content-Type':'text/html; charset=utf-8','Content-Length':Buffer.byteLength(html)});res.end(req.method==='HEAD'?undefined:html);return;
    }
    res.setHeader('WWW-Authenticate',PREVIEW_REALM);
