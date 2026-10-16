@@ -72,3 +72,5 @@ a.resource-link:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 .contribution-terms .terms-revision{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin:28px 0;padding-top:17px}
 .contribution-terms p+p{margin-top:14px}
 @media(max-width:700px){.contribution-terms{width:calc(100% - 40px);padding:30px 0 60px}.donor-consent{gap:11px}.donor-consent label{font-size:15px}}
+
+.video-session-controls{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:1rem}.video-session-controls p{flex-basis:100%;font-size:.875rem}.video-session-controls a{text-decoration:underline}

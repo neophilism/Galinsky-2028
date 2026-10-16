@@ -9,7 +9,7 @@
   "implemented_packages": 8,
   "merged_packages": 8,
   "deployed_packages": 7,
-  "note": "Conservative source-bound audit: 8 completed, 46 in progress, 7 not started. All 82 previously merged PRs are represented as either complete or partial evidence, not as work-unit numbers.",
+  "note": "16 October combined candidate: 8 accepted, 48 in progress, 5 not started. 84 previously merged PRs; PRs 95 and 96 remain open pending merge authorization. No production release is claimed.",
   "packages": [
     {
       "id": "G28-01",
@@ -59,19 +59,20 @@
       "acceptance": "A clean checkout installs reproducibly and passes the documented verification command. CI tests the merge candidate; no production secret is available to untrusted PRs. Empty test suites and skipped security gates cannot be reported as passing implementation evidence.",
       "evidence": "Lockfile, CI configuration, green bootstrap run and documented local setup.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "The complete CI suite passes, but the original G28-02 scope also calls for formatting/lint tooling, dedicated secret scanning, a PR template and branch-rule evidence. Those are absent or unverified; CI success alone is not full package acceptance.",
+      "implementation_note": "Added repository-wide JavaScript lint, formatting tooling/configuration, known-pattern secret scanning, a PR template and a verification command that requires the isolated test database. Classic branch-protection evidence remains unavailable to the connected app (403); hosted CI must verify this revision.",
       "contributing_prs": [
         1,
         6,
         19,
         90,
-        92
+        92,
+        96
       ],
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "The complete CI suite passes, but the original G28-02 scope also calls for formatting/lint tooling, dedicated secret scanning, a PR template and branch-rule evidence. Those are absent or unverified; CI success alone is not full package acceptance."
+        "report": "docs/evidence/PUBLIC_QUALITY_20261016.md",
+        "blocker": "Added repository-wide JavaScript lint, formatting tooling/configuration, known-pattern secret scanning, a PR template and a verification command that requires the isolated test database. Classic branch-protection evidence remains unavailable to the connected app (403); hosted CI must verify this revision."
       }
     },
     {
@@ -208,7 +209,8 @@
       "contributing_prs": [
         45,
         46,
-        65
+        65,
+        96
       ],
       "acceptance_review": {
         "status": "in_progress",
@@ -291,15 +293,16 @@
       "acceptance": "The headline and buttons never rotate away or move out of reach. Animation is decorative, silent and non-flashing; it stops when requested and remains paused across navigation. Low-power/mobile behavior and disabled-JavaScript still composition remain attractive.",
       "evidence": "Motion-state tests, reduced-motion screenshots, CPU/long-task measurements and mobile visual review.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Dot-star animation exists but user pause/persistent stop and CPU/mobile motion evidence are absent.",
+      "implementation_note": "Original static dot-flag fallback and its CSS URL repaired. Preserve the owner-requested absence of pause controls from PR #35. Measured CPU/mobile motion and remaining visual evidence are still outstanding.",
       "contributing_prs": [
-        35
+        35,
+        96
       ],
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Dot-star animation exists but user pause/persistent stop and CPU/mobile motion evidence are absent."
+        "report": "docs/evidence/PUBLIC_QUALITY_20261016.md",
+        "blocker": "Original static dot-flag fallback and its CSS URL repaired. Preserve the owner-requested absence of pause controls from PR #35. Measured CPU/mobile motion and remaining visual evidence are still outstanding."
       }
     },
     {
@@ -353,16 +356,17 @@
       "acceptance": "All three issue pages visibly reserve a large video area at the top. There are zero YouTube/Google thumbnail, player, DNS-preconnect or script requests before visitor activation. Activation loads a privacy-enhanced player with controls, fullscreen and suitable referrer configuration. Invalid/unavailable videos, denied embeds and revoked consent have accessible fallbacks. Editing one video does not alter another.",
       "evidence": "Network-interception tests, URL-parser adversarial tests, keyboard/screen-reader checks, no-video screenshots and documented later-link connection instructions.",
       "external_inputs": "The three actual YouTube links, approved posters if different, and reviewed accessibility material are publication inputs. Missing links do not block component implementation.",
-      "implementation_note": "Lazy YouTube component exists; revoke-consent and full live accessibility activation are not verified.",
+      "implementation_note": "Added explicit YouTube disconnection, restoration of the original play control and keyboard focus, replay protection and three-engine browser tests. Actual approved videos/captions and live media acceptance remain outstanding.",
       "contributing_prs": [
         45,
-        65
+        65,
+        96
       ],
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Lazy YouTube component exists; revoke-consent and full live accessibility activation are not verified."
+        "report": "docs/evidence/PUBLIC_QUALITY_20261016.md",
+        "blocker": "Added explicit YouTube disconnection, restoration of the original play control and keyboard focus, replay protection and three-engine browser tests. Actual approved videos/captions and live media acceptance remain outstanding."
       }
     },
     {
@@ -918,19 +922,21 @@
         "G28-29",
         "G28-30"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Add opt-in team membership, invitation/acceptance, scoped captain assignments, weekly plans, anonymous result summaries and authorized member contact handling. Do not publish a volunteer directory or precise private locations. Make leaving a team immediate and remove future access on role change.",
       "acceptance": "Captains see only the minimum data and tasks of authorized members. Joining a team does not grant access to historic private records. Invite forwarding, revoked invites, self-promotion and cross-team enumeration fail safely.",
       "evidence": "Team lifecycle tests, privacy/access matrix and revoked-captain browser journey.",
       "external_inputs": "None beyond the listed dependencies.",
-      "contributing_prs": [],
-      "implementation_note": "No working team membership or scoped captain-coordination system.",
+      "contributing_prs": [
+        95
+      ],
+      "implementation_note": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md.",
       "acceptance_review": {
-        "status": "not_started",
+        "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "No working team membership or scoped captain-coordination system."
+        "report": "docs/evidence/COORDINATION_20261016.md",
+        "blocker": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md."
       }
     },
     {
@@ -943,19 +949,21 @@
         "G28-32",
         "G28-24"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Provide approved orientation/event listings, accessible details, time zones, RSVP/capacity/waitlist/cancellation, attendee-only private details when appropriate and reminders. Support event-plan submission/review with venue, accessibility, safety and required authorization fields. Link to approved external meeting providers without exposing protected records.",
       "acceptance": "Double booking/capacity races, cancellation and time-zone boundaries are handled. Public calendars never reveal private addresses or attendee identities. An RSVP does not authorize spending, contracts, permits, field operations or recording participants.",
       "evidence": "Capacity/time-zone tests, privacy projections, cancellation notifications and event-host walkthrough.",
       "external_inputs": "None beyond the listed dependencies.",
-      "contributing_prs": [],
-      "implementation_note": "No event scheduling, capacity/RSVP or cancellation backend.",
+      "contributing_prs": [
+        95
+      ],
+      "implementation_note": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md.",
       "acceptance_review": {
-        "status": "not_started",
+        "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "No event scheduling, capacity/RSVP or cancellation backend."
+        "report": "docs/evidence/COORDINATION_20261016.md",
+        "blocker": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md."
       }
     },
     {
@@ -1084,7 +1092,8 @@
       "evidence": "Full admin action matrix, abuse tests, coordinator/captain/safety role walkthroughs and scoped audit review.",
       "external_inputs": "None beyond the listed dependencies.",
       "contributing_prs": [
-        69
+        69,
+        95
       ],
       "implementation_note": "Treasury admin preview exists; operational captain/support admin roles and step-up are incomplete.",
       "acceptance_review": {
@@ -1168,7 +1177,8 @@
         47,
         55,
         56,
-        57
+        57,
+        96
       ],
       "implementation_note": "Hosted sandbox checkout works; full retry/back-navigation/duplicate handling and live release remain unverified.",
       "acceptance_review": {
@@ -1383,7 +1393,8 @@
       "external_inputs": "None beyond the listed dependencies.",
       "implementation_note": "Account deletion/export exist; legal holds, protected object cleanup and retention/backup tests are incomplete.",
       "contributing_prs": [
-        41
+        41,
+        95
       ],
       "acceptance_review": {
         "status": "in_progress",
@@ -1776,5 +1787,5 @@
       }
     }
   ],
-  "progress_evidence_note": "13 October 2026 acceptance audit: eight demonstrated whole-package completions, 46 partial implementations and 7 unstarted; a merged PR does not imply full acceptance."
+  "progress_evidence_note": "16 October combined candidate: 8 accepted, 48 in progress, 5 not started. 84 previously merged PRs; PRs 95 and 96 remain open pending merge authorization. No production release is claimed."
 }

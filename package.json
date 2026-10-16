@@ -28,7 +28,14 @@
     "issue:prepare": "node scripts/prepare-issue-video.mjs",
     "policy:html": "node scripts/prepare-public-document.mjs",
     "test:browser": "node tests/browser/journeys.mjs",
-    "test:review-browser": "node scripts/run-review-browser-suite.mjs"
+    "test:review-browser": "node scripts/run-review-browser-suite.mjs",
+    "lint": "eslint apps packages scripts tests registry",
+    "format": "prettier --write",
+    "format:check": "prettier --check eslint.config.mjs scripts/scan-secrets.mjs tests/secret-scanner.test.mjs tests/public-interactions.test.mjs scripts/verify.mjs tests/verify-preflight.test.mjs",
+    "secrets:check": "node scripts/scan-secrets.mjs",
+    "verify": "node scripts/verify.mjs",
+    "test:public-browser": "node tests/browser/public-interactions.mjs",
+    "test:coordination-browser": "node tests/browser/coordination.mjs"
   },
   "dependencies": {
     "astro": "7.3.8",
@@ -39,11 +46,14 @@
     "better-auth": "1.7.7"
   },
   "devDependencies": {
-    "typescript": "6.0.3",
-    "vite": "8.3.1",
+    "@types/node": "22.18.6",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
-    "@types/node": "22.18.6",
-    "playwright": "1.63.0"
+    "eslint": "10.13.0",
+    "globals": "17.13.0",
+    "playwright": "1.63.0",
+    "prettier": "3.9.10",
+    "typescript": "6.0.3",
+    "vite": "8.3.1"
   }
 }
