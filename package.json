@@ -27,7 +27,7 @@
     "materials:sign": "node scripts/sign-material-review.mjs",
     "issue:prepare": "node scripts/prepare-issue-video.mjs",
     "policy:html": "node scripts/prepare-public-document.mjs",
-    "test:browser": "node tests/browser/journeys.mjs",
+    "test:browser": "node tests/browser/journeys.mjs && node tests/browser/campaign-editor.mjs",
     "test:review-browser": "node scripts/run-review-browser-suite.mjs",
     "lint": "eslint apps packages scripts tests registry",
     "format": "prettier --write",
@@ -35,7 +35,8 @@
     "secrets:check": "node scripts/scan-secrets.mjs",
     "verify": "node scripts/verify.mjs",
     "test:public-browser": "node tests/browser/public-interactions.mjs",
-    "test:coordination-browser": "node tests/browser/coordination.mjs"
+    "test:coordination-browser": "node tests/browser/coordination.mjs",
+    "test:editor-browser": "node tests/browser/campaign-editor.mjs"
   },
   "dependencies": {
     "astro": "7.3.8",
