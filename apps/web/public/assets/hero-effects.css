@@ -45,10 +45,10 @@
  background:radial-gradient(ellipse 28% 45% at 75% 60%,color-mix(in srgb,var(--campaign-surface) 60%,transparent),transparent 99%);
 }
 .campaign-hero-effect[data-effect="halo"] .hfx-a{
- background:radial-gradient(circle 23% at 76% 48%,color-mix(in srgb,var(--campaign-surface) 95%,transparent) 0%,color-mix(in srgb,var(--campaign-brand-blue) 41%,transparent) 44%,transparent 100%);
+ background:radial-gradient(ellipse 23% 23% at 76% 48%,color-mix(in srgb,var(--campaign-surface) 95%,transparent) 0%,color-mix(in srgb,var(--campaign-brand-blue) 41%,transparent) 44%,transparent 100%);
 }
 .campaign-hero-effect[data-effect="halo"] .hfx-b{
- background:radial-gradient(circle 32% at 76% 48%,transparent 25%,color-mix(in srgb,var(--campaign-brand-red) 33%,transparent) 52%,transparent 81%);
+ background:radial-gradient(ellipse 32% 32% at 76% 48%,transparent 25%,color-mix(in srgb,var(--campaign-brand-red) 33%,transparent) 52%,transparent 81%);
 }
 .campaign-hero-effect[data-effect="halo"] .hfx-c{
  background:radial-gradient(ellipse 34% 20% at 77% 82%,color-mix(in srgb,var(--campaign-brand-blue) 27%,transparent),transparent 100%);
@@ -73,7 +73,7 @@
  filter:none;opacity:.4;animation:none;
 }
 .campaign-hero-effect[data-effect="geometry"] .hfx-a{
- background:radial-gradient(circle 26% at 76% 26%,color-mix(in srgb,var(--campaign-brand-blue) 48%,transparent),transparent 98%),
+ background:radial-gradient(ellipse 26% 26% at 76% 26%,color-mix(in srgb,var(--campaign-brand-blue) 48%,transparent),transparent 98%),
  radial-gradient(ellipse 16% 32% at 65% 81%,color-mix(in srgb,var(--campaign-brand-red) 27%,transparent),transparent 99%);
 }
 .campaign-hero-effect[data-effect="geometry"] .hfx-b{
