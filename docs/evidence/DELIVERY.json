@@ -115,7 +115,7 @@
     "Staff/admin features not complete",
     "Unreviewed source archive not publicly bundled"
   ],
-  "notes": "Eight verified package acceptances, 46 incomplete scoped implementations and 7 without functional implementation. CI and worksheets exist but their full original package requirements are not yet satisfied. Public release and live donations remain gated.",
+  "notes": "Eight full package acceptances remain. The combined PR #95/#96 candidate has 48 packages in progress and 5 not started. Neither PR is merged or deployed; public release and live donations remain gated.",
   "production_release_verified": false,
   "private_preview": {
     "url": "https://galinsky-2028-private-preview.onrender.com",
@@ -170,19 +170,20 @@
     "public_role_links_to_actual_portal": true
   },
   "last_acceptance_audit": {
-    "reviewed_at": "2026-10-13T21:14:24.168Z",
-    "source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-    "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
+    "reviewed_at": "2026-10-16T17:49:52.597071+00:00",
+    "source_sha": "a6a3892e1372f76e6e3f172b6a6188a78f98a1e0",
+    "report": "docs/operations/HANDOFF_20261016.md",
     "completed": 8,
     "in_progress": 48,
     "not_started": 5,
-    "observed_merged_prs": 82,
+    "observed_merged_prs": 84,
     "observed_closed_unmerged_prs": 5,
-    "ci_run_id": 38462635121,
-    "ci_conclusion": "success",
+    "ci_run_id": 38942587653,
+    "ci_conclusion": "pending_at_checkpoint",
     "private_preview_deploy": "dep-db79b2d9fdbs73dblj80",
     "private_preview_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
     "portal_preview_sha": "c263d8fd8a331b238ddc884b052c672558cee96e",
-    "warning": "Whole-package acceptance is separate from full public campaign release, real-money contributions, verified production signup and public media publication."
+    "warning": "Counts include unmerged candidate implementations. Whole-package acceptance is separate from merger, deployment, public campaign release, real-money contributions and production signup. See PR checks for the later CI conclusion.",
+    "observed_open_prs": 2
   }
 }

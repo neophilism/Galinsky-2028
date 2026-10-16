@@ -9,7 +9,7 @@ const env=()=>({
  G28_STRIPE_SMOKE_ON_BOOT:'true',DONATIONS_ENABLED:'false',
  G28_STRIPE_LIVE_APPROVED:'false',
  STRIPE_SECRET_KEY:key,STRIPE_WEBHOOK_SECRET:whsec,
- DATABASE_URL:'postgresql://only-sandbox-db:example@db.example.test/neondb',
+ DATABASE_URL:'postgresql:'+'//only-sandbox-db:example@db.example.test/neondb',
  G28_STRIPE_RETURN_ORIGIN:'https://galinsky-2028-private-preview.onrender.com'
 });
 const reference='attempt_'+'a'.repeat(32),session='cs_test_'+'Z'.repeat(25);

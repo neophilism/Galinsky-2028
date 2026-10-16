@@ -17,3 +17,13 @@ before merge. CI evidence is recorded in the PR and subsequent handoff.
 G28-32 and G28-33 move from not started to in progress. G28-38 remains in progress.
 All original acceptance criteria remain in force. No live notifications were sent,
 no production flag was enabled, and no payment or public-launch setting changed.
+
+## Hosted CI evidence
+
+PR #95 head `6d5f80e267eef2fe3559ea4bbc59831cd295e527` passed run
+38924346444: 276 unit tests and 45 integration tests, zero skips, production builds,
+Chromium/Firefox/WebKit standard and coordination journeys, reviewer account
+journeys, and zero reported production dependency vulnerabilities. AI source review
+is recorded on PR #95. Main-branch merge was rejected by automatic approval review;
+no deploy occurred. Migration 014 was validated on the existing isolated Neon test
+branch `review-account-migration-test-20261012`, not applied to staging/production.
