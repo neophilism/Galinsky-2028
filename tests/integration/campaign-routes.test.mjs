@@ -26,7 +26,7 @@ test('editor routes require fresh owner/editor authorization before body parsing
  const s=await setup();try{
   const noAuth=await s.app.inject({method:'POST',url:'/api/editorial/campaigns',headers:{'content-type':'application/json'},payload:'{invalid'});
   assert.equal(noAuth.statusCode,401);assert.equal(s.calls.length,0);
-  const yes=await s.app.inject({url:'/api/editorial/contract',headers:s.headers});assert.equal(yes.statusCode,200);assert.equal(yes.json().fields.length,80);assert.equal(yes.json().role,'owner');assert.match(yes.headers['cache-control'],/no-store/);
+  const yes=await s.app.inject({url:'/api/editorial/contract',headers:s.headers});assert.equal(yes.statusCode,200);assert.equal(yes.json().fields.length,80);assert.equal(yes.json().heroEffectPresets.length,8);assert.equal(yes.json().heroEffectDefault.preset,'aurora');assert.equal(yes.json().role,'owner');assert.match(yes.headers['cache-control'],/no-store/);
   const created=await s.app.inject({method:'POST',url:'/api/editorial/campaigns',headers:s.headers,payload:{document:fixture()}});assert.equal(created.statusCode,200);assert.equal(s.calls.at(-1)[0],'create');assert.equal(s.calls.at(-1)[2],id(99));
  }finally{await s.app.close();}
 });

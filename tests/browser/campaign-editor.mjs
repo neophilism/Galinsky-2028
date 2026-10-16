@@ -26,11 +26,27 @@ for(const [name,engine]of Object.entries({chromium,firefox,webkit})){
   await page.getByRole('button',{name:'Save draft',exact:true}).first().click();await page.waitForFunction(()=>document.getElementById('message').classList.contains('error'));assert.equal(await field('home.hero.headline').first().inputValue(),'Shared synthetic edit');
   await page.locator('#left').selectOption(id(2));await page.locator('#right').selectOption(id(2));
   await page.locator('.panel').first().getByText('Hero image and preview',{exact:true}).click();
+  // Effects are edited beside the hero image, and day/night overrides remain independent.
+  const effectPanel=page.locator('.panel').first();
+  await effectPanel.getByRole('combobox',{name:'Background effect preset'}).selectOption('clouds');
+  assert.equal(harness.records.get(id(2)).document.heroBackground?.default?.preset,undefined,'unsaved changes stay in the editor');
+  assert.equal(await effectPanel.locator('.hero-preview .campaign-hero-effect').getAttribute('data-effect'),'clouds');
+  await effectPanel.getByRole('combobox',{name:'Edit hero background for appearance'}).selectOption('night');
+  assert.equal(await effectPanel.getByRole('checkbox',{name:'Inherit default effect for this appearance'}).isChecked(),true);
+  await effectPanel.getByRole('checkbox',{name:'Inherit default effect for this appearance'}).uncheck();
+  await effectPanel.getByRole('combobox',{name:'Background effect preset'}).selectOption('halo');
+  await effectPanel.getByRole('combobox',{name:'Background motion speed'}).selectOption('still');
+  assert.equal(await effectPanel.locator('.hero-preview .campaign-hero-effect').getAttribute('data-effect'),'halo');
+  await effectPanel.getByRole('combobox',{name:'Edit hero background for appearance'}).selectOption('default');
+  assert.equal(await effectPanel.locator('.hero-preview .campaign-hero-effect').getAttribute('data-effect'),'clouds');
   await page.locator('.hero-controls input[maxlength="500"]').first().fill('Synthetic image description');assert.equal(await page.locator('.hero-preview img').first().getAttribute('alt'),'Synthetic image description');
   await page.locator('.theme-grid input[type="color"]').first().evaluate(el=>{el.value='#eeeeee';el.dispatchEvent(new Event('input',{bubbles:true}));});
   assert.equal(await page.locator('.hero-preview').first().evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(238, 238, 238)');
   await page.locator('input[type="file"]').first().setInputFiles({name:'synthetic.png',mimeType:'image/png',buffer:harness.raster});await page.waitForFunction(()=>document.getElementById('message').textContent.startsWith('Image uploaded'));
   assert.equal(harness.media.size,1);await page.getByRole('button',{name:'Save draft',exact:true}).first().click();await page.waitForFunction(()=>document.getElementById('message').textContent.startsWith('Draft saved'));assert.ok(harness.records.get(id(2)).document.hero.assetPath.startsWith('/campaign-media/'));
+  assert.equal(harness.records.get(id(2)).document.heroBackground.default.preset,'clouds');
+  assert.equal(harness.records.get(id(2)).document.heroBackground.night.preset,'halo');
+  assert.equal(harness.records.get(id(2)).document.heroBackground.night.speed,'still');
   await page.locator('#default-campaign').selectOption(id(1));await page.locator('#mode-switching').check();await page.locator('#day-campaign').selectOption(id(2));await page.locator('#night-campaign').selectOption(id(2));
   await page.getByRole('button',{name:'Save website selection',exact:true}).click();await page.waitForFunction(()=>document.getElementById('settings-status').textContent==='Settings version 1');
   assert.equal(harness.getSettings().settings.modeSwitching,true);assert.equal(harness.getSettings().settings.day.campaignId,harness.getSettings().settings.night.campaignId);
@@ -49,6 +65,10 @@ for(const [name,engine]of Object.entries({chromium,firefox,webkit})){
   await page.waitForFunction(()=>document.querySelector('.draft-page-frame')?.getAttribute('srcdoc')?.includes('data-campaign="true"'));
   const preview=page.frameLocator('.draft-page-frame');
   assert.ok((await preview.locator('.hero h1').textContent()).startsWith('<img src=x onerror='));
+  assert.equal(await preview.locator('.campaign-hero-effect').getAttribute('data-effect'),'clouds');
+  await page.getByRole('combobox',{name:'Draft preview appearance'}).selectOption('night');
+  await page.waitForFunction(()=>document.querySelector('.draft-page-frame')?.srcdoc.includes('data-effect="halo"'));
+  assert.equal(await preview.locator('.campaign-hero-effect').getAttribute('data-effect'),'halo');
   assert.equal(await page.evaluate(()=>window.editorInjection),undefined);
   await page.getByRole('button',{name:'Mobile width'}).click();
   assert.ok((await page.locator('.draft-page-frame').boundingBox()).width<=375);
