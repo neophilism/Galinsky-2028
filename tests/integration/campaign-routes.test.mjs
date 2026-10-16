@@ -52,3 +52,31 @@ test('feature disabled and rate limits remain real gates',async()=>{
 test('generic editor assets serve with private caching and no inline executable code',async()=>{
  const s=await setup();try{for(const url of ['/editor/campaigns','/editor/campaigns/editor.mjs','/editor/campaigns/editor.css']){const r=await s.app.inject({url});assert.equal(r.statusCode,200);assert.match(r.headers['cache-control'],/private/);assert.match(r.headers['content-security-policy'],/script-src 'self'/);}const page=(await s.app.inject({url:'/editor/campaigns'})).body;assert.ok(page.includes('Side-by-side text'));assert.ok(page.includes('Enable day/night mode'));}finally{await s.app.close();}
 });
+
+test('full-page draft preview is protected and cannot publish or execute submitted markup',async()=>{
+ const s=await setup();try{
+  const doc=fixture();doc.hero.assetPath='/assets/candidate.webp';
+  doc.fields['home.hero.headline']='<img src=x onerror="bad()"> & synthetic';
+  const payload={page:'home',document:doc};
+  const allowed=await s.app.inject({method:'POST',url:'/api/editorial/preview',headers:s.headers,payload});
+  assert.equal(allowed.statusCode,200);assert.match(allowed.json().html,/&lt;img src=x onerror=/);
+  assert.equal(s.calls.length,0,'Rendering an unsaved draft must not mutate the store');
+  const unauthorized=await s.app.inject({method:'POST',url:'/api/editorial/preview',headers:{'content-type':'application/json'},payload});
+  assert.equal(unauthorized.statusCode,401);
+  const badCsrf=await s.app.inject({method:'POST',url:'/api/editorial/preview',headers:{...s.headers,'x-csrf-token':'not-the-session'},payload});
+  assert.equal(badCsrf.statusCode,403);
+  const invalid=await s.app.inject({method:'POST',url:'/api/editorial/preview',headers:s.headers,payload:{page:'untrusted',document:doc}});
+  assert.equal(invalid.statusCode,400);
+  const assets=await s.app.inject({url:'/editor/campaigns/preview-assets/design.css',headers:s.headers});
+  assert.equal(assets.statusCode,200);assert.match(assets.headers['cache-control'],/no-store/);
+  const traversal=await s.app.inject({url:'/editor/campaigns/preview-assets/secrets.env',headers:s.headers});
+  assert.equal(traversal.statusCode,404);
+ }finally{await s.app.close();}
+});
+test('reviewers and volunteers never acquire full-page preview grants',async()=>{
+ for(const role of ['reviewer','volunteer','treasurer']){const s=await setup({role});try{
+  const d=fixture();const response=await s.app.inject({method:'POST',url:'/api/editorial/preview',headers:s.headers,payload:{page:'home',document:d}});
+  assert.equal(response.statusCode,403);
+  assert.equal((await s.app.inject({url:'/editor/campaigns/preview-assets/design.css',headers:s.headers})).statusCode,403);
+ }finally{await s.app.close();}}
+});
