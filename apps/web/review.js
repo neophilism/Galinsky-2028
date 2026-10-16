@@ -18,7 +18,9 @@ function signIn(){
  app.replaceChildren();const panel=el('section','',{class:'panel'});panel.append(el('h2','Welcome.'),el('p','Use the username and password provided by Phillip to review the campaign website.'));
  const f=el('form');input(f,'Username','username','text',{autocomplete:'username',required:'',maxlength:'40',autocapitalize:'none',spellcheck:'false'});passwordInput(f,'Password','password','current-password');f.append(el('button','Sign in',{type:'submit'}));
  f.addEventListener('submit',async e=>{e.preventDefault();const values=Object.fromEntries(new FormData(f));busy(f,true);try{await api('/preview/auth/sign-in/username',values);f.reset();location.assign(document.querySelector('#main').dataset.next||'/');}catch(err){notice('Unable to sign in. Check your username and password, or ask Phillip to renew your access.',true);}finally{busy(f,false);}});
- panel.append(f,el('p','These credentials provide website review access. They do not create a volunteer or staff account.',{class:'fine'}));app.append(panel);
+ panel.append(f,el('p','These credentials are for individual reviewer accounts and are different from the original shared preview password.',{class:'fine'}));
+ link(panel,'Use existing shared preview access','/');
+ app.append(panel);
 }
 function setup(){
  app.replaceChildren();const panel=el('section','',{class:'panel'});panel.append(el('h2','Create your owner login.'),el('p','Retrieve the one-time G28_REVIEW_SETUP_KEY from the website service’s protected Render Environment settings, then choose your username and password. Only this account can create or revoke reviewer access.'));
