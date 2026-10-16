@@ -37,6 +37,7 @@ for(const [name,engine]of Object.entries({chromium,firefox,webkit})){
   await effectPanel.getByRole('combobox',{name:'Background effect preset'}).selectOption('halo');
   await effectPanel.getByRole('combobox',{name:'Background motion speed'}).selectOption('still');
   assert.equal(await effectPanel.locator('.hero-preview .campaign-hero-effect').getAttribute('data-effect'),'halo');
+  assert.notEqual(await effectPanel.locator('.hero-preview .hfx-a').evaluate(el=>getComputedStyle(el).backgroundImage),'none','Halo gradient is actually supported by this browser');
   await effectPanel.getByRole('combobox',{name:'Edit hero background for appearance'}).selectOption('default');
   assert.equal(await effectPanel.locator('.hero-preview .campaign-hero-effect').getAttribute('data-effect'),'clouds');
   await page.locator('.hero-controls input[maxlength="500"]').first().fill('Synthetic image description');assert.equal(await page.locator('.hero-preview img').first().getAttribute('alt'),'Synthetic image description');
