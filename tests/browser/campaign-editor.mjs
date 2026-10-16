@@ -45,6 +45,15 @@ for(const [name,engine]of Object.entries({chromium,firefox,webkit})){
   // Script-looking text stays literal in the preview and text controls.
   await page.locator('.panel').first().getByText('Hero image and preview',{exact:true}).click();
   await field('home.hero.headline',id(2)).fill('<img src=x onerror="window.editorInjection=true">');assert.equal(await page.evaluate(()=>window.editorInjection),undefined);assert.ok((await page.locator('.hero-preview h3').first().textContent()).startsWith('<img'));
+  await page.locator('#view').selectOption('preview');
+  await page.waitForFunction(()=>document.querySelector('.draft-page-frame')?.getAttribute('srcdoc')?.includes('data-campaign="true"'));
+  const preview=page.frameLocator('.draft-page-frame');
+  assert.ok((await preview.locator('.hero h1').textContent()).startsWith('<img src=x onerror='));
+  assert.equal(await page.evaluate(()=>window.editorInjection),undefined);
+  await page.getByRole('button',{name:'Mobile width'}).click();
+  assert.ok((await page.locator('.draft-page-frame').boundingBox()).width<=375);
+  assert.ok(harness.calls.some(call=>call.path==='/api/editorial/preview'&&call.method==='POST'));
+  await page.locator('#view').selectOption('single');
   assert.deepEqual(errors,[]);results.push({browser:name,status:'passed',backend:'synthetic UI harness; real API and PostgreSQL tested separately',checks:18});
  }finally{await context.close();await browser.close();await harness.close();}
 }
