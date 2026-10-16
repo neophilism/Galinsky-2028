@@ -1,3 +1,4 @@
+import {postgresCoordination,removeAccountCoordination,ownCoordination} from './coordination-store.mjs';
 import pg from 'pg';
 import {randomUUID} from 'node:crypto';
 export function databasePool(connectionString){
@@ -64,7 +65,7 @@ export class PostgresStore{
  }
  async logout(hash){await this.pool.query('DELETE FROM g28.sessions WHERE token_hash=$1',[hash]);}
  async consent(id,marketing){await this.pool.query('UPDATE g28.accounts SET marketing_consent=$1 WHERE id=$2',[marketing,id]);}
- async closeAccount(id){const c=await this.pool.connect();try{await c.query('BEGIN');await c.query('DELETE FROM g28.login_requests WHERE email_key=(SELECT email_key FROM g28.accounts WHERE id=$1)',[id]);await c.query('DELETE FROM g28.outbox WHERE subject_key=(SELECT email_key FROM g28.accounts WHERE id=$1)',[id]);await c.query('DELETE FROM g28.accounts WHERE id=$1',[id]);await c.query('COMMIT');}catch(e){await c.query('ROLLBACK');throw e;}finally{c.release();}}
+ async closeAccount(id){const c=await this.pool.connect();try{await c.query('BEGIN');const a=(await c.query('SELECT email_key FROM g28.accounts WHERE id=$1 FOR UPDATE',[id])).rows[0];if(a){const teams=await c.query('SELECT id,record FROM g28.coordination_teams ORDER BY id FOR UPDATE');for(const row of teams.rows){removeAccountCoordination(row.record,id,a.email_key);await c.query('UPDATE g28.coordination_teams SET record=$2,updated_at=now() WHERE id=$1',[row.id,row.record]);}}await c.query('DELETE FROM g28.login_requests WHERE email_key=(SELECT email_key FROM g28.accounts WHERE id=$1)',[id]);await c.query('DELETE FROM g28.outbox WHERE subject_key=(SELECT email_key FROM g28.accounts WHERE id=$1)',[id]);await c.query('DELETE FROM g28.accounts WHERE id=$1',[id]);await c.query('COMMIT');}catch(e){await c.query('ROLLBACK');throw e;}finally{c.release();}}
  async accountActivityExport(id){
   const c=await this.pool.connect();
   try{
@@ -76,9 +77,11 @@ export class PostgresStore{
    const tasks=await c.query('SELECT task_id FROM g28.task_progress WHERE account_id=$1 ORDER BY task_id',[id]);
    const reads=await c.query('SELECT material_id,revision,content_sha256 FROM g28.material_reading WHERE account_id=$1 ORDER BY material_id',[id]);
    const bookmarked=await c.query('SELECT material_id FROM g28.account_bookmarks WHERE account_id=$1 ORDER BY material_id',[id]);
+   const coordination=await c.query('SELECT record FROM g28.coordination_teams');
    await c.query('COMMIT');
    const a=account.rows[0],p=prefs.rows[0];
    return {
+    coordination:ownCoordination(coordination.rows.map(r=>r.record),id),
     account:{id:a.id,verifiedAt:a.verified_at.toISOString(),createdAt:a.created_at.toISOString(),
      marketingConsent:a.marketing_consent,termsVersion:a.terms_version},
     rolePreferences:p?{roleId:p.role_id,minutes:p.available_minutes,willingToTrain:p.willing_to_train}:null,
@@ -136,3 +139,5 @@ export class PostgresStore{
  async cleanup(){await this.pool.query('DELETE FROM g28.login_requests WHERE expires_at<now()');await this.pool.query('DELETE FROM g28.sessions WHERE expires_at<now()');await this.pool.query('DELETE FROM g28.rate_buckets WHERE expires_at<now()');await this.pool.query("DELETE FROM g28.outbox WHERE created_at<now()-interval '1 day'");}
  async close(){await this.pool.end();}
 }
+
+Object.assign(PostgresStore.prototype, postgresCoordination);

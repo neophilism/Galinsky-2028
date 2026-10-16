@@ -9,7 +9,7 @@
   "implemented_packages": 8,
   "merged_packages": 8,
   "deployed_packages": 7,
-  "note": "Conservative source-bound audit: 8 completed, 46 in progress, 7 not started. All 82 previously merged PRs are represented as either complete or partial evidence, not as work-unit numbers.",
+  "note": "16 October: 8 accepted, 48 in progress, 5 not started. Coordination implementation does not establish full package acceptance.",
   "packages": [
     {
       "id": "G28-01",
@@ -918,19 +918,19 @@
         "G28-29",
         "G28-30"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Add opt-in team membership, invitation/acceptance, scoped captain assignments, weekly plans, anonymous result summaries and authorized member contact handling. Do not publish a volunteer directory or precise private locations. Make leaving a team immediate and remove future access on role change.",
       "acceptance": "Captains see only the minimum data and tasks of authorized members. Joining a team does not grant access to historic private records. Invite forwarding, revoked invites, self-promotion and cross-team enumeration fail safely.",
       "evidence": "Team lifecycle tests, privacy/access matrix and revoked-captain browser journey.",
       "external_inputs": "None beyond the listed dependencies.",
       "contributing_prs": [],
-      "implementation_note": "No working team membership or scoped captain-coordination system.",
+      "implementation_note": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md.",
       "acceptance_review": {
-        "status": "not_started",
+        "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "No working team membership or scoped captain-coordination system."
+        "report": "docs/evidence/COORDINATION_20261016.md",
+        "blocker": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md."
       }
     },
     {
@@ -943,19 +943,19 @@
         "G28-32",
         "G28-24"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Provide approved orientation/event listings, accessible details, time zones, RSVP/capacity/waitlist/cancellation, attendee-only private details when appropriate and reminders. Support event-plan submission/review with venue, accessibility, safety and required authorization fields. Link to approved external meeting providers without exposing protected records.",
       "acceptance": "Double booking/capacity races, cancellation and time-zone boundaries are handled. Public calendars never reveal private addresses or attendee identities. An RSVP does not authorize spending, contracts, permits, field operations or recording participants.",
       "evidence": "Capacity/time-zone tests, privacy projections, cancellation notifications and event-host walkthrough.",
       "external_inputs": "None beyond the listed dependencies.",
       "contributing_prs": [],
-      "implementation_note": "No event scheduling, capacity/RSVP or cancellation backend.",
+      "implementation_note": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md.",
       "acceptance_review": {
-        "status": "not_started",
+        "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "No event scheduling, capacity/RSVP or cancellation backend."
+        "report": "docs/evidence/COORDINATION_20261016.md",
+        "blocker": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md."
       }
     },
     {
@@ -1776,5 +1776,5 @@
       }
     }
   ],
-  "progress_evidence_note": "13 October 2026 acceptance audit: eight demonstrated whole-package completions, 46 partial implementations and 7 unstarted; a merged PR does not imply full acceptance."
+  "progress_evidence_note": "16 October: 8 accepted, 48 in progress, 5 not started. Coordination implementation does not establish full package acceptance."
 }
