@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createCampaignAuthorization} from '../packages/core/campaign-access.mjs';
+function setup({enabled=true,role='owner',session=true,rate=true}={}){return createCampaignAuthorization({enabled,config:{production:false,adminLoginReady:true,portalOrigin:'https://portal.example',adminOwnerEmailKey:'owner'},readCookie:value=>value,validToken:token=>token==='session',tokenHash:token=>token,accountStore:{session:async()=>session?{account:{id:'synthetic-id'},csrf:'csrf'}:null,adminRole:async()=>role,rate:async()=>rate}});}
+const req=()=>({headers:{cookie:'session',origin:'https://portal.example','x-csrf-token':'csrf','sec-fetch-site':'same-origin'}});
+test('owner may edit and publish; editor may draft but not publish',async()=>{assert.equal((await setup()(req(),{write:true,owner:true})).role,'owner');assert.equal((await setup({role:'editor'})(req(),{write:true})).role,'editor');await assert.rejects(setup({role:'editor'})(req(),{owner:true}),e=>e.code==='editor_forbidden');});
+test('reviewer, volunteer, financial and absent grants cannot read drafts',async()=>{for(const role of ['reviewer','volunteer','treasurer','auditor',null])await assert.rejects(setup({role})(req()),e=>e.statusCode===403);});
+test('missing credentials, revoked session and disabled feature fail closed',async()=>{const r=req();r.headers.cookie='bad';await assert.rejects(setup()(r),e=>e.statusCode===401);await assert.rejects(setup({session:false})(req()),e=>e.statusCode===401);await assert.rejects(setup({enabled:false})(req()),e=>e.statusCode===503);});
+test('CSRF and origin checked before mutation',async()=>{for(const change of [{origin:'https://attacker.example'},{'sec-fetch-site':'cross-site'},{'x-csrf-token':'wrong'},{'x-csrf-token':'\u00e9\u00e9\u00e9\u00e9'}])await assert.rejects(setup()({headers:{...req().headers,...change}},{write:true}),e=>e.statusCode===403);});
+test('read operations cannot bypass fresh role lookup or rate control',async()=>{await assert.rejects(setup({rate:false})(req()),e=>e.statusCode===429);});
