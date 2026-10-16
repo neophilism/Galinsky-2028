@@ -6,6 +6,7 @@ import {deflateSync} from 'node:zlib';
 import {fixture,id} from '../campaign-fixture.mjs';
 import {CAMPAIGN_FIELDS,THEME_TOKENS,validateCampaignDocument,validateCampaignSettings,publicCampaignDocument} from '../../packages/core/campaign-content.mjs';
 import {normalizeCampaignPng,pngChunk} from '../../packages/core/campaign-image.mjs';
+import {renderCampaignDraftPage} from '../../apps/api/src/campaign-draft-preview.mjs';
 const root=fileURLToPath(new URL('../../apps/editor/',import.meta.url));
 const doc=(name,text)=>{const d=fixture();d.internalName=name;d.fields['home.hero.headline']=text;d.hero.assetPath='/assets/candidate.webp';return d;};
 export async function startEditorHarness({port=0}={}){
@@ -23,6 +24,8 @@ export async function startEditorHarness({port=0}={}){
    if(files.has(u.pathname)){const [name,type]=files.get(u.pathname);res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' blob:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");return send(await readFile(root+name),200,type);}
    if(u.pathname==='/favicon.ico')return send('',204,'text/plain');
    if(u.pathname==='/api/session')return send({csrf:'synthetic-csrf',account:{role:'owner'}});
+   if(u.pathname==='/api/editorial/preview'&&req.method==='POST')return send({html:renderCampaignDraftPage(body.document,body.page)});
+   if(u.pathname==='/editor/campaigns/preview-assets/candidate.webp')return send(raster,200,'image/png');
    if(u.pathname==='/api/editorial/contract')return send({schemaVersion:1,fields:CAMPAIGN_FIELDS,themeTokens:THEME_TOKENS,role:'owner',builtinHero:'/assets/candidate.webp'});
    if(u.pathname==='/api/editorial/builtin-hero')return send(raster,200,'image/png');
    if(u.pathname==='/api/editorial/settings'){
