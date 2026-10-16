@@ -1,4 +1,5 @@
 import {CAMPAIGN_FIELDS,validatePublicCampaignDocument,escapeCampaignText,campaignThemeCss,campaignFailure,contrastRatio} from './campaign-content.mjs';
+import {heroBackdropMarkup,heroEffectNeedsScript,HERO_EFFECT_CSS_PATH,HERO_EFFECT_SCRIPT_PATH} from './campaign-hero-effects.mjs';
 const VOID=new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr']);
 export const CAMPAIGN_PAGE_KEYS=Object.freeze({index:'home',issues:'issues','kirk-evers':'issue-freedom',garden:'issue-repair',cornerstone:'issue-opportunity',volunteer:'volunteer',donate:'donate',notices:'notices'});
 // Index trusted, checked-in renderer output only. This is NOT an HTML sanitizer.
@@ -87,8 +88,11 @@ export function compileCampaignTemplate(html,routeKey){
  const themeColor=select(nodes,'meta[name="theme-color"]')[0];if(themeColor?.attrs.content)slots.push({key:'@themeColor',start:themeColor.attrs.content.start,end:themeColor.attrs.content.end,decoration:'plain'});
  const ordered=[...slots].sort((a,b)=>a.start-b.start);for(let i=1;i<ordered.length;i++)if(ordered[i].start<ordered[i-1].end)throw Error('Overlapping campaign template slots.');
  const root=find('html'),head=find('head'),header=find('header.header');
+ const backdrops=select(nodes,'section.hero canvas.flag-canvas');
+ if(page==='home'&&backdrops.length!==1)throw Error('Campaign hero background slot unavailable.');
+ const heroBackdrop=backdrops.length?{start:backdrops[0].start,end:backdrops[0].end}:null;
  const csp=select(nodes,'meta[http-equiv="Content-Security-Policy"]')[0]?.attrs.content;
- return{schemaVersion:1,page,routeKey,html,slots,rootInsert:root.openEnd-1,headInsert:head.closeStart,controlInsert:header.closeStart,csp:csp?{...csp}:null};
+ return{schemaVersion:1,page,routeKey,html,slots,rootInsert:root.openEnd-1,headInsert:head.closeStart,controlInsert:header.closeStart,heroBackdrop,csp:csp?{...csp}:null};
 }
 function decorated(value,type){
  if(type==='attribute')return escapeCampaignText(value).replace(/\r?\n/g,' ');
@@ -107,12 +111,17 @@ export function renderCampaignTemplate(template,record,{mode='default',preferenc
   if(value==null)campaignFailure('missing_content','Published template content is missing.',503);
   return{start:slot.start,end:slot.end,value:decorated(value,slot.decoration)};
  });
+ if(template.heroBackdrop){
+  edits.push({start:template.heroBackdrop.start,end:template.heroBackdrop.end,value:heroBackdropMarkup(document,mode)});
+ }
  const long=document.fields['home.hero.headline'].length>32;
  edits.push({start:template.rootInsert,end:template.rootInsert,value:` data-campaign="true" data-campaign-mode="${mode}" data-campaign-preference="${preference}" data-campaign-mode-enabled="${modeEnabled}" data-campaign-long-heading="${long}"`});
  const accent=contrastRatio(document.theme.primary,document.theme.background)>=4.5&&contrastRatio(document.theme.primary,document.theme.surface)>=4.5?document.theme.primary:document.theme.link;
  const inputBorder=contrastRatio(document.theme.border,document.theme.surface)>=3?document.theme.border:document.theme.mutedText;
  const focal=`:root{--campaign-accent-text:${accent};--campaign-input-border:${inputBorder}}.hero .candidate{aspect-ratio:2/3;object-fit:cover;object-position:${document.hero.focalX}% ${document.hero.focalY}%}@media(max-width:700px){.hero .candidate{object-position:${document.hero.mobileFocalX}% ${document.hero.mobileFocalY}%}}`;
- edits.push({start:template.headInsert,end:template.headInsert,value:`<style data-campaign-theme>${campaignThemeCss(document.theme)}${css}${focal}</style>${modeEnabled?'<script src="'+scriptPath+'"></script>':''}`});
+ const heroAssets=template.heroBackdrop?'<link rel="stylesheet" href="'+HERO_EFFECT_CSS_PATH+'">'+
+  (heroEffectNeedsScript(document,mode)?'<script defer src="'+HERO_EFFECT_SCRIPT_PATH+'"></script>':''):'';
+ edits.push({start:template.headInsert,end:template.headInsert,value:`<style data-campaign-theme>${campaignThemeCss(document.theme)}${css}${focal}</style>${heroAssets}${modeEnabled?'<script src="'+scriptPath+'"></script>':''}`});
  if(modeEnabled&&template.csp){const policy=template.csp.value.replace(/form-action\s+'none'/,"form-action 'self'");edits.push({start:template.csp.start,end:template.csp.end,value:escapeCampaignText(policy)});}
  if(modeEnabled){const options=['system','day','night'].map(value=>`<option value="${value}"${value===preference?' selected':''}>${value[0].toUpperCase()+value.slice(1)}</option>`).join('');edits.push({start:template.controlInsert,end:template.controlInsert,value:`<form class="campaign-appearance" action="${path}" method="get"><label>Appearance <select name="appearance" aria-label="Website appearance">${options}</select></label><button type="submit">Apply</button></form>`});}
  let html=template.html;for(const edit of edits.sort((a,b)=>b.start-a.start))html=html.slice(0,edit.start)+edit.value+html.slice(edit.end);
