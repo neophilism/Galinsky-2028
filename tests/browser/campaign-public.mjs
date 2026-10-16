@@ -16,14 +16,14 @@ for(const [name,engine]of Object.entries({chromium,firefox,webkit})){
   assert.equal(await page.locator('body').evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(16, 16, 16)');
   assert.equal(await page.locator('.campaign-hero-effect').getAttribute('data-effect'),'beams');
   assert.equal(await page.locator('.campaign-hero-effect').getAttribute('data-animated'),'false');
-  assert.equal(await page.locator('.campaign-hero-effect .hfx-layer').evaluate(el=>getComputedStyle(el).animationName),'none');
+  assert.equal(await page.locator('.campaign-hero-effect .hfx-layer').first().evaluate(el=>getComputedStyle(el).animationName),'none');
   await page.screenshot({path:`${out}/${name}-night-desktop.png`});
   for(const path of ['/issues/','/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/','/volunteer/','/donate/','/notices/']){const response=await page.goto(h.origin+path);assert.equal(response.status(),200);await page.waitForFunction(()=>document.documentElement.dataset.campaignMode==='night');}
   await page.goto(h.origin+'/');await page.locator('[name="appearance"]').selectOption('day');await page.locator('.campaign-appearance button').click();await page.waitForFunction(()=>document.documentElement.dataset.campaignMode==='day');
   assert.equal(await page.title(),'Synthetic day title');
   assert.equal(await page.locator('.campaign-hero-effect').getAttribute('data-effect'),'halo');
   assert.equal(await page.locator('.campaign-hero-effect').getAttribute('data-animated'),'true');
-  assert.equal(await page.locator('.campaign-hero-effect .hfx-layer').evaluate(el=>getComputedStyle(el).animationName),'none','Reduced-motion browser must not animate');
+  assert.equal(await page.locator('.campaign-hero-effect .hfx-layer').first().evaluate(el=>getComputedStyle(el).animationName),'none','Reduced-motion browser must not animate');
   await page.evaluate(()=>scrollTo(0,document.body.scrollHeight));
   await page.waitForFunction(()=>document.querySelector('.campaign-hero-effect')?.dataset.running==='false');
   await page.goto(h.origin+'/issues/');assert.equal(await page.locator('html').getAttribute('data-campaign-mode'),'day');
