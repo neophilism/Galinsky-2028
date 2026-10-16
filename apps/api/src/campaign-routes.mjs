@@ -1,6 +1,7 @@
 import {readFile,stat} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {CampaignStore} from './campaign-store.mjs';
+import {renderCampaignDraftPage} from './campaign-draft-preview.mjs';
 import {CampaignError,CAMPAIGN_FIELDS,THEME_TOKENS,exactCampaignKeys} from '../../../packages/core/campaign-content.mjs';
 import {createCampaignAuthorization} from '../../../packages/core/campaign-access.mjs';
 import {normalizeCampaignPng,decodeCampaignUpload} from '../../../packages/core/campaign-image.mjs';
@@ -37,7 +38,17 @@ export function registerCampaignEditor(app,{accountStore,config,env=process.env,
  route('GET','/media',{},req=>store.assets({after:req.query.after||null,limit:req.query.limit==null?30:Number(req.query.limit)}));
  route('GET','/media/:id',{},async(req,reply)=>{const image=await store.asset(req.params.id);return reply.header('Cache-Control','private, no-store').header('X-Content-Type-Options','nosniff').type(image.contentType).send(image.bytes);});
  route('GET','/builtin-hero',{},async(req,reply)=>reply.header('Cache-Control','private, no-store').type('image/webp').send(await readFile(STATIC_HERO)));
+ route('POST','/preview',{write:true},req=>{const b=body(req,['page','document']);return{html:renderCampaignDraftPage(b.document,b.page)};});
  route('POST','/media',{write:true,upload:true},async req=>{const b=body(req,['base64']);return store.addAsset(await normalizeCampaignPng(decodeCampaignUpload(b.base64)),req.campaignIdentity.actorId);},6*1024*1024);
+ const TYPES={css:'text/css; charset=utf-8',woff2:'font/woff2',svg:'image/svg+xml',png:'image/png',webp:'image/webp',jpg:'image/jpeg',jpeg:'image/jpeg',avif:'image/avif'};
+ app.get('/editor/campaigns/preview-assets/:filename',{onRequest:async(req,reply)=>{reply.header('Cache-Control','private, no-store').header('Vary','Cookie, Authorization');try{await auth(req);}catch(error){return caught(error,reply);}}},async(req,reply)=>{
+  const file=req.params.filename;
+  if(typeof file!=='string'||!thisFile(file))return reply.code(404).type('text/plain').send('Asset not found.');
+  const type=file.split('.').at(-1).toLowerCase();
+  try{return reply.header('Cache-Control','private, no-store').header('X-Content-Type-Options','nosniff').header('Referrer-Policy','no-referrer').type(TYPES[type]).send(await readFile(new URL('../../web/public/assets/'+file,import.meta.url)));}
+  catch(error){if(error.code==='ENOENT')return reply.code(404).send('Asset not found.');throw error;}
+ });
+ function thisFile(value){return /^[A-Za-z0-9][A-Za-z0-9._-]{0,100}\.(?:css|woff2|svg|png|webp|jpg|jpeg|avif)$/i.test(value);}
  const files=[['/editor/campaigns','index.html','text/html; charset=utf-8'],['/editor/campaigns/editor.mjs','editor.mjs','application/javascript'],['/editor/campaigns/editor.css','editor.css','text/css']];
  for(const [url,file,type]of files)app.get(url,async(req,reply)=>{
   if(!enabled)return reply.code(503).type('text/plain').send('The campaign editor is not enabled.');
