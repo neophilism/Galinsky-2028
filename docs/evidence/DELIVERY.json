@@ -115,7 +115,7 @@
     "Staff/admin features not complete",
     "Unreviewed source archive not publicly bundled"
   ],
-  "notes": "Eight full package acceptances remain. The combined PR #95/#96 candidate has 48 packages in progress and 5 not started. Neither PR is merged or deployed; public release and live donations remain gated.",
+  "notes": "Eight full package acceptances remain. The combined PR #95/#96 candidate has 48 packages in progress and 5 not started. Neither PR is merged or deployed; public release and live donations remain gated. Registry expanded to 71 generic units while retaining prior accepted baseline; deployment status remains separate.",
   "production_release_verified": false,
   "private_preview": {
     "url": "https://galinsky-2028-private-preview.onrender.com",
@@ -170,20 +170,20 @@
     "public_role_links_to_actual_portal": true
   },
   "last_acceptance_audit": {
-    "reviewed_at": "2026-10-16T17:49:52.597071+00:00",
-    "source_sha": "a6a3892e1372f76e6e3f172b6a6188a78f98a1e0",
-    "report": "docs/operations/HANDOFF_20261016.md",
+    "reviewed_at": "2026-10-16T20:18:36.930Z",
+    "source_sha": "c3ae2b1d32cc5a8869188e7cc3cf70edfb6037fb",
+    "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
     "completed": 8,
-    "in_progress": 48,
+    "in_progress": 58,
     "not_started": 5,
     "observed_merged_prs": 84,
     "observed_closed_unmerged_prs": 5,
     "ci_run_id": 38942587653,
-    "ci_conclusion": "pending_at_checkpoint",
+    "ci_conclusion": "pending_after_registry_reconciliation",
     "private_preview_deploy": "dep-db79b2d9fdbs73dblj80",
     "private_preview_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
     "portal_preview_sha": "c263d8fd8a331b238ddc884b052c672558cee96e",
-    "warning": "Counts include unmerged candidate implementations. Whole-package acceptance is separate from merger, deployment, public campaign release, real-money contributions and production signup. See PR checks for the later CI conclusion.",
-    "observed_open_prs": 2
+    "warning": "71-unit denominator reconciled, 8 previously accepted unchanged. New editorial work units are partial pending deployment/live verification. PR #97 is still open; no public launch or donor activation.",
+    "observed_open_prs": 3
   }
 }

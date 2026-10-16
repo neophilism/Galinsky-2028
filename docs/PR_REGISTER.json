@@ -2,14 +2,14 @@
   "schema_version": 1,
   "project": "Galinsky 2028",
   "repository": "neophilism/Galinsky-2028",
-  "plan_version": "1.1",
+  "plan_version": "1.2",
   "plan_status": "implementation_started",
   "design_status": "approved_with_issue_video_amendment",
-  "planned_work_packages": 61,
+  "planned_work_packages": 71,
   "implemented_packages": 8,
   "merged_packages": 8,
   "deployed_packages": 7,
-  "note": "16 October combined candidate: 8 accepted, 48 in progress, 5 not started. 84 previously merged PRs; PRs 95 and 96 remain open pending merge authorization. No production release is claimed.",
+  "note": "Expanded to 71 planned work units; original 61 and prior acceptance retained. New units remain in progress pending full acceptance and deployed evidence.",
   "packages": [
     {
       "id": "G28-01",
@@ -1785,7 +1785,255 @@
         "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
         "scoped_deployed": true
       }
+    },
+    {
+      "id": "G28-62",
+      "title": "Generic editorial contracts, plan and canonical tracking",
+      "phase": "Added",
+      "depends_on": [],
+      "status": "in_progress",
+      "github_prs": [],
+      "contributing_prs": [
+        97
+      ],
+      "scope": "Define versioned field/theme/asset contracts, generic implementation plan and align all canonical registers.",
+      "acceptance": "Both registers contain the same 71 planned units; existing evidence preserved; generic fixtures and contracts validated.",
+      "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
+      "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
+      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
+        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+      }
+    },
+    {
+      "id": "G28-63",
+      "title": "Persistent campaign revisions, assets and site settings",
+      "phase": "Added",
+      "depends_on": [
+        "G28-62"
+      ],
+      "status": "in_progress",
+      "github_prs": [],
+      "contributing_prs": [
+        97
+      ],
+      "scope": "Implement unlimited campaign identities, independent duplicates, immutable revisions and atomic published settings with isolated SQL projections.",
+      "acceptance": "Local PostgreSQL verifies restart persistence, concurrency, archiving, publication and separation of drafts.",
+      "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
+      "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
+      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
+        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+      }
+    },
+    {
+      "id": "G28-64",
+      "title": "Shared templates and field inventory",
+      "phase": "Added",
+      "depends_on": [
+        "G28-62"
+      ],
+      "status": "in_progress",
+      "github_prs": [],
+      "contributing_prs": [
+        97
+      ],
+      "scope": "Bind complete editorial field inventory to shared marketing templates while preserving fixed legal and operational content.",
+      "acceptance": "Every required field maps to a stable shared template slot; baseline and finance parity tests pass.",
+      "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
+      "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
+      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
+        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+      }
+    },
+    {
+      "id": "G28-65",
+      "title": "Server-rendered published releases and safe caching",
+      "phase": "Added",
+      "depends_on": [
+        "G28-63",
+        "G28-64"
+      ],
+      "status": "in_progress",
+      "github_prs": [],
+      "contributing_prs": [
+        97
+      ],
+      "scope": "Render pinned text, metadata, hero and theme from published projections; limit stale fallbacks to verified published snapshots.",
+      "acceptance": "Published revision updates work without code deploy; cache isolation, outage and cold-start behavior proved.",
+      "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
+      "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
+      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
+        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+      }
+    },
+    {
+      "id": "G28-66",
+      "title": "Protected editorial APIs and lifecycle operations",
+      "phase": "Added",
+      "depends_on": [
+        "G28-63"
+      ],
+      "status": "in_progress",
+      "github_prs": [],
+      "contributing_prs": [
+        97
+      ],
+      "scope": "Provide owner/editor APIs for drafts, duplication, revisions, publication, archive, restore and audited settings with CSRF and role boundaries.",
+      "acceptance": "Unauthorized roles denied; optimistic-write conflicts preserve data; operations recorded and secure.",
+      "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
+      "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
+      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
+        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+      }
+    },
+    {
+      "id": "G28-67",
+      "title": "Unified text, theme and hero editor",
+      "phase": "Added",
+      "depends_on": [
+        "G28-64",
+        "G28-66"
+      ],
+      "status": "in_progress",
+      "github_prs": [],
+      "contributing_prs": [
+        97
+      ],
+      "scope": "Create a responsive protected editor with page/section navigation, copy, theme, image upload/alt/crop and visible save/conflict states.",
+      "acceptance": "Owner edits copy/colors/image in one place, saves/reloads and previews with keyboard and image-safety checks.",
+      "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
+      "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
+      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
+        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+      }
+    },
+    {
+      "id": "G28-68",
+      "title": "Single and side-by-side editorial comparison",
+      "phase": "Added",
+      "depends_on": [
+        "G28-67"
+      ],
+      "status": "in_progress",
+      "github_prs": [],
+      "contributing_prs": [
+        97
+      ],
+      "scope": "Add arbitrary pair comparison, filters, copying, self-comparison and independent save/conflict states.",
+      "acceptance": "Fields compare by stable keys on desktop/mobile without lost unsaved work; support requested draft preview.",
+      "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
+      "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
+      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
+        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+      }
+    },
+    {
+      "id": "G28-69",
+      "title": "Optional default, day and night assignments",
+      "phase": "Added",
+      "depends_on": [
+        "G28-65",
+        "G28-66",
+        "G28-67"
+      ],
+      "status": "in_progress",
+      "github_prs": [],
+      "contributing_prs": [
+        97
+      ],
+      "scope": "Enable separate owner selectors and visitor Day/Night/System preferences with OS changes and no profiling.",
+      "acceptance": "Disabled/active mode precedence, all permitted pairings, settings invalidation and shared publication proved.",
+      "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
+      "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
+      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
+        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+      }
+    },
+    {
+      "id": "G28-70",
+      "title": "Private initial editorial bootstrap",
+      "phase": "Added",
+      "depends_on": [
+        "G28-63",
+        "G28-64"
+      ],
+      "status": "in_progress",
+      "github_prs": [],
+      "contributing_prs": [
+        97
+      ],
+      "scope": "Load both owner-directed complete campaigns directly into authorized database, idempotently and without private values in Git.",
+      "acceptance": "Both actual documents present, validated, available to owner with verified image references and no disclosure in repo.",
+      "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
+      "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
+      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
+        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+      }
+    },
+    {
+      "id": "G28-71",
+      "title": "Integrated live acceptance and operator handoff",
+      "phase": "Added",
+      "depends_on": [
+        "G28-65",
+        "G28-66",
+        "G28-67",
+        "G28-68",
+        "G28-69",
+        "G28-70"
+      ],
+      "status": "in_progress",
+      "github_prs": [],
+      "contributing_prs": [
+        97
+      ],
+      "scope": "Test complete admin/edit/publish/site journeys across browser engines, outage/rollback, access and deployment checks.",
+      "acceptance": "Verified actual deployed URLs, published releases and roles; durable evidence and exact remaining obligations recorded.",
+      "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
+      "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
+      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
+        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+      }
     }
   ],
-  "progress_evidence_note": "16 October combined candidate: 8 accepted, 48 in progress, 5 not started. 84 previously merged PRs; PRs 95 and 96 remain open pending merge authorization. No production release is claimed."
+  "progress_evidence_note": "Expanded to 71 planned work units; original 61 and prior acceptance retained. New units remain in progress pending full acceptance and deployed evidence."
 }

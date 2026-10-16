@@ -2,17 +2,17 @@
   "repository": "neophilism/Galinsky-2028",
   "title": "Galinsky-2028",
   "planVerified": true,
-  "plannedPrCount": 61,
+  "plannedPrCount": 71,
   "sourceFiles": [
     ".exechub/project.yml",
     "docs/DEVELOPMENT_PLAN.md",
     ".exechub/approved-pr-mapping.json",
     "docs/PR_REGISTER.json"
   ],
-  "progressEvidenceNote": "16 October combined candidate: 8 accepted, 48 in progress, 5 not started. 84 previously merged PRs; PRs 95 and 96 remain open pending merge authorization. No production release is claimed.",
+  "progressEvidenceNote": "Expanded to 71 planned work units; original 61 preserved. PR #97 provides partial implementation of G28-062..G28-071, with pending full acceptance, merge and live deployment.",
   "schemaVersion": 1,
-  "roadmapVersion": 4,
-  "observedAt": "2026-10-16T17:43:08Z",
+  "roadmapVersion": 5,
+  "observedAt": "2026-10-16T20:17:06Z",
   "units": [
     {
       "id": "G28-001",
@@ -1063,9 +1063,212 @@
       "reviewedSourceSha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
       "acceptanceSummary": "Individually revocable reviewer accounts passed live HTTPS, privilege-isolation, revocation and cross-browser tests.",
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
+    },
+    {
+      "id": "G28-062",
+      "title": "Generic editorial contracts, plan and canonical tracking",
+      "origin": "addition",
+      "prs": [],
+      "contributingPrs": [
+        97
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "scope": "Define versioned field/theme/asset contracts, generic implementation plan and align all canonical registers.",
+      "acceptanceBlocker": "Implementation and synthetic CI contribute but end-to-end deployment, independent draft preview and live owner acceptance are not yet accepted.",
+      "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md"
+    },
+    {
+      "id": "G28-063",
+      "title": "Persistent campaign revisions, assets and site settings",
+      "origin": "addition",
+      "prs": [],
+      "contributingPrs": [
+        97
+      ],
+      "dependsOn": [
+        "G28-062"
+      ],
+      "externalDependencies": [],
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "scope": "Implement unlimited campaign identities, independent duplicates, immutable revisions and atomic published settings with isolated SQL projections.",
+      "acceptanceBlocker": "Implementation and synthetic CI contribute but end-to-end deployment, independent draft preview and live owner acceptance are not yet accepted.",
+      "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md"
+    },
+    {
+      "id": "G28-064",
+      "title": "Shared templates and field inventory",
+      "origin": "addition",
+      "prs": [],
+      "contributingPrs": [
+        97
+      ],
+      "dependsOn": [
+        "G28-062"
+      ],
+      "externalDependencies": [],
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "scope": "Bind complete editorial field inventory to shared marketing templates while preserving fixed legal and operational content.",
+      "acceptanceBlocker": "Implementation and synthetic CI contribute but end-to-end deployment, independent draft preview and live owner acceptance are not yet accepted.",
+      "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md"
+    },
+    {
+      "id": "G28-065",
+      "title": "Server-rendered published releases and safe caching",
+      "origin": "addition",
+      "prs": [],
+      "contributingPrs": [
+        97
+      ],
+      "dependsOn": [
+        "G28-063",
+        "G28-064"
+      ],
+      "externalDependencies": [],
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "scope": "Render pinned text, metadata, hero and theme from published projections; limit stale fallbacks to verified published snapshots.",
+      "acceptanceBlocker": "Implementation and synthetic CI contribute but end-to-end deployment, independent draft preview and live owner acceptance are not yet accepted.",
+      "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md"
+    },
+    {
+      "id": "G28-066",
+      "title": "Protected editorial APIs and lifecycle operations",
+      "origin": "addition",
+      "prs": [],
+      "contributingPrs": [
+        97
+      ],
+      "dependsOn": [
+        "G28-063"
+      ],
+      "externalDependencies": [],
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "scope": "Provide owner/editor APIs for drafts, duplication, revisions, publication, archive, restore and audited settings with CSRF and role boundaries.",
+      "acceptanceBlocker": "Implementation and synthetic CI contribute but end-to-end deployment, independent draft preview and live owner acceptance are not yet accepted.",
+      "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md"
+    },
+    {
+      "id": "G28-067",
+      "title": "Unified text, theme and hero editor",
+      "origin": "addition",
+      "prs": [],
+      "contributingPrs": [
+        97
+      ],
+      "dependsOn": [
+        "G28-064",
+        "G28-066"
+      ],
+      "externalDependencies": [],
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "scope": "Create a responsive protected editor with page/section navigation, copy, theme, image upload/alt/crop and visible save/conflict states.",
+      "acceptanceBlocker": "Implementation and synthetic CI contribute but end-to-end deployment, independent draft preview and live owner acceptance are not yet accepted.",
+      "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md"
+    },
+    {
+      "id": "G28-068",
+      "title": "Single and side-by-side editorial comparison",
+      "origin": "addition",
+      "prs": [],
+      "contributingPrs": [
+        97
+      ],
+      "dependsOn": [
+        "G28-067"
+      ],
+      "externalDependencies": [],
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "scope": "Add arbitrary pair comparison, filters, copying, self-comparison and independent save/conflict states.",
+      "acceptanceBlocker": "Implementation and synthetic CI contribute but end-to-end deployment, independent draft preview and live owner acceptance are not yet accepted.",
+      "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md"
+    },
+    {
+      "id": "G28-069",
+      "title": "Optional default, day and night assignments",
+      "origin": "addition",
+      "prs": [],
+      "contributingPrs": [
+        97
+      ],
+      "dependsOn": [
+        "G28-065",
+        "G28-066",
+        "G28-067"
+      ],
+      "externalDependencies": [],
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "scope": "Enable separate owner selectors and visitor Day/Night/System preferences with OS changes and no profiling.",
+      "acceptanceBlocker": "Implementation and synthetic CI contribute but end-to-end deployment, independent draft preview and live owner acceptance are not yet accepted.",
+      "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md"
+    },
+    {
+      "id": "G28-070",
+      "title": "Private initial editorial bootstrap",
+      "origin": "addition",
+      "prs": [],
+      "contributingPrs": [
+        97
+      ],
+      "dependsOn": [
+        "G28-063",
+        "G28-064"
+      ],
+      "externalDependencies": [],
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "scope": "Load both owner-directed complete campaigns directly into authorized database, idempotently and without private values in Git.",
+      "acceptanceBlocker": "Implementation and synthetic CI contribute but end-to-end deployment, independent draft preview and live owner acceptance are not yet accepted.",
+      "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md"
+    },
+    {
+      "id": "G28-071",
+      "title": "Integrated live acceptance and operator handoff",
+      "origin": "addition",
+      "prs": [],
+      "contributingPrs": [
+        97
+      ],
+      "dependsOn": [
+        "G28-065",
+        "G28-066",
+        "G28-067",
+        "G28-068",
+        "G28-069",
+        "G28-070"
+      ],
+      "externalDependencies": [],
+      "externalPrerequisites": [],
+      "status": "in_progress",
+      "scope": "Test complete admin/edit/publish/site journeys across browser engines, outage/rollback, access and deployment checks.",
+      "acceptanceBlocker": "Implementation and synthetic CI contribute but end-to-end deployment, independent draft preview and live owner acceptance are not yet accepted.",
+      "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md"
     }
   ],
   "pullRequests": [
+    {
+      "id": 4892951269,
+      "number": 97,
+      "title": "Implement database-backed campaign editing, paired text views and optional appearance assignments",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/97",
+      "state": "open",
+      "draft": true,
+      "createdAt": "2026-10-16T18:57:45Z",
+      "updatedAt": "2026-10-16T20:10:15Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
+      "baseRef": "main",
+      "mergeCommitSha": "a3a78c595d47ec64f4980cbdaaecd58ad3e90217"
+    },
     {
       "id": 4892104907,
       "number": 96,
@@ -1654,7 +1857,7 @@
     {
       "id": 4829596446,
       "number": 54,
-      "title": "SUPERSEDED: four-processor handoff already updated in merged PRs #55\u201357",
+      "title": "SUPERSEDED: four-processor handoff already updated in merged PRs #55–57",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/54",
       "state": "closed",
       "draft": false,
@@ -1684,7 +1887,7 @@
     {
       "id": 4829483935,
       "number": 52,
-      "title": "Recover September 2026 Kirk\u2013Evers legislation source for private editorial review",
+      "title": "Recover September 2026 Kirk–Evers legislation source for private editorial review",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/52",
       "state": "closed",
       "draft": false,
@@ -1714,7 +1917,7 @@
     {
       "id": 4829439565,
       "number": 48,
-      "title": "SUPERSEDED / PROHIBITED \u2014 do not use Stripe for campaign payments",
+      "title": "SUPERSEDED / PROHIBITED — do not use Stripe for campaign payments",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/48",
       "state": "closed",
       "draft": false,
@@ -2254,7 +2457,7 @@
     {
       "id": 4817446915,
       "number": 12,
-      "title": "Publish Kirk\u2013Evers documents only with independent review and verified asset hashes",
+      "title": "Publish Kirk–Evers documents only with independent review and verified asset hashes",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/12",
       "state": "closed",
       "draft": false,
