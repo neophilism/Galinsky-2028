@@ -26,8 +26,21 @@ test('real password accounts isolate reviewers, enforce revocation/expiry and ke
  }};}
  const owner=client(),reader=client(),other=client();
  try{
-  assert.equal((await reader.call('/')).status,401);
-  assert.equal((await reader.call('/preview/')).status,200);
+  const sharedCredentials='Basic '+Buffer.from('preview:synthetic-existing-preview-password-32-characters').toString('base64');
+  const anonymous=await reader.call('/');
+  assert.equal(anonymous.status,401);
+  assert.match(anonymous.headers.get('www-authenticate')||'',/^Basic realm=/,
+   'The shared password must trigger the native browser sign-in dialog even when individual accounts are enabled');
+  assert.equal((await reader.call('/',null,{Authorization:sharedCredentials})).status,200,
+   'Existing shared credentials still unlock the site');
+  const wrongShared=await reader.call('/',null,{Authorization:'Basic '+Buffer.from('preview:wrong-password').toString('base64')});
+  assert.equal(wrongShared.status,401);
+  assert.match(wrongShared.headers.get('www-authenticate')||'',/^Basic realm=/,
+   'Wrong shared credentials must remain denied and recoverable');
+  const individualLogin=await reader.call('/preview/');
+  assert.equal(individualLogin.status,200);
+  assert.equal(individualLogin.headers.get('www-authenticate'),null,
+   'The independent reviewer sign-in page remains available without the Basic challenge');
   assert.equal((await reader.call('/preview/assets/review.js')).status,200);
   assert.equal((await reader.call('/preview/auth/admin/create-user',{name:'Intruder',email:'intruder@example.test',password:'long-enough-password',role:'admin'})).status,404);
   assert.equal((await reader.call('/preview/auth/sign-up/email',{name:'Intruder',email:'intruder@example.test',password:'long-enough-password'})).status,404);
