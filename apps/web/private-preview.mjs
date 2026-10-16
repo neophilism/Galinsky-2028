@@ -13,6 +13,7 @@ import {randomUUID} from 'node:crypto';
 import {stripeSettings,checkoutNonceKey,openStripeSession,stripeDonationHtml,parseCheckoutForm,checkCheckoutToken} from '../../packages/core/stripe-web-checkout.mjs';
 import {StripeCampaignStore} from './stripe-campaign-store.mjs';
 import {contributionTermsHtml,CONTRIBUTION_TERMS_PATH} from '../../packages/core/contribution-terms.mjs';
+import {createCampaignRuntime} from './campaign-runtime.mjs';
 
 const mime={
  '.html':'text/html; charset=utf-8',
@@ -67,9 +68,10 @@ function requestedPath(raw){
 
 // Unlike a static CDN, this Node service authenticates BEFORE reading any file.
 // Use only this web-service entry point for preview hosting.
-export function createPrivatePreviewServer({directory=resolve('dist/web'),env=process.env,rotationStore=null,stripeTransport=fetch,stripeStore=null,reviewController=null}={}){
+export function createPrivatePreviewServer({directory=resolve('dist/web'),env=process.env,rotationStore=null,stripeTransport=fetch,stripeStore=null,reviewController=null,campaignRuntime=null}={}){
  const credentials=loadPreviewGate(env);
  if(env.G28_REVIEW_ACCOUNTS_ENABLED==='true'&&!reviewController)throw Error('Private review accounts require a persistent authentication controller.');
+ if(env.G28_CAMPAIGN_PUBLIC_ENABLED==='true'&&!campaignRuntime)throw Error('Published campaign rendering requires its verified runtime.');
  const root=realpathSync(directory);
  if(!statSync(root).isDirectory())throw Error('The public preview build directory does not exist.');
  // Release flags and provider approvals are checked independently of the database.
@@ -100,7 +102,7 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
   // protects future financial/admin routes as well as today's operations.
   if(review){
    const pages=new Set(['/','/issues','/issues/','/issues/kirk-evers','/issues/kirk-evers/','/issues/garden','/issues/garden/','/issues/cornerstone','/issues/cornerstone/','/volunteer','/volunteer/','/donate','/donate/','/donate/terms','/notices','/notices/']);
-   const allowed=pages.has(pathname)||pathname==='/favicon.svg'||/^\/(?:assets|_astro)\/[A-Za-z0-9_./-]+$/.test(pathname)||/^\/policy-library\/(?:kirk-evers|garden|cornerstone)(?:\/?|\/download\/[0-9a-f]{40})$/.test(pathname);
+   const allowed=pages.has(pathname)||pathname==='/favicon.svg'||/^\/(?:assets|_astro)\/[A-Za-z0-9_./-]+$/.test(pathname)||/^\/campaign-media\/[0-9a-f-]{36}\.png$/.test(pathname)||/^\/policy-library\/(?:kirk-evers|garden|cornerstone)(?:\/?|\/download\/[0-9a-f]{40})$/.test(pathname);
    if(!allowed||!['GET','HEAD'].includes(req.method))return send(res,403,'This account has website review access only.');
    if(review.user.previewPasswordChangeRequired){res.writeHead(303,{Location:'/preview/','Content-Length':'0'});res.end();return;}
   }
@@ -138,6 +140,8 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
    return send(res,401,'Private preview. Enter your access credentials.');
   }
   if(pathname===null)return send(res,404,'Not found.');
+  // Editorial rendering never runs before the existing preview/reviewer checks.
+  if(campaignRuntime&&await campaignRuntime.handle(req,res,pathname,{authorized:Boolean(legacy||review)}))return;
   // The same versioned contribution terms linked beside the one consent
   // checkbox must be accessible before Stripe checkout, even in preview mode.
   if(pathname===CONTRIBUTION_TERMS_PATH){
@@ -337,6 +341,7 @@ export function createPrivatePreviewServer({directory=resolve('dist/web'),env=pr
  });
  if(rotationPool)server.on('close',()=>{void rotationPool.end().catch(()=>{});});
  if(stripePool)server.on('close',()=>{void stripePool.end().catch(()=>{});});
+ if(campaignRuntime)server.on('close',()=>{void campaignRuntime.close().catch(()=>{});});
  return server;
 }
 const entry=process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url);
@@ -357,7 +362,9 @@ if(entry){
    console.log(JSON.stringify({event:'private_review_runtime_verified',...await verifyReviewRuntime({auth:reviewAuth,pool:reviewPool,origin,secret:process.env.G28_REVIEW_AUTH_SECRET})}));
    reviewController=createReviewController({auth:reviewAuth,pool:reviewPool,origin,setupKey:process.env.G28_REVIEW_SETUP_KEY,commit:process.env.RENDER_GIT_COMMIT});
   }
-  const server=createPrivatePreviewServer({reviewController});
+  const campaignRuntime=createCampaignRuntime();
+  if(campaignRuntime){try{await campaignRuntime.ready();}catch{await campaignRuntime.close().catch(()=>{});throw Error('Campaign runtime failed safe startup checks.');}}
+  const server=createPrivatePreviewServer({reviewController,campaignRuntime});
   server.listen(port,process.env.HOST||'0.0.0.0',async()=>{
    console.log(JSON.stringify({event:'private_preview_listening',port}));
    // An owner-authorized, explicitly flagged integration acceptance run.
