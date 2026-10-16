@@ -2,6 +2,7 @@ const $=id=>document.getElementById(id);
 const state={csrf:null,contract:null,catalog:new Map(),drafts:new Map(),left:null,right:null,next:null,settings:{version:0,settings:null},settingsDirty:false};
 const element=(tag,text,attrs={})=>{const e=document.createElement(tag);if(text!=null)e.textContent=text;for(const[k,v]of Object.entries(attrs))e.setAttribute(k,String(v));return e;};
 const label=(text,input)=>{const e=element('label',text);e.append(input);return e;};
+const fieldLabel=name=>({eyebrow:'Small heading',headline:'Main heading',body:'Body text',body1:'First paragraph',body2:'Second paragraph',primaryLabel:'Primary button text',secondaryLabel:'Secondary button text',footnote:'Supporting note',buttonLabel:'Button text',linkLabel:'Link text',title:'Search and sharing title',description:'Search and sharing description'}[name]||human(name));
 const human=s=>s.replace(/([a-z])([A-Z])/g,'$1 $2').replaceAll('-',' ').replace(/^./,c=>c.toUpperCase());
 function message(text,error=false){$('message').textContent=text;$('message').classList.toggle('error',error);}
 async function request(path,{method='GET',data}={}){
@@ -38,10 +39,12 @@ function dirty(id){const d=current(id);d.dirty=true;document.querySelectorAll('[
 function optionsList(select,values,chosen){select.replaceChildren(...values.map(([value,name])=>new Option(name,value)));select.value=chosen;}
 function previewUrl(path){const match=/^\/campaign-media\/([0-9a-f-]{36})\.png$/.exec(path);return match?'/api/editorial/media/'+match[1]:path==='/assets/candidate.webp'?'/api/editorial/builtin-hero':null;}
 function renderHeroPreview(box,id,mobile=false){
- const d=current(id),doc=d.document;box.replaceChildren();box.className='hero-preview'+(mobile?' mobile':'');box.style.backgroundColor=doc.theme.background;box.style.color=doc.theme.text;
- const copy=element('div');copy.append(element('p',doc.fields['home.hero.eyebrow']||'Hero eyebrow'),element('h3',doc.fields['home.hero.headline']||'Hero headline'),element('p',doc.fields['home.hero.body']||'Hero body'));
- const img=element('img',null,{alt:doc.hero.alt});const src=previewUrl(doc.hero.assetPath);if(src)img.src=src;img.style.objectPosition=`${mobile?doc.hero.mobileFocalX:doc.hero.focalX}% ${mobile?doc.hero.mobileFocalY:doc.hero.focalY}%`;
- box.append(copy,img);
+ const d=current(id),doc=d.document;box.className='hero-preview'+(mobile?' mobile':'');box.style.backgroundColor=doc.theme.background;box.style.color=doc.theme.text;
+ let copy=box.querySelector('[data-hero-copy]'),img=box.querySelector('img');
+ if(!copy){copy=element('div',null,{'data-hero-copy':'true'});box.append(copy);}
+ if(!img){img=element('img');box.append(img);}
+ copy.replaceChildren(element('p',doc.fields['home.hero.eyebrow']||'Hero eyebrow'),element('h3',doc.fields['home.hero.headline']||'Hero headline'),element('p',doc.fields['home.hero.body']||'Hero body'));
+ img.alt=doc.hero.alt;const src=previewUrl(doc.hero.assetPath);if(src&&img.getAttribute('src')!==src)img.src=src;else if(!src)img.removeAttribute('src');img.style.objectPosition=`${mobile?doc.hero.mobileFocalX:doc.hero.focalX}% ${mobile?doc.hero.mobileFocalY:doc.hero.focalY}%`;
 }
 function markAndPreview(id){dirty(id);document.querySelectorAll('[data-preview]').forEach(box=>{if(box.dataset.preview===id)renderHeroPreview(box,id,box.dataset.mobile==='true');});}
 async function operation(id,fn){const d=current(id);if(d.busy)return;d.busy=true;render();try{await fn(d);}finally{d.busy=false;render();refreshSelectors();}}
@@ -72,7 +75,7 @@ function panel(id,index){
  const actions=element('div',null,{class:'actions'});actions.append(button('Save draft',()=>save(id),'primary'),button('Duplicate',()=>duplicate(id)));
  if(state.contract.role==='owner')actions.append(button('Publish',()=>publish(id)),button(d.record.archived?'Unarchive':'Archive',()=>archive(id)));
  fs.append(actions);if(d.record.archived)fs.append(element('p','Archived: unarchive before saving or publishing.'));
- const hero=element('details');hero.open=true;hero.append(element('summary','Hero image and preview'));
+ const hero=element('details');hero.open=false;hero.append(element('summary','Hero image and preview'));
  const controls=element('div',null,{class:'hero-controls'}),alt=element('input',null,{maxlength:500});alt.value=d.document.hero.alt;alt.addEventListener('input',()=>{d.document.hero.alt=alt.value;markAndPreview(id);});const altLabel=label('Image description (alt text)',alt);altLabel.className='full';controls.append(altLabel);
  const select=element('select');select.add(new Option('Current image',d.document.hero.assetPath));select.add(new Option('Existing approved portrait','/assets/candidate.webp'));select.value=d.document.hero.assetPath;
  select.addEventListener('change',()=>{d.document.hero.assetPath=select.value;markAndPreview(id);});controls.append(label('Choose an image',select),button('Browse uploaded images',async()=>{await mediaPicker(select,d.document.hero.assetPath,select.dataset.next||null);}));
@@ -82,17 +85,18 @@ function panel(id,index){
  const colors=element('details');colors.append(element('summary','Colors'));const grid=element('div',null,{class:'theme-grid'});for(const key of state.contract.themeTokens){const input=element('input',null,{type:'color'});input.value=d.document.theme[key];input.addEventListener('input',()=>{d.document.theme[key]=input.value.toUpperCase();markAndPreview(id);});grid.append(label(human(key),input));}colors.append(grid,element('p','Publishing validates text and focus contrast. Brand accents do not replace readable text colors.',{class:'muted'}));fs.append(colors);
  const history=element('details');history.append(element('summary','Revision history'));const revisions=element('select');const restoreButton=button('Restore as a new draft',async()=>{cleanRequired(id);if(!revisions.value)return;if(!confirm('Restore this revision into a new draft? The published website will not change.'))return;await operation(id,async()=>{await request('/campaigns/'+id+'/restore',{method:'POST',data:{expectedRevision:d.record.revision,sourceRevision:Number(revisions.value)}});await load(id,{force:true});message('Historical revision restored as a new draft.');});});history.append(button('Load history',async()=>{const result=await request('/campaigns/'+id+'/history'+(revisions.dataset.next?'?before='+revisions.dataset.next:''));if(!revisions.dataset.next)revisions.replaceChildren();for(const item of result.items)revisions.add(new Option('Revision '+item.revision,item.revision));revisions.dataset.next=result.next||'';}),label('Saved revision',revisions),restoreButton);fs.append(history);return box;
 }
+function sections(preferred=''){const values=[...new Set(state.contract.fields.filter(x=>x.page===$('page').value).map(x=>x.section))];optionsList($('section'),[['','All sections'],...values.map(value=>[value,human(value)])],values.includes(preferred)?preferred:'');}
 function renderFields(){
  const ids=selectedIds(),page=$('page').value,compare=ids.length===2;const target=$('fields');target.replaceChildren();
  const drafts=ids.map(current);if(drafts.some(x=>!x)){target.append(element('p','Choose the campaign'+(compare?'s':'')+' above.',{class:'empty'}));return;}
- for(const field of state.contract.fields.filter(x=>x.page===page)){
+ for(const field of state.contract.fields.filter(x=>x.page===page&&(!$('section').value||x.section===$('section').value))){
   const values=drafts.map(d=>d.document.fields[field.key]??null);const status=values.some(x=>x===null)?'missing':!compare||values[0]===values[1]?'identical':'changed';
   if(compare&&$('filter').value!=='all'&&$('filter').value!==status)continue;
-  const row=element('div',null,{class:'field-row '+status});const head=element('div'),title=element('h3',human(field.section)+' / '+human(field.label),{class:'field-title'});title.append(element('span',field.key,{class:'field-key'}));head.append(title,element('span',status,{class:'field-state'}));row.append(head);
+  const row=element('div',null,{class:'field-row '+status});const head=element('div'),title=element('h3',human(field.section)+' / '+fieldLabel(field.label),{class:'field-title'});title.title=field.key;head.append(title,element('span',status,{class:'field-state'}));row.append(head);
   const cells=element('div',null,{class:'cells'+(!compare?' single':'')});ids.forEach((id,index)=>{
    const d=current(id),input=element('textarea',null,{maxlength:field.maxLength,'data-id':id,'data-key':field.key});input.value=values[index]??'';input.disabled=d.busy||d.record.archived;
    input.addEventListener('input',()=>{if(input.value.trim())d.document.fields[field.key]=input.value;else delete d.document.fields[field.key];markAndPreview(id);const live=ids.map(x=>current(x).document.fields[field.key]??null);const kind=live.some(x=>x===null)?'missing':!compare||live[0]===live[1]?'identical':'changed';row.className='field-row '+kind;head.querySelector('.field-state').textContent=kind;document.querySelectorAll('textarea[data-id]').forEach(other=>{if(other!==input&&other.dataset.id===id&&other.dataset.key===field.key)other.value=input.value;});});
-   cells.append(label(compare?(index===0?'Left campaign':'Right campaign'):human(field.label),input));
+   cells.append(label(compare?(index===0?'Left campaign':'Right campaign'):fieldLabel(field.label),input));
   });row.append(cells);
   if(compare&&ids[0]!==ids[1])row.append(button('Copy left to right',()=>{if(current(ids[1]).busy||current(ids[1]).record.archived)return;if(values[1]!=null&&!confirm('Replace this field in the right-hand draft with the left-hand text?'))return;const fresh=current(ids[0]).document.fields[field.key];if(fresh==null)delete current(ids[1]).document.fields[field.key];else current(ids[1]).document.fields[field.key]=fresh;dirty(ids[1]);renderFields();},'small'));
   target.append(row);
@@ -118,9 +122,9 @@ async function create(){
 }
 $('search-form').addEventListener('submit',act(()=>catalog()));$('more').addEventListener('click',act(()=>catalog({more:true})));$('new').addEventListener('click',act(create));
 for(const side of ['left','right'])$(side).addEventListener('change',act(async()=>{state[side]=$(side).value||null;await load(state[side]);render();}));
-$('view').addEventListener('change',act(async()=>{await Promise.all(selectedIds().filter(Boolean).map(id=>load(id)));refreshSelectors();render();}));$('page').addEventListener('change',renderFields);$('filter').addEventListener('change',renderFields);
+$('view').addEventListener('change',act(async()=>{await Promise.all(selectedIds().filter(Boolean).map(id=>load(id)));refreshSelectors();render();}));$('page').addEventListener('change',()=>{sections();renderFields();});$('section').addEventListener('change',renderFields);$('filter').addEventListener('change',renderFields);
 $('swap').addEventListener('click',()=>{[state.left,state.right]=[state.right,state.left];refreshSelectors();render();});
 $('mode-switching').addEventListener('change',()=>{$('mode-pickers').hidden=!$('mode-switching').checked;state.settingsDirty=true;});
 for(const key of ['default','day','night'])$(key+'-campaign').addEventListener('change',()=>{state.settingsDirty=true;});$('settings-form').addEventListener('submit',act(saveSettings));
 window.addEventListener('beforeunload',event=>{if(state.settingsDirty||[...state.drafts.values()].some(d=>d.dirty)){event.preventDefault();event.returnValue='';}});
-try{const session=await request('/api/session');state.csrf=session.csrf;state.contract=await request('/contract');const pages=[...new Set(state.contract.fields.map(x=>x.page))];optionsList($('page'),pages.map(page=>[page,human(page)]),'home');state.settings=await request('/settings');await catalog();message('Ready. Saving creates a draft; publishing is a separate action.');}catch(error){message(error.message+' Use Account & sign-in for your existing owner or editor account.',true);}
+try{const session=await request('/api/session');state.csrf=session.csrf;state.contract=await request('/contract');const pages=[...new Set(state.contract.fields.map(x=>x.page))];optionsList($('page'),pages.map(page=>[page,human(page)]),'home');sections('hero');state.settings=await request('/settings');await catalog();message('Ready. Saving creates a draft; publishing is a separate action.');}catch(error){message(error.message+' Use Account & sign-in for your existing owner or editor account.',true);}

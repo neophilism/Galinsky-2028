@@ -12,19 +12,20 @@ for(const [name,engine]of Object.entries({chromium,firefox,webkit})){
  const field=(key,which=id(1))=>page.locator(`textarea[data-id="${which}"][data-key="${key}"]`);
  try{
   await page.goto(harness.origin+'/editor/campaigns');await page.waitForFunction(()=>document.getElementById('message').textContent.startsWith('Ready.'));
-  assert.equal(await page.locator('.panel').count(),1);assert.equal(await page.locator('#fields textarea').count(),35);
-  await page.locator('#view').selectOption('compare');await page.waitForFunction(()=>document.querySelectorAll('.panel').length===2);assert.equal(await page.locator('#fields textarea').count(),70);
+  assert.equal(await page.locator('.panel').count(),1);assert.equal(await page.locator('#fields textarea').count(),6);
+  await page.locator('#view').selectOption('compare');await page.waitForFunction(()=>document.querySelectorAll('.panel').length===2);assert.equal(await page.locator('#fields textarea').count(),12);
   await field('home.hero.headline').fill('Edited synthetic headline');
   await page.locator('#view').selectOption('single');await page.locator('#view').selectOption('compare');assert.equal(await field('home.hero.headline').inputValue(),'Edited synthetic headline');
   await page.getByRole('button',{name:'Swap columns',exact:true}).click();assert.equal(await page.locator('#right').inputValue(),id(1));assert.equal(await field('home.hero.headline').inputValue(),'Edited synthetic headline');
   await page.getByRole('button',{name:'Save draft',exact:true}).nth(1).click();await page.waitForFunction(()=>document.getElementById('message').textContent==='Draft saved. The website has not changed.');assert.equal(harness.records.get(id(1)).revision,2);assert.equal(harness.records.get(id(2)).revision,1);
   // Self-comparison uses one in-memory draft, not two conflicting silent copies.
-  await page.locator('#left').selectOption(id(1));await page.waitForFunction(()=>document.querySelectorAll('textarea[data-id="00000000-0000-4000-8000-000000000001"]').length===70);
+  await page.locator('#left').selectOption(id(1));await page.waitForFunction(()=>document.querySelectorAll('textarea[data-id="00000000-0000-4000-8000-000000000001"]').length===12);
   await field('home.hero.headline').first().fill('Shared synthetic edit');assert.equal(await field('home.hero.headline').nth(1).inputValue(),'Shared synthetic edit');
   // Save conflicts preserve entered text rather than reloading it away.
   harness.records.get(id(1)).revision++;
   await page.getByRole('button',{name:'Save draft',exact:true}).first().click();await page.waitForFunction(()=>document.getElementById('message').classList.contains('error'));assert.equal(await field('home.hero.headline').first().inputValue(),'Shared synthetic edit');
   await page.locator('#left').selectOption(id(2));await page.locator('#right').selectOption(id(2));
+  await page.locator('.panel').first().getByText('Hero image and preview',{exact:true}).click();
   await page.locator('.hero-controls input[maxlength="500"]').first().fill('Synthetic image description');assert.equal(await page.locator('.hero-preview img').first().getAttribute('alt'),'Synthetic image description');
   await page.locator('.theme-grid input[type="color"]').first().evaluate(el=>{el.value='#eeeeee';el.dispatchEvent(new Event('input',{bubbles:true}));});
   assert.equal(await page.locator('.hero-preview').first().evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(238, 238, 238)');
@@ -37,10 +38,12 @@ for(const [name,engine]of Object.entries({chromium,firefox,webkit})){
   await page.getByRole('button',{name:'Create campaign',exact:true}).click();await page.waitForFunction(()=>document.getElementById('message').textContent.startsWith('Blank campaign created'));assert.equal(harness.records.size,3);
   await page.getByRole('button',{name:'Create campaign',exact:true}).click();await page.waitForFunction(()=>document.getElementById('left').value==='00000000-0000-4000-8000-000000000004');assert.equal(harness.records.size,4);
   await page.locator('#left').selectOption(id(2));await page.locator('#right').selectOption(id(1));
+  await page.evaluate(()=>window.scrollTo(0,0));
   await page.screenshot({path:`${evidence}/${name}-desktop.png`});
   for(const width of [1280,700,375,320]){await page.setViewportSize({width,height:900});const dimensions=await page.evaluate(()=>({viewport:innerWidth,scroll:document.documentElement.scrollWidth}));assert.ok(dimensions.scroll<=dimensions.viewport,`${name}: overflow at ${width}: ${JSON.stringify(dimensions)}`);}
   await page.screenshot({path:`${evidence}/${name}-mobile.png`});
   // Script-looking text stays literal in the preview and text controls.
+  await page.locator('.panel').first().getByText('Hero image and preview',{exact:true}).click();
   await field('home.hero.headline',id(2)).fill('<img src=x onerror="window.editorInjection=true">');assert.equal(await page.evaluate(()=>window.editorInjection),undefined);assert.ok((await page.locator('.hero-preview h3').first().textContent()).startsWith('<img'));
   assert.deepEqual(errors,[]);results.push({browser:name,status:'passed',backend:'synthetic UI harness; real API and PostgreSQL tested separately',checks:18});
  }finally{await context.close();await browser.close();await harness.close();}

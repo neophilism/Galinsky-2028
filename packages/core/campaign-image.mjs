@@ -47,7 +47,8 @@ export async function normalizeCampaignPng(bytes){
   try{decoded=await unzip(input,{maxOutputLength:expected,info:true});}catch{bad();}
   if(decoded.buffer.length!==expected||decoded.engine.bytesWritten!==input.length)bad();
   for(let y=0;y<height;y++)if(decoded.buffer[y*rowBytes]>4)bad();
-  const encoded=await zip(decoded.buffer,{level:6,maxOutputLength:MAX_IMAGE_BYTES});
+  let encoded;
+  try{encoded=await zip(decoded.buffer,{level:6,maxOutputLength:MAX_IMAGE_BYTES});}catch{campaignFailure('image_too_large','The normalized image exceeds the media limit.',413);}
   const normalized=Buffer.concat([SIGNATURE,pngChunk('IHDR',header),pngChunk('IDAT',encoded),pngChunk('IEND',Buffer.alloc(0))]);
   if(normalized.length>MAX_IMAGE_BYTES)campaignFailure('image_too_large','The normalized image exceeds the media limit.',413);
   return{bytes:normalized,width,height};
