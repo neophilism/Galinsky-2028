@@ -9,7 +9,7 @@
     ".exechub/approved-pr-mapping.json",
     "docs/PR_REGISTER.json"
   ],
-  "progressEvidenceNote": "Conservative scoped audit: 8 whole packages accepted; 46 partially implemented; 7 unstarted. Snapshot includes 82 merged PRs and 5 closed-unmerged.",
+  "progressEvidenceNote": "16 October: 8 accepted, 48 in progress, 5 not started. Coordination implementation does not establish full package acceptance.",
   "schemaVersion": 1,
   "roadmapVersion": 4,
   "observedAt": "2026-10-13T21:14:24.168Z",
@@ -592,9 +592,9 @@
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
-      "status": "not_started",
-      "acceptanceBlocker": "No working team membership or scoped captain-coordination system.",
-      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
+      "status": "in_progress",
+      "acceptanceBlocker": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md.",
+      "acceptanceReport": "docs/evidence/COORDINATION_20261016.md"
     },
     {
       "id": "G28-033",
@@ -605,9 +605,9 @@
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
-      "status": "not_started",
-      "acceptanceBlocker": "No event scheduling, capacity/RSVP or cancellation backend.",
-      "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
+      "status": "in_progress",
+      "acceptanceBlocker": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md.",
+      "acceptanceReport": "docs/evidence/COORDINATION_20261016.md"
     },
     {
       "id": "G28-034",
@@ -1583,7 +1583,7 @@
     {
       "id": 4829596446,
       "number": 54,
-      "title": "SUPERSEDED: four-processor handoff already updated in merged PRs #55–57",
+      "title": "SUPERSEDED: four-processor handoff already updated in merged PRs #55\u201357",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/54",
       "state": "closed",
       "draft": false,
@@ -1613,7 +1613,7 @@
     {
       "id": 4829483935,
       "number": 52,
-      "title": "Recover September 2026 Kirk–Evers legislation source for private editorial review",
+      "title": "Recover September 2026 Kirk\u2013Evers legislation source for private editorial review",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/52",
       "state": "closed",
       "draft": false,
@@ -1643,7 +1643,7 @@
     {
       "id": 4829439565,
       "number": 48,
-      "title": "SUPERSEDED / PROHIBITED — do not use Stripe for campaign payments",
+      "title": "SUPERSEDED / PROHIBITED \u2014 do not use Stripe for campaign payments",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/48",
       "state": "closed",
       "draft": false,
@@ -2183,7 +2183,7 @@
     {
       "id": 4817446915,
       "number": 12,
-      "title": "Publish Kirk–Evers documents only with independent review and verified asset hashes",
+      "title": "Publish Kirk\u2013Evers documents only with independent review and verified asset hashes",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/12",
       "state": "closed",
       "draft": false,
