@@ -1,0 +1,97 @@
+/* Decorative CSS-only hero backgrounds. Colors always come from the selected published palette. */
+.campaign-hero-effect{
+ position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;contain:paint;
+ opacity:var(--hfx-opacity,.58);isolation:isolate;
+ -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 35%,#000 100%);
+ mask-image:linear-gradient(90deg,transparent 0%,#000 35%,#000 100%);
+}
+.campaign-hero-effect .hfx-layer{
+ position:absolute;left:-18%;top:-26%;height:152%;width:136%;
+ background-repeat:no-repeat;opacity:.84;
+ filter:blur(var(--hfx-blur,50px)) saturate(calc(.62 + var(--hfx-intensity,.55)));
+ transform:translate3d(0,0,0);
+ backface-visibility:hidden;
+ animation:hfx-drift-a var(--hfx-duration,44s) ease-in-out infinite alternate;
+}
+.campaign-hero-effect .hfx-b{animation-name:hfx-drift-b;animation-duration:calc(var(--hfx-duration,44s)*1.31);opacity:.72}
+.campaign-hero-effect .hfx-c{animation-name:hfx-breathe;animation-duration:calc(var(--hfx-duration,44s)*.78);opacity:.68}
+.campaign-hero-effect[data-animated="false"] .hfx-layer,
+.campaign-hero-effect[data-running="false"] .hfx-layer,
+.campaign-hero-effect[data-speed="still"] .hfx-layer{animation-play-state:paused;will-change:auto}
+.campaign-hero-effect[data-animated="false"] .hfx-layer,
+.campaign-hero-effect[data-speed="still"] .hfx-layer{animation:none}
+@keyframes hfx-drift-a{from{transform:translate3d(-3%,-2%,0) rotate(-2deg) scale(1)}to{transform:translate3d(5%,3%,0) rotate(3deg) scale(1.07)}}
+@keyframes hfx-drift-b{from{transform:translate3d(6%,-3%,0) rotate(2deg) scale(1.05)}to{transform:translate3d(-5%,6%,0) rotate(-3deg) scale(.97)}}
+@keyframes hfx-breathe{from{transform:translate3d(-2%,3%,0) scale(.95)}to{transform:translate3d(3%,-2%,0) scale(1.07)}}
+.campaign-hero-effect[data-effect="clouds"] .hfx-a{
+ background:radial-gradient(ellipse 31% 27% at 64% 36%,color-mix(in srgb,var(--campaign-brand-red) 48%,transparent),transparent 97%),
+ radial-gradient(ellipse 36% 27% at 78% 62%,color-mix(in srgb,var(--campaign-surface) 73%,transparent),transparent 98%);
+}
+.campaign-hero-effect[data-effect="clouds"] .hfx-b{
+ background:radial-gradient(ellipse 35% 28% at 83% 37%,color-mix(in srgb,var(--campaign-brand-blue) 60%,transparent),transparent 99%),
+ radial-gradient(ellipse 31% 31% at 48% 81%,color-mix(in srgb,var(--campaign-surface) 52%,transparent),transparent 96%);
+}
+.campaign-hero-effect[data-effect="clouds"] .hfx-c{
+ background:radial-gradient(ellipse 39% 29% at 62% 67%,color-mix(in srgb,var(--campaign-brand-red) 26%,transparent),transparent 100%),
+ radial-gradient(ellipse 40% 36% at 92% 65%,color-mix(in srgb,var(--campaign-brand-blue) 27%,transparent),transparent 100%);
+}
+.campaign-hero-effect[data-effect="aurora"] .hfx-a{
+ background:conic-gradient(from 116deg at 77% 41%,transparent 0deg,color-mix(in srgb,var(--campaign-brand-red) 45%,transparent) 45deg,color-mix(in srgb,var(--campaign-brand-blue) 54%,transparent) 95deg,transparent 163deg,transparent 360deg);
+}
+.campaign-hero-effect[data-effect="aurora"] .hfx-b{
+ background:conic-gradient(from 295deg at 67% 63%,transparent 0deg,color-mix(in srgb,var(--campaign-brand-blue) 53%,transparent) 52deg,color-mix(in srgb,var(--campaign-brand-red) 41%,transparent) 100deg,transparent 172deg,transparent 360deg);
+}
+.campaign-hero-effect[data-effect="aurora"] .hfx-c{
+ background:radial-gradient(ellipse 28% 45% at 75% 60%,color-mix(in srgb,var(--campaign-surface) 60%,transparent),transparent 99%);
+}
+.campaign-hero-effect[data-effect="halo"] .hfx-a{
+ background:radial-gradient(circle 23% at 76% 48%,color-mix(in srgb,var(--campaign-surface) 95%,transparent) 0%,color-mix(in srgb,var(--campaign-brand-blue) 41%,transparent) 44%,transparent 100%);
+}
+.campaign-hero-effect[data-effect="halo"] .hfx-b{
+ background:radial-gradient(circle 32% at 76% 48%,transparent 25%,color-mix(in srgb,var(--campaign-brand-red) 33%,transparent) 52%,transparent 81%);
+}
+.campaign-hero-effect[data-effect="halo"] .hfx-c{
+ background:radial-gradient(ellipse 34% 20% at 77% 82%,color-mix(in srgb,var(--campaign-brand-blue) 27%,transparent),transparent 100%);
+}
+.campaign-hero-effect[data-effect="silk"] .hfx-a{
+ background:linear-gradient(116deg,transparent 30%,color-mix(in srgb,var(--campaign-brand-blue) 35%,transparent) 47%,color-mix(in srgb,var(--campaign-surface) 55%,transparent) 52%,transparent 67%);
+}
+.campaign-hero-effect[data-effect="silk"] .hfx-b{
+ background:linear-gradient(64deg,transparent 34%,color-mix(in srgb,var(--campaign-brand-red) 44%,transparent) 48%,color-mix(in srgb,var(--campaign-surface) 31%,transparent) 51%,transparent 65%);
+}
+.campaign-hero-effect[data-effect="silk"] .hfx-c{
+ background:linear-gradient(130deg,transparent 42%,color-mix(in srgb,var(--campaign-brand-blue) 30%,transparent) 52%,transparent 61%);
+}
+.campaign-hero-effect[data-effect="beams"] .hfx-a{
+ background:linear-gradient(111deg,transparent 47%,color-mix(in srgb,var(--campaign-brand-blue) 44%,transparent) 59%,transparent 69%);
+}
+.campaign-hero-effect[data-effect="beams"] .hfx-b{
+ background:linear-gradient(72deg,transparent 48%,color-mix(in srgb,var(--campaign-brand-red) 35%,transparent) 57%,transparent 67%);
+}
+.campaign-hero-effect[data-effect="beams"] .hfx-c{
+ background:repeating-linear-gradient(112deg,transparent 0 10px,color-mix(in srgb,var(--campaign-text) 3%,transparent) 10px 11px,transparent 11px 18px);
+ filter:none;opacity:.4;animation:none;
+}
+.campaign-hero-effect[data-effect="geometry"] .hfx-a{
+ background:radial-gradient(circle 26% at 76% 26%,color-mix(in srgb,var(--campaign-brand-blue) 48%,transparent),transparent 98%),
+ radial-gradient(ellipse 16% 32% at 65% 81%,color-mix(in srgb,var(--campaign-brand-red) 27%,transparent),transparent 99%);
+}
+.campaign-hero-effect[data-effect="geometry"] .hfx-b{
+ background:conic-gradient(from 0.23turn at 68% 47%,transparent 0deg,color-mix(in srgb,var(--campaign-brand-red) 36%,transparent) 60deg,transparent 117deg,transparent 360deg);
+}
+.campaign-hero-effect[data-effect="geometry"] .hfx-c{
+ background:radial-gradient(ellipse 31% 23% at 87% 79%,color-mix(in srgb,var(--campaign-brand-blue) 36%,transparent),transparent 100%);
+}
+.hero-preview{position:relative;isolation:isolate}
+.hero-preview>.campaign-hero-effect{z-index:0;inset:0}
+.hero-preview>[data-hero-copy],.hero-preview>img{position:relative;z-index:2}
+.hero-preview>.campaign-hero-effect .hfx-layer{width:155%;height:155%}
+@media(max-width:780px){
+ .hero .campaign-hero-effect{inset:0;opacity:calc(var(--hfx-opacity,.58)*.82);
+ -webkit-mask-image:linear-gradient(to bottom,#000 25%,#000 90%,transparent);
+ mask-image:linear-gradient(to bottom,#000 25%,#000 90%,transparent)}
+ .hero-preview>.campaign-hero-effect{-webkit-mask-image:none;mask-image:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .campaign-hero-effect .hfx-layer{animation:none!important;transform:none!important;will-change:auto!important}
+}
