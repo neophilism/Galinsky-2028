@@ -37,7 +37,8 @@
     "test:public-browser": "node tests/browser/public-interactions.mjs",
     "test:coordination-browser": "node tests/browser/coordination.mjs",
     "test:editor-browser": "node tests/browser/campaign-editor.mjs",
-    "test:campaign-public-browser": "node tests/browser/campaign-public.mjs"
+    "test:campaign-public-browser": "node tests/browser/campaign-public.mjs",
+    "perf:budget": "node scripts/performance-budget.mjs"
   },
   "dependencies": {
     "astro": "7.3.8",
