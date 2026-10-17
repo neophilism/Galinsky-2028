@@ -1,0 +1,9 @@
+# Read-only published activity readiness (17 October 2026)
+
+The authenticated volunteer portal now reads the **latest version** of each jurisdiction/activity record from `g28.activity_modules`. Only records whose newest revision is explicitly `published` are projected; a draft/revoked/superseded record never silently falls back to an older approval. Source records remain in the database and are not modified by the reader. No new activity is activated by this PR.
+
+The server runs the existing fail-closed review/validity checks against a hypothetical fully trained actor **only to assess administrative publication currency**; it never treats that hypothetical actor as the logged-in volunteer. Returned fields are limited to the module ID, activity, jurisdiction, election, revision, expiry, published-current flag, a generic reason and the count of training requirements. Verifier identities, source-check URLs, approval identities, tool IDs and training IDs are intentionally never returned. Every record has `activityAuthorized:false`.
+
+`/activity` displays these informational requirements and reiterates that regulated actions need personal training, approved tools, live jurisdiction rules and current publication approval. `/api/tasks/:id/completion` still rejects restricted task self-certification. Empty modules mean no published authorization; all existing release gates remain disabled.
+
+Automated unit, authenticated Fastify and isolated PostgreSQL tests cover the read-only shape, suppression of older published revisions by newer drafts, exclusion of unpublished records, no private reviewer disclosure and never granting a user permission. The source schema does not yet include a complete staff verify/publish/revoke administration workflow. That remains G28-29 scope and is **not** claimed complete.

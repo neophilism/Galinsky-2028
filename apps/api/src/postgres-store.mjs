@@ -155,6 +155,15 @@ export class PostgresStore{
   else await this.pool.query('DELETE FROM g28.material_reading WHERE account_id=$1 AND material_id=$2',[accountId,materialId]);
  }
  async listMaterials(){const q=await this.pool.query("SELECT record FROM g28.materials WHERE status='published' AND audience='volunteer'");return q.rows.map(r=>r.record);}
+ async listPublishedActivityModules(){
+  // A newer draft, expired/revoked publication or missing approval must not
+  // resurrect an older published version as current fieldwork guidance.
+  const q=await this.pool.query(`SELECT id,revision,record FROM (
+   SELECT DISTINCT ON (id) id,revision,record FROM g28.activity_modules
+   ORDER BY id,revision DESC
+  ) latest WHERE record->>'status'='published' ORDER BY id LIMIT 50`);
+  return q.rows.map(r=>({...r.record,id:r.id,revision:r.revision}));
+ }
  async claimJob(){const lease=randomUUID();const q=await this.pool.query(`WITH next AS (SELECT id FROM g28.outbox WHERE (status='queued' AND available_at<=now()) OR (status='leased' AND lease_until<now()) ORDER BY available_at FOR UPDATE SKIP LOCKED LIMIT 1) UPDATE g28.outbox o SET status='leased',attempts=attempts+1,lease_until=now()+interval '2 minutes',lease_token=$1 FROM next WHERE o.id=next.id RETURNING o.*`,[lease]);return q.rows[0]||null;}
  async finishJob(job,error=null){if(!error){await this.pool.query("UPDATE g28.outbox SET status='sent',payload_envelope='',lease_until=NULL,lease_token=NULL WHERE id=$1 AND lease_token=$2",[job.id,job.lease_token]);return;}const dead=job.attempts>=8||['expired','invalid_destination','provider_rejected'].includes(error);await this.pool.query("UPDATE g28.outbox SET status=$1,last_error_code=$2,payload_envelope=CASE WHEN $1='dead' THEN '' ELSE payload_envelope END,available_at=now()+($3 * interval '1 second'),lease_until=NULL,lease_token=NULL WHERE id=$4 AND lease_token=$5",[dead?'dead':'queued',error,Math.min(3600,2**job.attempts*15),job.id,job.lease_token]);}
  // Only terminal email jobs are eligible for retention cleanup. A delayed login
