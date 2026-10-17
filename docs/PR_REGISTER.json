@@ -9,7 +9,7 @@
   "implemented_packages": 8,
   "merged_packages": 8,
   "deployed_packages": 7,
-  "note": "Expanded to 71 planned work units; original 61 and prior acceptance retained. New units remain in progress pending full acceptance and deployed evidence.",
+  "note": "Work-package completion remains 8/71; 91 merged GitHub PRs are accepted. A merged contribution to a larger incomplete work package remains an accepted PR, not an unaccepted PR.",
   "packages": [
     {
       "id": "G28-01",
@@ -2035,5 +2035,8 @@
       }
     }
   ],
-  "progress_evidence_note": "Expanded to 71 planned work units; original 61 and prior acceptance retained. New units remain in progress pending full acceptance and deployed evidence."
+  "progress_evidence_note": "Expanded to 71 planned work units; original 61 and prior acceptance retained. New units remain in progress pending full acceptance and deployed evidence.",
+  "accepted_pull_requests": 91,
+  "accepted_prs_observed_at": "2026-10-17T13:05:51.523Z",
+  "pull_request_acceptance_rule": "Every real GitHub PR with a verified merged_at is accepted; no further package review is required to accept that PR. Fully complete planned work packages are counted separately."
 }
