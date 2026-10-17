@@ -1,3 +1,9 @@
+## Owner acceptance rule — 17 October 2026
+
+**GitHub PR merge is final acceptance of that PR.** Count every GitHub pull request with a non-null verified `merged_at` as accepted immediately, including PRs that contribute only part of a larger planned work package. A merged PR never needs a second human/package acceptance ceremony and must not be described as awaiting acceptance.
+
+Track distinct facts separately: (1) accepted/merged PRs; (2) current approved work packages whose *entire stated scope* is implemented; (3) deployed releases; (4) external production-activation conditions. A package can remain unfinished without making its already-merged PRs unaccepted. Never present the count of fully complete packages as the count of accepted PRs. Do not fabricate completed package scope or enable production financial/sensitive capabilities just to change a percentage. Refresh GitHub observations and show their date; never treat the bundled snapshot as current forever.
+
 ## Owner security-review policy — 2026-10-13
 
 The owner explicitly directs all projects to continue implementation, testing, merging and deployment without waiting for an independent human security review, external auditor, paid penetration test or E2EESA certification. This supersedes older repository planning text that makes absence of such review an operational prerequisite.
@@ -11,7 +17,7 @@ The owner explicitly directs all projects to continue implementation, testing, m
 
 ## Package acceptance — 13 October 2026
 
-`registry/prs.json` is the sole canonical PR-to-work-unit mapping. Read `docs/evidence/ACCEPTANCE_AUDIT_20261013.md` and `docs/PR_REGISTER.json` before changing acceptance. There are 61 total work units, not 61 remaining PRs. Update both registries together, associate only actually merged full-scope PRs with accepted packages, keep partial source marked in progress, and run `npm test` and `npm run check` before merging. The old `registry/roadmap.json` is a redirect; `.exechub` summaries are not parallel status truth. Full package acceptance requires its scoped source, CI and runtime evidence, but a paid external human security auditor is not a prerequisite to normal AI-reviewed development.
+`registry/prs.json` is the sole canonical PR-to-work-unit mapping. Read `docs/evidence/ACCEPTANCE_AUDIT_20261013.md` and `docs/PR_REGISTER.json` before changing acceptance. The current verified plan includes 71 work units, not 71 remaining PRs. Work-package completion is distinct from accepted merged PRs. Update both registries together, associate only actually merged full-scope PRs with accepted packages, keep partial source marked in progress, and run `npm test` and `npm run check` before merging. The old `registry/roadmap.json` is a redirect; `.exechub` summaries are not parallel status truth. Full package acceptance requires its scoped source, CI and runtime evidence, but a paid external human security auditor is not a prerequisite to normal AI-reviewed development.
 
 # Agent instructions: Galinsky 2028
 

@@ -64,3 +64,19 @@ test('status totals, PR observations and deployment counters are derived instead
  if(delivery.production_release_verified)
   assert.equal(registry.units.find(unit=>unit.id==='G28-059')?.status,'completed');
 });
+
+
+test('merged pull requests are accepted PRs independently of full package completion',()=>{
+ const accepted=registry.pullRequests.filter(pr=>pr.mergedAt);
+ assert.equal(plan.accepted_pull_requests,accepted.length);
+ assert.equal(delivery.accepted_merged_prs,accepted.length);
+ assert.equal(plan.accepted_prs_observed_at,registry.observedAt);
+ assert.equal(delivery.accepted_prs_observed_at,registry.observedAt);
+ assert.ok(accepted.length>plan.merged_packages,'PR acceptance must not be constrained by package completion count');
+ const merged=new Set(accepted.map(pr=>pr.number));
+ const acceptedContributions=registry.units.flatMap(unit=>unit.contributingPrs||[]).filter(n=>merged.has(n));
+ assert.ok(acceptedContributions.length>0,'Accepted merged contributions to unfinished packages must be recognized');
+ // Feature scope may remain open, but the contributing PR is accepted as a PR.
+ assert.equal(delivery.full_work_packages_accepted,registry.units.filter(unit=>unit.status==='completed').length);
+ assert.equal(registry.pullRequests.some(pr=>pr.state==='open'&&pr.mergedAt),false);
+});

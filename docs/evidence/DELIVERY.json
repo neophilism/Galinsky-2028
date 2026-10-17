@@ -1,5 +1,5 @@
 {
-  "status": "two_private_services_live_eight_scoped_packages_accepted_production_release_blocked",
+  "status": "two_private_services_live_production_release_blocked",
   "full_work_packages_accepted": 8,
   "deployment_verified": true,
   "repository": "neophilism/Galinsky-2028",
@@ -115,7 +115,7 @@
     "Staff/admin features not complete",
     "Unreviewed source archive not publicly bundled"
   ],
-  "notes": "Eight full package acceptances remain. The combined PR #95/#96 candidate has 48 packages in progress and 5 not started. Neither PR is merged or deployed; public release and live donations remain gated. Registry expanded to 71 generic units while retaining prior accepted baseline; deployment status remains separate.",
+  "notes": "All 91 merged GitHub PRs are accepted under the owner rule. Separately, 8 planned work packages are recorded as fully scoped complete. Current private preview deploy, production readiness and unfinished functionality must be verified independently.",
   "production_release_verified": false,
   "private_preview": {
     "url": "https://galinsky-2028-private-preview.onrender.com",
@@ -176,14 +176,18 @@
     "completed": 8,
     "in_progress": 58,
     "not_started": 5,
-    "observed_merged_prs": 84,
+    "observed_merged_prs": 91,
     "observed_closed_unmerged_prs": 5,
     "ci_run_id": 38942587653,
     "ci_conclusion": "pending_after_registry_reconciliation",
     "private_preview_deploy": "dep-db79b2d9fdbs73dblj80",
     "private_preview_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
     "portal_preview_sha": "c263d8fd8a331b238ddc884b052c672558cee96e",
-    "warning": "71-unit denominator reconciled, 8 previously accepted unchanged. New editorial work units are partial pending deployment/live verification. PR #97 is still open; no public launch or donor activation.",
-    "observed_open_prs": 3
-  }
+    "warning": "Snapshot now contains accepted GitHub PR merges; the original package-level audit is historical and does not reclassify merged PRs as unaccepted. Some larger planned functionality remains incomplete; production launch is not verified.",
+    "observed_open_prs": 0,
+    "pr_observation_at": "2026-10-17T13:05:51.523Z"
+  },
+  "accepted_merged_prs": 91,
+  "accepted_prs_observed_at": "2026-10-17T13:05:51.523Z",
+  "acceptance_model": "A verified merge accepts the PR. Full work-package scope completion and production deployment are separately tracked and cannot revoke acceptance of already merged PRs."
 }
