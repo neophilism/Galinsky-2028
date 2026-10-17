@@ -1,3 +1,7 @@
+## Public-repository CI provider — 17 October 2026
+
+**Use GitHub Actions as the sole continuous-integration provider while Galinsky 2028 is public.** Do not configure, enable, or rely on CircleCI. The canonical checks live in `.github/workflows/ci.yml` on GitHub-hosted standard runners. Preserve coverage of source validation, unit/integration tests, production builds, browser journeys, dependency audit, and secret scanning. Keep the workflow within the standard no-charge public-repository runner path; do not introduce paid third-party CI services or paid runner classes without an explicit new owner instruction.
+
 ## Owner acceptance rule — 17 October 2026
 
 **GitHub PR merge is final acceptance of that PR.** Count every GitHub pull request with a non-null verified `merged_at` as accepted immediately, including PRs that contribute only part of a larger planned work package. A merged PR never needs a second human/package acceptance ceremony and must not be described as awaiting acceptance.
