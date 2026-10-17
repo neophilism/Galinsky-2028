@@ -61,29 +61,13 @@
     }
   }
 
-
-  const hero = canvas.closest('.hero');
-  const button = hero?.querySelector('.motion-button');
-  const motionKey = 'g28:hero-motion';
-  let paused = false;
-  try { paused = window.localStorage.getItem(motionKey) === 'paused'; }
-  catch { /* In-session preference still works without storage. */ }
-  let width = 1, height = 1;
-  let elapsed = paused ? WANDER_SECONDS + FORM_SECONDS : 0;
-  let lastFrame = 0, handle = 0;
+  // Avoid continuous 60fps redraws for a wholly decorative background.
+  // Prefer a lighter 15fps cadence at mobile widths; do not change the
+  // documented offscreen, hidden-tab or reduced-motion stop conditions.
+  const frameInterval = window.matchMedia('(max-width: 780px)').matches ? 1000 / 15 : 1000 / 30;
+  let previousPaint = 0;
+  let width = 1, height = 1, elapsed = 0, lastFrame = 0, handle = 0;
   let visible = true;
-  function presentation() {
-    const systemPaused = reducedMotion.matches;
-    const running = !paused && !systemPaused && visible && !document.hidden;
-    if (hero) hero.dataset.motion = running ? 'playing' : 'paused';
-    if (button) {
-      button.hidden = false;
-      button.disabled = systemPaused;
-      button.textContent = systemPaused
-        ? 'Background animation disabled by device settings'
-        : paused ? 'Resume background animation' : 'Pause background animation';
-    }
-  }
 
   function resize() {
     const bounds = canvas.getBoundingClientRect();
@@ -204,14 +188,20 @@
 
   function tick(now) {
     handle = 0;
-    if (reducedMotion.matches || paused || !visible || document.hidden) {
+    if (reducedMotion.matches || !visible || document.hidden) {
       lastFrame = 0;
       draw();
       return;
     }
-    const dt = lastFrame ? Math.min(.04, (now - lastFrame) / 1000) : 0;
+    if (previousPaint && now - previousPaint < frameInterval) {
+      handle = requestAnimationFrame(tick);
+      return;
+    }
+    previousPaint = now;
+    const realDt = lastFrame ? (now - lastFrame) / 1000 : 0;
+    const dt = Math.min(.04, realDt);
     lastFrame = now;
-    elapsed += dt;
+    elapsed += Math.min(.12, realDt);
     if (elapsed < WANDER_SECONDS) wander(dt, elapsed);
     draw();
     handle = requestAnimationFrame(tick);
@@ -221,23 +211,12 @@
     if (handle) cancelAnimationFrame(handle);
     handle = 0;
     lastFrame = 0;
-    presentation();
+    previousPaint = 0;
     draw();
-    if (!reducedMotion.matches && !paused && visible && !document.hidden)
+    if (!reducedMotion.matches && visible && !document.hidden)
       handle = requestAnimationFrame(tick);
   }
 
-
-  if (button) button.addEventListener('click', () => {
-    if (reducedMotion.matches) return;
-    paused = !paused;
-    // Pausing an incomplete assembly shows a recognizable still flag.
-    if (paused && elapsed < WANDER_SECONDS + FORM_SECONDS)
-      elapsed = WANDER_SECONDS + FORM_SECONDS;
-    try { window.localStorage.setItem(motionKey, paused ? 'paused' : 'playing'); }
-    catch { /* In-session preference remains effective. */ }
-    synchronize();
-  });
   reducedMotion.addEventListener('change', synchronize);
   document.addEventListener('visibilitychange', synchronize);
   if ('IntersectionObserver' in window)
