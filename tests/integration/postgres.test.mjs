@@ -10,6 +10,35 @@ test('Postgres persistence, atomic verification, leasing and deletion',{skip:!ur
   let account;
   await t.test('concurrent consume has exactly one winner',async()=>{const consume=i=>store.consumeLogin('test-token','binding',{hash:'session-'+i,csrf:'csrf',expires:Date.now()+100000});const results=await Promise.all([consume(1),consume(2)]);assert.equal(results.filter(Boolean).length,1);account=results.find(Boolean);});
   await t.test('concurrent job leases cannot duplicate delivery',async()=>{const results=await Promise.all([store.claimJob(),store.claimJob()]);assert.equal(results.filter(Boolean).length,1);const job=results.find(Boolean);await store.finishJob(job);const row=await pool.query('SELECT status,payload_envelope FROM g28.outbox WHERE id=$1',[job.id]);assert.equal(row.rows[0].status,'sent');assert.equal(row.rows[0].payload_envelope,'');});
+  await t.test('outbox retention never deletes an undelivered or leased job even after a month',async()=>{
+   const ids=Array.from({length:5},()=>randomUUID());
+   const values=[
+    {state:'queued',days:35},
+    {state:'leased',days:35},
+    {state:'sent',days:35},
+    {state:'dead',days:35},
+    {state:'sent',days:2}
+   ];
+   for(let i=0;i<values.length;i++){
+    const v=values[i];
+    await pool.query(`INSERT INTO g28.outbox(id,kind,subject_key,payload_envelope,status,created_at)
+     VALUES($1,'account_login','retention-fixture','fixture-envelope',$2,$3)`,
+     [ids[i],v.state,new Date(Date.now()-v.days*86400000)]);
+   }
+   await store.cleanup();
+   const actual=await pool.query('SELECT id,status FROM g28.outbox WHERE id=ANY($1::uuid[])',[ids]);
+   const remaining=new Map(actual.rows.map(r=>[r.id,r.status]));
+   assert.equal(remaining.get(ids[0]),'queued');
+   assert.equal(remaining.get(ids[1]),'leased');
+   assert.equal(remaining.has(ids[2]),false);
+   assert.equal(remaining.has(ids[3]),false);
+   assert.equal(remaining.get(ids[4]),'sent');
+   // Repeating the operation is safe and must not drain pending work.
+   await store.cleanup();
+   const again=await pool.query('SELECT id FROM g28.outbox WHERE id=ANY($1::uuid[])',[ids]);
+   assert.equal(again.rowCount,3);
+   await pool.query('DELETE FROM g28.outbox WHERE id=ANY($1::uuid[])',[ids]);
+  });
   await t.test('rate buckets are shared and atomic',async()=>{const r=await Promise.all(Array.from({length:8},()=>store.rate('fixture-rate',4,Date.now()+10000)));assert.equal(r.filter(Boolean).length,4);});
   await t.test('task checklist is idempotent, per-account and cascades on closure',async()=>{
    await store.setTaskCompletion(account.id,'choose-role',true);
