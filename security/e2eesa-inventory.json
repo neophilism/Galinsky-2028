@@ -1,10 +1,389 @@
 {
   "schemaVersion": 1,
   "repository": "neophilism/Galinsky-2028",
-  "classificationStatus": "unverified",
+  "standardBasis": {
+    "repository": "neophilism/End-To-End-Everywhere-Security-Architecture-Standard",
+    "commit": "8441335f359c6e446f9bfe8b959f9606ce341409",
+    "inventorySchema": "0.2",
+    "conformanceArtifactProduced": false
+  },
+  "classificationStatus": "preliminary-source-mapped",
   "coverageComplete": false,
-  "components": [],
-  "dataFlows": [],
+  "reviewed": false,
+  "components": [
+    {
+      "id": "public-website",
+      "kind": "static-public",
+      "status": "implemented-preview",
+      "sourcePaths": [
+        "scripts/public-renderer.mjs",
+        "apps/web/private-preview.mjs",
+        "packages/core/indexing.mjs"
+      ],
+      "scope": "Public content and protected preview rendering",
+      "e2ee": "not-applicable-public"
+    },
+    {
+      "id": "video-third-party",
+      "kind": "visitor-activated-provider",
+      "status": "implemented-preview",
+      "sourcePaths": [
+        "packages/core/video.mjs",
+        "apps/web/public/assets/public.js"
+      ],
+      "scope": "YouTube privacy-enhanced embed only after visitor action",
+      "e2ee": "intentionally-disclosed-provider"
+    },
+    {
+      "id": "campaign-editor",
+      "kind": "private-authorized-business-processing",
+      "status": "implemented-preview-code",
+      "sourcePaths": [
+        "apps/api/src/campaign-routes.mjs",
+        "apps/api/src/campaign-store.mjs",
+        "apps/editor/editor.mjs"
+      ],
+      "scope": "Authorized editor draft, publication and asset metadata; server sees plaintext",
+      "e2ee": "not-claimed-server-readable"
+    },
+    {
+      "id": "volunteer-session",
+      "kind": "authentication",
+      "status": "implemented-preview-code",
+      "sourcePaths": [
+        "apps/api/src/app.mjs",
+        "packages/core/auth.mjs",
+        "apps/api/src/postgres-store.mjs"
+      ],
+      "scope": "Account login token, browser-bound cookie and session verification",
+      "e2ee": "not-claimed-server-readable"
+    },
+    {
+      "id": "volunteer-email",
+      "kind": "provider-delivery",
+      "status": "adapter-implemented-live-unverified",
+      "sourcePaths": [
+        "apps/api/src/worker.mjs",
+        "packages/core/auth.mjs"
+      ],
+      "scope": "Server-decryptable provider delivery envelopes and consent; provider processes destination",
+      "e2ee": "not-claimed-server-readable"
+    },
+    {
+      "id": "volunteer-materials",
+      "kind": "authenticated-content",
+      "status": "implemented-preview-code",
+      "sourcePaths": [
+        "packages/core/material-publication.mjs",
+        "packages/core/content.mjs",
+        "apps/api/src/app.mjs"
+      ],
+      "scope": "Current materials distributed to authenticated volunteers only after publisher approval",
+      "e2ee": "not-claimed-server-readable"
+    },
+    {
+      "id": "local-worksheets",
+      "kind": "local-user-controlled",
+      "status": "implemented-preview-code",
+      "sourcePaths": [
+        "packages/core/forms.mjs",
+        "apps/portal/src/main.tsx"
+      ],
+      "scope": "Local on-device planning and explicit downloads; no report submission",
+      "e2ee": "not-applicable-local"
+    },
+    {
+      "id": "team-events",
+      "kind": "authorized-operational-processing",
+      "status": "implemented-preview-feature-gated",
+      "sourcePaths": [
+        "apps/api/src/coordination-routes.mjs",
+        "apps/api/src/coordination-store.mjs",
+        "apps/portal/src/Coordination.tsx"
+      ],
+      "scope": "Operational memberships, events, RSVPs, invitations and staff workflow",
+      "e2ee": "not-claimed-server-readable"
+    },
+    {
+      "id": "review-accounts",
+      "kind": "private-review-authentication",
+      "status": "implemented-preview",
+      "sourcePaths": [
+        "apps/web/review-auth.mjs",
+        "apps/web/private-preview.mjs"
+      ],
+      "scope": "Individually revocable private policy website review accounts",
+      "e2ee": "not-claimed-server-readable"
+    },
+    {
+      "id": "processor-hosted-checkout",
+      "kind": "regulated-financial-business",
+      "status": "sandbox-code-live-gated",
+      "sourcePaths": [
+        "apps/web/private-preview.mjs",
+        "packages/core/stripe-web-checkout.mjs",
+        "packages/core/contribution-terms.mjs"
+      ],
+      "scope": "Provider-owned card entry, external checkout and donor eligibility terms",
+      "e2ee": "not-claimed-provider-processing"
+    },
+    {
+      "id": "treasury-and-reconciliation",
+      "kind": "restricted-financial-business",
+      "status": "sandbox-code-live-gated",
+      "sourcePaths": [
+        "packages/core/fundraising-ledger.mjs",
+        "packages/core/treasury-vault.mjs",
+        "apps/portal/src/AdminTreasury.tsx"
+      ],
+      "scope": "Controlled contribution ledger, staff reporting and provider-reconciliation metadata",
+      "e2ee": "not-claimed-server-readable"
+    },
+    {
+      "id": "protected-recipient-directory",
+      "kind": "protected-content-cryptography",
+      "status": "not-implemented",
+      "sourcePaths": [
+        "docs/security/RELEASE_GATES.md",
+        "security/e2eesa-status.json"
+      ],
+      "scope": "Recipient/device enrollment, key authority and authenticated directory for protected submissions",
+      "e2ee": "required-before-protected-release"
+    },
+    {
+      "id": "protected-incidents",
+      "kind": "protected-content-cryptography",
+      "status": "not-implemented",
+      "sourcePaths": [
+        "docs/security/RELEASE_GATES.md",
+        "docs/DEVELOPMENT_PLAN.md"
+      ],
+      "scope": "Confidential incident/help reports, attachments, replies and authorized recipients",
+      "e2ee": "required-before-protected-release"
+    },
+    {
+      "id": "service-health",
+      "kind": "operations-metadata",
+      "status": "implemented-preview",
+      "sourcePaths": [
+        "packages/core/ops-health.mjs",
+        "apps/api/src/app.mjs"
+      ],
+      "scope": "Health, deployment, error handling; no raw personal records in diagnostics",
+      "e2ee": "not-claimed-business-metadata"
+    }
+  ],
+  "dataFlows": [
+    {
+      "id": "public-page",
+      "componentId": "public-website",
+      "operation": "public-data",
+      "dataClass": "public",
+      "from": "campaign website",
+      "to": "visitor browser",
+      "authority": "none",
+      "status": "live-preview",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "editor-draft",
+      "componentId": "campaign-editor",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "editor browser",
+      "to": "campaign editing service/database",
+      "authority": "service-owned authorization",
+      "status": "restricted-preview",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "published-campaign",
+      "componentId": "campaign-editor",
+      "operation": "public-data",
+      "dataClass": "public",
+      "from": "approved editorial projection",
+      "to": "website visitor",
+      "authority": "none",
+      "status": "restricted-preview",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "video-view",
+      "componentId": "video-third-party",
+      "operation": "media",
+      "dataClass": "intentionally-disclosed",
+      "from": "visitor browser",
+      "to": "YouTube privacy-enhanced player",
+      "authority": "provider-managed",
+      "status": "visitor-activated",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "login-link",
+      "componentId": "volunteer-session",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "volunteer browser",
+      "to": "account service and configured email provider",
+      "authority": "server-held delivery key",
+      "status": "enabled-only-with-sender",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "session-token",
+      "componentId": "volunteer-session",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "volunteer browser",
+      "to": "account service",
+      "authority": "server-side session",
+      "status": "private-preview",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "email-outbox",
+      "componentId": "volunteer-email",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "account service",
+      "to": "configured email delivery provider",
+      "authority": "server-held AEAD key; NOT E2EE",
+      "status": "live-unverified",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "materials-view",
+      "componentId": "volunteer-materials",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "published private material",
+      "to": "authenticated volunteer",
+      "authority": "server authorization",
+      "status": "private-preview",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "local-plans",
+      "componentId": "local-worksheets",
+      "operation": "local-storage",
+      "dataClass": "intentionally-disclosed",
+      "from": "volunteer browser state",
+      "to": "same visitor/device or explicitly downloaded file",
+      "authority": "device/user-managed",
+      "status": "private-preview",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "team-members",
+      "componentId": "team-events",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "authorized volunteer/team staff",
+      "to": "scoped operations service/database",
+      "authority": "server ACL, not E2EE",
+      "status": "feature-gated",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "event-rsvp",
+      "componentId": "team-events",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "volunteer RSVP",
+      "to": "team/event service/database",
+      "authority": "server ACL, not E2EE",
+      "status": "feature-gated",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "private-policy-review",
+      "componentId": "review-accounts",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "authorized reviewer",
+      "to": "private preview authentication service",
+      "authority": "server sessions",
+      "status": "private-preview",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "hosted-donation",
+      "componentId": "processor-hosted-checkout",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "donor browser",
+      "to": "external regulated payment processor",
+      "authority": "processor controls card entry",
+      "status": "not-live",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "donor-ledger",
+      "componentId": "treasury-and-reconciliation",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "payment provider signed events",
+      "to": "restricted campaign finance ledger",
+      "authority": "server controlled; financial rules",
+      "status": "not-live",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "treasury-views",
+      "componentId": "treasury-and-reconciliation",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "approved treasurer",
+      "to": "scoped finance admin UI",
+      "authority": "server authorization",
+      "status": "not-live",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "recipient-enrollment",
+      "componentId": "protected-recipient-directory",
+      "operation": "direct-message",
+      "dataClass": "protected",
+      "from": "intended staff recipient device",
+      "to": "authenticated trusted key directory",
+      "authority": "reviewed profile pending",
+      "status": "blocked-not-implemented",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "incident-report",
+      "componentId": "protected-incidents",
+      "operation": "group-message",
+      "dataClass": "protected",
+      "from": "volunteer with confidential incident",
+      "to": "specific named safety recipients",
+      "authority": "reviewed device-based E2EE pending",
+      "status": "blocked-not-implemented",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "incident-attachment",
+      "componentId": "protected-incidents",
+      "operation": "attachment",
+      "dataClass": "protected",
+      "from": "confidential incident attachment",
+      "to": "named authorized recipient device",
+      "authority": "reviewed encrypted attachment profile pending",
+      "status": "blocked-not-implemented",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "operational-health",
+      "componentId": "service-health",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "campaign API runtime",
+      "to": "health and monitoring admin",
+      "authority": "server metadata",
+      "status": "private-preview",
+      "claim": "no-production-e2ee-certification"
+    }
+  ],
   "sourceObservations": [
     {
       "path": "README.md",
@@ -12,7 +391,10 @@
     }
   ],
   "limitations": [
-    "This is a discovery placeholder, not a complete E2EESA component inventory or a claim that no protected flows exist.",
-    "Use the pinned upstream 0.2 component-inventory and scoped-assessment contracts for actual assessment."
+    "Preliminary source path inventory, not a complete source/build/runtime enumeration or upstream schema 0.2 conformance artifact.",
+    "All component and flow statuses require environment-specific audit and real source/build/artifact digest binding. Coverage is explicitly incomplete.",
+    "Public disclosures, account provider delivery, approved staff processing, and payment-provider card handling intentionally do not claim private E2EE.",
+    "Recipient/device key enrollment, protected incidents, encrypted attachments and replies remain blocked until independently reviewed protocols are implemented and verified.",
+    "Absence of a source-bound E2EE conformance artifact must never downgrade a protected-content release gate or be presented as E2EESA implementation complete."
   ]
 }
