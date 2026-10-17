@@ -83,6 +83,12 @@ export class MemoryStore{
   if(reads.size)this.materialReading.set(accountId,reads);else this.materialReading.delete(accountId);
  }
  async listMaterials(){return structuredClone(this.materials);}
+ async listPublishedActivityModules(){
+  const newest=new Map();
+  for(const m of this.activityModules||[]){const old=newest.get(m.id);if(!old||m.revision>old.revision)newest.set(m.id,m);}
+  return structuredClone([...newest.values()].filter(m=>m.status==='published')
+   .sort((a,b)=>a.id.localeCompare(b.id)).slice(0,50));
+ }
  async cleanup(){const now=Date.now();for(const [k,l]of this.logins)if(l.expires<=now)this.logins.delete(k);for(const [k,s]of this.sessions)if(s.expires<=now)this.sessions.delete(k);for(const [k,b]of this.buckets)if(b.until<=now)this.buckets.delete(k);}
  async close(){}
 }

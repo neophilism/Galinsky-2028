@@ -8,6 +8,7 @@ import {forms} from '../../../packages/core/forms.mjs';
 import {materialSearch,canReadMaterial,publicMaterial} from '../../../packages/core/content.mjs';
 import {readableVersion,matchesReading} from '../../../packages/core/material-reading.mjs';
 import {starterTasks,taskDecision} from '../../../packages/core/tasks.mjs';
+import {summarizePublishedModule} from '../../../packages/core/activity-summary.mjs';
 import {publicOrientation,evaluateOrientation,ORIENTATION_COMPLETION_ID} from '../../../packages/core/orientation.mjs';
 import {previewAuthorized,PREVIEW_REALM,PREVIEW_ROBOTS} from '../../../packages/core/preview-gate.mjs';
 import {cleanTreasuryPayload,sealTreasury,MERCHANT_SLOTS} from '../../../packages/core/treasury-vault.mjs';
@@ -242,7 +243,14 @@ export function createApp({store,config,clock=()=>Date.now()}){
   await store.setTaskCompletion(s.account.id,task.id,b.completed);
   return {id:task.id,completed:b.completed,verified:false};
  });
- app.get('/api/activity-status',async req=>{await account(req);return {modules:[],notice:'No regulated activity module is currently active. Reading a playbook does not authorize the activity.'};});
+ app.get('/api/activity-status',async req=>{
+  await account(req);
+  const records=await store.listPublishedActivityModules();
+  const modules=records.map(record=>summarizePublishedModule(record,new Date(clock()))).filter(Boolean);
+  return {modules,notice:modules.length?
+   'Published module requirements are informational only. Your individual training, approved tool and jurisdiction must still be checked; this page never authorizes fieldwork.':
+   'No regulated activity module is currently published. Reading a playbook or completing orientation never authorizes the activity.'};
+ });
  registerCoordination(app,{store,config,clock,account,writeSession});
  return app;
 }

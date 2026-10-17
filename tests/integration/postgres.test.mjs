@@ -39,6 +39,18 @@ test('Postgres persistence, atomic verification, leasing and deletion',{skip:!ur
    assert.equal(again.rowCount,3);
    await pool.query('DELETE FROM g28.outbox WHERE id=ANY($1::uuid[])',[ids]);
   });
+  await t.test('newest activity revision controls read-only publication status',async()=>{
+   const id='readiness-fixture';
+   const published={id,revision:1,status:'published',activity:'Fixture training',jurisdiction:'CT',election:'2028 General'};
+   await pool.query('INSERT INTO g28.activity_modules(id,revision,record) VALUES($1,$2,$3) ON CONFLICT(id,revision) DO UPDATE SET record=EXCLUDED.record',[id,1,published]);
+   let records=await store.listPublishedActivityModules();
+   assert(records.some(r=>r.id===id&&r.revision===1));
+   const unpublished={...published,revision:2,status:'draft'};
+   await pool.query('INSERT INTO g28.activity_modules(id,revision,record) VALUES($1,$2,$3) ON CONFLICT(id,revision) DO UPDATE SET record=EXCLUDED.record',[id,2,unpublished]);
+   records=await store.listPublishedActivityModules();
+   assert(!records.some(r=>r.id===id));
+   await pool.query('DELETE FROM g28.activity_modules WHERE id=$1',[id]);
+  });
   await t.test('rate buckets are shared and atomic',async()=>{const r=await Promise.all(Array.from({length:8},()=>store.rate('fixture-rate',4,Date.now()+10000)));assert.equal(r.filter(Boolean).length,4);});
   await t.test('task checklist is idempotent, per-account and cascades on closure',async()=>{
    await store.setTaskCompletion(account.id,'choose-role',true);

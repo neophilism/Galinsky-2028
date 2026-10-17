@@ -5,6 +5,38 @@ const headers={origin:config.portalOrigin,'content-type':'application/json','sec
 const material={id:'test-guide',title:'Synthetic test guide',description:'Fixture',body:'This is a synthetic guide.',category:'start',status:'published',audience:'volunteer',revision:1,review:{approvedBy:'fixture-reviewer',revision:1}};
 async function setup(){const store=new MemoryStore({materials:[structuredClone(material),{...structuredClone(material),id:'archive',status:'unreviewed'}]});const app=createApp({store,config});return{app,store};}
 async function login(app,store){const r=await app.inject({method:'POST',url:'/api/auth/request',headers,payload:{email:'volunteer@example.test',termsAccepted:true,marketing:false}});assert.equal(r.statusCode,202);const binding=r.headers['set-cookie'].split(';')[0];const job=store.outbox.at(-1);const token=new URL(openDelivery(job.envelope,config.deliveryKey).url).hash.slice(7);const v=await app.inject({method:'POST',url:'/api/auth/verify',headers:{...headers,cookie:binding},payload:{token}});assert.equal(v.statusCode,200);const cookie=v.headers['set-cookie'][0].split(';')[0];const s=await app.inject({url:'/api/session',headers:{cookie}});assert.equal(s.statusCode,200);return{cookie,csrf:s.json().csrf,binding,token};}
+test('published activity readiness shows only non-sensitive current-version prerequisites',async()=>{
+ const{app,store}=await setup();
+ try{
+  const user=await login(app,store);
+  const at=Date.now();
+  const module={id:'fixture-module',revision:1,status:'published',jurisdiction:'CT',election:'2028 General',
+   activity:'Synthetic role orientation',validFrom:new Date(at-60000).toISOString(),
+   validUntil:new Date(at+3600000).toISOString(),training:['private-training-id'],
+   approvedTools:['approved-tool'],sources:[{url:'https://example.org/official',checkedAt:new Date(at).toISOString()}],
+   verifiers:[{id:'staff-private-one',revision:1,evidence:'reviewed'},
+    {id:'staff-private-two',revision:1,evidence:'reviewed'}],
+   approval:{by:'approver-private',revision:1}};
+  store.activityModules=[module,{...module,id:'draft-only',revision:1,status:'draft'}];
+  const r=await app.inject({url:'/api/activity-status',headers:{cookie:user.cookie}});
+  assert.equal(r.statusCode,200);
+  assert.equal(r.json().modules.length,1);
+  const status=r.json().modules[0];
+  assert.equal(status.id,'fixture-module');
+  assert.equal(status.publishedCurrent,true);
+  assert.equal(status.activityAuthorized,false);
+  assert(!r.body.includes('staff-private-one'));
+  assert(!r.body.includes('approver-private'));
+  assert(!r.body.includes('private-training-id'));
+  assert(!r.body.includes('approved-tool'));
+  assert(!r.body.includes('https://example.org'));
+  // A newer draft suppresses an older published record rather than silently
+  // falling back to an expired/possibly withdrawn field module.
+  store.activityModules.push({...module,revision:2,status:'draft'});
+  const later=await app.inject({url:'/api/activity-status',headers:{cookie:user.cookie}});
+  assert.deepEqual(later.json().modules,[]);
+ }finally{await app.close();}
+});
 test('first-hour orientation is private, revision-bound and never grants field authority',async()=>{
  const {app,store}=await setup();
  try{
