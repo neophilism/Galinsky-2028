@@ -97,6 +97,36 @@ test('only verified owner or individually invited staff can access encrypted tre
   assert.equal((await app.inject({method:'POST',url:'/api/payments/checkout',headers:h,payload:{}})).statusCode,503);
  }finally{await app.close();}
 });
+test('read-only aggregate operations deny anonymous, treasurer and revoked staff',async()=>{
+ const store=new MemoryStore(),app=createApp({store,config});
+ try{
+  assert.equal((await app.inject({url:'/api/admin/operations'})).statusCode,401);
+  const owner=await login(app,store,'owner@example.test');
+  const status=await app.inject({url:'/api/admin/operations',headers:{cookie:owner.cookie}});
+  assert.equal(status.statusCode,200);
+  const report=status.json();
+  assert.equal(report.source,'synthetic_memory_store');
+  assert.equal(report.healthy,false);
+  assert(report.warnings.includes('not_live_database_measurement'));
+  assert.equal(report.metrics.accounts,1);
+  assert.equal(report.metrics.queuedJobs,1);
+  assert(!status.body.includes('owner@example.test'));
+  assert(!status.body.includes('fixture-pepper'));
+  assert(!status.body.includes('payload_envelope'));
+  assert.equal(report.commit,null);
+  const treasurerKey=emailKey('treasurer@example.test',config.pepper);
+  await store.setAdminGrant('synthetic-actor',treasurerKey,'treasurer','Treasurer');
+  const treasurer=await login(app,store,'treasurer@example.test');
+  assert.equal((await app.inject({url:'/api/admin/operations',headers:{cookie:treasurer.cookie}})).statusCode,403);
+  const auditorKey=emailKey('audit@example.test',config.pepper);
+  await store.setAdminGrant('synthetic-actor',auditorKey,'auditor','Auditor');
+  const auditor=await login(app,store,'audit@example.test');
+  assert.equal((await app.inject({url:'/api/admin/operations',headers:{cookie:auditor.cookie}})).statusCode,200);
+  await store.revokeAdminGrant('synthetic-actor',auditorKey.slice(0,12));
+  assert.equal((await app.inject({url:'/api/admin/operations',headers:{cookie:auditor.cookie}})).statusCode,403);
+  assert.equal((await app.inject({method:'POST',url:'/api/admin/operations',headers:originHeaders,payload:{}})).statusCode,404);
+ }finally{await app.close();}
+});
 test('existing volunteer registration remains disabled when treasury admin setup is off',async()=>{
  const normal=loadConfig({SIGNUP_ENABLED:'false'});
  const app=createApp({store:new MemoryStore(),config:normal});

@@ -22,7 +22,7 @@ export function createApp({store,config,clock=()=>Date.now()}){
   reply.header('Cache-Control','no-store').header('X-Content-Type-Options','nosniff').header('Referrer-Policy','no-referrer').header('X-Frame-Options','DENY');
   reply.header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
   if(config.production)reply.header('Strict-Transport-Security','max-age=31536000');
-  if(req.url.startsWith('/api/protected/')||req.url.startsWith('/api/payments/')||(req.url.startsWith('/api/admin/')&&!/^\/api\/admin\/(settings(?:\/bank|\/providers\/[a-z-]+)?|grants(?:\/revoke)?)($|\?)/.test(req.url)))return reply.code(503).send({error:'release_unavailable',message:'This function is not released. No submission has been stored.'});
+  if(req.url.startsWith('/api/protected/')||req.url.startsWith('/api/payments/')||(req.url.startsWith('/api/admin/')&&!/^\/api\/admin\/(settings(?:\/bank|\/providers\/[a-z-]+)?|grants(?:\/revoke)?|operations)($|\?)/.test(req.url)))return reply.code(503).send({error:'release_unavailable',message:'This function is not released. No submission has been stored.'});
   if(!['GET','HEAD','OPTIONS'].includes(req.method)){
    assert(req.headers.origin===config.portalOrigin,'origin_mismatch','Open this action in the volunteer application.',403);
    assert(!req.headers['sec-fetch-site']||['same-origin','none'].includes(req.headers['sec-fetch-site']),'cross_site','Cross-site actions are not accepted.',403);
@@ -81,6 +81,14 @@ export function createApp({store,config,clock=()=>Date.now()}){
   assert(role&&roles.includes(role),'admin_forbidden','This account cannot access treasury administration.',403);
   return {session:s,role};
  }
+ app.get('/api/admin/operations',async req=>{
+  await adminAccount(req,{roles:['owner','auditor']});
+  // Only aggregate counts; no recipient identifiers, delivery envelopes,
+  // authentication tokens or financial details leave the database.
+  const report=await store.operationalStatus();
+  return {...report,asOf:new Date(clock()).toISOString(),commit:config.commit||null,
+   deliveryEvidence:'Queue acceptance is not confirmation that a mailbox received a message.'};
+ });
  app.get('/api/admin/settings',async req=>{
   const {role}=await adminAccount(req);
   const configured=await store.treasuryMetadata();
