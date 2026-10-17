@@ -8,6 +8,7 @@ import {forms} from '../../../packages/core/forms.mjs';
 import {materialSearch,canReadMaterial,publicMaterial} from '../../../packages/core/content.mjs';
 import {readableVersion,matchesReading} from '../../../packages/core/material-reading.mjs';
 import {starterTasks,taskDecision} from '../../../packages/core/tasks.mjs';
+import {publicOrientation,evaluateOrientation,ORIENTATION_COMPLETION_ID} from '../../../packages/core/orientation.mjs';
 import {previewAuthorized,PREVIEW_REALM,PREVIEW_ROBOTS} from '../../../packages/core/preview-gate.mjs';
 import {cleanTreasuryPayload,sealTreasury,MERCHANT_SLOTS} from '../../../packages/core/treasury-vault.mjs';
 export function createApp({store,config,clock=()=>Date.now()}){
@@ -211,6 +212,19 @@ export function createApp({store,config,clock=()=>Date.now()}){
  app.get('/api/roles',async()=>({roles}));
  app.get('/api/role-recommendation',async req=>recommendRole({interest:String(req.query.interest||'network'),minutes:Number(req.query.minutes)||30,willingToTrain:req.query.training!=='no'}));
  app.get('/api/forms',async req=>{await account(req);return {forms};});
+ app.get('/api/orientation',async req=>{
+  const s=await account(req);
+  const done=new Set(await store.listTaskCompletion(s.account.id));
+  return {...publicOrientation(),completed:done.has(ORIENTATION_COMPLETION_ID),
+   verification:'Self-reported first-hour knowledge check only. No regulated campaign activity is authorized.'};
+ });
+ app.post('/api/orientation/complete',async req=>{
+  const s=await writeSession(req);
+  const evaluation=evaluateOrientation(req.body);
+  if(!evaluation.passed)return {...evaluation,completed:false};
+  await store.setTaskCompletion(s.account.id,ORIENTATION_COMPLETION_ID,true);
+  return {...evaluation,completed:true};
+ });
  app.get('/api/tasks',async req=>{
   const s=await account(req);
   const done=new Set(await store.listTaskCompletion(s.account.id));

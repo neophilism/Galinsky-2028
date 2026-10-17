@@ -5,6 +5,37 @@ const headers={origin:config.portalOrigin,'content-type':'application/json','sec
 const material={id:'test-guide',title:'Synthetic test guide',description:'Fixture',body:'This is a synthetic guide.',category:'start',status:'published',audience:'volunteer',revision:1,review:{approvedBy:'fixture-reviewer',revision:1}};
 async function setup(){const store=new MemoryStore({materials:[structuredClone(material),{...structuredClone(material),id:'archive',status:'unreviewed'}]});const app=createApp({store,config});return{app,store};}
 async function login(app,store){const r=await app.inject({method:'POST',url:'/api/auth/request',headers,payload:{email:'volunteer@example.test',termsAccepted:true,marketing:false}});assert.equal(r.statusCode,202);const binding=r.headers['set-cookie'].split(';')[0];const job=store.outbox.at(-1);const token=new URL(openDelivery(job.envelope,config.deliveryKey).url).hash.slice(7);const v=await app.inject({method:'POST',url:'/api/auth/verify',headers:{...headers,cookie:binding},payload:{token}});assert.equal(v.statusCode,200);const cookie=v.headers['set-cookie'][0].split(';')[0];const s=await app.inject({url:'/api/session',headers:{cookie}});assert.equal(s.statusCode,200);return{cookie,csrf:s.json().csrf,binding,token};}
+test('first-hour orientation is private, revision-bound and never grants field authority',async()=>{
+ const {app,store}=await setup();
+ try{
+  assert.equal((await app.inject({url:'/api/orientation'})).statusCode,401);
+  const user=await login(app,store);
+  const read=await app.inject({url:'/api/orientation',headers:{cookie:user.cookie}});
+  assert.equal(read.statusCode,200);
+  const lesson=read.json();
+  assert.equal(lesson.completed,false);
+  assert.equal(lesson.questions.length,3);
+  assert(!read.body.includes('correct'));
+  const payload={revision:lesson.revision,answers:{'current-guides':'no','personal-details':'own-notes','outdated-content':'verify'}};
+  const h={...headers,cookie:user.cookie,'x-csrf-token':user.csrf};
+  assert.equal((await app.inject({method:'POST',url:'/api/orientation/complete',headers:{...headers,cookie:user.cookie},payload})).statusCode,403);
+  const wrong=await app.inject({method:'POST',url:'/api/orientation/complete',headers:h,
+   payload:{...payload,answers:{...payload.answers,'current-guides':'yes'}}});
+  assert.equal(wrong.statusCode,200);assert.equal(wrong.json().passed,false);
+  const before=await app.inject({url:'/api/orientation',headers:{cookie:user.cookie}});
+  assert.equal(before.json().completed,false);
+  const stale=await app.inject({method:'POST',url:'/api/orientation/complete',headers:h,payload:{...payload,revision:'obsolete'}});
+  assert.equal(stale.statusCode,409);
+  const right=await app.inject({method:'POST',url:'/api/orientation/complete',headers:h,payload});
+  assert.equal(right.statusCode,200);assert.equal(right.json().passed,true);
+  assert.equal(right.json().verified,false);assert.equal(right.json().activityAuthorized,false);
+  const saved=await app.inject({url:'/api/orientation',headers:{cookie:user.cookie}});
+  assert.equal(saved.json().completed,true);
+  const modules=await app.inject({url:'/api/activity-status',headers:{cookie:user.cookie}});
+  assert.deepEqual(modules.json().modules,[]);
+  assert.equal(store.accounts.size,1);
+ }finally{await app.close();}
+});
 test('signup waits for verification and only encrypted delivery metadata is queued',async()=>{const{app,store}=await setup();const r=await app.inject({method:'POST',url:'/api/auth/request',headers,payload:{email:'volunteer@example.test',termsAccepted:true}});assert.equal(r.statusCode,202);assert.equal(store.accounts.size,0);assert.equal(store.outbox.length,1);assert(!JSON.stringify(store.outbox).includes('volunteer@example.test'));assert(!r.body.includes('token='));await app.close();});
 test('email verification creates a real session and immediately unlocks reviewed materials',async()=>{const{app,store}=await setup();const{cookie}=await login(app,store);const r=await app.inject({url:'/api/materials',headers:{cookie}});assert.deepEqual(r.json().materials.map(m=>m.id),['test-guide']);const doc=await app.inject({url:'/api/materials/test-guide',headers:{cookie}});assert(doc.json().body.includes('synthetic'));const hidden=await app.inject({url:'/api/materials/archive',headers:{cookie}});assert.equal(hidden.statusCode,404);await app.close();});
 test('verification links cannot replay or create sessions by GET',async()=>{const{app,store}=await setup();const{binding,token}=await login(app,store);const replay=await app.inject({method:'POST',url:'/api/auth/verify',headers:{...headers,cookie:binding},payload:{token}});assert.equal(replay.statusCode,400);const get=await app.inject({url:'/api/auth/verify?token='+token});assert.equal(get.statusCode,404);await app.close();});
