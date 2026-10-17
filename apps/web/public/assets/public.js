@@ -59,7 +59,7 @@
    notify(error?.name==='AbortError'?'Sharing cancelled.':'Sharing is unavailable. Copy the page address from your browser address bar.');
   }
  }));
- $('.video-play').forEach(b=>b.addEventListener('click',()=>{
+ $$('.video-play').forEach(b=>b.addEventListener('click',()=>{
   const panel=b.closest('[data-video]');const id=panel?.dataset.video;
   if(!/^[a-zA-Z0-9_-]{11}$/.test(id||''))return;
   const original=Array.from(panel.childNodes);
