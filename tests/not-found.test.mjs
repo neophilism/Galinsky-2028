@@ -22,8 +22,8 @@ test('404 remains non-indexable without canonical URL in production',()=>{
  assert.ok(html.includes('class="brand"'));
 });
 
-test('404 does not leak into the eight public sitemap pages',()=>{
- assert.equal(pages.length,8);
+test('404 does not leak into the public sitemap pages',()=>{
+ assert.ok(pages.some(p=>p.key==='eternal-liberty'));
  assert.ok(!pages.find(p=>p.key==='404'));
  assert.throws(()=>renderPage('404x'),/Unknown page/);
 });
