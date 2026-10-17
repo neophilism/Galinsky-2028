@@ -42,6 +42,9 @@ jobs:
           name: Astro and React production builds
           command: npm run build
       - run:
+          name: Enforce first-render public asset budgets
+          command: npm run perf:budget
+      - run:
           name: Install Chromium, Firefox and WebKit
           command: npx playwright install --with-deps chromium firefox webkit
       - run:
