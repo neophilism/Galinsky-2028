@@ -28,6 +28,29 @@ test('real leased queue runner sends one job and records durable completion',asy
  assert(!JSON.stringify(logs).includes('recipient@example.test'));
  assert(!JSON.stringify(logs).includes('private-login-abc'));
 });
+test('invitation-only staff login delivers with public signup disabled and no signup bypass',async()=>{
+ const payload=job({expires:Date.now()+300000,url:config.portalOrigin+'/verify#token=private-admin-login',
+  email:'owner@example.test'});
+ payload.kind='account_login';
+ let taken=false;const finished=[],deliveries=[];
+ const store={
+  async claimJob(){if(taken)return null;taken=true;return payload;},
+  async finishJob(record,outcome){finished.push({id:record.id,outcome});},
+  async cleanup(){}
+ };
+ const cfg={...config,signup:false,adminLoginReady:true,mailReady:true,
+  databaseUrl:'postgresql://fixture.invalid/admin-worker'};
+ const outcome=await runMailQueueLoop({store,config:cfg,maxIterations:1,pollMs:50,
+  transport:async(url,options)=>{deliveries.push({url,options});return {ok:true};},logger:()=>{}});
+ assert.equal(outcome.processed,1);
+ assert.equal(outcome.storageFailures,0);
+ assert.equal(deliveries.length,1);
+ assert.deepEqual(JSON.parse(deliveries[0].options.body).to,['owner@example.test']);
+ assert.deepEqual(finished,[{id:'fixture-job',outcome:null}]);
+ // With neither authorized sign-in mode enabled, the same worker must refuse.
+ await assert.rejects(()=>runMailQueueLoop({store,config:{...cfg,adminLoginReady:false},
+  maxIterations:1,pollMs:50}),/requires a real database/);
+});
 test('provider/network failures retry via existing durable outbox instead of claiming success',async()=>{
  const payload=job({expires:Date.now()+300000,url:config.portalOrigin+'/verify#token=private-login-abc',
   email:'recipient@example.test'});payload.kind='account_login';
