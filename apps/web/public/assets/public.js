@@ -34,7 +34,7 @@
 
  // No trackers, shorteners, private account IDs or custom UTM parameters:
  // only a server-approved canonical production URL can leave this page.
- $('[data-share-action]').forEach(b=>b.addEventListener('click',async()=>{
+ $$('[data-share-action]').forEach(b=>b.addEventListener('click',async()=>{
   const panel=b.closest('.issue-share');
   const value=panel?.dataset.shareUrl;
   const canonical=document.querySelector('link[rel="canonical"]')?.href;
