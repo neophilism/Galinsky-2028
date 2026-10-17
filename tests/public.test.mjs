@@ -31,3 +31,16 @@ test('canonical source excludes archive from browser code',()=>{
  for(const path of files.filter(f=>/\.(js|ts|tsx|html|css)$/.test(f))){const text=readFileSync(path,'utf8');assert(!text.includes('content/materials/archive'));assert(!text.includes('window.MATERIALS'));assert(!/sk_live_|re_[a-zA-Z0-9]{30,}/.test(text));}
 });
 test('the complete original plan and all sixty IDs are preserved',()=>{const p=readFileSync(join(root,'docs/DEVELOPMENT_PLAN.md'),'utf8');assert(p.length>100000);for(let n=1;n<=60;n++)assert(p.includes('G28-'+String(n).padStart(2,'0')));});
+
+test('hero keeps the pointing photo while Meet Phillip uses its own square portrait',()=>{
+ const html=renderPage('index');
+ assert(html.includes('class="candidate" fetchpriority="high" src="/assets/candidate.webp"'));
+ const section=html.split('id="meet-phillip"')[1]?.split('class="story-copy"')[0];
+ assert(section,'Meet Phillip portrait section must exist');
+ assert(section.includes('src="/assets/meet-phillip.webp"'));
+ assert(!section.includes('src="/assets/candidate.webp"'));
+ assert(section.includes('width="800" height="800"'));
+ assert(existsSync(join(root,'apps/web/public/assets/meet-phillip.webp')));
+ const css=readFileSync(join(root,'apps/web/public/assets/site.css'),'utf8');
+ assert.match(css,/#meet-phillip \.portrait-detail img\{[^}]*object-fit:cover/);
+});
