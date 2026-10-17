@@ -5,6 +5,8 @@ import {startCampaignPublicHarness} from './campaign-public-server.mjs';
 const out='test-results/browser/campaign-public';await mkdir(out,{recursive:true});const results=[];
 for(const [name,engine]of Object.entries({chromium,firefox,webkit})){
  const h=await startCampaignPublicHarness(),browser=await engine.launch();
+ h.documents.night.heroBackground={default:{preset:'aurora',animated:true,intensity:55,opacity:58,blur:56,speed:'slow'},day:null,night:{preset:'beams',animated:false,intensity:55,opacity:58,blur:30,speed:'slow'}};
+ h.documents.day.heroBackground={default:{preset:'clouds',animated:true,intensity:60,opacity:64,blur:46,speed:'slow'},day:{preset:'halo',animated:true,intensity:68,opacity:62,blur:30,speed:'medium'},night:null};
  const context=await browser.newContext({httpCredentials:{username:'preview',password:h.password},colorScheme:'dark',reducedMotion:'reduce',viewport:{width:1280,height:900}}),page=await context.newPage(),errors=[];
  page.on('pageerror',error=>errors.push(error.message));
  try{
@@ -12,10 +14,19 @@ for(const [name,engine]of Object.entries({chromium,firefox,webkit})){
   assert.equal(await page.title(),'Synthetic night title');assert.equal(await page.locator('meta[name="description"]').getAttribute('content'),'Synthetic supporting text');
   assert.equal(await page.locator('.hero img.candidate').getAttribute('alt'),'Synthetic published portrait description');
   assert.equal(await page.locator('body').evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(16, 16, 16)');
+  assert.equal(await page.locator('.campaign-hero-effect').getAttribute('data-effect'),'beams');
+  assert.equal(await page.locator('.campaign-hero-effect').getAttribute('data-animated'),'false');
+  assert.equal(await page.locator('.campaign-hero-effect .hfx-layer').first().evaluate(el=>getComputedStyle(el).animationName),'none');
   await page.screenshot({path:`${out}/${name}-night-desktop.png`});
   for(const path of ['/issues/','/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/','/volunteer/','/donate/','/notices/']){const response=await page.goto(h.origin+path);assert.equal(response.status(),200);await page.waitForFunction(()=>document.documentElement.dataset.campaignMode==='night');}
   await page.goto(h.origin+'/');await page.locator('[name="appearance"]').selectOption('day');await page.locator('.campaign-appearance button').click();await page.waitForFunction(()=>document.documentElement.dataset.campaignMode==='day');
-  assert.equal(await page.title(),'Synthetic day title');await page.goto(h.origin+'/issues/');assert.equal(await page.locator('html').getAttribute('data-campaign-mode'),'day');
+  assert.equal(await page.title(),'Synthetic day title');
+  assert.equal(await page.locator('.campaign-hero-effect').getAttribute('data-effect'),'halo');
+  assert.equal(await page.locator('.campaign-hero-effect').getAttribute('data-animated'),'true');
+  assert.equal(await page.locator('.campaign-hero-effect .hfx-layer').first().evaluate(el=>getComputedStyle(el).animationName),'none','Reduced-motion browser must not animate');
+  await page.evaluate(()=>scrollTo(0,document.body.scrollHeight));
+  await page.waitForFunction(()=>document.querySelector('.campaign-hero-effect')?.dataset.running==='false');
+  await page.goto(h.origin+'/issues/');assert.equal(await page.locator('html').getAttribute('data-campaign-mode'),'day');
   await page.emulateMedia({colorScheme:'light'});await page.emulateMedia({colorScheme:'dark'});assert.equal(await page.locator('html').getAttribute('data-campaign-mode'),'day');
   await page.locator('[name="appearance"]').selectOption('system');await page.locator('.campaign-appearance button').click();await page.waitForFunction(()=>document.documentElement.dataset.campaignMode==='night');
   await page.emulateMedia({colorScheme:'light'});await page.waitForFunction(()=>document.documentElement.dataset.campaignMode==='day');

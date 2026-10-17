@@ -80,18 +80,59 @@ export function validateHero(value){
  }
  return result;
 }
+
+export const HERO_EFFECT_PRESETS=Object.freeze([
+ Object.freeze({id:'none',label:'Clean'}),
+ Object.freeze({id:'clouds',label:'Ethereal Cloud Drift'}),
+ Object.freeze({id:'aurora',label:'Soft Aurora Veil'}),
+ Object.freeze({id:'halo',label:'Radial Glow Halo'}),
+ Object.freeze({id:'silk',label:'Silk Wave'}),
+ Object.freeze({id:'beams',label:'Atmospheric Grain + Light Beams'}),
+ Object.freeze({id:'geometry',label:'Geometric Glow Field'}),
+ Object.freeze({id:'legacy',label:'Particle Field (Legacy)'})
+]);
+export const HERO_EFFECT_SPEEDS=Object.freeze(['still','slow','medium']);
+export const HERO_EFFECT_DEFAULT=Object.freeze({
+ preset:'aurora',animated:true,intensity:55,opacity:58,blur:56,speed:'slow'
+});
+export function validateHeroEffect(value){
+ const keys=['preset','animated','intensity','opacity','blur','speed'];
+ exactCampaignKeys(value,keys,'hero background effect');
+ if(!HERO_EFFECT_PRESETS.some(entry=>entry.id===value.preset))campaignFailure('invalid_hero_effect','Choose a supported background preset.');
+ if(typeof value.animated!=='boolean')campaignFailure('invalid_hero_animation','Animation must be enabled or disabled.');
+ if(!HERO_EFFECT_SPEEDS.includes(value.speed))campaignFailure('invalid_hero_speed','Choose an allowed background speed.');
+ const checked={preset:value.preset,animated:value.animated,speed:value.speed};
+ for(const key of ['intensity','opacity','blur']){
+  if(!Number.isInteger(value[key])||value[key]<0||value[key]>100)campaignFailure('invalid_hero_parameter',`Hero background ${key} must be between 0 and 100.`);
+  checked[key]=value[key];
+ }
+ return checked;
+}
+export function validateHeroBackground(value){
+ exactCampaignKeys(value,['default','day','night'],'hero background');
+ const basic={default:validateHeroEffect(value.default)};
+ for(const mode of ['day','night'])basic[mode]=value[mode]==null?null:validateHeroEffect(value[mode]);
+ return basic;
+}
+export function resolveHeroBackground(value,mode='default'){
+ if(!['default','day','night'].includes(mode))campaignFailure('invalid_hero_mode','Unsupported background appearance mode.');
+ if(value===undefined)return{...HERO_EFFECT_DEFAULT};
+ const backgrounds=validateHeroBackground(value);
+ return{...(backgrounds[mode]??backgrounds.default)};
+}
+
 export function validateCampaignDocument(value,{publishing=false}={}){
- exactCampaignKeys(value,['schemaVersion','internalName','fields','theme','hero'],'campaign document');
+ exactCampaignKeys(value,['schemaVersion','internalName','fields','theme','hero','heroBackground'],'campaign document');
  if(value.schemaVersion!==1) campaignFailure('unknown_schema','Unsupported campaign content version.');
  const internalName=validateEditorialName(value.internalName);
  exactCampaignKeys(value.fields,[...FIELD_MAP.keys()],'text fields');
  const fields=Object.fromEntries(Object.entries(value.fields).map(([key,valueText])=>[key,text(valueText,FIELD_MAP.get(key).maxLength,'campaign text')]));
  if(publishing&&CAMPAIGN_FIELDS.some(field=>!Object.hasOwn(fields,field.key))) campaignFailure('missing_content','Complete every required campaign field before publication.');
- return{schemaVersion:1,internalName,fields,theme:validateTheme(value.theme,{publishing}),hero:validateHero(value.hero)};
+ return{schemaVersion:1,internalName,fields,theme:validateTheme(value.theme,{publishing}),hero:validateHero(value.hero),...(value.heroBackground===undefined?{}:{heroBackground:validateHeroBackground(value.heroBackground)})};
 }
-export function publicCampaignDocument(value){const{schemaVersion,fields,theme,hero}=validateCampaignDocument(value,{publishing:true});return{schemaVersion,fields,theme,hero};}
+export function publicCampaignDocument(value){const{schemaVersion,fields,theme,hero,heroBackground}=validateCampaignDocument(value,{publishing:true});return{schemaVersion,fields,theme,hero,...(heroBackground===undefined?{}:{heroBackground})};}
 export function validatePublicCampaignDocument(value){
- exactCampaignKeys(value,['schemaVersion','fields','theme','hero'],'published campaign');
+ exactCampaignKeys(value,['schemaVersion','fields','theme','hero','heroBackground'],'published campaign');
  return publicCampaignDocument({...value,internalName:'Published content'});
 }
 export function compareCampaignDocuments(left,right,{filter='all'}={}){

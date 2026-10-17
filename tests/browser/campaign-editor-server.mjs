@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {deflateSync} from 'node:zlib';
 import {fixture,id} from '../campaign-fixture.mjs';
-import {CAMPAIGN_FIELDS,THEME_TOKENS,validateCampaignDocument,validateCampaignSettings,publicCampaignDocument} from '../../packages/core/campaign-content.mjs';
+import {CAMPAIGN_FIELDS,THEME_TOKENS,HERO_EFFECT_DEFAULT,HERO_EFFECT_PRESETS,HERO_EFFECT_SPEEDS,validateCampaignDocument,validateCampaignSettings,publicCampaignDocument} from '../../packages/core/campaign-content.mjs';
 import {normalizeCampaignPng,pngChunk} from '../../packages/core/campaign-image.mjs';
 import {renderCampaignDraftPage} from '../../apps/api/src/campaign-draft-preview.mjs';
 const root=fileURLToPath(new URL('../../apps/editor/',import.meta.url));
@@ -24,9 +24,10 @@ export async function startEditorHarness({port=0}={}){
    if(files.has(u.pathname)){const [name,type]=files.get(u.pathname);res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' blob:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");return send(await readFile(root+name),200,type);}
    if(u.pathname==='/favicon.ico')return send('',204,'text/plain');
    if(u.pathname==='/api/session')return send({csrf:'synthetic-csrf',account:{role:'owner'}});
-   if(u.pathname==='/api/editorial/preview'&&req.method==='POST')return send({html:renderCampaignDraftPage(body.document,body.page)});
+   if(u.pathname==='/api/editorial/preview'&&req.method==='POST')return send({html:renderCampaignDraftPage(body.document,body.page,body.appearance)});
    if(u.pathname==='/editor/campaigns/preview-assets/candidate.webp')return send(raster,200,'image/png');
-   if(u.pathname==='/api/editorial/contract')return send({schemaVersion:1,fields:CAMPAIGN_FIELDS,themeTokens:THEME_TOKENS,role:'owner',builtinHero:'/assets/candidate.webp'});
+   if(u.pathname==='/editor/campaigns/preview-assets/hero-effects.css')return send(await readFile(new URL('../../apps/web/public/assets/hero-effects.css',import.meta.url)),200,'text/css');
+   if(u.pathname==='/api/editorial/contract')return send({schemaVersion:1,fields:CAMPAIGN_FIELDS,themeTokens:THEME_TOKENS,heroEffectDefault:HERO_EFFECT_DEFAULT,heroEffectPresets:HERO_EFFECT_PRESETS,heroEffectSpeeds:HERO_EFFECT_SPEEDS,role:'owner',builtinHero:'/assets/candidate.webp'});
    if(u.pathname==='/api/editorial/builtin-hero')return send(raster,200,'image/png');
    if(u.pathname==='/api/editorial/settings'){
     if(req.method==='PUT'){if(body.expectedVersion!==settings.version)return send({message:'Settings changed',error:'revision_conflict'},409);const validated=validateCampaignSettings(body.settings);await new Promise(r=>setTimeout(r,80));settings={version:settings.version+1,settings:validated};}

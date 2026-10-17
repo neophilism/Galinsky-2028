@@ -38,8 +38,45 @@ async function catalog({more=false}={}){
 function dirty(id){const d=current(id);d.dirty=true;document.querySelectorAll('[data-badge]').forEach(e=>{if(e.dataset.badge===id){e.textContent='Unsaved draft';e.classList.add('dirty');}});}
 function optionsList(select,values,chosen){select.replaceChildren(...values.map(([value,name])=>new Option(name,value)));select.value=chosen;}
 function previewUrl(path){const match=/^\/campaign-media\/([0-9a-f-]{36})\.png$/.exec(path);return match?'/api/editorial/media/'+match[1]:path==='/assets/candidate.webp'?'/api/editorial/builtin-hero':null;}
+
+function heroEffectRecord(d){
+ return d.document.heroBackground||{default:{...state.contract.heroEffectDefault},day:null,night:null};
+}
+function heroEffectAt(d,mode='default'){
+ const data=heroEffectRecord(d);
+ return data[mode]||data.default;
+}
+function updateHeroEffect(d,mode,key,value){
+ const config=structuredClone(heroEffectRecord(d));
+ if(mode!=='default'&&!config[mode])config[mode]={...config.default};
+ config[mode]={...config[mode],[key]:value};
+ d.document.heroBackground=config;
+ markAndPreview(d.record.id);
+}
 function renderHeroPreview(box,id,mobile=false){
  const d=current(id),doc=d.document;box.className='hero-preview'+(mobile?' mobile':'');box.style.backgroundColor=doc.theme.background;box.style.color=doc.theme.text;
+ box.style.setProperty('--campaign-brand-red',doc.theme.brandRed);
+ box.style.setProperty('--campaign-brand-blue',doc.theme.brandBlue);
+ box.style.setProperty('--campaign-surface',doc.theme.surface);
+ box.style.setProperty('--campaign-background',doc.theme.background);
+ box.style.setProperty('--campaign-text',doc.theme.text);
+ const effect=heroEffectAt(d,d.effectEditMode||'default');
+ let layer=box.querySelector('.campaign-hero-effect');
+ if(effect.preset==='none'||effect.preset==='legacy'){layer?.remove();box.dataset.effect=effect.preset;}
+ else{
+  if(!layer){
+   layer=element('div',null,{class:'campaign-hero-effect','aria-hidden':'true'});
+   for(const suffix of ['a','b','c'])layer.append(element('span',null,{class:'hfx-layer hfx-'+suffix}));
+   box.prepend(layer);
+  }
+  layer.dataset.effect=effect.preset;layer.dataset.animated=String(effect.animated&&effect.speed!=='still');
+  layer.dataset.speed=effect.speed;layer.dataset.running='true';
+  layer.style.setProperty('--hfx-opacity',(effect.opacity/100).toFixed(2));
+  layer.style.setProperty('--hfx-intensity',(effect.intensity/100).toFixed(2));
+  layer.style.setProperty('--hfx-blur',Math.round(effect.blur*.9)+'px');
+  layer.style.setProperty('--hfx-duration',(effect.speed==='medium'?22:44)+'s');
+  box.dataset.effect=effect.preset;
+ }
  let copy=box.querySelector('[data-hero-copy]'),img=box.querySelector('img');
  if(!copy){copy=element('div',null,{'data-hero-copy':'true'});box.append(copy);}
  if(!img){img=element('img');box.append(img);}
@@ -81,7 +118,56 @@ function panel(id,index){
  select.addEventListener('change',()=>{d.document.hero.assetPath=select.value;markAndPreview(id);});controls.append(label('Choose an image',select),button('Browse uploaded images',async()=>{await mediaPicker(select,d.document.hero.assetPath,select.dataset.next||null);}));
  const file=element('input',null,{type:'file',accept:'image/png,image/jpeg,image/webp,image/avif'});file.addEventListener('change',act(async()=>{const selected=file.files[0];file.value='';await operation(id,()=>upload(id,selected));}));const fileLabel=label('Upload a replacement',file);fileLabel.className='full';controls.append(fileLabel);
  for(const key of ['focalX','focalY','mobileFocalX','mobileFocalY']){const input=element('input',null,{type:'range',min:0,max:100,step:1});input.value=d.document.hero[key];const output=element('output',input.value);input.addEventListener('input',()=>{d.document.hero[key]=Number(input.value);output.textContent=input.value;markAndPreview(id);});const l=label(human(key),input);l.append(output);controls.append(l);}
- hero.append(controls);const preview=element('div',null,{'data-preview':id,'data-mobile':'false'});renderHeroPreview(preview,id);hero.append(preview,button('Toggle mobile hero preview',()=>{preview.dataset.mobile=String(preview.dataset.mobile!=='true');renderHeroPreview(preview,id,preview.dataset.mobile==='true');}));fs.append(hero);
+ hero.append(controls);
+ const effects=element('div',null,{class:'effect-controls'});
+ effects.append(element('h3','Hero background effect'),element('p','Decorative layers always stay behind the headline and portrait. Settings are saved with this campaign draft.',{class:'muted'}));
+ const appearanceSelect=element('select',null,{'aria-label':'Edit hero background for appearance'});
+ optionsList(appearanceSelect,[['default','Default effect'],['day','Day appearance override'],['night','Night appearance override']],d.effectEditMode||'default');
+ effects.append(label('Appearance to configure',appearanceSelect));
+ const inherit=element('input',null,{type:'checkbox'}),inheritLabel=label('Inherit default effect for this appearance',inherit);inheritLabel.className='check';
+ effects.append(inheritLabel);
+ const effectGrid=element('div',null,{class:'effect-grid'});
+ const preset=element('select',null,{'aria-label':'Background effect preset'});
+ optionsList(preset,state.contract.heroEffectPresets.map(entry=>[entry.id,entry.label]),heroEffectAt(d).preset);
+ effectGrid.append(label('Background style',preset));
+ const speed=element('select',null,{'aria-label':'Background motion speed'});
+ optionsList(speed,state.contract.heroEffectSpeeds.map(name=>[name,human(name)]),'slow');
+ effectGrid.append(label('Motion speed',speed));
+ const enabled=element('input',null,{type:'checkbox'}),enabledLabel=label('Enable animation',enabled);enabledLabel.className='check';
+ effectGrid.append(enabledLabel);
+ const sliders=new Map();
+ for(const [key,title]of [['intensity','Intensity'],['opacity','Opacity'],['blur','Blur / softness']]){
+  const input=element('input',null,{type:'range',min:0,max:100,step:1,'aria-label':title}),output=element('output');
+  const wrap=label(title,input);wrap.append(output);effectGrid.append(wrap);sliders.set(key,{input,output});
+ }
+ effects.append(effectGrid);
+ function refreshEffectInputs(){
+  const mode=appearanceSelect.value;d.effectEditMode=mode;
+  const value=heroEffectAt(d,mode),inherited=mode!=='default'&&!heroEffectRecord(d)[mode];
+  inheritLabel.hidden=mode==='default';inherit.checked=inherited;
+  for(const input of effectGrid.querySelectorAll('input,select'))input.disabled=inherited||d.busy||d.record.archived;
+  preset.value=value.preset;speed.value=value.speed;enabled.checked=value.animated;
+  for(const [key,{input,output}]of sliders){input.value=value[key];output.textContent=value[key]+'%';}
+  renderHeroPreview(preview,id,preview.dataset.mobile==='true');
+ }
+ appearanceSelect.addEventListener('change',refreshEffectInputs);
+ inherit.addEventListener('change',()=>{
+  const mode=appearanceSelect.value;if(mode==='default')return;
+  const config=structuredClone(heroEffectRecord(d));
+  config[mode]=inherit.checked?null:{...config.default};
+  d.document.heroBackground=config;markAndPreview(id);refreshEffectInputs();
+ });
+ const change=(key,value)=>{updateHeroEffect(d,appearanceSelect.value,key,value);};
+ preset.addEventListener('change',()=>change('preset',preset.value));
+ speed.addEventListener('change',()=>change('speed',speed.value));
+ enabled.addEventListener('change',()=>change('animated',enabled.checked));
+ for(const [key,{input,output}]of sliders)input.addEventListener('input',()=>{output.textContent=input.value+'%';change(key,Number(input.value));});
+ hero.append(effects);
+ const preview=element('div',null,{'data-preview':id,'data-mobile':'false'});
+ renderHeroPreview(preview,id);
+ hero.append(preview,button('Toggle mobile hero preview',()=>{preview.dataset.mobile=String(preview.dataset.mobile!=='true');renderHeroPreview(preview,id,preview.dataset.mobile==='true');}));
+ refreshEffectInputs();
+ fs.append(hero);
  const colors=element('details');colors.append(element('summary','Colors'));const grid=element('div',null,{class:'theme-grid'});for(const key of state.contract.themeTokens){const input=element('input',null,{type:'color'});input.value=d.document.theme[key];input.addEventListener('input',()=>{d.document.theme[key]=input.value.toUpperCase();markAndPreview(id);});grid.append(label(human(key),input));}colors.append(grid,element('p','Publishing validates text and focus contrast. Brand accents do not replace readable text colors.',{class:'muted'}));fs.append(colors);
  const history=element('details');history.append(element('summary','Revision history'));const revisions=element('select');const restoreButton=button('Restore as a new draft',async()=>{cleanRequired(id);if(!revisions.value)return;if(!confirm('Restore this revision into a new draft? The published website will not change.'))return;await operation(id,async()=>{await request('/campaigns/'+id+'/restore',{method:'POST',data:{expectedRevision:d.record.revision,sourceRevision:Number(revisions.value)}});await load(id,{force:true});message('Historical revision restored as a new draft.');});});history.append(button('Load history',async()=>{const result=await request('/campaigns/'+id+'/history'+(revisions.dataset.next?'?before='+revisions.dataset.next:''));if(!revisions.dataset.next)revisions.replaceChildren();for(const item of result.items)revisions.add(new Option('Revision '+item.revision,item.revision));revisions.dataset.next=result.next||'';}),label('Saved revision',revisions),restoreButton);fs.append(history);return box;
 }
@@ -90,16 +176,19 @@ function renderDraftPreview(){
  const target=$('fields');target.replaceChildren();
  const d=current(state.left);if(!d){target.append(element('p','Choose a campaign to preview.',{class:'empty'}));return;}
  const box=element('section',null,{class:'card'}),controls=element('div',null,{class:'preview-controls'}),frame=element('iframe',null,{title:'Unpublished campaign page preview',sandbox:'allow-same-origin',referrerpolicy:'no-referrer',class:'draft-page-frame'});
- const labelText=element('p','Draft preview: unsaved text, colors, and portrait. This does not publish changes.',{class:'muted'});
+ const labelText=element('p','Draft preview: unsaved text, colors, portrait and hero background. This does not publish changes.',{class:'muted'});
+ const appearance=element('select',null,{'aria-label':'Draft preview appearance'});
+ optionsList(appearance,[['default','Default effect'],['day','Day effect'],['night','Night effect']],'default');
  const status=element('p','',{'role':'status'});
  let sequence=0;
  const refresh=async()=>{const requested=++sequence;status.textContent='Rendering private draft...';try{
-   const result=await request('/preview',{method:'POST',data:{page:$('page').value,document:structuredClone(current(state.left).document)}});
+   const result=await request('/preview',{method:'POST',data:{page:$('page').value,appearance:appearance.value,document:structuredClone(current(state.left).document)}});
    if(sequence!==requested)return;frame.srcdoc=result.html;status.textContent='This page reflects your current draft. The published website is unchanged.';
   }catch(error){if(sequence===requested){status.textContent='Complete every required field and resolve contrast warnings before previewing.';message(error.message,true);}}
  };
  const size=(mobile)=>{frame.classList.toggle('mobile',mobile);status.textContent=mobile?'Mobile-width preview.':'Desktop-width preview.';};
- controls.append(button('Refresh current draft',refresh,'primary'),button('Desktop width',()=>size(false)),button('Mobile width',()=>size(true)));
+ controls.append(button('Refresh current draft',refresh,'primary'),label('Preview appearance',appearance),button('Desktop width',()=>size(false)),button('Mobile width',()=>size(true)));
+ appearance.addEventListener('change',()=>void refresh());
  box.append(element('h2','Unpublished page preview'),labelText,controls,status,frame);target.append(box);void refresh();
 }
 function renderFields(){
@@ -135,7 +224,8 @@ async function create(){
  const name=prompt('Private name for the new campaign');if(!name)return;const selected=current(state.left)?.document;
  const theme=selected?structuredClone(selected.theme):Object.fromEntries(state.contract.themeTokens.map(key=>[key,['background','surface','primaryText','secondaryText'].includes(key)?'#FFFFFF':'#000000']));
  const hero=selected?structuredClone(selected.hero):{assetPath:state.contract.builtinHero,alt:'Describe the selected portrait',focalX:50,focalY:50,mobileFocalX:50,mobileFocalY:50};
- const created=await request('/campaigns',{method:'POST',data:{document:{schemaVersion:1,internalName:name,fields:{},theme,hero}}});state.left=created.id;await load(created.id);refreshSelectors();render();message('Blank campaign created. Fill every required field before publication.');
+ const background=selected?.heroBackground?structuredClone(selected.heroBackground):{default:{...state.contract.heroEffectDefault},day:null,night:null};
+ const created=await request('/campaigns',{method:'POST',data:{document:{schemaVersion:1,internalName:name,fields:{},theme,hero,heroBackground:background}}});state.left=created.id;await load(created.id);refreshSelectors();render();message('Blank campaign created. Fill every required field before publication.');
 }
 $('search-form').addEventListener('submit',act(()=>catalog()));$('more').addEventListener('click',act(()=>catalog({more:true})));$('new').addEventListener('click',act(create));
 for(const side of ['left','right'])$(side).addEventListener('change',act(async()=>{state[side]=$(side).value||null;await load(state[side]);render();}));

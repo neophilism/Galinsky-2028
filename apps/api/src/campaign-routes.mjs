@@ -2,7 +2,7 @@ import {readFile,stat} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {CampaignStore} from './campaign-store.mjs';
 import {renderCampaignDraftPage} from './campaign-draft-preview.mjs';
-import {CampaignError,CAMPAIGN_FIELDS,THEME_TOKENS,exactCampaignKeys} from '../../../packages/core/campaign-content.mjs';
+import {CampaignError,CAMPAIGN_FIELDS,THEME_TOKENS,HERO_EFFECT_PRESETS,HERO_EFFECT_SPEEDS,HERO_EFFECT_DEFAULT,exactCampaignKeys} from '../../../packages/core/campaign-content.mjs';
 import {createCampaignAuthorization} from '../../../packages/core/campaign-access.mjs';
 import {normalizeCampaignPng,decodeCampaignUpload} from '../../../packages/core/campaign-image.mjs';
 import {readCookie,validToken,tokenHash} from '../../../packages/core/auth.mjs';
@@ -23,7 +23,7 @@ export function registerCampaignEditor(app,{accountStore,config,env=process.env,
   });
  }
  const body=(req,keys)=>exactCampaignKeys(req.body,keys,'editorial request');
- route('GET','/contract',{},async req=>({schemaVersion:1,fields:CAMPAIGN_FIELDS,themeTokens:THEME_TOKENS,role:req.campaignIdentity.role,builtinHero:'/assets/candidate.webp'}));
+ route('GET','/contract',{},async req=>({schemaVersion:1,fields:CAMPAIGN_FIELDS,themeTokens:THEME_TOKENS,heroEffectPresets:HERO_EFFECT_PRESETS,heroEffectSpeeds:HERO_EFFECT_SPEEDS,heroEffectDefault:HERO_EFFECT_DEFAULT,role:req.campaignIdentity.role,builtinHero:'/assets/candidate.webp'}));
  route('GET','/campaigns',{},req=>store.list({after:req.query.after||null,limit:req.query.limit==null?30:Number(req.query.limit),search:req.query.search||'',archived:req.query.archived==='true'}));
  route('GET','/campaigns/:id',{},req=>store.get(req.params.id,{revision:req.query.revision==null?null:Number(req.query.revision)}));
  route('POST','/campaigns',{write:true},req=>{const b=body(req,['document']);return store.create(b.document,req.campaignIdentity.actorId);});
@@ -38,7 +38,7 @@ export function registerCampaignEditor(app,{accountStore,config,env=process.env,
  route('GET','/media',{},req=>store.assets({after:req.query.after||null,limit:req.query.limit==null?30:Number(req.query.limit)}));
  route('GET','/media/:id',{},async(req,reply)=>{const image=await store.asset(req.params.id);return reply.header('Cache-Control','private, no-store').header('X-Content-Type-Options','nosniff').type(image.contentType).send(image.bytes);});
  route('GET','/builtin-hero',{},async(req,reply)=>reply.header('Cache-Control','private, no-store').type('image/webp').send(await readFile(STATIC_HERO)));
- route('POST','/preview',{write:true},req=>{const b=body(req,['page','document']);return{html:renderCampaignDraftPage(b.document,b.page)};});
+ route('POST','/preview',{write:true},req=>{const b=body(req,['page','document','appearance']);return{html:renderCampaignDraftPage(b.document,b.page,b.appearance)};});
  route('POST','/media',{write:true,upload:true},async req=>{const b=body(req,['base64']);return store.addAsset(await normalizeCampaignPng(decodeCampaignUpload(b.base64)),req.campaignIdentity.actorId);},6*1024*1024);
  const TYPES={css:'text/css; charset=utf-8',woff2:'font/woff2',svg:'image/svg+xml',png:'image/png',webp:'image/webp',jpg:'image/jpeg',jpeg:'image/jpeg',avif:'image/avif'};
  app.get('/editor/campaigns/preview-assets/:filename',{onRequest:async(req,reply)=>{reply.header('Cache-Control','private, no-store').header('Vary','Cookie, Authorization');try{await auth(req);}catch(error){return caught(error,reply);}}},async(req,reply)=>{
