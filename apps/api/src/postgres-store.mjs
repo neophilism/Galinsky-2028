@@ -1,6 +1,7 @@
 import {postgresCoordination,removeAccountCoordination,ownCoordination} from './coordination-store.mjs';
 import pg from 'pg';
 import {randomUUID} from 'node:crypto';
+import {assessOperations} from '../../../packages/core/ops-health.mjs';
 export function databasePool(connectionString){
  const u=new URL(connectionString);const local=['localhost','127.0.0.1','[::1]'].includes(u.hostname);
  // Keep TLS verification explicit; connection-string sslmode must not silently weaken it.
@@ -10,6 +11,26 @@ export function databasePool(connectionString){
 export class PostgresStore{
  constructor(pool){this.pool=pool;}
  async healthy(){await this.pool.query('SELECT 1 FROM g28.schema_migrations LIMIT 1');return true;}
+ async operationalStatus(){
+  // Only grouped counts and schema versions leave PostgreSQL. Never select
+  // addresses, tokens, mail bodies, source IPs or payment events.
+  const [versions,accounts,materials,jobs]=await Promise.all([
+   this.pool.query('SELECT version FROM g28.schema_migrations ORDER BY version'),
+   this.pool.query('SELECT count(*)::integer AS value FROM g28.accounts'),
+   this.pool.query("SELECT count(*)::integer AS value FROM g28.materials WHERE status='published' AND audience='volunteer'"),
+   this.pool.query(`SELECT count(*) FILTER (WHERE status='queued')::integer AS queued,
+     count(*) FILTER (WHERE status='leased')::integer AS leased,
+     count(*) FILTER (WHERE status='dead')::integer AS dead,
+     COALESCE(GREATEST(0,EXTRACT(EPOCH FROM now()-min(created_at) FILTER (WHERE status='queued'))),0)::integer AS oldest_queued
+     FROM g28.outbox`)
+  ]);
+  const row=jobs.rows[0];
+  return {...assessOperations({versions:versions.rows.map(r=>r.version),
+   accounts:accounts.rows[0].value,materials:materials.rows[0].value,
+   queued:row.queued,leased:row.leased,dead:row.dead,
+   oldestQueuedSeconds:row.oldest_queued}),source:'live_database_aggregate'};
+ }
+
  async rate(key,limit,until){const q=await this.pool.query(`INSERT INTO g28.rate_buckets(key,count,expires_at) VALUES($1,1,$2) ON CONFLICT(key) DO UPDATE SET count=CASE WHEN g28.rate_buckets.expires_at<now() THEN 1 ELSE g28.rate_buckets.count+1 END, expires_at=CASE WHEN g28.rate_buckets.expires_at<now() THEN EXCLUDED.expires_at ELSE g28.rate_buckets.expires_at END RETURNING count`,[key,new Date(until)]);return q.rows[0].count<=limit;}
  async requestLogin(r,job){const c=await this.pool.connect();try{await c.query('BEGIN');await c.query(`INSERT INTO g28.login_requests(token_hash,binding_hash,email_key,delivery_envelope,marketing_consent,terms_version,expires_at) VALUES($1,$2,$3,$4,$5,$6,$7)`,[r.hash,r.binding,r.emailKey,r.deliveryEnvelope,r.marketing,r.termsVersion,new Date(r.expires)]);await c.query('INSERT INTO g28.outbox(id,kind,subject_key,payload_envelope) VALUES($1,$2,$3,$4)',[job.id,job.kind,r.emailKey,job.envelope]);await c.query('COMMIT');}catch(e){await c.query('ROLLBACK');throw e;}finally{c.release();}}
  async consumeLogin(hash,binding,s,now=Date.now()){

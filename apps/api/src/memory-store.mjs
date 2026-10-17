@@ -1,9 +1,22 @@
 import {memoryCoordination,removeAccountCoordination,ownCoordination} from './coordination-store.mjs';
 // Explicit development/test store only. server.mjs rejects it in production.
 import {randomUUID} from 'node:crypto';
+import {assessOperations} from '../../../packages/core/ops-health.mjs';
 export class MemoryStore{
  constructor({materials=[]}={}){this.logins=new Map();this.accounts=new Map();this.sessions=new Map();this.outbox=[];this.buckets=new Map();this.materials=materials;this.taskProgress=new Map();this.materialReading=new Map();this.rolePreferences=new Map();this.bookmarks=new Map();this.adminGrantsStore=new Map();this.treasurySecretsStore=new Map();this.treasuryAudit=[];}
  async healthy(){return true;}
+ async operationalStatus(now=Date.now()){
+  const queued=this.outbox.filter(j=>j.status==='queued');
+  const report=assessOperations({versions:[],accounts:this.accounts.size,
+   materials:this.materials.filter(m=>m.status==='published'&&m.audience==='volunteer').length,
+   queued:queued.length,leased:this.outbox.filter(j=>j.status==='leased').length,
+   dead:this.outbox.filter(j=>j.status==='dead').length,
+   oldestQueuedSeconds:queued.length?Math.max(0,Math.floor((now-Math.min(...queued.map(j=>j.availableAt||now)))/1000)):0});
+  // Development memory state is synthetic, never live operational evidence.
+  return {...report,source:'synthetic_memory_store',healthy:false,
+   warnings:[...report.warnings,'not_live_database_measurement']};
+ }
+
  async rate(key,limit,until){const old=this.buckets.get(key);const item=!old||old.until<Date.now()?{count:0,until}:old;item.count++;this.buckets.set(key,item);return item.count<=limit;}
  async requestLogin(record,job){this.logins.set(record.hash,record);this.outbox.push({...job,subjectKey:record.emailKey,status:'queued',attempts:0,availableAt:Date.now()});}
  async consumeLogin(hash,binding,session,now=Date.now()){
