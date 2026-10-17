@@ -13,7 +13,12 @@ registerPortal(app,config.portalOrigin);
 const mailController=new AbortController();
 let mailLoop=null;
 if(config.production&&(config.signup||config.adminLoginReady)&&config.mailDeliveryMode==='inline'){
- // Never accept signups until the existing service can actually reach its
+ // Never allow public signup OR private verified staff email until the service
+ // can reach its durable queue and verified mail provider. The worker may run
+ // in invitation-only mode while general volunteer signup is disabled.
+ // Keep startup fail-closed if the real database cannot be reached.
+ // This requires the existing configured sender and operational acceptance.
+ // The existing service can then reach its
  // durable queue and a valid mail transport configuration is present.
  if(!config.databaseUrl)throw new Error('Inline mail worker requires a real database.');
  await store.healthy();
@@ -37,7 +42,8 @@ for(const signal of ['SIGTERM','SIGINT'])process.once(signal,shutdown);
 try{
  await app.listen({host:config.host,port:config.port});
  console.log(JSON.stringify({event:'api_started',port:config.port,
-  signupEnabled:config.signup,mailDelivery:config.signup?config.mailDeliveryMode:'disabled'}));
+  signupEnabled:config.signup,adminLoginEnabled:config.adminLoginReady,
+  mailDelivery:config.signup||config.adminLoginReady?config.mailDeliveryMode:'disabled'}));
 }catch{
  mailController.abort();
  if(mailLoop)await mailLoop;

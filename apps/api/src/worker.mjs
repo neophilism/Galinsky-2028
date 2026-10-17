@@ -34,12 +34,14 @@ export async function processOneMailJob({store,config,transport=fetch,logger=con
 // Multiple portal replicas may run it: PostgreSQL SKIP LOCKED leases prevent
 // two workers from initially claiming the same queued message, and Resend
 // idempotency keys prevent re-sends after a crashed lease.
-// With no verified sender/provider it CANNOT activate registration.
+// With no verified sender/provider it cannot activate registration or private staff login.
+// Staff-only mode is legal when adminLoginReady is true and signup is false; do
+// not equate an operational invitation-only worker with public registration.
 export async function runMailQueueLoop({
  store,config,transport=fetch,logger=console.log,signal,
  pollMs=2000,maxIterations=Infinity
 }={}){
- if(!store||!config?.signup||!config.mailReady||!config.databaseUrl)
+ if(!store||!(config?.signup||config?.adminLoginReady)||!config.mailReady||!config.databaseUrl)
   throw new Error('Email worker requires a real database, verified sender configuration and enabled account delivery.');
  if(!Number.isSafeInteger(pollMs)||pollMs<50||pollMs>30000)
   throw new Error('Invalid mail polling interval.');
@@ -71,7 +73,7 @@ export async function runMailQueueLoop({
 }
 async function main(){
  const config=loadConfig();
- if(!config.databaseUrl||!config.mailReady||!config.signup)
+ if(!config.databaseUrl||!config.mailReady||!(config.signup||config.adminLoginReady))
   throw new Error('Worker requires the database and enabled account delivery.');
  const store=new PostgresStore(databasePool(config.databaseUrl));
  const controller=new AbortController();

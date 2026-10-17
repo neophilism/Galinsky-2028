@@ -32,3 +32,9 @@ The code uses real PostgreSQL for production. The in-memory admin store exists f
 If the user cannot activate email sender now due to the zero-dollar budget, keep the vault unconfigured. Public site and policy documents may continue to progress independently; the console is staged for use when verified email is available.
 
 **Processor shortlist correction, 2026-10-12:** Chase/Paymentech/WePay excluded by owner. No final four companies chosen. All options must be self-service, no required call or contact-sales process, no activation/monthly fees, no Stripe/Chase dependencies or political-specific restrictions. Assess independent acquirer groupings and written merchant terms; see `docs/operations/PROCESSOR_SELF_SERVICE_SCREEN_20261012.md`. The vault uses generic `merchant-a` through `merchant-d` slots until each merchant is actually approved.
+
+## 17 October 2026: invitation-only mail-worker correction
+
+Private owner/admin login does **not** require enabling general volunteer registration. The portal bootstrap already allowed an inline worker when either `G28_ADMIN_LOGIN_ENABLED` or `SIGNUP_ENABLED` was true, but the worker's own startup previously rejected all `SIGNUP_ENABLED=false` configurations. The runner and external-worker entrypoint now accept verified *admin-only* delivery, with no change to public account eligibility.
+
+The verified Resend sender, protected database, secure login keys, separate owner mailbox, operationally approved delivery mode and protected preview access are still mandatory. No environment flag is toggled by this change and no invitation or real email is sent as part of CI. Keep `SIGNUP_ENABLED=false` until public enrollment itself is approved. Acceptance in CI uses synthetic mail transport; a live real-mail test is still required.
