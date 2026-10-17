@@ -97,3 +97,12 @@ a.resource-link:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 .brand .brand-symbol,.footer .brand-symbol{display:block;position:relative;flex:0 0 42px;width:42px;height:42px;transform:none;border:0;background:url('/favicon.svg') center/contain no-repeat!important;box-shadow:none}
 .brand .brand-symbol::before,.brand .brand-symbol::after,.footer .brand-symbol::before,.footer .brand-symbol::after{content:none!important;display:none!important}
 @media(max-width:700px){.brand .brand-symbol,.footer .brand-symbol{flex-basis:36px;width:36px;height:36px;transform:none}}
+
+/* Stable, tracker-free sharing appears only on approved production issue pages. */
+.issue-share{border-top:1px solid var(--border,#dce3ed);background:#f3f6fa;padding:30px 0 34px}
+.issue-share h2{font-size:25px;line-height:1.2;margin:0 0 13px}
+.issue-share-actions{display:flex;gap:12px;flex-wrap:wrap}
+.issue-share .btn{min-height:44px;color:var(--blue);border:1px solid var(--blue);cursor:pointer;background:#fff}
+.issue-share [role="status"]{min-height:1.4em;margin:12px 0 0}
+.issue-share .btn:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+@media(max-width:390px){.issue-share-actions{flex-direction:column}.issue-share-actions .btn{width:100%;justify-content:center}}

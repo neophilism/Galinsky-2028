@@ -45,6 +45,18 @@ export function renderPage(key, options={}) {
    if(u.protocol!=='https:'||u.username||u.password||u.port||!u.hostname.includes('.')||u.hostname==='localhost'||u.hostname.endsWith('.local')||isIP(u.hostname))throw new Error('Invalid policy destination');
    return '<a'+attrs.replace(marker,'href="'+escapeHtml(u.toString())+'" rel="noopener noreferrer"')+'>'+inside+'</a>';
  });
+
+ // Sharing uses only verified production canonical page URLs. The private
+ // password-gated preview never emits copy/share controls or its protected URL.
+ if(mode==='production'&&canonical&&['kirk-evers','garden','cornerstone'].includes(page.key)){
+  const shareUrl=canonical+page.path;
+  const tools='<section class="issue-share" aria-label="Page sharing" data-share-url="'+escapeHtml(shareUrl)+'">'+
+   '<div class="wrap"><h2>Share this proposal</h2><div class="issue-share-actions">'+
+   '<button class="btn outline" type="button" data-share-action="copy">Copy page link</button>'+
+   '<button class="btn outline" type="button" data-share-action="native">Share page</button></div>'+
+   '<p class="small" role="status" aria-live="polite"></p></div></section>';
+  body=body.replace('</main>',tools+'</main>');
+ }
  if(body.includes('{{DESTINATION:'))throw new Error('Unresolved policy destination token');
  if(page.key==='donate'){
   const routes=approvedDonationRoutes(process.env,mode);

@@ -34,7 +34,7 @@
     "format:check": "prettier --check eslint.config.mjs scripts/scan-secrets.mjs tests/secret-scanner.test.mjs tests/public-interactions.test.mjs scripts/verify.mjs tests/verify-preflight.test.mjs",
     "secrets:check": "node scripts/scan-secrets.mjs",
     "verify": "node scripts/verify.mjs",
-    "test:public-browser": "node tests/browser/public-interactions.mjs",
+    "test:public-browser": "node tests/browser/public-interactions.mjs && node tests/browser/public-sharing.mjs",
     "test:coordination-browser": "node tests/browser/coordination.mjs",
     "test:editor-browser": "node tests/browser/campaign-editor.mjs",
     "test:campaign-public-browser": "node tests/browser/campaign-public.mjs",
