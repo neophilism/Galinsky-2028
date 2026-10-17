@@ -92,3 +92,8 @@ a.resource-link:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
   object-fit:cover;
   object-position:center;
 }
+
+/* Campaign owner's official G mark replaces the legacy placeholder flags. */
+.brand .brand-symbol,.footer .brand-symbol{display:block;position:relative;flex:0 0 42px;width:42px;height:42px;transform:none;border:0;background:url('/favicon.svg') center/contain no-repeat!important;box-shadow:none}
+.brand .brand-symbol::before,.brand .brand-symbol::after,.footer .brand-symbol::before,.footer .brand-symbol::after{content:none!important;display:none!important}
+@media(max-width:700px){.brand .brand-symbol,.footer .brand-symbol{flex-basis:36px;width:36px;height:36px;transform:none}}
