@@ -53,7 +53,11 @@ export function renderPage(key, options={}) {
   const tools='<section class="issue-share" aria-label="Page sharing" data-share-url="'+escapeHtml(shareUrl)+'">'+
    '<div class="wrap"><h2>Share this proposal</h2><div class="issue-share-actions">'+
    '<button class="btn outline" type="button" data-share-action="copy">Copy page link</button>'+
-   '<button class="btn outline" type="button" data-share-action="native">Share page</button></div>'+
+   '<button class="btn outline" type="button" data-share-action="native">Share page</button>'+
+   '<button class="btn outline" type="button" data-share-action="qr" aria-controls="issue-share-qr" aria-expanded="false">Show QR code</button></div>'+
+   '<div class="issue-share-qr" id="issue-share-qr" hidden>'+
+   '<div class="issue-share-qr-canvas" role="img" aria-label="QR code linking to this issue page"></div>'+
+   '<p class="small">Scan this code to open the official issue page. It contains no tracking parameters.</p></div>'+
    '<p class="small" role="status" aria-live="polite"></p></div></section>';
   body=body.replace('</main>',tools+'</main>');
  }

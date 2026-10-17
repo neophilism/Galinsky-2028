@@ -48,7 +48,38 @@
   const status=panel.querySelector('[role="status"]');
   const notify=message=>{if(status)status.textContent=message;};
   try{
-   if(b.dataset.shareAction==='native'&&typeof navigator.share==='function'){
+   if(b.dataset.shareAction==='qr'){
+    const box=panel.querySelector('#issue-share-qr');
+    const canvas=box?.querySelector('.issue-share-qr-canvas');
+    if(!box||!canvas)return;
+    if(!box.hidden){
+     box.hidden=true;b.setAttribute('aria-expanded','false');b.textContent='Show QR code';
+     notify('QR code hidden.');return;
+    }
+    if(url.length>240){notify('This link is too long for the QR tool. Use Copy page link.');return;}
+    b.disabled=true;
+    try{
+     if(typeof window.QRCode!=='function'){
+      await new Promise((resolve,reject)=>{
+       const script=document.createElement('script');
+       script.src='/assets/vendor/qrcode.js';
+       script.async=true;
+       script.addEventListener('load',resolve,{once:true});
+       script.addEventListener('error',()=>reject(new Error('qr_load_failed')),{once:true});
+       document.head.appendChild(script);
+      });
+     }
+     if(typeof window.QRCode!=='function')throw new Error('qr_unavailable');
+     canvas.replaceChildren();
+     new window.QRCode(canvas,{text:url,width:224,height:224,useSVG:true,
+      colorDark:'#082653',colorLight:'#ffffff',correctLevel:window.QRCode.CorrectLevel.M});
+     box.hidden=false;b.setAttribute('aria-expanded','true');b.textContent='Hide QR code';
+     notify('QR code ready. It links to the official issue page.');
+    }catch{
+     box.hidden=true;b.setAttribute('aria-expanded','false');b.textContent='Show QR code';
+     notify('Could not generate a QR code. Use Copy page link instead.');
+    }finally{b.disabled=false;}
+   }else if(b.dataset.shareAction==='native'&&typeof navigator.share==='function'){
     await navigator.share({title:document.title,url});
     notify('Sharing completed.');
    }else if(navigator.clipboard?.writeText){

@@ -16,7 +16,9 @@ test('only exact canonical issue URLs are shared, without tracking or private re
   const path='/issues/'+key+'/';
   assert(html.includes('data-share-url="'+origin+path+'"'));
   assert(html.includes('<link rel="canonical" href="'+origin+path+'">'));
-  assert.equal((html.match(/data-share-action="(?:native|copy)"/g)||[]).length,2);
+  assert.equal((html.match(/data-share-action="(?:native|copy|qr)"/g)||[]).length,3);
+  assert(html.includes('id="issue-share-qr" hidden'));
+  assert(html.includes('aria-controls="issue-share-qr"'));
   assert(!html.includes('utm_'));
   assert(!html.includes('private-preview.onrender.com'));
  }
