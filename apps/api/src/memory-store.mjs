@@ -1,3 +1,5 @@
+import {prepareAccountNotice} from './mail-notices.mjs';
+import {memoryMail} from './mail-store.mjs';
 import {memoryStaffSecurity} from './staff-security.mjs';
 import {memoryCoordination,removeAccountCoordination,ownCoordination} from './coordination-store.mjs';
 import {memoryActivityReview} from './activity-review-store.mjs';
@@ -22,10 +24,11 @@ export class MemoryStore{
 
  async rate(key,limit,until){const old=this.buckets.get(key);const item=!old||old.until<Date.now()?{count:0,until}:old;item.count++;this.buckets.set(key,item);return item.count<=limit;}
  async requestLogin(record,job){this.logins.set(record.hash,record);this.outbox.push({...job,subjectKey:record.emailKey,status:'queued',attempts:0,availableAt:Date.now()});}
- async consumeLogin(hash,binding,session,now=Date.now()){
+ async consumeLogin(hash,binding,session,now=Date.now(),noticeConfig=null){
   const r=this.logins.get(hash);if(!r||r.binding!==binding||r.expires<=now)return null;this.logins.delete(hash);
   let a=[...this.accounts.values()].find(x=>x.emailKey===r.emailKey);
   if(!a){a={id:randomUUID(),emailKey:r.emailKey,deliveryEnvelope:r.deliveryEnvelope,marketing:r.marketing,termsVersion:r.termsVersion,verified:true};this.accounts.set(a.id,a);}
+  if(noticeConfig)await this.queueAccountNotice(a.id,'welcome-v1',prepareAccountNotice({email_key:a.emailKey,delivery_envelope:a.deliveryEnvelope},noticeConfig,'account_welcome',now));
   this.sessions.set(session.hash,{...session,accountId:a.id});return {...a};
  }
  async session(hash,now=Date.now()){const s=this.sessions.get(hash);const a=s&&this.accounts.get(s.accountId);return s&&s.expires>now&&a?{...s,account:{...a}}:null;}
@@ -38,7 +41,7 @@ export class MemoryStore{
  async saveTreasurySecret(actorId,slot,envelope,maskedLabel){this.treasurySecretsStore.set(slot,{envelope,maskedLabel,updatedAt:new Date().toISOString()});this.treasuryAudit.push({action:'vault_set',subject:slot,actorId});}
  async logout(hash){this.sessions.delete(hash);}
  async consent(accountId,value){const a=this.accounts.get(accountId);if(a)a.marketing=value;}
- async closeAccount(id){const a=this.accounts.get(id);if(!a)return;for(const team of this.coordinationTeams?.values()||[])removeAccountCoordination(team,id,a.emailKey);for(const [caseId,item] of this.helpRequests||[])if(item.accountId===id)this.helpRequests.delete(caseId);this.accounts.delete(id);this.taskProgress.delete(id);this.materialReading.delete(id);this.rolePreferences.delete(id);this.bookmarks.delete(id);for(const [k,s]of this.sessions)if(s.accountId===id)this.sessions.delete(k);for(const[k,l]of this.logins)if(l.emailKey===a.emailKey)this.logins.delete(k);this.outbox=this.outbox.filter(j=>j.subjectKey!==a.emailKey);}
+ async closeAccount(id){const a=this.accounts.get(id);if(!a)return;for(const team of this.coordinationTeams?.values()||[])removeAccountCoordination(team,id,a.emailKey);for(const [caseId,item] of this.helpRequests||[])if(item.accountId===id)this.helpRequests.delete(caseId);for(const key of this.noticeKeys||[])if(key.startsWith(id+':'))this.noticeKeys.delete(key);this.accounts.delete(id);this.taskProgress.delete(id);this.materialReading.delete(id);this.rolePreferences.delete(id);this.bookmarks.delete(id);for(const [k,s]of this.sessions)if(s.accountId===id)this.sessions.delete(k);for(const[k,l]of this.logins)if(l.emailKey===a.emailKey)this.logins.delete(k);this.outbox=this.outbox.filter(j=>j.subjectKey!==a.emailKey);}
  async accountActivityExport(id){
   const a=this.accounts.get(id);
   if(!a)return null;
@@ -99,3 +102,5 @@ export class MemoryStore{
 Object.assign(MemoryStore.prototype, memoryCoordination, memoryHelp, memoryActivityReview);
 
 Object.assign(MemoryStore.prototype, memoryStaffSecurity);
+
+Object.assign(MemoryStore.prototype, memoryMail);

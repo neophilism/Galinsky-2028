@@ -1,3 +1,4 @@
+import {registerMailEvents} from './mail-events.mjs';
 import {registerActivityReview} from './activity-routes.mjs';
 import {STAFF_ROLES} from '../../../packages/core/staff-permissions.mjs';
 import {registerStaffSecurity} from './staff-security.mjs';
@@ -25,13 +26,14 @@ export function createApp({store,config,clock=()=>Date.now(),webauthn}){
   reply.header('Cache-Control','private, no-store').header('Vary','Authorization').header('X-Robots-Tag',PREVIEW_ROBOTS);
   if(!previewAuthorized(req.headers.authorization,config.previewGate))return reply.code(401).header('WWW-Authenticate',PREVIEW_REALM).type('text/plain').send('Private preview. Enter your access credentials.');
  });
+ app.register(registerMailEvents,{store,config});
  const cookieName=config.production?'__Host-g28':'g28-local';const bindingCookie=config.production?'__Host-g28-login':'g28-local-login';
  app.addHook('onRequest',async(req,reply)=>{
   reply.header('Cache-Control','no-store').header('X-Content-Type-Options','nosniff').header('Referrer-Policy','no-referrer').header('X-Frame-Options','DENY');
   reply.header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
   if(config.production)reply.header('Strict-Transport-Security','max-age=31536000');
   if(req.url.startsWith('/api/protected/')||req.url.startsWith('/api/payments/')||(req.url.startsWith('/api/admin/')&&!/^\/api\/admin\/(settings(?:\/bank|\/providers\/[a-z-]+)?|grants(?:\/revoke)?|operations|visitors)($|\?)/.test(req.url)))return reply.code(503).send({error:'release_unavailable',message:'This function is not released. No submission has been stored.'});
-  if(!['GET','HEAD','OPTIONS'].includes(req.method)){
+  if(!['GET','HEAD','OPTIONS'].includes(req.method)&&req.url!=='/api/mail/events'){
    assert(req.headers.origin===config.portalOrigin,'origin_mismatch','Open this action in the volunteer application.',403);
    assert(!req.headers['sec-fetch-site']||['same-origin','none'].includes(req.headers['sec-fetch-site']),'cross_site','Cross-site actions are not accepted.',403);
    assert(req.headers['content-type']?.split(';')[0]==='application/json','content_type','Use a JSON request.',415);
@@ -67,7 +69,7 @@ export function createApp({store,config,clock=()=>Date.now(),webauthn}){
   const b=exactKeys(req.body,['token']);const binding=readCookie(req.headers.cookie,bindingCookie);
   assert(validToken(b.token)&&validToken(binding),'invalid_link','This link is invalid or belongs to another browser. Request a new link in this browser.');
   const token=randomToken();const s={hash:tokenHash(token),csrf:randomToken(),expires:clock()+86400000};
-  const a=await store.consumeLogin(tokenHash(b.token),tokenHash(binding),s,clock());assert(a,'invalid_link','This link has expired or has already been used. Request a new link.');
+  const a=await store.consumeLogin(tokenHash(b.token),tokenHash(binding),s,clock(),config.signup?config:null);assert(a,'invalid_link','This link has expired or has already been used. Request a new link.');
   if(!config.signup&&config.adminLoginReady){
    const currentRole=await store.adminRole(a,config.adminOwnerEmailKey);
    if(!currentRole){await store.revokeAllSessions(a.id);return reply.code(403).send({error:'admin_grant_revoked',message:'This staff invitation is no longer active.'});}
@@ -95,8 +97,8 @@ export function createApp({store,config,clock=()=>Date.now(),webauthn}){
   // Only aggregate counts; no recipient identifiers, delivery envelopes,
   // authentication tokens or financial details leave the database.
   const report=await store.operationalStatus();
-  return {...report,asOf:new Date(clock()).toISOString(),commit:config.commit||null,
-   deliveryEvidence:'Queue acceptance is not confirmation that a mailbox received a message.'};
+  return {...report,delivery:await store.mailDeliveryStatus(),asOf:new Date(clock()).toISOString(),commit:config.commit||null,
+   deliveryEvidence:'Queue or send acceptance is not delivery. Signed delivered events report receiving-server acceptance, not whether a person read a message.'};
  });
  app.get('/api/admin/visitors',async(req,reply)=>{
    await adminAccount(req,{roles:['owner','auditor']});

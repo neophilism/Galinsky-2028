@@ -1,14 +1,29 @@
+import {noticeTemplate,NOTICE_KINDS} from './mail-notices.mjs';
 import {loadConfig} from './config.mjs';
 import {setTimeout as sleep} from 'node:timers/promises';
 import {databasePool,PostgresStore} from './postgres-store.mjs';
 import {openDelivery} from '../../../packages/core/auth.mjs';
 import {escapeHtml} from '../../../packages/core/validation.mjs';
-export async function deliverLogin(job,config,transport=fetch){
+export async function deliverLogin(job,config,transport=fetch,receipt){
  const p=openDelivery(job.payload_envelope,config.deliveryKey);
  if(!p.expires||p.expires<=Date.now())return 'expired';
  const u=new URL(p.url);if(u.origin!==config.portalOrigin||u.pathname!=='/verify')return 'invalid_destination';
  const result=await transport('https://api.resend.com/emails',{method:'POST',signal:AbortSignal.timeout(10000),headers:{Authorization:`Bearer ${config.mailKey}`,'Content-Type':'application/json','Idempotency-Key':`g28-login-${job.id}`},body:JSON.stringify({from:config.mailFrom,to:[p.email],subject:'Your Galinsky 2028 volunteer sign-in link',html:`<p>Use this link in the browser where you requested it. It expires in 15 minutes.</p><p><a href="${escapeHtml(p.url)}">Continue to your volunteer workspace</a></p><p>If you did not request this message, you can ignore it. No subscription is required to use your account.</p>`})});
- if(!result.ok)return result.status===429?'provider_rate_limited':result.status>=500?'provider_unavailable':'provider_rejected';return null;
+ if(!result.ok)return result.status===429?'provider_rate_limited':result.status>=500?'provider_unavailable':'provider_rejected';
+ if(receipt)await receipt(await providerId(result));return null;
+}
+
+async function providerId(response){
+ const value=await response.json();
+ if(typeof value?.id!=='string'||!/^[a-f0-9]{8}-[a-f0-9]{4}-[1-8][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(value.id))throw Error('Invalid delivery acceptance.');
+ return value.id.toLowerCase();
+}
+export async function deliverNotice(job,config,transport=fetch,receipt){
+ const p=openDelivery(job.payload_envelope,config.deliveryKey);if(!p.expires||p.expires<=Date.now())return 'expired';
+ const t=noticeTemplate(job.kind,config.portalOrigin);
+ const response=await transport('https://api.resend.com/emails',{method:'POST',signal:AbortSignal.timeout(10000),headers:{Authorization:`Bearer ${config.mailKey}`,'Content-Type':'application/json','Idempotency-Key':`g28-notice-${job.id}`},body:JSON.stringify({from:config.mailFrom,to:[p.email],subject:t.subject,text:t.text+'\n\n'+t.link})});
+ if(!response.ok)return response.status===429?'provider_rate_limited':response.status>=500?'provider_unavailable':'provider_rejected';
+ if(receipt)await receipt(await providerId(response));return null;
 }
 
 function safeLog(logger,event){
@@ -19,9 +34,10 @@ export async function processOneMailJob({store,config,transport=fetch,logger=con
  if(!job)return false;
  let outcome;
  try{
-  outcome=job.kind==='account_login'
-   ? await deliverLogin(job,config,transport)
-   : 'provider_rejected';
+  const receipt=store.recordMailAcceptance?(id)=>store.recordMailAcceptance(job,id):undefined;
+  outcome=store.deliveryAllowed&&!await store.deliveryAllowed(job)?'suppressed'
+   :job.kind==='account_login'?await deliverLogin(job,config,transport,receipt)
+   :NOTICE_KINDS.includes(job.kind)?await deliverNotice(job,config,transport,receipt):'provider_rejected';
  }catch{
   // Never log addresses, token fragments, delivery envelopes or the provider reply.
   outcome='delivery_failed';

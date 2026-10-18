@@ -4,7 +4,7 @@ import {randomUUID,createHash,generateKeyPairSync,randomBytes,sign} from 'node:c
 import {isoCBOR} from '@simplewebauthn/server/helpers';
 import {createApp} from '../apps/api/src/app.mjs';
 import {MemoryStore} from '../apps/api/src/memory-store.mjs';
-import {randomToken,tokenHash} from '../packages/core/auth.mjs';
+import {randomToken,tokenHash,sealDelivery} from '../packages/core/auth.mjs';
 
 const digest=x=>createHash('sha256').update(x).digest();
 const encoded=x=>Buffer.from(x).toString('base64url');
@@ -31,7 +31,7 @@ function setup(){
  const app=createApp({store,config,clock:()=>now});
  const headers={origin:config.portalOrigin,cookie:'g28-local='+token,'content-type':'application/json','x-csrf-token':csrf};
  const post=(path,payload={},h=headers)=>app.inject({method:'POST',url:'/api/staff/security/'+path,headers:h,payload});
- return {app,store,id,hash,headers,post,advance:n=>now+=n};
+ return {app,store,id,hash,headers,post,config,advance:n=>now+=n};
 }
 test('real WebAuthn verification binds registration and step-up to account, challenge, origin, user verification and revocation',async()=>{
  const s=setup(),d=device();
@@ -70,5 +70,18 @@ test('staff invitation revocation and foreign-account credentials never preserve
   assert.equal((await s.post('register/options')).statusCode,403);
   assert.equal((await s.app.inject({url:'/api/staff/security',headers:s.headers})).statusCode,403);
   assert.equal((await s.app.inject({url:'/api/staff/security'})).statusCode,401);
+ }finally{await s.app.close();}
+});
+
+test('credential enrollment and revocation commit a generic encrypted security notice with the device change',async()=>{
+ const s=setup(),d=device();s.config.mailReady=true;s.config.deliveryKey=randomBytes(32).toString('base64');
+ s.store.accounts.get(s.id).deliveryEnvelope=sealDelivery({email:'synthetic-security@example.test'},s.config.deliveryKey);
+ try{
+  const options=(await s.post('register/options')).json();
+  assert.equal((await s.post('register/verify',{response:response(d,options,{register:true,counter:0}),label:'Fixture device'})).statusCode,200);
+  assert.equal(s.store.outbox.length,1);assert.equal(s.store.outbox[0].kind,'account_security');
+  assert.equal((await s.post('revoke',{id:encoded(d.id)})).statusCode,200);
+  assert.equal(s.store.outbox.length,2);
+  assert(!JSON.stringify(s.store.outbox).includes('synthetic-security@example.test'));assert(!JSON.stringify(s.store.outbox).includes('Fixture device'));
  }finally{await s.app.close();}
 });
