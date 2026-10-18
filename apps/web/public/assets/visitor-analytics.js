@@ -175,7 +175,7 @@
  function onPointerOver(event){
   if(!active||ended||event.pointerType==='touch')return;
   const link=event.target?.closest?.('a[href]');
-  if(link&&!link.closest('[data-analytics-ui]'))hoverStarted.set(link,performance.now());
+  if(link&&!link.closest('[data-analytics-ui]')&&!hoverStarted.has(link))hoverStarted.set(link,performance.now());
  }
  function onPointerOut(event){
   if(!active||ended||event.pointerType==='touch')return;
