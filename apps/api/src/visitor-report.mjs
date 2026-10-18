@@ -37,7 +37,7 @@ export async function visitorReport(store,range='day',selectedPage='/'){
    "WHERE page=$2 AND kind='device_class' AND recorded_at>=now()-($1::integer*interval '1 hour') "+
    "GROUP BY detail ORDER BY detail",[hours,page])
  ]):[];
- const [visitRows=[],eventRows=[],heatmapRows=[],funnelRows=[],performanceRows=[],deviceRows[]]=
+ const [visitRows=[],eventRows=[],heatmapRows=[],funnelRows=[],performanceRows=[],deviceRows=[]]=
   results.map(r=>r.rows);
  const visits=new Map(visitRows.map(row=>[row.page,row]));
  const pages=VISITOR_PAGES.map(({path,label})=>{
