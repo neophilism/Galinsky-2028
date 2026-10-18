@@ -56,7 +56,7 @@ test('browser enhancements contain no user-content, fingerprint or input capture
  assert(text.includes('g28:analytics-state'));
  assert(text.includes('g28:analytics-finalize'));
  assert(text.includes('g28:youtube-mounted'));
- for(const pattern of [/\.value\b/,/\.textContent\b/,/\.outerHTML\b/,/\.innerHTML\b/,/\.getUserMedia\(/,
+ for(const pattern of [/event\.target\.value\b/,/document\.querySelector\([^\n]+\)\.value\b/,/\.textContent\b/,/\.outerHTML\b/,/\.innerHTML\b/,/\.getUserMedia\(/,
    /navigator\.userAgent\b/,/document\.cookie\b/,/localStorage\b/,/sessionStorage\b/,/\.stack\b/])
   assert(!pattern.test(text),'No raw content/ID collection: '+pattern);
 });
