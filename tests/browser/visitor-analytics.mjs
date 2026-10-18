@@ -41,9 +41,40 @@ try{
  received.length=0;
  await page.goto(origin+'/issues/kirk-evers/');
  await page.locator('main details summary').first().click();
- await page.waitForTimeout(1800);
+ await page.evaluate(()=>{
+  const target=document.querySelector('main .policy-main p');
+  if(!target)throw Error('Missing synthetic interaction target');
+  for(let i=0;i<3;i++)target.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:1,clientX:40,clientY:80}));
+  window.dispatchEvent(new Event('error'));
+ });
+ await page.route('https://www.youtube-nocookie.com/**',route=>route.fulfill({contentType:'text/html',body:'<html><body>Synthetic player</body></html>'}));
+ await page.evaluate(()=>{
+  window.YT={Player:class {
+   constructor(iframe,options){
+    this.playback=1;this.duration=40;this.position=20;
+    setTimeout(()=>options.events.onReady(),0);
+    setTimeout(()=>options.events.onStateChange({data:1}),10);
+   }
+   getDuration(){return this.duration;}
+   getCurrentTime(){return this.position;}
+   getPlayerState(){return this.playback;}
+  }};
+  const panel=document.createElement('div');panel.dataset.video='abcDEF123_-';
+  const iframe=document.createElement('iframe');
+  iframe.src='https://www.youtube-nocookie.com/embed/abcDEF123_-?enablejsapi=1';
+  panel.append(iframe);document.body.append(panel);
+  window.dispatchEvent(new CustomEvent('g28:youtube-mounted',{detail:{iframe}}));
+ });
+ await page.waitForTimeout(2250);
  const events=received.filter(x=>Array.isArray(x.events)).flatMap(x=>x.events);
  assert(events.some(e=>e.kind==='accordion_open'),'FAQ opening was not recorded');
+ assert(events.some(e=>e.kind==='funnel_step'&&e.detail==='policy_view'),'Policy funnel entry missing');
+ assert(events.some(e=>e.kind==='device_class'&&e.detail==='mobile'),'Anonymous viewport class missing');
+ assert(events.some(e=>e.kind==='rage_click'),'Rapid repeat clicks not recorded');
+ assert(events.some(e=>e.kind==='dead_click'),'Noninteractive click heuristic not recorded');
+ assert(events.some(e=>e.kind==='javascript_error'),'Sanitized script-error count missing');
+ assert(events.some(e=>e.kind==='youtube_play'),'YouTube API playback start missing');
+ assert(events.some(e=>e.kind==='youtube_progress'&&e.detail==='q50'),'YouTube quartile missing');
  assert(events.some(e=>e.kind==='click_heatmap'),'Document click density was not recorded');
  assert(events.every(e=>Object.keys(e).sort().join(',')==='amount,detail,kind,seq,target'));
  assert(!JSON.stringify(received).includes('Does this protect people'));
