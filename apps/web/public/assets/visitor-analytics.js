@@ -70,7 +70,7 @@
    for(const node of observed){
     const rect=node.getBoundingClientRect();
     const inView=Math.max(0,Math.min(innerHeight,rect.bottom)-Math.max(0,rect.top));
-    if(rect.height>0&&inView/rect.height>=0.5){
+    if(rect.height>0&&inView/Math.min(rect.height,innerHeight)>=0.5){
      const key=ids.get(node);
      if(key)activeSections.set(key,now);
     }
@@ -82,7 +82,8 @@
   for(const entry of entries){
    const key=ids.get(entry.target);
    if(!key)continue;
-   const isReading=entry.intersectionRatio>=0.5&&visible();
+   const occupied=entry.intersectionRect.height/Math.max(1,Math.min(entry.boundingClientRect.height,innerHeight));
+   const isReading=occupied>=0.5&&visible();
    if(isReading&&!activeSections.has(key)){
     activeSections.set(key,performance.now());enqueue('section_enter',key);
    }else if(!isReading&&activeSections.has(key)){
@@ -238,7 +239,7 @@
   started=visible()?performance.now():null;
   pageEvent('start');
   if('IntersectionObserver' in window){
-   sectionObserver=new IntersectionObserver(sectionChanges,{threshold:[0,0.5,1]});
+   sectionObserver=new IntersectionObserver(sectionChanges,{threshold:[0,0.01,0.05,0.1,0.25,0.5,1]});
    for(const node of sections){observed.add(node);sectionObserver.observe(node);}
   }
   sampleDepth();
