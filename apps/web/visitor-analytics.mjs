@@ -37,7 +37,7 @@ export function createVisitorCollector({env=process.env,store=null,poolFactory=d
  }catch{throw Error('Visitor analytics requires a valid first-party origin.');}
  const pool=store?null:poolFactory(env.G28_VISITOR_ANALYTICS_DATABASE_URL);
  const writer=store||new PostgresVisitorWriter(pool);
- const limits=new Map();let accepted=0;
+ const limits=new Map();let accepted=0,globalMinute={at:Date.now(),count:0};
  return{
   enabled:true,
   async handle(req,res,pathname){
@@ -50,15 +50,8 @@ export function createVisitorCollector({env=process.env,store=null,poolFactory=d
    if(!/^application\/json(?:;|$)/i.test(req.headers['content-type']||'')){
     respond(res,415);return true;
    }
-   // Transient minute-based abuse guard; addresses never reach logs or DB.
-   const key=req.socket.remoteAddress||'unknown',now=Date.now();
-   let bucket=limits.get(key);
-   if(!bucket||now-bucket.at>=60000){bucket={at:now,count:0};limits.set(key,bucket);}
-   if(++bucket.count>120){respond(res,429);return true;}
-   if(++accepted%500===0){
-    for(const [address,value] of limits)if(now-value.at>=60000)limits.delete(address);
-    if(limits.size>4096)limits.clear();
-   }
+   // Rate limits use only an ephemeral page-view ID after validation.
+   // Proxy IPs may be shared among legitimate visitors; no address key is kept.
    let raw='',event;
    try{
     for await(const chunk of req){
@@ -67,6 +60,16 @@ export function createVisitorCollector({env=process.env,store=null,poolFactory=d
     }
     event=parseVisitorPayload(JSON.parse(raw));
    }catch{respond(res,400);return true;}
+   const now=Date.now(),key=event.viewId;
+   if(now-globalMinute.at>=60000)globalMinute={at:now,count:0};
+   if(++globalMinute.count>12000){respond(res,429);return true;}
+   let bucket=limits.get(key);
+   if(!bucket||now-bucket.at>=60000){bucket={at:now,count:0};limits.set(key,bucket);}
+   if(++bucket.count>120){respond(res,429);return true;}
+   if(++accepted%500===0){
+    for(const [id,value] of limits)if(now-value.at>=60000)limits.delete(id);
+    if(limits.size>12000)limits.clear();
+   }
    try{await writer.ingest(event);respond(res,204);}
    catch{
     // Never log event IDs, addresses, paths, headers or database errors.
