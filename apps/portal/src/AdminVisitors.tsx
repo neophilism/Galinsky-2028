@@ -27,6 +27,29 @@ const actionLabels:Record<string,string>={
  click_heatmap:'Click area'
 };
 const prefixLabels:Record<string,string>={s:'Area',l:'Link',b:'Button',a:'Accordion',f:'Field or form',m:'Media'};
+const accordionDescriptions:Record<string,string[]> = {
+ '/issues/kirk-evers/':[
+  'Does this protect people who disagree with Phillip?',
+  'Is this already federal law?',
+  'Why Kirk–Evers?'
+ ],
+ '/issues/garden/':[
+  'Is this a program people can enroll in today?',
+  'Who decides the remedy?',
+  'Does repair require taking someone else’s livelihood?'
+ ],
+ '/issues/cornerstone/':[
+  'Does every displaced worker qualify?',
+  'Would outside funding take control away from workers?',
+  'Is a successful business guaranteed?'
+ ],
+ '/policies/eternal-liberty/':[
+  'Does this proposal claim American sovereignty over the Moon or Mars?',
+  'How is SPISA different from an ordinary government loan?',
+  'Does this mean forcing other nations to follow American law?',
+  'Is vivigenesis possible today?'
+ ]
+};
 const descriptions:Record<string,string[]> = {
  '/':['Hero','Campaign principles','Our philosophy','Issues overview','Kirk–Evers card',
   'Garden card','Cornerstone card','Meet Phillip','Volunteer invitation','Donate'],
@@ -49,6 +72,7 @@ const descriptions:Record<string,string[]> = {
 function targetName(kind:string,target:string,page:string){
  const index=Number(target.slice(1));
  if(target==='p0')return 'Page overview';
+ if(kind==='accordion_open'||kind==='accordion_close')return accordionDescriptions[page]?.[index-1]||'Accordion '+index;
  if(kind==='section_time'||kind==='section_enter'){
   return descriptions[page]?.[index-1]||'Area '+index;
  }
