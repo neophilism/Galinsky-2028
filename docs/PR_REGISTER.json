@@ -6,7 +6,7 @@
   "plan_status": "implementation_started",
   "design_status": "approved_with_issue_video_amendment",
   "planned_work_packages": 72,
-  "implemented_packages": 56,
+  "implemented_packages": 57,
   "merged_packages": 8,
   "deployed_packages": 7,
   "note": "See individual software implementation reviews. Full-scope completion is separate from implemented code, accepted PR merges and external production activation.",
@@ -47,7 +47,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "AGENTS.md",
@@ -93,7 +93,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "scripts/verify.mjs",
@@ -136,7 +136,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/web/public/assets/site.css",
@@ -190,11 +190,11 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/config.mjs",
-            "sha256": "b55fc261b3fc52453bac556202c9a5d8831cbaca966e7abb404bdcb51f2ec176"
+            "sha256": "f7e2b91a10df52f0f040efc6456753d53109987d707cbf92795698f2b548fab0"
           },
           {
             "path": "scripts/migrate.mjs",
@@ -233,7 +233,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "security/e2eesa-inventory.json",
@@ -273,7 +273,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/campaign-store.mjs",
@@ -318,7 +318,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/campaign-image.mjs",
@@ -360,7 +360,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
@@ -409,7 +409,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "content/public/pages/index.html",
@@ -450,7 +450,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/web/public/assets/motion.js",
@@ -503,7 +503,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "content/public/pages/issues.html",
@@ -544,7 +544,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/video.mjs",
@@ -590,7 +590,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/policy-documents.mjs",
@@ -633,7 +633,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "content/public/pages/garden.html",
@@ -672,7 +672,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "content/public/pages/cornerstone.html",
@@ -723,7 +723,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/roles.mjs",
@@ -781,7 +781,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-web-checkout.mjs",
@@ -837,7 +837,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/indexing.mjs",
@@ -883,11 +883,11 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/app.mjs",
-            "sha256": "162df3df8218263dd1161dfe3ad5498e992dcb6ea6d0ce64d1e6c8901634b014"
+            "sha256": "95f88bd418f86236e1e330f5789c2f2ca72695bf0047d3acd05a4bd6fa12fe21"
           },
           {
             "path": "tests/integration/api.test.mjs",
@@ -926,11 +926,11 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/staff-security.mjs",
-            "sha256": "604641715ce741f87a15f05224c53e88855c2f991735c978b330075f415acff8"
+            "sha256": "86874bb6c273b47c513d86cb1fc210cad679e9199465b00a16698d412de5ef2d"
           },
           {
             "path": "packages/core/staff-permissions.mjs",
@@ -938,7 +938,7 @@
           },
           {
             "path": "tests/staff-security.test.mjs",
-            "sha256": "37e0de3ba974f656c4e29b96ebba4ef08b23754f3c4ba22c84b8ad4674f6c1c2"
+            "sha256": "a6ad65d666efb2f907e8a00e2d1d0c7057e0fa8c74cce74ea83bcfb10c018ba1"
           }
         ],
         "softwareGap": "Finish integration of all scoped staff operational actions with the new passkey/permission framework.",
@@ -971,7 +971,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "docs/security/BOUNDARIES.md",
@@ -1008,7 +1008,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "docs/security/BOUNDARIES.md",
@@ -1046,11 +1046,11 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/app.mjs",
-            "sha256": "162df3df8218263dd1161dfe3ad5498e992dcb6ea6d0ce64d1e6c8901634b014"
+            "sha256": "95f88bd418f86236e1e330f5789c2f2ca72695bf0047d3acd05a4bd6fa12fe21"
           }
         ],
         "softwareGap": "Implement protected recipient-device recovery and trust restoration; ordinary session revocation/export already work.",
@@ -1067,35 +1067,55 @@
         "G28-19",
         "G28-22"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Add transactional email templates, verification/welcome/security notices, user-controlled onboarding reminders, separate opt-in campaign subscriptions, unsubscribe/suppression state and a transactional outbox. Use leased, idempotent retryable jobs with dead-letter handling and provider delivery callbacks. Protected reports trigger generic notices, never plaintext email summaries.",
       "acceptance": "An outbox retry never creates duplicate account messages or resurrects an unsubscribe. Optional campaigning stops after opt-out without disabling essential account access. Bounces/complaints suppress correctly; recipient addresses and tokens are redacted in logs. Jobs survive process restarts.",
       "evidence": "Retry/crash tests, suppression tests, delivery callback verification and evidence from staging email accounts.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Implement provider delivery callbacks, suppression and general welcome/security/reminder templates beyond the working leased login outbox.",
+      "implementation_note": "Working source implementation reviewed individually. Configure the existing sender callback signing secret and authenticated private ingress; observe deployed real-mailbox delivery. Welcome/security/reminder templates, durable receipt correlation and suppression are implemented.",
       "contributing_prs": [
         61,
         110,
         112
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
         "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
-        "blocker": "Implement provider delivery callbacks, suppression and general welcome/security/reminder templates beyond the working leased login outbox."
+        "blocker": "Configure the existing sender callback signing secret and authenticated private ingress; observe deployed real-mailbox delivery. Welcome/security/reminder templates, durable receipt correlation and suppression are implemented."
       },
       "implementation_review": {
-        "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/worker.mjs",
-            "sha256": "3d476095228d00581ca2e7d4f54b2ea7d525c23b2823f8577793d48360d15fdd"
+            "sha256": "65861ffab82af77eddd23f75ec52d7d7ab6c83acc2a7028362312ba8d9b8e8d5"
+          },
+          {
+            "path": "apps/api/src/mail-events.mjs",
+            "sha256": "a0f08c1dbab0e661bb27c867c1593df35038ece23d959a93e1b73a4abd5b36be"
+          },
+          {
+            "path": "apps/api/src/mail-store.mjs",
+            "sha256": "819a201056279c6a3caeaf7e2083c5e4700351f3a8e688c9c214ab6cf715c44a"
+          },
+          {
+            "path": "apps/api/src/mail-notices.mjs",
+            "sha256": "cce4a680e76aa3a53a60c73c7dcdd23c659af66cea0f9788a0f58bd57fcc41de"
+          },
+          {
+            "path": "tests/mail-delivery.test.mjs",
+            "sha256": "869c94d2887f9137368d5b4e1dd9ea1f738ec916f4efd0f7d78ecb0b00f58f63"
+          },
+          {
+            "path": "tests/integration/mail-delivery.test.mjs",
+            "sha256": "65e2876aa72cc9abfd2ef0c681798b0d5bb7dddfbec9a4b2cab9e5398a13010e"
           }
         ],
-        "softwareGap": "Implement provider delivery callbacks, suppression and general welcome/security/reminder templates beyond the working leased login outbox.",
-        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "softwareGap": null,
+        "activationRequirement": "Configure the existing sender callback signing secret and authenticated private ingress; observe deployed real-mailbox delivery. Welcome/security/reminder templates, durable receipt correlation and suppression are implemented.",
         "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
@@ -1126,7 +1146,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "content/materials/archive-manifest.json",
@@ -1172,7 +1192,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/material-outline.mjs",
@@ -1218,7 +1238,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/portal/src/main.tsx",
@@ -1261,7 +1281,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/orientation.mjs",
@@ -1306,7 +1326,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/activity-review-store.mjs",
@@ -1356,7 +1376,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/tasks.mjs",
@@ -1396,7 +1416,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/forms.mjs",
@@ -1440,7 +1460,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/coordination.mjs",
@@ -1484,7 +1504,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/coordination.mjs",
@@ -1532,7 +1552,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/help-routes.mjs",
@@ -1572,7 +1592,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/web/public/assets/public.js",
@@ -1618,7 +1638,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/activity.mjs",
@@ -1660,7 +1680,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
@@ -1710,11 +1730,11 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/portal/src/AdminOperations.tsx",
-            "sha256": "ac25433fa1bd4c24ba3ed9b7bfe5d201add7e55198951fab6f091f9b1bbfc786"
+            "sha256": "27848731ebaa9f20a85c8e10790bb25cad9168be2ec3ae2740adf83ca465b4d3"
           }
         ],
         "softwareGap": "Complete task/training/module/support management UI and emergency activity pause with scoped staff authority.",
@@ -1750,7 +1770,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-campaign.mjs",
@@ -1794,7 +1814,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/contribution-terms.mjs",
@@ -1842,7 +1862,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-web-checkout.mjs",
@@ -1883,7 +1903,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-campaign.mjs",
@@ -1925,7 +1945,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/fundraising-ledger.mjs",
@@ -1963,7 +1983,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-web-checkout.mjs",
@@ -2003,7 +2023,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/fundraising-ledger.mjs",
@@ -2040,7 +2060,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/treasury-vault.mjs",
@@ -2085,7 +2105,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "tests/stripe-outage-routing.test.mjs",
@@ -2130,7 +2150,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-campaign.mjs",
@@ -2179,11 +2199,11 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/postgres-store.mjs",
-            "sha256": "a11aa6d588c7be3852c7e3757d11f3ae3b12c1c1de373595186b3d4c617597b8"
+            "sha256": "e1774f70bc842f6247ec15e7a7ff8577ee696738d1e53cbf27ad0d224767850b"
           }
         ],
         "softwareGap": "Implement protected-object lifecycle, legal holds and per-class deletion/backup handling; account closure and outbox cleanup already work.",
@@ -2219,7 +2239,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/visitor-report.mjs",
@@ -2269,7 +2289,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "tests/browser/journeys.mjs",
@@ -2322,7 +2342,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "tests/browser/journeys.mjs",
@@ -2365,7 +2385,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "scripts/performance-budget.mjs",
@@ -2415,7 +2435,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "docs/security/BOUNDARIES.md",
@@ -2423,7 +2443,7 @@
           },
           {
             "path": "tests/staff-security.test.mjs",
-            "sha256": "37e0de3ba974f656c4e29b96ebba4ef08b23754f3c4ba22c84b8ad4674f6c1c2"
+            "sha256": "a6ad65d666efb2f907e8a00e2d1d0c7057e0fa8c74cce74ea83bcfb10c018ba1"
           }
         ],
         "softwareGap": null,
@@ -2461,11 +2481,11 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/worker.mjs",
-            "sha256": "3d476095228d00581ca2e7d4f54b2ea7d525c23b2823f8577793d48360d15fdd"
+            "sha256": "65861ffab82af77eddd23f75ec52d7d7ab6c83acc2a7028362312ba8d9b8e8d5"
           },
           {
             "path": "scripts/database-recovery.mjs",
@@ -2473,7 +2493,7 @@
           },
           {
             "path": "tests/integration/database-recovery.test.mjs",
-            "sha256": "46711a605e08571d1da9bec3fc42a54522f04b12db64abee20cf0221cd21b81e"
+            "sha256": "70f2ec740f6296dd0cb72e4efb1b4ad263401dd7efc4a5531d5d4f97b0dee954"
           },
           {
             "path": "docs/operations/DATABASE_RECOVERY.md",
@@ -2520,7 +2540,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/ops-health.mjs",
@@ -2584,7 +2604,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "scripts/verify.mjs",
@@ -2632,7 +2652,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/policy-documents.mjs",
@@ -2678,7 +2698,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "render.yaml",
@@ -2721,7 +2741,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "README.md",
@@ -2771,7 +2791,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md",
@@ -2814,7 +2834,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/campaign-content.mjs",
@@ -2851,7 +2871,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/campaign-store.mjs",
@@ -2888,7 +2908,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/campaign-template.mjs",
@@ -2926,7 +2946,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/web/private-preview.mjs",
@@ -2963,7 +2983,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/campaign-routes.mjs",
@@ -3001,7 +3021,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
@@ -3038,7 +3058,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
@@ -3081,7 +3101,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "packages/core/campaign-mode.mjs",
@@ -3119,7 +3139,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/campaign-store.mjs",
@@ -3165,7 +3185,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "tests/browser/campaign-public.mjs",
@@ -3206,7 +3226,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:43:58.905Z",
+        "reviewedAt": "2026-10-18T23:50:45.184Z",
         "sourceFiles": [
           {
             "path": "apps/portal/src/AdminVisitors.tsx",

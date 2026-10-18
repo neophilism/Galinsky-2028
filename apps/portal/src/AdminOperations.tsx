@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import {request} from './api';
 
 type Metrics={accounts:number;approvedMaterials:number;queuedJobs:number;leasedJobs:number;deadJobs:number;oldestQueuedSeconds:number};
-type Operations={asOf:string;source:string;commit:string|null;schemaReady:boolean;healthy:boolean;warnings:string[];missingMigrations:string[];metrics:Metrics;notice:string;deliveryEvidence:string};
+type Operations={asOf:string;source:string;commit:string|null;schemaReady:boolean;healthy:boolean;warnings:string[];missingMigrations:string[];metrics:Metrics;notice:string;deliveryEvidence:string;delivery?:{windowDays:number;events:Record<string,number>;suppressedRecipients:number;lastCallbackAt:string|null}};
 const fmt=(n:number)=>new Intl.NumberFormat('en-US').format(n);
 export function AdminOperations({role}:{role:string}){
  const[data,setData]=useState<Operations|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false);
@@ -28,6 +28,7 @@ export function AdminOperations({role}:{role:string}){
   ['Dead-letter email jobs',data.metrics.deadJobs],['Oldest queued job (seconds)',data.metrics.oldestQueuedSeconds]
  ] as [string,number][]).map(([label,value])=><article className="panel" key={label}><h2>{fmt(value)}</h2><p>{label}</p></article>)}
  </div>
+ {data.delivery&&<section className="panel spaced"><h2>Provider delivery receipts</h2><p>Signed callback observations over {data.delivery.windowDays} days. Last callback: {data.delivery.lastCallbackAt||'not observed'}. Suppressed recipients: {fmt(data.delivery.suppressedRecipients)}.</p><ul>{['email.sent','email.delivered','email.delivery_delayed','email.bounced','email.complained','email.failed','email.suppressed'].map(kind=><li key={kind}>{kind.replace('email.','').replaceAll('_',' ')}: {fmt(data.delivery?.events[kind]||0)}</li>)}</ul></section>}
  <div className="panel spaced"><h2>What these numbers do not prove</h2><p>{data.deliveryEvidence}</p><p>{data.notice}</p><p>There are no session replay scripts, user-level engagement histories or automatic public monitoring requests in this view. Financial, encryption, login-delivery and launch acceptance remain separate.</p></div>
  </>:!busy&&!error?<p role="status">No operational snapshot is available.</p>:null}
  </div>;

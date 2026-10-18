@@ -1,3 +1,6 @@
+import {prepareAccountNotice} from './mail-notices.mjs';
+import {queueNoticeSQL} from './mail-store.mjs';
+import {randomUUID} from 'node:crypto';
 import {STAFF_ROLES} from '../../../packages/core/staff-permissions.mjs';
 import {generateRegistrationOptions,verifyRegistrationResponse,generateAuthenticationOptions,verifyAuthenticationResponse} from '@simplewebauthn/server';
 import {assert,exactKeys} from '../../../packages/core/validation.mjs';
@@ -9,16 +12,17 @@ function trim(state,now){
  for(const [key,v] of Object.entries(state.sessions))if(v.expires<=now)delete state.sessions[key];
 }
 export const postgresStaffSecurity={
- async withStaffSecurity(accountId,change){
+ async withStaffSecurity(accountId,change,{noticeConfig=null,now=Date.now()}={}){
   const c=await this.pool.connect();
   try{
    await c.query('BEGIN');
    const a=await c.query('SELECT id FROM g28.accounts WHERE id=$1 FOR UPDATE',[accountId]);
    assert(a.rowCount===1,'authentication_required','Sign in again.',401);
    const r=await c.query('SELECT record FROM g28.staff_security WHERE account_id=$1 FOR UPDATE',[accountId]);
-   const state=r.rows[0]?.record||empty(),result=await change(state);
+   const state=r.rows[0]?.record||empty(),before=JSON.stringify(state.credentials),result=await change(state);
    await c.query(`INSERT INTO g28.staff_security(account_id,record) VALUES($1,$2)
     ON CONFLICT(account_id) DO UPDATE SET record=EXCLUDED.record,updated_at=now()`,[accountId,state]);
+   if(noticeConfig&&before!==JSON.stringify(state.credentials)){const a=(await c.query('SELECT email_key,delivery_envelope FROM g28.accounts WHERE id=$1',[accountId])).rows[0];await queueNoticeSQL(c,accountId,'security:'+randomUUID(),prepareAccountNotice(a,noticeConfig,'account_security',now));}
    await c.query('COMMIT');return result;
   }catch(e){await c.query('ROLLBACK');throw e;}finally{c.release();}
  },
@@ -28,12 +32,13 @@ export const postgresStaffSecurity={
  }
 };
 export const memoryStaffSecurity={
- async withStaffSecurity(accountId,change){
+ async withStaffSecurity(accountId,change,{noticeConfig=null,now=Date.now()}={}){
   this.staffSecurity??=new Map();this.staffSecurityLocks??=new Map();
   const previous=this.staffSecurityLocks.get(accountId)||Promise.resolve();
   const next=previous.catch(()=>{}).then(async()=>{
    assert(this.accounts.has(accountId),'authentication_required','Sign in again.',401);
-   const state=copy(this.staffSecurity.get(accountId)||empty()),result=await change(state);
+   const state=copy(this.staffSecurity.get(accountId)||empty()),before=JSON.stringify(state.credentials),result=await change(state);
+   if(noticeConfig&&before!==JSON.stringify(state.credentials)){const a=await this.deliveryAccount(accountId);await this.queueAccountNotice(accountId,'security:'+randomUUID(),prepareAccountNotice(a,noticeConfig,'account_security',now));}
    this.staffSecurity.set(accountId,state);return result;
   });
   this.staffSecurityLocks.set(accountId,next);
@@ -88,7 +93,7 @@ export function registerStaffSecurity(app,{store,config,clock,account,writeSessi
    state.credentials.push({id:c.id,publicKey:Buffer.from(c.publicKey).toString('base64url'),counter:c.counter,transports:c.transports||[],label:body.label.trim(),createdAt:new Date(clock()).toISOString()});
    state.sessions[s.hash]={credentialId:c.id,expires:Math.min(s.expires,clock()+900000)};
    return metadata(state,s);
-  });
+  },{noticeConfig:config.mailReady?config:null,now:clock()});
  });
  app.post('/api/staff/security/authenticate/options',async req=>{
   const s=await actor(req,true);exactKeys(req.body,[]);
@@ -116,7 +121,7 @@ export function registerStaffSecurity(app,{store,config,clock,account,writeSessi
    state.credentials=state.credentials.filter(c=>c.id!==b.id);
    for(const [hash,v] of Object.entries(state.sessions))if(v.credentialId===b.id)delete state.sessions[hash];
    state.challenges={};return metadata(state,s);
-  });
+  },{noticeConfig:config.mailReady?config:null,now:clock()});
  });
  async function consume(s,kind){return store.withStaffSecurity(s.account.id,state=>{
   const c=state.challenges[s.hash];delete state.challenges[s.hash];
