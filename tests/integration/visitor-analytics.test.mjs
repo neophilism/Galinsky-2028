@@ -11,6 +11,7 @@ test('anonymous visitor rows are idempotent and denied to ingest-only DB role',{
  try{
   await pool.query(await readFile('db/migrations/001_foundation.sql','utf8'));
   await pool.query(await readFile('db/migrations/20261017_visitor_analytics.sql','utf8'));
+  await pool.query(await readFile('db/migrations/20261018_visitor_interactions.sql','utf8'));
   const send=(id,page,action,seconds)=>pool.query('SELECT g28.ingest_page_visit($1::uuid,$2::text,$3::text,$4::integer)',[id,page,action,seconds]);
   await send(one,'/issues/','start',0);
   await send(one,'/issues/','pulse',20);
