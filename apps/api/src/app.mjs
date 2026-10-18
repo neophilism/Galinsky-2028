@@ -160,7 +160,7 @@ export function createApp({store,config,clock=()=>Date.now()}){
    .header('Content-Disposition','attachment; filename="galinsky-volunteer-account.json"')
    .type('application/json; charset=utf-8')
    .send({schemaVersion:1,exportedAt:new Date(clock()).toISOString(),...data,
-    helpRequests:config.helpRequests===true?await store.listHelpRequests(s.account.id):[],
+    helpRequests:await store.listStoredHelpRequests(s.account.id),
     limitations:'This export includes volunteer account activity stored in this application. Required finance and legally retained records, if any, are handled separately.'});
  });
  app.post('/api/account/revoke-sessions',async(req,reply)=>{

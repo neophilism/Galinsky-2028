@@ -11,6 +11,13 @@ const publicRecord=r=>r&&({
 });
 const active=status=>status==='received'||status==='acknowledged';
 export const postgresHelp={
+ async listStoredHelpRequests(accountId){
+  // Keep data-access exports complete even after intake is switched off.
+  // Older releases may not yet have migration 015; fail open for export
+  // availability, never for help intake or cross-account reads.
+  const table=await this.pool.query("SELECT to_regclass('g28.help_requests') AS name");
+  return table.rows[0]?.name?this.listHelpRequests(accountId):[];
+ },
  async createHelpRequest(accountId,details){
   const client=await this.pool.connect();
   try{
@@ -64,6 +71,7 @@ export const postgresHelp={
 };
 
 export const memoryHelp={
+ async listStoredHelpRequests(accountId){return this.listHelpRequests(accountId);},
  async createHelpRequest(accountId,details){
   assert(this.accounts.has(accountId),'authentication_required','Your account is no longer available.',401);
   this.helpRequests??=new Map();
