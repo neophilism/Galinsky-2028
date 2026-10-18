@@ -294,7 +294,7 @@
   panel.setAttribute('data-analytics-ui','');
   panel.setAttribute('aria-label','Anonymous website analytics preference');
   const text=document.createElement('p');
-  text.textContent='Help improve the campaign website? Allow anonymous counts of page activity, clicks, scrolls and time spent in sections. No typed content, identity or cross-page tracking.';
+  text.textContent='Help improve the campaign website? Allow anonymous measurements of clicks, scrolling, section time, playback, site errors and performance. No typed content, identity or cross-page tracking.';
   const link=document.createElement('a');link.href='/notices/#privacy';link.textContent=' Privacy details';
   text.append(link);
   const actions=document.createElement('div');actions.className='analytics-choice-actions';
