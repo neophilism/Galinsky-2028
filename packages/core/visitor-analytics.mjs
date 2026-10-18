@@ -49,7 +49,7 @@ const targetTypes={
  section_enter:'s',section_time:'s',scroll_depth:'p',hover_time:'l',
  field_focus:'f',field_change:'f',field_invalid:'f',form_submit:'f',form_abandon:'f',
  media_play:'m',media_pause:'m',media_end:'m',media_seek:'m',media_progress:'m',
- copy:'s',share:'l',download:'l',click_heatmap:'p'
+ copy:'s',share:'b',download:'l',click_heatmap:'p'
 };
 export function parseInteraction(value){
  if(!value||typeof value!=='object'||Array.isArray(value)||
