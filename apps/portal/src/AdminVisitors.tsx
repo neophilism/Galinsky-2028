@@ -42,6 +42,7 @@ const descriptions:Record<string,string[]> = {
   'Digital ambassador','Issue ambassador','Canvassing','Phone and text',
   'Event host','Recruiter','Team captain','Petition work','Voter activities',
   'Fundraising','Skills and operations','More ways to help','Volunteer sign-up'],
+ '/policies/eternal-liberty/':['Mission overview','The mission','Guiding principles','Principle 1','Principle 2','Principle 3','Our rights','SPISA financing','Science and research','Questions','Closing call to action'],
  '/donate/':['Contribution information'],
  '/notices/':['Introduction','Notices','Privacy','Accessibility','Volunteer terms','Contact','Resources']
 };
@@ -109,7 +110,7 @@ export function AdminVisitors({role}:{role:string}){
      {path:'/',label:'Home'},{path:'/issues/',label:'Issues overview'},
      {path:'/issues/kirk-evers/',label:'Kirk–Evers'},{path:'/issues/garden/',label:'The Garden'},
      {path:'/issues/cornerstone/',label:'The Cornerstone'},{path:'/volunteer/',label:'Volunteer'},
-     {path:'/donate/',label:'Donate'},{path:'/notices/',label:'Notices'}
+     {path:'/donate/',label:'Donate'},{path:'/policies/eternal-liberty/',label:'Eternal Liberty'},{path:'/notices/',label:'Notices'}
     ]).map(p=><option key={p.path} value={p.path}>{p.label}</option>)}
    </select></label>
    <button type="button" className="btn blue" disabled={busy} onClick={()=>setRefreshKey(x=>x+1)}>{busy?'Updating...':'Refresh now'}</button>
