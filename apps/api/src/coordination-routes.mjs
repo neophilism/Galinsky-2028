@@ -8,9 +8,10 @@ export function registerCoordination(app,{store,config,clock,account,writeSessio
   assert(config.coordination,'coordination_unavailable','Team coordination is not released in this environment.',503);
   const session=await (write?writeSession(req):account(req));
   const owner=config.adminLoginReady&&await store.adminRole(session.account,config.adminOwnerEmailKey)==='owner';
+  if(owner&&config.staffIdentity)assert(await store.staffMfaValid(session.account.id,session.hash,clock()),'mfa_required','Verify your staff passkey in Security settings.',403);
   // This preview integration does not claim staff MFA. Production enabling is
   // rejected by config until the staff identity package is actually delivered.
-  return {...session.account,owner};
+  return {...session.account,owner,mfaVerified:config.staffIdentity?await store.staffMfaValid(session.account.id,session.hash,clock()):false};
  }
  app.get('/api/teams',async req=>({teams:await service.list(await actor(req))}));
  app.post('/api/teams',async req=>service.create(await actor(req,true),req.body));
@@ -18,6 +19,7 @@ export function registerCoordination(app,{store,config,clock,account,writeSessio
  app.get('/api/teams/:id',async req=>service.view(await actor(req),uuid(req.params.id)));
  app.post('/api/teams/:id/:action',async req=>{
   const who=await actor(req,true);let body=req.body;
+  if(config.staffIdentity&&!['accept','leave'].includes(req.params.action))assert(who.mfaVerified,'mfa_required','Verify your staff passkey before managing a team.',403);
   if(req.params.action==='invite'){const b=exactKeys(body,['email']);body={emailKey:emailKey(email(b.email),config.pepper)};}
   return service.change(who,uuid(req.params.id),req.params.action,body);
  });

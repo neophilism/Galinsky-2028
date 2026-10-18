@@ -1,3 +1,5 @@
+> **Historical record, superseded for current implementation status.** Use `CURRENT_IMPLEMENTATION_REVIEW.md` and each unit's `implementationReview`. The counts below describe the 13 October review and must not be reported as the current amount of unfinished software.
+
 # Galinsky 2028 — evidence-based acceptance audit (13 October 2026)
 
 **Reviewed source:** `0e70c5cee4b34e5de78aea3b304cbe7aa73c3228` (main).

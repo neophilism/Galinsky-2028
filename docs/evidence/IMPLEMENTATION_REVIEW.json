@@ -1,0 +1,1367 @@
+{
+  "reviewedAt": "2026-10-18T23:43:58.905Z",
+  "counts": {
+    "completed": 8,
+    "implemented": 48,
+    "in_progress": 13,
+    "not_started": 3
+  },
+  "units": [
+    {
+      "id": "G28-001",
+      "title": "Freeze the approved design and establish the complete handoff",
+      "status": "completed",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "AGENTS.md",
+          "sha256": "fca131f1791e5b7aad243537994cf0c52e721beea5c29c0367f804a3e2db7781"
+        },
+        {
+          "path": "docs/DEVELOPMENT_PLAN.md",
+          "sha256": "41641834813b819306925f9196bc6627f91af21596a81ee3bd8f0f1d87de2ea1"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-002",
+      "title": "Create the monorepo and mandatory CI",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "scripts/verify.mjs",
+          "sha256": "dd052ac5503ce12d2965d6dcda8b104cbd32fbb48ade24e4e595c8f05828861e"
+        },
+        {
+          "path": ".github/workflows/ci.yml",
+          "sha256": "9d900f885e71dd1b6b339f27dda6ecd8595b9f2970c2b4fc87aa8c5b2c843139"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-003",
+      "title": "Build the exact design system and shared navigation",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/web/public/assets/site.css",
+          "sha256": "545f87f924c9ac59cd85aa577d2cc2b5fc765b6762db988288d22c1cced1f661"
+        },
+        {
+          "path": "tests/browser/journeys.mjs",
+          "sha256": "cd5eda5d5c9d86123f789ffbc5c19b775ade102218100a0284c45750796f1d57"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-004",
+      "title": "Establish runtime, databases and preview infrastructure",
+      "status": "completed",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/config.mjs",
+          "sha256": "b55fc261b3fc52453bac556202c9a5d8831cbaca966e7abb404bdcb51f2ec176"
+        },
+        {
+          "path": "scripts/migrate.mjs",
+          "sha256": "b75ea8d7b8b518bccd220f58a6e88d9da6cfeba0b034b8affe01609774716865"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-005",
+      "title": "Define the E2EESA security and privacy contract",
+      "status": "in_progress",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "security/e2eesa-inventory.json",
+          "sha256": "07132a395aac4d1692b5d18b9f199bd84e5456845984e070e890eed71fd266dd"
+        }
+      ],
+      "softwareGap": "Finish the complete component/profile coverage review, including protected-flow obligations; preliminary inventory is not full coverage.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-006",
+      "title": "Implement versioned content and publication contracts",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/campaign-store.mjs",
+          "sha256": "4721d96f519298cf0095f3545b5c0d141d59a39f21908173be63e13f28d47d8d"
+        },
+        {
+          "path": "tests/integration/campaign-store.test.mjs",
+          "sha256": "dd86a0ba8eabd2ed834af0bd6d9f8ac72b3ee3fba81d28325450a393604e1108"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-007",
+      "title": "Implement media, document and provenance handling",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/campaign-image.mjs",
+          "sha256": "ba94fdc56b5708097cb68533ce184c6ae61ccca0f94e398fb460f5f0b0c6d1a2"
+        },
+        {
+          "path": "tests/campaign-image.test.mjs",
+          "sha256": "47850929dd8cd952fd6b1e4b50ce81e45966fb589c4b469b607dd7a61467fa23"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-008",
+      "title": "Register the project and its full plan in Engine Room",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
+          "sha256": "8e86194b920b8797b20dc1d96dfa4cab0be834750437aa08d6a085e527bbcf12"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Observe current source-plan ingestion and presentation in Engine Room; this is a consumer integration check.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-009",
+      "title": "Build the complete candidate-forward homepage",
+      "status": "completed",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "content/public/pages/index.html",
+          "sha256": "d0b884af483ebf634b5f9bb10b68fe4d11c0689459ce90d1ef055bbfd5d61034"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-010",
+      "title": "Implement the network-flag hero motion",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/web/public/assets/motion.js",
+          "sha256": "08704965825a652de69201e341e4ec938946251e0d289c75c14d91724ec6db1c"
+        },
+        {
+          "path": "tests/hero-motion-accessibility.test.mjs",
+          "sha256": "d34e61ab2ea892e544e7136a12380b74267d2b47fb7e5532896b278e7ec04605"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-011",
+      "title": "Build the issues overview and extensible issue collection",
+      "status": "completed",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "content/public/pages/issues.html",
+          "sha256": "435b3fa69117eef87f8186db842a54f391c138be03b15f77e58e7aeef38de700"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-012",
+      "title": "Build the large top-of-page YouTube component",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/video.mjs",
+          "sha256": "89d7cfdc1a3d72d5df735218e10b4aa81bd12adc4ec8f44148d4131b88529c91"
+        },
+        {
+          "path": "tests/public-interactions.test.mjs",
+          "sha256": "ea3593e9337a1e31bcbd864aaa741a20d4039b1caf424756585db69fdc0219ad"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Supply/release final issue videos and captions; the consent, revoke and playback component is implemented.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-013",
+      "title": "Build Kirk-Evers and the legislative document reader",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/policy-documents.mjs",
+          "sha256": "fecf27af57fb2ed9a512ed15786ce11c538af6a5bfda8d60212419cd61e5d676"
+        },
+        {
+          "path": "tests/kirk-evers-discussion-provenance.test.mjs",
+          "sha256": "ce8f3030a7175bd2443574030fd61b3b97a9144054974f337170fdfda6d02223"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Publish the exact approved final legal document; the current draft reader/provenance works.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-014",
+      "title": "Build The Garden issue page",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "content/public/pages/garden.html",
+          "sha256": "a5d6c66679365458321d785710898f954f0f9c49ff4c7254b320ef82444b2547"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Set the approved final canonical destination/video in content configuration.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-015",
+      "title": "Build The Cornerstone issue page",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "content/public/pages/cornerstone.html",
+          "sha256": "477454f50bd6e892870004091fdc3c5a11f366aa1dacb8b463836776f79137e8"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Set the approved final canonical destination/video in content configuration.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-016",
+      "title": "Build the public volunteer page and role finder",
+      "status": "completed",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/roles.mjs",
+          "sha256": "accb28253ed1dce24c20308c60916bcc7bb62f07ebf98dceb0f16d2901562a7f"
+        },
+        {
+          "path": "tests/flag-real-portal.test.mjs",
+          "sha256": "26db4b2bcecb777f7d190de4d5acf30e4f8a40b3ceb74e38d028a23ede8dffd3"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-017",
+      "title": "Build the donation UI and exact disclosure components",
+      "status": "completed",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/stripe-web-checkout.mjs",
+          "sha256": "e7cda76f88fe19bceef3e60eb6a6f88636112aa6dd33f18766958e80836c1381"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-018",
+      "title": "Finish public navigation, SEO and essential information pages",
+      "status": "completed",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/indexing.mjs",
+          "sha256": "213de878f89d86a3a7f1f02156304b6a9cbfff173fa9076748af9988b3d0cc33"
+        },
+        {
+          "path": "tests/accessibility-navigation.test.mjs",
+          "sha256": "7d660b084f1051dbb92d7f177362a3567b6c95b297b2a135c88d76e2929ac6a6"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-019",
+      "title": "Implement real signup, email verification and authentication",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/app.mjs",
+          "sha256": "162df3df8218263dd1161dfe3ad5498e992dcb6ea6d0ce64d1e6c8901634b014"
+        },
+        {
+          "path": "tests/integration/api.test.mjs",
+          "sha256": "621f32522e6facd3e63de53bc7b8b232a17333d5439beb1a58bdac04999b2fa9"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify existing sender, mail worker and a real mailbox journey before opening public signup.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-020",
+      "title": "Implement staff MFA and scoped authorization",
+      "status": "in_progress",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/staff-security.mjs",
+          "sha256": "604641715ce741f87a15f05224c53e88855c2f991735c978b330075f415acff8"
+        },
+        {
+          "path": "packages/core/staff-permissions.mjs",
+          "sha256": "7a77ecb896e99d3cbb840a62cbd1436b82672f0a77082c7760797548c8061deb"
+        },
+        {
+          "path": "tests/staff-security.test.mjs",
+          "sha256": "37e0de3ba974f656c4e29b96ebba4ef08b23754f3c4ba22c84b8ad4674f6c1c2"
+        }
+      ],
+      "softwareGap": "Finish integration of all scoped staff operational actions with the new passkey/permission framework.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-021",
+      "title": "Implement approved recipient keys and device enrollment",
+      "status": "not_started",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "docs/security/BOUNDARIES.md",
+          "sha256": "5ab57eebf2e67e3afe07d56c1f5975f4fb1ee9c603151c8563c50cad2e27fd14"
+        }
+      ],
+      "softwareGap": "Implement approved recipient directory, device trust verification and substitution resistance.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-022",
+      "title": "Implement protected volunteer records and submissions",
+      "status": "not_started",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "docs/security/BOUNDARIES.md",
+          "sha256": "5ab57eebf2e67e3afe07d56c1f5975f4fb1ee9c603151c8563c50cad2e27fd14"
+        }
+      ],
+      "softwareGap": "Implement actual client-encrypted protected submission, authorized recipients and private attachment custody.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-023",
+      "title": "Implement recovery, revocation and controlled export",
+      "status": "in_progress",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/app.mjs",
+          "sha256": "162df3df8218263dd1161dfe3ad5498e992dcb6ea6d0ce64d1e6c8901634b014"
+        }
+      ],
+      "softwareGap": "Implement protected recipient-device recovery and trust restoration; ordinary session revocation/export already work.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-024",
+      "title": "Implement consent-aware messaging and reliable jobs",
+      "status": "in_progress",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/worker.mjs",
+          "sha256": "3d476095228d00581ca2e7d4f54b2ea7d525c23b2823f8577793d48360d15fdd"
+        }
+      ],
+      "softwareGap": "Implement provider delivery callbacks, suppression and general welcome/security/reminder templates beyond the working leased login outbox.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-025",
+      "title": "Import and reconcile the volunteer source edition",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "content/materials/archive-manifest.json",
+          "sha256": "a151ca1a8a228d4720b62318c2c920c1c5ea4fb860038e0bb3094196622cf145"
+        },
+        {
+          "path": "scripts/publish-materials.mjs",
+          "sha256": "7af96ddc62f44d6d582520d42fc97e7d7f9a9ef516a8801249e801fe4ad78e7f"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Review and publish the actual current volunteer source edition; no invented source or approval.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-026",
+      "title": "Implement the authorized materials library and reader",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/material-outline.mjs",
+          "sha256": "14134ec57c61a75b598b300d31d4ff34180fd36a01bbaf19f3a598971feea09b"
+        },
+        {
+          "path": "packages/core/material-reading.mjs",
+          "sha256": "72070ea0ab92fec02977ce43e5fd4be608a28add19538cf58aaa876164b440a4"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Publish reviewed current guides and enable normal verified registration when delivery is ready.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-027",
+      "title": "Build the volunteer first-hour workspace",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/portal/src/main.tsx",
+          "sha256": "6cb80c3e85a99c2b24b661297f1c5ab60d4aa7c68c9473f1e23e394dd9a542d9"
+        },
+        {
+          "path": "packages/core/tasks.mjs",
+          "sha256": "422510609f578cc3262dbf881606956c48e174eec3a3773173c108125f74de43"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Exercise newly registered volunteer entry against the hosted release.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-028",
+      "title": "Implement orientation, training and versioned acknowledgments",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/orientation.mjs",
+          "sha256": "cb51d1e80f2b40e20e13a9ec998bd85723b88c1a36c8fddea85dfa903fb31960"
+        },
+        {
+          "path": "apps/portal/src/Orientation.tsx",
+          "sha256": "eb0e19f78a4112d96a9305d2ebc7d23e55287856a1d49d917a1908c0b9cd79cf"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Publish the approved current orientation/training content and exercise hosted re-acknowledgment.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-029",
+      "title": "Implement jurisdiction/activity activation gates",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/activity-review-store.mjs",
+          "sha256": "395ba0fa2d25d443230136fa947cba7bbf24199eca7eb644046a202c1e630e4b"
+        },
+        {
+          "path": "apps/api/src/activity-routes.mjs",
+          "sha256": "8a3b408ebf8d175b7c90102b0d61d2e7802d611b1ab64eb2cd7aab796c8e7f47"
+        },
+        {
+          "path": "apps/portal/src/ActivityReview.tsx",
+          "sha256": "4c20e80ebe9c2bdd137e42352be12e03fe3732625066fd7a053f688f1a4eedaf"
+        },
+        {
+          "path": "tests/activity-routes.test.mjs",
+          "sha256": "01622b547aa599a4c262b387f0890011ae838289192a11b20c91229bc22fa40c"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-030",
+      "title": "Implement actionable tasks and activity reporting",
+      "status": "in_progress",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/tasks.mjs",
+          "sha256": "422510609f578cc3262dbf881606956c48e174eec3a3773173c108125f74de43"
+        }
+      ],
+      "softwareGap": "Implement bounded role/task assignment, claiming, verified reporting and capacity concurrency beyond starter checklists.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-031",
+      "title": "Convert every worksheet into an appropriate web tool",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/forms.mjs",
+          "sha256": "e41389340d7d4eeed8e9cde595c7e68c57ecf53f6a0ea6754571d57553c3ca99"
+        },
+        {
+          "path": "apps/portal/src/main.tsx",
+          "sha256": "6cb80c3e85a99c2b24b661297f1c5ab60d4aa7c68c9473f1e23e394dd9a542d9"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-032",
+      "title": "Implement local teams and captain coordination",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/coordination.mjs",
+          "sha256": "88f806e286f9a3a9308c65a41399b06067305d4c15a2538171772a4b10181ae2"
+        },
+        {
+          "path": "apps/api/src/coordination-store.mjs",
+          "sha256": "65441fb9d4bef9e0d881396147284860160df939d46e31c36f49bc779d81eb67"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Enable coordination only with the completed staff identity/operations release and hosted verification.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-033",
+      "title": "Implement events and orientation participation",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/coordination.mjs",
+          "sha256": "88f806e286f9a3a9308c65a41399b06067305d4c15a2538171772a4b10181ae2"
+        },
+        {
+          "path": "tests/integration/coordination.test.mjs",
+          "sha256": "9d273c126b3ff6d187ca7a151ccde0312da669ca897e39448908db9ff69c6d59"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify hosted staff/member reservation, cancellation and notification journeys.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-034",
+      "title": "Implement secure incident, help and correction workflows",
+      "status": "in_progress",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/help-routes.mjs",
+          "sha256": "a6ff314aeca7df597a039601cb2fa9d48bb625ead15a792a63e63898a583fc03"
+        }
+      ],
+      "softwareGap": "Connect protected incident narratives, encrypted attachments and scoped staff replies; structured category-only help already works.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-035",
+      "title": "Implement approved sharing and campaign asset tools",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/web/public/assets/public.js",
+          "sha256": "24eba3450ef04e325ada392bd0114195c175015c6fe45b8372692f5721ce15d3"
+        },
+        {
+          "path": "tests/public-sharing.test.mjs",
+          "sha256": "8c67379cb639e6a6fb5de0a4cfd6c185a05715e2b476ed8661bcc6add6cceedf"
+        },
+        {
+          "path": "apps/api/src/campaign-store.mjs",
+          "sha256": "4721d96f519298cf0095f3545b5c0d141d59a39f21908173be63e13f28d47d8d"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-036",
+      "title": "Implement official-tool handoffs for outreach roles",
+      "status": "in_progress",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/activity.mjs",
+          "sha256": "68e5584a2d4cc9375a626d902c2526dc8544c2f1a8207ab70a68a488ab0d6349"
+        }
+      ],
+      "softwareGap": "Implement the approved external-tool registry and scoped handoff/suppression lifecycle.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-037",
+      "title": "Build the nontechnical content/media administration UI",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/editor/editor.mjs",
+          "sha256": "28ba26c42060f9eef4623974a72964a1052e5b9e88f70eb8607a77b9b5e81239"
+        },
+        {
+          "path": "apps/api/src/campaign-routes.mjs",
+          "sha256": "b8c0166f0553dc2cc73937142f20b967a783ffae07eefea429e090ca3c3f8665"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-038",
+      "title": "Build volunteer operations and support administration",
+      "status": "in_progress",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/portal/src/AdminOperations.tsx",
+          "sha256": "ac25433fa1bd4c24ba3ed9b7bfe5d201add7e55198951fab6f091f9b1bbfc786"
+        }
+      ],
+      "softwareGap": "Complete task/training/module/support management UI and emergency activity pause with scoped staff authority.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-039",
+      "title": "Validate the fundraising processor and actual account capabilities",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/stripe-campaign.mjs",
+          "sha256": "fc4f3dd83874db6c43a4e49a819dad3eae8c7aa3ccae6da6f1483eec8910a725"
+        },
+        {
+          "path": "tests/stripe-real-sandbox-acceptance.test.mjs",
+          "sha256": "498e86836286f575f864dba12eaa730bae32de6eeb9383df8a79ff3c555e2720"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify actual campaign-specific merchant approval; test credentials are already supplied.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-040",
+      "title": "Implement approved donation policy and election configuration",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/contribution-terms.mjs",
+          "sha256": "964f667841eab576a0369bf14d7c56b3ec7abd97c996615e0b042f3c6b0ad459"
+        },
+        {
+          "path": "tests/stripe-campaign.test.mjs",
+          "sha256": "db95e024bff361df6e5d1c845d7972489f578901e828f926e56e2202d19094b6"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Load the approved current election/limit policy; do not invent campaign legal facts.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-041",
+      "title": "Integrate hosted checkout with the approved donation design",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/stripe-web-checkout.mjs",
+          "sha256": "e7cda76f88fe19bceef3e60eb6a6f88636112aa6dd33f18766958e80836c1381"
+        },
+        {
+          "path": "tests/stripe-web-checkout.test.mjs",
+          "sha256": "78789b126e0cbfa5d1413aa26eee23e779ce29e07a406ad4ec746fe6ad0fe8f0"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the exact deployed checkout/return journey; keep live charges separately authorized.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-042",
+      "title": "Implement authenticated, idempotent payment webhooks",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/stripe-campaign.mjs",
+          "sha256": "fc4f3dd83874db6c43a4e49a819dad3eae8c7aa3ccae6da6f1483eec8910a725"
+        },
+        {
+          "path": "tests/stripe-webhook.test.mjs",
+          "sha256": "7358e73ee98a92caf2f51f98034fe3998ea0f25b3eb2a2d6023437a65c5f9fe4"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Confirm a real Stripe-origin signed test payment receipt against the deployed ledger.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-043",
+      "title": "Implement the contribution ledger and reconciliation",
+      "status": "in_progress",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/fundraising-ledger.mjs",
+          "sha256": "9f93f41d21e10e260062fe28dc2ef225394d04b3e3f614d2d3810060479d0794"
+        }
+      ],
+      "softwareGap": "Complete treasury settlement/deposit and all-channel reconciliation beyond the implemented signed event ledger.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-044",
+      "title": "Implement receipts and recurring donor self-service",
+      "status": "not_started",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/stripe-web-checkout.mjs",
+          "sha256": "e7cda76f88fe19bceef3e60eb6a6f88636112aa6dd33f18766958e80836c1381"
+        }
+      ],
+      "softwareGap": "Implement independent donor receipt/recurring cancellation and processor-managed customer portal.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-045",
+      "title": "Implement finance exception and remedy workflows",
+      "status": "in_progress",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/fundraising-ledger.mjs",
+          "sha256": "9f93f41d21e10e260062fe28dc2ef225394d04b3e3f614d2d3810060479d0794"
+        }
+      ],
+      "softwareGap": "Implement treasurer-controlled exception casework and approved refund/dispute actions beyond ledger reconciliation.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-046",
+      "title": "Implement controlled treasury reporting and exports",
+      "status": "in_progress",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/treasury-vault.mjs",
+          "sha256": "40bc46a15678431f91fee3f65fba8869234f541ad0956e605a368c687e64603a"
+        }
+      ],
+      "softwareGap": "Implement authorized, audited treasury export with formula-injection protection and reconciliation totals.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-047",
+      "title": "Harden and test the full donation system",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "tests/stripe-outage-routing.test.mjs",
+          "sha256": "bd94f8a21d4c0513dd066434bc472a1079d63529f094457244efb245a9a14951"
+        },
+        {
+          "path": "tests/stripe-webhook.test.mjs",
+          "sha256": "7358e73ee98a92caf2f51f98034fe3998ea0f25b3eb2a2d6023437a65c5f9fe4"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Run the actual configured provider end-to-end failure/refund rehearsal when the treasury workflow is ready.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-048",
+      "title": "Complete treasury and fundraising release acceptance",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/stripe-campaign.mjs",
+          "sha256": "fc4f3dd83874db6c43a4e49a819dad3eae8c7aa3ccae6da6f1483eec8910a725"
+        },
+        {
+          "path": "docs/operations/STRIPE_POLITICAL_CAMPAIGN_ACCEPTANCE.md",
+          "sha256": "bddfaadc7ef6cb606bdd207f2a1b0eb03ab9a14621f23f4adb41358aceb2b34d"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Record real merchant/treasurer release and authorized settlement evidence before live activation.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-049",
+      "title": "Implement retention, privacy requests and secure lifecycle cleanup",
+      "status": "in_progress",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/postgres-store.mjs",
+          "sha256": "a11aa6d588c7be3852c7e3757d11f3ae3b12c1c1de373595186b3d4c617597b8"
+        }
+      ],
+      "softwareGap": "Implement protected-object lifecycle, legal holds and per-class deletion/backup handling; account closure and outbox cleanup already work.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-050",
+      "title": "Implement privacy-preserving campaign measurement",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/visitor-report.mjs",
+          "sha256": "9feeda30b3d1d8ab2d4a560f6d2dd7dc749b351207d37d0c70abf17a9e9974dd"
+        },
+        {
+          "path": "tests/visitor-analytics.test.mjs",
+          "sha256": "65c14c8b4321e64fd99d51c0c062628145e6ae41beb1ad0721a2ec6c9e2ae3a8"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-051",
+      "title": "Complete accessibility across public and authenticated journeys",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "tests/browser/journeys.mjs",
+          "sha256": "cd5eda5d5c9d86123f789ffbc5c19b775ade102218100a0284c45750796f1d57"
+        },
+        {
+          "path": "tests/accessibility-navigation.test.mjs",
+          "sha256": "7d660b084f1051dbb92d7f177362a3567b6c95b297b2a135c88d76e2929ac6a6"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Exercise assistive technology on the deployed release; deferred outside review does not mean missing UI code.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-052",
+      "title": "Complete visual fidelity and cross-browser regression testing",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "tests/browser/journeys.mjs",
+          "sha256": "cd5eda5d5c9d86123f789ffbc5c19b775ade102218100a0284c45750796f1d57"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Retain the current browser/visual release evidence; no extra owner acceptance ceremony.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-053",
+      "title": "Meet performance, resilience and load budgets",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "scripts/performance-budget.mjs",
+          "sha256": "3a4c453484708dc571a9a68f184af8866348da4cbc100053ea51620bfd551afb"
+        },
+        {
+          "path": "apps/web/public/assets/visitor-insights.js",
+          "sha256": "4421b9bea0b5777b2c1af5d5020b5d0930b9c523c6964de3a19ff6d4467431e9"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Measure deployed latency/load and configured-vitals reports; asset budget enforcement exists.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-054",
+      "title": "Complete application security review and remediation",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "docs/security/BOUNDARIES.md",
+          "sha256": "5ab57eebf2e67e3afe07d56c1f5975f4fb1ee9c603151c8563c50cad2e27fd14"
+        },
+        {
+          "path": "tests/staff-security.test.mjs",
+          "sha256": "37e0de3ba974f656c4e29b96ebba4ef08b23754f3c4ba22c84b8ad4674f6c1c2"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Retain current source-bound security/CI evidence; do not claim independent certification.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-055",
+      "title": "Prove durable jobs, backups and disaster recovery",
+      "status": "in_progress",
+      "implementation": "remaining_implementation",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/worker.mjs",
+          "sha256": "3d476095228d00581ca2e7d4f54b2ea7d525c23b2823f8577793d48360d15fdd"
+        },
+        {
+          "path": "scripts/database-recovery.mjs",
+          "sha256": "ab1aa84d44c2265d6018966540143eda3fe2930a09a3c671ba24880ed4993f56"
+        },
+        {
+          "path": "tests/integration/database-recovery.test.mjs",
+          "sha256": "46711a605e08571d1da9bec3fc42a54522f04b12db64abee20cf0221cd21b81e"
+        },
+        {
+          "path": "docs/operations/DATABASE_RECOVERY.md",
+          "sha256": "1067420bc6d4599c2e6afbbc4623f137729d681476bd923a59e9aa88714a37a4"
+        }
+      ],
+      "softwareGap": "Finish matching protected-object/key recovery generations when that storage flow lands; encrypted full-database backup/isolated restore and durable job recovery are implemented and exercised in CI.",
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-056",
+      "title": "Connect real deployment monitoring and Engine Room freshness",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/ops-health.mjs",
+          "sha256": "ac3c4c0d79f14dd5ed95f9a57812918cca7696f43c791fa6ab63b9c665b0fb79"
+        },
+        {
+          "path": "tests/ops-health.test.mjs",
+          "sha256": "840e140a508c2981da43807eaf726591b62a7f5fd63c87bcebaec0e81890d8d7"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify fresh deployed-SHA, queue and Engine Room outage reporting against the actual services.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-057",
+      "title": "Run the complete staging acceptance rehearsal",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "scripts/verify.mjs",
+          "sha256": "dd052ac5503ce12d2965d6dcda8b104cbd32fbb48ade24e4e595c8f05828861e"
+        },
+        {
+          "path": "tests/integration/api.test.mjs",
+          "sha256": "621f32522e6facd3e63de53bc7b8b232a17333d5439beb1a58bdac04999b2fa9"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Run the whole configured staging release rehearsal; do not count an unperformed observation as unwritten code.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-058",
+      "title": "Close publication inputs and operational launch gates",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/policy-documents.mjs",
+          "sha256": "fecf27af57fb2ed9a512ed15786ce11c538af6a5bfda8d60212419cd61e5d676"
+        },
+        {
+          "path": "scripts/prepare-issue-video.mjs",
+          "sha256": "5b368372d2a36bfcde338f71e6c749594cec865d0d4ba3f8959156b0a45a9cd7"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Supply/release final publication content and intended public origins.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-059",
+      "title": "Deploy the production release and enable approved functions",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "render.yaml",
+          "sha256": "98ecf6c22a73379f914a33668e0f61e58b6771ec41db0a587f886df17364f5db"
+        },
+        {
+          "path": "docs/operations/RENDER_VERIFIED_PLACEMENT.md",
+          "sha256": "49bbe342135196e8dfacc9bc544ea2fb7f02d65d7d29c97256ff94193956f6a5"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Deploy the tested revision and enable only genuinely configured and approved release capabilities.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-060",
+      "title": "Verify the live site and finish the durable handoff",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "README.md",
+          "sha256": "3abb8e3546564f006c62bccda255b34ea5883286e68ec61a22c707d1239fdd77"
+        },
+        {
+          "path": "docs/operations/DEPLOYMENT.md",
+          "sha256": "f6d2c8a019464f1ebc7a543be9d32c99cb7e2dcee9a66bdcbbf2e1905fb587d1"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify actual released flows and operational ownership on the target services.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-061",
+      "title": "Individual, revocable private policy-review accounts",
+      "status": "completed",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md",
+          "sha256": "f0330a3312104076e0ed6afe69912b5ce29d0ea8d3333ac548ac35036f280bd6"
+        },
+        {
+          "path": "tests/review-accounts.test.mjs",
+          "sha256": "3b4750864f6a7baae71c90c39479437b38e3fd8a250d8f18587183a734b5865a"
+        },
+        {
+          "path": "tests/browser/review-journeys.mjs",
+          "sha256": "5f68c26651fa7dfbd4b1e8c6336328a254a30a425aa2e13d2debff046df06975"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-062",
+      "title": "Generic editorial contracts, plan and canonical tracking",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/campaign-content.mjs",
+          "sha256": "932ad5f12205533b2052b869e9251d83dc86a5350cc1215692f131f9a3343fa9"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-063",
+      "title": "Persistent campaign revisions, assets and site settings",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/campaign-store.mjs",
+          "sha256": "4721d96f519298cf0095f3545b5c0d141d59a39f21908173be63e13f28d47d8d"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-064",
+      "title": "Shared templates and field inventory",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/campaign-template.mjs",
+          "sha256": "1c45abc2ec2f51636c0f7a333803ba6d7b97beedc5c484f667ad8c8217c987ba"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-065",
+      "title": "Server-rendered published releases and safe caching",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/web/private-preview.mjs",
+          "sha256": "a4eb6192551691b4706dafe633be1a9d9960840aa246c1f6bc78ffe65162c8ea"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-066",
+      "title": "Protected editorial APIs and lifecycle operations",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/campaign-routes.mjs",
+          "sha256": "b8c0166f0553dc2cc73937142f20b967a783ffae07eefea429e090ca3c3f8665"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-067",
+      "title": "Unified text, theme and hero editor",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/editor/editor.mjs",
+          "sha256": "28ba26c42060f9eef4623974a72964a1052e5b9e88f70eb8607a77b9b5e81239"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-068",
+      "title": "Single and side-by-side editorial comparison",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/editor/editor.mjs",
+          "sha256": "28ba26c42060f9eef4623974a72964a1052e5b9e88f70eb8607a77b9b5e81239"
+        },
+        {
+          "path": "tests/browser/campaign-editor.mjs",
+          "sha256": "353b32e08bad94faee2150ba55139ea2d663b2a5063fd050e30b418777a44186"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-069",
+      "title": "Optional default, day and night assignments",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "packages/core/campaign-mode.mjs",
+          "sha256": "1a03974d4e191d62062b41416ec72ed6af997004225890db128380f01726b1b9"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-070",
+      "title": "Private initial editorial bootstrap",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/api/src/campaign-store.mjs",
+          "sha256": "4721d96f519298cf0095f3545b5c0d141d59a39f21908173be63e13f28d47d8d"
+        },
+        {
+          "path": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+          "sha256": "b561dae3c5b1485fd9f4daa50ae5646c26eda6e0c71491869eab24051fb055df"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify actual owner access to the existing initialized editorial database.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-071",
+      "title": "Integrated live acceptance and operator handoff",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "tests/browser/campaign-public.mjs",
+          "sha256": "b16796f951fda57a215b3e20c4b00afee79a3247d74033ddcd91be45084fc0fb"
+        },
+        {
+          "path": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+          "sha256": "b561dae3c5b1485fd9f4daa50ae5646c26eda6e0c71491869eab24051fb055df"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the hosted owner draft/save/publish/rollback and independent published-reader journey.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    },
+    {
+      "id": "G28-072",
+      "title": "Privacy-preserving visitor engagement analytics",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:43:58.905Z",
+      "sourceFiles": [
+        {
+          "path": "apps/portal/src/AdminVisitors.tsx",
+          "sha256": "2847c57421fa61be95be5285e7a152fad2c64fcb5f24617fb79903fe06c27f10"
+        },
+        {
+          "path": "tests/browser/visitor-analytics.mjs",
+          "sha256": "dae0c27302166411921fca6c81019e4e56e89b0f2e866f02a0da5d67d878a5ee"
+        }
+      ],
+      "softwareGap": null,
+      "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+      "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
+    }
+  ]
+}

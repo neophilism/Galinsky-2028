@@ -1,3 +1,7 @@
+## Owner acceptance and completion directive — 18 October 2026
+
+The owner grants this conversation authority to accept verified work in every repository. Finish Galinsky 2028 first, then apply the same source/test review to the remaining portfolio excluding the four oldest repositories. Inspect every planned unit against current code and tests; finish actual software gaps and accept verified changes without another owner ceremony. Do not convert missing deployment observations, final videos, domains, provider credentials or deferred external human review into claims that implemented PRs are partially written. Keep software implementation, accepted PR merges, current deployment and external activation facts separate. This authority does not fabricate missing features or authorize actual financial transactions or disclosure of private records.
+
 ## Public-repository CI provider — 17 October 2026
 
 **Use GitHub Actions as the sole continuous-integration provider while Galinsky 2028 is public.** Do not configure, enable, or rely on CircleCI. The canonical checks live in `.github/workflows/ci.yml` on GitHub-hosted standard runners. Preserve coverage of source validation, unit/integration tests, production builds, browser journeys, dependency audit, and secret scanning. Keep the workflow within the standard no-charge public-repository runner path; do not introduce paid third-party CI services or paid runner classes without an explicit new owner instruction.

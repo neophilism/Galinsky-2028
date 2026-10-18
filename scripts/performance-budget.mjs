@@ -10,6 +10,8 @@ export const publicBudgets=Object.freeze({
  'assets/site.css':32000,
  'assets/motion.js':26000,
  'assets/public.js':28000,
+ 'assets/visitor-analytics.js':18000,
+ 'assets/visitor-insights.js':18000,
  'assets/candidate.webp':130000,
  'assets/network-flag.svg':180000,
  'assets/meet-phillip.webp':130000,
@@ -20,7 +22,7 @@ export const publicBudgets=Object.freeze({
 export const initialByteBudget=350000;
 export const initialResources=Object.freeze([
  'index.html','assets/design.css','assets/site.css',
- 'assets/motion.js','assets/public.js',
+ 'assets/motion.js','assets/public.js','assets/visitor-analytics.js','assets/visitor-insights.js',
  'assets/candidate.webp','assets/network-flag.svg'
 ]);
 export async function checkPublicAssetBudget(output){

@@ -50,8 +50,15 @@ export function registerCampaignEditor(app,{accountStore,config,env=process.env,
  });
  function thisFile(value){return /^[A-Za-z0-9][A-Za-z0-9._-]{0,100}\.(?:css|woff2|svg|png|webp|jpg|jpeg|avif)$/i.test(value);}
  const files=[['/editor/campaigns','index.html','text/html; charset=utf-8'],['/editor/campaigns/editor.mjs','editor.mjs','application/javascript'],['/editor/campaigns/editor.css','editor.css','text/css']];
- for(const [url,file,type]of files)app.get(url,async(req,reply)=>{
-  if(!enabled)return reply.code(503).type('text/plain').send('The campaign editor is not enabled.');
+ for(const [url,file,type]of files)app.get(url,{
+  onRequest:async(req,reply)=>{
+   reply.header('Cache-Control','private, no-store').header('Vary','Cookie, Authorization');
+   if(!enabled)return reply.code(503).type('text/plain').send('The campaign editor is not enabled.');
+   // Static source, not just API responses, is restricted to freshly verified
+   // owner/editor sessions. A shared preview password is insufficient.
+   try{req.campaignIdentity=await auth(req);}catch(error){return caught(error,reply);}
+  }
+ },async(req,reply)=>{
   return reply.header('Cache-Control','private, no-store').header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' blob:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'").type(type).send(await readFile(editorFile(file)));
  });
  return{enabled:enabled&&Boolean(store),store};
