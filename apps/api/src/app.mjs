@@ -11,7 +11,7 @@ import {starterTasks,taskDecision} from '../../../packages/core/tasks.mjs';
 import {summarizePublishedModule} from '../../../packages/core/activity-summary.mjs';
 import {publicOrientation,evaluateOrientation,ORIENTATION_COMPLETION_ID} from '../../../packages/core/orientation.mjs';
 import {previewAuthorized,PREVIEW_REALM,PREVIEW_ROBOTS} from '../../../packages/core/preview-gate.mjs';
-import {visitorRange} from '../../../packages/core/visitor-analytics.mjs';
+import {visitorRange,visitorPage} from '../../../packages/core/visitor-analytics.mjs';
 import {visitorReport} from './visitor-report.mjs';
 import {cleanTreasuryPayload,sealTreasury,MERCHANT_SLOTS} from '../../../packages/core/treasury-vault.mjs';
 export function createApp({store,config,clock=()=>Date.now()}){
@@ -95,10 +95,10 @@ export function createApp({store,config,clock=()=>Date.now()}){
  });
  app.get('/api/admin/visitors',async(req,reply)=>{
    await adminAccount(req,{roles:['owner','auditor']});
-   let range;
-   try{range=visitorRange(req.query?.range||'day');}
+   let range,page;
+   try{range=visitorRange(req.query?.range||'day');page=visitorPage(req.query?.page||'/');}
    catch{return reply.code(400).send({error:'invalid_range',message:'Choose 24 hours, 7 days or 30 days.'});}
-   try{return await visitorReport(store,range);}
+   try{return await visitorReport(store,range,page);}
    catch(error){if(error?.code==='42P01'||error?.code==='42501')return reply.code(503).send({error:'analytics_not_ready',message:'Visitor analytics storage is not ready.'});throw error;}
   });
   app.get('/api/admin/settings',async req=>{
