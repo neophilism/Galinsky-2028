@@ -15,7 +15,22 @@ test('anonymous interactions are idempotent, reported only in aggregate, and pri
   {seq:4,kind:'section_time',target:'s3',detail:'none',amount:18},
   {seq:5,kind:'scroll_depth',target:'p0',detail:'d75',amount:0},
   {seq:6,kind:'click_heatmap',target:'p0',detail:'none',amount:150},
-  {seq:7,kind:'share',target:'b2',detail:'none',amount:0}
+  {seq:7,kind:'share',target:'b2',detail:'none',amount:0},
+  {seq:8,kind:'rage_click',target:'s3',detail:'none',amount:0},
+  {seq:9,kind:'dead_click',target:'s3',detail:'none',amount:0},
+  {seq:10,kind:'scroll_speed',target:'p0',detail:'fast',amount:0},
+  {seq:11,kind:'scroll_direction',target:'p0',detail:'down',amount:0},
+  {seq:12,kind:'funnel_step',target:'p0',detail:'policy_view',amount:0},
+  {seq:13,kind:'funnel_step',target:'p0',detail:'policy_media',amount:0},
+  {seq:14,kind:'device_class',target:'p0',detail:'mobile',amount:0},
+  {seq:15,kind:'perf_ttfb',target:'p0',detail:'none',amount:94},
+  {seq:16,kind:'perf_lcp',target:'p0',detail:'none',amount:1950},
+  {seq:17,kind:'perf_cls',target:'p0',detail:'none',amount:16},
+  {seq:18,kind:'resource_error',target:'p0',detail:'image',amount:0},
+  {seq:19,kind:'navigation_stall',target:'p0',detail:'none',amount:0},
+  {seq:20,kind:'youtube_play',target:'m1',detail:'none',amount:0},
+  {seq:21,kind:'youtube_progress',target:'m1',detail:'q75',amount:0},
+  {seq:22,kind:'youtube_error',target:'m1',detail:'none',amount:0}
  ];
  const write=(id,list,page='/issues/kirk-evers/')=>pool.query(
   'SELECT g28.ingest_page_events($1::uuid,$2::text,$3::jsonb)',[id,page,JSON.stringify(list)]);
@@ -33,6 +48,19 @@ test('anonymous interactions are idempotent, reported only in aggregate, and pri
   assert(report.sections.some(s=>s.target==='s3'&&s.visibleSeconds===18));
   assert.deepEqual(report.clickHeatmap,[{cell:150,clicks:1}]);
   assert(report.scroll.some(s=>s.depth===75&&s.views===1));
+  assert.equal(report.activity.rageClicks,1);
+  assert.equal(report.activity.deadClicks,1);
+  assert.equal(report.activity.resourceErrors,1);
+  assert.equal(report.activity.navigationStalls,1);
+  assert.equal(report.activity.youtubeStarts,1);
+  assert.equal(report.activity.youtubeErrors,1);
+  assert.deepEqual(report.funnels.map(s=>s.stage),['policy_media','policy_view']);
+  assert(report.funnels.every(f=>f.views===1&&f.percentOfPageViews===100));
+  assert.deepEqual(report.devices,[{kind:'mobile',views:1}]);
+  assert.equal(report.performances.find(p=>p.kind==='perf_ttfb')?.p75,94);
+  assert.equal(report.performances.find(p=>p.kind==='perf_lcp')?.p95,1950);
+  assert(report.scrollBehaviors.some(p=>p.kind==='scroll_speed'&&p.detail==='fast'));
+  assert(report.interactions.some(p=>p.kind==='youtube_progress'&&p.detail==='q75'));
   assert(!JSON.stringify(report).includes(viewId));
   const forbidden=[
    {...events[0],seq:8,target:'javascript:alert(1)'},
