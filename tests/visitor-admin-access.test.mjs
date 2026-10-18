@@ -25,6 +25,10 @@ test('only verified owner and active auditor can read aggregated visitor reports
   const report=await app.inject({url:'/api/admin/visitors?range=day',headers:{cookie:owner}});
   assert.equal(report.statusCode,200,report.body);
   assert.equal(report.json().pages.length,9);
+  const detailed=await app.inject({url:'/api/admin/visitors?range=month&page=%2Fpolicies%2Feternal-liberty%2F',headers:{cookie:owner}});
+  assert.equal(detailed.statusCode,200);
+  assert.equal(detailed.json().selectedPage,'/policies/eternal-liberty/');
+  assert.equal((await app.inject({url:'/api/admin/visitors?page=%2Faccount%2Fexport',headers:{cookie:owner}})).statusCode,400);
   assert(!report.body.includes('owner@example.test'));
   assert.equal((await app.inject({url:'/api/admin/visitors?range=bad',headers:{cookie:owner}})).statusCode,400);
   const treasurerKey=emailKey('treasurer@example.test',cfg.pepper);
