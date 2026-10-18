@@ -97,7 +97,7 @@ export function createApp({store,config,clock=()=>Date.now()}){
    await adminAccount(req,{roles:['owner','auditor']});
    let range,page;
    try{range=visitorRange(req.query?.range||'day');page=visitorPage(req.query?.page||'/');}
-   catch{return reply.code(400).send({error:'invalid_range',message:'Choose 24 hours, 7 days or 30 days.'});}
+   catch{return reply.code(400).send({error:'invalid_range',message:'Choose an available reporting period and a public campaign page.'});}
    try{return await visitorReport(store,range,page);}
    catch(error){if(error?.code==='42P01'||error?.code==='42501')return reply.code(503).send({error:'analytics_not_ready',message:'Visitor analytics storage is not ready.'});throw error;}
   });
