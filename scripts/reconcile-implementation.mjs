@@ -34,7 +34,7 @@ const sources={
  49:['apps/api/src/postgres-store.mjs'],50:['apps/api/src/visitor-report.mjs','tests/visitor-analytics.test.mjs'],
  51:['tests/browser/journeys.mjs','tests/accessibility-navigation.test.mjs'],52:['tests/browser/journeys.mjs'],
  53:['scripts/performance-budget.mjs','apps/web/public/assets/visitor-insights.js'],
- 54:['docs/security/BOUNDARIES.md','tests/staff-security.test.mjs'],55:['apps/api/src/worker.mjs'],
+ 54:['docs/security/BOUNDARIES.md','tests/staff-security.test.mjs'],55:['apps/api/src/worker.mjs','scripts/database-recovery.mjs','tests/integration/database-recovery.test.mjs','docs/operations/DATABASE_RECOVERY.md'],
  56:['packages/core/ops-health.mjs','tests/ops-health.test.mjs'],
  57:['scripts/verify.mjs','tests/integration/api.test.mjs'],58:['packages/core/policy-documents.mjs','scripts/prepare-issue-video.mjs'],
  59:['render.yaml','docs/operations/RENDER_VERIFIED_PLACEMENT.md'],60:['README.md','docs/operations/DEPLOYMENT.md'],
@@ -61,7 +61,7 @@ const gaps={
  45:'Implement treasurer-controlled exception casework and approved refund/dispute actions beyond ledger reconciliation.',
  46:'Implement authorized, audited treasury export with formula-injection protection and reconciliation totals.',
  49:'Implement protected-object lifecycle, legal holds and per-class deletion/backup handling; account closure and outbox cleanup already work.',
- 55:'Implement and exercise complete isolated backup/restore tooling and measured recovery; durable mail jobs already work.'
+ 55:'Finish matching protected-object/key recovery generations when that storage flow lands; encrypted full-database backup/isolated restore and durable job recovery are implemented and exercised in CI.'
 };
 const activation={
  8:'Observe current source-plan ingestion and presentation in Engine Room; this is a consumer integration check.',
