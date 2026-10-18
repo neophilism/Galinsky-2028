@@ -16,7 +16,7 @@ test('production requires verified HTTPS canonical origin',()=>{
 test('production sitemap includes exactly all public pages and no private routes',()=>{
  const canonical='https://www.example.org';
  const docs=indexingDocuments({...site,mode:'production',canonicalOrigin:canonical},pages,{});
- assert.equal((docs.sitemap.match(/<url>/g)||[]).length,8);
+ assert.equal((docs.sitemap.match(/<url>/g)||[]).length,pages.length);
  assert.match(docs.robots,/Allow: \/\nSitemap: https:\/\/www.example.org\/sitemap.xml/);
  for(const page of pages)assert.ok(docs.sitemap.includes('<loc>'+canonical+page.path+'</loc>'));
  assert.ok(!docs.sitemap.includes('/api/'));

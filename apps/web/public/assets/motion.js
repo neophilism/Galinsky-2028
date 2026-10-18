@@ -68,6 +68,23 @@
   let previousPaint = 0;
   let width = 1, height = 1, elapsed = 0, lastFrame = 0, handle = 0;
   let visible = true;
+  // Persist visitors' preferences without depending on storage availability.
+  const preferenceKey = 'g28-hero-motion-paused';
+  let paused = false;
+  try { paused = window.localStorage.getItem(preferenceKey) === 'true'; } catch {}
+  const control = document.querySelector('#flag-motion-toggle');
+  function updateControl() {
+    if (!control) return;
+    control.setAttribute('aria-pressed', String(paused));
+    control.textContent = paused ? 'Resume flag animation' : 'Pause flag animation';
+  }
+  control?.addEventListener('click', () => {
+    paused = !paused;
+    try { window.localStorage.setItem(preferenceKey, String(paused)); } catch {}
+    updateControl();
+    synchronize();
+  });
+  updateControl();
 
   function resize() {
     const bounds = canvas.getBoundingClientRect();
@@ -188,7 +205,7 @@
 
   function tick(now) {
     handle = 0;
-    if (reducedMotion.matches || !visible || document.hidden) {
+    if (reducedMotion.matches || paused || !visible || document.hidden) {
       lastFrame = 0;
       draw();
       return;
@@ -213,7 +230,7 @@
     lastFrame = 0;
     previousPaint = 0;
     draw();
-    if (!reducedMotion.matches && visible && !document.hidden)
+    if (!reducedMotion.matches && !paused && visible && !document.hidden)
       handle = requestAnimationFrame(tick);
   }
 
