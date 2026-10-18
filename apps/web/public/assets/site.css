@@ -106,3 +106,18 @@ a.resource-link:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 .issue-share [role="status"]{min-height:1.4em;margin:12px 0 0}
 .issue-share .btn:focus-visible{outline:3px solid var(--red);outline-offset:3px}
 @media(max-width:390px){.issue-share-actions{flex-direction:column}.issue-share-actions .btn{width:100%;justify-content:center}}
+
+/* Consent is presented without changing the approved campaign page layout. */
+.analytics-choice{position:fixed;z-index:1200;inset:auto 16px 16px;max-width:680px;margin:auto;
+ padding:18px 22px;background:#fff;color:#0a3161;border:2px solid #0a3161;
+ border-left:5px solid #b02039;box-shadow:0 8px 34px #071d3c30;font-size:14px;line-height:1.5}
+.analytics-choice p{margin:0 0 12px}.analytics-choice a{font-weight:700;text-decoration:underline;color:#0a3161}
+.analytics-choice-actions{display:flex;gap:10px;flex-wrap:wrap}
+.analytics-choice-actions button{min-height:44px;padding:9px 16px;background:#0a3161;color:#fff;
+ border:1px solid #0a3161;font:inherit;font-weight:700;cursor:pointer}
+.analytics-choice-actions button:last-child{background:#fff;color:#0a3161}
+.analytics-choice-actions button:focus-visible{outline:3px solid #b02039;outline-offset:3px}
+#analytics-preferences-button{padding:9px 12px;margin:10px 0;border:1px solid #0a3161;
+ background:#fff;color:#0a3161;font:inherit;cursor:pointer}
+#analytics-preferences-status{font-size:14px}
+@media(max-width:700px){.analytics-choice{inset:auto 8px 8px;padding:13px 15px;font-size:13px}}
