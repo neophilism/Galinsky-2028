@@ -5,7 +5,7 @@
 Open **Visitor analytics** at /visitors in the existing protected staff portal. Every report requires a current verified owner or auditor role. The owner can select a 24-hour, 7-day, or 30-day window, drill into any of the nine registered public campaign pages, and export **aggregated** CSV. A visible admin tab refreshes every 30 seconds.
 
 - Page views, approximate active foreground pages, average visible dwell.
-- Link and button clicks by ordinal control ID and approved category of destination.
+- Link and button clicks by ordinal control ID, reviewed published text label (generated from the actual HTML during build), and approved destination category. No browser-provided label or raw URL is accepted.
 - FAQ accordion opens and closes; copy, share, and download clicks.
 - Times a page section was meaningfully in view, focused visible seconds and averages.
 - Scroll-depth thresholds (10, 25, 50, 75, 90, 100 percent).
