@@ -1,4 +1,5 @@
 import {postgresCoordination,removeAccountCoordination,ownCoordination} from './coordination-store.mjs';
+import {postgresHelp} from './help-store.mjs';
 import pg from 'pg';
 import {randomUUID} from 'node:crypto';
 import {assessOperations} from '../../../packages/core/ops-health.mjs';
@@ -184,4 +185,4 @@ export class PostgresStore{
  async close(){await this.pool.end();}
 }
 
-Object.assign(PostgresStore.prototype, postgresCoordination);
+Object.assign(PostgresStore.prototype, postgresCoordination, postgresHelp);
