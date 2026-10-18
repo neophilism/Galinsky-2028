@@ -9,7 +9,7 @@
   "implemented_packages": 8,
   "merged_packages": 8,
   "deployed_packages": 7,
-  "note": "Work-package completion remains 8/71; 91 merged GitHub PRs are accepted. A merged contribution to a larger incomplete work package remains an accepted PR, not an unaccepted PR.",
+  "note": "111 GitHub PRs are accepted as merged; 8/71 packages have full-scope evidence. These are different facts; neither is an overall application completion estimate.",
   "packages": [
     {
       "id": "G28-01",
@@ -293,16 +293,19 @@
       "acceptance": "The headline and buttons never rotate away or move out of reach. Animation is decorative, silent and non-flashing; it stops when requested and remains paused across navigation. Low-power/mobile behavior and disabled-JavaScript still composition remain attractive.",
       "evidence": "Motion-state tests, reduced-motion screenshots, CPU/long-task measurements and mobile visual review.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Original static dot-flag fallback and its CSS URL repaired. Preserve the owner-requested absence of pause controls from PR #35. Measured CPU/mobile motion and remaining visual evidence are still outstanding.",
+      "implementation_note": "Persistent visitor motion control is implemented in PR #118. Full mobile/CPU and final visual evidence remain unverified; the former no-pause note is superseded.",
       "contributing_prs": [
         35,
-        96
+        96,
+        103,
+        107,
+        118
       ],
       "acceptance_review": {
         "status": "in_progress",
-        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/PUBLIC_QUALITY_20261016.md",
-        "blocker": "Original static dot-flag fallback and its CSS URL repaired. Preserve the owner-requested absence of pause controls from PR #35. Measured CPU/mobile motion and remaining visual evidence are still outstanding."
+        "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
+        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
+        "blocker": "Persistent visitor motion control is implemented in PR #118. Full mobile/CPU and final visual evidence remain unverified; the former no-pause note is superseded."
       }
     },
     {
@@ -715,15 +718,17 @@
       "acceptance": "An outbox retry never creates duplicate account messages or resurrects an unsubscribe. Optional campaigning stops after opt-out without disabling essential account access. Bounces/complaints suppress correctly; recipient addresses and tokens are redacted in logs. Jobs survive process restarts.",
       "evidence": "Retry/crash tests, suppression tests, delivery callback verification and evidence from staging email accounts.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Durable outbox exists; verified live sender, delivery callbacks, opt-out suppression and retries remain.",
+      "implementation_note": "Outbox retention and owner-only verified email login are implemented. Live provider callback and complete volunteer-delivery evidence remain outstanding.",
       "contributing_prs": [
-        61
+        61,
+        110,
+        112
       ],
       "acceptance_review": {
         "status": "in_progress",
-        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Durable outbox exists; verified live sender, delivery callbacks, opt-out suppression and retries remain."
+        "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
+        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
+        "blocker": "Outbox retention and owner-only verified email login are implemented. Live provider callback and complete volunteer-delivery evidence remain outstanding."
       }
     },
     {
@@ -825,14 +830,15 @@
       "evidence": "Training state-machine tests, old-version acknowledgment tests and assistive-technology walkthrough.",
       "external_inputs": "None beyond the listed dependencies.",
       "contributing_prs": [
-        14
+        14,
+        113
       ],
-      "implementation_note": "Reading acknowledgments exist; orientation/training lifecycle and activated prerequisites are incomplete.",
+      "implementation_note": "Versioned orientation and saved knowledge checks are implemented. Complete training lifecycle and activated prerequisite evidence remain outstanding.",
       "acceptance_review": {
         "status": "in_progress",
-        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Reading acknowledgments exist; orientation/training lifecycle and activated prerequisites are incomplete."
+        "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
+        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
+        "blocker": "Versioned orientation and saved knowledge checks are implemented. Complete training lifecycle and activated prerequisite evidence remain outstanding."
       }
     },
     {
@@ -851,13 +857,16 @@
       "acceptance": "A worksheet, downloaded packet, expired module or one verifier cannot activate regulated work. Mismatched jurisdiction/election/activity, missing training, withdrawn approval or tool outage blocks the action with a clear reason. Every sensitive operation rechecks authorization; a stale open tab is not sufficient.",
       "evidence": "Authorization decision-table tests, clock-boundary/revocation tests, two-verifier separation tests and admin audit evidence.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Fail-closed activity rules exist; live verified jurisdiction module admin/publish/revoke flow is missing.",
-      "contributing_prs": [],
+      "implementation_note": "Published activity information and independent revision-pinned review rules are implemented. Persistent review transitions and full publication/live integration remain unfinished.",
+      "contributing_prs": [
+        114,
+        124
+      ],
       "acceptance_review": {
         "status": "in_progress",
-        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Fail-closed activity rules exist; live verified jurisdiction module admin/publish/revoke flow is missing."
+        "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
+        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
+        "blocker": "Published activity information and independent revision-pinned review rules are implemented. Persistent review transitions and full publication/live integration remain unfinished."
       }
     },
     {
@@ -977,19 +986,24 @@
         "G28-31",
         "G28-20"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Route private incidents to named authorized safety recipients, content corrections to editors and ordinary help to the appropriate support role. Provide receipt/status, controlled replies and escalation without making emergency-response promises. Use a separate protected attachment quarantine/recipient-side review path; public document scanners must not decrypt private submissions.",
       "acceptance": "Immediate-danger guidance is visible; the form is not described as emergency services. Reports do not appear in public logs, dashboards or email. Unauthorized staff cannot read a report. Corrections can supersede affected published material with traceable approval.",
       "evidence": "End-to-end encrypted report/reply tests, attachment-handling threat tests and correction-to-publication audit trail.",
       "external_inputs": "None beyond the listed dependencies.",
-      "contributing_prs": [],
-      "implementation_note": "No secure protected incident intake, reply or private-attachment workflow.",
+      "contributing_prs": [
+        119,
+        120,
+        121,
+        122
+      ],
+      "implementation_note": "Bounded account-scoped structured help, route/storage isolation, browser journeys and retained privacy export are implemented. Protected incident text, private attachments and secure staff replies remain outside this partial feature.",
       "acceptance_review": {
-        "status": "not_started",
-        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "No secure protected incident intake, reply or private-attachment workflow."
+        "status": "in_progress",
+        "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
+        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
+        "blocker": "Bounded account-scoped structured help, route/storage isolation, browser journeys and retained privacy export are implemented. Protected incident text, private attachments and secure staff replies remain outside this partial feature."
       }
     },
     {
@@ -1001,19 +1015,22 @@
         "G28-26",
         "G28-06"
       ],
-      "status": "not_started",
+      "status": "in_progress",
       "github_prs": [],
       "scope": "Provide current share links, printable issue cards, campaign-supplied images, QR generation for approved public destinations, social-preview previews and simple copy-link functions. Preserve required disclaimers and asset usage terms. Personal sharing remains separate from official-account publishing.",
       "acceptance": "QR codes resolve to approved stable public URLs, not private portal objects, expiring tokens or PII-bearing tracking links. Withdrawn assets are marked and removed from current collections. No automatic posting, supporter tracking or fabricated endorsement is introduced.",
       "evidence": "QR decode/link tests, current-asset/version checks, image rights review and mobile share behavior tests.",
       "external_inputs": "None beyond the listed dependencies.",
-      "contributing_prs": [],
-      "implementation_note": "No approved asset-sharing/QR versioning and withdrawal system.",
+      "contributing_prs": [
+        104,
+        123
+      ],
+      "implementation_note": "Tracker-free canonical URL sharing and on-demand public issue QR controls are implemented. Complete approved asset versioning and withdrawal remain unfinished.",
       "acceptance_review": {
-        "status": "not_started",
-        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "No approved asset-sharing/QR versioning and withdrawal system."
+        "status": "in_progress",
+        "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
+        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
+        "blocker": "Tracker-free canonical URL sharing and on-demand public issue QR controls are implemented. Complete approved asset versioning and withdrawal remain unfinished."
       }
     },
     {
@@ -1391,16 +1408,18 @@
       "acceptance": "Account deletion never promises to erase legally retained finance records or downloaded copies. No one can request another persons data by changing an ID. Cleanup is restart-safe, logged minimally and tested against protected-object/key references and active legal holds.",
       "evidence": "Retention/deletion fixtures, legal-hold tests, privacy-request identity checks and backup-expiry runbook.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Account deletion/export exist; legal holds, protected object cleanup and retention/backup tests are incomplete.",
+      "implementation_note": "Pending email retention and disabled-help export are repaired. Full legal holds, protected-object cleanup and backup lifecycle still require complete evidence.",
       "contributing_prs": [
         41,
-        95
+        95,
+        110,
+        122
       ],
       "acceptance_review": {
         "status": "in_progress",
-        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Account deletion/export exist; legal holds, protected object cleanup and retention/backup tests are incomplete."
+        "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
+        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
+        "blocker": "Pending email retention and disabled-help export are repaired. Full legal holds, protected-object cleanup and backup lifecycle still require complete evidence."
       }
     },
     {
@@ -1517,13 +1536,16 @@
       "acceptance": "Target public-page p75 LCP <=2.5s, INP <=200ms and CLS <=0.1 when sufficient field samples exist; use documented lab conditions before launch. Keep public initial compressed JS approximately <=100KB, excluding user-activated providers, unless a reviewed budget exception is justified. Slow services fail visibly without corrupting data.",
       "evidence": "Lab measurements, load/recovery tests, bundle budget report and later field-measurement plan; targets are not preclaimed results.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Images optimized; measured LCP/INP/CLS, load/fault and bundle acceptance not done.",
-      "contributing_prs": [],
+      "implementation_note": "Enforced first-render asset budgets are implemented and tested. Full LCP/INP/CLS, fault and load acceptance is not established by asset-size tests.",
+      "contributing_prs": [
+        105,
+        106
+      ],
       "acceptance_review": {
         "status": "in_progress",
-        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Images optimized; measured LCP/INP/CLS, load/fault and bundle acceptance not done."
+        "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
+        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
+        "blocker": "Enforced first-render asset budgets are implemented and tested. Full LCP/INP/CLS, fault and load acceptance is not established by asset-size tests."
       }
     },
     {
@@ -1546,16 +1568,17 @@
       "acceptance": "No open release-blocking finding or missing required cryptographic production evidence is waived by a green unit test. Independent review is attributed to its actual reviewer, not self-certified. Public-only deployment and protected-production approval remain distinct scopes.",
       "evidence": "Security test artifacts, threat-model closure, independent review evidence where required and exact scoped security status.",
       "external_inputs": "External expert review is a genuine independent dependency. Continue unrelated work; do not mark the gate complete without its evidence.",
-      "implementation_note": "Owner deferred paid external review; substantive complete AI source/security assessment and applicable controls still pending.",
+      "implementation_note": "Source-linked component/data-flow inventories exist. Complete applicable source/security verification remains; no deferred external human audit is treated as a development prerequisite.",
       "contributing_prs": [
         16,
-        66
+        66,
+        108
       ],
       "acceptance_review": {
         "status": "in_progress",
-        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Owner deferred paid external review; substantive complete AI source/security assessment and applicable controls still pending."
+        "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
+        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
+        "blocker": "Source-linked component/data-flow inventories exist. Complete applicable source/security verification remains; no deferred external human audit is treated as a development prerequisite."
       }
     },
     {
@@ -1610,14 +1633,15 @@
         33,
         43,
         63,
-        67
+        67,
+        111
       ],
-      "implementation_note": "Registry/deployed SHA hooks exist; live Engine Room refresh/failure/stale behavior unverified.",
+      "implementation_note": "A staff-only operational health dashboard is implemented. Exact deployed-source, freshness and outage evidence remain separate.",
       "acceptance_review": {
         "status": "in_progress",
-        "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Registry/deployed SHA hooks exist; live Engine Room refresh/failure/stale behavior unverified."
+        "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
+        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
+        "blocker": "A staff-only operational health dashboard is implemented. Exact deployed-source, freshness and outage evidence remain separate."
       }
     },
     {
@@ -2036,7 +2060,7 @@
     }
   ],
   "progress_evidence_note": "Expanded to 71 planned work units; original 61 and prior acceptance retained. New units remain in progress pending full acceptance and deployed evidence.",
-  "accepted_pull_requests": 91,
-  "accepted_prs_observed_at": "2026-10-17T13:05:51.523Z",
+  "accepted_pull_requests": 111,
+  "accepted_prs_observed_at": "2026-10-18T19:43:24Z",
   "pull_request_acceptance_rule": "Every real GitHub PR with a verified merged_at is accepted; no further package review is required to accept that PR. Fully complete planned work packages are counted separately."
 }
