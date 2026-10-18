@@ -10,12 +10,12 @@ import {visitorReport} from '../apps/api/src/visitor-report.mjs';
 import {renderPage} from '../scripts/public-renderer.mjs';
 test('events accept only allowed anonymous page metrics',()=>{
  const good={action:'pulse',path:'/issues/garden/',viewId:randomUUID(),seconds:22};
- assert.deepEqual(parseVisitorEvent(good),good);assert.equal(VISITOR_PAGES.length,8);
+ assert.deepEqual(parseVisitorEvent(good),good);assert.equal(VISITOR_PAGES.length,9);
  for(const bad of [{...good,path:'/api/admin/grants'},{...good,seconds:14401},{...good,seconds:-1},{...good,viewId:'id'}, {...good,email:'private'},{...good,action:'identify'}])assert.throws(()=>parseVisitorEvent(bad));
  assert.equal(visitorRange('month'),'month');assert.throws(()=>visitorRange('all'));
 });
 test('public templates contain first-party visitor script',()=>{
- for(const key of ['index','issues','kirk-evers','garden','cornerstone','volunteer','donate','notices'])
+ for(const key of ['index','issues','kirk-evers','garden','cornerstone','volunteer','donate','notices','eternal-liberty'])
   assert(renderPage(key).includes('/assets/visitor-analytics.js'));
 });
 test('development reporting does not claim live data',async()=>{
