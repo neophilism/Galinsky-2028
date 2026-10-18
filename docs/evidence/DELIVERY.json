@@ -174,9 +174,9 @@
     "source_sha": "c3ae2b1d32cc5a8869188e7cc3cf70edfb6037fb",
     "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
     "completed": 8,
-    "in_progress": 58,
-    "not_started": 5,
-    "observed_merged_prs": 91,
+    "in_progress": 60,
+    "not_started": 3,
+    "observed_merged_prs": 111,
     "observed_closed_unmerged_prs": 5,
     "ci_run_id": 38942587653,
     "ci_conclusion": "pending_after_registry_reconciliation",
@@ -184,10 +184,10 @@
     "private_preview_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
     "portal_preview_sha": "c263d8fd8a331b238ddc884b052c672558cee96e",
     "warning": "Snapshot now contains accepted GitHub PR merges; the original package-level audit is historical and does not reclassify merged PRs as unaccepted. Some larger planned functionality remains incomplete; production launch is not verified.",
-    "observed_open_prs": 0,
+    "observed_open_prs": 4,
     "pr_observation_at": "2026-10-17T13:05:51.523Z"
   },
-  "accepted_merged_prs": 91,
-  "accepted_prs_observed_at": "2026-10-17T13:05:51.523Z",
+  "accepted_merged_prs": 111,
+  "accepted_prs_observed_at": "2026-10-18T19:43:24Z",
   "acceptance_model": "A verified merge accepts the PR. Full work-package scope completion and production deployment are separately tracked and cannot revoke acceptance of already merged PRs."
 }
