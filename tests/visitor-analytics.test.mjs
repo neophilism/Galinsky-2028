@@ -36,5 +36,12 @@ test('collection is behind preview gate and enforces origin and strict body',asy
  assert.equal((await post({origin:'https://evil.test',authorization})).status,403);
  assert.equal((await post({origin:'http://127.0.0.1:7777',authorization},{...valid,email:'secret'})).status,400);
  assert.equal((await post({origin:'http://127.0.0.1:7777',authorization})).status,204);
- assert.deepEqual(events,[valid]);
+ const batch={path:'/',viewId:valid.viewId,events:[
+  {seq:1,kind:'accordion_open',target:'a1',detail:'none',amount:0},
+  {seq:2,kind:'click_heatmap',target:'p0',detail:'none',amount:234}
+ ]};
+ assert.equal((await post({origin:'http://127.0.0.1:7777',authorization},batch)).status,204);
+ assert.equal((await post({origin:'http://127.0.0.1:7777',authorization},{...batch,
+  events:[{...batch.events[0],detail:'person@example.test'}]})).status,400);
+ assert.deepEqual(events,[valid,batch]);
 });
