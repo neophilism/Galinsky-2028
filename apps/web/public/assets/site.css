@@ -107,6 +107,14 @@ a.resource-link:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 .issue-share .btn:focus-visible{outline:3px solid var(--red);outline-offset:3px}
 @media(max-width:390px){.issue-share-actions{flex-direction:column}.issue-share-actions .btn{width:100%;justify-content:center}}
 
+/* Local, lazy-loaded QR: intentional production-only action and printable quiet zone. */
+.issue-share-qr{margin:18px 0 10px;max-width:290px}
+.issue-share-qr[hidden]{display:none!important}
+.issue-share-qr-canvas{display:inline-block;line-height:0;background:#fff;padding:16px;border:1px solid #b9c8d7;border-radius:4px;max-width:100%}
+.issue-share-qr-canvas svg{display:block;width:224px;max-width:100%;height:auto;aspect-ratio:1 / 1}
+.issue-share-qr p{margin-top:9px;line-height:1.4}
+@media print{.issue-share [data-share-action]{display:none}.issue-share-qr-canvas{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
 /* Explicit persistent control for the decorative flag canvas. */
 .flag-motion-toggle{position:absolute;z-index:5;right:clamp(12px,3vw,48px);bottom:22px;padding:10px 14px;min-height:44px;background:#fff;color:#0a3161;border:2px solid #0a3161;border-radius:3px;font-size:12px;font-weight:800;cursor:pointer;box-shadow:0 2px 8px #08284828}
 .flag-motion-toggle:hover{background:#eaf0f7}
