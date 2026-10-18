@@ -1,7 +1,7 @@
 -- Anonymous page-view metrics; no account, IP, browser or cross-page identity.
 CREATE TABLE IF NOT EXISTS g28.page_visits(
  view_id uuid PRIMARY KEY,
- page text NOT NULL CHECK(page IN ('/','/issues/','/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/','/volunteer/','/donate/','/notices/','/policies/eternal-liberty/','/policies/eternal-liberty/')),
+ page text NOT NULL CHECK(page IN ('/','/issues/','/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/','/volunteer/','/donate/','/notices/','/policies/eternal-liberty/')),
  started_at timestamptz NOT NULL DEFAULT now(),
  last_seen_at timestamptz NOT NULL DEFAULT now(),
  ended_at timestamptz,
@@ -21,7 +21,7 @@ CREATE OR REPLACE FUNCTION g28.ingest_page_visit(p_id uuid,p_page text,p_action 
  RETURNS void LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog,g28 AS $$
 DECLARE should_prune boolean;
 BEGIN
- IF p_id IS NULL OR p_page NOT IN ('/','/issues/','/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/','/volunteer/','/donate/','/notices/')
+ IF p_id IS NULL OR p_page NOT IN ('/','/issues/','/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/','/volunteer/','/donate/','/notices/','/policies/eternal-liberty/')
   OR p_action NOT IN ('start','pulse','end') OR p_seconds IS NULL OR p_seconds NOT BETWEEN 0 AND 14400 THEN
   RAISE EXCEPTION 'Invalid visitor measurement' USING ERRCODE='22023';
  END IF;
