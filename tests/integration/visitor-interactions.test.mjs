@@ -38,8 +38,10 @@ test('anonymous interactions are idempotent, reported only in aggregate, and pri
   await pool.query(await readFile('db/migrations/001_foundation.sql','utf8'));
   await pool.query(await readFile('db/migrations/20261017_visitor_analytics.sql','utf8'));
   await pool.query(await readFile('db/migrations/20261018_visitor_interactions.sql','utf8'));
-  await write(viewId,events);
-  await write(viewId,events);
+  for(const batch of [events.slice(0,16),events.slice(16)]){
+   await write(viewId,batch);
+   await write(viewId,batch);
+  }
   let stored=await pool.query('SELECT count(*)::integer AS n FROM g28.page_events WHERE view_id=$1',[viewId]);
   assert.equal(stored.rows[0].n,events.length,'Retransmitted batch must not double count');
   const report=await visitorReport({pool},'day','/issues/kirk-evers/');
