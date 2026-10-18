@@ -49,8 +49,27 @@ test('CSRF, cross-origin and unexpected request fields fail without storage call
 test('feature disabled and rate limits remain real gates',async()=>{
  for(const options of [{enabled:false},{rate:false}]){const s=await setup(options);try{assert.equal((await s.app.inject({url:'/api/editorial/contract',headers:s.headers})).statusCode,options.enabled===false?503:429);assert.equal(s.calls.length,0);}finally{await s.app.close();}}
 });
-test('generic editor assets serve with private caching and no inline executable code',async()=>{
- const s=await setup();try{for(const url of ['/editor/campaigns','/editor/campaigns/editor.mjs','/editor/campaigns/editor.css']){const r=await s.app.inject({url});assert.equal(r.statusCode,200);assert.match(r.headers['cache-control'],/private/);assert.match(r.headers['content-security-policy'],/script-src 'self'/);}const page=(await s.app.inject({url:'/editor/campaigns'})).body;assert.ok(page.includes('Side-by-side text'));assert.ok(page.includes('Enable day/night mode'));}finally{await s.app.close();}
+test('generic editor assets are private, authorized and prohibit serving source to anonymous roles',async()=>{
+ const s=await setup();try{
+  for(const url of ['/editor/campaigns','/editor/campaigns/editor.mjs','/editor/campaigns/editor.css']){
+   const guest=await s.app.inject({url});
+   assert.equal(guest.statusCode,401);
+   const r=await s.app.inject({url,headers:s.headers});
+   assert.equal(r.statusCode,200);assert.match(r.headers['cache-control'],/private/);
+   assert.match(r.headers.vary,/Cookie/);assert.match(r.headers['content-security-policy'],/script-src 'self'/);
+  }
+  const page=(await s.app.inject({url:'/editor/campaigns',headers:s.headers})).body;
+  assert.ok(page.includes('Side-by-side text'));assert.ok(page.includes('Enable day/night mode'));
+ }finally{await s.app.close();}
+ for(const role of ['volunteer','auditor','treasurer','reviewer',null]){
+  const s=await setup({role});try{
+   for(const url of ['/editor/campaigns','/editor/campaigns/editor.mjs','/editor/campaigns/editor.css'])
+    assert.equal((await s.app.inject({url,headers:s.headers})).statusCode,403);
+  }finally{await s.app.close();}
+ }
+ const off=await setup({enabled:false});try{
+  assert.equal((await off.app.inject({url:'/editor/campaigns',headers:off.headers})).statusCode,503);
+ }finally{await off.app.close();}
 });
 
 test('full-page draft preview is protected and cannot publish or execute submitted markup',async()=>{

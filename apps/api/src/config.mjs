@@ -20,6 +20,7 @@ export function loadConfig(env=process.env){
  const signup=env.SIGNUP_ENABLED==='true';
  const mailDeliveryMode=env.MAIL_DELIVERY_MODE||'disabled';
  const adminLoginReady=env.G28_ADMIN_LOGIN_ENABLED==='true';
+ const campaignEditorEnabled=adminLoginReady&&env.G28_CAMPAIGN_EDITOR_ENABLED==='true'&&Boolean(env.DATABASE_URL);
  // Never bootstrap by password knowledge alone: actual mailbox ownership and
  // dedicated email one-time link must be proven before any admin role is issued.
  const adminOwnerEmailKey=adminLoginReady?emailKey(email(env.G28_OWNER_ADMIN_EMAIL),pepper):null;
@@ -45,5 +46,5 @@ export function loadConfig(env=process.env){
  assert(env.STAFF_IDENTITY_ENABLED!=='true','staff_unavailable','A reviewed staff identity integration is not installed.',503);
  assert(env.DONATIONS_ENABLED!=='true','fundraising_unavailable','A production fundraising adapter and release evidence are not installed.',503);
  if(production)assert(env.DATABASE_URL,'database_required','Production requires the assigned database.',503);
- return {coordination,helpRequests,production,previewGate,publicOrigin,portalOrigin,deliveryKey,pepper,signup,adminLoginReady,adminOwnerEmailKey,treasuryKey,mailReady,mailDeliveryMode,mailKey:env.RESEND_API_KEY,mailFrom:env.MAIL_FROM,databaseUrl:env.DATABASE_URL,port:Number(env.PORT||4322),host:env.HOST||(production?'0.0.0.0':'127.0.0.1'),commit:safeReleaseCommit(env.RENDER_GIT_COMMIT),termsVersion:'2026-10-10'};
+ return {coordination,helpRequests,campaignEditorEnabled,production,previewGate,publicOrigin,portalOrigin,deliveryKey,pepper,signup,adminLoginReady,adminOwnerEmailKey,treasuryKey,mailReady,mailDeliveryMode,mailKey:env.RESEND_API_KEY,mailFrom:env.MAIL_FROM,databaseUrl:env.DATABASE_URL,port:Number(env.PORT||4322),host:env.HOST||(production?'0.0.0.0':'127.0.0.1'),commit:safeReleaseCommit(env.RENDER_GIT_COMMIT),termsVersion:'2026-10-10'};
 }

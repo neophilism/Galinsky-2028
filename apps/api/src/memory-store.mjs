@@ -1,4 +1,5 @@
 import {memoryCoordination,removeAccountCoordination,ownCoordination} from './coordination-store.mjs';
+import {memoryActivityReview} from './activity-review-store.mjs';
 import {memoryHelp} from './help-store.mjs';
 // Explicit development/test store only. server.mjs rejects it in production.
 import {randomUUID} from 'node:crypto';
@@ -94,4 +95,4 @@ export class MemoryStore{
  async close(){}
 }
 
-Object.assign(MemoryStore.prototype, memoryCoordination, memoryHelp);
+Object.assign(MemoryStore.prototype, memoryCoordination, memoryHelp, memoryActivityReview);
