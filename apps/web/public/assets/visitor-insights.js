@@ -35,7 +35,8 @@
   }
  }
  function enterFunnel(){
-  if(path==='/donate/')stages('donate_view');
+  if(path==='/')stages('home_view');
+  else if(path==='/donate/')stages('donate_view');
   else if(path==='/volunteer/')stages('volunteer_view');
   else if(path==='/issues/')stages('issues_view');
   else if(path.startsWith('/issues/')||path.startsWith('/policies/'))stages('policy_view');
@@ -168,7 +169,12 @@
    },750);
    timeouts.push(t);
   }
-  if(path==='/donate/'){
+  if(path==='/'){
+   const dest=href?.pathname||'';
+   if(dest==='/issues/'||dest.startsWith('/issues/')||dest.startsWith('/policies/'))stages('home_issues');
+   if(dest==='/donate/'||target.closest('#donate'))stages('home_donate');
+   if(dest==='/volunteer/'||target.closest('#meet-phillip .btn'))stages('home_volunteer');
+  }else if(path==='/donate/'){
    if(target.closest('.amount,.other-amount,[data-frequency]'))stages('donate_choice');
    if(target.closest('.donate-continue,[href="/donate/continue"],[href^="/donate/stripe"]'))stages('donate_handoff');
   }else if(path==='/volunteer/'){
