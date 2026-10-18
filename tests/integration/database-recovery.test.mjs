@@ -48,6 +48,6 @@ test('complete encrypted PostgreSQL recovery is authenticated, isolated, atomic 
   console.log(JSON.stringify({event:'synthetic_recovery_drill',backupMs:result.durationMs,restoreMs:restored.durationMs,bytes:result.bytes,schemaVersions:before.rowCount,productionRecoveryProven:false}));
  }finally{
   await source?.end();await target?.end();
-  await admin.query('DROP DATABASE IF EXISTS '+sourceName+' WITH (FORCE)');await admin.query('DROP DATABASE IF EXISTS '+targetName+' WITH (FORCE)');await admin.end();await rm(dir,{recursive:true,force:true});
+  await admin.query('DROP DATABASE IF EXISTS '+sourceName);await admin.query('DROP DATABASE IF EXISTS '+targetName);await admin.end();await rm(dir,{recursive:true,force:true});
  }
 });
