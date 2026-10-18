@@ -11,8 +11,8 @@
   ],
   "progressEvidenceNote": "Expanded to 71 planned work units; original 61 preserved. PR #97 provides partial implementation of G28-062..G28-071, with pending full acceptance, merge and live deployment.",
   "schemaVersion": 1,
-  "roadmapVersion": 5,
-  "observedAt": "2026-10-17T13:05:51.523Z",
+  "roadmapVersion": 6,
+  "observedAt": "2026-10-18T19:43:24Z",
   "units": [
     {
       "id": "G28-001",
@@ -205,13 +205,16 @@
       "prs": [],
       "contributingPrs": [
         35,
-        96
+        96,
+        103,
+        107,
+        118
       ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
       "status": "in_progress",
-      "acceptanceBlocker": "Original static dot-flag fallback and its CSS URL repaired. Preserve the owner-requested absence of pause controls from PR #35. Measured CPU/mobile motion and remaining visual evidence are still outstanding.",
+      "acceptanceBlocker": "Persistent visitor motion control is implemented in PR #118. Full mobile/CPU and final visual evidence remain unverified; the former no-pause note is superseded.",
       "acceptanceReport": "docs/evidence/PUBLIC_QUALITY_20261016.md"
     },
     {
@@ -470,13 +473,15 @@
       "origin": "original",
       "prs": [],
       "contributingPrs": [
-        61
+        61,
+        110,
+        112
       ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
       "status": "in_progress",
-      "acceptanceBlocker": "Durable outbox exists; verified live sender, delivery callbacks, opt-out suppression and retries remain.",
+      "acceptanceBlocker": "Outbox retention and owner-only verified email login are implemented. Live provider callback and complete volunteer-delivery evidence remain outstanding.",
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
@@ -536,13 +541,14 @@
       "origin": "original",
       "prs": [],
       "contributingPrs": [
-        14
+        14,
+        113
       ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
       "status": "in_progress",
-      "acceptanceBlocker": "Reading acknowledgments exist; orientation/training lifecycle and activated prerequisites are incomplete.",
+      "acceptanceBlocker": "Versioned orientation and saved knowledge checks are implemented. Complete training lifecycle and activated prerequisite evidence remain outstanding.",
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
@@ -550,12 +556,15 @@
       "title": "Implement jurisdiction/activity activation gates",
       "origin": "original",
       "prs": [],
-      "contributingPrs": [],
+      "contributingPrs": [
+        114,
+        124
+      ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
       "status": "in_progress",
-      "acceptanceBlocker": "Fail-closed activity rules exist; live verified jurisdiction module admin/publish/revoke flow is missing.",
+      "acceptanceBlocker": "Published activity information and independent revision-pinned review rules are implemented. Persistent review transitions and full publication/live integration remain unfinished.",
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
@@ -622,12 +631,17 @@
       "title": "Implement secure incident, help and correction workflows",
       "origin": "original",
       "prs": [],
-      "contributingPrs": [],
+      "contributingPrs": [
+        119,
+        120,
+        121,
+        122
+      ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
-      "status": "not_started",
-      "acceptanceBlocker": "No secure protected incident intake, reply or private-attachment workflow.",
+      "status": "in_progress",
+      "acceptanceBlocker": "Bounded account-scoped structured help, route/storage isolation, browser journeys and retained privacy export are implemented. Protected incident text, private attachments and secure staff replies remain outside this partial feature.",
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
@@ -635,12 +649,15 @@
       "title": "Implement approved sharing and campaign asset tools",
       "origin": "original",
       "prs": [],
-      "contributingPrs": [],
+      "contributingPrs": [
+        104,
+        123
+      ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
-      "status": "not_started",
-      "acceptanceBlocker": "No approved asset-sharing/QR versioning and withdrawal system.",
+      "status": "in_progress",
+      "acceptanceBlocker": "Tracker-free canonical URL sharing and on-demand public issue QR controls are implemented. Complete approved asset versioning and withdrawal remain unfinished.",
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
@@ -851,13 +868,15 @@
       "prs": [],
       "contributingPrs": [
         41,
-        95
+        95,
+        110,
+        122
       ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
       "status": "in_progress",
-      "acceptanceBlocker": "Account deletion/export exist; legal holds, protected object cleanup and retention/backup tests are incomplete.",
+      "acceptanceBlocker": "Pending email retention and disabled-help export are repaired. Full legal holds, protected-object cleanup and backup lifecycle still require complete evidence.",
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
@@ -912,12 +931,15 @@
       "title": "Meet performance, resilience and load budgets",
       "origin": "original",
       "prs": [],
-      "contributingPrs": [],
+      "contributingPrs": [
+        105,
+        106
+      ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
       "status": "in_progress",
-      "acceptanceBlocker": "Images optimized; measured LCP/INP/CLS, load/fault and bundle acceptance not done.",
+      "acceptanceBlocker": "Enforced first-render asset budgets are implemented and tested. Full LCP/INP/CLS, fault and load acceptance is not established by asset-size tests.",
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
@@ -927,13 +949,14 @@
       "prs": [],
       "contributingPrs": [
         16,
-        66
+        66,
+        108
       ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
       "status": "in_progress",
-      "acceptanceBlocker": "Owner deferred paid external review; substantive complete AI source/security assessment and applicable controls still pending.",
+      "acceptanceBlocker": "Source-linked component/data-flow inventories exist. Complete applicable source/security verification remains; no deferred external human audit is treated as a development prerequisite.",
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
@@ -963,13 +986,14 @@
         33,
         43,
         63,
-        67
+        67,
+        111
       ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
       "status": "in_progress",
-      "acceptanceBlocker": "Registry/deployed SHA hooks exist; live Engine Room refresh/failure/stale behavior unverified.",
+      "acceptanceBlocker": "A staff-only operational health dashboard is implemented. Exact deployed-source, freshness and outage evidence remain separate.",
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md"
     },
     {
@@ -1254,6 +1278,366 @@
     }
   ],
   "pullRequests": [
+    {
+      "id": 4911863028,
+      "number": 125,
+      "title": "Persist staff activity review and revision transitions transactionally",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/125",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-10-18T18:54:39Z",
+      "updatedAt": "2026-10-18T18:55:05Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "27b9c81212d3e48f939a56b536e04a64f5ca1684",
+      "baseRef": "main",
+      "mergeCommitSha": "f1374f6a2b2ce72d3fb41148b6dc5d6f41b7e2ab"
+    },
+    {
+      "id": 4911833349,
+      "number": 124,
+      "title": "Implement revision-pinned two-verifier activity publication rules",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/124",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-18T18:51:09Z",
+      "updatedAt": "2026-10-18T18:55:02Z",
+      "closedAt": "2026-10-18T18:55:02Z",
+      "mergedAt": "2026-10-18T18:55:02Z",
+      "headSha": "9974eb9ae2105b9da4b7b8b6e5895472e8b041a0",
+      "baseRef": "main",
+      "mergeCommitSha": "42ac2c89a85633fbe1fdd97abc3f8872abf0bb7a"
+    },
+    {
+      "id": 4911808366,
+      "number": 123,
+      "title": "Integrate validated on-demand QR sharing into current campaign site",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/123",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-18T18:48:07Z",
+      "updatedAt": "2026-10-18T19:42:11Z",
+      "closedAt": "2026-10-18T19:42:11Z",
+      "mergedAt": "2026-10-18T19:42:11Z",
+      "headSha": "4e482b89467953dcabb1726830d54611cbb26fdc",
+      "baseRef": "main",
+      "mergeCommitSha": "42aac8731e222637f5a48a5e1c5940568604ed14"
+    },
+    {
+      "id": 4911764961,
+      "number": 122,
+      "title": "Keep privacy export complete after disabling help intake",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/122",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-18T18:42:34Z",
+      "updatedAt": "2026-10-18T18:47:50Z",
+      "closedAt": "2026-10-18T18:47:50Z",
+      "mergedAt": "2026-10-18T18:47:49Z",
+      "headSha": "d2bec3929a596d445e923721e9d5f0a09c1b244a",
+      "baseRef": "main",
+      "mergeCommitSha": "56be7935567397505c46aad442fbd707f69c1cb1"
+    },
+    {
+      "id": 4911747938,
+      "number": 121,
+      "title": "Verify structured help intake and withdrawal in Chromium, Firefox and WebKit",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/121",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-18T18:40:06Z",
+      "updatedAt": "2026-10-18T18:44:08Z",
+      "closedAt": "2026-10-18T18:44:07Z",
+      "mergedAt": "2026-10-18T18:44:07Z",
+      "headSha": "e93c49ab05831d2d5086c427a32b8b1ccb7c40cc",
+      "baseRef": "main",
+      "mergeCommitSha": "ceacd5dadc68b8c89388929338ea719ccf493ecc"
+    },
+    {
+      "id": 4911734994,
+      "number": 120,
+      "title": "Add guarded volunteer help and correction workflows",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/120",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-18T18:38:14Z",
+      "updatedAt": "2026-10-18T18:42:53Z",
+      "closedAt": "2026-10-18T18:42:53Z",
+      "mergedAt": "2026-10-18T18:42:53Z",
+      "headSha": "df03f05fccce866444665ed3c52a8db0c00aa92d",
+      "baseRef": "main",
+      "mergeCommitSha": "86fe3cfa403aaecca9db777234acf8c70dd25cba"
+    },
+    {
+      "id": 4911710734,
+      "number": 119,
+      "title": "Build private structured help-request foundation with PostgreSQL isolation",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/119",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-18T18:34:47Z",
+      "updatedAt": "2026-10-18T18:38:41Z",
+      "closedAt": "2026-10-18T18:38:41Z",
+      "mergedAt": "2026-10-18T18:38:41Z",
+      "headSha": "736491d6034a7f96fd3d41725d535165806aa520",
+      "baseRef": "main",
+      "mergeCommitSha": "158f2dfa5148f488a45fa8974b3f754539a66c46"
+    },
+    {
+      "id": 4909219160,
+      "number": 118,
+      "title": "Give visitors persistent control over homepage flag animation",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/118",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-18T12:49:46Z",
+      "updatedAt": "2026-10-18T12:55:00Z",
+      "closedAt": "2026-10-18T12:55:00Z",
+      "mergedAt": "2026-10-18T12:55:00Z",
+      "headSha": "420452e3d2fee997806f472311825377b497c237",
+      "baseRef": "main",
+      "mergeCommitSha": "1263ec721c76a8e6ab2384947d5ab467b074ecef"
+    },
+    {
+      "id": 4904542738,
+      "number": 117,
+      "title": "Add opt-in granular website engagement analytics to the protected admin dashboard",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/117",
+      "state": "open",
+      "draft": true,
+      "createdAt": "2026-10-17T22:41:02Z",
+      "updatedAt": "2026-10-18T16:32:18Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "24e106d5841b0896d42bde1dca733260f3cbb24c",
+      "baseRef": "main",
+      "mergeCommitSha": null
+    },
+    {
+      "id": 4904538523,
+      "number": 116,
+      "title": "Add Eternal Liberty standalone space policy",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/116",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-17T22:40:25Z",
+      "updatedAt": "2026-10-17T22:49:25Z",
+      "closedAt": "2026-10-17T22:49:25Z",
+      "mergedAt": "2026-10-17T22:49:25Z",
+      "headSha": "8195c0ac42e6cef70318b3d0fe26f479020a12b3",
+      "baseRef": "main",
+      "mergeCommitSha": "22012b2b92c5bfb831a12d91bf2fbebfcc2caf3a"
+    },
+    {
+      "id": 4904270383,
+      "number": 115,
+      "title": "Protect campaign editor source and add verified staff navigation",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/115",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-10-17T21:58:40Z",
+      "updatedAt": "2026-10-18T19:43:24Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "d15098b8f6b2863ad20f4b27aed3cce796709cf3",
+      "baseRef": "feat/published-activity-module-readiness-20261017",
+      "mergeCommitSha": "75bb576729994b82d5c92b56f781137c2f43ef44"
+    },
+    {
+      "id": 4904247017,
+      "number": 114,
+      "title": "Display only current published activity requirements without authorization",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/114",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-17T21:54:45Z",
+      "updatedAt": "2026-10-17T21:59:05Z",
+      "closedAt": "2026-10-17T21:59:05Z",
+      "mergedAt": "2026-10-17T21:59:05Z",
+      "headSha": "fa8eafd56cda4df4d20bed6133cfd18bffa9db42",
+      "baseRef": "main",
+      "mergeCommitSha": "0869987577c7b4529e2f9ea6671b52354f8fb6a5"
+    },
+    {
+      "id": 4904224900,
+      "number": 113,
+      "title": "Add versioned private volunteer orientation and saved knowledge check",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/113",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-17T21:51:08Z",
+      "updatedAt": "2026-10-17T21:55:26Z",
+      "closedAt": "2026-10-17T21:55:26Z",
+      "mergedAt": "2026-10-17T21:55:26Z",
+      "headSha": "a48de9914d8be00f7e4f8a1cd4a4e3007b9f96ec",
+      "baseRef": "main",
+      "mergeCommitSha": "0a425c31b84858a86061a13fd9bcf72439a4e516"
+    },
+    {
+      "id": 4904213257,
+      "number": 112,
+      "title": "Make owner-only verified email login work without opening volunteer signup",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/112",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-17T21:49:10Z",
+      "updatedAt": "2026-10-17T21:52:46Z",
+      "closedAt": "2026-10-17T21:52:46Z",
+      "mergedAt": "2026-10-17T21:52:46Z",
+      "headSha": "8b0817fdc8e1ab335ab5c6220e327d80a6c7c1b7",
+      "baseRef": "main",
+      "mergeCommitSha": "6f6d5c9e01f4cd55761c0834c54f736dbf5e7c71"
+    },
+    {
+      "id": 4904200622,
+      "number": 111,
+      "title": "Add manual, staff-only operational health dashboard",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/111",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-17T21:47:02Z",
+      "updatedAt": "2026-10-17T21:51:21Z",
+      "closedAt": "2026-10-17T21:51:21Z",
+      "mergedAt": "2026-10-17T21:51:21Z",
+      "headSha": "2a071bd880fdd7be6757f72046e5e875f2e93255",
+      "baseRef": "main",
+      "mergeCommitSha": "44719dab12bdda5f90d86a1eb45b909e208d3c59"
+    },
+    {
+      "id": 4904178256,
+      "number": 110,
+      "title": "Never purge queued or leased email deliveries during cleanup",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/110",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-17T21:43:25Z",
+      "updatedAt": "2026-10-17T21:47:20Z",
+      "closedAt": "2026-10-17T21:47:19Z",
+      "mergedAt": "2026-10-17T21:47:19Z",
+      "headSha": "7b9f4b32173be5dfbba7e6179379ea312b6b506d",
+      "baseRef": "main",
+      "mergeCommitSha": "072246880c81694bc06a6b30e080dfea6ca8eb4d"
+    },
+    {
+      "id": 4900969730,
+      "number": 109,
+      "title": "Generate offline printable QR codes for approved canonical issue pages",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/109",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-10-17T14:39:05Z",
+      "updatedAt": "2026-10-17T14:39:05Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "6fd88410988506e597e88905d8f55dc4df48490a",
+      "baseRef": "main",
+      "mergeCommitSha": null
+    },
+    {
+      "id": 4900922704,
+      "number": 108,
+      "title": "Replace empty E2EESA discovery placeholder with source-linked flow inventory",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/108",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-17T14:33:00Z",
+      "updatedAt": "2026-10-17T14:37:11Z",
+      "closedAt": "2026-10-17T14:37:11Z",
+      "mergedAt": "2026-10-17T14:37:11Z",
+      "headSha": "e6c3c57bc422acb03efe39f95acd7e8b7e4aff1c",
+      "baseRef": "main",
+      "mergeCommitSha": "3e86edc10f138247ab57fabdd6c54573880a5e69"
+    },
+    {
+      "id": 4900887663,
+      "number": 107,
+      "title": "Restore owner-approved no-pause-button hero and reduce flag CPU redraw",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/107",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-17T14:28:09Z",
+      "updatedAt": "2026-10-17T14:34:36Z",
+      "closedAt": "2026-10-17T14:34:36Z",
+      "mergedAt": "2026-10-17T14:34:36Z",
+      "headSha": "006717933925b8d12d8376a94c12c96c89501785",
+      "baseRef": "main",
+      "mergeCommitSha": "ad19b700b26bea0f791d7dabef2257e0b8447d89"
+    },
+    {
+      "id": 4900865181,
+      "number": 106,
+      "title": "Enforce performance budgets in local verification and CircleCI",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/106",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-17T14:24:51Z",
+      "updatedAt": "2026-10-17T14:30:14Z",
+      "closedAt": "2026-10-17T14:30:13Z",
+      "mergedAt": "2026-10-17T14:30:13Z",
+      "headSha": "d449c4a1fa1f35abfb9797900ccf1f3ce1a06c26",
+      "baseRef": "main",
+      "mergeCommitSha": "2575f6014120f4917583bd6a211ef89dc11d3259"
+    },
+    {
+      "id": 4900795853,
+      "number": 105,
+      "title": "Add measurable first-render asset budgets to production build CI",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/105",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-17T14:15:33Z",
+      "updatedAt": "2026-10-17T14:22:09Z",
+      "closedAt": "2026-10-17T14:22:09Z",
+      "mergedAt": "2026-10-17T14:22:09Z",
+      "headSha": "0d16aa96a68a0bdea5ec589ca0471fbe6927a4c3",
+      "baseRef": "main",
+      "mergeCommitSha": "dfc65dd88fe2e579c50d3376760f66cbe7ebcc07"
+    },
+    {
+      "id": 4900758431,
+      "number": 104,
+      "title": "Add tracker-free sharing of approved public issue URLs",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/104",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-17T14:11:08Z",
+      "updatedAt": "2026-10-17T14:34:30Z",
+      "closedAt": "2026-10-17T14:34:29Z",
+      "mergedAt": "2026-10-17T14:34:29Z",
+      "headSha": "76eb581c3beda28985cbce7a2109d90669d346d3",
+      "baseRef": "main",
+      "mergeCommitSha": "09152eb06f1e3ff2b17678b12f534a70160d4dff"
+    },
+    {
+      "id": 4900733487,
+      "number": 103,
+      "title": "Add persistent pause/resume and reduced-motion controls to hero animation",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/103",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-17T14:07:58Z",
+      "updatedAt": "2026-10-17T14:13:51Z",
+      "closedAt": "2026-10-17T14:13:51Z",
+      "mergedAt": "2026-10-17T14:13:51Z",
+      "headSha": "ea28cf2eeb19f6f6351561d563a96c46283ccdf5",
+      "baseRef": "main",
+      "mergeCommitSha": "6016d3f8b3e9d4067c145f92b0bb112b0ab6e68a"
+    },
+    {
+      "id": 4900295287,
+      "number": 102,
+      "title": "Correct PR acceptance accounting and refresh actual merged history",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/102",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-17T13:06:15Z",
+      "updatedAt": "2026-10-17T13:11:31Z",
+      "closedAt": "2026-10-17T13:11:31Z",
+      "mergedAt": "2026-10-17T13:11:31Z",
+      "headSha": "23e32472adb251c77b78527d53d1f0f4e6754362",
+      "baseRef": "main",
+      "mergeCommitSha": "26cb376f7c13d47c558c109a6eb9e2c6a90d026a"
+    },
     {
       "id": 4900128669,
       "number": 101,
@@ -1917,7 +2301,7 @@
     {
       "id": 4829596446,
       "number": 54,
-      "title": "SUPERSEDED: four-processor handoff already updated in merged PRs #55–57",
+      "title": "SUPERSEDED: four-processor handoff already updated in merged PRs #55\u201357",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/54",
       "state": "closed",
       "draft": false,
@@ -1947,7 +2331,7 @@
     {
       "id": 4829483935,
       "number": 52,
-      "title": "Recover September 2026 Kirk–Evers legislation source for private editorial review",
+      "title": "Recover September 2026 Kirk\u2013Evers legislation source for private editorial review",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/52",
       "state": "closed",
       "draft": false,
@@ -1977,7 +2361,7 @@
     {
       "id": 4829439565,
       "number": 48,
-      "title": "SUPERSEDED / PROHIBITED — do not use Stripe for campaign payments",
+      "title": "SUPERSEDED / PROHIBITED \u2014 do not use Stripe for campaign payments",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/48",
       "state": "closed",
       "draft": false,
@@ -2517,7 +2901,7 @@
     {
       "id": 4817446915,
       "number": 12,
-      "title": "Publish Kirk–Evers documents only with independent review and verified asset hashes",
+      "title": "Publish Kirk\u2013Evers documents only with independent review and verified asset hashes",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/12",
       "state": "closed",
       "draft": false,
@@ -2694,5 +3078,6 @@
       "baseRef": "main",
       "mergeCommitSha": "0e576ee14ec63717ed6598bc3157da0ba3b03395"
     }
-  ]
+  ],
+  "observationNote": "Complete paginated GitHub Pull Requests API observation retained in docs/evidence/PR_OBSERVATION_20261018.json; observedAt is its provider update watermark. Engine Room must independently fetch current PR state."
 }
