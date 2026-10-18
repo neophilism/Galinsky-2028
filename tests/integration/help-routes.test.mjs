@@ -53,6 +53,21 @@ test('help HTTP routes require verified account, exact origin, CSRF and zero nar
  }finally{await app.close();}
 });
 
+test('account export retains structured history when new intake is disabled',async()=>{
+ const store=new MemoryStore(),app=createApp({store,config:{...config,helpRequests:false}});
+ try{
+  const who=login(store);
+  const saved=await store.createHelpRequest(who.id,payload);
+  const response=await app.inject({url:'/api/account/export',headers:who.auth});
+  assert.equal(response.statusCode,200);
+  assert.deepEqual(response.json().helpRequests.map(item=>item.id),[saved.id]);
+  assert.equal((await post(app,'/api/help/requests',who.write,payload)).statusCode,503);
+  const still=await app.inject({url:'/api/account/export',headers:who.auth});
+  assert.deepEqual(still.json().helpRequests.map(item=>item.id),[saved.id]);
+  assert(!still.body.includes(who.id+'@example.test'));
+ }finally{await app.close();}
+});
+
 test('unreleased help workflows never accept or store account requests',async()=>{
  const store=new MemoryStore(),app=createApp({store,config:{...config,helpRequests:false}});
  try{

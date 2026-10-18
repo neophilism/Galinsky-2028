@@ -26,3 +26,8 @@ and export, verify an individually authenticated staff operator and MFA,
 establish documented response/retention/legal-hold procedures, then rerun
 real browser and PostgreSQL tests. Sensitive incident handling is G28-21/22
 and has no adapter here. G28-34 stays in progress.
+
+Account-data export always includes historical structured help cases, even
+when new intake is disabled. Older instances without migration 015 return an
+empty case list instead of failing account export; the live migration must
+still precede any request creation.
