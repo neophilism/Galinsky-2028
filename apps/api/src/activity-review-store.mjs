@@ -25,6 +25,10 @@ const audit=async(db,actor,action,id)=>db.query(
  [randomUUID(),actor.id,'activity_'+action,id,'success']
 );
 export const postgresActivityReview={
+ async listActivityReviewDrafts(){
+  const r=await this.pool.query('SELECT record FROM (SELECT DISTINCT ON (id) id,revision,record FROM g28.activity_modules ORDER BY id,revision DESC) latest ORDER BY id LIMIT 200');
+  return r.rows.map(x=>x.record);
+ },
  async createActivityReviewDraft(draft,actor,now=new Date()){
   const created=createActivityDraft(draft,actor,now),client=await this.pool.connect();
   try{
@@ -72,6 +76,7 @@ export const postgresActivityReview={
  }
 };
 export const memoryActivityReview={
+ async listActivityReviewDrafts(){return structuredClone([...(this.activityReviews?.values()||[])].map(h=>h.at(-1)).sort((a,b)=>a.id.localeCompare(b.id)).slice(0,200));},
  async createActivityReviewDraft(draft,actor,now=new Date()){
   const created=createActivityDraft(draft,actor,now);
   this.activityReviews??=new Map();

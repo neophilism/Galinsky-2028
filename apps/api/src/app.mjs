@@ -1,3 +1,4 @@
+import {registerActivityReview} from './activity-routes.mjs';
 import {STAFF_ROLES} from '../../../packages/core/staff-permissions.mjs';
 import {registerStaffSecurity} from './staff-security.mjs';
 import {registerCoordination} from './coordination-routes.mjs';
@@ -266,6 +267,7 @@ export function createApp({store,config,clock=()=>Date.now(),webauthn}){
    'Published module requirements are informational only. Your individual training, approved tool and jurisdiction must still be checked; this page never authorizes fieldwork.':
    'No regulated activity module is currently published. Reading a playbook or completing orientation never authorizes the activity.'};
  });
+ registerActivityReview(app,{store,config,clock,account,writeSession});
  registerStaffSecurity(app,{store,config,clock,account,writeSession,webauthn});
  registerCoordination(app,{store,config,clock,account,writeSession});
  registerHelpRoutes(app,{store,config,clock,account,writeSession,adminAccount});

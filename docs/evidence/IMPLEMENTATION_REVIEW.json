@@ -1,9 +1,9 @@
 {
-  "reviewedAt": "2026-10-18T23:32:52.506Z",
+  "reviewedAt": "2026-10-18T23:40:15.463Z",
   "counts": {
     "completed": 8,
-    "implemented": 47,
-    "in_progress": 14,
+    "implemented": 48,
+    "in_progress": 13,
     "not_started": 3
   },
   "units": [
@@ -12,7 +12,7 @@
       "title": "Freeze the approved design and establish the complete handoff",
       "status": "completed",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "AGENTS.md",
@@ -32,7 +32,7 @@
       "title": "Create the monorepo and mandatory CI",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "scripts/verify.mjs",
@@ -52,7 +52,7 @@
       "title": "Build the exact design system and shared navigation",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/web/public/assets/site.css",
@@ -72,7 +72,7 @@
       "title": "Establish runtime, databases and preview infrastructure",
       "status": "completed",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/config.mjs",
@@ -92,7 +92,7 @@
       "title": "Define the E2EESA security and privacy contract",
       "status": "in_progress",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "security/e2eesa-inventory.json",
@@ -108,7 +108,7 @@
       "title": "Implement versioned content and publication contracts",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/campaign-store.mjs",
@@ -128,7 +128,7 @@
       "title": "Implement media, document and provenance handling",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/campaign-image.mjs",
@@ -148,7 +148,7 @@
       "title": "Register the project and its full plan in Engine Room",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
@@ -164,7 +164,7 @@
       "title": "Build the complete candidate-forward homepage",
       "status": "completed",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "content/public/pages/index.html",
@@ -180,7 +180,7 @@
       "title": "Implement the network-flag hero motion",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/web/public/assets/motion.js",
@@ -200,7 +200,7 @@
       "title": "Build the issues overview and extensible issue collection",
       "status": "completed",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "content/public/pages/issues.html",
@@ -216,7 +216,7 @@
       "title": "Build the large top-of-page YouTube component",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/video.mjs",
@@ -236,7 +236,7 @@
       "title": "Build Kirk-Evers and the legislative document reader",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/policy-documents.mjs",
@@ -256,7 +256,7 @@
       "title": "Build The Garden issue page",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "content/public/pages/garden.html",
@@ -272,7 +272,7 @@
       "title": "Build The Cornerstone issue page",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "content/public/pages/cornerstone.html",
@@ -288,7 +288,7 @@
       "title": "Build the public volunteer page and role finder",
       "status": "completed",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/roles.mjs",
@@ -308,7 +308,7 @@
       "title": "Build the donation UI and exact disclosure components",
       "status": "completed",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/stripe-web-checkout.mjs",
@@ -324,7 +324,7 @@
       "title": "Finish public navigation, SEO and essential information pages",
       "status": "completed",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/indexing.mjs",
@@ -344,11 +344,11 @@
       "title": "Implement real signup, email verification and authentication",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/app.mjs",
-          "sha256": "ef60e28f46261a1205e94d4b12f9480615bc1c06cdd98d6e1c36b7f729759c3b"
+          "sha256": "162df3df8218263dd1161dfe3ad5498e992dcb6ea6d0ce64d1e6c8901634b014"
         },
         {
           "path": "tests/integration/api.test.mjs",
@@ -364,7 +364,7 @@
       "title": "Implement staff MFA and scoped authorization",
       "status": "in_progress",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/staff-security.mjs",
@@ -388,7 +388,7 @@
       "title": "Implement approved recipient keys and device enrollment",
       "status": "not_started",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "docs/security/BOUNDARIES.md",
@@ -404,7 +404,7 @@
       "title": "Implement protected volunteer records and submissions",
       "status": "not_started",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "docs/security/BOUNDARIES.md",
@@ -420,11 +420,11 @@
       "title": "Implement recovery, revocation and controlled export",
       "status": "in_progress",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/app.mjs",
-          "sha256": "ef60e28f46261a1205e94d4b12f9480615bc1c06cdd98d6e1c36b7f729759c3b"
+          "sha256": "162df3df8218263dd1161dfe3ad5498e992dcb6ea6d0ce64d1e6c8901634b014"
         }
       ],
       "softwareGap": "Implement protected recipient-device recovery and trust restoration; ordinary session revocation/export already work.",
@@ -436,7 +436,7 @@
       "title": "Implement consent-aware messaging and reliable jobs",
       "status": "in_progress",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/worker.mjs",
@@ -452,7 +452,7 @@
       "title": "Import and reconcile the volunteer source edition",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "content/materials/archive-manifest.json",
@@ -472,7 +472,7 @@
       "title": "Implement the authorized materials library and reader",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/material-outline.mjs",
@@ -492,11 +492,11 @@
       "title": "Build the volunteer first-hour workspace",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/portal/src/main.tsx",
-          "sha256": "dc7ad8ef6803deff354e6cf6df99726856b41770b263d1e2213f0a371775ccda"
+          "sha256": "6cb80c3e85a99c2b24b661297f1c5ab60d4aa7c68c9473f1e23e394dd9a542d9"
         },
         {
           "path": "packages/core/tasks.mjs",
@@ -512,7 +512,7 @@
       "title": "Implement orientation, training and versioned acknowledgments",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/orientation.mjs",
@@ -530,16 +530,28 @@
     {
       "id": "G28-029",
       "title": "Implement jurisdiction/activity activation gates",
-      "status": "in_progress",
-      "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "status": "implemented",
+      "implementation": "implemented",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/activity-review-store.mjs",
-          "sha256": "dcc2683489ea34b45878eb5048586bd5004b9603cd6452b4ac3ebe255f80c929"
+          "sha256": "395ba0fa2d25d443230136fa947cba7bbf24199eca7eb644046a202c1e630e4b"
+        },
+        {
+          "path": "apps/api/src/activity-routes.mjs",
+          "sha256": "8a3b408ebf8d175b7c90102b0d61d2e7802d611b1ab64eb2cd7aab796c8e7f47"
+        },
+        {
+          "path": "apps/portal/src/ActivityReview.tsx",
+          "sha256": "4c20e80ebe9c2bdd137e42352be12e03fe3732625066fd7a053f688f1a4eedaf"
+        },
+        {
+          "path": "tests/activity-routes.test.mjs",
+          "sha256": "01622b547aa599a4c262b387f0890011ae838289192a11b20c91229bc22fa40c"
         }
       ],
-      "softwareGap": "Connect the durable activity-review state machine to authorized staff HTTP/UI review and publication.",
+      "softwareGap": null,
       "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
       "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
     },
@@ -548,7 +560,7 @@
       "title": "Implement actionable tasks and activity reporting",
       "status": "in_progress",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/tasks.mjs",
@@ -564,7 +576,7 @@
       "title": "Convert every worksheet into an appropriate web tool",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/forms.mjs",
@@ -572,7 +584,7 @@
         },
         {
           "path": "apps/portal/src/main.tsx",
-          "sha256": "dc7ad8ef6803deff354e6cf6df99726856b41770b263d1e2213f0a371775ccda"
+          "sha256": "6cb80c3e85a99c2b24b661297f1c5ab60d4aa7c68c9473f1e23e394dd9a542d9"
         }
       ],
       "softwareGap": null,
@@ -584,7 +596,7 @@
       "title": "Implement local teams and captain coordination",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/coordination.mjs",
@@ -604,7 +616,7 @@
       "title": "Implement events and orientation participation",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/coordination.mjs",
@@ -624,7 +636,7 @@
       "title": "Implement secure incident, help and correction workflows",
       "status": "in_progress",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/help-routes.mjs",
@@ -640,7 +652,7 @@
       "title": "Implement approved sharing and campaign asset tools",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/web/public/assets/public.js",
@@ -664,7 +676,7 @@
       "title": "Implement official-tool handoffs for outreach roles",
       "status": "in_progress",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/activity.mjs",
@@ -680,7 +692,7 @@
       "title": "Build the nontechnical content/media administration UI",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/editor/editor.mjs",
@@ -700,7 +712,7 @@
       "title": "Build volunteer operations and support administration",
       "status": "in_progress",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/portal/src/AdminOperations.tsx",
@@ -716,7 +728,7 @@
       "title": "Validate the fundraising processor and actual account capabilities",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/stripe-campaign.mjs",
@@ -736,7 +748,7 @@
       "title": "Implement approved donation policy and election configuration",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/contribution-terms.mjs",
@@ -756,7 +768,7 @@
       "title": "Integrate hosted checkout with the approved donation design",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/stripe-web-checkout.mjs",
@@ -776,7 +788,7 @@
       "title": "Implement authenticated, idempotent payment webhooks",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/stripe-campaign.mjs",
@@ -796,7 +808,7 @@
       "title": "Implement the contribution ledger and reconciliation",
       "status": "in_progress",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/fundraising-ledger.mjs",
@@ -812,7 +824,7 @@
       "title": "Implement receipts and recurring donor self-service",
       "status": "not_started",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/stripe-web-checkout.mjs",
@@ -828,7 +840,7 @@
       "title": "Implement finance exception and remedy workflows",
       "status": "in_progress",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/fundraising-ledger.mjs",
@@ -844,7 +856,7 @@
       "title": "Implement controlled treasury reporting and exports",
       "status": "in_progress",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/treasury-vault.mjs",
@@ -860,7 +872,7 @@
       "title": "Harden and test the full donation system",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "tests/stripe-outage-routing.test.mjs",
@@ -880,7 +892,7 @@
       "title": "Complete treasury and fundraising release acceptance",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/stripe-campaign.mjs",
@@ -900,7 +912,7 @@
       "title": "Implement retention, privacy requests and secure lifecycle cleanup",
       "status": "in_progress",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/postgres-store.mjs",
@@ -916,7 +928,7 @@
       "title": "Implement privacy-preserving campaign measurement",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/visitor-report.mjs",
@@ -936,7 +948,7 @@
       "title": "Complete accessibility across public and authenticated journeys",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "tests/browser/journeys.mjs",
@@ -956,7 +968,7 @@
       "title": "Complete visual fidelity and cross-browser regression testing",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "tests/browser/journeys.mjs",
@@ -972,7 +984,7 @@
       "title": "Meet performance, resilience and load budgets",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "scripts/performance-budget.mjs",
@@ -992,7 +1004,7 @@
       "title": "Complete application security review and remediation",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "docs/security/BOUNDARIES.md",
@@ -1012,7 +1024,7 @@
       "title": "Prove durable jobs, backups and disaster recovery",
       "status": "in_progress",
       "implementation": "remaining_implementation",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/worker.mjs",
@@ -1028,7 +1040,7 @@
       "title": "Connect real deployment monitoring and Engine Room freshness",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/ops-health.mjs",
@@ -1048,7 +1060,7 @@
       "title": "Run the complete staging acceptance rehearsal",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "scripts/verify.mjs",
@@ -1068,7 +1080,7 @@
       "title": "Close publication inputs and operational launch gates",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/policy-documents.mjs",
@@ -1088,7 +1100,7 @@
       "title": "Deploy the production release and enable approved functions",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "render.yaml",
@@ -1108,7 +1120,7 @@
       "title": "Verify the live site and finish the durable handoff",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "README.md",
@@ -1128,7 +1140,7 @@
       "title": "Individual, revocable private policy-review accounts",
       "status": "completed",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md",
@@ -1152,7 +1164,7 @@
       "title": "Generic editorial contracts, plan and canonical tracking",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/campaign-content.mjs",
@@ -1168,7 +1180,7 @@
       "title": "Persistent campaign revisions, assets and site settings",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/campaign-store.mjs",
@@ -1184,7 +1196,7 @@
       "title": "Shared templates and field inventory",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/campaign-template.mjs",
@@ -1200,7 +1212,7 @@
       "title": "Server-rendered published releases and safe caching",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/web/private-preview.mjs",
@@ -1216,7 +1228,7 @@
       "title": "Protected editorial APIs and lifecycle operations",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/campaign-routes.mjs",
@@ -1232,7 +1244,7 @@
       "title": "Unified text, theme and hero editor",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/editor/editor.mjs",
@@ -1248,7 +1260,7 @@
       "title": "Single and side-by-side editorial comparison",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/editor/editor.mjs",
@@ -1268,7 +1280,7 @@
       "title": "Optional default, day and night assignments",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "packages/core/campaign-mode.mjs",
@@ -1284,7 +1296,7 @@
       "title": "Private initial editorial bootstrap",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/api/src/campaign-store.mjs",
@@ -1304,7 +1316,7 @@
       "title": "Integrated live acceptance and operator handoff",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "tests/browser/campaign-public.mjs",
@@ -1324,7 +1336,7 @@
       "title": "Privacy-preserving visitor engagement analytics",
       "status": "implemented",
       "implementation": "implemented",
-      "reviewedAt": "2026-10-18T23:32:52.506Z",
+      "reviewedAt": "2026-10-18T23:40:15.463Z",
       "sourceFiles": [
         {
           "path": "apps/portal/src/AdminVisitors.tsx",

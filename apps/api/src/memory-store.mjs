@@ -88,7 +88,7 @@ export class MemoryStore{
  async listMaterials(){return structuredClone(this.materials);}
  async listPublishedActivityModules(){
   const newest=new Map();
-  for(const m of this.activityModules||[]){const old=newest.get(m.id);if(!old||m.revision>old.revision)newest.set(m.id,m);}
+  for(const m of [...(this.activityModules||[]),...[...(this.activityReviews?.values()||[])].flat()]){const old=newest.get(m.id);if(!old||m.revision>old.revision)newest.set(m.id,m);}
   return structuredClone([...newest.values()].filter(m=>m.status==='published')
    .sort((a,b)=>a.id.localeCompare(b.id)).slice(0,50));
  }
