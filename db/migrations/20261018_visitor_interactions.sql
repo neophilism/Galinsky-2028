@@ -26,7 +26,7 @@ DECLARE
  event_prefix text;
 BEGIN
  IF p_id IS NULL OR p_page IS NULL OR p_page NOT IN
- ('/','/issues/','/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/','/volunteer/','/donate/','/notices/')
+ ('/','/issues/','/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/','/volunteer/','/donate/','/notices/','/policies/eternal-liberty/')
  OR jsonb_typeof(p_events) IS DISTINCT FROM 'array'
  OR jsonb_array_length(p_events) NOT BETWEEN 1 AND 16 THEN
   RAISE EXCEPTION 'Invalid analytics batch' USING ERRCODE='22023';
