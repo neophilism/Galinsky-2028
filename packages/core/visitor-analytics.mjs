@@ -34,12 +34,19 @@ export const VISITOR_ACTIONS=Object.freeze([
  'section_enter','section_time','scroll_depth','hover_time',
  'field_focus','field_change','field_invalid','form_submit','form_abandon',
  'media_play','media_pause','media_end','media_seek','media_progress',
- 'copy','share','download','click_heatmap'
+ 'copy','share','download','click_heatmap',
+ 'rage_click','dead_click','scroll_direction','scroll_speed','navigation_attempt','navigation_stall','navigation_http_error',
+ 'javascript_error','promise_rejection','resource_error','resource_slow','device_class','funnel_step',
+ 'perf_ttfb','perf_fcp','perf_lcp','perf_cls','perf_interaction_delay','perf_longtask',
+ 'youtube_play','youtube_pause','youtube_end','youtube_progress','youtube_error'
 ]);
 export const VISITOR_DETAILS=Object.freeze([
  'none','home','issues','kirk-evers','garden','cornerstone','volunteer','donate','notices','eternal-liberty',
  'portal','external','anchor','document','other',
- 'd10','d25','d50','d75','d90','d100','q25','q50','q75','q100'
+ 'd10','d25','d50','d75','d90','d100','q25','q50','q75','q100',
+ 'up','down','slow','medium','fast','mobile','tablet','desktop','script','image','style','font','media',
+ 'http4','http5','donate_view','donate_choice','donate_handoff','volunteer_view','volunteer_role',
+ 'volunteer_handoff','issues_view','issues_policy','policy_view','policy_media'
 ]);
 const actionSet=new Set(VISITOR_ACTIONS);
 const detailSet=new Set(VISITOR_DETAILS);
@@ -50,7 +57,12 @@ const targetTypes={
  section_enter:'s',section_time:'s',scroll_depth:'p',hover_time:'l',
  field_focus:'f',field_change:'f',field_invalid:'f',form_submit:'f',form_abandon:'f',
  media_play:'m',media_pause:'m',media_end:'m',media_seek:'m',media_progress:'m',
- copy:'s',share:'b',download:'l',click_heatmap:'p'
+ copy:'s',share:'b',download:'l',click_heatmap:'p',
+ rage_click:'s',dead_click:'s',scroll_direction:'p',scroll_speed:'p',
+ navigation_attempt:'p',navigation_stall:'p',navigation_http_error:'p',
+ javascript_error:'p',promise_rejection:'p',resource_error:'p',resource_slow:'p',device_class:'p',funnel_step:'p',
+ perf_ttfb:'p',perf_fcp:'p',perf_lcp:'p',perf_cls:'p',perf_interaction_delay:'p',perf_longtask:'p',
+ youtube_play:'m',youtube_pause:'m',youtube_end:'m',youtube_progress:'m',youtube_error:'m'
 };
 export function parseInteraction(value){
  if(!value||typeof value!=='object'||Array.isArray(value)||
@@ -65,7 +77,25 @@ export function parseInteraction(value){
    (kind==='media_progress'&&!['q25','q50','q75','q100'].includes(detail))||
    (kind==='section_time'&&amount>60)||
    (kind==='hover_time'&&amount>300)||
-   (!['section_time','hover_time','media_seek','click_heatmap'].includes(kind)&&amount!==0))throw Error('Invalid interaction.');
+   (['scroll_direction','scroll_speed','navigation_attempt','navigation_stall',
+     'javascript_error','promise_rejection','rage_click','dead_click','device_class','funnel_step',
+     'youtube_play','youtube_pause','youtube_end','youtube_progress','youtube_error',
+     'navigation_http_error','resource_error'].includes(kind)&&amount!==0)||
+   (['scroll_depth','scroll_direction','scroll_speed','navigation_attempt','navigation_stall',
+     'navigation_http_error','javascript_error','promise_rejection','resource_error','resource_slow',
+     'device_class','funnel_step','perf_ttfb','perf_fcp','perf_lcp','perf_cls',
+     'perf_interaction_delay','perf_longtask'].includes(kind)&&target!=='p0')||
+   (kind==='scroll_direction'&&!['up','down'].includes(detail))||
+   (kind==='scroll_speed'&&!['slow','medium','fast'].includes(detail))||
+   (kind==='device_class'&&!['mobile','tablet','desktop'].includes(detail))||
+   (kind==='navigation_http_error'&&!['http4','http5'].includes(detail))||
+   (['resource_error','resource_slow'].includes(kind)&&!['script','image','style','font','media','other'].includes(detail))||
+   (kind==='funnel_step'&&!['donate_view','donate_choice','donate_handoff','volunteer_view',
+      'volunteer_role','volunteer_handoff','issues_view','issues_policy','policy_view','policy_media'].includes(detail))||
+   (kind==='youtube_progress'&&!['q25','q50','q75','q100'].includes(detail))||
+   (['resource_slow','perf_ttfb','perf_fcp','perf_lcp','perf_cls','perf_interaction_delay','perf_longtask'].includes(kind)&&amount===0)||
+   (!['section_time','hover_time','media_seek','click_heatmap','resource_slow','perf_ttfb','perf_fcp',
+       'perf_lcp','perf_cls','perf_interaction_delay','perf_longtask'].includes(kind)&&amount!==0))throw Error('Invalid interaction.');
  return {seq,kind,target,detail,amount};
 }
 export function parseVisitorPayload(value){
