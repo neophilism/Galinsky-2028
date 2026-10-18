@@ -49,6 +49,6 @@ test('campaign editor navigation flag is disabled without explicitly configured 
   G28_ADMIN_LOGIN_ENABLED:'true',G28_OWNER_ADMIN_EMAIL:'editor-owner@example.test',
   G28_TREASURY_VAULT_KEY:randomBytes(32).toString('base64'),G28_CAMPAIGN_EDITOR_ENABLED:'true'};
  assert.equal(loadConfig(active).campaignEditorEnabled,true);
- assert.equal(loadConfig({...active,DATABASE_URL:undefined}).campaignEditorEnabled,false);
+ assert.throws(()=>loadConfig({...active,DATABASE_URL:undefined}),/Production requires the assigned database/);
  assert.equal(loadConfig({...active,G28_CAMPAIGN_EDITOR_ENABLED:'false'}).campaignEditorEnabled,false);
 });
