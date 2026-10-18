@@ -1,5 +1,6 @@
 import React,{useEffect,useMemo,useState} from 'react';
 import {request} from './api';
+import controlNames from './visitor-control-labels.json';
 import './admin-visitors.css';
 
 type Page={path:string;label:string;views:number;active:number;averageSeconds:number};
@@ -101,6 +102,8 @@ const descriptions:Record<string,string[]> = {
 };
 function targetName(kind:string,target:string,page:string){
  const index=Number(target.slice(1));
+ const publishedLabel=(controlNames as Record<string,Record<string,string>>)[page]?.[target];
+ if(publishedLabel&&['l','b','a'].includes(target[0]))return publishedLabel;
  if(target==='p0')return 'Page overview';
  if(kind==='accordion_open'||kind==='accordion_close')return accordionDescriptions[page]?.[index-1]||'Accordion '+index;
  if(kind==='section_time'||kind==='section_enter'||kind==='rage_click'||kind==='dead_click'){
