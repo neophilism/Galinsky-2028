@@ -1,3 +1,5 @@
+import {STAFF_ROLES} from '../../../packages/core/staff-permissions.mjs';
+import {registerStaffSecurity} from './staff-security.mjs';
 import {registerCoordination} from './coordination-routes.mjs';
 import {registerHelpRoutes} from './help-routes.mjs';
 import Fastify from 'fastify';
@@ -15,7 +17,7 @@ import {previewAuthorized,PREVIEW_REALM,PREVIEW_ROBOTS} from '../../../packages/
 import {visitorRange,visitorPage} from '../../../packages/core/visitor-analytics.mjs';
 import {visitorReport} from './visitor-report.mjs';
 import {cleanTreasuryPayload,sealTreasury,MERCHANT_SLOTS} from '../../../packages/core/treasury-vault.mjs';
-export function createApp({store,config,clock=()=>Date.now()}){
+export function createApp({store,config,clock=()=>Date.now(),webauthn}){
  const app=Fastify({logger:false,bodyLimit:32768,trustProxy:false,requestTimeout:15000});
  if(config.production&&!config.previewGate)throw Error('Production portal must be behind the private preview password gate.');
  if(config.previewGate)app.addHook('onRequest',async(req,reply)=>{
@@ -39,7 +41,7 @@ export function createApp({store,config,clock=()=>Date.now()}){
  async function writeSession(req){const s=await account(req);const supplied=req.headers['x-csrf-token'];assert(typeof supplied==='string'&&supplied.length===s.csrf.length&&timingSafeEqual(Buffer.from(supplied),Buffer.from(s.csrf)),'csrf','Reload the workspace and try again.',403);return s;}
  app.get('/healthz',async()=>({ok:true,service:'galinsky-2028-api',version:'0.1.0',commit:config.commit??null}));
  app.get('/readyz',async(req,reply)=>{try{await store.healthy();return {ready:true};}catch{return reply.code(503).send({ready:false});}});
- app.get('/api/config',async()=>({publicOrigin:config.publicOrigin,signupEnabled:config.signup,features:{coordination:config.coordination===true,helpRequests:config.helpRequests===true,materials:true,worksheets:true,protectedSubmissions:false,staff:false,payments:false,treasurySetup:config.adminLoginReady===true,campaignEditor:config.campaignEditorEnabled===true},adminLoginEnabled:config.adminLoginReady===true,notice:config.signup?null:config.adminLoginReady?'Private staff sign-in is available by verified email invitation. Public volunteer registration remains closed.':'Account registration opens when verified email delivery is connected.'}));
+ app.get('/api/config',async()=>({publicOrigin:config.publicOrigin,signupEnabled:config.signup,features:{coordination:config.coordination===true,helpRequests:config.helpRequests===true,materials:true,worksheets:true,protectedSubmissions:false,staff:config.staffIdentity===true,payments:false,treasurySetup:config.adminLoginReady===true,campaignEditor:config.campaignEditorEnabled===true},adminLoginEnabled:config.adminLoginReady===true,notice:config.signup?null:config.adminLoginReady?'Private staff sign-in is available by verified email invitation. Public volunteer registration remains closed.':'Account registration opens when verified email delivery is connected.'}));
  app.post('/api/auth/request',async(req,reply)=>{
   assert(config.signup||config.adminLoginReady,'signup_unavailable','Account registration is not open yet. No account has been created.',503);
   const b=exactKeys(req.body,['email','marketing','termsAccepted']);const address=email(b.email);assert(b.termsAccepted===true,'terms_required','Review the participation and privacy notices before continuing.');assert(b.marketing===undefined||typeof b.marketing==='boolean','invalid_consent','Choose whether to receive optional campaign updates.');
@@ -84,6 +86,7 @@ export function createApp({store,config,clock=()=>Date.now()}){
   const s=write?await writeSession(req):await account(req);
   const role=await store.adminRole(s.account,config.adminOwnerEmailKey);
   assert(role&&roles.includes(role),'admin_forbidden','This account cannot access treasury administration.',403);
+  if(config.staffIdentity)assert(await store.staffMfaValid(s.account.id,s.hash,clock()),'mfa_required','Verify your staff passkey in Security settings.',403);
   return {session:s,role};
  }
  app.get('/api/admin/operations',async req=>{
@@ -127,13 +130,13 @@ export function createApp({store,config,clock=()=>Date.now()}){
  });
  app.get('/api/admin/grants',async req=>{
   await adminAccount(req,{roles:['owner']});
-  return {grants:await store.adminGrants(),ownerAdmin:'Configured outside the database',roleOptions:['treasurer','editor','auditor']};
+  return {grants:await store.adminGrants(),ownerAdmin:'Configured outside the database',roleOptions:STAFF_ROLES};
  });
  app.post('/api/admin/grants',async req=>{
   const {session:s}=await adminAccount(req,{write:true,roles:['owner']});
   const b=exactKeys(req.body,['email','role','label']);
   const address=email(b.email);
-  assert(['treasurer','editor','auditor'].includes(b.role),'invalid_admin_role','Choose a limited administrator role.');
+  assert(STAFF_ROLES.includes(b.role),'invalid_admin_role','Choose a limited administrator role.');
   assert(typeof b.label==='string'&&b.label.trim().length>=2&&b.label.trim().length<=90&&!/[\r\n\x00-\x1f]/.test(b.label),
    'invalid_admin_label','Provide a short staff label.');
   const key=emailKey(address,config.pepper);
@@ -263,6 +266,7 @@ export function createApp({store,config,clock=()=>Date.now()}){
    'Published module requirements are informational only. Your individual training, approved tool and jurisdiction must still be checked; this page never authorizes fieldwork.':
    'No regulated activity module is currently published. Reading a playbook or completing orientation never authorizes the activity.'};
  });
+ registerStaffSecurity(app,{store,config,clock,account,writeSession,webauthn});
  registerCoordination(app,{store,config,clock,account,writeSession});
  registerHelpRoutes(app,{store,config,clock,account,writeSession,adminAccount});
  return app;

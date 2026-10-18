@@ -8,6 +8,7 @@ export function registerCoordination(app,{store,config,clock,account,writeSessio
   assert(config.coordination,'coordination_unavailable','Team coordination is not released in this environment.',503);
   const session=await (write?writeSession(req):account(req));
   const owner=config.adminLoginReady&&await store.adminRole(session.account,config.adminOwnerEmailKey)==='owner';
+  if(owner&&config.staffIdentity)assert(await store.staffMfaValid(session.account.id,session.hash,clock()),'mfa_required','Verify your staff passkey in Security settings.',403);
   // This preview integration does not claim staff MFA. Production enabling is
   // rejected by config until the staff identity package is actually delivered.
   return {...session.account,owner};

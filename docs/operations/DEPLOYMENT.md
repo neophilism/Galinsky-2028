@@ -34,7 +34,7 @@ Edit each issue in `content/public/site.json`. A YouTube URL or 11-character ID 
 
 ## Feature release
 
-Do not set `DONATIONS_ENABLED`, `STAFF_IDENTITY_ENABLED` or `PROTECTED_CONTENT_ENABLED` to true in this foundation. Startup intentionally rejects them because their reviewed adapters do not exist. Complete the corresponding work packages and release evidence first. No boolean bypass is a valid completion shortcut.
+Staff identity now has a maintained WebAuthn implementation: follow `STAFF_PASSKEYS.md`, apply migration 016, verify the deployed owner journey, then enable `STAFF_IDENTITY_ENABLED` on the existing portal. `DONATIONS_ENABLED` and `PROTECTED_CONTENT_ENABLED` remain independently gated until their adapters and release prerequisites are satisfied. A flag never replaces a working implementation.
 
 ## Recovery and incident behavior
 

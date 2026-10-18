@@ -71,7 +71,9 @@ try{
   panel.append(iframe);document.body.append(panel);
   window.dispatchEvent(new CustomEvent('g28:youtube-mounted',{detail:{iframe}}));
  });
- await page.waitForTimeout(2250);
+ // Progress is sampled at 1.5s and then batched asynchronously. Wait for the
+ // actual signed-off event shape, not a delay shorter than those two timers.
+ for(let attempt=0;attempt<80&&!received.some(x=>x.events?.some(e=>e.kind==='youtube_progress'&&e.detail==='q50'));attempt++)await page.waitForTimeout(100);
  const events=received.filter(x=>Array.isArray(x.events)).flatMap(x=>x.events);
  assert(events.some(e=>e.kind==='accordion_open'),'FAQ opening was not recorded');
  assert(events.some(e=>e.kind==='funnel_step'&&e.detail==='policy_view'),'Policy funnel entry missing');

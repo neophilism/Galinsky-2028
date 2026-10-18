@@ -10,6 +10,7 @@ export function createCampaignAuthorization({enabled,config,accountStore,readCoo
   if(!session)campaignFailure('authentication_required','Your session has expired. Sign in again.',401);
   const role=await accountStore.adminRole(session.account,config.adminOwnerEmailKey);
   if(!(owner?['owner']:['owner','editor']).includes(role))campaignFailure('editor_forbidden','This account has no permission for this editorial action.',403);
+  if(config.staffIdentity&&!await accountStore.staffMfaValid(session.account.id,session.hash,clock()))campaignFailure('mfa_required','Verify your staff passkey in Security settings.',403);
   if(write){
    if(req.headers.origin!==config.portalOrigin||req.headers['sec-fetch-site']&&!['same-origin','none'].includes(req.headers['sec-fetch-site']))campaignFailure('origin_mismatch','Use the editor on its original website.',403);
    const received=req.headers['x-csrf-token'];

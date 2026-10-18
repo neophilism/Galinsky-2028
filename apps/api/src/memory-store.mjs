@@ -1,3 +1,4 @@
+import {memoryStaffSecurity} from './staff-security.mjs';
 import {memoryCoordination,removeAccountCoordination,ownCoordination} from './coordination-store.mjs';
 import {memoryActivityReview} from './activity-review-store.mjs';
 import {memoryHelp} from './help-store.mjs';
@@ -96,3 +97,5 @@ export class MemoryStore{
 }
 
 Object.assign(MemoryStore.prototype, memoryCoordination, memoryHelp, memoryActivityReview);
+
+Object.assign(MemoryStore.prototype, memoryStaffSecurity);

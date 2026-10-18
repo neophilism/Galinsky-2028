@@ -13,10 +13,11 @@ export function loadConfig(env=process.env){
  assert(!production||publicOrigin!==portalOrigin,'origin_separation','Public and protected applications require separate origins.',503);
  const deliveryKey=env.DELIVERY_KEY||'';const pepper=env.LOGIN_PEPPER||'';
  const mailReady=env.MAIL_PROVIDER==='resend'&&Boolean(env.RESEND_API_KEY&&env.MAIL_FROM&&/^[^\r\n]+@[^\r\n]+$/.test(env.MAIL_FROM));
+ const staffIdentity=env.STAFF_IDENTITY_ENABLED==='true';
  const coordination=env.COORDINATION_ENABLED==='true';
  const helpRequests=env.G28_HELP_REQUESTS_ENABLED==='true';
- assert(!production||!helpRequests,'help_release_unavailable','Live support intake requires the pending staff MFA and support operations release.',503);
- assert(!production||!coordination,'coordination_unavailable','Production team coordination requires the pending staff identity release.',503);
+ assert(!production||!helpRequests||staffIdentity,'help_release_unavailable','Live support intake requires the pending staff MFA and support operations release.',503);
+ assert(!production||!coordination||staffIdentity,'coordination_unavailable','Production team coordination requires the pending staff identity release.',503);
  const signup=env.SIGNUP_ENABLED==='true';
  const mailDeliveryMode=env.MAIL_DELIVERY_MODE||'disabled';
  const adminLoginReady=env.G28_ADMIN_LOGIN_ENABLED==='true';
@@ -43,8 +44,8 @@ export function loadConfig(env=process.env){
  if(signup){assert(deliveryKey&&Buffer.from(deliveryKey,'base64').length===32&&pepper.length>=32&&mailReady,'signup_unready','Account delivery and authentication configuration are incomplete.',503);}
  // These flags may not bypass missing reviewed adapters or release evidence.
  assert(env.PROTECTED_CONTENT_ENABLED!=='true','protected_unavailable','A reviewed protected-content implementation is not installed.',503);
- assert(env.STAFF_IDENTITY_ENABLED!=='true','staff_unavailable','A reviewed staff identity integration is not installed.',503);
+ assert(!staffIdentity||adminLoginReady,'staff_unavailable','Staff passkeys require configured verified-email staff access.',503);
  assert(env.DONATIONS_ENABLED!=='true','fundraising_unavailable','A production fundraising adapter and release evidence are not installed.',503);
  if(production)assert(env.DATABASE_URL,'database_required','Production requires the assigned database.',503);
- return {coordination,helpRequests,campaignEditorEnabled,production,previewGate,publicOrigin,portalOrigin,deliveryKey,pepper,signup,adminLoginReady,adminOwnerEmailKey,treasuryKey,mailReady,mailDeliveryMode,mailKey:env.RESEND_API_KEY,mailFrom:env.MAIL_FROM,databaseUrl:env.DATABASE_URL,port:Number(env.PORT||4322),host:env.HOST||(production?'0.0.0.0':'127.0.0.1'),commit:safeReleaseCommit(env.RENDER_GIT_COMMIT),termsVersion:'2026-10-10'};
+ return {staffIdentity,coordination,helpRequests,campaignEditorEnabled,production,previewGate,publicOrigin,portalOrigin,deliveryKey,pepper,signup,adminLoginReady,adminOwnerEmailKey,treasuryKey,mailReady,mailDeliveryMode,mailKey:env.RESEND_API_KEY,mailFrom:env.MAIL_FROM,databaseUrl:env.DATABASE_URL,port:Number(env.PORT||4322),host:env.HOST||(production?'0.0.0.0':'127.0.0.1'),commit:safeReleaseCommit(env.RENDER_GIT_COMMIT),termsVersion:'2026-10-10'};
 }

@@ -1,3 +1,4 @@
+import {STAFF_ROLES} from '../../../packages/core/staff-permissions.mjs';
 import React,{useEffect,useState,FormEvent} from 'react';
 import {request} from './api';
 import './admin-treasury.css';
@@ -66,7 +67,7 @@ function StaffInvitations({csrf}:{csrf:string}){
   <form onSubmit={submit} className="admin-fields">
    <label>Invited person's email<input required type="email" maxLength={254} autoComplete="off" value={email} onChange={e=>setEmail(e.target.value)}/></label>
    <label>Display label<input required maxLength={90} value={label} onChange={e=>setLabel(e.target.value)} placeholder="Treasury assistant" autoComplete="off"/></label>
-   <label>Role<select value={role} onChange={e=>setRole(e.target.value)}><option value="treasurer">Treasurer — change sandbox credentials and bank details</option><option value="auditor">Auditor — view masked vault status only</option><option value="editor">Editor — reserved for future content permissions; no treasury access</option></select></label>
+   <label>Role<select value={role} onChange={e=>setRole(e.target.value)}>{STAFF_ROLES.map((r:string)=><option key={r} value={r}>{r.replaceAll('-',' ')}</option>)}</select></label>
    <button className="btn" disabled={busy}>{busy?'Inviting...':'Register invitation'}</button>
   </form>
   <h3>Active invitations</h3>

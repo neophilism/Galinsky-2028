@@ -1,0 +1,11 @@
+import React,{useEffect,useState} from 'react';
+import {startRegistration,startAuthentication} from '@simplewebauthn/browser';
+import {request} from './api';
+type State={credentials:{id:string;label:string;createdAt:string}[];verified:boolean};
+export function StaffSecurity({csrf}:{csrf:string}){
+ const[state,setState]=useState<State|null>(null),[label,setLabel]=useState('My passkey'),[error,setError]=useState(''),[busy,setBusy]=useState(false);
+ async function refresh(){setState(await request<State>('/api/staff/security'));}
+ useEffect(()=>{refresh().catch(e=>setError(e.message));},[]);
+ async function run(action:()=>Promise<unknown>){setBusy(true);setError('');try{await action();await refresh();}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
+ return <section className="panel"><h1>Staff security</h1><p>Your email sign-in and a verified passkey protect staff actions. Verification lasts fifteen minutes in this session. Register a second passkey for recovery before removing your last device.</p>{error&&<p role="alert">{error}</p>}{state&&<><p role="status">{state.verified?'This session is verified.':'Verify a passkey before using staff administration.'}</p><label>Passkey label<input value={label} maxLength={80} onChange={e=>setLabel(e.target.value)}/></label><button disabled={busy||label.trim().length<2} onClick={()=>run(async()=>{const optionsJSON=await request<Parameters<typeof startRegistration>[0]['optionsJSON']>('/api/staff/security/register/options',{},csrf);const response=await startRegistration({optionsJSON});await request('/api/staff/security/register/verify',{response,label},csrf);})}>Add passkey</button>{state.credentials.length>0&&<button disabled={busy} onClick={()=>run(async()=>{const optionsJSON=await request<Parameters<typeof startAuthentication>[0]['optionsJSON']>('/api/staff/security/authenticate/options',{},csrf);const response=await startAuthentication({optionsJSON});await request('/api/staff/security/authenticate/verify',{response},csrf);})}>Verify passkey</button>}<ul>{state.credentials.map(c=><li key={c.id}>{c.label} <button disabled={busy||!state.verified} onClick={()=>{if(window.confirm('Revoke this passkey and every staff verification made with it?'))run(()=>request('/api/staff/security/revoke',{id:c.id},csrf));}}>Revoke</button></li>)}</ul></>}</section>;
+}

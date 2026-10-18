@@ -1,3 +1,4 @@
+import {postgresStaffSecurity} from './staff-security.mjs';
 import {postgresCoordination,removeAccountCoordination,ownCoordination} from './coordination-store.mjs';
 import {postgresActivityReview} from './activity-review-store.mjs';
 import {postgresHelp} from './help-store.mjs';
@@ -187,3 +188,5 @@ export class PostgresStore{
 }
 
 Object.assign(PostgresStore.prototype, postgresCoordination, postgresHelp, postgresActivityReview);
+
+Object.assign(PostgresStore.prototype, postgresStaffSecurity);
