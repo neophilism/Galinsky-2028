@@ -5,11 +5,19 @@ import './admin-visitors.css';
 type Page={path:string;label:string;views:number;active:number;averageSeconds:number};
 type Section={target:string;entries:number;visibleSeconds:number;averageSeconds:number};
 type Action={kind:string;target:string;detail:string;count:number;totalAmount:number};
+type Vital={kind:string;samples:number;average:number;p75:number;p95:number;unit:string};
+type Funnel={stage:string;views:number;percentOfPageViews:number};
+type Device={kind:string;views:number};
+type ScrollBehavior={kind:string;detail:string;count:number};
 type Report={asOf:string;source:string;range:string;windowHours:number;selectedPage:string;
  totals:{views:number;active:number;averageSeconds:number};
- activity:{clicks:number;accordionOpens:number;formInteractions:number;mediaStarts:number;sampledSectionSeconds:number};
+ activity:{clicks:number;accordionOpens:number;formInteractions:number;mediaStarts:number;sampledSectionSeconds:number;
+  rageClicks:number;deadClicks:number;navigationStalls:number;navigationAttempts:number;navigationHttpErrors:number;
+  javascriptErrors:number;rejectedPromises:number;resourceErrors:number;youtubeErrors:number;
+  youtubeStarts:number};
  pages:Page[];sections:Section[];interactions:Action[];
- scroll:{depth:number;views:number}[];clickHeatmap:{cell:number;clicks:number}[]};
+ scroll:{depth:number;views:number}[];clickHeatmap:{cell:number;clicks:number}[];
+ funnels:Funnel[];performances:Vital[];devices:Device[];scrollBehaviors:ScrollBehavior[]};
 const count=(n:number)=>new Intl.NumberFormat('en-US').format(n);
 function time(n:number){
  if(n<60)return n+' sec';
@@ -24,7 +32,29 @@ const actionLabels:Record<string,string>={
  form_abandon:'Form abandoned',media_play:'Media played',media_pause:'Media paused',
  media_end:'Media ended',media_seek:'Media seeked',media_progress:'Media playback milestone',
  copy:'Content copied',share:'Share button used',download:'Download link clicked',
- click_heatmap:'Click area'
+ click_heatmap:'Click area',rage_click:'Rapid repeated clicks (estimate)',
+ dead_click:'Click on noninteractive content (estimate)',
+ scroll_direction:'Scroll direction',scroll_speed:'Scroll speed',
+ navigation_attempt:'Navigation attempted',navigation_stall:'Possible stalled navigation',
+ navigation_http_error:'Navigation HTTP error',javascript_error:'JavaScript error',
+ promise_rejection:'Unhandled promise rejection',
+ resource_error:'Page resource failed',resource_slow:'Slow resource',
+ device_class:'Viewport class',funnel_step:'Anonymous funnel milestone',
+ perf_ttfb:'Server response (TTFB)',perf_fcp:'First contentful paint',
+ perf_lcp:'Largest contentful paint',perf_cls:'Cumulative layout shift (scaled)',
+ perf_interaction_delay:'Slowest observed interaction',
+ perf_longtask:'Long main-thread task',
+ youtube_play:'YouTube played',youtube_pause:'YouTube paused',
+ youtube_end:'YouTube finished',youtube_progress:'YouTube playback milestone',
+ youtube_error:'YouTube player error'
+};
+const funnelNames:Record<string,string>={
+ donate_view:'Contribution page viewed',donate_choice:'Contribution controls used',
+ donate_handoff:'Checkout handoff clicked',
+ volunteer_view:'Volunteer page viewed',volunteer_role:'Role finder used',
+ volunteer_handoff:'Volunteer portal opened',
+ issues_view:'Policy index viewed',issues_policy:'Policy detail selected',
+ policy_view:'Policy page viewed',policy_media:'Policy video opened'
 };
 const prefixLabels:Record<string,string>={s:'Area',l:'Link',b:'Button',a:'Accordion',f:'Field or form',m:'Media'};
 const accordionDescriptions:Record<string,string[]> = {
@@ -73,7 +103,7 @@ function targetName(kind:string,target:string,page:string){
  const index=Number(target.slice(1));
  if(target==='p0')return 'Page overview';
  if(kind==='accordion_open'||kind==='accordion_close')return accordionDescriptions[page]?.[index-1]||'Accordion '+index;
- if(kind==='section_time'||kind==='section_enter'){
+ if(kind==='section_time'||kind==='section_enter'||kind==='rage_click'||kind==='dead_click'){
   return descriptions[page]?.[index-1]||'Area '+index;
  }
  return (prefixLabels[target[0]]||'Control')+' '+index;
@@ -84,7 +114,11 @@ function exportAggregates(report:Report){
   ...report.pages.map(p=>['page',p.path,p.label,'views',p.views,p.averageSeconds]),
   ...report.sections.map(s=>['section',report.selectedPage,targetName('section_time',s.target,report.selectedPage),'views',s.entries,s.visibleSeconds]),
   ...report.interactions.map(a=>['action',report.selectedPage,actionLabels[a.kind]||a.kind+' '+a.target,a.detail,a.count,a.totalAmount]),
-  ...report.scroll.map(s=>['scroll',report.selectedPage,String(s.depth)+'%','reached',s.views,0])
+  ...report.scroll.map(s=>['scroll',report.selectedPage,String(s.depth)+'%','reached',s.views,0]),
+  ...report.funnels.map(f=>['funnel',report.selectedPage,funnelNames[f.stage]||f.stage,'page views',f.views,f.percentOfPageViews]),
+  ...report.performances.map(v=>['performance',report.selectedPage,actionLabels[v.kind]||v.kind,'p75 '+v.unit,v.samples,v.p75]),
+  ...report.devices.map(d=>['viewport',report.selectedPage,d.kind,'page views',d.views,0]),
+  ...report.scrollBehaviors.map(s=>['scroll behavior',report.selectedPage,s.kind,s.detail,s.count,0])
  ];
  const csv=rows.map(row=>row.map(escapeCsv).join(',')).join('\n')+'\n';
  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
@@ -124,7 +158,7 @@ export function AdminVisitors({role}:{role:string}){
  const high=Math.max(0,...cells);
  return <div className="admin-visitors">
   <span className="eyebrow">PRIVATE CAMPAIGN ADMINISTRATION</span><h1>Visitor analytics.</h1>
-  <p className="lead">Analyze clicks, expanded questions, section attention, scrolling and media use across the public campaign website. This view contains only aggregate measurements from visitors who opted in.</p>
+  <p className="lead">Analyze page engagement, every defined interaction, scrolling, navigation friction, media, performance and anonymous funnel milestones. All data below is aggregated from visitors who explicitly opted in.</p>
   <div className="visitor-controls">
    <label>Reporting period <select value={range} onChange={e=>setRange(e.target.value)}>
     <option value="day">Last 24 hours</option><option value="week">Last 7 days</option><option value="month">Last 30 days</option>
@@ -150,6 +184,51 @@ export function AdminVisitors({role}:{role:string}){
     <article className="panel"><h2>{count(report.activity.accordionOpens)}</h2><p>Accordion questions opened</p></article>
     <article className="panel"><h2>{time(report.activity.sampledSectionSeconds)}</h2><p>Total visible time across page areas</p></article>
    </div>
+   <section className="panel spaced"><h2>Interaction friction and reliability</h2>
+    <p className="fine">Rage and dead clicks are heuristics, not proof a control malfunctioned. A possible navigation stall means that a link click did not leave the page within four seconds.</p>
+    <div className="visitor-scroll">
+     {[
+      ['Rapid repeat clicks',report.activity.rageClicks],
+      ['Noninteractive clicks',report.activity.deadClicks],
+      ['Navigation attempts',report.activity.navigationAttempts],
+      ['Possible stalled navigations',report.activity.navigationStalls],
+      ['HTTP navigation errors',report.activity.navigationHttpErrors],
+      ['JavaScript errors',report.activity.javascriptErrors],
+      ['Unhandled promise rejections',report.activity.rejectedPromises],
+      ['Failed page resources',report.activity.resourceErrors],
+      ['Embedded YouTube playback starts',report.activity.youtubeStarts],
+      ['YouTube player errors',report.activity.youtubeErrors]
+     ].map(([label,value])=><div key={String(label)}><strong>{count(Number(value))}</strong><span>{label}</span></div>)}
+    </div>
+   </section>
+   <section className="panel spaced"><h2>Real-user performance</h2>
+    <p className="fine">Browser performance observations are reported only after opt-in. Values below reflect supported browsers. Interaction delay is the slowest observed Event Timing duration, not the standardized INP metric. CLS is multiplied by 1,000 for integer storage.</p>
+    {report.performances.length?<div className="visitor-table-wrap"><table className="visitor-table">
+     <thead><tr><th scope="col">Measurement</th><th scope="col">Samples</th><th scope="col">Average</th><th scope="col">P75</th><th scope="col">P95</th><th scope="col">Unit</th></tr></thead>
+     <tbody>{report.performances.map(m=><tr key={m.kind}>
+      <th scope="row">{actionLabels[m.kind]||m.kind}</th>
+      <td>{count(m.samples)}</td><td>{count(m.average)}</td>
+      <td>{count(m.p75)}</td><td>{count(m.p95)}</td><td>{m.unit}</td>
+     </tr>)}</tbody></table></div>:<p>No performance readings collected for this period.</p>}
+   </section>
+   <section className="panel spaced"><h2>Anonymous conversion funnels</h2>
+    <p className="fine">Milestone counts represent distinct consented page views, not identified people. Percentages use the selected page's opt-in views. These are *on-page actions*, never verified donations or account registrations; cross-page conversion cannot be inferred without identifiers.</p>
+    {report.funnels.length?<div className="visitor-table-wrap"><table className="visitor-table">
+     <thead><tr><th scope="col">Page milestone</th><th scope="col">Page views reaching milestone</th><th scope="col">Share of page views</th></tr></thead>
+     <tbody>{report.funnels.map(f=><tr key={f.stage}>
+      <th scope="row">{funnelNames[f.stage]||f.stage}</th>
+      <td>{count(f.views)}</td><td>{Math.min(100,f.percentOfPageViews)}%</td>
+     </tr>)}</tbody></table></div>:<p>No opt-in funnel activity has been recorded.</p>}
+   </section>
+   <section className="panel spaced"><h2>Viewport classes and scrolling habits</h2>
+    <p className="fine">These classes use only viewport widths (mobile, tablet, desktop). No browser fingerprints, device IDs or user agents are stored.</p>
+    <div className="visitor-table-wrap"><table className="visitor-table">
+     <thead><tr><th scope="col">Breakdown</th><th scope="col">Category</th><th scope="col">Occurrences</th></tr></thead>
+     <tbody>{[...report.devices.map(d=>({kind:'Viewport',detail:d.kind,value:d.views})),
+       ...report.scrollBehaviors.map(b=>({kind:actionLabels[b.kind]||b.kind,detail:b.detail,value:b.count}))].map(r=>
+      <tr key={r.kind+r.detail}><th scope="row">{r.kind}</th><td>{r.detail}</td><td>{count(r.value)}</td></tr>
+     )}</tbody></table></div>
+   </section>
    <section className="panel spaced"><h2>Page traffic overview</h2><div className="visitor-table-wrap">
     <table className="visitor-table"><thead><tr><th scope="col">Page</th><th scope="col">Active now</th><th scope="col">Page views</th><th scope="col">Average focused time</th></tr></thead>
     <tbody>{[...report.pages].sort((a,b)=>b.active-a.active||b.views-a.views).map(p=><tr key={p.path}>
@@ -190,6 +269,6 @@ export function AdminVisitors({role}:{role:string}){
    <p className="fine">Snapshot taken {new Date(report.asOf).toLocaleString()}. Updated every 30 seconds while the dashboard is visible.
     {report.source!=='live_database_aggregate'?' Development fixture only; live traffic is not connected.':''}</p>
   </>:!busy&&!error?<p role="status">No analytics snapshot available.</p>:null}
-  <p className="fine">Interaction events omit form contents, visitor identity, IP addresses, cross-page user IDs and full URLs. No session replay, keystroke capture or political profiling. Events are erased after 30 days. Browser privacy signals and visitor opt-out take precedence.</p>
+  <p className="fine">Analytics are consent-based and anonymous. No entered data, account identity, IP address, cross-page visitor ID, raw URL, unfiltered error stack, session replay, mouse trail or political profile is collected. The temporary measurements expire after 30 days. Some activity is approximate; privacy signals and revocation take precedence.</p>
  </div>;
 }
