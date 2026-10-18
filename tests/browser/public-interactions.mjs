@@ -34,7 +34,21 @@ try{
    await still.goto(origin+'/');const bg=await still.locator('.flag-canvas').evaluate(el=>getComputedStyle(el).backgroundImage);assert(bg.includes('/assets/network-flag.svg'));
    const response=await nojs.request.get(origin+'/assets/network-flag.svg');assert.equal(response.status(),200);assert.match(await response.text(),/<svg/);
    await still.screenshot({path:`test-results/public-interactions/${name}-nojs-home.png`,fullPage:true});
-   evidence.push({browser:name,noRequestBeforePlay:true,disconnectAndReplay:true,focusRestored:true,staticFlagWithoutJavaScript:true});
+   const animated=await context.newPage();
+   await animated.goto(origin+'/');
+   const motionControl=animated.getByRole('button',{name:'Pause flag animation'});
+   await motionControl.waitFor();
+   assert.equal(await motionControl.getAttribute('aria-pressed'),'false');
+   await motionControl.click();
+   const resume=animated.getByRole('button',{name:'Resume flag animation'});
+   assert.equal(await resume.getAttribute('aria-pressed'),'true');
+   assert.equal(await animated.evaluate(()=>localStorage.getItem('g28-hero-motion-paused')),'true');
+   await animated.reload();
+   assert.equal(await animated.getByRole('button',{name:'Resume flag animation'}).getAttribute('aria-pressed'),'true');
+   await animated.getByRole('button',{name:'Resume flag animation'}).click();
+   assert.equal(await animated.getByRole('button',{name:'Pause flag animation'}).getAttribute('aria-pressed'),'false');
+   await animated.close();
+   evidence.push({browser:name,noRequestBeforePlay:true,disconnectAndReplay:true,focusRestored:true,staticFlagWithoutJavaScript:true,persistentMotionControl:true});
   }finally{await browser.close();}
  }
 }finally{await new Promise(r=>server.close(r));await writeFile('test-results/public-interactions/results.json',JSON.stringify(evidence,null,2));}
