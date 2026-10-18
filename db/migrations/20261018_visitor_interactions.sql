@@ -59,21 +59,30 @@ BEGIN
     'section_enter','section_time','scroll_depth','hover_time','field_focus',
     'field_change','field_invalid','form_submit','form_abandon','media_play',
     'media_pause','media_end','media_seek','media_progress','copy','share',
-    'download','click_heatmap')
+    'download','click_heatmap','rage_click','dead_click','scroll_direction','scroll_speed',
+    'navigation_attempt','navigation_stall','navigation_http_error','javascript_error',
+    'promise_rejection','resource_error','resource_slow','device_class','funnel_step',
+    'perf_ttfb','perf_fcp','perf_lcp','perf_cls','perf_interaction_delay','perf_longtask',
+    'youtube_play','youtube_pause','youtube_end','youtube_progress','youtube_error')
    OR event_target !~ '^(?:[slbafmp](?:[1-9]|[1-9][0-9]{1,2})|p0)$'
    OR event_detail NOT IN ('none','home','issues','kirk-evers','garden','cornerstone',
     'volunteer','donate','notices','portal','external','anchor','document','other',
-    'd10','d25','d50','d75','d90','d100','q25','q50','q75','q100')
-   OR event_amount NOT BETWEEN 0 AND 14400 THEN
+    'd10','d25','d50','d75','d90','d100','q25','q50','q75','q100',
+    'up','down','slow','medium','fast','mobile','tablet','desktop','script','image','style','font','media',
+    'http4','http5','donate_view','donate_choice','donate_handoff','volunteer_view',
+    'volunteer_role','volunteer_handoff','issues_view','issues_policy','policy_view','policy_media')
+   OR event_amount NOT BETWEEN 0 AND 14400
+   OR event_kind IS NULL OR event_target IS NULL OR event_detail IS NULL THEN
    RAISE EXCEPTION 'Invalid interaction' USING ERRCODE='22023';
   END IF;
   event_prefix=CASE
    WHEN event_kind IN ('link_click','hover_time','download') THEN 'l'
    WHEN event_kind IN ('button_click','share') THEN 'b'
    WHEN event_kind IN ('accordion_open','accordion_close') THEN 'a'
-   WHEN event_kind IN ('section_enter','section_time','copy') THEN 's'
+   WHEN event_kind IN ('section_enter','section_time','copy','rage_click','dead_click') THEN 's'
    WHEN event_kind IN ('field_focus','field_change','field_invalid','form_submit','form_abandon') THEN 'f'
-   WHEN event_kind IN ('media_play','media_pause','media_end','media_seek','media_progress') THEN 'm'
+   WHEN event_kind IN ('media_play','media_pause','media_end','media_seek','media_progress',
+    'youtube_play','youtube_pause','youtube_end','youtube_progress','youtube_error') THEN 'm'
    ELSE 'p' END;
   IF left(event_target,1)<>event_prefix
     OR (event_kind IN ('scroll_depth','click_heatmap') AND event_target<>'p0')
@@ -82,7 +91,25 @@ BEGIN
     OR (event_kind='click_heatmap' AND event_amount>399)
     OR (event_kind='section_time' AND event_amount>60)
     OR (event_kind='hover_time' AND event_amount>300)
-    OR (event_kind NOT IN ('section_time','hover_time','media_seek','click_heatmap') AND event_amount<>0)
+    OR (event_kind NOT IN ('section_time','hover_time','media_seek','click_heatmap',
+      'resource_slow','perf_ttfb','perf_fcp','perf_lcp','perf_cls',
+      'perf_interaction_delay','perf_longtask') AND event_amount<>0)
+    OR (event_kind IN ('resource_slow','perf_ttfb','perf_fcp','perf_lcp',
+      'perf_cls','perf_interaction_delay','perf_longtask') AND event_amount=0)
+    OR (event_kind IN ('scroll_direction','scroll_speed','navigation_attempt','navigation_stall',
+      'navigation_http_error','javascript_error','promise_rejection','resource_error','resource_slow',
+      'device_class','funnel_step','perf_ttfb','perf_fcp','perf_lcp','perf_cls',
+      'perf_interaction_delay','perf_longtask') AND event_target<>'p0')
+    OR (event_kind='scroll_direction' AND event_detail NOT IN ('up','down'))
+    OR (event_kind='scroll_speed' AND event_detail NOT IN ('slow','medium','fast'))
+    OR (event_kind='device_class' AND event_detail NOT IN ('mobile','tablet','desktop'))
+    OR (event_kind='navigation_http_error' AND event_detail NOT IN ('http4','http5'))
+    OR (event_kind IN ('resource_error','resource_slow') AND event_detail NOT IN
+     ('script','image','style','font','media','other'))
+    OR (event_kind='funnel_step' AND event_detail NOT IN
+     ('donate_view','donate_choice','donate_handoff','volunteer_view','volunteer_role',
+      'volunteer_handoff','issues_view','issues_policy','policy_view','policy_media'))
+    OR (event_kind='youtube_progress' AND event_detail NOT IN ('q25','q50','q75','q100'))
     THEN RAISE EXCEPTION 'Invalid interaction properties' USING ERRCODE='22023';
   END IF;
   INSERT INTO g28.page_events(view_id,seq,page,kind,target,detail,amount)
