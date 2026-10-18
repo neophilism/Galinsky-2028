@@ -1,0 +1,17 @@
+
+/* Structured request UI; scoped so it does not alter existing campaign layouts. */
+.help-center{max-width:960px}
+.help-center>.service-notice{margin:24px 0}
+.help-center>.service-notice strong{display:block;margin-bottom:7px}
+.help-center>.service-notice p{color:inherit}
+.help-center .spaced{margin:22px 0}
+.help-center .help-form{display:grid;gap:18px;max-width:550px;margin-top:20px}
+.help-center .help-form label{display:grid;gap:6px;font-weight:750}
+.help-center .help-form select{width:100%;min-height:46px;border:1px solid #9eafc3;background:white;padding:9px 12px}
+.help-center .help-form .btn{justify-self:start}
+.help-center .help-case-list{list-style:none;padding:0;margin:18px 0 0}
+.help-center .help-case{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:19px 0;border-top:1px solid var(--line)}
+.help-center .help-case p{font-size:13px;margin-top:5px}
+.help-center .help-case-actions{flex-shrink:0}
+.help-center .help-case-actions .btn{min-height:42px}
+@media(max-width:600px){.help-center .help-case{display:block}.help-center .help-case-actions{margin-top:12px}}

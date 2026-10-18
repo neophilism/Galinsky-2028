@@ -1,4 +1,5 @@
 import {registerCoordination} from './coordination-routes.mjs';
+import {registerHelpRoutes} from './help-routes.mjs';
 import Fastify from 'fastify';
 import {randomUUID,timingSafeEqual} from 'node:crypto';
 import {DomainError,assert,email,exactKeys,id} from '../../../packages/core/validation.mjs';
@@ -36,7 +37,7 @@ export function createApp({store,config,clock=()=>Date.now()}){
  async function writeSession(req){const s=await account(req);const supplied=req.headers['x-csrf-token'];assert(typeof supplied==='string'&&supplied.length===s.csrf.length&&timingSafeEqual(Buffer.from(supplied),Buffer.from(s.csrf)),'csrf','Reload the workspace and try again.',403);return s;}
  app.get('/healthz',async()=>({ok:true,service:'galinsky-2028-api',version:'0.1.0',commit:config.commit??null}));
  app.get('/readyz',async(req,reply)=>{try{await store.healthy();return {ready:true};}catch{return reply.code(503).send({ready:false});}});
- app.get('/api/config',async()=>({publicOrigin:config.publicOrigin,signupEnabled:config.signup,features:{coordination:config.coordination===true,materials:true,worksheets:true,protectedSubmissions:false,staff:false,payments:false,treasurySetup:config.adminLoginReady===true},adminLoginEnabled:config.adminLoginReady===true,notice:config.signup?null:config.adminLoginReady?'Private staff sign-in is available by verified email invitation. Public volunteer registration remains closed.':'Account registration opens when verified email delivery is connected.'}));
+ app.get('/api/config',async()=>({publicOrigin:config.publicOrigin,signupEnabled:config.signup,features:{coordination:config.coordination===true,helpRequests:config.helpRequests===true,materials:true,worksheets:true,protectedSubmissions:false,staff:false,payments:false,treasurySetup:config.adminLoginReady===true},adminLoginEnabled:config.adminLoginReady===true,notice:config.signup?null:config.adminLoginReady?'Private staff sign-in is available by verified email invitation. Public volunteer registration remains closed.':'Account registration opens when verified email delivery is connected.'}));
  app.post('/api/auth/request',async(req,reply)=>{
   assert(config.signup||config.adminLoginReady,'signup_unavailable','Account registration is not open yet. No account has been created.',503);
   const b=exactKeys(req.body,['email','marketing','termsAccepted']);const address=email(b.email);assert(b.termsAccepted===true,'terms_required','Review the participation and privacy notices before continuing.');assert(b.marketing===undefined||typeof b.marketing==='boolean','invalid_consent','Choose whether to receive optional campaign updates.');
@@ -159,6 +160,7 @@ export function createApp({store,config,clock=()=>Date.now()}){
    .header('Content-Disposition','attachment; filename="galinsky-volunteer-account.json"')
    .type('application/json; charset=utf-8')
    .send({schemaVersion:1,exportedAt:new Date(clock()).toISOString(),...data,
+    helpRequests:config.helpRequests===true?await store.listHelpRequests(s.account.id):[],
     limitations:'This export includes volunteer account activity stored in this application. Required finance and legally retained records, if any, are handled separately.'});
  });
  app.post('/api/account/revoke-sessions',async(req,reply)=>{
@@ -252,5 +254,6 @@ export function createApp({store,config,clock=()=>Date.now()}){
    'No regulated activity module is currently published. Reading a playbook or completing orientation never authorizes the activity.'};
  });
  registerCoordination(app,{store,config,clock,account,writeSession});
+ registerHelpRoutes(app,{store,config,clock,account,writeSession,adminAccount});
  return app;
 }
