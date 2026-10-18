@@ -2,7 +2,7 @@
 // arbitrary DOM text, URLs, referral information, account IDs or mouse trails.
 (()=>{
  'use strict';
- const pages=new Set(['/','/issues/','/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/','/volunteer/','/donate/','/notices/']);
+ const pages=new Set(['/','/issues/','/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/','/policies/eternal-liberty/','/volunteer/','/donate/','/notices/']);
  const path=location.pathname.endsWith('/')?location.pathname:location.pathname+'/';
  if(!pages.has(path)||typeof crypto.randomUUID!=='function')return;
  const KEY='g28-anonymous-analytics-choice-v1';
@@ -117,7 +117,7 @@
    const normalized=u.pathname.endsWith('/')?u.pathname:u.pathname+'/';
    return ({'/':'home','/issues/':'issues','/issues/kirk-evers/':'kirk-evers',
     '/issues/garden/':'garden','/issues/cornerstone/':'cornerstone','/volunteer/':'volunteer',
-    '/donate/':'donate','/notices/':'notices'})[normalized]||'other';
+    '/donate/':'donate','/notices/':'notices','/policies/eternal-liberty/':'eternal-liberty'})[normalized]||'other';
   }catch{return 'other';}
  }
  function onClick(event){
