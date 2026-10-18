@@ -1,5 +1,5 @@
 import {databasePool} from '../api/src/postgres-store.mjs';
-import {parseVisitorEvent} from '../../packages/core/visitor-analytics.mjs';
+import {parseVisitorPayload} from '../../packages/core/visitor-analytics.mjs';
 
 function respond(res,status){
  res.statusCode=status;
@@ -10,8 +10,13 @@ function respond(res,status){
 export class PostgresVisitorWriter{
  constructor(pool){this.pool=pool;}
  async ingest(event){
-  await this.pool.query('SELECT g28.ingest_page_visit($1::uuid,$2::text,$3::text,$4::integer)',
-   [event.viewId,event.path,event.action,event.seconds]);
+  if(event.events){
+   await this.pool.query('SELECT g28.ingest_page_events($1::uuid,$2::text,$3::jsonb)',
+    [event.viewId,event.path,JSON.stringify(event.events)]);
+  }else{
+   await this.pool.query('SELECT g28.ingest_page_visit($1::uuid,$2::text,$3::text,$4::integer)',
+    [event.viewId,event.path,event.action,event.seconds]);
+  }
  }
 }
 // The preview gate must authorize requests before this handler. Web DB role
@@ -49,7 +54,7 @@ export function createVisitorCollector({env=process.env,store=null,poolFactory=d
    const key=req.socket.remoteAddress||'unknown',now=Date.now();
    let bucket=limits.get(key);
    if(!bucket||now-bucket.at>=60000){bucket={at:now,count:0};limits.set(key,bucket);}
-   if(++bucket.count>2400){respond(res,429);return true;}
+   if(++bucket.count>120){respond(res,429);return true;}
    if(++accepted%500===0){
     for(const [address,value] of limits)if(now-value.at>=60000)limits.delete(address);
     if(limits.size>4096)limits.clear();
@@ -58,9 +63,9 @@ export function createVisitorCollector({env=process.env,store=null,poolFactory=d
    try{
     for await(const chunk of req){
      raw+=chunk.toString('utf8');
-     if(Buffer.byteLength(raw)>512){respond(res,413);return true;}
+     if(Buffer.byteLength(raw)>8192){respond(res,413);return true;}
     }
-    event=parseVisitorEvent(JSON.parse(raw));
+    event=parseVisitorPayload(JSON.parse(raw));
    }catch{respond(res,400);return true;}
    try{await writer.ingest(event);respond(res,204);}
    catch{
