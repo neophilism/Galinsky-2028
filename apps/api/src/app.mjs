@@ -12,6 +12,8 @@ import {starterTasks,taskDecision} from '../../../packages/core/tasks.mjs';
 import {summarizePublishedModule} from '../../../packages/core/activity-summary.mjs';
 import {publicOrientation,evaluateOrientation,ORIENTATION_COMPLETION_ID} from '../../../packages/core/orientation.mjs';
 import {previewAuthorized,PREVIEW_REALM,PREVIEW_ROBOTS} from '../../../packages/core/preview-gate.mjs';
+import {visitorRange,visitorPage} from '../../../packages/core/visitor-analytics.mjs';
+import {visitorReport} from './visitor-report.mjs';
 import {cleanTreasuryPayload,sealTreasury,MERCHANT_SLOTS} from '../../../packages/core/treasury-vault.mjs';
 export function createApp({store,config,clock=()=>Date.now()}){
  const app=Fastify({logger:false,bodyLimit:32768,trustProxy:false,requestTimeout:15000});
@@ -25,7 +27,7 @@ export function createApp({store,config,clock=()=>Date.now()}){
   reply.header('Cache-Control','no-store').header('X-Content-Type-Options','nosniff').header('Referrer-Policy','no-referrer').header('X-Frame-Options','DENY');
   reply.header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
   if(config.production)reply.header('Strict-Transport-Security','max-age=31536000');
-  if(req.url.startsWith('/api/protected/')||req.url.startsWith('/api/payments/')||(req.url.startsWith('/api/admin/')&&!/^\/api\/admin\/(settings(?:\/bank|\/providers\/[a-z-]+)?|grants(?:\/revoke)?|operations)($|\?)/.test(req.url)))return reply.code(503).send({error:'release_unavailable',message:'This function is not released. No submission has been stored.'});
+  if(req.url.startsWith('/api/protected/')||req.url.startsWith('/api/payments/')||(req.url.startsWith('/api/admin/')&&!/^\/api\/admin\/(settings(?:\/bank|\/providers\/[a-z-]+)?|grants(?:\/revoke)?|operations|visitors)($|\?)/.test(req.url)))return reply.code(503).send({error:'release_unavailable',message:'This function is not released. No submission has been stored.'});
   if(!['GET','HEAD','OPTIONS'].includes(req.method)){
    assert(req.headers.origin===config.portalOrigin,'origin_mismatch','Open this action in the volunteer application.',403);
    assert(!req.headers['sec-fetch-site']||['same-origin','none'].includes(req.headers['sec-fetch-site']),'cross_site','Cross-site actions are not accepted.',403);
@@ -92,7 +94,15 @@ export function createApp({store,config,clock=()=>Date.now()}){
   return {...report,asOf:new Date(clock()).toISOString(),commit:config.commit||null,
    deliveryEvidence:'Queue acceptance is not confirmation that a mailbox received a message.'};
  });
- app.get('/api/admin/settings',async req=>{
+ app.get('/api/admin/visitors',async(req,reply)=>{
+   await adminAccount(req,{roles:['owner','auditor']});
+   let range,page;
+   try{range=visitorRange(req.query?.range||'day');page=visitorPage(req.query?.page||'/');}
+   catch{return reply.code(400).send({error:'invalid_range',message:'Choose an available reporting period and a public campaign page.'});}
+   try{return await visitorReport(store,range,page);}
+   catch(error){if(error?.code==='42P01'||error?.code==='42501')return reply.code(503).send({error:'analytics_not_ready',message:'Visitor analytics storage is not ready.'});throw error;}
+  });
+  app.get('/api/admin/settings',async req=>{
   const {role}=await adminAccount(req);
   const configured=await store.treasuryMetadata();
   return {mode:'sandbox-only',role,credentials:configured,slots:MERCHANT_SLOTS,

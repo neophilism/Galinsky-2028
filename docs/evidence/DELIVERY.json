@@ -174,7 +174,7 @@
     "source_sha": "c3ae2b1d32cc5a8869188e7cc3cf70edfb6037fb",
     "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
     "completed": 8,
-    "in_progress": 60,
+    "in_progress": 61,
     "not_started": 3,
     "observed_merged_prs": 111,
     "observed_closed_unmerged_prs": 5,

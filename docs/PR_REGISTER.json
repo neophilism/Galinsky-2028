@@ -5,7 +5,7 @@
   "plan_version": "1.2",
   "plan_status": "implementation_started",
   "design_status": "approved_with_issue_video_amendment",
-  "planned_work_packages": 71,
+  "planned_work_packages": 72,
   "implemented_packages": 8,
   "merged_packages": 8,
   "deployed_packages": 7,
@@ -2056,6 +2056,30 @@
         "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
         "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
         "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+      }
+    },
+    {
+      "id": "G28-72",
+      "title": "Privacy-preserving visitor engagement analytics",
+      "phase": "Added",
+      "depends_on": [
+        "G28-04"
+      ],
+      "status": "in_progress",
+      "github_prs": [],
+      "contributing_prs": [
+        117
+      ],
+      "scope": "Private owner/auditor page engagement reporting backed by explicit opt-in first-party interaction events, section and page dwell, safe clicks, accordion use, scroll depth, media and generic form events, aggregate heatmaps and bounded retention.",
+      "acceptance": "Final CI validates unit, HTTP, PostgreSQL and browser privacy journeys; least-privilege staging collection and report verified; consent withdrawal and admin role revocation demonstrated in deployment.",
+      "evidence": "docs/operations/VISITOR_ANALYTICS.md; tests/visitor-interactions.test.mjs; tests/visitor-admin-access.test.mjs; tests/integration/visitor-interactions.test.mjs; tests/browser/visitor-analytics.mjs",
+      "external_inputs": "Provision restricted Neon ingest role and existing Render service environment; public campaign launch remains gated.",
+      "implementation_note": "PR #117 contributes staged implementation; an unmerged/draft PR and queued CI are not package acceptance.",
+      "acceptance_review": {
+        "status": "in_progress",
+        "reviewed_source_sha": null,
+        "report": "docs/operations/VISITOR_ANALYTICS.md",
+        "blocker": "Final CI and isolated staging deployment/live verification not complete."
       }
     }
   ],

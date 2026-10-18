@@ -96,7 +96,9 @@
   const original=Array.from(panel.childNodes);
   const iframe=document.createElement('iframe');
   iframe.title=panel.dataset.title+' video';
-  iframe.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+  const analyticsEnabled=typeof window!=='undefined'&&window.__g28Analytics?.isActive?.()===true;
+  iframe.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`+
+   (analyticsEnabled?`&enablejsapi=1&origin=${encodeURIComponent(location.origin)}`:'');
   iframe.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
   iframe.allowFullscreen=true;iframe.tabIndex=0;
   iframe.referrerPolicy='strict-origin-when-cross-origin';
@@ -108,7 +110,13 @@
   fallback.textContent='Open this video on YouTube';fallback.target='_blank';fallback.rel='noopener noreferrer';
   const note=document.createElement('p');note.textContent='If playback is unavailable here, you can open the video on YouTube. Disconnecting stops this player; it cannot undo information already sent.';
   controls.append(stop,fallback,note);panel.replaceChildren(iframe);panel.after(controls);
-  stop.addEventListener('click',()=>{iframe.remove();panel.replaceChildren(...original);controls.remove();b.focus();},{once:true});
+  if(analyticsEnabled&&typeof CustomEvent==='function')
+   window.dispatchEvent(new CustomEvent('g28:youtube-mounted',{detail:{iframe}}));
+  stop.addEventListener('click',()=>{
+   if(analyticsEnabled&&typeof CustomEvent==='function')
+    window.dispatchEvent(new CustomEvent('g28:youtube-disconnected',{detail:{iframe}}));
+   iframe.remove();panel.replaceChildren(...original);controls.remove();b.focus();
+  },{once:true});
   stop.focus();
  }));
 })();
