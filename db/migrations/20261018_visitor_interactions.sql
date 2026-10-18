@@ -69,7 +69,7 @@ BEGIN
     'volunteer','donate','notices','portal','external','anchor','document','other',
     'd10','d25','d50','d75','d90','d100','q25','q50','q75','q100',
     'up','down','slow','medium','fast','mobile','tablet','desktop','script','image','style','font','media',
-    'http4','http5','donate_view','donate_choice','donate_handoff','volunteer_view',
+    'http4','http5','home_view','home_issues','home_donate','home_volunteer','donate_view','donate_choice','donate_handoff','volunteer_view',
     'volunteer_role','volunteer_handoff','issues_view','issues_policy','policy_view','policy_media')
    OR event_amount NOT BETWEEN 0 AND 14400
    OR event_kind IS NULL OR event_target IS NULL OR event_detail IS NULL THEN
@@ -107,7 +107,8 @@ BEGIN
     OR (event_kind IN ('resource_error','resource_slow') AND event_detail NOT IN
      ('script','image','style','font','media','other'))
     OR (event_kind='funnel_step' AND event_detail NOT IN
-     ('donate_view','donate_choice','donate_handoff','volunteer_view','volunteer_role',
+     ('home_view','home_issues','home_donate','home_volunteer',
+      'donate_view','donate_choice','donate_handoff','volunteer_view','volunteer_role',
       'volunteer_handoff','issues_view','issues_policy','policy_view','policy_media'))
     OR (event_kind='youtube_progress' AND event_detail NOT IN ('q25','q50','q75','q100'))
     THEN RAISE EXCEPTION 'Invalid interaction properties' USING ERRCODE='22023';
