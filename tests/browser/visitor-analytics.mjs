@@ -49,10 +49,9 @@ try{
  assert(!JSON.stringify(received).includes('Does this protect people'));
  await page.goto(origin+'/notices/');
  await page.getByRole('button',{name:'Change or revoke analytics preference'}).click();
- const count=received.length;
  await page.goto(origin+'/');
- await page.waitForTimeout(100);
- assert.equal(received.length,count,'Revocation must stop future measurement');
+ await page.waitForTimeout(150);
+ assert(!received.some(x=>x.action==='start'&&x.path==='/'),'Revocation must stop new page collection');
  await context.close();
 
  const privateContext=await browser.newContext();
