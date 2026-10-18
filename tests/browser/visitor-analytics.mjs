@@ -4,6 +4,9 @@ import {readFile} from 'node:fs/promises';
 import {resolve,extname} from 'node:path';
 import assert from 'node:assert/strict';
 
+const labels=JSON.parse(await readFile('apps/portal/src/visitor-control-labels.json','utf8'));
+assert(labels['/']?.l1,'Home control names should be generated before portal build');
+assert.match(labels['/issues/kirk-evers/']?.a1||'',/Does this protect people/);
 const root=resolve('dist/web'),received=[];
 const server=createServer(async(req,res)=>{
  try{
