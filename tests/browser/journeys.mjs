@@ -11,7 +11,7 @@ import {loadConfig} from '../../apps/api/src/config.mjs';
 import {registerPortal} from '../../apps/api/src/static.mjs';
 import {openDelivery} from '../../packages/core/auth.mjs';
 const publicOrigin='http://127.0.0.1:4421',portalOrigin='http://127.0.0.1:4422';
-const cfg=loadConfig({NODE_ENV:'test',PUBLIC_ORIGIN:publicOrigin,PORTAL_ORIGIN:portalOrigin,SIGNUP_ENABLED:'true',MAIL_PROVIDER:'resend',RESEND_API_KEY:'synthetic-test-only',MAIL_FROM:'test@example.test',DELIVERY_KEY:randomBytes(32).toString('base64'),LOGIN_PEPPER:randomBytes(32).toString('hex')});
+const cfg=loadConfig({NODE_ENV:'test',PUBLIC_ORIGIN:publicOrigin,PORTAL_ORIGIN:portalOrigin,SIGNUP_ENABLED:'true',G28_HELP_REQUESTS_ENABLED:'true',MAIL_PROVIDER:'resend',RESEND_API_KEY:'synthetic-test-only',MAIL_FROM:'test@example.test',DELIVERY_KEY:randomBytes(32).toString('base64'),LOGIN_PEPPER:randomBytes(32).toString('hex')});
 const store=new MemoryStore({materials:[{id:'synthetic-guide',title:'Synthetic test guide',description:'This fixture is not campaign guidance.',category:'start',revision:1,status:'published',audience:'volunteer',body:'# Synthetic test guide\n\nOnly used to verify the application.\n\n## Getting started\n\nUseful synthetic content.\n\n## A second section\n\n| Stage | Value |\n| --- | --- |\n| Prepared | Yes |',review:{approvedBy:'test-fixture',revision:1,at:'2026-10-10'}}]});
 const app=createApp({store,config:cfg});registerPortal(app,portalOrigin);
 const root=resolve('dist/web');const web=createServer(async(req,res)=>{
@@ -69,6 +69,30 @@ try{
   const prefs=await context.request.get(portalOrigin+'/api/account/role-preferences');
   assert.equal(prefs.status(),200);
   assert.equal((await prefs.json()).preferences.roleId,'skills');
+  // New help workflow: structured metadata only, private status, mobile
+  // reflow and actual saved/withdrawn states in all three browser engines.
+  await page.goto(portalOrigin+'/help');
+  await page.getByRole('heading',{name:'Help and corrections.'}).waitFor();
+  assert.equal(await page.locator('.help-form textarea, .help-form input[type="file"]').count(),0,
+    'Structured help intake must not accept sensitive incident narratives or uploads');
+  await page.getByLabel('What do you need help with?').selectOption('material_correction');
+  await page.getByLabel('Which area is affected?').selectOption('issues');
+  await page.getByRole('button',{name:'Save structured request'}).click();
+  await page.getByText(/Your structured request was stored/).waitFor();
+  let privateHelp=await context.request.get(portalOrigin+'/api/help/requests');
+  assert.equal(privateHelp.status(),200);
+  assert.equal((await privateHelp.json()).requests.length,1);
+  await page.reload();
+  await page.getByText('Received (not yet acknowledged)').waitFor();
+  await page.setViewportSize({width:320,height:844});
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,
+    'Help page should reflow without horizontal scrolling at 320px');
+  await page.screenshot({path:`test-results/browser/${name}-structured-help-mobile.png`,fullPage:true});
+  await page.getByRole('button',{name:'Withdraw'}).click();
+  await page.getByText('The request was withdrawn.').waitFor();
+  privateHelp=await context.request.get(portalOrigin+'/api/help/requests');
+  assert.equal((await privateHelp.json()).requests[0].status,'withdrawn');
+  await page.setViewportSize({width:390,height:844});
   // Account-only checklist persists across reloads without certifying fieldwork.
   // SPA route changes must announce a new page and move keyboard/screen-reader focus.
   await page.getByRole('link',{name:'Available actions'}).click();
