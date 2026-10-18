@@ -25,7 +25,7 @@
  const buttonSelector='button';
  let active=false,ended=false,viewId='',sequence=0,seconds=0,started=null;
  let pending=[],sendTimer=null,pulseTimer=null,sectionObserver=null;
- let chosen=null,consentPanel=null;
+ let consentPanel=null;
  const observed=new Set(),activeSections=new Map(),formTouched=new Set(),formSubmitted=new Set();
  const scrolled=new Set(),mediaMilestones=new WeakMap(),hoverStarted=new WeakMap();
  const visible=()=>document.visibilityState==='visible'&&document.hasFocus();
@@ -122,7 +122,7 @@
  function onClick(event){
   if(!active||ended||!event.target?.closest||event.target.closest('[data-analytics-ui]'))return;
   const point=event.target;
-  if(point.closest('main')){
+  if(point.closest('main')&&event.detail!==0){
    const full=Math.max(1,document.documentElement.scrollHeight);
    const x=clamp(Math.floor(event.clientX/Math.max(1,innerWidth)*20),0,19);
    const y=clamp(Math.floor((window.scrollY+event.clientY)/full*20),0,19);
@@ -180,7 +180,7 @@
   if(!active||ended||event.pointerType==='touch')return;
   const link=event.target?.closest?.('a[href]');
   const at=link&&hoverStarted.get(link);
-  if(at===undefined)return;
+  if(at===undefined||link.contains(event.relatedTarget))return;
   hoverStarted.delete(link);
   const duration=clamp(Math.ceil((performance.now()-at)/1000),0,300);
   if(duration>=1)enqueue('hover_time',position(link,linkSelector,'l'),'none',duration);
@@ -204,6 +204,7 @@
  }
  function onVisible(){
   if(!active||ended)return;
+  if(blocked()){stop();return;}
   if(!visible()){settlePage();settleSections();pageEvent('pulse');flush();}
   else{if(started===null)started=performance.now();settleSections(true);sampleDepth();}
  }
@@ -271,7 +272,7 @@
    read()==='yes'?'Anonymous analytics: enabled.':'Anonymous analytics: off.';
  }
  function choose(value){
-  chosen=value;save(value);
+  save(value);
   if(consentPanel){consentPanel.remove();consentPanel=null;}
   if(value==='yes'&&!blocked())start();else stop();
   updatePreferenceLabel();
