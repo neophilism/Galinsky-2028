@@ -2,7 +2,7 @@
   "repository": "neophilism/Galinsky-2028",
   "title": "Galinsky-2028",
   "planVerified": true,
-  "plannedPrCount": 71,
+  "plannedPrCount": 72,
   "sourceFiles": [
     ".exechub/project.yml",
     "docs/DEVELOPMENT_PLAN.md",
@@ -1251,6 +1251,28 @@
       "scope": "Test complete admin/edit/publish/site journeys across browser engines, outage/rollback, access and deployment checks.",
       "acceptanceBlocker": "Implementation and synthetic CI contribute but end-to-end deployment, independent draft preview and live owner acceptance are not yet accepted.",
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md"
+    },
+    {
+      "id": "G28-072",
+      "title": "Privacy-preserving visitor engagement analytics",
+      "origin": "addition",
+      "prs": [],
+      "contributingPrs": [
+        117
+      ],
+      "dependsOn": [
+        "G28-004"
+      ],
+      "externalDependencies": [],
+      "externalPrerequisites": [
+        "Restricted Neon web collector role",
+        "Opt-in disclosure and visitor preference controls",
+        "Exact-head CI and staged Render verification"
+      ],
+      "status": "in_progress",
+      "scope": "Event-level anonymous public campaign analytics: page and section duration, clicks, accordions, scroll milestones, media, generic form activity, heatmaps and aggregate owner dashboard. No user political profiles or form values.",
+      "acceptanceBlocker": "Final reviewed-head CI still queued; staging migrations, least-privilege ingest credential, verified owner sign-in, deployment and live acceptance not yet complete.",
+      "acceptanceReport": "docs/operations/VISITOR_ANALYTICS.md"
     }
   ],
   "pullRequests": [
