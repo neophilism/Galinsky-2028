@@ -24,7 +24,7 @@ test('only verified owner and active auditor can read aggregated visitor reports
   const owner=await login(app,store,'owner@example.test');
   const report=await app.inject({url:'/api/admin/visitors?range=day',headers:{cookie:owner}});
   assert.equal(report.statusCode,200,report.body);
-  assert.equal(report.json().pages.length,8);
+  assert.equal(report.json().pages.length,9);
   assert(!report.body.includes('owner@example.test'));
   assert.equal((await app.inject({url:'/api/admin/visitors?range=bad',headers:{cookie:owner}})).statusCode,400);
   const treasurerKey=emailKey('treasurer@example.test',cfg.pepper);
