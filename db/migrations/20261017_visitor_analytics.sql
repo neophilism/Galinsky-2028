@@ -1,7 +1,7 @@
 -- Anonymous page-view metrics; no account, IP, browser or cross-page identity.
 CREATE TABLE IF NOT EXISTS g28.page_visits(
  view_id uuid PRIMARY KEY,
- page text NOT NULL CHECK(page IN ('/','/issues/','/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/','/volunteer/','/donate/','/notices/')),
+ page text NOT NULL CHECK(page IN ('/','/issues/','/issues/kirk-evers/','/issues/garden/','/issues/cornerstone/','/volunteer/','/donate/','/notices/','/policies/eternal-liberty/','/policies/eternal-liberty/')),
  started_at timestamptz NOT NULL DEFAULT now(),
  last_seen_at timestamptz NOT NULL DEFAULT now(),
  ended_at timestamptz,
