@@ -68,8 +68,8 @@ BEGIN
    RAISE EXCEPTION 'Invalid interaction' USING ERRCODE='22023';
   END IF;
   event_prefix=CASE
-   WHEN event_kind IN ('link_click','hover_time','share','download') THEN 'l'
-   WHEN event_kind='button_click' THEN 'b'
+   WHEN event_kind IN ('link_click','hover_time','download') THEN 'l'
+   WHEN event_kind IN ('button_click','share') THEN 'b'
    WHEN event_kind IN ('accordion_open','accordion_close') THEN 'a'
    WHEN event_kind IN ('section_enter','section_time','copy') THEN 's'
    WHEN event_kind IN ('field_focus','field_change','field_invalid','form_submit','form_abandon') THEN 'f'
