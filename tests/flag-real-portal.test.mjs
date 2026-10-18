@@ -10,7 +10,8 @@ test('hero flag animates colliding dots including fifty white dot stars',()=>{
  assert(h.includes('class="flag-canvas"'));
  assert(h.includes('/assets/motion.js'));
  assert(!h.includes('Pause animation'));
- assert(!h.includes('motion-toggle'));
+ assert(h.includes('id="flag-motion-toggle"'));
+ assert(motion.includes('g28-hero-motion-paused'));
  assert(motion.includes('prefers-reduced-motion: reduce'));
  assert(motion.includes("const count = row % 2 === 0 ? 6 : 5"));
  assert(motion.includes('for (let row = 0; row < 9; row++)'));
