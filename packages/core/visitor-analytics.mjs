@@ -7,6 +7,7 @@ export const VISITOR_PAGES=Object.freeze([
  {path:'/issues/cornerstone/',label:'The Cornerstone'},
  {path:'/volunteer/',label:'Volunteer'},
  {path:'/donate/',label:'Donate'},
+ {path:'/policies/eternal-liberty/',label:'Eternal Liberty'},
  {path:'/notices/',label:'Notices'}
 ]);
 export const VISITOR_WINDOWS=Object.freeze({day:24,week:168,month:720});
@@ -36,7 +37,7 @@ export const VISITOR_ACTIONS=Object.freeze([
  'copy','share','download','click_heatmap'
 ]);
 export const VISITOR_DETAILS=Object.freeze([
- 'none','home','issues','kirk-evers','garden','cornerstone','volunteer','donate','notices',
+ 'none','home','issues','kirk-evers','garden','cornerstone','volunteer','donate','notices','eternal-liberty',
  'portal','external','anchor','document','other',
  'd10','d25','d50','d75','d90','d100','q25','q50','q75','q100'
 ]);
