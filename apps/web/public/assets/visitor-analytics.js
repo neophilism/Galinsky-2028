@@ -206,11 +206,12 @@
  function onVisible(){
   if(!active||ended)return;
   if(blocked()){stop();return;}
-  if(!visible()){settlePage();settleSections();pageEvent('pulse');flush();}
+  if(!visible()){window.dispatchEvent(new Event('g28:analytics-finalize'));settlePage();settleSections();pageEvent('pulse');flush();}
   else{if(started===null)started=performance.now();settleSections(true);sampleDepth();}
  }
  function endPage(){
   if(!active||ended)return;
+  window.dispatchEvent(new Event('g28:analytics-finalize'));
   for(const form of formTouched)if(!formSubmitted.has(form))enqueue('form_abandon',position(form,'main form','f'));
   settlePage();settleSections();flush(true);ended=true;pageEvent('end',true);
  }
@@ -220,6 +221,7 @@
   started=visible()?performance.now():null;
   scrolled.clear();activeSections.clear();formTouched.clear();formSubmitted.clear();
   pageEvent('start');settleSections(true);sampleDepth();
+  window.dispatchEvent(new Event('g28:analytics-state'));
  }
  function tick(){
   if(!active||ended||!visible())return;
@@ -232,6 +234,7 @@
   if(pulseTimer)clearInterval(pulseTimer);
   if(sectionObserver)sectionObserver.disconnect();
   sendTimer=null;pulseTimer=null;sectionObserver=null;
+  window.dispatchEvent(new Event('g28:analytics-state'));
  }
  function start(){
   if(active||blocked())return;
@@ -244,7 +247,14 @@
   }
   sampleDepth();
   pulseTimer=setInterval(tick,15000);
+  window.dispatchEvent(new Event('g28:analytics-state'));
  }
+ // A deliberately tiny bridge: other first-party scripts cannot inspect IDs or
+ // page-visit histories, and the server still validates every emitted enum.
+ Object.defineProperty(window,'__g28Analytics',{value:Object.freeze({
+  isActive:()=>active&&!ended,
+  emit:(kind,target='p0',detail='none',amount=0)=>enqueue(kind,target,detail,amount)
+ }),writable:false,configurable:false});
  document.addEventListener('click',onClick,{capture:true});
  document.addEventListener('toggle',onToggle,{capture:true});
  document.addEventListener('focusin',onFocus);
