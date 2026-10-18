@@ -2,7 +2,7 @@
 
 ## What the protected admin dashboard shows
 
-Open **Visitor analytics** at /visitors in the existing protected staff portal. Every report requires a current verified owner or auditor role. The owner can select a 24-hour, 7-day, or 30-day window, drill into any of the eight public campaign pages, and export **aggregated** CSV. A visible admin tab refreshes every 30 seconds.
+Open **Visitor analytics** at /visitors in the existing protected staff portal. Every report requires a current verified owner or auditor role. The owner can select a 24-hour, 7-day, or 30-day window, drill into any of the nine registered public campaign pages, and export **aggregated** CSV. A visible admin tab refreshes every 30 seconds.
 
 - Page views, approximate active foreground pages, average visible dwell.
 - Link and button clicks by ordinal control ID and approved category of destination.
