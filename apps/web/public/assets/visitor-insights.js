@@ -16,7 +16,7 @@
   return 's'+(index<0?1:index+1);
  };
  let running=false,observers=[],intervals=[],timeouts=[],lastScroll=null;
- let lastMovement='',lastVelocity='',recentClicks=[],lastRage=0,mutations=0;
+ let lastMovement='',lastVelocity='',recentClicks=[],lastRage=-Infinity,mutations=0;
  let observedPerformance=new Map(),vitalsFlushed=false,resourceCount=0;
  let stageSeen=new Set(),pendingNavigation=null,videoSessions=new Set();
  const perfKinds=new Set(['perf_ttfb','perf_fcp','perf_lcp','perf_cls','perf_interaction_delay']);
@@ -297,7 +297,7 @@
  function start(){
   if(!active()||running)return;
   running=true;vitalsFlushed=false;lastScroll=null;lastMovement='';lastVelocity='';
-  observedPerformance=new Map();stageSeen=new Set();recentClicks=[];mutations=0;resourceCount=0;
+  observedPerformance=new Map();stageSeen=new Set();recentClicks=[];lastRage=-Infinity;mutations=0;resourceCount=0;
   const width=window.innerWidth;
   emit('device_class','p0',width<600?'mobile':width<1024?'tablet':'desktop');
   enterFunnel();
