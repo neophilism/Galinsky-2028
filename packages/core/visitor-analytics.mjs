@@ -45,7 +45,7 @@ export const VISITOR_DETAILS=Object.freeze([
  'portal','external','anchor','document','other',
  'd10','d25','d50','d75','d90','d100','q25','q50','q75','q100',
  'up','down','slow','medium','fast','mobile','tablet','desktop','script','image','style','font','media',
- 'http4','http5','donate_view','donate_choice','donate_handoff','volunteer_view','volunteer_role',
+ 'http4','http5','home_view','home_issues','home_donate','home_volunteer','donate_view','donate_choice','donate_handoff','volunteer_view','volunteer_role',
  'volunteer_handoff','issues_view','issues_policy','policy_view','policy_media'
 ]);
 const actionSet=new Set(VISITOR_ACTIONS);
@@ -90,7 +90,7 @@ export function parseInteraction(value){
    (kind==='device_class'&&!['mobile','tablet','desktop'].includes(detail))||
    (kind==='navigation_http_error'&&!['http4','http5'].includes(detail))||
    (['resource_error','resource_slow'].includes(kind)&&!['script','image','style','font','media','other'].includes(detail))||
-   (kind==='funnel_step'&&!['donate_view','donate_choice','donate_handoff','volunteer_view',
+   (kind==='funnel_step'&&!['home_view','home_issues','home_donate','home_volunteer','donate_view','donate_choice','donate_handoff','volunteer_view',
       'volunteer_role','volunteer_handoff','issues_view','issues_policy','policy_view','policy_media'].includes(detail))||
    (kind==='youtube_progress'&&!['q25','q50','q75','q100'].includes(detail))||
    (['resource_slow','perf_ttfb','perf_fcp','perf_lcp','perf_cls','perf_interaction_delay','perf_longtask'].includes(kind)&&amount===0)||
