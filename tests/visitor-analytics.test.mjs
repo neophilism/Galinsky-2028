@@ -7,7 +7,7 @@ import {randomUUID} from 'node:crypto';
 import {parseVisitorEvent,VISITOR_PAGES,visitorRange} from '../packages/core/visitor-analytics.mjs';
 import {createPrivatePreviewServer} from '../apps/web/private-preview.mjs';
 import {visitorReport} from '../apps/api/src/visitor-report.mjs';
-import {renderPage} from '../scripts/public-renderer.mjs';
+import {renderPage,pages} from '../scripts/public-renderer.mjs';
 test('events accept only allowed anonymous page metrics',()=>{
  const good={action:'pulse',path:'/issues/garden/',viewId:randomUUID(),seconds:22};
  assert.deepEqual(parseVisitorEvent(good),good);assert.equal(VISITOR_PAGES.length,9);
@@ -15,6 +15,7 @@ test('events accept only allowed anonymous page metrics',()=>{
  assert.equal(visitorRange('month'),'month');assert.throws(()=>visitorRange('all'));
 });
 test('public templates contain first-party visitor script',()=>{
+ assert.deepEqual(new Set(VISITOR_PAGES.map(p=>p.path)),new Set(pages.map(p=>p.path)),'Never ship a new published page without instrumentation coverage');
  for(const key of ['index','issues','kirk-evers','garden','cornerstone','volunteer','donate','notices','eternal-liberty'])
   assert(renderPage(key).includes('/assets/visitor-analytics.js'));
 });
