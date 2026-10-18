@@ -50,6 +50,8 @@ const actionLabels:Record<string,string>={
  youtube_error:'YouTube player error'
 };
 const funnelNames:Record<string,string>={
+ home_view:'Homepage viewed',home_issues:'Homepage policy link clicked',
+ home_donate:'Homepage contribution action clicked',home_volunteer:'Homepage volunteer link clicked',
  donate_view:'Contribution page viewed',donate_choice:'Contribution controls used',
  donate_handoff:'Checkout handoff clicked',
  volunteer_view:'Volunteer page viewed',volunteer_role:'Role finder used',
