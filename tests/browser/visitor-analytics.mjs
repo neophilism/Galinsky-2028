@@ -50,6 +50,9 @@ try{
   for(let i=0;i<3;i++)target.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:1,clientX:40,clientY:80}));
   window.dispatchEvent(new Event('error'));
  });
+ // A subsequent test fixture DOM insertion should not invalidate the earlier
+ // dead-click mutation check; let the heuristic's 750 ms interval finish.
+ await page.waitForTimeout(1050);
  await page.route('https://www.youtube-nocookie.com/**',route=>route.fulfill({contentType:'text/html',body:'<html><body>Synthetic player</body></html>'}));
  await page.evaluate(()=>{
   window.YT={Player:class {
