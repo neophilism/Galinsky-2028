@@ -6,10 +6,10 @@
   "plan_status": "implementation_started",
   "design_status": "approved_with_issue_video_amendment",
   "planned_work_packages": 72,
-  "implemented_packages": 8,
+  "implemented_packages": 55,
   "merged_packages": 8,
   "deployed_packages": 7,
-  "note": "111 GitHub PRs are accepted as merged; 8/71 packages have full-scope evidence. These are different facts; neither is an overall application completion estimate.",
+  "note": "See individual software implementation reviews. Full-scope completion is separate from implemented code, accepted PR merges and external production activation.",
   "packages": [
     {
       "id": "G28-01",
@@ -44,6 +44,23 @@
         ],
         "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
         "scoped_deployed": false
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "AGENTS.md",
+            "sha256": "fca131f1791e5b7aad243537994cf0c52e721beea5c29c0367f804a3e2db7781"
+          },
+          {
+            "path": "docs/DEVELOPMENT_PLAN.md",
+            "sha256": "41641834813b819306925f9196bc6627f91af21596a81ee3bd8f0f1d87de2ea1"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -53,13 +70,13 @@
       "depends_on": [
         "G28-01"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Set up Astro marketing, React/TypeScript portal, Fastify API/static portal host, shared UI/contracts/content/security packages, pnpm workspace and pinned supported Node/tool versions. Add formatting, lint, type checks, unit/integration/browser test runners, secret scanning, dependency review, branch rules and PR templates. Keep pending features behind server-side flags.",
       "acceptance": "A clean checkout installs reproducibly and passes the documented verification command. CI tests the merge candidate; no production secret is available to untrusted PRs. Empty test suites and skipped security gates cannot be reported as passing implementation evidence.",
       "evidence": "Lockfile, CI configuration, green bootstrap run and documented local setup.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Added repository-wide JavaScript lint, formatting tooling/configuration, known-pattern secret scanning, a PR template and a verification command that requires the isolated test database. Classic branch-protection evidence remains unavailable to the connected app (403); hosted CI must verify this revision.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "contributing_prs": [
         1,
         6,
@@ -69,10 +86,27 @@
         96
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/PUBLIC_QUALITY_20261016.md",
-        "blocker": "Added repository-wide JavaScript lint, formatting tooling/configuration, known-pattern secret scanning, a PR template and a verification command that requires the isolated test database. Classic branch-protection evidence remains unavailable to the connected app (403); hosted CI must verify this revision."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "scripts/verify.mjs",
+            "sha256": "dd052ac5503ce12d2965d6dcda8b104cbd32fbb48ade24e4e595c8f05828861e"
+          },
+          {
+            "path": ".github/workflows/ci.yml",
+            "sha256": "9d900f885e71dd1b6b339f27dda6ecd8595b9f2970c2b4fc87aa8c5b2c843139"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -82,23 +116,40 @@
       "depends_on": [
         "G28-02"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Extract the approved color, spacing, typography, button, card, form, sidebar, footer, responsive navigation and layout tokens. Preserve the original flag mark, white canvas and portrait-led visual hierarchy. Provide accessible focus, errors, loading, success and empty states. Use source CSS as the baseline rather than substituting a generic component theme.",
       "acceptance": "Header/footer and representative components match approved desktop/mobile references. Keyboard navigation, skip link, menu state and focus restoration work. Legal text remains readable; an accessibility fix may improve a tiny prototype label without changing the design direction.",
       "evidence": "Component gallery, screenshot baselines and keyboard/accessibility component tests.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Keyboard/mobile components are built, but full baseline side-by-side UI approval and focus/gallery evidence are missing.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "contributing_prs": [
         1,
         10,
         35
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Keyboard/mobile components are built, but full baseline side-by-side UI approval and focus/gallery evidence are missing."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/web/public/assets/site.css",
+            "sha256": "545f87f924c9ac59cd85aa577d2cc2b5fc765b6762db988288d22c1cced1f661"
+          },
+          {
+            "path": "tests/browser/journeys.mjs",
+            "sha256": "cd5eda5d5c9d86123f789ffbc5c19b775ade102218100a0284c45750796f1d57"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -136,6 +187,23 @@
         ],
         "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
         "scoped_deployed": true
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/config.mjs",
+            "sha256": "b55fc261b3fc52453bac556202c9a5d8831cbaca966e7abb404bdcb51f2ec176"
+          },
+          {
+            "path": "scripts/migrate.mjs",
+            "sha256": "b75ea8d7b8b518bccd220f58a6e88d9da6cfeba0b034b8affe01609774716865"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -152,7 +220,7 @@
       "acceptance": "No TLS-only or provider-managed encryption is called E2EE. The build can identify every protected flow and its intended recipients. Missing upstream production evidence blocks protected production use but not public UI development. Unknown capabilities fail closed instead of selecting a weaker fallback.",
       "evidence": "Component/data-flow inventory, profile decision record, egress matrix, release-gate specification and reviewer handoff requirements.",
       "external_inputs": "Production profile eligibility and required expert review remain independent gates; they are not presumed satisfied by this plan.",
-      "implementation_note": "Security boundaries exist; verified complete E2EESA component/flow inventory and profile mapping do not.",
+      "implementation_note": "Finish the complete component/profile coverage review, including protected-flow obligations; preliminary inventory is not full coverage.",
       "contributing_prs": [
         16,
         66
@@ -160,8 +228,21 @@
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Security boundaries exist; verified complete E2EESA component/flow inventory and profile mapping do not."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Finish the complete component/profile coverage review, including protected-flow obligations; preliminary inventory is not full coverage."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "security/e2eesa-inventory.json",
+            "sha256": "07132a395aac4d1692b5d18b9f199bd84e5456845984e070e890eed71fd266dd"
+          }
+        ],
+        "softwareGap": "Finish the complete component/profile coverage review, including protected-flow obligations; preliminary inventory is not full coverage.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -172,23 +253,40 @@
         "G28-04",
         "G28-05"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Add schemas and persistence for campaign copy, issues, videos, documents, approved links, legal copy, media and content releases. Use sanitized Markdown/structured blocks, not executable author-supplied MDX. Implement draft/review/approved/published/superseded/withdrawn states with immutable versions, role-scoped approvals and rollback. A published immutable release feeds the static site; repository exports preserve approved public content for handoff.",
       "acceptance": "Unapproved documents cannot enter a public release or volunteer current-materials view. Publishing is atomic; stale edits cannot overwrite newer versions. A failed build leaves the previous public release live. No second manual copy of policy definitions is needed for volunteer summaries.",
       "evidence": "Schema tests, publication state-machine tests, rollback fixture and source-to-release traceability.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Material publication protections exist; atomic public content release, cross-source versioning and rollback remain incomplete.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "contributing_prs": [
         12,
         13,
         16
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Material publication protections exist; atomic public content release, cross-source versioning and rollback remain incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/campaign-store.mjs",
+            "sha256": "4721d96f519298cf0095f3545b5c0d141d59a39f21908173be63e13f28d47d8d"
+          },
+          {
+            "path": "tests/integration/campaign-store.test.mjs",
+            "sha256": "dd86a0ba8eabd2ed834af0bd6d9f8ac72b3ee3fba81d28325450a393604e1108"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -199,13 +297,13 @@
         "G28-03",
         "G28-06"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Add portrait derivatives, local concept illustrations, responsive image sizes, focal points, asset rights/consent fields, alt text, upload limits and content hashes. Split public assets from authenticated or encrypted objects. Scan and sanitize public editorial uploads; reject active SVG/HTML and deceptive MIME types. Retain original sources with explicit publication status.",
       "acceptance": "The real candidate likeness and pointing pose are preserved. No public asset or ZIP exposes restricted source materials or metadata. Every displayed/downloadable asset has a rights record, correct content type and accessible alternative. Portrait and illustration loading does not shift layout.",
       "evidence": "Asset register, malicious-upload tests, image comparison and download authorization tests.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Assets/sanitization exist; comprehensive rights metadata and hostile-editor upload testing are unfinished.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "contributing_prs": [
         45,
         46,
@@ -213,10 +311,27 @@
         96
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Assets/sanitization exist; comprehensive rights metadata and hostile-editor upload testing are unfinished."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/campaign-image.mjs",
+            "sha256": "ba94fdc56b5708097cb68533ce184c6ae61ccca0f94e398fb460f5f0b0c6d1a2"
+          },
+          {
+            "path": "tests/campaign-image.test.mjs",
+            "sha256": "47850929dd8cd952fd6b1e4b50ce81e45966fb589c4b469b607dd7a61467fa23"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -227,21 +342,34 @@
         "G28-01",
         "G28-02"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Inspect the current Engine Room ingestion/schema rather than copying an outdated manifest. Register Galinsky 2028, this repository, all 60 work-package IDs, dependencies, plan location, preview/production fields and blocked-input categories. Supply the adapter/manifest it actually accepts, including .exechub/project.yml where applicable.",
       "acceptance": "Engine Room shows planned work before PRs exist. Green means accepted/merged planned work, yellow means implemented but not yet accepted/merged work, and empty means not implemented. New planned work increases the denominator. Deployment and security readiness are separate from merge progress.",
       "evidence": "Manifest validation, ingestion test and an observed Engine Room project entry; screenshots alone are not the data source.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Engine Room manifests exist; actual 61-package import, accepted colors and denominator have not been observed.",
+      "implementation_note": "Working source implementation reviewed individually. Observe current source-plan ingestion and presentation in Engine Room; this is a consumer integration check.",
       "contributing_prs": [
         63
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Engine Room manifests exist; actual 61-package import, accepted colors and denominator have not been observed."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Observe current source-plan ingestion and presentation in Engine Room; this is a consumer integration check."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
+            "sha256": "8e86194b920b8797b20dc1d96dfa4cab0be834750437aa08d6a085e527bbcf12"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Observe current source-plan ingestion and presentation in Engine Room; this is a consumer integration check.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -278,6 +406,19 @@
         ],
         "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
         "scoped_deployed": true
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "content/public/pages/index.html",
+            "sha256": "d0b884af483ebf634b5f9bb10b68fe4d11c0689459ce90d1ef055bbfd5d61034"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -287,13 +428,13 @@
       "depends_on": [
         "G28-09"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Recreate red/blue dots and connecting lines assembling into the flag, with a subtle portrait-scale cycle. Prefer lightweight SVG/canvas/CSS over a large animation library. Add an obvious pause/resume control, persistent local motion preference, reduced-motion still state and off-screen/background-tab suspension.",
       "acceptance": "The headline and buttons never rotate away or move out of reach. Animation is decorative, silent and non-flashing; it stops when requested and remains paused across navigation. Low-power/mobile behavior and disabled-JavaScript still composition remain attractive.",
       "evidence": "Motion-state tests, reduced-motion screenshots, CPU/long-task measurements and mobile visual review.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Persistent visitor motion control is implemented in PR #118. Full mobile/CPU and final visual evidence remain unverified; the former no-pause note is superseded.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "contributing_prs": [
         35,
         96,
@@ -302,10 +443,27 @@
         118
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
-        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
-        "blocker": "Persistent visitor motion control is implemented in PR #118. Full mobile/CPU and final visual evidence remain unverified; the former no-pause note is superseded."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/web/public/assets/motion.js",
+            "sha256": "08704965825a652de69201e341e4ec938946251e0d289c75c14d91724ec6db1c"
+          },
+          {
+            "path": "tests/hero-motion-accessibility.test.mjs",
+            "sha256": "d34e61ab2ea892e544e7136a12380b74267d2b47fb7e5532896b278e7ec04605"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -342,6 +500,19 @@
         ],
         "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
         "scoped_deployed": true
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "content/public/pages/issues.html",
+            "sha256": "435b3fa69117eef87f8186db842a54f391c138be03b15f77e58e7aeef38de700"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -353,23 +524,40 @@
         "G28-06",
         "G28-07"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Implement one shared IssueVideo component and independent configuration for all three issues. Place a compact title/breadcrumb then a full-width 16:9 video panel before the extended summary. Store provider, validated video ID, approved poster, accessible title, transcript/captions references and publication state. Start all actual video IDs as null; do not insert demonstration videos.",
       "acceptance": "All three issue pages visibly reserve a large video area at the top. There are zero YouTube/Google thumbnail, player, DNS-preconnect or script requests before visitor activation. Activation loads a privacy-enhanced player with controls, fullscreen and suitable referrer configuration. Invalid/unavailable videos, denied embeds and revoked consent have accessible fallbacks. Editing one video does not alter another.",
       "evidence": "Network-interception tests, URL-parser adversarial tests, keyboard/screen-reader checks, no-video screenshots and documented later-link connection instructions.",
       "external_inputs": "The three actual YouTube links, approved posters if different, and reviewed accessibility material are publication inputs. Missing links do not block component implementation.",
-      "implementation_note": "Added explicit YouTube disconnection, restoration of the original play control and keyboard focus, replay protection and three-engine browser tests. Actual approved videos/captions and live media acceptance remain outstanding.",
+      "implementation_note": "Working source implementation reviewed individually. Supply/release final issue videos and captions; the consent, revoke and playback component is implemented.",
       "contributing_prs": [
         45,
         65,
         96
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/PUBLIC_QUALITY_20261016.md",
-        "blocker": "Added explicit YouTube disconnection, restoration of the original play control and keyboard focus, replay protection and three-engine browser tests. Actual approved videos/captions and live media acceptance remain outstanding."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Supply/release final issue videos and captions; the consent, revoke and playback component is implemented."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/video.mjs",
+            "sha256": "89d7cfdc1a3d72d5df735218e10b4aa81bd12adc4ec8f44148d4131b88529c91"
+          },
+          {
+            "path": "tests/public-interactions.test.mjs",
+            "sha256": "ea3593e9337a1e31bcbd864aaa741a20d4039b1caf424756585db69fdc0219ad"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Supply/release final issue videos and captions; the consent, revoke and playback component is implemented.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -381,13 +569,13 @@
         "G28-12",
         "G28-06"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Reproduce the approved summary, mechanism, safeguards, FAQ, source area and volunteer invitation beneath the large video. Add stable bill/version routes, accessible HTML text, section anchors, document metadata and PDF/DOCX downloads when approved sources exist. Show version and proposal status without claiming enactment.",
       "acceptance": "Approved legislative text is preserved exactly in the source record; summaries do not silently replace it. Download links resolve to the stated version/hash, and older versions are clearly superseded. Missing files are honest preview placeholders, not dead or fabricated downloads.",
       "evidence": "HTML-to-source comparison, bill anchor tests, download/hash checks, visual tests and legal-content review checklist.",
       "external_inputs": "Approved publication bill and supporting documents are needed to publish the actual legislative library.",
-      "implementation_note": "Kirk-Evers draft and source reader exist; final approved legislation/PDF and versioned public downloads are missing.",
+      "implementation_note": "Working source implementation reviewed individually. Publish the exact approved final legal document; the current draft reader/provenance works.",
       "contributing_prs": [
         12,
         13,
@@ -395,10 +583,27 @@
         68
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Kirk-Evers draft and source reader exist; final approved legislation/PDF and versioned public downloads are missing."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Publish the exact approved final legal document; the current draft reader/provenance works."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/policy-documents.mjs",
+            "sha256": "fecf27af57fb2ed9a512ed15786ce11c538af6a5bfda8d60212419cd61e5d676"
+          },
+          {
+            "path": "tests/kirk-evers-discussion-provenance.test.mjs",
+            "sha256": "ce8f3030a7175bd2443574030fd61b3b97a9144054974f337170fdfda6d02223"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Publish the exact approved final legal document; the current draft reader/provenance works.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -410,21 +615,34 @@
         "G28-12",
         "G28-06"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Reproduce the approved extended summary, negotiated remedy, self-government, safeguards and questions. Link repeatedly and contextually to the canonical dedicated Garden site using one managed destination record. Use the current approved policy source, not the old volunteer kit as authority.",
       "acceptance": "Large video is first major content. Links in the introduction, mechanism/source area and closing invitation resolve to the verified destination. The summary preserves voluntary participation, victim-negotiated repair and safeguards; no unapproved land, membership, eligibility or financing promise is introduced.",
       "evidence": "Copy/source review, destination verification, broken-link tests and responsive screenshots.",
       "external_inputs": "Verified Garden public URL and reconciled policy material are publication inputs.",
-      "implementation_note": "Garden page exists; verified canonical external URL and final issue video are absent.",
+      "implementation_note": "Working source implementation reviewed individually. Set the approved final canonical destination/video in content configuration.",
       "contributing_prs": [
         15
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Garden page exists; verified canonical external URL and final issue video are absent."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Set the approved final canonical destination/video in content configuration."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "content/public/pages/garden.html",
+            "sha256": "a5d6c66679365458321d785710898f954f0f9c49ff4c7254b320ef82444b2547"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Set the approved final canonical destination/video in content configuration.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -436,21 +654,34 @@
         "G28-12",
         "G28-06"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Reproduce the approved explanation of government-caused livelihood loss and worker-owned replacement opportunity, mechanism, safeguards, FAQ and contextual links to its dedicated website. Drive both the public summary and volunteer explanation from the same approved policy definition.",
       "acceptance": "Large video is first major content. The livelihood/material-effect test and approved scope remain intact; no blanket compensation entitlement is invented. Repeated external links use the verified destination, and missing links remain explicit in preview.",
       "evidence": "Copy/source review, external-link checks and desktop/mobile screenshots.",
       "external_inputs": "Verified Cornerstone public URL and current policy source are publication inputs.",
-      "implementation_note": "Cornerstone page exists; verified canonical external URL and final issue video are absent.",
+      "implementation_note": "Working source implementation reviewed individually. Set the approved final canonical destination/video in content configuration.",
       "contributing_prs": [
         15
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Cornerstone page exists; verified canonical external URL and final issue video are absent."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Set the approved final canonical destination/video in content configuration."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "content/public/pages/cornerstone.html",
+            "sha256": "477454f50bd6e892870004091fdc3c5a11f366aa1dacb8b463836776f79137e8"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Set the approved final canonical destination/video in content configuration.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -489,6 +720,23 @@
         ],
         "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
         "scoped_deployed": true
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/roles.mjs",
+            "sha256": "accb28253ed1dce24c20308c60916bcc7bb62f07ebf98dceb0f16d2901562a7f"
+          },
+          {
+            "path": "tests/flag-real-portal.test.mjs",
+            "sha256": "26db4b2bcecb777f7d190de4d5acf30e4f8a40b3ceb74e38d028a23ede8dffd3"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -530,6 +778,19 @@
         ],
         "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
         "scoped_deployed": true
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/stripe-web-checkout.mjs",
+            "sha256": "e7cda76f88fe19bceef3e60eb6a6f88636112aa6dd33f18766958e80836c1381"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -573,6 +834,23 @@
         ],
         "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
         "scoped_deployed": true
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/indexing.mjs",
+            "sha256": "213de878f89d86a3a7f1f02156304b6a9cbfff173fa9076748af9988b3d0cc33"
+          },
+          {
+            "path": "tests/accessibility-navigation.test.mjs",
+            "sha256": "7d660b084f1051dbb92d7f177362a3567b6c95b297b2a135c88d76e2929ac6a6"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -584,13 +862,13 @@
         "G28-05",
         "G28-16"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Integrate a maintained authentication library with verified-email signup, passkey enrollment, session management, logout and account recovery states. Use single-use bounded verification tokens; avoid consumption by email-link scanners. Give verified volunteers immediate reviewed-library access. Separate optional marketing consent from essential account delivery.",
       "acceptance": "A real new account can verify, sign in, sign out and return from another session without a staff approval queue for materials. Expired, replayed, tampered and scanner-opened links are handled safely. Account enumeration, abuse throttling, origin/CSRF checks and accessible recovery paths are tested.",
       "evidence": "Authentication integration tests, mail delivery evidence in staging and full new-volunteer browser journey.",
       "external_inputs": "An authorized sending domain and email provider credentials are needed for deployed mail delivery.",
-      "implementation_note": "Real signup code exists, but actual portal still has signup=false and mail delivery disabled.",
+      "implementation_note": "Working source implementation reviewed individually. Verify existing sender, mail worker and a real mailbox journey before opening public signup.",
       "contributing_prs": [
         36,
         38,
@@ -598,10 +876,27 @@
         61
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Real signup code exists, but actual portal still has signup=false and mail delivery disabled."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify existing sender, mail worker and a real mailbox journey before opening public signup."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/app.mjs",
+            "sha256": "ef60e28f46261a1205e94d4b12f9480615bc1c06cdd98d6e1c36b7f729759c3b"
+          },
+          {
+            "path": "tests/integration/api.test.mjs",
+            "sha256": "621f32522e6facd3e63de53bc7b8b232a17333d5439beb1a58bdac04999b2fa9"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify existing sender, mail worker and a real mailbox journey before opening public signup.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -622,12 +917,33 @@
         16,
         69
       ],
-      "implementation_note": "Treasury/owner basics exist; staff MFA, scoped roles and negative authorization journeys are missing.",
+      "implementation_note": "Finish integration of all scoped staff operational actions with the new passkey/permission framework.",
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Treasury/owner basics exist; staff MFA, scoped roles and negative authorization journeys are missing."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Finish integration of all scoped staff operational actions with the new passkey/permission framework."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/staff-security.mjs",
+            "sha256": "604641715ce741f87a15f05224c53e88855c2f991735c978b330075f415acff8"
+          },
+          {
+            "path": "packages/core/staff-permissions.mjs",
+            "sha256": "7a77ecb896e99d3cbb840a62cbd1436b82672f0a77082c7760797548c8061deb"
+          },
+          {
+            "path": "tests/staff-security.test.mjs",
+            "sha256": "37e0de3ba974f656c4e29b96ebba4ef08b23754f3c4ba22c84b8ad4674f6c1c2"
+          }
+        ],
+        "softwareGap": "Finish integration of all scoped staff operational actions with the new passkey/permission framework.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -646,12 +962,25 @@
       "evidence": "Interoperability/test vectors, key-substitution tests, enrollment evidence and profile-conformance mapping.",
       "external_inputs": "A suitable reviewed implementation/profile is a dependency; writing a novel cryptographic scheme is not an acceptable shortcut.",
       "contributing_prs": [],
-      "implementation_note": "No recipient-key enrollment, device verification or key-substitution implementation.",
+      "implementation_note": "Implement approved recipient directory, device trust verification and substitution resistance.",
       "acceptance_review": {
         "status": "not_started",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "No recipient-key enrollment, device verification or key-substitution implementation."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Implement approved recipient directory, device trust verification and substitution resistance."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "docs/security/BOUNDARIES.md",
+            "sha256": "5ab57eebf2e67e3afe07d56c1f5975f4fb1ee9c603151c8563c50cad2e27fd14"
+          }
+        ],
+        "softwareGap": "Implement approved recipient directory, device trust verification and substitution resistance.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -670,12 +999,25 @@
       "evidence": "Plaintext-canary tests, recipient/record-binding tests, egress traces and storage/log inspection evidence.",
       "external_inputs": "None beyond the listed dependencies.",
       "contributing_prs": [],
-      "implementation_note": "Protected ciphertext submission/recipient system is not implemented or enabled.",
+      "implementation_note": "Implement actual client-encrypted protected submission, authorized recipients and private attachment custody.",
       "acceptance_review": {
         "status": "not_started",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Protected ciphertext submission/recipient system is not implemented or enabled."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Implement actual client-encrypted protected submission, authorized recipients and private attachment custody."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "docs/security/BOUNDARIES.md",
+            "sha256": "5ab57eebf2e67e3afe07d56c1f5975f4fb1ee9c603151c8563c50cad2e27fd14"
+          }
+        ],
+        "softwareGap": "Implement actual client-encrypted protected submission, authorized recipients and private attachment custody.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -695,12 +1037,25 @@
       "contributing_prs": [
         41
       ],
-      "implementation_note": "Account export/revocation exists; protected device/key recovery and trust restoration are incomplete.",
+      "implementation_note": "Implement protected recipient-device recovery and trust restoration; ordinary session revocation/export already work.",
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Account export/revocation exists; protected device/key recovery and trust restoration are incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Implement protected recipient-device recovery and trust restoration; ordinary session revocation/export already work."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/app.mjs",
+            "sha256": "ef60e28f46261a1205e94d4b12f9480615bc1c06cdd98d6e1c36b7f729759c3b"
+          }
+        ],
+        "softwareGap": "Implement protected recipient-device recovery and trust restoration; ordinary session revocation/export already work.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -718,7 +1073,7 @@
       "acceptance": "An outbox retry never creates duplicate account messages or resurrects an unsubscribe. Optional campaigning stops after opt-out without disabling essential account access. Bounces/complaints suppress correctly; recipient addresses and tokens are redacted in logs. Jobs survive process restarts.",
       "evidence": "Retry/crash tests, suppression tests, delivery callback verification and evidence from staging email accounts.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Outbox retention and owner-only verified email login are implemented. Live provider callback and complete volunteer-delivery evidence remain outstanding.",
+      "implementation_note": "Implement provider delivery callbacks, suppression and general welcome/security/reminder templates beyond the working leased login outbox.",
       "contributing_prs": [
         61,
         110,
@@ -727,8 +1082,21 @@
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
-        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
-        "blocker": "Outbox retention and owner-only verified email login are implemented. Live provider callback and complete volunteer-delivery evidence remain outstanding."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Implement provider delivery callbacks, suppression and general welcome/security/reminder templates beyond the working leased login outbox."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/worker.mjs",
+            "sha256": "3d476095228d00581ca2e7d4f54b2ea7d525c23b2823f8577793d48360d15fdd"
+          }
+        ],
+        "softwareGap": "Implement provider delivery callbacks, suppression and general welcome/security/reminder templates beyond the working leased login outbox.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -740,21 +1108,38 @@
         "G28-07",
         "G28-05"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Inventory the 36 Markdown documents, 36 Word originals, two principal PDFs and orientation deck from Edition 1.0. Preserve immutable provenance. Reconcile Garden/Cornerstone, add a Kirk-Evers kit, refresh the universal core/messaging/onboarding as necessary and classify the fifteen other policy kits as unpublished reference unless separately approved. Classify owner-maintainer documents separately from volunteer-facing materials.",
       "acceptance": "Every source item has a stable ID, version, intended audience, owner, review status and source hash. No historic packet becomes current legal guidance by import alone. All twelve roles remain represented. The compiled manual is not duplicated into normal search results.",
       "evidence": "Import reconciliation report, document inventory, changed-policy crosswalk and content approval queue.",
       "external_inputs": "Current policy sources/reviewer approval are needed for publication; ingesting an archive is not that approval.",
-      "implementation_note": "Historical sources inventoried privately; full revised-policy crosswalk and current publication queue are unfinished.",
+      "implementation_note": "Working source implementation reviewed individually. Review and publish the actual current volunteer source edition; no invented source or approval.",
       "contributing_prs": [
         46
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Historical sources inventoried privately; full revised-policy crosswalk and current publication queue are unfinished."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Review and publish the actual current volunteer source edition; no invented source or approval."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "content/materials/archive-manifest.json",
+            "sha256": "a151ca1a8a228d4720b62318c2c920c1c5ea4fb860038e0bb3094196622cf145"
+          },
+          {
+            "path": "scripts/publish-materials.mjs",
+            "sha256": "7af96ddc62f44d6d582520d42fc97e7d7f9a9ef516a8801249e801fe4ad78e7f"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Review and publish the actual current volunteer source edition; no invented source or approval.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -766,13 +1151,13 @@
         "G28-20",
         "G28-25"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Provide searchable/filterable HTML materials, role/issue collections, table of contents, related resources, version history, current downloads and printable views. Serve library data/search/downloads only through the appropriate authenticated contract. Generate standard downloads from the same approved content where practical; retain original source versions separately.",
       "acceptance": "Every verified volunteer can immediately access all current volunteer-facing materials without staff approval. Direct URLs, object keys, search APIs and static bundles do not bypass authorization. Superseded/withdrawn items are absent from default search. Sensitive records are not placed in a server plaintext search index.",
       "evidence": "Full-library access and leakage tests, search relevance fixtures, accessibility checks and download/source version parity.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Materials reader/bookmarks exist; no approved current materials published and signup disabled.",
+      "implementation_note": "Working source implementation reviewed individually. Publish reviewed current guides and enable normal verified registration when delivery is ready.",
       "contributing_prs": [
         11,
         49,
@@ -780,10 +1165,27 @@
         68
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Materials reader/bookmarks exist; no approved current materials published and signup disabled."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Publish reviewed current guides and enable normal verified registration when delivery is ready."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/material-outline.mjs",
+            "sha256": "14134ec57c61a75b598b300d31d4ff34180fd36a01bbaf19f3a598971feea09b"
+          },
+          {
+            "path": "packages/core/material-reading.mjs",
+            "sha256": "72070ea0ab92fec02977ce43e5fd4be608a28add19538cf58aaa876164b440a4"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Publish reviewed current guides and enable normal verified registration when delivery is ready.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -795,13 +1197,13 @@
         "G28-16",
         "G28-24"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Reproduce the approved workspace sidebar, first action, starting checklist, current materials and activity-status panel. Add role preferences, bookmarks, last-read position, progress and resumable first-hour guidance. A visitor can change roles without losing access to other approved playbooks.",
       "acceptance": "Progress persists across legitimate sessions and devices at the declared privacy level. A new volunteer sees a useful low-risk action, not an empty dashboard. No fabricated completion, attendance or activity counts are displayed; completion is identified as self-reported or verified.",
       "evidence": "New/returning volunteer journeys, progress synchronization tests and desktop/mobile visual snapshots.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "First-hour checklist exists; real newly registered volunteer/session acceptance is unavailable.",
+      "implementation_note": "Working source implementation reviewed individually. Exercise newly registered volunteer entry against the hosted release.",
       "contributing_prs": [
         7,
         35,
@@ -809,10 +1211,27 @@
         62
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "First-hour checklist exists; real newly registered volunteer/session acceptance is unavailable."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Exercise newly registered volunteer entry against the hosted release."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/portal/src/main.tsx",
+            "sha256": "dc7ad8ef6803deff354e6cf6df99726856b41770b263d1e2213f0a371775ccda"
+          },
+          {
+            "path": "packages/core/tasks.mjs",
+            "sha256": "422510609f578cc3262dbf881606956c48e174eec3a3773173c108125f74de43"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Exercise newly registered volunteer entry against the hosted release.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -823,7 +1242,7 @@
         "G28-26",
         "G28-27"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Convert the orientation guide/deck into accessible navigable training, with transcript/slide-text equivalents, short knowledge checks and acknowledgments of the current universal core. Track training version, completion evidence and expiry only where relevant. Material changes prompt targeted re-acknowledgment.",
       "acceptance": "All training remains readable immediately after signup. Completing a lesson is not represented as legal authority, certification or automatic activation of regulated activity. Training prerequisites gate task execution rather than hiding the entire library.",
@@ -833,12 +1252,29 @@
         14,
         113
       ],
-      "implementation_note": "Versioned orientation and saved knowledge checks are implemented. Complete training lifecycle and activated prerequisite evidence remain outstanding.",
+      "implementation_note": "Working source implementation reviewed individually. Publish the approved current orientation/training content and exercise hosted re-acknowledgment.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
-        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
-        "blocker": "Versioned orientation and saved knowledge checks are implemented. Complete training lifecycle and activated prerequisite evidence remain outstanding."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Publish the approved current orientation/training content and exercise hosted re-acknowledgment."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/orientation.mjs",
+            "sha256": "cb51d1e80f2b40e20e13a9ec998bd85723b88c1a36c8fddea85dfa903fb31960"
+          },
+          {
+            "path": "apps/portal/src/Orientation.tsx",
+            "sha256": "eb0e19f78a4112d96a9305d2ebc7d23e55287856a1d49d917a1908c0b9cd79cf"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Publish the approved current orientation/training content and exercise hosted re-acknowledgment.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -857,7 +1293,7 @@
       "acceptance": "A worksheet, downloaded packet, expired module or one verifier cannot activate regulated work. Mismatched jurisdiction/election/activity, missing training, withdrawn approval or tool outage blocks the action with a clear reason. Every sensitive operation rechecks authorization; a stale open tab is not sufficient.",
       "evidence": "Authorization decision-table tests, clock-boundary/revocation tests, two-verifier separation tests and admin audit evidence.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Published activity information and independent revision-pinned review rules are implemented. Persistent review transitions and full publication/live integration remain unfinished.",
+      "implementation_note": "Connect the durable activity-review state machine to authorized staff HTTP/UI review and publication.",
       "contributing_prs": [
         114,
         124
@@ -865,8 +1301,21 @@
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
-        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
-        "blocker": "Published activity information and independent revision-pinned review rules are implemented. Persistent review transitions and full publication/live integration remain unfinished."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Connect the durable activity-review state machine to authorized staff HTTP/UI review and publication."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/activity-review-store.mjs",
+            "sha256": "dcc2683489ea34b45878eb5048586bd5004b9603cd6452b4ac3ebe255f80c929"
+          }
+        ],
+        "softwareGap": "Connect the durable activity-review state machine to authorized staff HTTP/UI review and publication.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -885,13 +1334,26 @@
       "acceptance": "Tasks cannot be claimed or completed outside current authorization. Race conditions cannot overbook exclusive assignments. Reporting excludes supporter identities and sensitive personal attributes; counts have validation and clear self-reported/verified provenance.",
       "evidence": "Task concurrency tests, activity privacy fixtures, task lifecycle tests and volunteer-to-coordinator journeys.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Simple task checklist exists; task assignments, capacity and verified activity reporting are missing.",
+      "implementation_note": "Implement bounded role/task assignment, claiming, verified reporting and capacity concurrency beyond starter checklists.",
       "contributing_prs": [],
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Simple task checklist exists; task assignments, capacity and verified activity reporting are missing."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Implement bounded role/task assignment, claiming, verified reporting and capacity concurrency beyond starter checklists."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/tasks.mjs",
+            "sha256": "422510609f578cc3262dbf881606956c48e174eec3a3773173c108125f74de43"
+          }
+        ],
+        "softwareGap": "Implement bounded role/task assignment, claiming, verified reporting and capacity concurrency beyond starter checklists.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -903,22 +1365,39 @@
         "G28-29",
         "G28-30"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Implement web versions of the action card, three-line debrief, conversation practice, event plan/run of show, call-bank checklist, creative QA, source card, correction record, state activation sheet, petition custody log, incident first-response card and weekly team plan. Use local/no-save mode where submission is unnecessary; protected submission where needed. Offer accessible print/download views.",
       "acceptance": "Each original form maps to a working typed form or intentionally local worksheet; none is merely a PDF embedded in an iframe. Required warnings and no-supporter-data rules remain. Custody logs use sheet identifiers rather than copying signatures or voter identities. Admin-only activation fields cannot be submitted by ordinary volunteers.",
       "evidence": "Form-to-source coverage matrix, field/privacy validation, authorization tests and print layout checks.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "All twelve local worksheets render, but the original source templates contain fields not yet mapped to typed controls and the required coverage matrix, print/privacy and role-boundary evidence is incomplete.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "contributing_prs": [
         1,
         35
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "All twelve local worksheets render, but the original source templates contain fields not yet mapped to typed controls and the required coverage matrix, print/privacy and role-boundary evidence is incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/forms.mjs",
+            "sha256": "e41389340d7d4eeed8e9cde595c7e68c57ecf53f6a0ea6754571d57553c3ca99"
+          },
+          {
+            "path": "apps/portal/src/main.tsx",
+            "sha256": "dc7ad8ef6803deff354e6cf6df99726856b41770b263d1e2213f0a371775ccda"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -931,7 +1410,7 @@
         "G28-29",
         "G28-30"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Add opt-in team membership, invitation/acceptance, scoped captain assignments, weekly plans, anonymous result summaries and authorized member contact handling. Do not publish a volunteer directory or precise private locations. Make leaving a team immediate and remove future access on role change.",
       "acceptance": "Captains see only the minimum data and tasks of authorized members. Joining a team does not grant access to historic private records. Invite forwarding, revoked invites, self-promotion and cross-team enumeration fail safely.",
@@ -940,12 +1419,29 @@
       "contributing_prs": [
         95
       ],
-      "implementation_note": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md.",
+      "implementation_note": "Working source implementation reviewed individually. Enable coordination only with the completed staff identity/operations release and hosted verification.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/COORDINATION_20261016.md",
-        "blocker": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Enable coordination only with the completed staff identity/operations release and hosted verification."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/coordination.mjs",
+            "sha256": "88f806e286f9a3a9308c65a41399b06067305d4c15a2538171772a4b10181ae2"
+          },
+          {
+            "path": "apps/api/src/coordination-store.mjs",
+            "sha256": "65441fb9d4bef9e0d881396147284860160df939d46e31c36f49bc779d81eb67"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Enable coordination only with the completed staff identity/operations release and hosted verification.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -958,7 +1454,7 @@
         "G28-32",
         "G28-24"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Provide approved orientation/event listings, accessible details, time zones, RSVP/capacity/waitlist/cancellation, attendee-only private details when appropriate and reminders. Support event-plan submission/review with venue, accessibility, safety and required authorization fields. Link to approved external meeting providers without exposing protected records.",
       "acceptance": "Double booking/capacity races, cancellation and time-zone boundaries are handled. Public calendars never reveal private addresses or attendee identities. An RSVP does not authorize spending, contracts, permits, field operations or recording participants.",
@@ -967,12 +1463,29 @@
       "contributing_prs": [
         95
       ],
-      "implementation_note": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md.",
+      "implementation_note": "Working source implementation reviewed individually. Verify hosted staff/member reservation, cancellation and notification journeys.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/COORDINATION_20261016.md",
-        "blocker": "Persistent team/event API and React workflows with permission, invitation, capacity and cleanup tests implemented. Staff MFA, notifications, aggregate reporting and live acceptance remain; see docs/operations/VOLUNTEER_COORDINATION.md."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify hosted staff/member reservation, cancellation and notification journeys."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/coordination.mjs",
+            "sha256": "88f806e286f9a3a9308c65a41399b06067305d4c15a2538171772a4b10181ae2"
+          },
+          {
+            "path": "tests/integration/coordination.test.mjs",
+            "sha256": "9d273c126b3ff6d187ca7a151ccde0312da669ca897e39448908db9ff69c6d59"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify hosted staff/member reservation, cancellation and notification journeys.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -998,12 +1511,25 @@
         121,
         122
       ],
-      "implementation_note": "Bounded account-scoped structured help, route/storage isolation, browser journeys and retained privacy export are implemented. Protected incident text, private attachments and secure staff replies remain outside this partial feature.",
+      "implementation_note": "Connect protected incident narratives, encrypted attachments and scoped staff replies; structured category-only help already works.",
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
-        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
-        "blocker": "Bounded account-scoped structured help, route/storage isolation, browser journeys and retained privacy export are implemented. Protected incident text, private attachments and secure staff replies remain outside this partial feature."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Connect protected incident narratives, encrypted attachments and scoped staff replies; structured category-only help already works."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/help-routes.mjs",
+            "sha256": "a6ff314aeca7df597a039601cb2fa9d48bb625ead15a792a63e63898a583fc03"
+          }
+        ],
+        "softwareGap": "Connect protected incident narratives, encrypted attachments and scoped staff replies; structured category-only help already works.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1015,7 +1541,7 @@
         "G28-26",
         "G28-06"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Provide current share links, printable issue cards, campaign-supplied images, QR generation for approved public destinations, social-preview previews and simple copy-link functions. Preserve required disclaimers and asset usage terms. Personal sharing remains separate from official-account publishing.",
       "acceptance": "QR codes resolve to approved stable public URLs, not private portal objects, expiring tokens or PII-bearing tracking links. Withdrawn assets are marked and removed from current collections. No automatic posting, supporter tracking or fabricated endorsement is introduced.",
@@ -1025,12 +1551,33 @@
         104,
         123
       ],
-      "implementation_note": "Tracker-free canonical URL sharing and on-demand public issue QR controls are implemented. Complete approved asset versioning and withdrawal remain unfinished.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
-        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
-        "blocker": "Tracker-free canonical URL sharing and on-demand public issue QR controls are implemented. Complete approved asset versioning and withdrawal remain unfinished."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/web/public/assets/public.js",
+            "sha256": "24eba3450ef04e325ada392bd0114195c175015c6fe45b8372692f5721ce15d3"
+          },
+          {
+            "path": "tests/public-sharing.test.mjs",
+            "sha256": "8c67379cb639e6a6fb5de0a4cfd6c185a05715e2b476ed8661bcc6add6cceedf"
+          },
+          {
+            "path": "apps/api/src/campaign-store.mjs",
+            "sha256": "4721d96f519298cf0095f3545b5c0d141d59a39f21908173be63e13f28d47d8d"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1050,12 +1597,25 @@
       "evidence": "Connector contract tests, inactive-tool tests, opt-out failure scenario and role-to-tool readiness matrix.",
       "external_inputs": "An actual approved outreach provider/module is required only to activate those activities. The platform must work normally for other volunteer roles.",
       "contributing_prs": [],
-      "implementation_note": "Role instruction paths exist; provider-approved field-tool handoffs and opt-out tests are missing.",
+      "implementation_note": "Implement the approved external-tool registry and scoped handoff/suppression lifecycle.",
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Role instruction paths exist; provider-approved field-tool handoffs and opt-out tests are missing."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Implement the approved external-tool registry and scoped handoff/suppression lifecycle."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/activity.mjs",
+            "sha256": "68e5584a2d4cc9375a626d902c2526dc8544c2f1a8207ab70a68a488ab0d6349"
+          }
+        ],
+        "softwareGap": "Implement the approved external-tool registry and scoped handoff/suppression lifecycle.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1069,7 +1629,7 @@
         "G28-12",
         "G28-25"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Provide friendly editing, preview, review, publication and rollback for homepage copy, issues, each YouTube URL/poster/transcript, canonical links, documents, legal text and media. Add change comparison, concurrent-edit protection and a publication readiness checklist. No GitHub knowledge is required for ordinary content changes.",
       "acceptance": "A publisher can replace one issue video, fix a link or publish a reviewed document without a code change. The static public release updates atomically after a successful build; failed publication leaves the previous version intact. Legal/security-controlled fields retain their special approvals.",
@@ -1079,12 +1639,29 @@
         8,
         45
       ],
-      "implementation_note": "CLI video/link preparation exists; nontechnical editor, publish and rollback UI is missing.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "CLI video/link preparation exists; nontechnical editor, publish and rollback UI is missing."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/editor/editor.mjs",
+            "sha256": "28ba26c42060f9eef4623974a72964a1052e5b9e88f70eb8607a77b9b5e81239"
+          },
+          {
+            "path": "apps/api/src/campaign-routes.mjs",
+            "sha256": "b8c0166f0553dc2cc73937142f20b967a783ffae07eefea429e090ca3c3f8665"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1112,12 +1689,25 @@
         69,
         95
       ],
-      "implementation_note": "Treasury admin preview exists; operational captain/support admin roles and step-up are incomplete.",
+      "implementation_note": "Complete task/training/module/support management UI and emergency activity pause with scoped staff authority.",
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Treasury admin preview exists; operational captain/support admin roles and step-up are incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Complete task/training/module/support management UI and emergency activity pause with scoped staff authority."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/portal/src/AdminOperations.tsx",
+            "sha256": "ac25433fa1bd4c24ba3ed9b7bfe5d201add7e55198951fab6f091f9b1bbfc786"
+          }
+        ],
+        "softwareGap": "Complete task/training/module/support management UI and emergency activity pause with scoped staff authority.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1128,7 +1718,7 @@
         "G28-05",
         "G28-17"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Evaluate Anedot first against the required hosted fields, personal-credit-card policy, recurring management, custom donor attestations, designation/limits, receipts, signed webhooks, exports, accessibility, branding, test environment, fees and committee onboarding. Record verified capabilities and gaps. Implement a narrow provider adapter contract and a fake provider for CI only.",
       "acceptance": "Processor selection is evidence-backed, not an assumption. Direct hosted-page donations, recurring charges and offline contributions are included in the compliance feasibility review. No undocumented endpoint or CSS access to a cross-origin frame is assumed. A material capability gap is resolved before enabling affected features.",
@@ -1139,12 +1729,29 @@
         53,
         55
       ],
-      "implementation_note": "Stripe test API and Checkout work; political-merchant approval and live account/settlement capability are unverified.",
+      "implementation_note": "Working source implementation reviewed individually. Verify actual campaign-specific merchant approval; test credentials are already supplied.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Stripe test API and Checkout work; political-merchant approval and live account/settlement capability are unverified."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify actual campaign-specific merchant approval; test credentials are already supplied."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/stripe-campaign.mjs",
+            "sha256": "fc4f3dd83874db6c43a4e49a819dad3eae8c7aa3ccae6da6f1483eec8910a725"
+          },
+          {
+            "path": "tests/stripe-real-sandbox-acceptance.test.mjs",
+            "sha256": "498e86836286f575f864dba12eaa730bae32de6eeb9383df8a79ff3c555e2720"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify actual campaign-specific merchant approval; test credentials are already supplied.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1156,7 +1763,7 @@
         "G28-06",
         "G28-20"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Create versioned treasurer-approved configurations for committee identity, election designations/dates, effective limits, campaign-specific exclusions, donor attestations, record fields, recurring caps and remedy workflows. Define authoritative aggregation across processor and offline records with concurrency handling and conservative reconciliation of uncertain identities.",
       "acceptance": "No 2025-2026 number is hard-coded as a 2028 rule. Campaign choices such as age 18 and no PAC money are preserved without being mislabeled universal law. Stale/missing approval disables fundraising. Frontend checks are not the enforcement boundary; provider-direct and recurring paths are covered or explicitly blocked.",
@@ -1166,12 +1773,29 @@
         18,
         47
       ],
-      "implementation_note": "Linked election terms exist; live donor aggregation, approved limits and personal-card enforcement are incomplete.",
+      "implementation_note": "Working source implementation reviewed individually. Load the approved current election/limit policy; do not invent campaign legal facts.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Linked election terms exist; live donor aggregation, approved limits and personal-card enforcement are incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Load the approved current election/limit policy; do not invent campaign legal facts."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/contribution-terms.mjs",
+            "sha256": "964f667841eab576a0369bf14d7c56b3ec7abd97c996615e0b042f3c6b0ad459"
+          },
+          {
+            "path": "tests/stripe-campaign.test.mjs",
+            "sha256": "db95e024bff361df6e5d1c845d7972489f578901e828f926e56e2202d19094b6"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Load the approved current election/limit policy; do not invent campaign legal facts.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1184,7 +1808,7 @@
         "G28-40",
         "G28-04"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Wire homepage amount/frequency selection and the dedicated donation page to processor-hosted fields or a reviewed embedded checkout. Keep the campaign-owned shell visually faithful; use supported theming for the secure form. Preserve amount, frequency, election designation and consent when entering checkout without leaking donor PII in URLs. Provide a trusted hosted fallback when embedding is blocked.",
       "acceptance": "Card numbers/CVV never reach campaign servers, logs or analytics. Unchecked eligibility, invalid amounts or unapproved election configuration stop the flow. Closing/retrying/back navigation cannot silently duplicate a gift or switch its frequency. External handoff is clear and does not introduce a second unapproved recipient.",
@@ -1197,12 +1821,29 @@
         57,
         96
       ],
-      "implementation_note": "Hosted sandbox checkout works; full retry/back-navigation/duplicate handling and live release remain unverified.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the exact deployed checkout/return journey; keep live charges separately authorized.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Hosted sandbox checkout works; full retry/back-navigation/duplicate handling and live release remain unverified."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the exact deployed checkout/return journey; keep live charges separately authorized."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/stripe-web-checkout.mjs",
+            "sha256": "e7cda76f88fe19bceef3e60eb6a6f88636112aa6dd33f18766958e80836c1381"
+          },
+          {
+            "path": "tests/stripe-web-checkout.test.mjs",
+            "sha256": "78789b126e0cbfa5d1413aa26eee23e779ce29e07a406ad4ec746fe6ad0fe8f0"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the exact deployed checkout/return journey; keep live charges separately authorized.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1214,19 +1855,36 @@
         "G28-04",
         "G28-05"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Validate the provider signature over exact raw request bytes before JSON processing; enforce account/page allowlists, size bounds and supported event types. Durably accept events, deduplicate, redact/drop unnecessary donor fields and route financial changes into the outbox/ledger. Apply replay/state-order protections without assuming the provider supplies a signed timestamp.",
       "acceptance": "Invalid signatures and wrong-account events never alter records. Duplicate, delayed, reordered and replayed valid events cannot double count or roll state backward. Server crash after receipt causes safe replay; success is never inferred from a browser return URL.",
       "evidence": "Provider signature vectors, raw-body corruption tests, event-order/replay suite and webhook crash/retry evidence.",
       "external_inputs": "None beyond the listed dependencies.",
       "contributing_prs": [],
-      "implementation_note": "Signed event validator and synthetic replay tests exist; real signed paid event delivery/reconciliation not verified.",
+      "implementation_note": "Working source implementation reviewed individually. Confirm a real Stripe-origin signed test payment receipt against the deployed ledger.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Signed event validator and synthetic replay tests exist; real signed paid event delivery/reconciliation not verified."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Confirm a real Stripe-origin signed test payment receipt against the deployed ledger."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/stripe-campaign.mjs",
+            "sha256": "fc4f3dd83874db6c43a4e49a819dad3eae8c7aa3ccae6da6f1483eec8910a725"
+          },
+          {
+            "path": "tests/stripe-webhook.test.mjs",
+            "sha256": "7358e73ee98a92caf2f51f98034fe3998ea0f25b3eb2a2d6023437a65c5f9fe4"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Confirm a real Stripe-origin signed test payment receipt against the deployed ledger.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1246,12 +1904,25 @@
       "contributing_prs": [
         18
       ],
-      "implementation_note": "Staging financial ledger exists; real settlement, deposit reconciliation and all-channel totals are missing.",
+      "implementation_note": "Complete treasury settlement/deposit and all-channel reconciliation beyond the implemented signed event ledger.",
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Staging financial ledger exists; real settlement, deposit reconciliation and all-channel totals are missing."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Complete treasury settlement/deposit and all-channel reconciliation beyond the implemented signed event ledger."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/fundraising-ledger.mjs",
+            "sha256": "9f93f41d21e10e260062fe28dc2ef225394d04b3e3f614d2d3810060479d0794"
+          }
+        ],
+        "softwareGap": "Complete treasury settlement/deposit and all-channel reconciliation beyond the implemented signed event ledger.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1271,12 +1942,25 @@
       "evidence": "Create/renew/cancel/retry sandbox scenarios, receipt accuracy and unauthorized donor-portal access tests.",
       "external_inputs": "None beyond the listed dependencies.",
       "contributing_prs": [],
-      "implementation_note": "No receipts/recurring donor self-service or cancellation workflow.",
+      "implementation_note": "Implement independent donor receipt/recurring cancellation and processor-managed customer portal.",
       "acceptance_review": {
         "status": "not_started",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "No receipts/recurring donor self-service or cancellation workflow."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Implement independent donor receipt/recurring cancellation and processor-managed customer portal."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/stripe-web-checkout.mjs",
+            "sha256": "e7cda76f88fe19bceef3e60eb6a6f88636112aa6dd33f18766958e80836c1381"
+          }
+        ],
+        "softwareGap": "Implement independent donor receipt/recurring cancellation and processor-managed customer portal.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1298,12 +1982,25 @@
         55,
         57
       ],
-      "implementation_note": "Outage quarantine and exceptions partly exist; live refunds, disputes and remedy workflow are missing.",
+      "implementation_note": "Implement treasurer-controlled exception casework and approved refund/dispute actions beyond ledger reconciliation.",
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Outage quarantine and exceptions partly exist; live refunds, disputes and remedy workflow are missing."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Implement treasurer-controlled exception casework and approved refund/dispute actions beyond ledger reconciliation."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/fundraising-ledger.mjs",
+            "sha256": "9f93f41d21e10e260062fe28dc2ef225394d04b3e3f614d2d3810060479d0794"
+          }
+        ],
+        "softwareGap": "Implement treasurer-controlled exception casework and approved refund/dispute actions beyond ledger reconciliation.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1322,12 +2019,25 @@
       "evidence": "Export golden files, schema/total validation, injection tests and a treasurer import dry run.",
       "external_inputs": "The treasurer must identify the actual accounting/filing system and approve its mapping.",
       "contributing_prs": [],
-      "implementation_note": "Encrypted treasury configuration exists; compliant treasurer exports/import validation are unfinished.",
+      "implementation_note": "Implement authorized, audited treasury export with formula-injection protection and reconciliation totals.",
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Encrypted treasury configuration exists; compliant treasurer exports/import validation are unfinished."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Implement authorized, audited treasury export with formula-injection protection and reconciliation totals."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/treasury-vault.mjs",
+            "sha256": "40bc46a15678431f91fee3f65fba8869234f541ad0956e605a368c687e64603a"
+          }
+        ],
+        "softwareGap": "Implement authorized, audited treasury export with formula-injection protection and reconciliation totals.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1342,7 +2052,7 @@
         "G28-45",
         "G28-46"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Exercise card-testing/abuse controls using provider-supported protections, rate limits and no sensitive fingerprinting. Test unavailable provider, stale rules, parallel donations, excessive recurring schedules, conflicting identities, cancellations, refunds, chargebacks, webhook exhaustion, reconciliation outage and accessible fallback.",
       "acceptance": "The site never shows payment success before authenticated confirmation. Failure states preserve clear donor choices and never silently retry a charge. Direct hosted links obey campaign restrictions. All requested exclusions are accounted for through configuration, attestation and treasurer review without claiming perfect automatic detection.",
@@ -1354,12 +2064,29 @@
         57,
         64
       ],
-      "implementation_note": "Adversarial sandbox tests exist; full direct-link, real provider, refund and failure acceptance unverified.",
+      "implementation_note": "Working source implementation reviewed individually. Run the actual configured provider end-to-end failure/refund rehearsal when the treasury workflow is ready.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Adversarial sandbox tests exist; full direct-link, real provider, refund and failure acceptance unverified."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Run the actual configured provider end-to-end failure/refund rehearsal when the treasury workflow is ready."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "tests/stripe-outage-routing.test.mjs",
+            "sha256": "bd94f8a21d4c0513dd066434bc472a1079d63529f094457244efb245a9a14951"
+          },
+          {
+            "path": "tests/stripe-webhook.test.mjs",
+            "sha256": "7358e73ee98a92caf2f51f98034fe3998ea0f25b3eb2a2d6023437a65c5f9fe4"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Run the actual configured provider end-to-end failure/refund rehearsal when the treasury workflow is ready.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1372,7 +2099,7 @@
         "G28-40",
         "G28-46"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Have the authorized treasurer verify committee identity, processor onboarding, bank/payout setup, disclosures, effective election configuration, donor-field collection, receipts, cancellation, remedies, exports, retention and reconciliation ownership. Record approval against the exact build/configuration and expiry/review triggers.",
       "acceptance": "Fundraising cannot enable unless evidence and responsible contacts exist. A code/config change affecting compliance invalidates the relevant approval. Sandbox tests are distinct from any later expressly authorized small live transaction; developers do not charge a card merely to claim completion.",
@@ -1382,12 +2109,29 @@
         53,
         64
       ],
-      "implementation_note": "Release checks exist; real merchant/treasurer approval and authorized live payment reconciliation are missing.",
+      "implementation_note": "Working source implementation reviewed individually. Record real merchant/treasurer release and authorized settlement evidence before live activation.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Release checks exist; real merchant/treasurer approval and authorized live payment reconciliation are missing."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Record real merchant/treasurer release and authorized settlement evidence before live activation."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/stripe-campaign.mjs",
+            "sha256": "fc4f3dd83874db6c43a4e49a819dad3eae8c7aa3ccae6da6f1483eec8910a725"
+          },
+          {
+            "path": "docs/operations/STRIPE_POLITICAL_CAMPAIGN_ACCEPTANCE.md",
+            "sha256": "bddfaadc7ef6cb606bdd207f2a1b0eb03ab9a14621f23f4adb41358aceb2b34d"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Record real merchant/treasurer release and authorized settlement evidence before live activation.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1408,7 +2152,7 @@
       "acceptance": "Account deletion never promises to erase legally retained finance records or downloaded copies. No one can request another persons data by changing an ID. Cleanup is restart-safe, logged minimally and tested against protected-object/key references and active legal holds.",
       "evidence": "Retention/deletion fixtures, legal-hold tests, privacy-request identity checks and backup-expiry runbook.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Pending email retention and disabled-help export are repaired. Full legal holds, protected-object cleanup and backup lifecycle still require complete evidence.",
+      "implementation_note": "Implement protected-object lifecycle, legal holds and per-class deletion/backup handling; account closure and outbox cleanup already work.",
       "contributing_prs": [
         41,
         95,
@@ -1418,8 +2162,21 @@
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
-        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
-        "blocker": "Pending email retention and disabled-help export are repaired. Full legal holds, protected-object cleanup and backup lifecycle still require complete evidence."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Implement protected-object lifecycle, legal holds and per-class deletion/backup handling; account closure and outbox cleanup already work."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/postgres-store.mjs",
+            "sha256": "a11aa6d588c7be3852c7e3757d11f3ae3b12c1c1de373595186b3d4c617597b8"
+          }
+        ],
+        "softwareGap": "Implement protected-object lifecycle, legal holds and per-class deletion/backup handling; account closure and outbox cleanup already work.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1432,7 +2189,7 @@
         "G28-43",
         "G28-05"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Add aggregate public page/action counts and operational conversion measurements with documented definitions. Exclude session replay, ad pixels, cross-site tracking, hidden fingerprints and political profiling. Do not instrument protected form fields, reports, donor identity or individualized issue histories. Separate security logs from campaign measurement.",
       "acceptance": "Staff can see that signup/checkout delivery is functioning without inspecting peoples private interests or messages. Opt-out/consent settings are respected. Dashboards display real data with sampling/latency caveats, not mock numbers.",
@@ -1441,12 +2198,29 @@
       "contributing_prs": [
         20
       ],
-      "implementation_note": "Privacy-minimal operations counts exist; consent-based real analytics dashboard and retention tests are missing.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Privacy-minimal operations counts exist; consent-based real analytics dashboard and retention tests are missing."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/visitor-report.mjs",
+            "sha256": "9feeda30b3d1d8ab2d4a560f6d2dd7dc749b351207d37d0c70abf17a9e9974dd"
+          },
+          {
+            "path": "tests/visitor-analytics.test.mjs",
+            "sha256": "65c14c8b4321e64fd99d51c0c062628145e6ae41beb1ad0721a2ec6c9e2ae3a8"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1463,23 +2237,40 @@
         "G28-38",
         "G28-44"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Audit against WCAG 2.2 AA with automated and manual testing: keyboard, screen readers, headings, focus, errors/status announcements, accessible authentication, targets, contrast, reflow/zoom and reduced motion. Review media captions and audio description where relevant; transcripts alone do not satisfy every video criterion. Include third-party checkout and video failures.",
       "acceptance": "No unresolved blocker prevents a user from reading issues, joining, using materials, completing forms or donating. Accessibility fixes preserve the design. Any third-party limitation has a genuinely accessible working alternative and an owner, not only a disclaimer.",
       "evidence": "Manual audit report, automated results, assistive-technology journey recordings and issue closure evidence.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Automated keyboard/browser tests exist; actual assistive-technology audit across released flows is missing.",
+      "implementation_note": "Working source implementation reviewed individually. Exercise assistive technology on the deployed release; deferred outside review does not mean missing UI code.",
       "contributing_prs": [
         10,
         11,
         13
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Automated keyboard/browser tests exist; actual assistive-technology audit across released flows is missing."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Exercise assistive technology on the deployed release; deferred outside review does not mean missing UI code."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "tests/browser/journeys.mjs",
+            "sha256": "cd5eda5d5c9d86123f789ffbc5c19b775ade102218100a0284c45750796f1d57"
+          },
+          {
+            "path": "tests/accessibility-navigation.test.mjs",
+            "sha256": "7d660b084f1051dbb92d7f177362a3567b6c95b297b2a135c88d76e2929ac6a6"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Exercise assistive technology on the deployed release; deferred outside review does not mean missing UI code.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1501,21 +2292,34 @@
         "G28-38",
         "G28-44"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Compare the eight approved views and newly required operational screens at mobile/tablet/desktop widths, including 320, 390, 768, 1024 and 1440 pixels. Test Chromium, Firefox and WebKit/Safari with stable fonts and motion frozen for screenshots. Review the explicit video amendment separately from unchanged baseline sections.",
       "acceptance": "No accidental redesign, cropped portrait/hand, overflow, broken navigation, unreadable disclosures or dashboard-like public homepage remains. Snapshot updates require an explanation; a failing comparison cannot be fixed solely by approving the new image.",
       "evidence": "Before/after visual report, cross-browser runs, approved amendment baseline and documented design exceptions.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Cross-browser screenshots exist; approved reference visual comparisons and exceptions are incomplete.",
+      "implementation_note": "Working source implementation reviewed individually. Retain the current browser/visual release evidence; no extra owner acceptance ceremony.",
       "contributing_prs": [
         35
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Cross-browser screenshots exist; approved reference visual comparisons and exceptions are incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Retain the current browser/visual release evidence; no extra owner acceptance ceremony."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "tests/browser/journeys.mjs",
+            "sha256": "cd5eda5d5c9d86123f789ffbc5c19b775ade102218100a0284c45750796f1d57"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Retain the current browser/visual release evidence; no extra owner acceptance ceremony.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1530,22 +2334,39 @@
         "G28-47",
         "G28-50"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Optimize responsive images, selective hydration, deferred third-party content, caching, bundle splitting and API/database queries. Load-test authentication, library, task claims, document delivery and donation-event ingestion. Test slow networks, disabled JavaScript on public content, provider delays and database connection pressure.",
       "acceptance": "Target public-page p75 LCP <=2.5s, INP <=200ms and CLS <=0.1 when sufficient field samples exist; use documented lab conditions before launch. Keep public initial compressed JS approximately <=100KB, excluding user-activated providers, unless a reviewed budget exception is justified. Slow services fail visibly without corrupting data.",
       "evidence": "Lab measurements, load/recovery tests, bundle budget report and later field-measurement plan; targets are not preclaimed results.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Enforced first-render asset budgets are implemented and tested. Full LCP/INP/CLS, fault and load acceptance is not established by asset-size tests.",
+      "implementation_note": "Working source implementation reviewed individually. Measure deployed latency/load and configured-vitals reports; asset budget enforcement exists.",
       "contributing_prs": [
         105,
         106
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
-        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
-        "blocker": "Enforced first-render asset budgets are implemented and tested. Full LCP/INP/CLS, fault and load acceptance is not established by asset-size tests."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Measure deployed latency/load and configured-vitals reports; asset budget enforcement exists."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "scripts/performance-budget.mjs",
+            "sha256": "3a4c453484708dc571a9a68f184af8866348da4cbc100053ea51620bfd551afb"
+          },
+          {
+            "path": "apps/web/public/assets/visitor-insights.js",
+            "sha256": "4421b9bea0b5777b2c1af5d5020b5d0930b9c523c6964de3a19ff6d4467431e9"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Measure deployed latency/load and configured-vitals reports; asset budget enforcement exists.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1562,23 +2383,40 @@
         "G28-47",
         "G28-49"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Run dependency/secret scans, authorization/CSRF/XSS/SSRF/upload tests, browser egress and supply-chain review, protected-data canaries and protocol integration tests. Produce an independent-review packet with exact build/profile scope. Remediate actual findings in tracked child/new work packages and preserve unresolved release gates.",
       "acceptance": "No open release-blocking finding or missing required cryptographic production evidence is waived by a green unit test. Independent review is attributed to its actual reviewer, not self-certified. Public-only deployment and protected-production approval remain distinct scopes.",
       "evidence": "Security test artifacts, threat-model closure, independent review evidence where required and exact scoped security status.",
       "external_inputs": "External expert review is a genuine independent dependency. Continue unrelated work; do not mark the gate complete without its evidence.",
-      "implementation_note": "Source-linked component/data-flow inventories exist. Complete applicable source/security verification remains; no deferred external human audit is treated as a development prerequisite.",
+      "implementation_note": "Working source implementation reviewed individually. Retain current source-bound security/CI evidence; do not claim independent certification.",
       "contributing_prs": [
         16,
         66,
         108
       ],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
-        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
-        "blocker": "Source-linked component/data-flow inventories exist. Complete applicable source/security verification remains; no deferred external human audit is treated as a development prerequisite."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Retain current source-bound security/CI evidence; do not claim independent certification."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "docs/security/BOUNDARIES.md",
+            "sha256": "5ab57eebf2e67e3afe07d56c1f5975f4fb1ee9c603151c8563c50cad2e27fd14"
+          },
+          {
+            "path": "tests/staff-security.test.mjs",
+            "sha256": "37e0de3ba974f656c4e29b96ebba4ef08b23754f3c4ba22c84b8ad4674f6c1c2"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Retain current source-bound security/CI evidence; do not claim independent certification.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1598,7 +2436,7 @@
       "acceptance": "Process restarts do not lose accepted tasks or double-send effects. A complete restore succeeds with documented key custody and without production PII in CI. Proposed starting objectives are RPO <=24h and RTO <=4h for ordinary operational content; unreconciled accepted financial events must be recoverable from durable/provider records. Objectives require measured proof and budget approval.",
       "evidence": "Restore/drill report, outbox/crash tests, backup inventory and documented recovery owners.",
       "external_inputs": "Production uptime, backup retention and worker capacity may require a paid plan; no free-tier assumption substitutes for the drill.",
-      "implementation_note": "Outbox retry tests exist; backup restore rehearsal, custody and measured recovery acceptance missing.",
+      "implementation_note": "Implement and exercise complete isolated backup/restore tooling and measured recovery; durable mail jobs already work.",
       "contributing_prs": [
         17,
         61
@@ -1606,8 +2444,21 @@
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Outbox retry tests exist; backup restore rehearsal, custody and measured recovery acceptance missing."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Implement and exercise complete isolated backup/restore tooling and measured recovery; durable mail jobs already work."
+      },
+      "implementation_review": {
+        "implementation": "remaining_implementation",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/worker.mjs",
+            "sha256": "3d476095228d00581ca2e7d4f54b2ea7d525c23b2823f8577793d48360d15fdd"
+          }
+        ],
+        "softwareGap": "Implement and exercise complete isolated backup/restore tooling and measured recovery; durable mail jobs already work.",
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1621,7 +2472,7 @@
         "G28-43",
         "G28-55"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Publish authenticated/internal health summaries for service readiness, deployed SHA, approved content version, queue lag, last successful email/webhook/reconciliation/backup, configured videos, blocked modules and release gates. Connect GitHub events/reconciliation and Render deployment state to Engine Room without sending personal data.",
       "acceptance": "Clicking Engine Room refresh retrieves actual available GitHub/deployment state, timestamps success, and retains honest partial-failure/stale indicators. Merged, deployed and live-verified are separate. No private volunteer/donor/report contents appear in status data.",
@@ -1636,12 +2487,29 @@
         67,
         111
       ],
-      "implementation_note": "A staff-only operational health dashboard is implemented. Exact deployed-source, freshness and outage evidence remain separate.",
+      "implementation_note": "Working source implementation reviewed individually. Verify fresh deployed-SHA, queue and Engine Room outage reporting against the actual services.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "42aac8731e222637f5a48a5e1c5940568604ed14",
-        "report": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
-        "blocker": "A staff-only operational health dashboard is implemented. Exact deployed-source, freshness and outage evidence remain separate."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify fresh deployed-SHA, queue and Engine Room outage reporting against the actual services."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/ops-health.mjs",
+            "sha256": "ac3c4c0d79f14dd5ed95f9a57812918cca7696f43c791fa6ab63b9c665b0fb79"
+          },
+          {
+            "path": "tests/ops-health.test.mjs",
+            "sha256": "840e140a508c2981da43807eaf726591b62a7f5fd63c87bcebaec0e81890d8d7"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify fresh deployed-SHA, queue and Engine Room outage reporting against the actual services.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1672,7 +2540,7 @@
         "G28-55",
         "G28-56"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Deploy an isolated production-like staging release and run end-to-end public, volunteer, staff and treasury journeys using synthetic users and processor-approved test mechanisms. Include a new-device recovery exercise, expired activity module, withdrawn document, disabled integration, failed publishing build, provider outage and restored backup.",
       "acceptance": "Every launch requirement has demonstrable pass/fail evidence, owner and exact build reference. Test communications cannot reach real supporters. Missing provider credentials or external reviews are visible blockers, not bypassed by a demo flag.",
@@ -1683,12 +2551,29 @@
         40,
         43
       ],
-      "implementation_note": "Partial staging checks exist; complete release rehearsal across real configured services unverified.",
+      "implementation_note": "Working source implementation reviewed individually. Run the whole configured staging release rehearsal; do not count an unperformed observation as unwritten code.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Partial staging checks exist; complete release rehearsal across real configured services unverified."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Run the whole configured staging release rehearsal; do not count an unperformed observation as unwritten code."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "scripts/verify.mjs",
+            "sha256": "dd052ac5503ce12d2965d6dcda8b104cbd32fbb48ade24e4e595c8f05828861e"
+          },
+          {
+            "path": "tests/integration/api.test.mjs",
+            "sha256": "621f32522e6facd3e63de53bc7b8b232a17333d5439beb1a58bdac04999b2fa9"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Run the whole configured staging release rehearsal; do not count an unperformed observation as unwritten code.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1702,7 +2587,7 @@
         "G28-54",
         "G28-57"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Connect and verify the three supplied issue videos, approved bill/downloads and canonical Garden/Cornerstone sites. Confirm current volunteer kits, real contact/privacy channels, media rights, committee/legal wording, current activity modules where activation is intended and all responsible staff. Record any explicitly approved public-preview omissions separately from a full launch.",
       "acceptance": "No prototype banner, invented link, missing required media, historic policy mislabeling or fake success remains in the full release. Publication readiness, security readiness and fundraising readiness all have evidence; an inactive optional field program is shown accurately rather than implied active.",
@@ -1714,12 +2599,29 @@
         15,
         45
       ],
-      "implementation_note": "Policy source reader exists; final videos, bill/links and publication signoff missing.",
+      "implementation_note": "Working source implementation reviewed individually. Supply/release final publication content and intended public origins.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Policy source reader exists; final videos, bill/links and publication signoff missing."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Supply/release final publication content and intended public origins."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/policy-documents.mjs",
+            "sha256": "fecf27af57fb2ed9a512ed15786ce11c538af6a5bfda8d60212419cd61e5d676"
+          },
+          {
+            "path": "scripts/prepare-issue-video.mjs",
+            "sha256": "5b368372d2a36bfcde338f71e6c749594cec865d0d4ba3f8959156b0a45a9cd7"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Supply/release final publication content and intended public origins.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1731,7 +2633,7 @@
         "G28-55",
         "G28-56"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Configure verified production domains/TLS, isolated secrets, database/object permissions, sender authentication, backups and monitoring. Apply reversible migrations, publish the immutable content release, deploy portal/API, verify health and enable volunteer/payment/module flags only after their gates pass. Use a rollback checklist and make external provider configuration part of the release.",
       "acceptance": "Public pages, real verification mail, authorized materials, protected submissions and permitted donation flow work on the actual production origins. Preview data is absent. Any real-money test is separately authorized and reconciled by the treasurer; no unauthorized card charge is made.",
@@ -1743,12 +2645,29 @@
         38,
         42
       ],
-      "implementation_note": "Private previews live; public origin, signup/mail, current materials and live fundraising unavailable.",
+      "implementation_note": "Working source implementation reviewed individually. Deploy the tested revision and enable only genuinely configured and approved release capabilities.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Private previews live; public origin, signup/mail, current materials and live fundraising unavailable."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Deploy the tested revision and enable only genuinely configured and approved release capabilities."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "render.yaml",
+            "sha256": "98ecf6c22a73379f914a33668e0f61e58b6771ec41db0a587f886df17364f5db"
+          },
+          {
+            "path": "docs/operations/RENDER_VERIFIED_PLACEMENT.md",
+            "sha256": "49bbe342135196e8dfacc9bc544ea2fb7f02d65d7d29c97256ff94193956f6a5"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Deploy the tested revision and enable only genuinely configured and approved release capabilities.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1758,7 +2677,7 @@
       "depends_on": [
         "G28-59"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Rerun critical journeys after production deployment and provider callbacks, verify Engine Room state, inspect errors/deliverability and document observed performance. Deliver operator guides for publishing an issue/video, adding volunteers/staff, activating modules, handling incidents, fundraising reconciliation and restoring service. Update README, AGENTS, changelog, input register and next-maintenance responsibilities.",
       "acceptance": "Completion is supported by live evidence, not merely merged PRs. All remaining exceptions are explicit and any additional work is in the denominator. A new agent and a nontechnical campaign operator can continue without this conversation. No unattended ChatGPT scheduler is silently restarted.",
@@ -1769,12 +2688,29 @@
         44,
         63
       ],
-      "implementation_note": "Handoff docs exist; full live release walkthrough, final status and operational owners incomplete.",
+      "implementation_note": "Working source implementation reviewed individually. Verify actual released flows and operational ownership on the target services.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
-        "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
-        "blocker": "Handoff docs exist; full live release walkthrough, final status and operational owners incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify actual released flows and operational ownership on the target services."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "README.md",
+            "sha256": "3abb8e3546564f006c62bccda255b34ea5883286e68ec61a22c707d1239fdd77"
+          },
+          {
+            "path": "docs/operations/DEPLOYMENT.md",
+            "sha256": "f6d2c8a019464f1ebc7a543be9d32c99cb7e2dcee9a66bdcbbf2e1905fb587d1"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify actual released flows and operational ownership on the target services.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1808,6 +2744,27 @@
         ],
         "report": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
         "scoped_deployed": true
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md",
+            "sha256": "f0330a3312104076e0ed6afe69912b5ce29d0ea8d3333ac548ac35036f280bd6"
+          },
+          {
+            "path": "tests/review-accounts.test.mjs",
+            "sha256": "3b4750864f6a7baae71c90c39479437b38e3fd8a250d8f18587183a734b5865a"
+          },
+          {
+            "path": "tests/browser/review-journeys.mjs",
+            "sha256": "5f68c26651fa7dfbd4b1e8c6336328a254a30a425aa2e13d2debff046df06975"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1815,7 +2772,7 @@
       "title": "Generic editorial contracts, plan and canonical tracking",
       "phase": "Added",
       "depends_on": [],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "contributing_prs": [
         97
@@ -1824,12 +2781,25 @@
       "acceptance": "Both registers contain the same 71 planned units; existing evidence preserved; generic fixtures and contracts validated.",
       "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
       "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
-      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
-        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
-        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/campaign-content.mjs",
+            "sha256": "932ad5f12205533b2052b869e9251d83dc86a5350cc1215692f131f9a3343fa9"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1839,7 +2809,7 @@
       "depends_on": [
         "G28-62"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "contributing_prs": [
         97
@@ -1848,12 +2818,25 @@
       "acceptance": "Local PostgreSQL verifies restart persistence, concurrency, archiving, publication and separation of drafts.",
       "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
       "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
-      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
-        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
-        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/campaign-store.mjs",
+            "sha256": "4721d96f519298cf0095f3545b5c0d141d59a39f21908173be63e13f28d47d8d"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1863,7 +2846,7 @@
       "depends_on": [
         "G28-62"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "contributing_prs": [
         97
@@ -1872,12 +2855,25 @@
       "acceptance": "Every required field maps to a stable shared template slot; baseline and finance parity tests pass.",
       "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
       "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
-      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
-        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
-        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/campaign-template.mjs",
+            "sha256": "1c45abc2ec2f51636c0f7a333803ba6d7b97beedc5c484f667ad8c8217c987ba"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1888,7 +2884,7 @@
         "G28-63",
         "G28-64"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "contributing_prs": [
         97
@@ -1897,12 +2893,25 @@
       "acceptance": "Published revision updates work without code deploy; cache isolation, outage and cold-start behavior proved.",
       "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
       "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
-      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
-        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
-        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/web/private-preview.mjs",
+            "sha256": "a4eb6192551691b4706dafe633be1a9d9960840aa246c1f6bc78ffe65162c8ea"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1912,7 +2921,7 @@
       "depends_on": [
         "G28-63"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "contributing_prs": [
         97
@@ -1921,12 +2930,25 @@
       "acceptance": "Unauthorized roles denied; optimistic-write conflicts preserve data; operations recorded and secure.",
       "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
       "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
-      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
-        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
-        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/campaign-routes.mjs",
+            "sha256": "b8c0166f0553dc2cc73937142f20b967a783ffae07eefea429e090ca3c3f8665"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1937,7 +2959,7 @@
         "G28-64",
         "G28-66"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "contributing_prs": [
         97
@@ -1946,12 +2968,25 @@
       "acceptance": "Owner edits copy/colors/image in one place, saves/reloads and previews with keyboard and image-safety checks.",
       "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
       "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
-      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
-        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
-        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/editor/editor.mjs",
+            "sha256": "28ba26c42060f9eef4623974a72964a1052e5b9e88f70eb8607a77b9b5e81239"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1961,7 +2996,7 @@
       "depends_on": [
         "G28-67"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "contributing_prs": [
         97
@@ -1970,12 +3005,29 @@
       "acceptance": "Fields compare by stable keys on desktop/mobile without lost unsaved work; support requested draft preview.",
       "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
       "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
-      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
-        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
-        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/editor/editor.mjs",
+            "sha256": "28ba26c42060f9eef4623974a72964a1052e5b9e88f70eb8607a77b9b5e81239"
+          },
+          {
+            "path": "tests/browser/campaign-editor.mjs",
+            "sha256": "353b32e08bad94faee2150ba55139ea2d663b2a5063fd050e30b418777a44186"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -1987,7 +3039,7 @@
         "G28-66",
         "G28-67"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "contributing_prs": [
         97
@@ -1996,12 +3048,25 @@
       "acceptance": "Disabled/active mode precedence, all permitted pairings, settings invalidation and shared publication proved.",
       "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
       "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
-      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
-        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
-        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "packages/core/campaign-mode.mjs",
+            "sha256": "1a03974d4e191d62062b41416ec72ed6af997004225890db128380f01726b1b9"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -2012,7 +3077,7 @@
         "G28-63",
         "G28-64"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "contributing_prs": [
         97
@@ -2021,12 +3086,29 @@
       "acceptance": "Both actual documents present, validated, available to owner with verified image references and no disclosure in repo.",
       "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
       "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
-      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "implementation_note": "Working source implementation reviewed individually. Verify actual owner access to the existing initialized editorial database.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
-        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
-        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify actual owner access to the existing initialized editorial database."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/api/src/campaign-store.mjs",
+            "sha256": "4721d96f519298cf0095f3545b5c0d141d59a39f21908173be63e13f28d47d8d"
+          },
+          {
+            "path": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+            "sha256": "b561dae3c5b1485fd9f4daa50ae5646c26eda6e0c71491869eab24051fb055df"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify actual owner access to the existing initialized editorial database.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -2041,7 +3123,7 @@
         "G28-69",
         "G28-70"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "contributing_prs": [
         97
@@ -2050,12 +3132,29 @@
       "acceptance": "Verified actual deployed URLs, published releases and roles; durable evidence and exact remaining obligations recorded.",
       "evidence": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md; tests/campaign-content.test.mjs; tests/browser/campaign-editor.mjs; tests/browser/campaign-public.mjs",
       "external_inputs": "Reuse authorized existing services and restricted database; live login and deployment checks required.",
-      "implementation_note": "PR #97 provides substantial generic implementation; package acceptance remains contingent on complete owner/site functionality and actual live verification.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the hosted owner draft/save/publish/rollback and independent published-reader journey.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "9e4901144d21c9bba43ca6b15867724c554e95f3",
-        "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
-        "blocker": "Live owner journey and deployment, full-page draft preview and final verification incomplete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the hosted owner draft/save/publish/rollback and independent published-reader journey."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "tests/browser/campaign-public.mjs",
+            "sha256": "b16796f951fda57a215b3e20c4b00afee79a3247d74033ddcd91be45084fc0fb"
+          },
+          {
+            "path": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
+            "sha256": "b561dae3c5b1485fd9f4daa50ae5646c26eda6e0c71491869eab24051fb055df"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the hosted owner draft/save/publish/rollback and independent published-reader journey.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     },
     {
@@ -2065,7 +3164,7 @@
       "depends_on": [
         "G28-04"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "contributing_prs": [
         117
@@ -2074,16 +3173,33 @@
       "acceptance": "Final CI validates unit, HTTP, PostgreSQL and browser privacy journeys; least-privilege staging collection and report verified; consent withdrawal and admin role revocation demonstrated in deployment.",
       "evidence": "docs/operations/VISITOR_ANALYTICS.md; tests/visitor-interactions.test.mjs; tests/visitor-admin-access.test.mjs; tests/integration/visitor-interactions.test.mjs; tests/browser/visitor-analytics.mjs",
       "external_inputs": "Provision restricted Neon ingest role and existing Render service environment; public campaign launch remains gated.",
-      "implementation_note": "PR #117 contributes staged implementation; an unmerged/draft PR and queued CI are not package acceptance.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": null,
-        "report": "docs/operations/VISITOR_ANALYTICS.md",
-        "blocker": "Final CI and isolated staging deployment/live verification not complete."
+        "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
+      },
+      "implementation_review": {
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-18T23:32:52.506Z",
+        "sourceFiles": [
+          {
+            "path": "apps/portal/src/AdminVisitors.tsx",
+            "sha256": "2847c57421fa61be95be5285e7a152fad2c64fcb5f24617fb79903fe06c27f10"
+          },
+          {
+            "path": "tests/browser/visitor-analytics.mjs",
+            "sha256": "dae0c27302166411921fca6c81019e4e56e89b0f2e866f02a0da5d67d878a5ee"
+          }
+        ],
+        "softwareGap": null,
+        "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
+        "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
     }
   ],
-  "progress_evidence_note": "Expanded to 71 planned work units; original 61 and prior acceptance retained. New units remain in progress pending full acceptance and deployed evidence.",
+  "progress_evidence_note": "Software implementation is reviewed unit by unit in implementationReview. Implemented code, accepted PRs, deployment and external activation are distinct facts. Historical in_progress labels are not a count of partially written PRs.",
   "accepted_pull_requests": 111,
   "accepted_prs_observed_at": "2026-10-18T19:43:24Z",
   "pull_request_acceptance_rule": "Every real GitHub PR with a verified merged_at is accepted; no further package review is required to accept that PR. Fully complete planned work packages are counted separately."
