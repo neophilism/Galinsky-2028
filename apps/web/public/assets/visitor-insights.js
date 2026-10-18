@@ -104,8 +104,9 @@
   });
   monitorObserver('resource',entry=>{
    if(entry.duration<2500||++resourceCount>25)return;
-   metricOnce('resource_slow',entry.duration);
-   // Resource type is nonidentifying; do not read or send the URL.
+   // Only a resource class and rounded elapsed time leave the browser.
+   const duration=limit(Math.round(entry.duration),1,14400);
+   emit('resource_slow','p0',classifyResource(entry.initiatorType),duration);
   });
  }
  function flushVitals(){
