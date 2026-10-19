@@ -27,7 +27,10 @@ test('SQL-created application identities allow scoped DML and deny account leaka
   await as(roles[1],"UPDATE g28.financial_provider_events SET amount_cents=1 WHERE false",true);
   for(const table of ['accounts','sessions','staff_security','treasury_secrets','financial_provider_events'])await as(roles[0],'SELECT * FROM g28.'+table+' LIMIT 0',true);
   await as(roles[1],'SELECT * FROM g28.accounts LIMIT 0');await as(roles[1],'SELECT * FROM g28.campaign_public_releases LIMIT 0');
-  for(const role of roles){await as(role,'CREATE TABLE g28.synthetic_unauthorized(id int)',true);await as(role,'ALTER TABLE g28.accounts ADD COLUMN synthetic_unauthorized text',true);await as(role,'TRUNCATE g28.accounts CASCADE',true);await as(role,'CREATE ROLE g28_synthetic_unauthorized',true);await as(role,'SELECT * FROM g28.schema_migrations',true);}
+  for(const role of roles){await as(role,'CREATE TABLE g28.synthetic_unauthorized(id int)',true);await as(role,'ALTER TABLE g28.accounts ADD COLUMN synthetic_unauthorized text',true);await as(role,'TRUNCATE g28.accounts CASCADE',true);await as(role,'CREATE ROLE g28_synthetic_unauthorized',true);}
+  await as(roles[0],'SELECT * FROM g28.schema_migrations',true);
+  await as(roles[1],'SELECT version FROM g28.schema_migrations LIMIT 1');
+  await as(roles[1],"DELETE FROM g28.schema_migrations WHERE false",true);
   await c.query('CREATE TABLE g28.synthetic_future_permission(id int)');
   for(const role of roles)await as(role,'SELECT * FROM g28.synthetic_future_permission',true);
   await c.query('ROLLBACK');

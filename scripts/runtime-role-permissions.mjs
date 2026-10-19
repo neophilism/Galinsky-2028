@@ -15,7 +15,7 @@ export function runtimeRoleStatements({role,password,profile}){
   `GRANT SELECT(provider,event_id) ON g28.financial_provider_events TO ${id}`,
  ]:[`GRANT SELECT,INSERT,UPDATE,DELETE ON ${PORTAL_RUNTIME_TABLES.map(t=>'g28.'+t).join(',')} TO ${id}`,
   `GRANT SELECT,INSERT ON g28.audit_events,g28.operation_claim_history,g28.treasury_audit,g28.treasury_exports TO ${id}`,
-  `GRANT SELECT ON g28.financial_provider_events TO ${id}`,
+  `GRANT SELECT ON g28.financial_provider_events,g28.schema_migrations TO ${id}`,
   `GRANT SELECT ON g28.campaign_public_releases,g28.campaign_public_settings,g28.campaign_public_media TO ${id}`];
  return [`CREATE ROLE ${id} LOGIN NOINHERIT NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD '${password}'`,
   `GRANT CONNECT ON DATABASE neondb TO ${id}`,`GRANT USAGE ON SCHEMA g28 TO ${id}`,...grants];
