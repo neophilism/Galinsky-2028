@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "action": "inspect",
+  "expectedCommit": "12204fce932de91e6b933c1cba3b15a941cb495a",
+  "nonce": "review-before-release-20261019"
+}
