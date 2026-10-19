@@ -3,7 +3,7 @@
 export const STAFF_ROLES=Object.freeze(['captain','coordinator','editor','publisher','module-verifier','module-approver','safety-reviewer','treasurer','security-administrator','auditor']);
 const scopes={
  captain:['team:manage','task:review'],
- coordinator:['team:manage','task:manage','training:manage','operations:read'],
+ coordinator:['team:manage','task:manage','task:review','tools:manage','training:manage','operations:read'],
  editor:['content:edit','activity:edit'],
  publisher:['content:publish','activity:publish'],
  'module-verifier':['activity:verify'],

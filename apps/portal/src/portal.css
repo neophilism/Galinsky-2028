@@ -39,3 +39,5 @@
 .brand .brand-symbol{display:block;flex:0 0 42px;width:42px;height:42px;position:relative;border:0;background:url('/favicon.svg') center/contain no-repeat;box-shadow:none}
 .brand .brand-symbol::before,.brand .brand-symbol::after{content:none!important;display:none!important}
 @media(max-width:700px){.brand .brand-symbol{flex-basis:36px;width:36px;height:36px}}
+
+.operations-workspace{min-width:0;overflow-wrap:anywhere}.operations-workspace fieldset{min-width:0;max-width:100%;margin:18px 0}.operations-workspace button{min-height:44px;max-width:100%;padding:10px 15px;margin:6px 8px 6px 0;background:var(--blue);color:#fff;border:1px solid var(--blue)}.operations-workspace form{margin:24px 0}.operations-workspace h3{margin:12px 0}.operations-workspace code,.operations-workspace a{overflow-wrap:anywhere}
