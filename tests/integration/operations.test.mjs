@@ -8,11 +8,11 @@ import {randomToken,tokenHash} from '../../packages/core/auth.mjs';
 const url=process.env.TEST_DATABASE_URL;
 test('real task HTTP/SQL enforces capacity, current training, tool opt-out, publication revocation, provenance and scoped review',{skip:!url},async()=>{
  assert(['localhost','127.0.0.1'].includes(new URL(url).hostname));
- const pool=databasePool(url),store=new PostgresStore(pool),now=Date.now(),origin='http://localhost:4322',prefix='fixture-'+randomUUID().slice(0,8),accounts=[];
- const config={staffIdentity:true,adminLoginReady:true,adminOwnerEmailKey:prefix+'-owner',portalOrigin:origin,publicOrigin:'http://localhost:4321'};
+ const pool=databasePool(url),store=new PostgresStore(pool),now=Date.now(),origin='http://localhost:4322',prefix='fixture-'+randomUUID().slice(0,8),accounts=[],keys=[];
+ const config={staffIdentity:true,adminLoginReady:true,adminOwnerEmailKey:tokenHash(prefix+'-owner'),portalOrigin:origin,publicOrigin:'http://localhost:4321'};
  const app=createApp({store,config,clock:()=>now});
  async function actor(role='volunteer'){
-  const id=randomUUID(),key=role==='owner'?config.adminOwnerEmailKey:prefix+'-'+id,token=randomToken(),hash=tokenHash(token),csrf=randomToken();accounts.push(id);
+  const id=randomUUID(),key=role==='owner'?config.adminOwnerEmailKey:tokenHash(prefix+'-'+id),token=randomToken(),hash=tokenHash(token),csrf=randomToken();accounts.push(id);keys.push(key);
   await pool.query("INSERT INTO g28.accounts(id,email_key,delivery_envelope,verified_at,terms_version) VALUES($1,$2,'synthetic',now(),'synthetic')",[id,key]);
   await pool.query('INSERT INTO g28.sessions(token_hash,account_id,csrf_token,expires_at) VALUES($1,$2,$3,$4)',[hash,id,csrf,new Date(now+86400000)]);
   if(!['owner','volunteer'].includes(role))await store.setAdminGrant(id,key,role,'Synthetic staff');
@@ -62,6 +62,6 @@ test('real task HTTP/SQL enforces capacity, current training, tool opt-out, publ
   await store.withStaffSecurity(owner.id,s=>{s.sessions={};});assert.equal((await post('/api/staff/operations/tool',owner,{definition:tool,expected:1})).statusCode,403);
   const records=await pool.query('SELECT record FROM g28.operation_claims WHERE task_id=$1',[taskId]);assert(!JSON.stringify(records.rows).includes('Must not store'));assert.equal(records.rowCount,1);
  }finally{
-  await app.close();await pool.query('DELETE FROM g28.operation_definitions WHERE id LIKE $1',[prefix+'%']);await pool.query('DELETE FROM g28.operation_claims WHERE task_id LIKE $1',[prefix+'%']);await pool.query('DELETE FROM g28.activity_modules WHERE id=$1',[moduleId]);await pool.query('DELETE FROM g28.materials WHERE id=$1',[guideId]);await pool.query('DELETE FROM g28.accounts WHERE id=ANY($1::uuid[])',[accounts]);await pool.query('DELETE FROM g28.admin_grants WHERE email_key LIKE $1',[prefix+'%']);await pool.query('DELETE FROM g28.audit_events WHERE actor_subject=ANY($1::text[])',[accounts]);await store.close();
+  await app.close();await pool.query('DELETE FROM g28.operation_definitions WHERE id LIKE $1',[prefix+'%']);await pool.query('DELETE FROM g28.operation_claims WHERE task_id LIKE $1',[prefix+'%']);await pool.query('DELETE FROM g28.activity_modules WHERE id=$1',[moduleId]);await pool.query('DELETE FROM g28.materials WHERE id=$1',[guideId]);await pool.query('DELETE FROM g28.accounts WHERE id=ANY($1::uuid[])',[accounts]);await pool.query('DELETE FROM g28.admin_grants WHERE email_key=ANY($1::text[])',[keys]);await pool.query('DELETE FROM g28.audit_events WHERE actor_subject=ANY($1::text[])',[accounts]);await store.close();
  }
 });
