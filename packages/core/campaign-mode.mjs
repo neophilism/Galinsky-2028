@@ -15,6 +15,8 @@ function apply(){
   if(location.search!==url.search){root.style.visibility='hidden';location.replace(url.pathname+url.search+url.hash);}
  }
 }
+// Listen immediately: a system change during document loading must not be lost.
+if(query.addEventListener)query.addEventListener('change',function(){if(preference==='system')apply();});
 apply();
 function start(){
  var form=document.querySelector('.campaign-appearance');
@@ -26,7 +28,6 @@ function start(){
    var hidden=document.createElement('input');hidden.type='hidden';hidden.name='scheme';hidden.value=query.matches?'night':'day';form.appendChild(hidden);
   }
  });
- if(query.addEventListener)query.addEventListener('change',function(){if(preference==='system')apply();});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();`;
