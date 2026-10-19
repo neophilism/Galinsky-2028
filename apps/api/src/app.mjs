@@ -1,3 +1,4 @@
+import {registerOperations} from './operations-routes.mjs';
 import {registerMailEvents} from './mail-events.mjs';
 import {registerActivityReview} from './activity-routes.mjs';
 import {STAFF_ROLES} from '../../../packages/core/staff-permissions.mjs';
@@ -27,6 +28,7 @@ export function createApp({store,config,clock=()=>Date.now(),webauthn}){
   if(!previewAuthorized(req.headers.authorization,config.previewGate))return reply.code(401).header('WWW-Authenticate',PREVIEW_REALM).type('text/plain').send('Private preview. Enter your access credentials.');
  });
  app.register(registerMailEvents,{store,config});
+ registerOperations(app,{store,config,account,writeSession,clock});
  const cookieName=config.production?'__Host-g28':'g28-local';const bindingCookie=config.production?'__Host-g28-login':'g28-local-login';
  app.addHook('onRequest',async(req,reply)=>{
   reply.header('Cache-Control','no-store').header('X-Content-Type-Options','nosniff').header('Referrer-Policy','no-referrer').header('X-Frame-Options','DENY');
@@ -44,7 +46,7 @@ export function createApp({store,config,clock=()=>Date.now(),webauthn}){
  async function writeSession(req){const s=await account(req);const supplied=req.headers['x-csrf-token'];assert(typeof supplied==='string'&&supplied.length===s.csrf.length&&timingSafeEqual(Buffer.from(supplied),Buffer.from(s.csrf)),'csrf','Reload the workspace and try again.',403);return s;}
  app.get('/healthz',async()=>({ok:true,service:'galinsky-2028-api',version:'0.1.0',commit:config.commit??null}));
  app.get('/readyz',async(req,reply)=>{try{await store.healthy();return {ready:true};}catch{return reply.code(503).send({ready:false});}});
- app.get('/api/config',async()=>({publicOrigin:config.publicOrigin,signupEnabled:config.signup,features:{coordination:config.coordination===true,helpRequests:config.helpRequests===true,materials:true,worksheets:true,protectedSubmissions:false,staff:config.staffIdentity===true,payments:false,treasurySetup:config.adminLoginReady===true,campaignEditor:config.campaignEditorEnabled===true},adminLoginEnabled:config.adminLoginReady===true,notice:config.signup?null:config.adminLoginReady?'Private staff sign-in is available by verified email invitation. Public volunteer registration remains closed.':'Account registration opens when verified email delivery is connected.'}));
+ app.get('/api/config',async()=>({publicOrigin:config.publicOrigin,signupEnabled:config.signup,features:{coordination:config.coordination===true,helpRequests:config.helpRequests===true,materials:true,worksheets:true,protectedSubmissions:false,staff:config.staffIdentity===true,operationalTasks:config.staffIdentity===true&&typeof store.withOperationTask==='function',payments:false,treasurySetup:config.adminLoginReady===true,campaignEditor:config.campaignEditorEnabled===true},adminLoginEnabled:config.adminLoginReady===true,notice:config.signup?null:config.adminLoginReady?'Private staff sign-in is available by verified email invitation. Public volunteer registration remains closed.':'Account registration opens when verified email delivery is connected.'}));
  app.post('/api/auth/request',async(req,reply)=>{
   assert(config.signup||config.adminLoginReady,'signup_unavailable','Account registration is not open yet. No account has been created.',503);
   const b=exactKeys(req.body,['email','marketing','termsAccepted']);const address=email(b.email);assert(b.termsAccepted===true,'terms_required','Review the participation and privacy notices before continuing.');assert(b.marketing===undefined||typeof b.marketing==='boolean','invalid_consent','Choose whether to receive optional campaign updates.');

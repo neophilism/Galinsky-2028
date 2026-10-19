@@ -1,3 +1,4 @@
+import {postgresOperations} from './operations-store.mjs';
 import {prepareAccountNotice} from './mail-notices.mjs';
 import {queueNoticeSQL,postgresMail} from './mail-store.mjs';
 import {postgresStaffSecurity} from './staff-security.mjs';
@@ -195,3 +196,5 @@ Object.assign(PostgresStore.prototype, postgresCoordination, postgresHelp, postg
 Object.assign(PostgresStore.prototype, postgresStaffSecurity);
 
 Object.assign(PostgresStore.prototype, postgresMail);
+
+Object.assign(PostgresStore.prototype,postgresOperations);
