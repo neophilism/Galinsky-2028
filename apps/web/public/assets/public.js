@@ -11,7 +11,7 @@
   const imageHeight=Math.min(600,920*image.naturalHeight/image.naturalWidth);canvas.height=Math.ceil(80+imageHeight+lines.length*38);if(canvas.height>6000)throw Error('Use the printable card for this longer asset.');
   context.fillStyle='white';context.fillRect(0,0,canvas.width,canvas.height);const imageWidth=Math.min(920,imageHeight*image.naturalWidth/image.naturalHeight);context.drawImage(image,(1000-imageWidth)/2,40,imageWidth,imageHeight);context.fillStyle='#082653';context.textBaseline='top';let y=60+imageHeight;
   for(const line of lines){context.font=line.font;context.fillText(line.text,40,y);y+=38;}
-  const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw Error('Card download unavailable');const href=URL.createObjectURL(blob),a=document.createElement('a');a.href=href;a.download='galinsky-approved-card-'+item.id+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(href),30000);
+  const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw Error('Card download unavailable');const href=URL.createObjectURL(blob),a=document.createElement('a');a.href=href;a.download='galinsky-approved-card-'+item.id+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(href),30000);
  }
  const assetButton=$('[data-sharing-assets]'),assetList=$('#approved-sharing-assets');
  assetButton?.addEventListener('click',async()=>{

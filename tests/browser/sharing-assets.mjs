@@ -10,7 +10,7 @@ await mkdir('test-results/browser/sharing-assets',{recursive:true});
 try{
  for(const file of (await readdir('db/migrations')).filter(x=>x.endsWith('.sql')).sort())await pool.query(await readFile('db/migrations/'+file,'utf8'));
  await pool.query("INSERT INTO g28.accounts(id,email_key,delivery_envelope,verified_at,terms_version) VALUES($1,$2,'synthetic',now(),'synthetic')",[owner,key]);await pool.query('INSERT INTO g28.sessions(token_hash,account_id,csrf_token,expires_at) VALUES($1,$2,$3,$4)',[hash,owner,randomToken(),new Date(now+86400000)]);await accounts.withStaffSecurity(owner,s=>{s.credentials=[{id:'synthetic'}];s.sessions={[hash]:{credentialId:'synthetic',expires:now+900000}};});
- const campaign=await campaigns.create(fixture(),owner);await campaigns.publish(campaign.id,1,owner);await campaigns.saveSettings((await campaigns.settings()).version,{schemaVersion:1,modeSwitching:false,default:{campaignId:campaign.id,revision:1},day:null,night:null},owner);
+ const initial=fixture();initial.hero.assetPath='/assets/candidate.webp';const campaign=await campaigns.create(initial,owner);await campaigns.publish(campaign.id,1,owner);await campaigns.saveSettings((await campaigns.settings()).version,{schemaVersion:1,modeSwitching:false,default:{campaignId:campaign.id,revision:1},day:null,night:null},owner);
  await app.listen({host:'127.0.0.1',port:0});config.portalOrigin='http://127.0.0.1:'+app.server.address().port;
  await new Promise(r=>publicServer.listen(0,'127.0.0.1',r));const publicOrigin='http://127.0.0.1:'+publicServer.address().port;config.publicOrigin=publicOrigin;
  for(const [name,engine]of Object.entries({chromium,firefox,webkit})){
