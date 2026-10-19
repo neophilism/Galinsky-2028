@@ -1630,7 +1630,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T01:28:10.453Z",
+        "reviewedAt": "2026-10-19T01:36:08.792Z",
         "sourceFiles": [
           {
             "path": "packages/core/sharing-assets.mjs",
@@ -1654,7 +1654,7 @@
           },
           {
             "path": "apps/web/public/assets/public.js",
-            "sha256": "c3acb468ecb504b16bd1980ef0a99aeddc4402a4b40302ef160d3bc0c6a5468b"
+            "sha256": "252d217056794536f2ef3c260e0f4e2345a2938f1c2addd8d71f9a606fac87a1"
           },
           {
             "path": "tests/integration/sharing-assets.test.mjs",
@@ -1662,7 +1662,7 @@
           },
           {
             "path": "tests/browser/sharing-assets.mjs",
-            "sha256": "69345a44746dc615fa783111d2a7e9f8868a962e2cb46e47993c03deb5ba1506"
+            "sha256": "bd0312616e69f35dab34eb5d2bd0ef04346f9bd2460ec0fd77cccfbbd1fcfce0"
           },
           {
             "path": "tests/browser/public-sharing.mjs",

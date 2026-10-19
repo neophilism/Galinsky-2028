@@ -13,9 +13,9 @@
   for(const line of lines){context.font=line.font;context.fillText(line.text,40,y);y+=38;}
   const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw Error('Card download unavailable');const href=URL.createObjectURL(blob),a=document.createElement('a');a.href=href;a.download='galinsky-approved-card-'+item.id+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(href),30000);
  }
- const assetButton=$('[data-sharing-assets]'),assetList=$('#approved-sharing-assets');
- assetButton?.addEventListener('click',async()=>{
-  if(!assetList)return;
+ document.addEventListener('click',async event=>{
+  const assetButton=event.target?.closest?.('[data-sharing-assets]');if(!assetButton)return;
+  const assetList=document.getElementById(assetButton.getAttribute('aria-controls'));if(!assetList)return;
   if(!assetList.hidden){assetList.hidden=true;assetButton.setAttribute('aria-expanded','false');return;}
   assetButton.disabled=true;assetList.replaceChildren();
   try{
