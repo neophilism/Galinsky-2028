@@ -1257,7 +1257,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T01:36:08.792Z",
+        "reviewedAt": "2026-10-19T01:59:58.203Z",
         "sourceFiles": [
           {
             "path": "packages/core/sharing-assets.mjs",
@@ -1273,7 +1273,7 @@
           },
           {
             "path": "apps/editor/editor.mjs",
-            "sha256": "cab502af42baafcedb11147e9456cbd64db66fe29cf8367d9095cc5ace181eca"
+            "sha256": "51b2826bf389143e1c9693cecb2da8c2a214f1887e55a83c92b3ba264ab792d6"
           },
           {
             "path": "apps/web/campaign-runtime.mjs",
@@ -1289,7 +1289,7 @@
           },
           {
             "path": "tests/browser/sharing-assets.mjs",
-            "sha256": "bd0312616e69f35dab34eb5d2bd0ef04346f9bd2460ec0fd77cccfbbd1fcfce0"
+            "sha256": "c308de144dac7ad89d36322b30df4670e1bea48f0af14564e80b0a9fd6088b1d"
           },
           {
             "path": "tests/browser/public-sharing.mjs",
@@ -1358,11 +1358,11 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T01:28:10.453Z",
+        "reviewedAt": "2026-10-19T01:59:58.203Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
-            "sha256": "cab502af42baafcedb11147e9456cbd64db66fe29cf8367d9095cc5ace181eca"
+            "sha256": "51b2826bf389143e1c9693cecb2da8c2a214f1887e55a83c92b3ba264ab792d6"
           },
           {
             "path": "apps/api/src/campaign-routes.mjs",
@@ -2376,11 +2376,11 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T01:28:10.453Z",
+        "reviewedAt": "2026-10-19T01:59:58.203Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
-            "sha256": "cab502af42baafcedb11147e9456cbd64db66fe29cf8367d9095cc5ace181eca"
+            "sha256": "51b2826bf389143e1c9693cecb2da8c2a214f1887e55a83c92b3ba264ab792d6"
           }
         ],
         "softwareGap": null,
@@ -2407,11 +2407,11 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T01:28:10.453Z",
+        "reviewedAt": "2026-10-19T01:59:58.203Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
-            "sha256": "cab502af42baafcedb11147e9456cbd64db66fe29cf8367d9095cc5ace181eca"
+            "sha256": "51b2826bf389143e1c9693cecb2da8c2a214f1887e55a83c92b3ba264ab792d6"
           },
           {
             "path": "tests/browser/campaign-editor.mjs",

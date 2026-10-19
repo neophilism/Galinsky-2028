@@ -227,17 +227,20 @@ async function create(){
  const background=selected?.heroBackground?structuredClone(selected.heroBackground):{default:{...state.contract.heroEffectDefault},day:null,night:null};
  const created=await request('/campaigns',{method:'POST',data:{document:{schemaVersion:1,internalName:name,fields:{},theme,hero,heroBackground:background}}});state.left=created.id;await load(created.id);refreshSelectors();render();message('Blank campaign created. Fill every required field before publication.');
 }
-let sharingCurrent=null,sharingDirty=false;
+let sharingCurrent=null,sharingDirty=false,sharingEditGeneration=0;
 async function sharingCatalog(after=null,append=false){const result=await request('/sharing-assets?limit=30'+(after?'&after='+encodeURIComponent(after):''));if(!append)$('sharing-list').replaceChildren();for(const a of result.items){const p=element('p');p.append(button(a.document.title,()=>editSharing(a)),element('span',' · '+a.status+' · draft '+a.revision+(a.publishedRevision?' · published '+a.publishedRevision:'')));$('sharing-list').append(p);}if(result.next){const more=button('Load more sharing assets',async()=>{await sharingCatalog(result.next,true);more.remove();});$('sharing-list').append(more);}}
 
 async function editSharing(asset=null){
  if(sharingDirty&&!confirm('Discard the unsaved sharing draft?'))return;
- sharingCurrent=asset;sharingDirty=false;$('sharing-form').hidden=false;$('sharing-heading').textContent=asset?'Edit sharing asset':'New sharing asset';
- const images=await request('/media?limit=100');const picker=$('sharing-image');picker.replaceChildren(new Option('Campaign portrait','/assets/candidate.webp'));for(const image of images.items)picker.add(new Option('Campaign upload '+image.id,'/campaign-media/'+image.id+'.png'));
+ const generation=++sharingEditGeneration,form=$('sharing-form'),wasHidden=form.hidden;form.hidden=true;
+ let images;try{images=await request('/media?limit=100');}catch(error){if(generation===sharingEditGeneration)form.hidden=wasHidden;throw error;}
+ if(generation!==sharingEditGeneration)return;
+ sharingCurrent=asset;sharingDirty=false;$('sharing-heading').textContent=asset?'Edit sharing asset':'New sharing asset';
+ const picker=$('sharing-image');picker.replaceChildren(new Option('Campaign portrait','/assets/candidate.webp'));for(const image of images.items)picker.add(new Option('Campaign upload '+image.id,'/campaign-media/'+image.id+'.png'));
  const d=asset?.document||{};for(const [id,key]of Object.entries({'issue':'issue','title':'title','image':'imagePath','alt':'alt','caption':'caption','disclaimer':'disclaimer','terms':'usageTerms','attribution':'attribution','rights-url':'rightsReferenceUrl'}))$('sharing-'+id).value=d[key]|| (id==='issue'?'kirk-evers':id==='image'?'/assets/candidate.webp':'');
  if(d.imagePath&&!Array.from(picker.options).some(o=>o.value===d.imagePath))picker.add(new Option('Current image',d.imagePath));if(d.imagePath)picker.value=d.imagePath;
  $('sharing-expires').value=d.expiresAt?new Date(Date.parse(d.expiresAt)-new Date(d.expiresAt).getTimezoneOffset()*60000).toISOString().slice(0,16):'';$('sharing-rights-approved').checked=d.rightsApproved===true;
- $('sharing-publish').disabled=state.contract.role!=='owner'||!asset;$('sharing-withdraw').disabled=state.contract.role!=='owner'||!asset?.publicationVersion||asset.status!=='published';$('sharing-status').textContent=asset?'Draft '+asset.revision+'; publication '+asset.status+'.':'Save a private draft first.';
+ $('sharing-publish').disabled=state.contract.role!=='owner'||!asset;$('sharing-withdraw').disabled=state.contract.role!=='owner'||!asset?.publicationVersion||asset.status!=='published';$('sharing-status').textContent=asset?'Draft '+asset.revision+'; publication '+asset.status+'.':'Save a private draft first.';form.hidden=false;
 }
 function sharingInput(){const value=id=>$('sharing-'+id).value;return {schemaVersion:1,issue:value('issue'),title:value('title'),imagePath:value('image'),alt:value('alt'),caption:value('caption'),disclaimer:value('disclaimer'),usageTerms:value('terms'),attribution:value('attribution'),rightsReferenceUrl:value('rights-url'),rightsApproved:$('sharing-rights-approved').checked,expiresAt:new Date(value('expires')).toISOString()};}
 $('sharing-load').addEventListener('click',act(()=>sharingCatalog()));$('sharing-new').addEventListener('click',act(()=>editSharing()));$('sharing-form').addEventListener('input',()=>{sharingDirty=true;});
