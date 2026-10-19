@@ -12,7 +12,7 @@
   "progressEvidenceNote": "Software implementation is reviewed unit by unit in implementationReview. Implemented code, accepted PRs, deployment and external activation are distinct facts. Historical in_progress labels are not a count of partially written PRs.",
   "schemaVersion": 1,
   "roadmapVersion": 6,
-  "observedAt": "2026-10-18T23:36:38.920Z",
+  "observedAt": "2026-10-19T00:44:00.971Z",
   "units": [
     {
       "id": "G28-001",
@@ -43,7 +43,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "AGENTS.md",
@@ -80,7 +80,7 @@
       "acceptanceBlocker": "Verify the tested revision in its intended release; no additional activation input identified.",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "scripts/verify.mjs",
@@ -114,7 +114,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/web/public/assets/site.css",
@@ -142,7 +142,10 @@
         38,
         40
       ],
-      "contributingPrs": [],
+      "contributingPrs": [
+        132,
+        135
+      ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
@@ -159,7 +162,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/config.mjs",
@@ -192,7 +195,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "security/e2eesa-inventory.json",
@@ -222,7 +225,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/campaign-store.mjs",
@@ -257,7 +260,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/campaign-image.mjs",
@@ -289,7 +292,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
@@ -327,7 +330,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "content/public/pages/index.html",
@@ -359,7 +362,7 @@
       "acceptanceReport": "docs/evidence/PUBLIC_QUALITY_20261016.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/web/public/assets/motion.js",
@@ -401,7 +404,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "content/public/pages/issues.html",
@@ -431,7 +434,7 @@
       "acceptanceReport": "docs/evidence/PUBLIC_QUALITY_20261016.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/video.mjs",
@@ -466,7 +469,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/policy-documents.mjs",
@@ -498,7 +501,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "content/public/pages/garden.html",
@@ -526,7 +529,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "content/public/pages/cornerstone.html",
@@ -566,7 +569,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/roles.mjs",
@@ -613,7 +616,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-web-checkout.mjs",
@@ -654,7 +657,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/indexing.mjs",
@@ -689,7 +692,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/app.mjs",
@@ -712,17 +715,20 @@
       "prs": [],
       "contributingPrs": [
         16,
-        69
+        69,
+        128,
+        134,
+        135
       ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
       "status": "in_progress",
-      "acceptanceBlocker": "Finish least-privilege runtime identity correction and protected safety scope integration; staff passkeys, bounded roles and all current task/editor/finance actions are implemented.",
+      "acceptanceBlocker": "Finish protected safety scope integration; staff passkeys, bounded roles, current task/editor/finance actions and SQL-created restricted runtime identities are implemented.",
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/staff-security.mjs",
@@ -735,9 +741,17 @@
           {
             "path": "tests/staff-security.test.mjs",
             "sha256": "a6ad65d666efb2f907e8a00e2d1d0c7057e0fa8c74cce74ea83bcfb10c018ba1"
+          },
+          {
+            "path": "scripts/runtime-role-permissions.mjs",
+            "sha256": "a0846c494e6d7f5ece4d0be0e03660966e7b900678ed1edbf44a44a2fd2c6c36"
+          },
+          {
+            "path": "tests/integration/runtime-role-permissions.test.mjs",
+            "sha256": "13e12b2d762e092886cf7ff20a005fa1a4d7b9bd44954ec8e1d21b1dea8bc5cf"
           }
         ],
-        "softwareGap": "Finish least-privilege runtime identity correction and protected safety scope integration; staff passkeys, bounded roles and all current task/editor/finance actions are implemented.",
+        "softwareGap": "Finish protected safety scope integration; staff passkeys, bounded roles, current task/editor/finance actions and SQL-created restricted runtime identities are implemented.",
         "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
         "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
@@ -756,7 +770,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "docs/security/BOUNDARIES.md",
@@ -782,7 +796,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "docs/security/BOUNDARIES.md",
@@ -810,7 +824,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/app.mjs",
@@ -830,7 +844,8 @@
       "contributingPrs": [
         61,
         110,
-        112
+        112,
+        129
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -840,7 +855,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/worker.mjs",
@@ -888,7 +903,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "content/materials/archive-manifest.json",
@@ -923,7 +938,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/material-outline.mjs",
@@ -958,7 +973,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/portal/src/main.tsx",
@@ -991,7 +1006,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/orientation.mjs",
@@ -1014,7 +1029,8 @@
       "prs": [],
       "contributingPrs": [
         114,
-        124
+        124,
+        128
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -1024,7 +1040,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/activity-review-store.mjs",
@@ -1053,7 +1069,9 @@
       "title": "Implement actionable tasks and activity reporting",
       "origin": "original",
       "prs": [],
-      "contributingPrs": [],
+      "contributingPrs": [
+        131
+      ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
@@ -1062,7 +1080,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/operations.mjs",
@@ -1111,7 +1129,7 @@
       "acceptanceBlocker": "Verify the tested revision in its intended release; no additional activation input identified.",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/forms.mjs",
@@ -1143,7 +1161,7 @@
       "acceptanceReport": "docs/evidence/COORDINATION_20261016.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/coordination.mjs",
@@ -1175,7 +1193,7 @@
       "acceptanceReport": "docs/evidence/COORDINATION_20261016.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/coordination.mjs",
@@ -1210,7 +1228,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/help-routes.mjs",
@@ -1239,7 +1257,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/web/public/assets/public.js",
@@ -1264,7 +1282,9 @@
       "title": "Implement official-tool handoffs for outreach roles",
       "origin": "original",
       "prs": [],
-      "contributingPrs": [],
+      "contributingPrs": [
+        131
+      ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
@@ -1273,7 +1293,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/operations.mjs",
@@ -1314,7 +1334,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
@@ -1337,7 +1357,8 @@
       "prs": [],
       "contributingPrs": [
         69,
-        95
+        95,
+        131
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -1347,7 +1368,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/portal/src/AdminOperations.tsx",
@@ -1389,7 +1410,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-campaign.mjs",
@@ -1422,7 +1443,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/contribution-terms.mjs",
@@ -1458,7 +1479,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-web-checkout.mjs",
@@ -1488,7 +1509,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-campaign.mjs",
@@ -1520,7 +1541,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/fundraising-ledger.mjs",
@@ -1546,7 +1567,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-web-checkout.mjs",
@@ -1575,7 +1596,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/fundraising-ledger.mjs",
@@ -1592,7 +1613,9 @@
       "title": "Implement controlled treasury reporting and exports",
       "origin": "original",
       "prs": [],
-      "contributingPrs": [],
+      "contributingPrs": [
+        133
+      ],
       "dependsOn": [],
       "externalDependencies": [],
       "externalPrerequisites": [],
@@ -1601,7 +1624,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/treasury-export.mjs",
@@ -1648,7 +1671,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "tests/stripe-outage-routing.test.mjs",
@@ -1681,7 +1704,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-campaign.mjs",
@@ -1716,7 +1739,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/postgres-store.mjs",
@@ -1734,7 +1757,8 @@
       "origin": "original",
       "prs": [],
       "contributingPrs": [
-        20
+        20,
+        128
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -1744,7 +1768,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/visitor-report.mjs",
@@ -1778,7 +1802,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "tests/browser/journeys.mjs",
@@ -1810,7 +1834,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "tests/browser/journeys.mjs",
@@ -1839,7 +1863,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "scripts/performance-budget.mjs",
@@ -1863,7 +1887,9 @@
       "contributingPrs": [
         16,
         66,
-        108
+        108,
+        134,
+        135
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -1873,7 +1899,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "docs/security/BOUNDARIES.md",
@@ -1896,7 +1922,8 @@
       "prs": [],
       "contributingPrs": [
         17,
-        61
+        61,
+        128
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -1906,7 +1933,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/worker.mjs",
@@ -1942,7 +1969,8 @@
         43,
         63,
         67,
-        111
+        111,
+        132
       ],
       "dependsOn": [],
       "externalDependencies": [],
@@ -1952,7 +1980,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/ops-health.mjs",
@@ -1986,7 +2014,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "scripts/verify.mjs",
@@ -2021,7 +2049,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/policy-documents.mjs",
@@ -2056,7 +2084,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "render.yaml",
@@ -2090,7 +2118,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "README.md",
@@ -2129,7 +2157,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md",
@@ -2166,7 +2194,7 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/campaign-content.mjs",
@@ -2197,7 +2225,7 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/campaign-store.mjs",
@@ -2228,7 +2256,7 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/campaign-template.mjs",
@@ -2260,7 +2288,7 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/web/private-preview.mjs",
@@ -2278,7 +2306,8 @@
       "origin": "addition",
       "prs": [],
       "contributingPrs": [
-        97
+        97,
+        128
       ],
       "dependsOn": [
         "G28-063"
@@ -2291,7 +2320,7 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/campaign-routes.mjs",
@@ -2323,7 +2352,7 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
@@ -2354,7 +2383,7 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
@@ -2376,7 +2405,8 @@
       "origin": "addition",
       "prs": [],
       "contributingPrs": [
-        97
+        97,
+        130
       ],
       "dependsOn": [
         "G28-065",
@@ -2391,7 +2421,7 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "packages/core/campaign-mode.mjs",
@@ -2423,7 +2453,7 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/campaign-store.mjs",
@@ -2463,7 +2493,7 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "tests/browser/campaign-public.mjs",
@@ -2502,7 +2532,7 @@
       "acceptanceReport": "docs/operations/VISITOR_ANALYTICS.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T00:21:03.026Z",
+        "reviewedAt": "2026-10-19T00:42:29.170Z",
         "sourceFiles": [
           {
             "path": "apps/portal/src/AdminVisitors.tsx",
@@ -2521,19 +2551,124 @@
   ],
   "pullRequests": [
     {
+      "id": 4914218679,
+      "number": 135,
+      "title": "Limit the disabled-signup portal identity to safe preview reads",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/135",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-19T00:39:14Z",
+      "updatedAt": "2026-10-19T00:43:41Z",
+      "closedAt": "2026-10-19T00:43:40Z",
+      "mergedAt": "2026-10-19T00:43:40Z",
+      "headSha": "74baf04e31ff85961c2493356f0a8c75374c4e51",
+      "baseRef": "main",
+      "mergeCommitSha": "d147d71aab5cfcaa015995d137a18c99fabc6ba6"
+    },
+    {
+      "id": 4914145180,
+      "number": 134,
+      "title": "Scope application database identities without inherited Neon administration",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/134",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-19T00:28:40Z",
+      "updatedAt": "2026-10-19T00:36:54Z",
+      "closedAt": "2026-10-19T00:36:54Z",
+      "mergedAt": "2026-10-19T00:36:54Z",
+      "headSha": "448db3f9a9376e1be193af08872d785a370e8f8a",
+      "baseRef": "main",
+      "mergeCommitSha": "1c7a172a43d8d3f62f78b4c602b27bb3b387d0ab"
+    },
+    {
+      "id": 4914121413,
+      "number": 133,
+      "title": "Add audited treasury ledger downloads and reconcile implemented operations",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/133",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-19T00:25:17Z",
+      "updatedAt": "2026-10-19T00:29:03Z",
+      "closedAt": "2026-10-19T00:29:03Z",
+      "mergedAt": "2026-10-19T00:29:03Z",
+      "headSha": "542c3c85c8fe3ba7e9cf2062477c35a63166cbea",
+      "baseRef": "main",
+      "mergeCommitSha": "3bdf6249afc108a59887beedd98a146fae258b93"
+    },
+    {
+      "id": 4914049354,
+      "number": 132,
+      "title": "Verify actual release placement, runtime roles and private health without exposing secrets",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/132",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-19T00:15:04Z",
+      "updatedAt": "2026-10-19T00:23:29Z",
+      "closedAt": "2026-10-19T00:23:29Z",
+      "mergedAt": "2026-10-19T00:23:29Z",
+      "headSha": "392ebe2c0ab374d4ee289c1f96dd11f4701c2cac",
+      "baseRef": "main",
+      "mergeCommitSha": "486649725d8ea5a9e44fdda20341d606eb0d4ade"
+    },
+    {
+      "id": 4913977905,
+      "number": 131,
+      "title": "Complete coordinated task claims, training verification and approved-tool handoffs",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/131",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-19T00:04:38Z",
+      "updatedAt": "2026-10-19T00:17:04Z",
+      "closedAt": "2026-10-19T00:17:04Z",
+      "mergedAt": "2026-10-19T00:17:04Z",
+      "headSha": "20b9a06d8b12d0e6ed403afdfec79381f994e9b0",
+      "baseRef": "main",
+      "mergeCommitSha": "646bc35e6f9d48970ee40e39ccb9cc4f1d816915"
+    },
+    {
+      "id": 4913945414,
+      "number": 130,
+      "title": "Fix system theme changes missed during page loading",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/130",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-18T23:58:58Z",
+      "updatedAt": "2026-10-19T00:04:00Z",
+      "closedAt": "2026-10-19T00:04:00Z",
+      "mergedAt": "2026-10-19T00:04:00Z",
+      "headSha": "dcd47789dc6e603f3708449f9e88402ded76d0c9",
+      "baseRef": "main",
+      "mergeCommitSha": "12204fce932de91e6b933c1cba3b15a941cb495a"
+    },
+    {
+      "id": 4913909505,
+      "number": 129,
+      "title": "Complete signed delivery receipts, suppression and durable account notices",
+      "url": "https://github.com/neophilism/Galinsky-2028/pull/129",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-18T23:52:34Z",
+      "updatedAt": "2026-10-18T23:57:49Z",
+      "closedAt": "2026-10-18T23:57:49Z",
+      "mergedAt": "2026-10-18T23:57:49Z",
+      "headSha": "d9850b5795ceb421525d85bbb652fba6e88c39d7",
+      "baseRef": "main",
+      "mergeCommitSha": "9407c28d8175036a26f766b065800dedecf5f33a"
+    },
+    {
       "id": 4913709099,
       "number": 128,
-      "title": "Integrate current activity reviews and protected campaign editor access",
+      "title": "Finish staff passkeys and activity review; reconcile current implementation status",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/128",
-      "state": "open",
+      "state": "closed",
       "draft": false,
       "createdAt": "2026-10-18T23:21:47Z",
-      "updatedAt": "2026-10-18T23:34:32Z",
-      "closedAt": null,
-      "mergedAt": null,
-      "headSha": "648eab74112cb2518ab125b83b23f93ae0d51300",
+      "updatedAt": "2026-10-18T23:51:18Z",
+      "closedAt": "2026-10-18T23:51:18Z",
+      "mergedAt": "2026-10-18T23:51:18Z",
+      "headSha": "cfe91f45c8f208f57b34539e76a0c7641a9c17f8",
       "baseRef": "main",
-      "mergeCommitSha": "b531621a786d6882a93c72410305aa3d2c6b0d9f"
+      "mergeCommitSha": "48ee92b67b23e5dea1f2442c6e31edeabc92275d"
     },
     {
       "id": 4913377852,
@@ -2570,11 +2705,11 @@
       "number": 125,
       "title": "Persist staff activity review and revision transitions transactionally",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/125",
-      "state": "open",
+      "state": "closed",
       "draft": false,
       "createdAt": "2026-10-18T18:54:39Z",
-      "updatedAt": "2026-10-18T18:55:05Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-18T23:52:55Z",
+      "closedAt": "2026-10-18T23:52:55Z",
       "mergedAt": null,
       "headSha": "27b9c81212d3e48f939a56b536e04a64f5ca1684",
       "baseRef": "main",
@@ -2690,11 +2825,11 @@
       "number": 117,
       "title": "Add opt-in granular website engagement analytics to the protected admin dashboard",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/117",
-      "state": "open",
+      "state": "closed",
       "draft": true,
       "createdAt": "2026-10-17T22:41:02Z",
-      "updatedAt": "2026-10-18T16:32:18Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-18T23:52:51Z",
+      "closedAt": "2026-10-18T23:52:51Z",
       "mergedAt": null,
       "headSha": "24e106d5841b0896d42bde1dca733260f3cbb24c",
       "baseRef": "main",
@@ -2810,11 +2945,11 @@
       "number": 109,
       "title": "Generate offline printable QR codes for approved canonical issue pages",
       "url": "https://github.com/neophilism/Galinsky-2028/pull/109",
-      "state": "open",
+      "state": "closed",
       "draft": false,
       "createdAt": "2026-10-17T14:39:05Z",
-      "updatedAt": "2026-10-17T14:39:05Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-19T00:43:18Z",
+      "closedAt": "2026-10-19T00:43:17Z",
       "mergedAt": null,
       "headSha": "6fd88410988506e597e88905d8f55dc4df48490a",
       "baseRef": "main",
