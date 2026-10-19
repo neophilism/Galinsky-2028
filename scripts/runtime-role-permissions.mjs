@@ -6,9 +6,9 @@ export const PORTAL_RUNTIME_TABLES=Object.freeze([
 const identifier=value=>{if(typeof value!=='string'||!/^g28_(?:stripe|portal)_runtime_[a-z0-9_]{1,40}$/.test(value))throw Error('Use an explicitly scoped runtime login name.');return '"'+value+'"';};
 export function runtimeRoleStatements({role,password,profile}){
  const id=identifier(role);
- if(!['stripe','portal'].includes(profile)||!role.startsWith('g28_'+profile+'_runtime_'))throw Error('Runtime name/profile mismatch.');
+ if(!['stripe','portal','portal_preview'].includes(profile)||!role.startsWith('g28_'+(profile==='portal_preview'?'portal':profile)+'_runtime_'))throw Error('Runtime name/profile mismatch.');
  if(typeof password!=='string'||!/^[A-Za-z0-9_-]{43,128}$/.test(password))throw Error('Use a generated high-entropy URL-safe password.');
- const grants=profile==='stripe'?[
+ const grants=profile==='portal_preview'?[`GRANT SELECT ON g28.schema_migrations TO ${id}`,`GRANT SELECT ON g28.campaign_public_releases,g28.campaign_public_settings,g28.campaign_public_media TO ${id}`]:profile==='stripe'?[
   `GRANT SELECT,INSERT,UPDATE ON g28.stripe_checkout_intents TO ${id}`,
   `GRANT SELECT,INSERT ON g28.stripe_webhook_receipts TO ${id}`,
   `GRANT INSERT ON g28.financial_provider_events TO ${id}`,
