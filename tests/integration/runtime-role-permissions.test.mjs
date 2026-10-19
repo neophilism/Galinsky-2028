@@ -8,12 +8,12 @@ const url=process.env.TEST_DATABASE_URL;
 test('SQL-created application identities allow scoped DML and deny account leakage, DDL, role administration and future-table grants',{skip:!url},async()=>{
  assert(['localhost','127.0.0.1'].includes(new URL(url).hostname));
  const pool=new pg.Pool({connectionString:url}),c=await pool.connect(),suffix=randomBytes(5).toString('hex');
- const roles=['stripe','portal'].map(p=>'g28_'+p+'_runtime_'+suffix);
+ const profiles=['stripe','portal','portal_preview'],roles=profiles.map(p=>'g28_'+(p==='portal_preview'?'portal':p)+'_runtime_'+suffix+(p==='portal_preview'?'_preview':''));
  try{
   for(const name of (await readdir('db/migrations')).filter(f=>f.endsWith('.sql')).sort())await c.query(await readFile('db/migrations/'+name,'utf8'));
   await c.query('BEGIN');
   // The production profile pins neondb; this synthetic database may use another name.
-  for(const [index,profile]of ['stripe','portal'].entries())for(const sql of runtimeRoleStatements({role:roles[index],password:randomBytes(36).toString('base64url'),profile}))await c.query(sql.replace('ON DATABASE neondb','ON DATABASE "'+new URL(url).pathname.slice(1)+'"'));
+  for(const [index,profile]of profiles.entries())for(const sql of runtimeRoleStatements({role:roles[index],password:randomBytes(36).toString('base64url'),profile}))await c.query(sql.replace('ON DATABASE neondb','ON DATABASE "'+new URL(url).pathname.slice(1)+'"'));
   for(const role of roles){
    const r=(await c.query('SELECT rolcreatedb,rolcreaterole,rolsuper,rolinherit,rolbypassrls FROM pg_roles WHERE rolname=$1',[role])).rows[0];assert(Object.values(r).every(v=>v===false));
    assert.equal((await c.query('SELECT 1 FROM pg_auth_members WHERE member=(SELECT oid FROM pg_roles WHERE rolname=$1)',[role])).rowCount,0);
@@ -30,6 +30,10 @@ test('SQL-created application identities allow scoped DML and deny account leaka
   for(const role of roles){await as(role,'CREATE TABLE g28.synthetic_unauthorized(id int)',true);await as(role,'ALTER TABLE g28.accounts ADD COLUMN synthetic_unauthorized text',true);await as(role,'TRUNCATE g28.accounts CASCADE',true);await as(role,'CREATE ROLE g28_synthetic_unauthorized',true);}
   await as(roles[0],'SELECT * FROM g28.schema_migrations',true);
   await as(roles[1],'SELECT version FROM g28.schema_migrations LIMIT 1');
+  await as(roles[2],'SELECT version FROM g28.schema_migrations LIMIT 1');
+  await as(roles[2],'SELECT * FROM g28.campaign_public_releases LIMIT 0');
+  for(const table of ['accounts','sessions','staff_security','treasury_secrets','financial_provider_events','content_revisions','outbox'])await as(roles[2],'SELECT * FROM g28.'+table+' LIMIT 0',true);
+  await as(roles[2],"INSERT INTO g28.rate_buckets(key,count,expires_at) VALUES('synthetic',1,now())",true);
   await as(roles[1],"DELETE FROM g28.schema_migrations WHERE false",true);
   await c.query('CREATE TABLE g28.synthetic_future_permission(id int)');
   for(const role of roles)await as(role,'SELECT * FROM g28.synthetic_future_permission',true);
