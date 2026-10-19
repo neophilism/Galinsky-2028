@@ -1,3 +1,5 @@
+import jsQR from 'jsqr';
+import {PNG} from 'pngjs';
 import {chromium,firefox,webkit} from 'playwright';
 import {createServer} from 'node:http';
 import {readFile} from 'node:fs/promises';
@@ -10,6 +12,7 @@ const preview=renderPage('garden');
 const server=createServer(async(req,res)=>{
  if(req.url==='/share'){res.setHeader('content-type','text/html');res.end(html);return;}
  if(req.url==='/preview'){res.setHeader('content-type','text/html');res.end(preview);return;}
+ if(req.url==='/assets/site.css'){res.setHeader('content-type','text/css');res.end(await readFile(resolve('apps/web/public/assets/site.css')));return;}
  if(req.url==='/assets/public.js'||req.url==='/assets/vendor/qrcode.js'){
   res.setHeader('content-type','application/javascript');
   res.end(await readFile(resolve('apps/web/public'+req.url)));return;
@@ -47,6 +50,20 @@ try{
    assert.equal(await page.locator('.issue-share-qr-canvas').getAttribute('title'),publicUrl);
    assert((await page.locator('#issue-share-qr svg use').count())>100,name+' SVG contains QR modules');
    assert.equal(qrRequests.length,1,name+' first-party QR script loaded once');
+   // Decode the actual rasterized SVG with an independent QR implementation.
+   // A title/input attribute and module count alone cannot prove the symbol works.
+   async function decodeVisibleQr(mode){
+    const png=PNG.sync.read(await page.locator('.issue-share-qr-canvas').screenshot());
+    const decoded=jsQR(new Uint8ClampedArray(png.data),png.width,png.height);
+    assert(decoded,name+' '+mode+' QR must decode');assert.equal(decoded.data,publicUrl,name+' '+mode+' decoded destination');
+   }
+   await decodeVisibleQr('screen');
+   await page.emulateMedia({media:'print'});
+   assert.equal(await page.locator('[data-share-action="qr"]').evaluate(el=>getComputedStyle(el).display),'none');
+   const printStyle=await page.locator('.issue-share-qr-canvas').evaluate(el=>{const s=getComputedStyle(el);return {padding:s.paddingTop,background:s.backgroundColor};});
+   assert.equal(printStyle.padding,'16px');assert.equal(printStyle.background,'rgb(255, 255, 255)');
+   await decodeVisibleQr('print');
+   await page.emulateMedia({media:'screen'});
    const hideQr=page.getByRole('button',{name:'Hide QR code'});
    assert.equal(await hideQr.getAttribute('aria-expanded'),'true');
    await hideQr.click();
