@@ -12,6 +12,7 @@ export function runtimeRoleStatements({role,password,profile}){
   `GRANT SELECT,INSERT,UPDATE ON g28.stripe_checkout_intents TO ${id}`,
   `GRANT SELECT,INSERT ON g28.stripe_webhook_receipts TO ${id}`,
   `GRANT INSERT ON g28.financial_provider_events TO ${id}`,
+  `GRANT SELECT(provider,event_id) ON g28.financial_provider_events TO ${id}`,
  ]:[`GRANT SELECT,INSERT,UPDATE,DELETE ON ${PORTAL_RUNTIME_TABLES.map(t=>'g28.'+t).join(',')} TO ${id}`,
   `GRANT SELECT,INSERT ON g28.audit_events,g28.operation_claim_history,g28.treasury_audit,g28.treasury_exports TO ${id}`,
   `GRANT SELECT ON g28.financial_provider_events TO ${id}`,
