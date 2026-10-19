@@ -29,7 +29,7 @@ export const campaignSharing={
   });
  },
  async withdrawSharingAsset(id,expectedPublicationVersion,actor,now=Date.now()){
-  id=campaignId(id);version(expectedPublicationVersion);return this.transaction(async c=>{const a=await this.sharingAsset(id,c);if(a.publicationVersion!==expectedPublicationVersion||!a.publicationVersion)conflict();await this.append(c,P+id,a.publicationVersion+1,{status:'withdrawn',sourceRevision:a.publishedRevision,document:a.document,withdrawnAt:new Date(now).toISOString()},actor,'withdrawn');await this.audit(c,actor,'sharing_withdraw',id,a.revision);return this.sharingAsset(id,c);});
+  id=campaignId(id);version(expectedPublicationVersion);return this.transaction(async c=>{const a=await this.sharingAsset(id,c);if(a.publicationVersion!==expectedPublicationVersion||!a.publicationVersion||a.status!=='published')conflict();const prior=await this.latest(c,P+id);await this.append(c,P+id,a.publicationVersion+1,{status:'withdrawn',sourceRevision:a.publishedRevision,document:prior.document.document,withdrawnAt:new Date(now).toISOString()},actor,'withdrawn');await this.audit(c,actor,'sharing_withdraw',id,a.revision);return this.sharingAsset(id,c);});
  }
 };
 export const publicCampaignSharing={

@@ -1257,7 +1257,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T01:13:13.691Z",
+        "reviewedAt": "2026-10-19T01:28:10.453Z",
         "sourceFiles": [
           {
             "path": "packages/core/sharing-assets.mjs",
@@ -1265,7 +1265,7 @@
           },
           {
             "path": "apps/api/src/sharing-assets-store.mjs",
-            "sha256": "2b3a3478dfcbd68a8d1b5dbfffaf911e3993715b51a8edb6ca321178b207537f"
+            "sha256": "cc749af07becd00b46e66b3943fd1b8de6d75113b0853b32e685e55885ec4326"
           },
           {
             "path": "apps/api/src/campaign-routes.mjs",
@@ -1273,7 +1273,7 @@
           },
           {
             "path": "apps/editor/editor.mjs",
-            "sha256": "71c3cd97b655ee3ca2156cef2c23e7c275aa9dae8ab530e80225b77ff3be636a"
+            "sha256": "cab502af42baafcedb11147e9456cbd64db66fe29cf8367d9095cc5ace181eca"
           },
           {
             "path": "apps/web/campaign-runtime.mjs",
@@ -1285,7 +1285,7 @@
           },
           {
             "path": "tests/integration/sharing-assets.test.mjs",
-            "sha256": "0bdcf12761a0b359878bad0740ba363eb0aa8c1071cd5a07d94fec648fdb0f22"
+            "sha256": "8f1d0392cb2feba5f787b8b073eb3e43ddf92f26377104f2045c81a154758255"
           },
           {
             "path": "tests/browser/sharing-assets.mjs",
@@ -1358,11 +1358,11 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T01:13:13.691Z",
+        "reviewedAt": "2026-10-19T01:28:10.453Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
-            "sha256": "71c3cd97b655ee3ca2156cef2c23e7c275aa9dae8ab530e80225b77ff3be636a"
+            "sha256": "cab502af42baafcedb11147e9456cbd64db66fe29cf8367d9095cc5ace181eca"
           },
           {
             "path": "apps/api/src/campaign-routes.mjs",
@@ -2376,11 +2376,11 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T01:13:13.691Z",
+        "reviewedAt": "2026-10-19T01:28:10.453Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
-            "sha256": "71c3cd97b655ee3ca2156cef2c23e7c275aa9dae8ab530e80225b77ff3be636a"
+            "sha256": "cab502af42baafcedb11147e9456cbd64db66fe29cf8367d9095cc5ace181eca"
           }
         ],
         "softwareGap": null,
@@ -2407,11 +2407,11 @@
       "acceptanceReport": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T01:13:13.691Z",
+        "reviewedAt": "2026-10-19T01:28:10.453Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
-            "sha256": "71c3cd97b655ee3ca2156cef2c23e7c275aa9dae8ab530e80225b77ff3be636a"
+            "sha256": "cab502af42baafcedb11147e9456cbd64db66fe29cf8367d9095cc5ace181eca"
           },
           {
             "path": "tests/browser/campaign-editor.mjs",
