@@ -1,3 +1,4 @@
+import {registerTreasuryExports} from './treasury-export.mjs';
 import {registerOperations} from './operations-routes.mjs';
 import {registerMailEvents} from './mail-events.mjs';
 import {registerActivityReview} from './activity-routes.mjs';
@@ -29,6 +30,7 @@ export function createApp({store,config,clock=()=>Date.now(),webauthn}){
  });
  app.register(registerMailEvents,{store,config});
  registerOperations(app,{store,config,account,writeSession,clock});
+ registerTreasuryExports(app,{store,config,writeSession,clock});
  const cookieName=config.production?'__Host-g28':'g28-local';const bindingCookie=config.production?'__Host-g28-login':'g28-local-login';
  app.addHook('onRequest',async(req,reply)=>{
   reply.header('Cache-Control','no-store').header('X-Content-Type-Options','nosniff').header('Referrer-Policy','no-referrer').header('X-Frame-Options','DENY');

@@ -6,7 +6,7 @@
   "plan_status": "implementation_started",
   "design_status": "approved_with_issue_video_amendment",
   "planned_work_packages": 72,
-  "implemented_packages": 57,
+  "implemented_packages": 58,
   "merged_packages": 8,
   "deployed_packages": 7,
   "note": "See individual software implementation reviews. Full-scope completion is separate from implemented code, accepted PR merges and external production activation.",
@@ -47,7 +47,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "AGENTS.md",
@@ -93,7 +93,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "scripts/verify.mjs",
@@ -136,7 +136,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/web/public/assets/site.css",
@@ -190,7 +190,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/config.mjs",
@@ -233,11 +233,11 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "security/e2eesa-inventory.json",
-            "sha256": "07132a395aac4d1692b5d18b9f199bd84e5456845984e070e890eed71fd266dd"
+            "sha256": "4e1123c7ac3a9fb9f73c7aa3ceaceebdcedcf99a5814157aa1dd2b20d3271e87"
           }
         ],
         "softwareGap": "Finish the complete component/profile coverage review, including protected-flow obligations; preliminary inventory is not full coverage.",
@@ -273,7 +273,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/campaign-store.mjs",
@@ -318,7 +318,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/campaign-image.mjs",
@@ -360,7 +360,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "docs/evidence/ENGINE_ROOM_RECONCILIATION_20261018.md",
@@ -409,7 +409,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "content/public/pages/index.html",
@@ -450,7 +450,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/web/public/assets/motion.js",
@@ -503,7 +503,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "content/public/pages/issues.html",
@@ -544,7 +544,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/video.mjs",
@@ -590,7 +590,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/policy-documents.mjs",
@@ -633,7 +633,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "content/public/pages/garden.html",
@@ -672,7 +672,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "content/public/pages/cornerstone.html",
@@ -723,7 +723,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/roles.mjs",
@@ -781,7 +781,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-web-checkout.mjs",
@@ -837,7 +837,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/indexing.mjs",
@@ -883,11 +883,11 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/app.mjs",
-            "sha256": "95f88bd418f86236e1e330f5789c2f2ca72695bf0047d3acd05a4bd6fa12fe21"
+            "sha256": "5d46ed0923d63086091c82a00db31e19eec551e023acb971355672ef6769fef6"
           },
           {
             "path": "tests/integration/api.test.mjs",
@@ -917,16 +917,16 @@
         16,
         69
       ],
-      "implementation_note": "Finish integration of all scoped staff operational actions with the new passkey/permission framework.",
+      "implementation_note": "Finish least-privilege runtime identity correction and protected safety scope integration; staff passkeys, bounded roles and all current task/editor/finance actions are implemented.",
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
         "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
-        "blocker": "Finish integration of all scoped staff operational actions with the new passkey/permission framework."
+        "blocker": "Finish least-privilege runtime identity correction and protected safety scope integration; staff passkeys, bounded roles and all current task/editor/finance actions are implemented."
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/staff-security.mjs",
@@ -934,14 +934,14 @@
           },
           {
             "path": "packages/core/staff-permissions.mjs",
-            "sha256": "7a77ecb896e99d3cbb840a62cbd1436b82672f0a77082c7760797548c8061deb"
+            "sha256": "7184f3bbad87fb61d91ea656ca55ac92c3cd17cdce62a309cc438e5d350b403a"
           },
           {
             "path": "tests/staff-security.test.mjs",
             "sha256": "a6ad65d666efb2f907e8a00e2d1d0c7057e0fa8c74cce74ea83bcfb10c018ba1"
           }
         ],
-        "softwareGap": "Finish integration of all scoped staff operational actions with the new passkey/permission framework.",
+        "softwareGap": "Finish least-privilege runtime identity correction and protected safety scope integration; staff passkeys, bounded roles and all current task/editor/finance actions are implemented.",
         "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
         "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
@@ -971,7 +971,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "docs/security/BOUNDARIES.md",
@@ -1008,7 +1008,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "docs/security/BOUNDARIES.md",
@@ -1046,11 +1046,11 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/app.mjs",
-            "sha256": "95f88bd418f86236e1e330f5789c2f2ca72695bf0047d3acd05a4bd6fa12fe21"
+            "sha256": "5d46ed0923d63086091c82a00db31e19eec551e023acb971355672ef6769fef6"
           }
         ],
         "softwareGap": "Implement protected recipient-device recovery and trust restoration; ordinary session revocation/export already work.",
@@ -1087,7 +1087,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/worker.mjs",
@@ -1146,7 +1146,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "content/materials/archive-manifest.json",
@@ -1192,7 +1192,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/material-outline.mjs",
@@ -1238,11 +1238,11 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/portal/src/main.tsx",
-            "sha256": "6cb80c3e85a99c2b24b661297f1c5ab60d4aa7c68c9473f1e23e394dd9a542d9"
+            "sha256": "43c5ae1f30107f44993ed69cadf9b3eaf8c915e3ca229225aa906c571aa502df"
           },
           {
             "path": "packages/core/tasks.mjs",
@@ -1281,7 +1281,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/orientation.mjs",
@@ -1326,7 +1326,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/activity-review-store.mjs",
@@ -1360,30 +1360,50 @@
         "G28-29",
         "G28-22"
       ],
-      "status": "in_progress",
+      "status": "implemented",
       "github_prs": [],
       "scope": "Create role-linked tasks with scope, estimated time, current material/tool, stop conditions, availability, assignment/claiming, completion and feedback. Include low-risk first actions, training tasks and module-gated field tasks. Collect aggregate results, not voter/supporter dossiers, and label the limits of anonymity for signed-in reporting.",
       "acceptance": "Tasks cannot be claimed or completed outside current authorization. Race conditions cannot overbook exclusive assignments. Reporting excludes supporter identities and sensitive personal attributes; counts have validation and clear self-reported/verified provenance.",
       "evidence": "Task concurrency tests, activity privacy fixtures, task lifecycle tests and volunteer-to-coordinator journeys.",
       "external_inputs": "None beyond the listed dependencies.",
-      "implementation_note": "Implement bounded role/task assignment, claiming, verified reporting and capacity concurrency beyond starter checklists.",
+      "implementation_note": "Working source implementation reviewed individually. Verify the tested revision in its intended release; no additional activation input identified.",
       "contributing_prs": [],
       "acceptance_review": {
-        "status": "in_progress",
+        "status": "implemented",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
         "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
-        "blocker": "Implement bounded role/task assignment, claiming, verified reporting and capacity concurrency beyond starter checklists."
+        "blocker": "Verify the tested revision in its intended release; no additional activation input identified."
       },
       "implementation_review": {
-        "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "implementation": "implemented",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
-            "path": "packages/core/tasks.mjs",
-            "sha256": "422510609f578cc3262dbf881606956c48e174eec3a3773173c108125f74de43"
+            "path": "packages/core/operations.mjs",
+            "sha256": "238c65654760520fb65f516f58dda49db9255a334550976fd35b288d16e64533"
+          },
+          {
+            "path": "apps/api/src/operations-store.mjs",
+            "sha256": "dfd16743b171d1fb620a2925a150984f9abbd1be65d08cc259807e7f97b5c9be"
+          },
+          {
+            "path": "apps/api/src/operations-routes.mjs",
+            "sha256": "0f7e593e4e07c01c0c92443353dd42afc40baff5b4384f141ead437dd865957e"
+          },
+          {
+            "path": "apps/portal/src/Operations.tsx",
+            "sha256": "4ff68193510e45067ccf04c67a1b208a4daafae6753647b2622eca24d3b66d99"
+          },
+          {
+            "path": "tests/integration/operations.test.mjs",
+            "sha256": "1de3edc10cae06ad10ae1d175e5be3b93883c35251e7789630297007aaa05f1f"
+          },
+          {
+            "path": "tests/browser/operations.mjs",
+            "sha256": "9c5395eb4728337eed9e1ce00ed0ce6d407a38b03696ca30f13c42a66d6a83e4"
           }
         ],
-        "softwareGap": "Implement bounded role/task assignment, claiming, verified reporting and capacity concurrency beyond starter checklists.",
+        "softwareGap": null,
         "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
         "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
@@ -1416,7 +1436,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/forms.mjs",
@@ -1424,7 +1444,7 @@
           },
           {
             "path": "apps/portal/src/main.tsx",
-            "sha256": "6cb80c3e85a99c2b24b661297f1c5ab60d4aa7c68c9473f1e23e394dd9a542d9"
+            "sha256": "43c5ae1f30107f44993ed69cadf9b3eaf8c915e3ca229225aa906c571aa502df"
           }
         ],
         "softwareGap": null,
@@ -1460,7 +1480,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/coordination.mjs",
@@ -1504,7 +1524,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/coordination.mjs",
@@ -1552,7 +1572,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/help-routes.mjs",
@@ -1592,7 +1612,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/web/public/assets/public.js",
@@ -1629,23 +1649,35 @@
       "evidence": "Connector contract tests, inactive-tool tests, opt-out failure scenario and role-to-tool readiness matrix.",
       "external_inputs": "An actual approved outreach provider/module is required only to activate those activities. The platform must work normally for other volunteer roles.",
       "contributing_prs": [],
-      "implementation_note": "Implement the approved external-tool registry and scoped handoff/suppression lifecycle.",
+      "implementation_note": "Approved link registry, version-bound opt-in/handoff and opt-out are implemented. Provider-specific API/suppression adapters require the actual approved provider contract; no fictional connector is enabled.",
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
         "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
-        "blocker": "Implement the approved external-tool registry and scoped handoff/suppression lifecycle."
+        "blocker": "Approved link registry, version-bound opt-in/handoff and opt-out are implemented. Provider-specific API/suppression adapters require the actual approved provider contract; no fictional connector is enabled."
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
-            "path": "packages/core/activity.mjs",
-            "sha256": "68e5584a2d4cc9375a626d902c2526dc8544c2f1a8207ab70a68a488ab0d6349"
+            "path": "packages/core/operations.mjs",
+            "sha256": "238c65654760520fb65f516f58dda49db9255a334550976fd35b288d16e64533"
+          },
+          {
+            "path": "apps/api/src/operations-store.mjs",
+            "sha256": "dfd16743b171d1fb620a2925a150984f9abbd1be65d08cc259807e7f97b5c9be"
+          },
+          {
+            "path": "apps/api/src/operations-routes.mjs",
+            "sha256": "0f7e593e4e07c01c0c92443353dd42afc40baff5b4384f141ead437dd865957e"
+          },
+          {
+            "path": "docs/operations/COORDINATED_TASKS.md",
+            "sha256": "fa0b9a1d0a39819c67054205f2fe95e004226bff3a46b06008e9c9c8e911b542"
           }
         ],
-        "softwareGap": "Implement the approved external-tool registry and scoped handoff/suppression lifecycle.",
+        "softwareGap": "Approved link registry, version-bound opt-in/handoff and opt-out are implemented. Provider-specific API/suppression adapters require the actual approved provider contract; no fictional connector is enabled.",
         "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
         "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
@@ -1680,7 +1712,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
@@ -1721,23 +1753,35 @@
         69,
         95
       ],
-      "implementation_note": "Complete task/training/module/support management UI and emergency activity pause with scoped staff authority.",
+      "implementation_note": "Complete protected safety/support administration with the recipient flow; task/training/module management, report review, coordination controls and emergency activity pause are implemented.",
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
         "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
-        "blocker": "Complete task/training/module/support management UI and emergency activity pause with scoped staff authority."
+        "blocker": "Complete protected safety/support administration with the recipient flow; task/training/module management, report review, coordination controls and emergency activity pause are implemented."
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/portal/src/AdminOperations.tsx",
             "sha256": "27848731ebaa9f20a85c8e10790bb25cad9168be2ec3ae2740adf83ca465b4d3"
+          },
+          {
+            "path": "apps/portal/src/Operations.tsx",
+            "sha256": "4ff68193510e45067ccf04c67a1b208a4daafae6753647b2622eca24d3b66d99"
+          },
+          {
+            "path": "apps/portal/src/ActivityReview.tsx",
+            "sha256": "4c20e80ebe9c2bdd137e42352be12e03fe3732625066fd7a053f688f1a4eedaf"
+          },
+          {
+            "path": "apps/portal/src/HelpCenter.tsx",
+            "sha256": "eda27f9040a855e5c0c7991215bc71582205dab52f23e224055ebfb0fb45d31f"
           }
         ],
-        "softwareGap": "Complete task/training/module/support management UI and emergency activity pause with scoped staff authority.",
+        "softwareGap": "Complete protected safety/support administration with the recipient flow; task/training/module management, report review, coordination controls and emergency activity pause are implemented.",
         "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
         "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
@@ -1770,7 +1814,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-campaign.mjs",
@@ -1814,7 +1858,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/contribution-terms.mjs",
@@ -1862,7 +1906,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-web-checkout.mjs",
@@ -1903,7 +1947,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-campaign.mjs",
@@ -1945,7 +1989,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/fundraising-ledger.mjs",
@@ -1983,7 +2027,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-web-checkout.mjs",
@@ -2023,7 +2067,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/fundraising-ledger.mjs",
@@ -2051,23 +2095,39 @@
       "evidence": "Export golden files, schema/total validation, injection tests and a treasurer import dry run.",
       "external_inputs": "The treasurer must identify the actual accounting/filing system and approve its mapping.",
       "contributing_prs": [],
-      "implementation_note": "Implement authorized, audited treasury export with formula-injection protection and reconciliation totals.",
+      "implementation_note": "Finish donor/source and all-channel export adapters with the remaining ledger. Audited generic ledger CSV/JSON, source totals, explicit confirmation and formula-injection protection are implemented.",
       "acceptance_review": {
         "status": "in_progress",
         "reviewed_source_sha": "0e70c5cee4b34e5de78aea3b304cbe7aa73c3228",
         "report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md",
-        "blocker": "Implement authorized, audited treasury export with formula-injection protection and reconciliation totals."
+        "blocker": "Finish donor/source and all-channel export adapters with the remaining ledger. Audited generic ledger CSV/JSON, source totals, explicit confirmation and formula-injection protection are implemented."
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
-            "path": "packages/core/treasury-vault.mjs",
-            "sha256": "40bc46a15678431f91fee3f65fba8869234f541ad0956e605a368c687e64603a"
+            "path": "packages/core/treasury-export.mjs",
+            "sha256": "7ddae1713687f549a013bd05b7da71cfa51370f033720a6ef76a2bd7a90eacdb"
+          },
+          {
+            "path": "apps/api/src/treasury-export.mjs",
+            "sha256": "95ac5d0bf3df88fc7e0659a36724488297adc0589084afd08e33bc17f8321db4"
+          },
+          {
+            "path": "apps/portal/src/TreasuryExport.tsx",
+            "sha256": "63a68e1d09fb70dfe9916e8fa6e2c5c0ee87c7c5a3915e79b385d7c2050f2bb4"
+          },
+          {
+            "path": "tests/treasury-export.test.mjs",
+            "sha256": "a399d844cd62a819b2e83d121970eb97d7727607990ed8097c5e7c96df06880f"
+          },
+          {
+            "path": "tests/integration/treasury-export.test.mjs",
+            "sha256": "54a06d28ba30f97dd45af7ff7d5e0701a7f3e69f8dc5fc2034fbf81960807cce"
           }
         ],
-        "softwareGap": "Implement authorized, audited treasury export with formula-injection protection and reconciliation totals.",
+        "softwareGap": "Finish donor/source and all-channel export adapters with the remaining ledger. Audited generic ledger CSV/JSON, source totals, explicit confirmation and formula-injection protection are implemented.",
         "activationRequirement": "Verify the tested revision in its intended release; no additional activation input identified.",
         "verification": "Current branch source review; final hosted checks and accepted merge are recorded separately."
       }
@@ -2105,7 +2165,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "tests/stripe-outage-routing.test.mjs",
@@ -2150,7 +2210,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/stripe-campaign.mjs",
@@ -2158,7 +2218,7 @@
           },
           {
             "path": "docs/operations/STRIPE_POLITICAL_CAMPAIGN_ACCEPTANCE.md",
-            "sha256": "bddfaadc7ef6cb606bdd207f2a1b0eb03ab9a14621f23f4adb41358aceb2b34d"
+            "sha256": "bfde7a868d5aeb38798df0604e48799d589ccd1b07d79181a1db169b7f74b6d5"
           }
         ],
         "softwareGap": null,
@@ -2199,11 +2259,11 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/postgres-store.mjs",
-            "sha256": "e1774f70bc842f6247ec15e7a7ff8577ee696738d1e53cbf27ad0d224767850b"
+            "sha256": "c724ae9df1410c61bd0060608a5f780fe9a96123f9b4289104f02f793129f20a"
           }
         ],
         "softwareGap": "Implement protected-object lifecycle, legal holds and per-class deletion/backup handling; account closure and outbox cleanup already work.",
@@ -2239,7 +2299,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/visitor-report.mjs",
@@ -2289,7 +2349,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "tests/browser/journeys.mjs",
@@ -2342,7 +2402,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "tests/browser/journeys.mjs",
@@ -2385,7 +2445,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "scripts/performance-budget.mjs",
@@ -2435,7 +2495,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "docs/security/BOUNDARIES.md",
@@ -2481,7 +2541,7 @@
       },
       "implementation_review": {
         "implementation": "remaining_implementation",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/worker.mjs",
@@ -2540,7 +2600,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/ops-health.mjs",
@@ -2604,7 +2664,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "scripts/verify.mjs",
@@ -2652,7 +2712,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/policy-documents.mjs",
@@ -2698,7 +2758,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "render.yaml",
@@ -2741,7 +2801,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "README.md",
@@ -2791,7 +2851,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "docs/operations/PRIVATE_REVIEW_ACCEPTANCE_20261012.md",
@@ -2834,7 +2894,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/campaign-content.mjs",
@@ -2871,7 +2931,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/campaign-store.mjs",
@@ -2908,7 +2968,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/campaign-template.mjs",
@@ -2946,7 +3006,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/web/private-preview.mjs",
@@ -2983,7 +3043,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/campaign-routes.mjs",
@@ -3021,7 +3081,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
@@ -3058,7 +3118,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/editor/editor.mjs",
@@ -3101,11 +3161,11 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "packages/core/campaign-mode.mjs",
-            "sha256": "1a03974d4e191d62062b41416ec72ed6af997004225890db128380f01726b1b9"
+            "sha256": "0769352a806465a3988be6a2be380c4d0b8e69ff0e6411dc43fc6fb8e08001fc"
           }
         ],
         "softwareGap": null,
@@ -3139,7 +3199,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/api/src/campaign-store.mjs",
@@ -3185,7 +3245,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "tests/browser/campaign-public.mjs",
@@ -3226,7 +3286,7 @@
       },
       "implementation_review": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-18T23:50:45.184Z",
+        "reviewedAt": "2026-10-19T00:21:03.026Z",
         "sourceFiles": [
           {
             "path": "apps/portal/src/AdminVisitors.tsx",

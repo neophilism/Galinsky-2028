@@ -171,6 +171,62 @@
       ],
       "scope": "Health, deployment, error handling; no raw personal records in diagnostics",
       "e2ee": "not-claimed-business-metadata"
+    },
+    {
+      "id": "staff-passkeys",
+      "kind": "authentication",
+      "status": "implemented-preview-code",
+      "sourcePaths": [
+        "apps/api/src/staff-security.mjs",
+        "packages/core/staff-permissions.mjs"
+      ],
+      "scope": "WebAuthn public credentials, session-bound challenges and step-up state; private authenticator keys never reach the server",
+      "e2ee": "not-claimed-server-readable"
+    },
+    {
+      "id": "mail-delivery-receipts",
+      "kind": "provider-delivery",
+      "status": "implemented-preview-code",
+      "sourcePaths": [
+        "apps/api/src/mail-events.mjs",
+        "apps/api/src/mail-store.mjs",
+        "apps/api/src/mail-notices.mjs"
+      ],
+      "scope": "Signed delivery event correlation, HMAC suppression keys and encrypted fixed-template account notices",
+      "e2ee": "not-claimed-server-readable"
+    },
+    {
+      "id": "coordinated-operations",
+      "kind": "private-authorized-business-processing",
+      "status": "implemented-preview-code",
+      "sourcePaths": [
+        "apps/api/src/operations-routes.mjs",
+        "apps/api/src/operations-store.mjs"
+      ],
+      "scope": "Scoped task claims, aggregate signed-in reports, training attestations and tool-consent metadata; no supporter narrative",
+      "e2ee": "not-claimed-server-readable"
+    },
+    {
+      "id": "encrypted-database-recovery",
+      "kind": "operator-recovery",
+      "status": "implemented-preview-code",
+      "sourcePaths": [
+        "scripts/database-recovery.mjs",
+        "tests/integration/database-recovery.test.mjs"
+      ],
+      "scope": "Owner-key encrypted full-database archives, separately held recovery key and isolated authenticated restore; not recipient E2EE",
+      "e2ee": "not-claimed-server-readable"
+    },
+    {
+      "id": "controlled-treasury-export",
+      "kind": "private-authorized-business-processing",
+      "status": "implemented-preview-code",
+      "sourcePaths": [
+        "apps/api/src/treasury-export.mjs",
+        "packages/core/treasury-export.mjs"
+      ],
+      "scope": "Fresh-MFA finance-only source ledger export, immutable byte digest/audit and safe CSV; no card/private volunteer data",
+      "e2ee": "not-claimed-server-readable"
     }
   ],
   "dataFlows": [
@@ -382,6 +438,61 @@
       "authority": "server metadata",
       "status": "private-preview",
       "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "staff-passkeys-flow",
+      "componentId": "staff-passkeys",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "authorized participant or provider",
+      "to": "scoped runtime or authorized recipient",
+      "authority": "server-side role/session checks; source-bound tests; exact deployment verification remains separate",
+      "status": "private-preview",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "mail-delivery-receipts-flow",
+      "componentId": "mail-delivery-receipts",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "authorized participant or provider",
+      "to": "scoped runtime or authorized recipient",
+      "authority": "server-side role/session checks; source-bound tests; exact deployment verification remains separate",
+      "status": "private-preview",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "coordinated-operations-flow",
+      "componentId": "coordinated-operations",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "authorized participant or provider",
+      "to": "scoped runtime or authorized recipient",
+      "authority": "server-side role/session checks; source-bound tests; exact deployment verification remains separate",
+      "status": "private-preview",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "encrypted-database-recovery-flow",
+      "componentId": "encrypted-database-recovery",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "authorized participant or provider",
+      "to": "scoped runtime or authorized recipient",
+      "authority": "server-side role/session checks; source-bound tests; exact deployment verification remains separate",
+      "status": "private-preview",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "controlled-treasury-export-flow",
+      "componentId": "controlled-treasury-export",
+      "operation": "business-processing",
+      "dataClass": "intentionally-disclosed",
+      "from": "authorized participant or provider",
+      "to": "scoped runtime or authorized recipient",
+      "authority": "server-side role/session checks; source-bound tests; exact deployment verification remains separate",
+      "status": "private-preview",
+      "claim": "no-production-e2ee-certification"
     }
   ],
   "sourceObservations": [
@@ -394,7 +505,7 @@
     "Preliminary source path inventory, not a complete source/build/runtime enumeration or upstream schema 0.2 conformance artifact.",
     "All component and flow statuses require environment-specific audit and real source/build/artifact digest binding. Coverage is explicitly incomplete.",
     "Public disclosures, account provider delivery, approved staff processing, and payment-provider card handling intentionally do not claim private E2EE.",
-    "Recipient/device key enrollment, protected incidents, encrypted attachments and replies remain blocked until independently reviewed protocols are implemented and verified.",
+    "Recipient/device key enrollment, protected incidents, encrypted attachments and replies remain blocked until the selected protocol/profile is implemented and substantively AI-reviewed with interoperability/adversarial verification; outside human review is deferred.",
     "Absence of a source-bound E2EE conformance artifact must never downgrade a protected-content release gate or be presented as E2EESA implementation complete."
   ]
 }

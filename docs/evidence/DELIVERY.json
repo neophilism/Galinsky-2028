@@ -174,7 +174,7 @@
     "source_sha": "c3ae2b1d32cc5a8869188e7cc3cf70edfb6037fb",
     "report": "docs/operations/CAMPAIGN_CONTENT_HANDOFF.md",
     "completed": 8,
-    "in_progress": 12,
+    "in_progress": 11,
     "not_started": 3,
     "observed_merged_prs": 114,
     "observed_closed_unmerged_prs": 5,
@@ -186,12 +186,12 @@
     "warning": "Snapshot now contains accepted GitHub PR merges; the original package-level audit is historical and does not reclassify merged PRs as unaccepted. Some larger planned functionality remains incomplete; production launch is not verified.",
     "observed_open_prs": 4,
     "pr_observation_at": "2026-10-17T13:05:51.523Z",
-    "implemented": 49,
+    "implemented": 50,
     "software_review_report": "docs/evidence/CURRENT_IMPLEMENTATION_REVIEW.md"
   },
   "accepted_merged_prs": 114,
   "accepted_prs_observed_at": "2026-10-18T23:36:38.920Z",
   "acceptance_model": "A verified merge accepts the PR. Full work-package scope completion and production deployment are separately tracked and cannot revoke acceptance of already merged PRs.",
-  "implemented_software_packages": 57,
+  "implemented_software_packages": 58,
   "progress_evidence_note": "Software implementation is reviewed unit by unit in implementationReview. Implemented code, accepted PRs, deployment and external activation are distinct facts. Historical in_progress labels are not a count of partially written PRs."
 }
