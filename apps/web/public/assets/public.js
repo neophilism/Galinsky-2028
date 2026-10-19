@@ -1,6 +1,37 @@
 'use strict';
 (()=>{
  const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
+ async function downloadSharingCard(item,issue,canonical){
+  const response=await fetch('/api/public/sharing-assets?issue='+encodeURIComponent(issue),{cache:'no-store',credentials:'same-origin',signal:AbortSignal.timeout(15000)});
+  if(!response.ok)throw Error('Asset unavailable');const current=(await response.json()).items?.find(a=>a.id===item.id&&a.revision===item.revision);if(!current||Date.parse(current.document.expiresAt)<=Date.now())throw Error('This asset changed or expired. Reload the collection.');
+  const d=current.document;if(d.issue!==issue||d.rightsApproved!==true||(d.imagePath!=='/assets/candidate.webp'&&!/^\/campaign-media\/[0-9a-f-]{36}\.png$/.test(d.imagePath)))throw Error('Approved image is unavailable.');const image=new Image();image.src=d.imagePath;await image.decode();
+  const canvas=document.createElement('canvas');canvas.width=1000;const context=canvas.getContext('2d');
+  const paragraphs=[[d.title,'bold 32px sans-serif'],[d.caption,'24px sans-serif'],[d.disclaimer,'bold 24px sans-serif'],[d.attribution,'20px sans-serif'],['Usage: '+d.usageTerms,'20px sans-serif'],[canonical,'20px sans-serif'],['Revision '+item.revision+' · Expires '+d.expiresAt,'18px sans-serif']],lines=[];
+  for(const [text,font]of paragraphs){context.font=font;let line='';for(const char of String(text)){if(char==='\n'||context.measureText(line+char).width>920){lines.push({text:line,font});line=char==='\n'?'':char;}else line+=char;}if(line)lines.push({text:line,font});lines.push({text:'',font});}
+  const imageHeight=Math.min(600,920*image.naturalHeight/image.naturalWidth);canvas.height=Math.ceil(80+imageHeight+lines.length*38);if(canvas.height>6000)throw Error('Use the printable card for this longer asset.');
+  context.fillStyle='white';context.fillRect(0,0,canvas.width,canvas.height);const imageWidth=Math.min(920,imageHeight*image.naturalWidth/image.naturalHeight);context.drawImage(image,(1000-imageWidth)/2,40,imageWidth,imageHeight);context.fillStyle='#082653';context.textBaseline='top';let y=60+imageHeight;
+  for(const line of lines){context.font=line.font;context.fillText(line.text,40,y);y+=38;}
+  const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw Error('Card download unavailable');const href=URL.createObjectURL(blob),a=document.createElement('a');a.href=href;a.download='galinsky-approved-card-'+item.id+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(href),30000);
+ }
+ const assetButton=$('[data-sharing-assets]'),assetList=$('#approved-sharing-assets');
+ assetButton?.addEventListener('click',async()=>{
+  if(!assetList)return;
+  if(!assetList.hidden){assetList.hidden=true;assetButton.setAttribute('aria-expanded','false');return;}
+  assetButton.disabled=true;assetList.replaceChildren();
+  try{
+   const response=await fetch('/api/public/sharing-assets?issue='+encodeURIComponent(assetButton.dataset.sharingAssets),{cache:'no-store',credentials:'same-origin',signal:AbortSignal.timeout(15000)});
+   if(!response.ok)throw Error('unavailable');const result=await response.json();if(!Array.isArray(result.items)||result.items.length>50)throw Error('invalid');
+   const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
+   for(const item of result.items){
+    if(!/^[0-9a-f-]{36}$/.test(item.id)||!Number.isSafeInteger(item.revision)||!item.document||!['kirk-evers','garden','cornerstone'].includes(item.document.issue))throw Error('invalid');
+    const d=item.document;if(d.imagePath!=='/assets/candidate.webp'&&!/^\/campaign-media\/[0-9a-f-]{36}\.png$/.test(d.imagePath))throw Error('invalid');
+    const card=el('article');card.className='sharing-asset-card';card.append(el('h3',d.title));const image=el('img');image.src=d.imagePath;image.alt=d.alt;image.loading='lazy';card.append(image,el('p',d.caption),el('p',d.disclaimer),el('p',d.attribution),el('p','Usage: '+d.usageTerms),el('p','Revision '+item.revision+' · Expires '+d.expiresAt));
+    const link=el('a','Open printable issue card');link.href='/share/cards/'+item.id+'/';link.className='btn outline';const download=el('button','Download card with disclaimer');download.type='button';download.className='btn outline';download.addEventListener('click',async()=>{download.disabled=true;try{await downloadSharingCard(item,d.issue,assetButton.closest('[data-share-url]').dataset.shareUrl);}catch(error){card.append(el('p',error.message||'Card download unavailable.'));}finally{download.disabled=false;}});card.append(link,download);assetList.append(card);
+   }
+   if(!result.items.length)assetList.append(el('p','No current campaign-approved image is published for this issue. The official page link and QR remain available.'));
+  }catch{const p=document.createElement('p');p.textContent='Approved assets are temporarily unavailable. Use the official page link or QR code.';assetList.replaceChildren(p);}
+  finally{assetButton.disabled=false;assetList.hidden=false;assetButton.setAttribute('aria-expanded','true');}
+ });
  const menu=$('#menu-toggle');
  menu?.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'Close -':'Menu +';$('#navlinks')?.classList.toggle('open',open);});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu?.getAttribute('aria-expanded')==='true'){menu.click();menu.focus();}});

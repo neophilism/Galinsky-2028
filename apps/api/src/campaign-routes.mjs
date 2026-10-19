@@ -35,6 +35,12 @@ export function registerCampaignEditor(app,{accountStore,config,env=process.env,
  route('GET','/campaigns/:id/history',{},req=>store.history(req.params.id,{before:req.query.before==null?2147483647:Number(req.query.before),limit:req.query.limit==null?30:Number(req.query.limit)}));
  route('GET','/settings',{},()=>store.settings());
  route('PUT','/settings',{write:true,owner:true},req=>{const b=body(req,['expectedVersion','settings']);return store.saveSettings(b.expectedVersion,b.settings,req.campaignIdentity.actorId);});
+ route('GET','/sharing-assets',{mfa:true},req=>store.sharingAssets({after:req.query.after||null,limit:req.query.limit==null?30:Number(req.query.limit)}));
+ route('GET','/sharing-assets/:id',{mfa:true},req=>store.sharingAsset(req.params.id));
+ route('POST','/sharing-assets',{write:true,mfa:true},req=>{const b=body(req,['document']);return store.createSharingAsset(b.document,req.campaignIdentity.actorId);});
+ route('PUT','/sharing-assets/:id',{write:true,mfa:true},req=>{const b=body(req,['expectedRevision','document']);return store.saveSharingAsset(req.params.id,b.expectedRevision,b.document,req.campaignIdentity.actorId);});
+ route('POST','/sharing-assets/:id/publish',{write:true,owner:true,mfa:true},req=>{const b=body(req,['expectedRevision','expectedPublicationVersion']);return store.publishSharingAsset(req.params.id,b.expectedRevision,b.expectedPublicationVersion,req.campaignIdentity.actorId);});
+ route('POST','/sharing-assets/:id/withdraw',{write:true,owner:true,mfa:true},req=>{const b=body(req,['expectedPublicationVersion']);return store.withdrawSharingAsset(req.params.id,b.expectedPublicationVersion,req.campaignIdentity.actorId);});
  route('GET','/media',{},req=>store.assets({after:req.query.after||null,limit:req.query.limit==null?30:Number(req.query.limit)}));
  route('GET','/media/:id',{},async(req,reply)=>{const image=await store.asset(req.params.id);return reply.header('Cache-Control','private, no-store').header('X-Content-Type-Options','nosniff').type(image.contentType).send(image.bytes);});
  route('GET','/builtin-hero',{},async(req,reply)=>reply.header('Cache-Control','private, no-store').type('image/webp').send(await readFile(STATIC_HERO)));

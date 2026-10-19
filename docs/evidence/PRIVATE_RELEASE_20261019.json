@@ -1,0 +1,129 @@
+{
+  "observedAt": "2026-10-19T00:49:29.482Z",
+  "action": "verify",
+  "reports": [
+    {
+      "serviceId": "srv-db5teuajnfac73bm8pug",
+      "placementVerified": true,
+      "autoDeploy": "off",
+      "configuration": {
+        "keys": [
+          "DATABASE_URL",
+          "DONATIONS_ENABLED",
+          "DONATIONS_TREASURER_APPROVED",
+          "G28_CAMPAIGN_PUBLIC_ENABLED",
+          "G28_PUBLIC_MODE",
+          "G28_REVIEW_ACCOUNTS_ENABLED",
+          "G28_REVIEW_AUTH_SECRET",
+          "G28_REVIEW_DATABASE_URL",
+          "G28_REVIEW_LIVE_CHECK",
+          "G28_REVIEW_ORIGIN",
+          "G28_REVIEW_PORTAL_ORIGIN",
+          "G28_REVIEW_SETUP_KEY",
+          "G28_STRIPE_DIAGNOSE_WEBHOOKS_ON_BOOT",
+          "G28_STRIPE_LIVE_APPROVED",
+          "G28_STRIPE_RETURN_ORIGIN",
+          "G28_STRIPE_SMOKE_ON_BOOT",
+          "G28_STRIPE_TEST_ENABLED",
+          "NODE_VERSION",
+          "PORTAL_ORIGIN",
+          "PREVIEW_ACCESS_PASSWORD",
+          "PREVIEW_ACCESS_USER",
+          "STRIPE_SECRET_KEY",
+          "STRIPE_WEBHOOK_SECRET"
+        ],
+        "databaseRoles": {
+          "DATABASE_URL": {
+            "role": "g28_stripe_runtime_20261019",
+            "endpoint": "ep-jolly-fog-b4os5jom",
+            "database": "neondb"
+          },
+          "G28_REVIEW_DATABASE_URL": {
+            "role": "g28_review_web",
+            "endpoint": "ep-jolly-fog-b4os5jom-pooler",
+            "database": "neondb"
+          }
+        },
+        "flags": {
+          "SIGNUP_ENABLED": false,
+          "STAFF_IDENTITY_ENABLED": false,
+          "PROTECTED_CONTENT_ENABLED": false,
+          "DONATIONS_ENABLED": false,
+          "G28_ADMIN_LOGIN_ENABLED": false,
+          "G28_CAMPAIGN_EDITOR_ENABLED": false,
+          "COORDINATION_ENABLED": false,
+          "G28_HELP_REQUESTS_ENABLED": false,
+          "G28_VISITOR_ANALYTICS_ENABLED": false
+        },
+        "configured": {
+          "RESEND_API_KEY": false,
+          "MAIL_FROM": false,
+          "DELIVERY_KEY": false,
+          "LOGIN_PEPPER": false,
+          "G28_TREASURY_VAULT_KEY": false,
+          "RESEND_WEBHOOK_SECRET": false,
+          "PREVIEW_ACCESS_PASSWORD": true
+        }
+      },
+      "authenticatedHealth": true,
+      "unauthorizedRejected": true,
+      "deployedCommit": "1c7a172a43d8d3f62f78b4c602b27bb3b387d0ab",
+      "expectedCommit": "1c7a172a43d8d3f62f78b4c602b27bb3b387d0ab",
+      "commitMatches": true
+    },
+    {
+      "serviceId": "srv-db5v0lfavr4c73a62870",
+      "placementVerified": true,
+      "autoDeploy": "off",
+      "configuration": {
+        "keys": [
+          "DATABASE_URL",
+          "DONATIONS_ENABLED",
+          "G28_CAMPAIGN_EDITOR_ENABLED",
+          "MAIL_PROVIDER",
+          "NODE_ENV",
+          "NODE_VERSION",
+          "PORTAL_ORIGIN",
+          "PREVIEW_ACCESS_PASSWORD",
+          "PREVIEW_ACCESS_USER",
+          "PROTECTED_CONTENT_ENABLED",
+          "PUBLIC_ORIGIN",
+          "SIGNUP_ENABLED",
+          "STAFF_IDENTITY_ENABLED"
+        ],
+        "databaseRoles": {
+          "DATABASE_URL": {
+            "role": "g28_portal_runtime_20261019",
+            "endpoint": "ep-jolly-fog-b4os5jom",
+            "database": "neondb"
+          }
+        },
+        "flags": {
+          "SIGNUP_ENABLED": false,
+          "STAFF_IDENTITY_ENABLED": false,
+          "PROTECTED_CONTENT_ENABLED": false,
+          "DONATIONS_ENABLED": false,
+          "G28_ADMIN_LOGIN_ENABLED": false,
+          "G28_CAMPAIGN_EDITOR_ENABLED": true,
+          "COORDINATION_ENABLED": false,
+          "G28_HELP_REQUESTS_ENABLED": false,
+          "G28_VISITOR_ANALYTICS_ENABLED": false
+        },
+        "configured": {
+          "RESEND_API_KEY": false,
+          "MAIL_FROM": false,
+          "DELIVERY_KEY": false,
+          "LOGIN_PEPPER": false,
+          "G28_TREASURY_VAULT_KEY": false,
+          "RESEND_WEBHOOK_SECRET": false,
+          "PREVIEW_ACCESS_PASSWORD": true
+        }
+      },
+      "authenticatedHealth": true,
+      "unauthorizedRejected": true,
+      "deployedCommit": "1c7a172a43d8d3f62f78b4c602b27bb3b387d0ab",
+      "expectedCommit": "1c7a172a43d8d3f62f78b4c602b27bb3b387d0ab",
+      "commitMatches": true
+    }
+  ]
+}

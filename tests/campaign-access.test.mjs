@@ -8,3 +8,7 @@ test('reviewer, volunteer, financial and absent grants cannot read drafts',async
 test('missing credentials, revoked session and disabled feature fail closed',async()=>{const r=req();r.headers.cookie='bad';await assert.rejects(setup()(r),e=>e.statusCode===401);await assert.rejects(setup({session:false})(req()),e=>e.statusCode===401);await assert.rejects(setup({enabled:false})(req()),e=>e.statusCode===503);});
 test('CSRF and origin checked before mutation',async()=>{for(const change of [{origin:'https://attacker.example'},{'sec-fetch-site':'cross-site'},{'x-csrf-token':'wrong'},{'x-csrf-token':'\u00e9\u00e9\u00e9\u00e9'}])await assert.rejects(setup()({headers:{...req().headers,...change}},{write:true}),e=>e.statusCode===403);});
 test('read operations cannot bypass fresh role lookup or rate control',async()=>{await assert.rejects(setup({rate:false})(req()),e=>e.statusCode===429);});
+test('sensitive editorial actions require MFA even when the optional legacy staff flag is off',async()=>{
+ let valid=false;const authorize=createCampaignAuthorization({enabled:true,config:{adminLoginReady:true,staffIdentity:false,portalOrigin:'https://portal.example'},readCookie:x=>x,validToken:()=>true,tokenHash:x=>x,accountStore:{session:async()=>({account:{id:'synthetic'},hash:'session',csrf:'csrf'}),adminRole:async()=> 'owner',staffMfaValid:async()=>valid,rate:async()=>true}});
+ await assert.rejects(authorize(req(),{mfa:true}),e=>e.code==='mfa_required');valid=true;assert.equal((await authorize(req(),{mfa:true,write:true})).role,'owner');
+});

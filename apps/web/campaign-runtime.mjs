@@ -1,3 +1,4 @@
+import {sharingCardHtml} from '../../packages/core/sharing-assets.mjs';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {CampaignPublicStore} from '../api/src/campaign-store.mjs';
@@ -7,7 +8,7 @@ import {CAMPAIGN_PRESENTATION_CSS} from '../../packages/core/campaign-presentati
 import {CAMPAIGN_MODE_SCRIPT,campaignPreferences} from '../../packages/core/campaign-mode.mjs';
 const ROUTES=new Map([['/','index'],['/issues/','issues'],['/issues/kirk-evers/','kirk-evers'],['/issues/garden/','garden'],['/issues/cornerstone/','cornerstone'],['/volunteer/','volunteer'],['/donate/','donate'],['/notices/','notices']]);
 export async function verifyCampaignReadRole(pool){
- const q=await pool.query("SELECT has_table_privilege(current_user,'g28.content_revisions','SELECT,INSERT,UPDATE,DELETE') AS private_access, has_table_privilege(current_user,'g28.campaign_public_releases','SELECT') AND has_table_privilege(current_user,'g28.campaign_public_settings','SELECT') AND has_table_privilege(current_user,'g28.campaign_public_media','SELECT') AS public_access");
+ const q=await pool.query("SELECT has_table_privilege(current_user,'g28.content_revisions','SELECT,INSERT,UPDATE,DELETE') AS private_access, has_table_privilege(current_user,'g28.campaign_public_releases','SELECT') AND has_table_privilege(current_user,'g28.campaign_public_settings','SELECT') AND has_table_privilege(current_user,'g28.campaign_public_media','SELECT') AND has_table_privilege(current_user,'g28.sharing_assets_public','SELECT') AS public_access");
  if(q.rows[0]?.private_access!==false||q.rows[0]?.public_access!==true)throw Error('Campaign rendering requires a published-only database role.');
 }
 export function campaignTransientError(error){return typeof error?.code==='string'&&(/^(08|57P0)/.test(error.code)||['ECONNRESET','ECONNREFUSED','ETIMEDOUT','53300'].includes(error.code));}
@@ -43,11 +44,19 @@ export function createCampaignRuntime({env=process.env,directory=resolve('dist/w
   async handle(req,res,pathname,{authorized=false}={}){
    const path=pathname==='/'?'/':typeof pathname==='string'&&!pathname.endsWith('/')?pathname+'/':pathname;
    const route=ROUTES.get(path),media=/^\/campaign-media\/([0-9a-f-]{36})\.png$/.exec(pathname||''),script=pathname==='/assets/campaign-mode.js';
-   if(!route&&!media&&!script)return false;
+   const sharingList=pathname==='/api/public/sharing-assets',sharingCard=/^\/share\/cards\/([0-9a-f-]{36})\/?$/.exec(pathname||'');
+   if(!route&&!media&&!script&&!sharingList&&!sharingCard)return false;
    res.setHeader('Cache-Control','private, no-store, max-age=0');res.setHeader('Vary','Authorization, Cookie');res.setHeader('X-Content-Type-Options','nosniff');
    if(!authorized){reply(req,res,401,'text/plain; charset=utf-8','Private preview access is required.');return true;}
    if(!['GET','HEAD'].includes(req.method)){res.setHeader('Allow','GET, HEAD');reply(req,res,405,'text/plain; charset=utf-8','Method not allowed.');return true;}
    try{
+    if(sharingList||sharingCard){
+     if(env.G28_PUBLIC_MODE!=='production'){reply(req,res,404,'text/plain; charset=utf-8','Not found.');return true;}
+     if(sharingList){const url=new URL(req.url,'https://request.invalid');if([...url.searchParams.keys()].some(k=>k!=='issue')||url.searchParams.getAll('issue').length!==1)throw Error('Invalid sharing query.');const result=await(await ready).sharingAssets(url.searchParams.get('issue'));reply(req,res,200,'application/json; charset=utf-8',JSON.stringify(result));return true;}
+     const asset=await(await ready).sharingAsset(campaignId(sharingCard[1]));
+     res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'");
+     reply(req,res,200,'text/html; charset=utf-8',sharingCardHtml(asset,env.CANONICAL_ORIGIN));return true;
+    }
     if(script){reply(req,res,200,'application/javascript; charset=utf-8',CAMPAIGN_MODE_SCRIPT);return true;}
     if(media){const image=await(await ready).asset(campaignId(media[1]));reply(req,res,200,image.contentType,image.bytes);return true;}
     if(typeof req.url!=='string'||req.url.length>4096)throw Error('Invalid page request.');
@@ -58,7 +67,7 @@ export function createCampaignRuntime({env=process.env,directory=resolve('dist/w
     if(!html){html=renderCampaignTemplate(await template(path,route),s.document,{mode:s.selection.mode,preference:preferences.preference,modeEnabled:s.modeSwitching,settingsVersion:s.settingsVersion,path,css:CAMPAIGN_PRESENTATION_CSS});if(rendered.size>=48)rendered.delete(rendered.keys().next().value);rendered.set(cacheKey,html);}
     if(loaded.stale)res.setHeader('X-Campaign-Snapshot','last-known-good');
     reply(req,res,200,'text/html; charset=utf-8',html);return true;
-   }catch(error){const status=error instanceof CampaignError&&error.code==='asset_not_found'?404:503;reply(req,res,status,'text/plain; charset=utf-8',status===404?'Published image not found.':'Published website content is temporarily unavailable.');return true;}
+   }catch(error){const status=error instanceof CampaignError&&['asset_not_found','sharing_not_found'].includes(error.code)?404:503;reply(req,res,status,'text/plain; charset=utf-8',status===404?'Published image not found.':'Published website content is temporarily unavailable.');return true;}
   }
  };
 }
