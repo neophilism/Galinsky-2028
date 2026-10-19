@@ -22,7 +22,7 @@ const sources={
  30:['packages/core/operations.mjs','apps/api/src/operations-store.mjs','apps/api/src/operations-routes.mjs','apps/portal/src/Operations.tsx','tests/integration/operations.test.mjs','tests/browser/operations.mjs'],31:['packages/core/forms.mjs','apps/portal/src/main.tsx'],
  32:['packages/core/coordination.mjs','apps/api/src/coordination-store.mjs'],
  33:['packages/core/coordination.mjs','tests/integration/coordination.test.mjs'],34:['apps/api/src/help-routes.mjs'],
- 35:['apps/web/public/assets/public.js','tests/public-sharing.test.mjs','apps/api/src/campaign-store.mjs'],
+ 35:['packages/core/sharing-assets.mjs','apps/api/src/sharing-assets-store.mjs','apps/api/src/campaign-routes.mjs','apps/editor/editor.mjs','apps/web/campaign-runtime.mjs','apps/web/public/assets/public.js','tests/integration/sharing-assets.test.mjs','tests/browser/sharing-assets.mjs','tests/browser/public-sharing.mjs'],
  36:['packages/core/operations.mjs','apps/api/src/operations-store.mjs','apps/api/src/operations-routes.mjs','docs/operations/COORDINATED_TASKS.md'],37:['apps/editor/editor.mjs','apps/api/src/campaign-routes.mjs'],
  38:['apps/portal/src/AdminOperations.tsx','apps/portal/src/Operations.tsx','apps/portal/src/ActivityReview.tsx','apps/portal/src/HelpCenter.tsx'],39:['packages/core/stripe-campaign.mjs','tests/stripe-real-sandbox-acceptance.test.mjs'],
  40:['packages/core/contribution-terms.mjs','tests/stripe-campaign.test.mjs'],
@@ -62,6 +62,7 @@ const gaps={
  55:'Finish matching protected-object/key recovery generations when that storage flow lands; encrypted full-database backup/isolated restore and durable job recovery are implemented and exercised in CI.'
 };
 const activation={
+ 35:'Publish actual campaign-approved images, rights/disclaimer/usage terms and final canonical origin through the implemented workflow.',
  8:'Observe current source-plan ingestion and presentation in Engine Room; this is a consumer integration check.',
  12:'Supply/release final issue videos and captions; the consent, revoke and playback component is implemented.',
  13:'Publish the exact approved final legal document; the current draft reader/provenance works.',

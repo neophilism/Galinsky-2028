@@ -1,0 +1,13 @@
+# Approved sharing images and printable cards
+
+Use the existing campaign editor's **Approved images and print cards** section. It requires a verified owner/editor session and fresh staff passkey even when the legacy optional staff flag is off. Choose an uploaded campaign image or the existing campaign portrait, a launch issue, caption, actual required disclaimer, permitted usage terms, attribution, public rights/license reference and expiration. Record actual rights verification; software and engineering acceptance never invent a license.
+
+Saving creates an immutable private draft. A separate owner action publishes the exact draft revision with compare-and-swap publication version checks. Editing a draft leaves the existing publication unchanged. A current publication expires within a year and can be withdrawn by the owner. Every change appends an audit record in the same database transaction.
+
+Production-mode issue sharing controls load current approved images only after a visitor asks for them. The public projection contains no staff identity, account information or private drafts. Image access is also projected: a sharing-only uploaded image disappears from the public media view when no current campaign or sharing publication authorizes it. Independent current uses remain independently authorized.
+
+The gallery links to a dedicated printable card, containing the caption, disclaimer, usage terms, attribution, exact canonical issue URL, QR, source revision and expiry. A visitor can download a rendered PNG card with these texts embedded. The download rechecks current publication/version and expiry and does not offer a context-free raw-image download. Assets do not post to social accounts or track supporters. Social-style image/title/caption previews and ordinary issue links remain user-directed.
+
+Preview pages keep sharing controls absent. All existing web preview/reviewer authorization executes before public projection routes. The published-only runtime requires SELECT on `g28.sharing_assets_public` in addition to the existing three campaign projection views; never grant it private revision or account access. Apply `20261019_sharing_assets.sql` and the narrow view grant before deploying this revision. Do not enable signup, live finances or public launch to demonstrate a sharing tool.
+
+Validation includes independent QR decoding in screen/print media, actual PostgreSQL publication/draft/CAS/expiry/withdrawal and restricted-view tests, actual HTTP role/passkey/CSRF checks, and a real browser/editor/public-card/download/withdrawal journey across Chromium, Firefox and WebKit. All fixtures are synthetic and local PostgreSQL only. Actual campaign rights and final public origins remain publication inputs.

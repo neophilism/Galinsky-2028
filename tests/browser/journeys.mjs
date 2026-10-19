@@ -57,7 +57,7 @@ try{
   await page.goto(publicOrigin+'/');await page.setViewportSize({width:390,height:844});await page.locator('#menu-toggle').click();assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'true');
   await page.screenshot({path:`test-results/browser/${name}-home-mobile.png`,fullPage:true});
   await page.goto(portalOrigin+'/join');await page.getByLabel('Email address').fill(name+'@example.test');await page.getByRole('checkbox').first().check();await page.getByRole('button',{name:/Email my sign-in link/}).click();await page.getByText(/When delivery is available/).waitFor();
-  const queued=store.outbox.at(-1);const mail=openDelivery(queued.envelope,cfg.deliveryKey);assert.equal(mail.email,name+'@example.test');await page.goto(mail.url);await page.getByRole('button',{name:'Continue to my workspace'}).click();await page.getByRole('button',{name:'Sign out'}).waitFor();
+  const queued=store.outbox.findLast(job=>job.kind==='account_login'&&openDelivery(job.envelope,cfg.deliveryKey).email===name+'@example.test');assert(queued,'The accepted request queued its login message');const mail=openDelivery(queued.envelope,cfg.deliveryKey);assert.equal(mail.email,name+'@example.test');await page.goto(mail.url);await page.getByRole('button',{name:'Continue to my workspace'}).click();await page.getByRole('button',{name:'Sign out'}).waitFor();
   // Real role preferences are saved behind the volunteer session and persist.
   await page.goto(portalOrigin+'/roles');
   await page.getByLabel('What would you enjoy?').selectOption('skills');
@@ -146,8 +146,10 @@ try{
   // Restore a verified session to exercise the ordinary sign-out button too.
   await page.getByLabel('Email address').fill(name+'-again@example.test');
   await page.getByRole('checkbox').first().check();
+  const acceptedLogin=page.waitForResponse(response=>response.url()===portalOrigin+'/api/auth/request'&&response.request().method()==='POST');
   await page.getByRole('button',{name:/Email my sign-in link/}).click();
-  const job2=store.outbox.at(-1);
+  assert.equal((await acceptedLogin).status(),202);await page.getByText(/When delivery is available/).waitFor();
+  const job2=store.outbox.findLast(job=>job.kind==='account_login'&&openDelivery(job.envelope,cfg.deliveryKey).email===name+'-again@example.test');assert(job2,'The accepted request queued the new login message');
   await page.goto(openDelivery(job2.envelope,cfg.deliveryKey).url);
   await page.getByRole('button',{name:'Continue to my workspace'}).click();
   await page.getByRole('button',{name:'Sign out'}).waitFor();

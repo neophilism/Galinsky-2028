@@ -227,6 +227,21 @@
       ],
       "scope": "Fresh-MFA finance-only source ledger export, immutable byte digest/audit and safe CSV; no card/private volunteer data",
       "e2ee": "not-claimed-server-readable"
+    },
+    {
+      "id": "approved-sharing-assets",
+      "kind": "authorized-publication",
+      "status": "implemented-preview-code",
+      "sourcePaths": [
+        "packages/core/sharing-assets.mjs",
+        "apps/api/src/sharing-assets-store.mjs",
+        "apps/api/src/campaign-routes.mjs",
+        "apps/editor/editor.mjs",
+        "apps/web/campaign-runtime.mjs",
+        "db/migrations/20261019_sharing_assets.sql"
+      ],
+      "scope": "Private campaign image/rights drafts and explicitly approved public sharing cards; no supporter records or automatic social posting",
+      "e2ee": "not-claimed-server-readable"
     }
   ],
   "dataFlows": [
@@ -492,6 +507,17 @@
       "to": "scoped runtime or authorized recipient",
       "authority": "server-side role/session checks; source-bound tests; exact deployment verification remains separate",
       "status": "private-preview",
+      "claim": "no-production-e2ee-certification"
+    },
+    {
+      "id": "sharing-publication",
+      "componentId": "approved-sharing-assets",
+      "operation": "Owner publication of a specific rights-approved, expiring image/card revision; current public projection and withdrawal",
+      "dataClass": "intentionally disclosed public campaign content; private editorial drafts remain authenticated server processing",
+      "from": "verified owner/editor",
+      "to": "approved public projection and user-directed download/print",
+      "authority": "current role, fresh passkey, CSRF, explicit owner publication, actual rights attestation and current immutable revision",
+      "status": "implemented-preview-code",
       "claim": "no-production-e2ee-certification"
     }
   ],

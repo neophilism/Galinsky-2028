@@ -43,7 +43,8 @@ export async function inspectRelease(raw,{env=process.env,transport=fetch}={}){
   }
   const response=await transport(origin+'/healthz',{redirect:'manual',headers:{Authorization:auth},signal:AbortSignal.timeout(60000)});if(response.status!==200)throw Error('Authenticated health verification failed with HTTP '+response.status+'.');const health=await response.json();
   if(request.action==='verify'&&health.commit!==request.expectedCommit)throw Error('Deployed health commit differs from expected tested revision.');
-  reports.push({serviceId:id,placementVerified:true,autoDeploy:service.autoDeployTrigger||service.autoDeploy,configuration:summary,authenticatedHealth:true,unauthorizedRejected:true,deployedCommit:health.commit||null,expectedCommit:request.expectedCommit,commitMatches:health.commit===request.expectedCommit});
+  let databaseReadyVerified=null;if(id==='srv-db5v0lfavr4c73a62870'){const ready=await transport(origin+'/readyz',{redirect:'manual',headers:{Authorization:auth},signal:AbortSignal.timeout(60000)});if(ready.status!==200||(await ready.json()).ready!==true)throw Error('Authenticated portal database readiness failed.');databaseReadyVerified=true;}
+  reports.push({serviceId:id,databaseReadyVerified,placementVerified:true,autoDeploy:service.autoDeployTrigger||service.autoDeploy,configuration:summary,authenticatedHealth:true,unauthorizedRejected:true,deployedCommit:health.commit||null,expectedCommit:request.expectedCommit,commitMatches:health.commit===request.expectedCommit});
  }
  return {observedAt:new Date().toISOString(),action:request.action,reports};
 }

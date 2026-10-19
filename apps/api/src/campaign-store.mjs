@@ -1,3 +1,4 @@
+import {campaignSharing,publicCampaignSharing} from './sharing-assets-store.mjs';
 import {randomUUID} from 'node:crypto';
 import {
  CAMPAIGN_RECORD_PREFIX as DOC, CAMPAIGN_PUBLIC_PREFIX as PUB, CAMPAIGN_SETTINGS_KEY as SETTINGS,
@@ -165,3 +166,6 @@ export class CampaignPublicStore {
   return{bytes:Buffer.from(q.rows[0].base64,'base64'),contentType:'image/png'};
  }
 }
+
+Object.assign(CampaignStore.prototype,campaignSharing);
+Object.assign(CampaignPublicStore.prototype,publicCampaignSharing);

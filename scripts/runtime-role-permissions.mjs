@@ -8,7 +8,7 @@ export function runtimeRoleStatements({role,password,profile}){
  const id=identifier(role);
  if(!['stripe','portal','portal_preview'].includes(profile)||!role.startsWith('g28_'+(profile==='portal_preview'?'portal':profile)+'_runtime_'))throw Error('Runtime name/profile mismatch.');
  if(typeof password!=='string'||!/^[A-Za-z0-9_-]{43,128}$/.test(password))throw Error('Use a generated high-entropy URL-safe password.');
- const grants=profile==='portal_preview'?[`GRANT SELECT ON g28.schema_migrations TO ${id}`,`GRANT SELECT ON g28.campaign_public_releases,g28.campaign_public_settings,g28.campaign_public_media TO ${id}`]:profile==='stripe'?[
+ const grants=profile==='portal_preview'?[`GRANT SELECT ON g28.schema_migrations TO ${id}`,`GRANT SELECT ON g28.campaign_public_releases,g28.campaign_public_settings,g28.campaign_public_media,g28.sharing_assets_public TO ${id}`]:profile==='stripe'?[
   `GRANT SELECT,INSERT,UPDATE ON g28.stripe_checkout_intents TO ${id}`,
   `GRANT SELECT,INSERT ON g28.stripe_webhook_receipts TO ${id}`,
   `GRANT INSERT ON g28.financial_provider_events TO ${id}`,
@@ -16,7 +16,7 @@ export function runtimeRoleStatements({role,password,profile}){
  ]:[`GRANT SELECT,INSERT,UPDATE,DELETE ON ${PORTAL_RUNTIME_TABLES.map(t=>'g28.'+t).join(',')} TO ${id}`,
   `GRANT SELECT,INSERT ON g28.audit_events,g28.operation_claim_history,g28.treasury_audit,g28.treasury_exports TO ${id}`,
   `GRANT SELECT ON g28.financial_provider_events,g28.schema_migrations TO ${id}`,
-  `GRANT SELECT ON g28.campaign_public_releases,g28.campaign_public_settings,g28.campaign_public_media TO ${id}`];
+  `GRANT SELECT ON g28.campaign_public_releases,g28.campaign_public_settings,g28.campaign_public_media,g28.sharing_assets_public TO ${id}`];
  return [`CREATE ROLE ${id} LOGIN NOINHERIT NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD '${password}'`,
   `GRANT CONNECT ON DATABASE neondb TO ${id}`,`GRANT USAGE ON SCHEMA g28 TO ${id}`,...grants];
 }

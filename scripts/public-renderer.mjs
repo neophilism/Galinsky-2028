@@ -58,7 +58,7 @@ export function renderPage(key, options={}) {
    '<div class="issue-share-qr" id="issue-share-qr" hidden>'+
    '<div class="issue-share-qr-canvas" role="img" aria-label="QR code linking to this issue page"></div>'+
    '<p class="small">Scan this code to open the official issue page. It contains no tracking parameters.</p></div>'+
-   '<p class="small" role="status" aria-live="polite"></p></div></section>';
+   '<p class="small" role="status" aria-live="polite"></p><button class="btn outline" type="button" data-sharing-assets="'+key+'" aria-controls="approved-sharing-assets" aria-expanded="false">Approved images and print cards</button><div id="approved-sharing-assets" hidden></div></div></section>';
   body=body.replace('</main>',tools+'</main>');
  }
  if(body.includes('{{DESTINATION:'))throw new Error('Unresolved policy destination token');
