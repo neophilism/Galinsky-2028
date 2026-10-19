@@ -78,7 +78,9 @@ rewrite that text without treasurer approval.
 
 The owner reports that the **existing campaign Stripe TEST secret** and the **TEST webhook signing secret** were saved directly in the existing Render website's Environment settings, rebuilt and redeployed. The website service is `srv-db5teuajnfac73bm8pug` inside the previously authorized project `prj-db57fnm7bikc739783q0` under Phillip's workspace.
 
-An independent **least-privilege database role** `g28_stripe_test_web` has been created in the **existing** Neon staging branch `br-purple-tooth-b4ra2kbm`. It has only `SELECT/INSERT/UPDATE` on `g28.stripe_checkout_intents`, `SELECT/INSERT` on `g28.stripe_webhook_receipts`, and `INSERT` on `g28.financial_provider_events`. No access to volunteer, reviewer, admin, bank, or treasury records. The role's URI belongs only in the protected Render Environment; it is not a repository secret.
+**Historical claim superseded by the 19 October runtime privilege inspection:** see `docs/security/RUNTIME_ROLE_FINDING_20261019.md`. Explicit grants were narrow, but inherited provider administration was not. Current runtime replacement/verification must be recorded before treating this identity as least privilege.
+
+An independent **intended least-privilege database role** `g28_stripe_test_web` has been created in the **existing** Neon staging branch `br-purple-tooth-b4ra2kbm`. It has only `SELECT/INSERT/UPDATE` on `g28.stripe_checkout_intents`, `SELECT/INSERT` on `g28.stripe_webhook_receipts`, and `INSERT` on `g28.financial_provider_events`. No access to volunteer, reviewer, admin, bank, or treasury records. The role's URI belongs only in the protected Render Environment; it is not a repository secret.
 
 The server's `G28_STRIPE_TEST_ENABLED=true` exposes a Basic-password-protected **TEST** checkout. `DONATIONS_ENABLED=false`, `G28_STRIPE_LIVE_APPROVED=false`, and `G28_PUBLIC_MODE=preview` ensure real funds are not accepted. `G28_STRIPE_RETURN_ORIGIN` must be `https://galinsky-2028-private-preview.onrender.com`.
 
