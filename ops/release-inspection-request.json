@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
   "action": "verify",
-  "expectedCommit": "1c7a172a43d8d3f62f78b4c602b27bb3b387d0ab",
-  "nonce": "verify-database-ready-before-sharing-release-20261019"
+  "expectedCommit": "99ea8011e016e5a3b4a1316ee6e1e87c6d8923a2",
+  "nonce": "verify-accepted-sharing-release-20261019"
 }
