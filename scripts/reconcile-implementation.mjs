@@ -14,7 +14,7 @@ const sources={
  14:['content/public/pages/garden.html'],15:['content/public/pages/cornerstone.html'],
  16:['packages/core/roles.mjs','tests/flag-real-portal.test.mjs'],17:['packages/core/stripe-web-checkout.mjs'],
  18:['packages/core/indexing.mjs','tests/accessibility-navigation.test.mjs'],19:['apps/api/src/app.mjs','tests/integration/api.test.mjs'],
- 20:['apps/api/src/staff-security.mjs','packages/core/staff-permissions.mjs','tests/staff-security.test.mjs'],
+ 20:['apps/api/src/staff-security.mjs','packages/core/staff-permissions.mjs','tests/staff-security.test.mjs','scripts/runtime-role-permissions.mjs','tests/integration/runtime-role-permissions.test.mjs'],
  21:['docs/security/BOUNDARIES.md'],22:['docs/security/BOUNDARIES.md'],23:['apps/api/src/app.mjs'],
  24:['apps/api/src/worker.mjs','apps/api/src/mail-events.mjs','apps/api/src/mail-store.mjs','apps/api/src/mail-notices.mjs','tests/mail-delivery.test.mjs','tests/integration/mail-delivery.test.mjs'],25:['content/materials/archive-manifest.json','scripts/publish-materials.mjs'],
  26:['packages/core/material-outline.mjs','packages/core/material-reading.mjs'],27:['apps/portal/src/main.tsx','packages/core/tasks.mjs'],
@@ -47,7 +47,7 @@ const sources={
 };
 const gaps={
  5:'Finish the complete component/profile coverage review, including protected-flow obligations; preliminary inventory is not full coverage.',
- 20:'Finish least-privilege runtime identity correction and protected safety scope integration; staff passkeys, bounded roles and all current task/editor/finance actions are implemented.',
+ 20:'Finish protected safety scope integration; staff passkeys, bounded roles, current task/editor/finance actions and SQL-created restricted runtime identities are implemented.',
  21:'Implement approved recipient directory, device trust verification and substitution resistance.',
  22:'Implement actual client-encrypted protected submission, authorized recipients and private attachment custody.',
  23:'Implement protected recipient-device recovery and trust restoration; ordinary session revocation/export already work.',
