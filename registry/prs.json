@@ -114,7 +114,7 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T01:13:13.691Z",
+        "reviewedAt": "2026-10-19T01:42:15.765Z",
         "sourceFiles": [
           {
             "path": "apps/web/public/assets/site.css",
@@ -122,7 +122,7 @@
           },
           {
             "path": "tests/browser/journeys.mjs",
-            "sha256": "cd5eda5d5c9d86123f789ffbc5c19b775ade102218100a0284c45750796f1d57"
+            "sha256": "4092888075f8a2736d9f27f08ac38d3799003f980c6e5d8b4db666d10dc2a8b5"
           }
         ],
         "softwareGap": null,
@@ -1826,11 +1826,11 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T01:13:13.691Z",
+        "reviewedAt": "2026-10-19T01:42:15.765Z",
         "sourceFiles": [
           {
             "path": "tests/browser/journeys.mjs",
-            "sha256": "cd5eda5d5c9d86123f789ffbc5c19b775ade102218100a0284c45750796f1d57"
+            "sha256": "4092888075f8a2736d9f27f08ac38d3799003f980c6e5d8b4db666d10dc2a8b5"
           },
           {
             "path": "tests/accessibility-navigation.test.mjs",
@@ -1858,11 +1858,11 @@
       "acceptanceReport": "docs/evidence/ACCEPTANCE_AUDIT_20261013.md",
       "implementationReview": {
         "implementation": "implemented",
-        "reviewedAt": "2026-10-19T01:13:13.691Z",
+        "reviewedAt": "2026-10-19T01:42:15.765Z",
         "sourceFiles": [
           {
             "path": "tests/browser/journeys.mjs",
-            "sha256": "cd5eda5d5c9d86123f789ffbc5c19b775ade102218100a0284c45750796f1d57"
+            "sha256": "4092888075f8a2736d9f27f08ac38d3799003f980c6e5d8b4db666d10dc2a8b5"
           }
         ],
         "softwareGap": null,
